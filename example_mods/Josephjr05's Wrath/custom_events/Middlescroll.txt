@@ -1,0 +1,3 @@
+Enable Middlescroll Mid Song and also Disable it.
+Value 1: Turn Middel Scroll On and Off (0=OFF 1=ONE)
+Value 2: Leave this empty

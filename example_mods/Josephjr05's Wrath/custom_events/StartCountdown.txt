@@ -1,0 +1,5 @@
+Place the event where you want, the first one will be Ready
+next event you place will be Set, Third Event you place will be Go,
+if you place another event after Go it will reset the countdown,
+and start over again. If the sprites' offsets are wrong you can
+change the X and Y in the StartCountdown.lua file.

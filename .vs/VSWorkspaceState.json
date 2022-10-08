@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\source"
+    "\\source",
+    "\\source\\flixel",
+    "\\source\\flixel\\addons\\display"
   ],
-  "SelectedNode": "\\source\\FunkinLua.hx",
+  "SelectedNode": "\\source\\CreditsState.hx",
   "PreviewInSolutionExplorer": false
 }

@@ -1,10 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\source",
-    "\\source\\flixel",
-    "\\source\\flixel\\addons\\display"
+    "\\source\\openfl\\display"
   ],
-  "SelectedNode": "\\source\\CreditsState.hx",
+  "SelectedNode": "\\source",
   "PreviewInSolutionExplorer": false
 }

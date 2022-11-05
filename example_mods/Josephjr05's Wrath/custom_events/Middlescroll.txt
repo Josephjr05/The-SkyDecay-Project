@@ -1,0 +1,5 @@
+Enables/Disables middlescroll mid-song. 
+Disabling while it's already disabled does nothing. 
+Also works with downscroll.
+Value 1: Enables/Disables Middlescroll (On=Enable, Off=Disable)
+Value 2: Changes the speed of the transition (Anything above 0 is fine)

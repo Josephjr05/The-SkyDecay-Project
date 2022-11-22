@@ -1,0 +1,111 @@
+{
+	"atlas": "Camellia",
+	"animations": [
+		{
+			"name": "idle",
+			"prefix": "Camellia_Idle",
+			"frameRate": 24,
+			"loop": true,
+			"offsets": [0, 0]
+		},
+		{
+			"name": "singUP",
+			"prefix": "Camellia_Up0",
+			"frameRate": 24,
+			"offsets": [5, 88]
+		},
+		{
+			"name": "singRIGHT",
+			"prefix": "Camellia_Right0",
+			"frameRate": 24,
+			"offsets": [0, -3]
+		},		
+		{
+			"name": "singDOWN",
+			"prefix": "Camellia_Down0",
+			"frameRate": 24,
+			"offsets": [0, 92]
+		},
+		{
+			"name": "singLEFT",
+			"prefix": "Camellia_Left0",
+			"frameRate": 24,
+			"offsets": [94, 19]
+		},
+		{
+			"atlas": "Camellia_Mod_SING",
+			"name": "singUP-alt",
+			"prefix": "Camellia_UpAlt",
+			"frameRate": 24,
+			"offsets": [71, 274]
+		},
+		{
+			"atlas": "Camellia_Mod_SING",
+			"name": "singRIGHT-alt",
+			"prefix": "Camellia_RightAlt",
+			"frameRate": 24,
+			"offsets": [-2, -6]
+		},
+		{
+			"atlas": "Camellia_Mod_SING",
+			"name": "singDOWN-alt",
+			"prefix": "Camellia_DownAlt",
+			"frameRate": 24,
+			"offsets": [-2, 102]
+		},
+		{
+			"atlas": "Camellia_Mod_SING",
+			"name": "singLEFT-alt",
+			"prefix": "Camellia_LeftAlt",
+			"frameRate": 24,
+			"offsets": [92, 29]
+		},
+		{
+			"name": "singLEFTmiss",
+			"prefix": "Camellia_Left_MISS",
+			"frameRate": 24,
+			"offsets": [94, 19]
+		},
+		{
+			"name": "singUPmiss",
+			"prefix": "Camellia_Up_MISS",
+			"frameRate": 24,
+			"offsets": [4, 125]
+		},
+		{
+			"name": "singRIGHTmiss",
+			"prefix": "Camellia_Right_MISS",
+			"frameRate": 24,
+			"offsets": [0, 22]
+		},
+		{
+			"name": "singDOWNmiss",
+			"prefix": "Camellia_Down_MISS",
+			"frameRate": 24,
+			"offsets": [0, 92]
+		},
+		{
+			"name": "firstDeath",
+			"prefix": "Camellia_DEATH",
+			"frameRate": 24,
+			"offsets": [5, -10]
+		},
+		{
+			"name": "deathLoop",
+			"prefix": "Camellia_DEATHLoop",
+			"frameRate": 24,
+			"offsets": [0, -9]
+		}
+	],
+	"scale": 0.85,
+	"playerPos": { "x": 895, "y": 80 },
+	"opponentPos": { "x": -500, "y": 30 },
+	"holdLength": 10.8,
+	"healthColors": [
+        "0xFFD55F56"
+    ],
+	"leftFacing": false,
+	"initAnim": "idle",
+	"reflectionOffset": -160,
+	"deathChar": "camellia"
+}

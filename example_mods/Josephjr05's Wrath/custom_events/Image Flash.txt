@@ -1,0 +1,4 @@
+Flash an image on screen and fades away after a fixed amount of seconds
+
+Value 1: Name of the image
+Value 2: Duration (in seconds)

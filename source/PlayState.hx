@@ -971,7 +971,7 @@ class PlayState extends MusicBeatState
 		}
 
 		dad = new Character(0, 0, SONG.player2);
-		startCharacterPos(dad, true);
+		startCharacterPos(dad, false);
 		dadGroup.add(dad);
 		startCharacterLua(dad.curCharacter);
 

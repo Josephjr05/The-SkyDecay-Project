@@ -1,32 +1,36 @@
 function onEvent(name, value1, value2)
     if not middlescroll then
-	    if value1 == 'On' then
-            noteTweenAlpha('note movement1', 0, 0, value2, 'linear')
-            noteTweenAlpha('note movement2', 1, 0, value2, 'linear')
-            noteTweenAlpha('note movement3', 2, 0, value2, 'linear')
-            noteTweenAlpha('note movement4', 3, 0, value2, 'linear')
-            noteTweenX('note movement5', 4, 412, value2, 'linear')
-            noteTweenX('note movement6', 5, 524, value2, 'linear')
-            noteTweenX('note movement7', 6, 636, value2, 'linear')
-            noteTweenX('note movement8', 7, 748, value2, 'linear')
-            noteTweenX('note movement9', 0, 412, value2, 'linear')
-            noteTweenX('note movement10', 1, 524, value2, 'linear')
-            noteTweenX('note movement11', 2, 636, value2, 'linear')
-            noteTweenX('note movement12', 3, 748, value2, 'linear')
+	    if value1 == '1' then
+            setPropertyFromGroup('opponentStrums', 0, 'x', defaultOpponentStrumX0 - 10);
+            setPropertyFromGroup('opponentStrums', 1, 'x', defaultOpponentStrumX1 + 30);
+            setPropertyFromGroup('opponentStrums', 2, 'x', defaultOpponentStrumX2 + 600);
+            setPropertyFromGroup('opponentStrums', 3, 'x', defaultOpponentStrumX3 + 640);
+                setPropertyFromGroup('playerStrums', 0, 'x', defaultPlayerStrumX0 - 320);
+                setPropertyFromGroup('playerStrums', 1, 'x', defaultPlayerStrumX1 - 320);
+                setPropertyFromGroup('playerStrums', 2, 'x', defaultPlayerStrumX2 - 320);
+                setPropertyFromGroup('playerStrums', 3, 'x', defaultPlayerStrumX3 - 320);
+			end
         end
-		if value1 == 'Off' then
-            noteTweenAlpha('note movement1', 0, 1, value2, 'linear')
-            noteTweenAlpha('note movement2', 1, 1, value2, 'linear')
-            noteTweenAlpha('note movement3', 2, 1, value2, 'linear')
-            noteTweenAlpha('note movement4', 3, 1, value2, 'linear')
-            noteTweenX('note movement5', 4, 732, value2, 'linear')
-            noteTweenX('note movement6', 5, 844, value2, 'linear')
-            noteTweenX('note movement7', 6, 956, value2, 'linear')
-            noteTweenX('note movement8', 7, 1068, value2, 'linear')
-            noteTweenX('note movement9', 0, 92, value2, 'linear')
-            noteTweenX('note movement10', 1, 204, value2, 'linear')
-            noteTweenX('note movement11', 2, 316, value2, 'linear')
-            noteTweenX('note movement12', 3, 428, value2, 'linear')
+
+if value1 == '2' then
+            setPropertyFromGroup('opponentStrums', 0, 'x', defaultOpponentStrumX0 + 320);
+            setPropertyFromGroup('opponentStrums', 1, 'x', defaultOpponentStrumX1 + 320);
+            setPropertyFromGroup('opponentStrums', 2, 'x', defaultOpponentStrumX2 + 320);
+            setPropertyFromGroup('opponentStrums', 3, 'x', defaultOpponentStrumX3 + 320);
+            setPropertyFromGroup('playerStrums', 0, 'x', defaultPlayerStrumX0 - 0);
+            setPropertyFromGroup('playerStrums', 1, 'x', defaultPlayerStrumX1 - 0);
+            setPropertyFromGroup('playerStrums', 2, 'x', defaultPlayerStrumX2 - 0);
+            setPropertyFromGroup('playerStrums', 3, 'x', defaultPlayerStrumX3 - 0);
+end
+
+		if value1 == '0' then
+            setPropertyFromGroup('opponentStrums', 0, 'x', defaultOpponentStrumX0 -0);
+            setPropertyFromGroup('opponentStrums', 1, 'x', defaultOpponentStrumX1 -0);
+            setPropertyFromGroup('opponentStrums', 2, 'x', defaultOpponentStrumX2 -0);
+            setPropertyFromGroup('opponentStrums', 3, 'x', defaultOpponentStrumX3 -0);
+            setPropertyFromGroup('playerStrums', 0, 'x', defaultPlayerStrumX0 - 0);
+            setPropertyFromGroup('playerStrums', 1, 'x', defaultPlayerStrumX1 - 0);
+            setPropertyFromGroup('playerStrums', 2, 'x', defaultPlayerStrumX2 - 0);
+            setPropertyFromGroup('playerStrums', 3, 'x', defaultPlayerStrumX3 - 0);
 		end
     end
-end

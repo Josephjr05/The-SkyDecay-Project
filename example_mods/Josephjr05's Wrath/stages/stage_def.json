@@ -1,0 +1,126 @@
+{
+	"background": [
+		{
+			"name": "bg",
+			"atlas": "BG_CITY",
+			"active": false,
+			"position": {
+				"x": -250,
+				"y": -100
+			},
+			"antialiasing": true,
+			"scrollFactor": {
+				"x": 0.5,
+				"y": 0.5
+			},
+			"scale": {
+				"x": 1.55,
+				"y": 1.55
+			}
+		},
+		{
+			"name": "wall",
+			"atlas": "BG_WALL",
+			"active": false,
+			"position": {
+				"x": -250,
+				"y": -100
+			},
+			"antialiasing": true,
+			"scrollFactor": {
+				"x": 1,
+				"y": 1
+			},
+			"scale": {
+				"x": 1.55,
+				"y": 1.55
+			}
+		},
+		{
+			"name": "stage",
+			"atlas": "FG_Floor",
+			"active": false,
+			"position": {
+				"x": -250,
+				"y": -100
+			},
+			"antialiasing": true,
+			"scrollFactor": {
+				"x": 0.9,
+				"y": 0.9
+			},
+			"scale": {
+				"x": 1.55,
+				"y": 1.55
+			}
+		}
+	],
+	"groups": [],
+	"foreground": [
+		{
+			"layer": 2,
+			"name": "glow_bf",
+			"atlas": "BF_GLOW",
+			"alpha": 0.5,
+			"position": {
+				"x": -350,
+				"y": -30
+			},
+			"antialiasing": true,
+			"scrollFactor": {
+				"x": 1,
+				"y": 1
+			},
+			"scale": {
+				"x": 1.2,
+				"y": 1.2
+			}
+		},
+		{
+			"layer": 2,
+			"name": "glow_cam",
+			"atlas": "CAMELLIA_GLOW",
+			"alpha": 0.5,
+			"position": {
+				"x": -415,
+				"y": -50
+			},
+			"antialiasing": true,
+			"scrollFactor": {
+				"x": 1,
+				"y": 1
+			},
+			"scale": {
+				"x": 1.2,
+				"y": 1.2
+			}
+		}
+	],
+	"objectOrder": [
+		"bg",
+		"wall",
+		"stage",
+		"glow_bf",
+		"glow_cam"
+	],
+	"playerPosition": {
+		"x": 310,
+		"y": 75
+	},
+	"speakerPosition": {
+		"x": 370,
+		"y": 130
+	},
+	"opponentPosition": {
+		"x": 0,
+		"y": 0
+	},
+	"lightning": false,
+	"disableCamera": true,
+	"cameraZoom": 0.5,
+	"reflection": {
+		"alphaMul": 1.0,
+		"alphaAdd": 0.1,
+		"screenStartHeight": 0.1
+	}
+}

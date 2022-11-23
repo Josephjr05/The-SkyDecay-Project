@@ -1,4 +1,0 @@
-Modifies The Gui's Alpha Value
-
-Value 2: How long it takes to fade in or out
-Value 1: 1-visible 0-no hud

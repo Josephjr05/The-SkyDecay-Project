@@ -63,7 +63,12 @@ class NotesSubState extends MusicBeatSubstate
 		for (i in 0...ClientPrefs.arrowHSV.length) {
 			var yPos:Float = (165 * i) + 35;
 			for (j in 0...3) {
+<<<<<<< HEAD
 				var optionText:Alphabet = new Alphabet(posX + (225 * j) + 250, yPos + 60, Std.string(ClientPrefs.arrowHSV[i][j]), true);
+=======
+				var optionText:Alphabet = new Alphabet(0, yPos + 60, Std.string(ClientPrefs.arrowHSV[i][j]), true);
+				optionText.x = posX + (225 * j) + 250;
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 				grpNumbers.add(optionText);
 			}
 
@@ -83,9 +88,14 @@ class NotesSubState extends MusicBeatSubstate
 			shaderArray.push(newShader);
 		}
 
+<<<<<<< HEAD
 		hsbText = new Alphabet(posX + 560, 0, "Hue    Saturation  Brightness", false);
 		hsbText.scaleX = 0.6;
 		hsbText.scaleY = 0.6;
+=======
+		hsbText = new Alphabet(0, 0, "Hue    Saturation  Brightness", false, false, 0, 0.65);
+		hsbText.x = posX + 240;
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 		add(hsbText);
 
 		changeSelection();
@@ -247,6 +257,7 @@ class NotesSubState extends MusicBeatSubstate
 		}
 
 		var item = grpNumbers.members[(selected * 3) + type];
+<<<<<<< HEAD
 		item.text = '0';
 
 		var add = (40 * (item.letters.length - 1)) / 2;
@@ -254,6 +265,10 @@ class NotesSubState extends MusicBeatSubstate
 		{
 			letter.offset.x += add;
 		}
+=======
+		item.changeText('0');
+		item.offset.x = (40 * (item.lettersArray.length - 1)) / 2;
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 	}
 	function updateValue(change:Float = 0) {
 		curValue += change;
@@ -278,6 +293,7 @@ class NotesSubState extends MusicBeatSubstate
 		}
 
 		var item = grpNumbers.members[(curSelected * 3) + typeSelected];
+<<<<<<< HEAD
 		item.text = Std.string(roundedValue);
 
 		var add = (40 * (item.letters.length - 1)) / 2;
@@ -286,5 +302,10 @@ class NotesSubState extends MusicBeatSubstate
 			letter.offset.x += add;
 			if(roundedValue < 0) letter.offset.x += 10;
 		}
+=======
+		item.changeText(Std.string(roundedValue));
+		item.offset.x = (40 * (item.lettersArray.length - 1)) / 2;
+		if(roundedValue < 0) item.offset.x += 10;
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 	}
 }

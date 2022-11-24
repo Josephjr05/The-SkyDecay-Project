@@ -131,7 +131,11 @@ class Option
 	private function set_text(newValue:String = '')
 	{
 		if(child != null) {
+<<<<<<< HEAD
 			child.text = newValue;
+=======
+			child.changeText(newValue);
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 		}
 		return null;
 	}

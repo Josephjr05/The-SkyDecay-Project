@@ -43,10 +43,16 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		optionsArray.push(goption);
 
 		var option:GameplayOption = new GameplayOption('Scroll Speed', 'scrollspeed', 'float', 1);
+<<<<<<< HEAD
 		option.scrollSpeed = 2.0;
 		option.minValue = 0.35;
 		option.changeValue = 0.05;
 		option.decimals = 2;
+=======
+		option.scrollSpeed = 1.5;
+		option.minValue = 0.5;
+		option.changeValue = 0.1;
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 		if (goption.getValue() != "constant")
 		{
 			option.displayFormat = '%vX';
@@ -59,6 +65,7 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		}
 		optionsArray.push(option);
 
+<<<<<<< HEAD
 		#if !html5
 		var option:GameplayOption = new GameplayOption('Playback Rate', 'songspeed', 'float', 1);
 		option.scrollSpeed = 1;
@@ -69,6 +76,15 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		option.decimals = 2;
 		optionsArray.push(option);
 		#end
+=======
+		/*var option:GameplayOption = new GameplayOption('Playback Rate', 'songspeed', 'float', 1);
+		option.scrollSpeed = 1;
+		option.minValue = 0.5;
+		option.maxValue = 2.5;
+		option.changeValue = 0.1;
+		option.displayFormat = '%vX';
+		optionsArray.push(option);*/
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 
 		var option:GameplayOption = new GameplayOption('Health Gain Multiplier', 'healthgain', 'float', 1);
 		option.scrollSpeed = 2.5;
@@ -129,14 +145,24 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 
 		for (i in 0...optionsArray.length)
 		{
+<<<<<<< HEAD
 			var optionText:Alphabet = new Alphabet(200, 360, optionsArray[i].name, true);
 			optionText.isMenuItem = true;
 			optionText.scaleX = 0.8;
 			optionText.scaleY = 0.8;
+=======
+			var optionText:Alphabet = new Alphabet(0, 70 * i, optionsArray[i].name, true, false, 0.05, 0.8);
+			optionText.isMenuItem = true;
+			optionText.x += 300;
+			/*optionText.forceX = 300;
+			optionText.yMult = 90;*/
+			optionText.xAdd = 120;
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 			optionText.targetY = i;
 			grpOptions.add(optionText);
 
 			if(optionsArray[i].type == 'bool') {
+<<<<<<< HEAD
 				optionText.x += 110;
 				optionText.startPosition.x += 110;
 				optionText.snapToPosition();
@@ -149,6 +175,16 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 			} else {
 				optionText.snapToPosition();
 				var valueText:AttachedText = new AttachedText(Std.string(optionsArray[i].getValue()), optionText.width, -72, true, 0.8);
+=======
+				var checkbox:CheckboxThingie = new CheckboxThingie(optionText.x - 105, optionText.y, optionsArray[i].getValue() == true);
+				checkbox.sprTracker = optionText;
+				checkbox.offsetY = -60;
+				checkbox.ID = i;
+				checkboxGroup.add(checkbox);
+				optionText.xAdd += 80;
+			} else {
+				var valueText:AttachedText = new AttachedText('' + optionsArray[i].getValue(), optionText.width + 80, true, 0.8);
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 				valueText.sprTracker = optionText;
 				valueText.copyAlpha = true;
 				valueText.ID = i;
@@ -266,7 +302,13 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 							curOption.change();
 							FlxG.sound.play(Paths.sound('scrollMenu'));
 						} else if(curOption.type != 'string') {
+<<<<<<< HEAD
 							holdValue = Math.max(curOption.minValue, Math.min(curOption.maxValue, holdValue + curOption.scrollSpeed * elapsed * (controls.UI_LEFT ? -1 : 1)));
+=======
+							holdValue += curOption.scrollSpeed * elapsed * (controls.UI_LEFT ? -1 : 1);
+							if(holdValue < curOption.minValue) holdValue = curOption.minValue;
+							else if (holdValue > curOption.maxValue) holdValue = curOption.maxValue;
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 
 							switch(curOption.type)
 							{
@@ -274,8 +316,12 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 									curOption.setValue(Math.round(holdValue));
 								
 								case 'float' | 'percent':
+<<<<<<< HEAD
 									var blah:Float = Math.max(curOption.minValue, Math.min(curOption.maxValue, holdValue + curOption.changeValue - (holdValue % curOption.changeValue)));
 									curOption.setValue(FlxMath.roundDecimal(blah, curOption.decimals));
+=======
+									curOption.setValue(FlxMath.roundDecimal(holdValue, curOption.decimals));
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 							}
 							updateTextFrom(curOption);
 							curOption.change();
@@ -486,7 +532,11 @@ class GameplayOption
 	private function set_text(newValue:String = '')
 	{
 		if(child != null) {
+<<<<<<< HEAD
 			child.text = newValue;
+=======
+			child.changeText(newValue);
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 		}
 		return null;
 	}

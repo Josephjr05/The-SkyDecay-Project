@@ -12,7 +12,10 @@ import flixel.util.FlxTimer;
 import flixel.FlxSubState;
 import haxe.Json;
 import haxe.format.JsonParser;
+<<<<<<< HEAD
 import Alphabet;
+=======
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 #if sys
 import sys.FileSystem;
 import sys.io.File;
@@ -165,7 +168,11 @@ class DialogueCharacter extends FlxSprite
 // TO DO: Clean code? Maybe? idk
 class DialogueBoxPsych extends FlxSpriteGroup
 {
+<<<<<<< HEAD
 	var dialogue:TypedAlphabet;
+=======
+	var dialogue:Alphabet;
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 	var dialogueList:DialogueFile = null;
 
 	public var finishThing:Void->Void;
@@ -221,11 +228,14 @@ class DialogueBoxPsych extends FlxSpriteGroup
 		box.updateHitbox();
 		add(box);
 
+<<<<<<< HEAD
 		daText = new TypedAlphabet(DEFAULT_TEXT_X, DEFAULT_TEXT_Y, '');
 		daText.scaleX = 0.7;
 		daText.scaleY = 0.7;
 		add(daText);
 
+=======
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 		startNextDialog();
 	}
 
@@ -282,6 +292,7 @@ class DialogueBoxPsych extends FlxSpriteGroup
 		}
 	}
 
+<<<<<<< HEAD
 	public static var DEFAULT_TEXT_X = 175;
 	public static var DEFAULT_TEXT_Y = 432;
 	public static var LONG_TEXT_ADD = 24;
@@ -291,6 +302,13 @@ class DialogueBoxPsych extends FlxSpriteGroup
 
 	public var closeSound:String = 'dialogueClose';
 	public var closeVolume:Float = 1;
+=======
+	public static var DEFAULT_TEXT_X = 90;
+	public static var DEFAULT_TEXT_Y = 430;
+	var scrollSpeed = 4500;
+	var daText:Alphabet = null;
+	var ignoreThisFrame:Bool = true; //First frame is reserved for loading dialogue images
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 	override function update(elapsed:Float)
 	{
 		if(ignoreThisFrame) {
@@ -305,7 +323,19 @@ class DialogueBoxPsych extends FlxSpriteGroup
 
 			if(PlayerSettings.player1.controls.ACCEPT) {
 				if(!daText.finishedText) {
+<<<<<<< HEAD
 					daText.finishText();
+=======
+					if(daText != null) {
+						daText.killTheTimer();
+						daText.kill();
+						remove(daText);
+						daText.destroy();
+					}
+					daText = new Alphabet(DEFAULT_TEXT_X, DEFAULT_TEXT_Y, textToType, false, true, 0.0, 0.7);
+					add(daText);
+					
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 					if(skipDialogueThing != null) {
 						skipDialogueThing();
 					}
@@ -323,18 +353,29 @@ class DialogueBoxPsych extends FlxSpriteGroup
 
 					box.animation.curAnim.curFrame = box.animation.curAnim.frames.length - 1;
 					box.animation.curAnim.reverse();
+<<<<<<< HEAD
 					if(daText != null)
 					{
 						daText.kill();
 						remove(daText);
 						daText.destroy();
 					}
+=======
+					daText.kill();
+					remove(daText);
+					daText.destroy();
+					daText = null;
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 					updateBoxOffsets(box);
 					FlxG.sound.music.fadeOut(1, 0);
 				} else {
 					startNextDialog();
 				}
+<<<<<<< HEAD
 				FlxG.sound.play(Paths.sound(closeSound), closeVolume);
+=======
+				FlxG.sound.play(Paths.sound('dialogueClose'));
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 			} else if(daText.finishedText) {
 				var char:DialogueCharacter = arrayCharacters[lastCharacter];
 				if(char != null && char.animation.curAnim != null && char.animationIsLoop() && char.animation.finished) {
@@ -490,12 +531,26 @@ class DialogueBoxPsych extends FlxSpriteGroup
 		lastCharacter = character;
 		lastBoxType = boxType;
 
+<<<<<<< HEAD
 		daText.text = curDialogue.text;
 		daText.sound = curDialogue.sound;
 		if(daText.sound == null || daText.sound.trim() == '') daText.sound = 'dialogue';
 		
 		daText.y = DEFAULT_TEXT_Y;
 		if(daText.rows > 2) daText.y -= LONG_TEXT_ADD;
+=======
+		if(daText != null) {
+			daText.killTheTimer();
+			daText.kill();
+			remove(daText);
+			daText.destroy();
+		}
+
+		textToType = curDialogue.text;
+		Alphabet.setDialogueSound(curDialogue.sound);
+		daText = new Alphabet(DEFAULT_TEXT_X, DEFAULT_TEXT_Y, textToType, false, true, curDialogue.speed, 0.7);
+		add(daText);
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 
 		var char:DialogueCharacter = arrayCharacters[character];
 		if(char != null) {

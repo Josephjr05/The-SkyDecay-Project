@@ -1,7 +1,16 @@
 {
+<<<<<<< HEAD
 	"name": "name",
 	"description": "description",
 	"restart":true,
 	"runsGlobally": false,
 	"color": [8, 41, 255]
 }
+=======
+	"name": "Name",
+	"description": "Description",
+	"restart":false,
+	"runsGlobally": false,
+	"color": [170, 0, 255]
+}
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65

@@ -311,7 +311,11 @@ class FlxInputText extends FlxText
 		if (FlxG.mouse.justPressed)
 		{
 			var hadFocus:Bool = hasFocus;
+<<<<<<< HEAD
 			if (mouseOverlapping())
+=======
+			if (FlxG.mouse.overlaps(this))
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 			{
 				caretIndex = getCaretIndex();
 				hasFocus = true;
@@ -327,6 +331,7 @@ class FlxInputText extends FlxText
 		}
 		#end
 	}
+<<<<<<< HEAD
 	
 	function mouseOverlapping()
 	{
@@ -339,6 +344,8 @@ class FlxInputText extends FlxText
 		}
 		return false;
 	}
+=======
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 
 	/**
 	 * Handles keypresses generated on the stage.

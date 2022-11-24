@@ -117,6 +117,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		addOption(option);
 		#end
 
+<<<<<<< HEAD
 		var option:Option = new Option('Combo Stacking',
 			"If unchecked, Ratings and Combo won't stack, saving on System Memory and making them easier to read",
 			'comboStacking',
@@ -124,6 +125,8 @@ class VisualsUISubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 
+=======
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 		super();
 	}
 
@@ -151,4 +154,8 @@ class VisualsUISubState extends BaseOptionsMenu
 			Main.fpsVar.visible = ClientPrefs.showFPS;
 	}
 	#end
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65

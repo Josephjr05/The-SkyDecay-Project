@@ -28,7 +28,11 @@ import Controls;
 using StringTools;
 
 class ControlsSubState extends MusicBeatSubstate {
+<<<<<<< HEAD
 	private static var curSelected:Int = 1;
+=======
+	private static var curSelected:Int = -1;
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 	private static var curAlt:Bool = false;
 
 	private static var defaultKey:String = 'Reset to Default Keys';
@@ -90,6 +94,7 @@ class ControlsSubState extends MusicBeatSubstate {
 				isCentered = true;
 			}
 
+<<<<<<< HEAD
 			var optionText:Alphabet = new Alphabet(200, 300, optionShit[i][0], (!isCentered || isDefaultKey));
 			optionText.isMenuItem = true;
 			if(isCentered) {
@@ -101,6 +106,19 @@ class ControlsSubState extends MusicBeatSubstate {
 			optionText.distancePerItem.y = 60;
 			optionText.targetY = i - curSelected;
 			optionText.snapToPosition();
+=======
+			var optionText:Alphabet = new Alphabet(0, (10 * i), optionShit[i][0], (!isCentered || isDefaultKey), false);
+			optionText.isMenuItem = true;
+			if(isCentered) {
+				optionText.screenCenter(X);
+				optionText.forceX = optionText.x;
+				optionText.yAdd = -55;
+			} else {
+				optionText.forceX = 200;
+			}
+			optionText.yMult = 60;
+			optionText.targetY = i;
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 			grpOptions.add(optionText);
 
 			if(!isCentered) {

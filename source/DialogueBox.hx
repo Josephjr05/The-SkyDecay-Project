@@ -18,6 +18,10 @@ class DialogueBox extends FlxSpriteGroup
 
 	var curCharacter:String = '';
 
+<<<<<<< HEAD
+=======
+	var dialogue:Alphabet;
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 	var dialogueList:Array<String> = [];
 
 	// SECOND DIALOGUE FOR THE PIXEL SHIT INSTEAD???
@@ -143,6 +147,13 @@ class DialogueBox extends FlxSpriteGroup
 		swagDialogue.color = 0xFF3F2021;
 		swagDialogue.sounds = [FlxG.sound.load(Paths.sound('pixelText'), 0.6)];
 		add(swagDialogue);
+<<<<<<< HEAD
+=======
+
+		dialogue = new Alphabet(0, 80, "", false, true);
+		// dialogue.x = 90;
+		// add(dialogue);
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 	}
 
 	var dialogueOpened:Bool = false;
@@ -182,6 +193,10 @@ class DialogueBox extends FlxSpriteGroup
 		{
 			if (dialogueEnded)
 			{
+<<<<<<< HEAD
+=======
+				remove(dialogue);
+>>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 				if (dialogueList[1] == null && dialogueList[0] != null)
 				{
 					if (!isEnding)

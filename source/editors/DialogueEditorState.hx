@@ -27,10 +27,6 @@ import flash.net.FileFilter;
 import haxe.Json;
 import DialogueBoxPsych;
 import lime.system.Clipboard;
-<<<<<<< HEAD
-import Alphabet;
-=======
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 #if sys
 import sys.io.File;
 #end
@@ -41,11 +37,7 @@ class DialogueEditorState extends MusicBeatState
 {
 	var character:DialogueCharacter;
 	var box:FlxSprite;
-<<<<<<< HEAD
-	var daText:TypedAlphabet;
-=======
 	var daText:Alphabet;
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 
 	var selectedText:FlxText;
 	var animText:FlxText;
@@ -106,14 +98,6 @@ class DialogueEditorState extends MusicBeatState
 		animText.setFormat(Paths.font("vcr.ttf"), 24, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		animText.scrollFactor.set();
 		add(animText);
-<<<<<<< HEAD
-		
-		daText = new TypedAlphabet(DialogueBoxPsych.DEFAULT_TEXT_X, DialogueBoxPsych.DEFAULT_TEXT_Y, DEFAULT_TEXT);
-		daText.scaleX = 0.7;
-		daText.scaleY = 0.7;
-		add(daText);
-=======
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 		changeText();
 		super.create();
 	}
@@ -244,19 +228,6 @@ class DialogueEditorState extends MusicBeatState
 	private static var DEFAULT_TEXT:String = "coolswag";
 	private static var DEFAULT_SPEED:Float = 0.05;
 	private static var DEFAULT_BUBBLETYPE:String = "normal";
-<<<<<<< HEAD
-	function reloadText(skipDialogue:Bool) {
-		var textToType:String = lineInputText.text;
-		if(textToType == null || textToType.length < 1) textToType = ' ';
-
-		daText.text = textToType;
-		daText.resetDialogue();
-
-		if(skipDialogue) 
-			daText.finishText();
-		else if(daText.delay > 0)
-		{
-=======
 	function reloadText(speed:Float = 0.05) {
 		if(daText != null) {
 			daText.killTheTimer();
@@ -275,19 +246,12 @@ class DialogueEditorState extends MusicBeatState
 		add(daText);
 
 		if(speed > 0) {
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 			if(character.jsonFile.animations.length > curAnim && character.jsonFile.animations[curAnim] != null) {
 				character.playAnim(character.jsonFile.animations[curAnim].anim);
 			}
 			characterAnimSpeed();
 		}
 
-<<<<<<< HEAD
-		daText.y = DialogueBoxPsych.DEFAULT_TEXT_Y;
-		if(daText.rows > 2) daText.y -= DialogueBoxPsych.LONG_TEXT_ADD;
-
-=======
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 		#if desktop
 		// Updating Discord Rich Presence
 		var rpcText:String = lineInputText.text;
@@ -303,11 +267,8 @@ class DialogueEditorState extends MusicBeatState
 			{
 				character.reloadCharacterJson(characterInputText.text);
 				reloadCharacter();
-<<<<<<< HEAD
-=======
 				updateTextBox();
 
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 				if(character.jsonFile.animations.length > 0) {
 					curAnim = 0;
 					if(character.jsonFile.animations.length > curAnim && character.jsonFile.animations[curAnim] != null) {
@@ -319,27 +280,6 @@ class DialogueEditorState extends MusicBeatState
 					characterAnimSpeed();
 				}
 				dialogueFile.dialogue[curSelected].portrait = characterInputText.text;
-<<<<<<< HEAD
-				reloadText(false);
-				updateTextBox();
-			}
-			else if(sender == lineInputText)
-			{
-				dialogueFile.dialogue[curSelected].text = lineInputText.text;
-
-				daText.text = lineInputText.text;
-				if(daText.text == null) daText.text = '';
-				reloadText(true);
-			}
-			else if(sender == soundInputText)
-			{
-				daText.finishText();
-				dialogueFile.dialogue[curSelected].sound = soundInputText.text;
-				daText.sound = soundInputText.text;
-				if(daText.sound == null) daText.sound = '';
-			}
-		} else if(id == FlxUINumericStepper.CHANGE_EVENT && (sender == speedStepper)) {
-=======
 			}
 			else if(sender == lineInputText)
 			{
@@ -353,16 +293,10 @@ class DialogueEditorState extends MusicBeatState
 			}
 		} else if(id == FlxUINumericStepper.CHANGE_EVENT && (sender == speedStepper)) {
 			reloadText(speedStepper.value);
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 			dialogueFile.dialogue[curSelected].speed = speedStepper.value;
 			if(Math.isNaN(dialogueFile.dialogue[curSelected].speed) || dialogueFile.dialogue[curSelected].speed == null || dialogueFile.dialogue[curSelected].speed < 0.001) {
 				dialogueFile.dialogue[curSelected].speed = 0.0;
 			}
-<<<<<<< HEAD
-			daText.delay = dialogueFile.dialogue[curSelected].speed;
-			reloadText(false);
-=======
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 		}
 	}
 
@@ -394,14 +328,11 @@ class DialogueEditorState extends MusicBeatState
 				FlxG.sound.volumeUpKeys = [];
 				blockInput = true;
 
-<<<<<<< HEAD
-=======
 				if(FlxG.keys.pressed.CONTROL && FlxG.keys.justPressed.V && Clipboard.text != null) { //Copy paste
 					inputText.text = ClipboardAdd(inputText.text);
 					inputText.caretIndex = inputText.text.length;
 					getEvent(FlxUIInputText.CHANGE_EVENT, inputText, null, []);
 				}
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 				if(FlxG.keys.justPressed.ENTER) {
 					if(inputText == lineInputText) {
 						inputText.text += '\\n';
@@ -419,11 +350,7 @@ class DialogueEditorState extends MusicBeatState
 			FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
 			FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
 			if(FlxG.keys.justPressed.SPACE) {
-<<<<<<< HEAD
-				reloadText(false);
-=======
 				reloadText(speedStepper.value);
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 			}
 			if(FlxG.keys.justPressed.ESCAPE) {
 				MusicBeatState.switchState(new editors.MasterEditorMenu());
@@ -479,26 +406,11 @@ class DialogueEditorState extends MusicBeatState
 		angryCheckbox.checked = (curDialogue.boxState == 'angry');
 		speedStepper.value = curDialogue.speed;
 
-<<<<<<< HEAD
-		if (curDialogue.sound == null) curDialogue.sound = '';
-		soundInputText.text = curDialogue.sound;
-
-		daText.delay = speedStepper.value;
-		daText.sound = soundInputText.text;
-		if(daText.sound != null && daText.sound.trim() == '') daText.sound = 'dialogue';
-
-		curAnim = 0;
-		character.reloadCharacterJson(characterInputText.text);
-		reloadCharacter();
-		reloadText(false);
-		updateTextBox();
-=======
 		curAnim = 0;
 		character.reloadCharacterJson(characterInputText.text);
 		reloadCharacter();
 		updateTextBox();
 		reloadText(curDialogue.speed);
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 
 		var leLength:Int = character.jsonFile.animations.length;
 		if(leLength > 0) {
@@ -529,8 +441,6 @@ class DialogueEditorState extends MusicBeatState
 		}
 	}
 
-<<<<<<< HEAD
-=======
 	function ClipboardAdd(prefix:String = ''):String {
 		if(prefix.toLowerCase().endsWith('v')) //probably copy paste attempt
 		{
@@ -541,7 +451,6 @@ class DialogueEditorState extends MusicBeatState
 		return text;
 	}
 
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 	var _file:FileReference = null;
 	function loadDialogue() {
 		var jsonFilter:FileFilter = new FileFilter('JSON', 'json');

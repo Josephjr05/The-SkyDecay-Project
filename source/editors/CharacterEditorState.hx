@@ -89,15 +89,9 @@ class CharacterEditorState extends MusicBeatState
 		camMenu.bgColor.alpha = 0;
 
 		FlxG.cameras.reset(camEditor);
-<<<<<<< HEAD
-		FlxG.cameras.add(camHUD, false);
-		FlxG.cameras.add(camMenu, false);
-		FlxG.cameras.setDefaultDrawTarget(camEditor, true);
-=======
 		FlxG.cameras.add(camHUD);
 		FlxG.cameras.add(camMenu);
 		FlxCamera.defaultCameras = [camEditor];
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 
 		bgLayer = new FlxTypedGroup<FlxSprite>();
 		add(bgLayer);
@@ -1093,10 +1087,6 @@ class CharacterEditorState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-<<<<<<< HEAD
-		MusicBeatState.camBeat = FlxG.camera;
-=======
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 		if(char.animationsArray[curAnim] != null) {
 			textAnim.text = char.animationsArray[curAnim].anim;
 
@@ -1111,8 +1101,6 @@ class CharacterEditorState extends MusicBeatState
 		var inputTexts:Array<FlxUIInputText> = [animationInputText, imageInputText, healthIconInputText, animationNameInputText, animationIndicesInputText];
 		for (i in 0...inputTexts.length) {
 			if(inputTexts[i].hasFocus) {
-<<<<<<< HEAD
-=======
 				if(FlxG.keys.pressed.CONTROL && FlxG.keys.justPressed.V && Clipboard.text != null) { //Copy paste
 					inputTexts[i].text = ClipboardAdd(inputTexts[i].text);
 					inputTexts[i].caretIndex = inputTexts[i].text.length;
@@ -1121,7 +1109,6 @@ class CharacterEditorState extends MusicBeatState
 				if(FlxG.keys.justPressed.ENTER) {
 					inputTexts[i].hasFocus = false;
 				}
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 				FlxG.sound.muteKeys = [];
 				FlxG.sound.volumeDownKeys = [];
 				FlxG.sound.volumeUpKeys = [];

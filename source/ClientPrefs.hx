@@ -15,10 +15,6 @@ class ClientPrefs {
 	public static var globalAntialiasing:Bool = true;
 	public static var noteSplashes:Bool = true;
 	public static var lowQuality:Bool = false;
-<<<<<<< HEAD
-	public static var shaders:Bool = true;
-=======
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 	public static var framerate:Int = 60;
 	public static var cursing:Bool = true;
 	public static var violence:Bool = true;
@@ -26,10 +22,7 @@ class ClientPrefs {
 	public static var hideHud:Bool = false;
 	public static var noteOffset:Int = 0;
 	public static var arrowHSV:Array<Array<Int>> = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
-<<<<<<< HEAD
-=======
 	public static var imagesPersist:Bool = false;
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 	public static var ghostTapping:Bool = true;
 	public static var timeBarType:String = 'Time Left';
 	public static var scoreZoom:Bool = true;
@@ -39,10 +32,6 @@ class ClientPrefs {
 	public static var hitsoundVolume:Float = 0;
 	public static var pauseMusic:String = 'Tea Time';
 	public static var checkForUpdates:Bool = true;
-<<<<<<< HEAD
-	public static var comboStacking = true;
-=======
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
@@ -112,10 +101,6 @@ class ClientPrefs {
 		FlxG.save.data.globalAntialiasing = globalAntialiasing;
 		FlxG.save.data.noteSplashes = noteSplashes;
 		FlxG.save.data.lowQuality = lowQuality;
-<<<<<<< HEAD
-		FlxG.save.data.shaders = shaders;
-=======
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 		FlxG.save.data.framerate = framerate;
 		//FlxG.save.data.cursing = cursing;
 		//FlxG.save.data.violence = violence;
@@ -123,10 +108,7 @@ class ClientPrefs {
 		FlxG.save.data.noteOffset = noteOffset;
 		FlxG.save.data.hideHud = hideHud;
 		FlxG.save.data.arrowHSV = arrowHSV;
-<<<<<<< HEAD
-=======
 		FlxG.save.data.imagesPersist = imagesPersist;
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 		FlxG.save.data.ghostTapping = ghostTapping;
 		FlxG.save.data.timeBarType = timeBarType;
 		FlxG.save.data.scoreZoom = scoreZoom;
@@ -146,10 +128,6 @@ class ClientPrefs {
 		FlxG.save.data.hitsoundVolume = hitsoundVolume;
 		FlxG.save.data.pauseMusic = pauseMusic;
 		FlxG.save.data.checkForUpdates = checkForUpdates;
-<<<<<<< HEAD
-		FlxG.save.data.comboStacking = comboStacking;
-=======
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 	
 		FlxG.save.flush();
 
@@ -188,12 +166,6 @@ class ClientPrefs {
 		if(FlxG.save.data.lowQuality != null) {
 			lowQuality = FlxG.save.data.lowQuality;
 		}
-<<<<<<< HEAD
-		if(FlxG.save.data.shaders != null) {
-			shaders = FlxG.save.data.shaders;
-		}
-=======
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 		if(FlxG.save.data.framerate != null) {
 			framerate = FlxG.save.data.framerate;
 			if(framerate > FlxG.drawFramerate) {
@@ -287,11 +259,6 @@ class ClientPrefs {
 		{
 			checkForUpdates = FlxG.save.data.checkForUpdates;
 		}
-<<<<<<< HEAD
-		if (FlxG.save.data.comboStacking != null)
-			comboStacking = FlxG.save.data.comboStacking;
-=======
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 
 		var save:FlxSave = new FlxSave();
 		save.bind('controls_v2', 'ninjamuffin99');

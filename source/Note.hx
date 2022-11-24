@@ -37,10 +37,6 @@ class Note extends FlxSprite
 
 	public var tail:Array<Note> = []; // for sustains
 	public var parent:Note;
-<<<<<<< HEAD
-	public var blockHit:Bool = false; // only works for player
-=======
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 
 	public var sustainLength:Float = 0;
 	public var isSustainNote:Bool = false;
@@ -61,16 +57,10 @@ class Note extends FlxSprite
 	public var lowPriority:Bool = false;
 
 	public static var swagWidth:Float = 160 * 0.7;
-<<<<<<< HEAD
-	
-	private var colArray:Array<String> = ['purple', 'blue', 'green', 'red'];
-	private var pixelInt:Array<Int> = [0, 1, 2, 3];
-=======
 	public static var PURP_NOTE:Int = 0;
 	public static var GREEN_NOTE:Int = 2;
 	public static var BLUE_NOTE:Int = 1;
 	public static var RED_NOTE:Int = 3;
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 
 	// Lua shit
 	public var noteSplashDisabled:Bool = false;
@@ -131,18 +121,9 @@ class Note extends FlxSprite
 
 	private function set_noteType(value:String):String {
 		noteSplashTexture = PlayState.SONG.splashSkin;
-<<<<<<< HEAD
-		if (noteData > -1 && noteData < ClientPrefs.arrowHSV.length)
-		{
-			colorSwap.hue = ClientPrefs.arrowHSV[noteData][0] / 360;
-			colorSwap.saturation = ClientPrefs.arrowHSV[noteData][1] / 100;
-			colorSwap.brightness = ClientPrefs.arrowHSV[noteData][2] / 100;
-		}
-=======
 		colorSwap.hue = ClientPrefs.arrowHSV[noteData % 4][0] / 360;
 		colorSwap.saturation = ClientPrefs.arrowHSV[noteData % 4][1] / 100;
 		colorSwap.brightness = ClientPrefs.arrowHSV[noteData % 4][2] / 100;
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 
 		if(noteData > -1 && noteType != value) {
 			switch(value) {
@@ -201,12 +182,6 @@ class Note extends FlxSprite
 			colorSwap = new ColorSwap();
 			shader = colorSwap.shader;
 
-<<<<<<< HEAD
-			x += swagWidth * (noteData);
-			if(!isSustainNote && noteData > -1 && noteData < 4) { //Doing this 'if' check to fix the warnings on Senpai songs
-				var animToPlay:String = '';
-				animToPlay = colArray[noteData % 4];
-=======
 			x += swagWidth * (noteData % 4);
 			if(!isSustainNote) { //Doing this 'if' check to fix the warnings on Senpai songs
 				var animToPlay:String = '';
@@ -221,7 +196,6 @@ class Note extends FlxSprite
 					case 3:
 						animToPlay = 'red';
 				}
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 				animation.play(animToPlay + 'Scroll');
 			}
 		}
@@ -241,9 +215,6 @@ class Note extends FlxSprite
 			offsetX += width / 2;
 			copyAngle = false;
 
-<<<<<<< HEAD
-			animation.play(colArray[noteData % 4] + 'holdend');
-=======
 			switch (noteData)
 			{
 				case 0:
@@ -255,7 +226,6 @@ class Note extends FlxSprite
 				case 3:
 					animation.play('redholdend');
 			}
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 
 			updateHitbox();
 
@@ -266,9 +236,6 @@ class Note extends FlxSprite
 
 			if (prevNote.isSustainNote)
 			{
-<<<<<<< HEAD
-				prevNote.animation.play(colArray[prevNote.noteData % 4] + 'hold');
-=======
 				switch (prevNote.noteData)
 				{
 					case 0:
@@ -280,7 +247,6 @@ class Note extends FlxSprite
 					case 3:
 						prevNote.animation.play('redhold');
 				}
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 
 				prevNote.scale.y *= Conductor.stepCrochet / 100 * 1.05;
 				if(PlayState.instance != null)
@@ -381,15 +347,6 @@ class Note extends FlxSprite
 	}
 
 	function loadNoteAnims() {
-<<<<<<< HEAD
-		animation.addByPrefix(colArray[noteData] + 'Scroll', colArray[noteData] + '0');
-
-		if (isSustainNote)
-		{
-			animation.addByPrefix('purpleholdend', 'pruple end hold'); // ?????
-			animation.addByPrefix(colArray[noteData] + 'holdend', colArray[noteData] + ' hold end');
-			animation.addByPrefix(colArray[noteData] + 'hold', colArray[noteData] + ' hold piece');
-=======
 		animation.addByPrefix('greenScroll', 'green0');
 		animation.addByPrefix('redScroll', 'red0');
 		animation.addByPrefix('blueScroll', 'blue0');
@@ -406,7 +363,6 @@ class Note extends FlxSprite
 			animation.addByPrefix('greenhold', 'green hold piece');
 			animation.addByPrefix('redhold', 'red hold piece');
 			animation.addByPrefix('bluehold', 'blue hold piece');
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 		}
 
 		setGraphicSize(Std.int(width * 0.7));
@@ -415,12 +371,6 @@ class Note extends FlxSprite
 
 	function loadPixelNoteAnims() {
 		if(isSustainNote) {
-<<<<<<< HEAD
-			animation.add(colArray[noteData] + 'holdend', [pixelInt[noteData] + 4]);
-			animation.add(colArray[noteData] + 'hold', [pixelInt[noteData]]);
-		} else {
-			animation.add(colArray[noteData] + 'Scroll', [pixelInt[noteData] + 4]);
-=======
 			animation.add('purpleholdend', [PURP_NOTE + 4]);
 			animation.add('greenholdend', [GREEN_NOTE + 4]);
 			animation.add('redholdend', [RED_NOTE + 4]);
@@ -435,7 +385,6 @@ class Note extends FlxSprite
 			animation.add('redScroll', [RED_NOTE + 4]);
 			animation.add('blueScroll', [BLUE_NOTE + 4]);
 			animation.add('purpleScroll', [PURP_NOTE + 4]);
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 		}
 	}
 

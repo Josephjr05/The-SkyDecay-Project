@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<TextureAtlas imagePath="lights.png"><SubTexture name="bglights idle0000" x="0" y="0" width="3973" height="2053" frameX="0" frameY="-67" frameWidth="3973" frameHeight="2120" />
-<SubTexture name="bglights idle0001" x="3973" y="0" width="3973" height="2053" frameX="0" frameY="-67" frameWidth="3973" frameHeight="2120" />
-<SubTexture name="bglights idle0002" x="0" y="2053" width="3973" height="2053" frameX="0" frameY="-67" frameWidth="3973" frameHeight="2120" />
-<SubTexture name="bglights idle0003" x="3973" y="2053" width="3973" height="2053" frameX="0" frameY="-67" frameWidth="3973" frameHeight="2120" />
-<SubTexture name="bglights idle0004" x="0" y="4106" width="3973" height="2053" frameX="0" frameY="-67" frameWidth="3973" frameHeight="2120" />
-</TextureAtlas>

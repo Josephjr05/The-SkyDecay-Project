@@ -448,11 +448,7 @@ class FlxUIDropDownMenuCustom extends FlxUIGroup implements IFlxUIWidget impleme
 				}
 			}
 
-<<<<<<< HEAD
-			if (FlxG.mouse.justPressed && !mouseOverlapping())
-=======
 			if (FlxG.mouse.justPressed && !FlxG.mouse.overlaps(this))
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 			{
 				showList(false);
 			}
@@ -460,21 +456,6 @@ class FlxUIDropDownMenuCustom extends FlxUIGroup implements IFlxUIWidget impleme
 		#end
 	}
 
-<<<<<<< HEAD
-	function mouseOverlapping()
-	{
-		var mousePoint = FlxG.mouse.getScreenPosition(camera);
-		var objPoint = this.getScreenPosition(null, camera);
-		if(mousePoint.x >= objPoint.x && mousePoint.y >= objPoint.y &&
-			mousePoint.x < objPoint.x + this.width && mousePoint.y < objPoint.y + this.height)
-		{
-			return true;
-		}
-		return false;
-	}
-
-=======
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 	override public function destroy():Void
 	{
 		super.destroy();

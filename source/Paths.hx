@@ -324,15 +324,7 @@ class Paths
 	}
 
 	inline static public function formatToSongPath(path:String) {
-<<<<<<< HEAD
-		var invalidChars = ~/[~&\\;:<>#]/;
-		var hideChars = ~/[.,'"%?!]/;
-
-		var path = invalidChars.split(path.replace(' ', '-')).join("-");
-		return hideChars.split(path).join("").toLowerCase();
-=======
 		return path.toLowerCase().replace(' ', '-');
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 	}
 
 	// completely rewritten asset loading? fuck!

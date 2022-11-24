@@ -75,15 +75,9 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		descBox.alpha = 0.6;
 		add(descBox);
 
-<<<<<<< HEAD
-		var titleText:Alphabet = new Alphabet(75, 40, title, true);
-		titleText.scaleX = 0.6;
-		titleText.scaleY = 0.6;
-=======
 		var titleText:Alphabet = new Alphabet(0, 0, title, true, false, 0, 0.6);
 		titleText.x += 60;
 		titleText.y += 40;
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 		titleText.alpha = 0.4;
 		add(titleText);
 
@@ -95,19 +89,12 @@ class BaseOptionsMenu extends MusicBeatSubstate
 
 		for (i in 0...optionsArray.length)
 		{
-<<<<<<< HEAD
-			var optionText:Alphabet = new Alphabet(290, 260, optionsArray[i].name, false);
-			optionText.isMenuItem = true;
-			/*optionText.forceX = 300;
-			optionText.yMult = 90;*/
-=======
 			var optionText:Alphabet = new Alphabet(0, 70 * i, optionsArray[i].name, false, false);
 			optionText.isMenuItem = true;
 			optionText.x += 300;
 			/*optionText.forceX = 300;
 			optionText.yMult = 90;*/
 			optionText.xAdd = 200;
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 			optionText.targetY = i;
 			grpOptions.add(optionText);
 
@@ -118,12 +105,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 				checkboxGroup.add(checkbox);
 			} else {
 				optionText.x -= 80;
-<<<<<<< HEAD
-				optionText.startPosition.x -= 80;
-				//optionText.xAdd -= 80;
-=======
 				optionText.xAdd -= 80;
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 				var valueText:AttachedText = new AttachedText('' + optionsArray[i].getValue(), optionText.width + 80);
 				valueText.sprTracker = optionText;
 				valueText.copyAlpha = true;
@@ -131,10 +113,6 @@ class BaseOptionsMenu extends MusicBeatSubstate
 				grpTexts.add(valueText);
 				optionsArray[i].setChild(valueText);
 			}
-<<<<<<< HEAD
-			//optionText.snapToPosition(); //Don't ignore me when i ask for not making a fucking pull request to uncomment this line ok
-=======
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 
 			if(optionsArray[i].showBoyfriend && boyfriend == null)
 			{

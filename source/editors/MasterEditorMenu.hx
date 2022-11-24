@@ -53,18 +53,10 @@ class MasterEditorMenu extends MusicBeatState
 
 		for (i in 0...options.length)
 		{
-<<<<<<< HEAD
-			var leText:Alphabet = new Alphabet(90, 320, options[i], true);
-			leText.isMenuItem = true;
-			leText.targetY = i;
-			grpTexts.add(leText);
-			leText.snapToPosition();
-=======
 			var leText:Alphabet = new Alphabet(0, (70 * i) + 30, options[i], true, false);
 			leText.isMenuItem = true;
 			leText.targetY = i;
 			grpTexts.add(leText);
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 		}
 		
 		#if MODS_ALLOWED

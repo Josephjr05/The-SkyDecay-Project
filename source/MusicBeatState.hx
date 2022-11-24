@@ -12,10 +12,6 @@ import flixel.FlxSprite;
 import flixel.util.FlxColor;
 import flixel.util.FlxGradient;
 import flixel.FlxState;
-<<<<<<< HEAD
-import flixel.FlxCamera;
-=======
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 import flixel.FlxBasic;
 
 class MusicBeatState extends FlxUIState
@@ -30,19 +26,10 @@ class MusicBeatState extends FlxUIState
 	private var curDecBeat:Float = 0;
 	private var controls(get, never):Controls;
 
-<<<<<<< HEAD
-	public static var camBeat:FlxCamera;
-
-=======
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 	inline function get_controls():Controls
 		return PlayerSettings.player1.controls;
 
 	override function create() {
-<<<<<<< HEAD
-		camBeat = FlxG.camera;
-=======
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 		var skip:Bool = FlxTransitionableState.skipNextTransOut;
 		super.create();
 

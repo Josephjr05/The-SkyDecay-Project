@@ -260,11 +260,7 @@ class Character extends FlxSprite
 		{
 			if(heyTimer > 0)
 			{
-<<<<<<< HEAD
-				heyTimer -= elapsed * PlayState.instance.playbackRate;
-=======
 				heyTimer -= elapsed;
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 				if(heyTimer <= 0)
 				{
 					if(specialAnim && animation.curAnim.name == 'hey' || animation.curAnim.name == 'cheer')
@@ -302,11 +298,7 @@ class Character extends FlxSprite
 					holdTimer += elapsed;
 				}
 
-<<<<<<< HEAD
-				if (holdTimer >= Conductor.stepCrochet * (0.0011 / (FlxG.sound.music != null ? FlxG.sound.music.pitch : 1)) * singDuration)
-=======
 				if (holdTimer >= Conductor.stepCrochet * 0.0011 * singDuration)
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 				{
 					dance();
 					holdTimer = 0;

@@ -92,10 +92,6 @@ class GameOverSubstate extends MusicBeatSubstate
 			FlxG.sound.music.stop();
 			PlayState.deathCounter = 0;
 			PlayState.seenCutscene = false;
-<<<<<<< HEAD
-			PlayState.chartingMode = false;
-=======
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 
 			WeekData.loadTheFirstEnabledMod();
 			if (PlayState.isStoryMode)
@@ -107,11 +103,7 @@ class GameOverSubstate extends MusicBeatSubstate
 			PlayState.instance.callOnLuas('onGameOverConfirm', [false]);
 		}
 
-<<<<<<< HEAD
-		if (boyfriend.animation.curAnim != null && boyfriend.animation.curAnim.name == 'firstDeath')
-=======
 		if (boyfriend.animation.curAnim.name == 'firstDeath')
->>>>>>> e08a47df190a58543331b227cb7eb17426863f65
 		{
 			if(boyfriend.animation.curAnim.curFrame >= 12 && !isFollowingAlready)
 			{

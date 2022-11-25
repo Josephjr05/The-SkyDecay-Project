@@ -3,7 +3,9 @@ package options;
 #if desktop
 import Discord.DiscordClient;
 #end
+import Achievements;
 import flash.text.TextField;
+import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.display.FlxGridOverlay;
@@ -56,7 +58,7 @@ class OptionsState extends MusicBeatState
 
 	override function create() {
 		#if desktop
-		DiscordClient.changePresence("Options Menu", null);
+		DiscordClient.changePresence("Changing Settings", null);
 		#end
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));

@@ -1,21 +1,6 @@
 {
 	"song": {
-		"speed": 3.3,
-		"stage": "show",
-		"player1": "boe",
-		"player2": "Camellia",
-		"player3": null,
 		"events": [
-			[
-				132.743362831858,
-				[
-					[
-						"Change Scroll Speed",
-						"1.7",
-						"0.1"
-					]
-				]
-			],
 			[
 				10486.7256637168,
 				[
@@ -1550,25 +1535,7 @@
 						""
 					]
 				]
-			],
-			[
-				63716.8141592921,
-				[
-					[
-						"Change Scroll Speed",
-						"1.2",
-						"0.1"
-					]
-				]
 			]
-		],
-		"notes": [],
-		"splashSkin": "noteSplashes",
-		"validScore": false,
-		"gfVersion": "gfreanimatedmic",
-		"bpm": 113,
-		"arrowSkin": "stepmaniacool",
-		"needsVoices": true,
-		"song": "kisaragi"
+		]
 	}
 }

@@ -6,20 +6,16 @@
 	--Example: CodeName1 = ''
 
 	CoderName1 = 'Razalzy'
-	CoderName2 = ''
-	CoderName3 = ''
 
 	ArtistName1 = 'Vs. Camellia Team'
-	ArtistName2 = ''
-	ArtistName3 = ''
+	ArtistName2 = 'SDBF by Josephjr05'
 
-	MusicianName1 = 'Tictacto'
-	MusicianName2 = ''
-	MusicianName3 = ''
+	MusicianName1 = 'Inst - Camellia'
+	MusicianName2 = 'Vocals - Tictacto'
 
-	CharterName1 = 'Insane-NeoNuke'
-	CharterName2 = 'Mania-JuliuzG'
-	CharterName3 = '' 
+	CharterName1 = 'Advanc'
+	CharterName2 = 'Insane-NeoNuke'
+	CharterName3 = 'Mania-JuliuzG' 
 
 
 
@@ -164,13 +160,6 @@ function onCreate()
 	addLuaText('ARTIST2')
 	setTextFont('ARTIST2', Font)
 
-	--ARTIST 3
-	makeLuaText('ARTIST3', ArtistName3, 1280, HorizontalWordsOffset, -1000)
-	setTextAlignment('ARTIST3', 'center')
-	setTextSize('ARTIST3', 25)
-	setObjectCamera('ARTIST3', 'other')
-	addLuaText('ARTIST3')
-	setTextFont('ARTIST3', Font)
 	
 	--------MUSIC CREW--------
 	
@@ -189,14 +178,6 @@ function onCreate()
 	setObjectCamera('MUSICIAN2', 'other')
 	addLuaText('MUSICIAN2')
 	setTextFont('MUSICIAN2', Font)
-
-	--MUSICIAN 3
-	makeLuaText('MUSICIAN3', MusicianName3, 1280, HorizontalWordsOffset, -1000)
-	setTextAlignment('MUSICIAN3', 'center')
-	setTextSize('MUSICIAN3', 25)
-	setObjectCamera('MUSICIAN3', 'other')
-	addLuaText('MUSICIAN3') 
-	setTextFont('MUSICIAN3', Font)
 
 
 	--------CHARTING CREW--------

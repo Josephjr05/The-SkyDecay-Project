@@ -84,7 +84,7 @@ function onUpdate()
                 if num ~= '' and num ~= ' ' then
                     setProperty(tag .. '.visible', true)
                     setProperty(tag .. '.active', true)
-                    objectPlayAnimation(tag, num .. 'a')
+                    playAnim(tag, num .. 'a')
                 else
                     setProperty(tag .. '.visible', false)
                     setProperty(tag .. '.active', false)
@@ -103,7 +103,7 @@ function onUpdate()
                 local tag = 'noteComboN' .. i
                 local num = string.sub(seperatedHits, i, i)
                 if num ~= '' and num ~= ' ' then
-                    objectPlayAnimation(tag, num .. 'd')
+                    playAnim(tag, num .. 'd')
                 end
             end
         elseif ateUrFrame == 'disappear' then

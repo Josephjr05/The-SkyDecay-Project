@@ -8,12 +8,12 @@
 	CoderName1 = 'Razalzy'
 
 	ArtistName1 = 'Vs. Camellia Team'
-	ArtistName2 = 'SDBF by Josephjr05'
+	ArtistName2 = 'SkyDecay-BF by Josephjr05'
 
 	MusicianName1 = 'Inst - Camellia'
 	MusicianName2 = 'Vocals - Tictacto'
 
-	CharterName1 = 'Advanc'
+	CharterName1 = 'Advanced-Josephjr05'
 	CharterName2 = 'Insane-NeoNuke'
 	CharterName3 = 'Mania-JuliuzG' 
 
@@ -126,21 +126,6 @@ function onCreate()
 	addLuaText('CODER1')
 	setTextFont('CODER1', Font)
 	
-	--CODER 2
-	makeLuaText('CODER2', CoderName2, 1280, HorizontalWordsOffset, -1000)
-	setTextAlignment('CODER2', 'center')
-	setTextSize('CODER2', 25)
-	setObjectCamera('CODER2', 'other')
-	addLuaText('CODER2')
-	setTextFont('CODER2', Font)
-
-	--CODER 3
-	makeLuaText('CODER3', CoderName3, 1280, HorizontalWordsOffset, -1000)
-	setTextAlignment('CODER3', 'center')
-	setTextSize('CODER3', 25)
-	setObjectCamera('CODER3', 'other')
-	addLuaText('CODER3')
-	setTextFont('CODER3', Font)
 	
 	--------ARTIST CREW--------
 		

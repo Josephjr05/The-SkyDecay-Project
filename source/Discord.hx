@@ -15,7 +15,7 @@ class DiscordClient
 	public static var isInitialized:Bool = false;
 	public function new()
 	{
-		trace("Discord Client starting...");
+		trace("Joseph's Nice Discord RPC is starting...");
 		DiscordRpc.start({
 			clientID: "1006066717019078686",
 			onReady: onReady,
@@ -42,7 +42,7 @@ class DiscordClient
 	static function onReady()
 	{
 		DiscordRpc.presence({
-			details: "At the station",
+			details: "START THE DAMN GAME!!",
 			state: null,
 			largeImageKey: 'icon',
 			largeImageText: "Psych Engine"

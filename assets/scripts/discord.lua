@@ -82,7 +82,7 @@ end
 
 function onUpdatePost(elapsed)
 	if botPlay and not dieee then
-		playing = "BotPlay: "
+		playing = "Using BotPlay Like a bitch: "
 	end
 	songPos = getPropertyFromClass('Conductor', 'songPosition');
 	if savePos < songPos - 100 then
@@ -99,7 +99,7 @@ end
 function onGameOver()
 	dieee = true
 	hp = ""
-	playing = "Game Over: "
+	playing = "THEY DED:"
 	pause = ""
 	truething = false
 	weekname = ""

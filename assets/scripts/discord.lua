@@ -65,10 +65,10 @@ function onCreate()
 		bbdisplay = "Blueballed: " .. getPropertyFromClass('PlayState', 'deathCounter')
 	end
 	if isStoryMode then
-		mode = "Story Mode"
+		mode = "At the station"
 		weekname = ': ' .. week
 	else
-		mode = "Freeplay"
+		mode = "At Freeplay Area"
 		weekname = ""
 	end
 	difficultything = getProperty('storyDifficultyText')
@@ -82,7 +82,7 @@ end
 
 function onUpdatePost(elapsed)
 	if botPlay and not dieee then
-		playing = "Using BotPlay Like a bitch: "
+		playing = "Botplay: "
 	end
 	songPos = getPropertyFromClass('Conductor', 'songPosition');
 	if savePos < songPos - 100 then
@@ -99,7 +99,7 @@ end
 function onGameOver()
 	dieee = true
 	hp = ""
-	playing = "THEY DED:"
+	playing = "Get BlueBalled:"
 	pause = ""
 	truething = false
 	weekname = ""

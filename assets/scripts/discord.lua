@@ -6,7 +6,7 @@ playing = "Playing: " -- i think you know what does it means, change if idk lol
 savePos = 0 -- crutch for lua pause fix
 dieee = false -- game won't change playing var if you died with botplay
 
-canshowpopup = true -- turns off and turns on pop up
+canshowpopup = off -- turns off and turns on pop up
 function onSongStart()
 	offset = getPropertyFromClass('ClientPrefs', 'noteOffset')
 	truething = true
@@ -65,7 +65,7 @@ function onCreate()
 		bbdisplay = "Blueballed: " .. getPropertyFromClass('PlayState', 'deathCounter')
 	end
 	if isStoryMode then
-		mode = "At the station"
+		mode = "At The Station"
 		weekname = ': ' .. week
 	else
 		mode = "At Freeplay Area"

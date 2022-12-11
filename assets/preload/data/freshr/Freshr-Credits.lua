@@ -7,8 +7,7 @@
 
 	CoderName1 = 'Razalzy'
 
-	ArtistName1 = 'BF, Dad, GF by PhantomArcade, evilsk8r'
-	ArtistName2 = 'Joel_8946'
+	ArtistName1 = 'Original FNF Dev Team'
 
 	MusicianName1 = 'Honey Rose'
 
@@ -134,13 +133,6 @@ function onCreate()
 	addLuaText('ARTIST1')
 	setTextFont('ARTIST1', Font)
 	
-	--ARTIST 2
-	makeLuaText('ARTIST2', ArtistName2, 1280, HorizontalWordsOffset, -1000)
-	setTextAlignment('ARTIST2', 'center')
-	setTextSize('ARTIST2', 25)
-	setObjectCamera('ARTIST2', 'other')
-	addLuaText('ARTIST2')
-	setTextFont('ARTIST2', Font)
 
 	
 	--------MUSIC CREW--------
@@ -190,7 +182,6 @@ function onCreate()
 			----ARTISTS TEXT----
 			doTweenY('ARTTEXT', 'ARTISTS', 280, TweenSpeed/1.6, 'QuadOut')
 			doTweenY('ARTIST1', 'ARTIST1', 320, TweenSpeed/1.6, 'QuadOut')
-			doTweenY('ARTIST2', 'ARTIST2', 350, TweenSpeed/1.6, 'QuadOut')
 			
 
 			----MUSICIANS TEXT----

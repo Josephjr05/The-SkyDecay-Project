@@ -40,7 +40,7 @@ class MainMenuState extends MusicBeatState
 		#if MODS_ALLOWED 'mods', #end
 		#if ACHIEVEMENTS_ALLOWED 'awards', #end
 		'credits',
-		#if !switch 'donate', #end
+		//#if !switch 'donate', #end
 		'options'
 	];
 
@@ -58,7 +58,7 @@ class MainMenuState extends MusicBeatState
 
 		#if desktop
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Menus", null);
+		DiscordClient.changePresence("At The Station", null);
 		#end
 		debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 

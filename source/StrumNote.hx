@@ -14,7 +14,7 @@ class StrumNote extends FlxSprite
 	public var direction:Float = 90;//plan on doing scroll directions soon -bb
 	public var downScroll:Bool = false;//plan on doing scroll directions soon -bb
 	public var sustainReduce:Bool = true;
-	
+
 	private var player:Int;
 	
 	public var texture(default, set):String = null;
@@ -26,15 +26,18 @@ class StrumNote extends FlxSprite
 		return value;
 	}
 
-	public function new(x:Float, y:Float, leData:Int, player:Int) {
+	public function new(xx:Float, yy:Float, leData:Int, player:Int) {
 		colorSwap = new ColorSwap();
 		shader = colorSwap.shader;
 		noteData = leData;
 		this.player = player;
 		this.noteData = leData;
-		super(x, y);
+		super(xx, yy);
 
-		var skin:String = 'NOTE_assets';
+		x = xx;
+		y = yy;
+
+		var skin:String = 'noteSkins/' + CoolUtil.skinTypes[ClientPrefs.curSkin];
 		if(PlayState.SONG.arrowSkin != null && PlayState.SONG.arrowSkin.length > 1) skin = PlayState.SONG.arrowSkin;
 		texture = skin; //Load texture and anims
 
@@ -46,12 +49,12 @@ class StrumNote extends FlxSprite
 		var lastAnim:String = null;
 		if(animation.curAnim != null) lastAnim = animation.curAnim.name;
 
-		if(PlayState.isPixelStage)
+		if(PlayState.isPixelStage || CoolUtil.skinTypes[ClientPrefs.curSkin] == 'Pixel')
 		{
-			loadGraphic(Paths.image('pixelUI/' + texture));
+			loadGraphic(Paths.image('pixelUI/' + 'NOTE_assets'));
 			width = width / 4;
 			height = height / 5;
-			loadGraphic(Paths.image('pixelUI/' + texture), true, Math.floor(width), Math.floor(height));
+			loadGraphic(Paths.image('pixelUI/' + 'NOTE_assets'), true, Math.floor(width), Math.floor(height));
 
 			antialiasing = false;
 			setGraphicSize(Std.int(width * PlayState.daPixelZoom));
@@ -122,7 +125,7 @@ class StrumNote extends FlxSprite
 	public function postAddedToGroup() {
 		playAnim('static');
 		x += Note.swagWidth * noteData;
-		x += 50;
+		x += 100;
 		x += ((FlxG.width / 2) * player);
 		ID = noteData;
 	}
@@ -136,7 +139,7 @@ class StrumNote extends FlxSprite
 			}
 		}
 		//if(animation.curAnim != null){ //my bad i was upset
-		if(animation.curAnim.name == 'confirm' && !PlayState.isPixelStage) {
+		if(animation.curAnim.name == 'confirm' && !PlayState.isPixelStage && CoolUtil.skinTypes[ClientPrefs.curSkin] != 'Pixel') {
 			centerOrigin();
 		//}
 		}
@@ -157,7 +160,7 @@ class StrumNote extends FlxSprite
 			colorSwap.saturation = ClientPrefs.arrowHSV[noteData % 4][1] / 100;
 			colorSwap.brightness = ClientPrefs.arrowHSV[noteData % 4][2] / 100;
 
-			if(animation.curAnim.name == 'confirm' && !PlayState.isPixelStage) {
+			if(animation.curAnim.name == 'confirm' && !PlayState.isPixelStage && CoolUtil.skinTypes[ClientPrefs.curSkin] != 'Pixel') {
 				centerOrigin();
 			}
 		}

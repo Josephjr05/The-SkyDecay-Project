@@ -15,7 +15,8 @@ class ClientPrefs {
 	public static var globalAntialiasing:Bool = true;
 	public static var noteSplashes:Bool = true;
 	public static var lowQuality:Bool = false;
-	public static var framerate:Int = 60;
+	public static var framerate:Int = 120;
+	public static var curSkin:Int = 0;
 	public static var cursing:Bool = true;
 	public static var violence:Bool = true;
 	public static var camZooms:Bool = true;
@@ -102,6 +103,7 @@ class ClientPrefs {
 		FlxG.save.data.noteSplashes = noteSplashes;
 		FlxG.save.data.lowQuality = lowQuality;
 		FlxG.save.data.framerate = framerate;
+		FlxG.save.data.curSkin = curSkin;
 		//FlxG.save.data.cursing = cursing;
 		//FlxG.save.data.violence = violence;
 		FlxG.save.data.camZooms = camZooms;
@@ -190,6 +192,10 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.noteOffset != null) {
 			noteOffset = FlxG.save.data.noteOffset;
+		}
+		if (FlxG.save.data.curSkin != null)
+		{
+			curSkin = FlxG.save.data.curSkin;
 		}
 		if(FlxG.save.data.arrowHSV != null) {
 			arrowHSV = FlxG.save.data.arrowHSV;

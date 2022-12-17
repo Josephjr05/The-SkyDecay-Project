@@ -2,9 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\assets",
-    "\\assets\\scripts",
-    "\\source",
-    "\\source\\flixel"
+    "\\source"
   ],
+  "SelectedNode": "\\source\\TitleState.hx",
   "PreviewInSolutionExplorer": false
 }

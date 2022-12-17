@@ -39,6 +39,7 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
 import openfl.Assets;
+import vlc.MP4Handler;
 
 using StringTools;
 typedef TitleData =
@@ -223,14 +224,20 @@ class TitleState extends MusicBeatState
 			}
 			#end
 
-			if (initialized)
-				startIntro();
+			if (initialized){
+				var video:MP4Handler = new MP4Handler();
+				video.playVideo(Paths.video('Intro'));
+				video.finishCallback = function() {
+					startIntro();
+				}
+			}
 			else
 			{
-				new FlxTimer().start(1, function(tmr:FlxTimer)
-				{
+				var video:MP4Handler = new MP4Handler();
+				video.playVideo(Paths.video('Intro'));
+				video.finishCallback = function() {
 					startIntro();
-				});
+				}
 			}
 		}
 		#end

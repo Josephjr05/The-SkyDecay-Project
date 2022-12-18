@@ -1,9 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\assets",
-    "\\source"
+    "\\source",
+    "\\source\\editors"
   ],
-  "SelectedNode": "\\source\\TitleState.hx",
+  "SelectedNode": "\\source\\editors\\ChartingState.hx",
   "PreviewInSolutionExplorer": false
 }

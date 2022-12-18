@@ -36,7 +36,7 @@ class Note extends FlxSprite
 	public var spawned:Bool = false;
 
 	public var tail:Array<Note> = []; // for sustains
-	public var parent:Note;
+	public var parentNote:Note;
 
 	public var sustainLength:Float = 0;
 	public var isSustainNote:Bool = false;
@@ -158,7 +158,7 @@ class Note extends FlxSprite
 		return value;
 	}
 
-	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?inEditor:Bool = false)
+	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?parentNote:Note, ?sustainNote:Bool = false, ?inEditor:Bool = false)
 	{
 		super();
 
@@ -168,6 +168,7 @@ class Note extends FlxSprite
 		this.prevNote = prevNote;
 		isSustainNote = sustainNote;
 		this.inEditor = inEditor;
+		this.parentNote = parentNote;
 
 		x += (ClientPrefs.middleScroll ? PlayState.STRUM_X_MIDDLESCROLL : PlayState.STRUM_X) + 50;
 		// MAKE SURE ITS DEFINITELY OFF SCREEN?
@@ -231,8 +232,19 @@ class Note extends FlxSprite
 
 			offsetX -= width / 2;
 
-			if (PlayState.isPixelStage)
+			if (PlayState.isPixelStage || CoolUtil.skinTypes[ClientPrefs.curSkin] == 'Pixel')
+			{
 				offsetX += 30;
+			}
+			if(CoolUtil.skinTypes[ClientPrefs.curSkin] == 'Bar' && isSustainNote)
+			{
+				offsetY -= 30;
+			}
+			if(CoolUtil.skinTypes[ClientPrefs.curSkin] == 'Circle' && !isSustainNote)
+			{
+				offsetX += 30;
+				offsetY += 45;
+			}
 
 			if (prevNote.isSustainNote)
 			{
@@ -254,7 +266,7 @@ class Note extends FlxSprite
 					prevNote.scale.y *= PlayState.instance.songSpeed;
 				}
 
-				if(PlayState.isPixelStage) {
+				if(PlayState.isPixelStage || CoolUtil.skinTypes[ClientPrefs.curSkin] == 'Pixel') {
 					prevNote.scale.y *= 1.19;
 					prevNote.scale.y *= (6 / height); //Auto adjust note size
 				}
@@ -262,7 +274,7 @@ class Note extends FlxSprite
 				// prevNote.setGraphicSize();
 			}
 
-			if(PlayState.isPixelStage) {
+			if(PlayState.isPixelStage || CoolUtil.skinTypes[ClientPrefs.curSkin] == 'Pixel') {
 				scale.y *= PlayState.daPixelZoom;
 				updateHitbox();
 			}
@@ -281,12 +293,7 @@ class Note extends FlxSprite
 		if(suffix == null) suffix = '';
 
 		var skin:String = texture;
-		if(texture.length < 1) {
-			skin = PlayState.SONG.arrowSkin;
-			if(skin == null || skin.length < 1) {
-				skin = 'NOTE_assets';
-			}
-		}
+		skin = 'noteSkins/' + CoolUtil.skinTypes[ClientPrefs.curSkin];
 
 		var animName:String = null;
 		if(animation.curAnim != null) {
@@ -298,18 +305,18 @@ class Note extends FlxSprite
 
 		var lastScaleY:Float = scale.y;
 		var blahblah:String = arraySkin.join('/');
-		if(PlayState.isPixelStage) {
+		if(PlayState.isPixelStage || CoolUtil.skinTypes[ClientPrefs.curSkin] == 'Pixel') {
 			if(isSustainNote) {
-				loadGraphic(Paths.image('pixelUI/' + blahblah + 'ENDS'));
+				loadGraphic(Paths.image('pixelUI/' + 'NOTE_assets' + 'ENDS'));
 				width = width / 4;
 				height = height / 2;
 				originalHeightForCalcs = height;
-				loadGraphic(Paths.image('pixelUI/' + blahblah + 'ENDS'), true, Math.floor(width), Math.floor(height));
+				loadGraphic(Paths.image('pixelUI/' + 'NOTE_assets' + 'ENDS'), true, Math.floor(width), Math.floor(height));
 			} else {
-				loadGraphic(Paths.image('pixelUI/' + blahblah));
+				loadGraphic(Paths.image('pixelUI/' + 'NOTE_assets'));
 				width = width / 4;
 				height = height / 5;
-				loadGraphic(Paths.image('pixelUI/' + blahblah), true, Math.floor(width), Math.floor(height));
+				loadGraphic(Paths.image('pixelUI/' + 'NOTE_assets'), true, Math.floor(width), Math.floor(height));
 			}
 			setGraphicSize(Std.int(width * PlayState.daPixelZoom));
 			loadPixelNoteAnims();
@@ -328,12 +335,15 @@ class Note extends FlxSprite
 				}*/
 			}
 		} else {
-			frames = Paths.getSparrowAtlas(blahblah);
+			frames = Paths.getSparrowAtlas('noteSkins/' + CoolUtil.skinTypes[ClientPrefs.curSkin]);
 			loadNoteAnims();
 			antialiasing = ClientPrefs.globalAntialiasing;
 		}
 		if(isSustainNote) {
 			scale.y = lastScaleY;
+			if(ClientPrefs.keSustains) {
+				scale.y *= 0.75;
+			}
 		}
 		updateHitbox();
 

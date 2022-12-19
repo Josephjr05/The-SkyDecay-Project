@@ -590,6 +590,7 @@ class ChartingState extends MusicBeatState
 
 		var skin = PlayState.SONG.arrowSkin;
 		if(skin == null) skin = '';
+			skin = '';
 		noteSkinInputText = new FlxUIInputText(player2DropDown.x, player2DropDown.y + 50, 150, skin, 8);
 		blockPressWhileTypingOn.push(noteSkinInputText);
 

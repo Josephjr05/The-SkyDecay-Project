@@ -2347,6 +2347,14 @@ class PlayState extends MusicBeatState
 			if (player == 1)
 			{
 				playerStrums.add(babyArrow);
+				if (ClientPrefs.middleScroll)
+				{
+					babyArrow.x -= 320;
+				}
+				if (CoolUtil.skinTypes[ClientPrefs.curSkin] == 'Bar')
+				{
+					babyArrow.y += 8;
+				}
 			}
 			else
 			{
@@ -2734,6 +2742,9 @@ class PlayState extends MusicBeatState
 				if(daNote.copyAlpha)
 					daNote.alpha = strumAlpha;
 
+				if (daNote.copyAngle)
+					daNote.angle = strumAngle;
+
 				if(daNote.copyX)
 					daNote.x = strumX + Math.cos(angleDir) * daNote.distance;
 
@@ -2742,7 +2753,7 @@ class PlayState extends MusicBeatState
 					daNote.y = strumY + Math.sin(angleDir) * daNote.distance;
 
 					//Jesus fuck this took me so much mother fucking time AAAAAAAAAA
-					if(strumScroll && daNote.isSustainNote)
+					if (daNote.isSustainNote && !ClientPrefs.keSustains)
 					{
 						if (daNote.animation.curAnim.name.endsWith('end')) {
 							daNote.y += 10.5 * (fakeCrochet / 400) * 1.5 * songSpeed + (46 * (songSpeed - 1));
@@ -4125,7 +4136,7 @@ class PlayState extends MusicBeatState
 			{
 				FlxG.sound.play(Paths.sound('hitsound'), ClientPrefs.hitsoundVolume);
 			}
-
+			
 			if(note.hitCausesMiss) {
 				noteMiss(note);
 				if(!note.noteSplashDisabled && !note.isSustainNote) {

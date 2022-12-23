@@ -38,7 +38,7 @@ class NotesSubState extends MusicBeatSubstate
 	private static var typeSelected:Int = 0;
 	private var grpNumbers:FlxTypedGroup<Alphabet>;
 	private var skinText:Alphabet = new Alphabet(0, 0, 'Arrow', false, false);
-	var dumbText:Alphabet = new Alphabet(0, 0, 'Note Skin:', true, false);
+	var dumbText:Alphabet = new Alphabet(0, 0, 'Note Skin: ', true, false);
 	var note:FlxSprite;
 	var ln:FlxSprite;
 	var selectorLeft:Alphabet;

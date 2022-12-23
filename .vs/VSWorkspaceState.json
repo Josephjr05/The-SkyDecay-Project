@@ -2,9 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\source",
-    "\\source\\editors",
     "\\source\\options"
   ],
-  "SelectedNode": "\\source\\Main.hx",
+  "SelectedNode": "\\source\\MP4Handler.hx",
   "PreviewInSolutionExplorer": false
 }

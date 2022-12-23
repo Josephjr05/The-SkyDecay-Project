@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\source",
-    "\\source\\editors"
+    "\\source\\editors",
+    "\\source\\options"
   ],
-  "SelectedNode": "\\source\\CoolUtil.hx",
+  "SelectedNode": "\\source\\Main.hx",
   "PreviewInSolutionExplorer": false
 }

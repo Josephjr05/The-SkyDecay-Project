@@ -31,12 +31,10 @@ class Note extends FlxSprite
 	public var hitByOpponent:Bool = false;
 	public var noteWasHit:Bool = false;
 	public var prevNote:Note;
-	public var nextNote:Note;
 
 	public var spawned:Bool = false;
 
 	public var tail:Array<Note> = []; // for sustains
-	public var parentNote:Note;
 
 	public var sustainLength:Float = 0;
 	public var isSustainNote:Bool = false;
@@ -61,6 +59,8 @@ class Note extends FlxSprite
 	public static var GREEN_NOTE:Int = 2;
 	public static var BLUE_NOTE:Int = 1;
 	public static var RED_NOTE:Int = 3;
+
+	public var parentNote:Note;
 
 	// Lua shit
 	public var noteSplashDisabled:Bool = false;
@@ -202,9 +202,6 @@ class Note extends FlxSprite
 		}
 
 		// trace(prevNote);
-
-		if(prevNote!=null)
-			prevNote.nextNote = this;
 
 		if (isSustainNote && prevNote != null)
 		{

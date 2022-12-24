@@ -2753,7 +2753,7 @@ class PlayState extends MusicBeatState
 					daNote.y = strumY + Math.sin(angleDir) * daNote.distance;
 
 					//Jesus fuck this took me so much mother fucking time AAAAAAAAAA
-					if (daNote.isSustainNote && !ClientPrefs.keSustains)
+					if(strumScroll && daNote.isSustainNote)
 					{
 						if (daNote.animation.curAnim.name.endsWith('end')) {
 							daNote.y += 10.5 * (fakeCrochet / 400) * 1.5 * songSpeed + (46 * (songSpeed - 1));

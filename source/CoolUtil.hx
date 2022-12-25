@@ -23,7 +23,6 @@ class CoolUtil
 		'Advanced',
 		'Insane',
 		'Expert',
-		'Maximum',
 		'Mania'
 	];
 	public static var skinTypes:Array<String> = [

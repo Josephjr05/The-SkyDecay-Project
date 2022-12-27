@@ -87,6 +87,7 @@ class CoolUtil
 	
 	inline public static function listFromString(string:String):Array<String>
 	{
+		final daList = string.trim().split('\n');
 		return [for (i in string.trim().split('\n')) i.trim()];
 	}
 			

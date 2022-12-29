@@ -262,6 +262,7 @@ class ClientPrefs {
 			{
 				gameplaySettings.set(name, value);
 			}
+			gameplaySettings.set('opponentplay', false);
 		}
 		
 		// flixel automatically saves your volume!

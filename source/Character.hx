@@ -128,9 +128,7 @@ class Character extends FlxSprite
 				#if MODS_ALLOWED
 				var modTxtToFind:String = Paths.modsTxt(json.image);
 				var txtToFind:String = Paths.getPath('images/' + json.image + '.txt', TEXT);
-				
-				//var modTextureToFind:String = Paths.modFolders("images/"+json.image);
-				//var textureToFind:String = Paths.getPath('images/' + json.image, new AssetType();
+
 				
 				if (FileSystem.exists(modTxtToFind) || FileSystem.exists(txtToFind) || Assets.exists(txtToFind))
 				#else
@@ -140,6 +138,17 @@ class Character extends FlxSprite
 					spriteType = "packer";
 				}
 				
+				#if MODS_ALLOWED
+				var modJsonToFind:String = Paths.modsImageJson(json.image);
+				var jsonToFind:String = Paths.getPath('images/' + json.image + '.json', TEXT);
+				if (FileSystem.exists(modJsonToFind) || FileSystem.exists(jsonToFind) || Assets.exists(jsonToFind))
+				#else
+				if (Assets.exists(Paths.getPath('images/' + json.image + '.json', TEXT)))
+				#end
+				{
+					spriteType = "packerjson";
+				}
+
 				#if MODS_ALLOWED
 				var modAnimToFind:String = Paths.modFolders('images/' + json.image + '/Animation.json');
 				var animToFind:String = Paths.getPath('images/' + json.image + '/Animation.json', TEXT);
@@ -156,6 +165,8 @@ class Character extends FlxSprite
 				}
 
 				switch (spriteType){
+					case 'packerjson':
+						frames = Paths.asespriteJson(json.image);
 					
 					case "packer":
 						frames = Paths.getPackerAtlas(json.image);

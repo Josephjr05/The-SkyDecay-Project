@@ -836,14 +836,13 @@ class CharacterEditorState extends MusicBeatState
 			char.frames = AtlasFrameMaker.construct(char.imageFile);
 		} else if(Paths.fileExists('images/' + char.imageFile + '.txt', TEXT)) {
 			char.frames = Paths.getPackerAtlas(char.imageFile);
-		} else {
+		}
+		else if (Paths.fileExists('images/' + char.imageFile + '.json', TEXT))
+		{
+			char.frames = Paths.asespriteJson(char.imageFile);
+		}else {
 			char.frames = Paths.getSparrowAtlas(char.imageFile);
 		}
-
-
-
-
-
 
 
 		if(char.animationsArray != null && char.animationsArray.length > 0) {
@@ -1087,6 +1086,7 @@ class CharacterEditorState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
+		CoolUtil.daCam = camMenu;
 		if(char.animationsArray[curAnim] != null) {
 			textAnim.text = char.animationsArray[curAnim].anim;
 

@@ -2,8 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\source",
+    "\\source\\animateatlas",
     "\\source\\editors"
   ],
-  "SelectedNode": "\\source\\editors\\DialogueEditorState.hx",
   "PreviewInSolutionExplorer": false
 }

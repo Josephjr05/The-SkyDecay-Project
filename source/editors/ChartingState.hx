@@ -1506,6 +1506,7 @@ class ChartingState extends MusicBeatState
 	var colorSine:Float = 0;
 	override function update(elapsed:Float)
 	{
+CoolUtil.daCam = FlxG.camera;
 		curStep = recalculateSteps();
 
 		if(FlxG.sound.music.time < 0) {
@@ -1827,6 +1828,7 @@ class ChartingState extends MusicBeatState
 						curQuant = 0;
 
 					quantization = quantizations[curQuant];
+					updateText();
 				}
 
 				if(FlxG.keys.justPressed.LEFT){
@@ -1835,6 +1837,7 @@ class ChartingState extends MusicBeatState
 						curQuant = quantizations.length-1;
 
 					quantization = quantizations[curQuant];
+					updateText();
 				}
 				quant.animation.play('q', true, false, curQuant);
 			}
@@ -1878,6 +1881,7 @@ class ChartingState extends MusicBeatState
 						vocals.pause();
 						vocals.time = FlxG.sound.music.time;
 					}
+					updateText();
 
 					var dastrum = 0;
 
@@ -1948,12 +1952,6 @@ class ChartingState extends MusicBeatState
 			strumLineNotes.members[i].alpha = FlxG.sound.music.playing ? 1 : 0.35;
 		}
 
-		bpmTxt.text =
-		Std.string(FlxMath.roundDecimal(Conductor.songPosition / 1000, 2)) + " / " + Std.string(FlxMath.roundDecimal(FlxG.sound.music.length / 1000, 2)) +
-		"\nSection: " + curSec +
-		"\n\nBeat: " + Std.string(curDecBeat).substring(0,4) +
-		"\n\nStep: " + curStep +
-		"\n\nBeat Snap: " + quantization + "th";
 
 		var playedSound:Array<Bool> = [false, false, false, false]; //Prevents ouchy GF sex sounds
 		curRenderedNotes.forEachAlive(function(note:Note) {
@@ -2009,7 +2007,20 @@ class ChartingState extends MusicBeatState
 			}
 		}
 		lastConductorPos = Conductor.songPosition;
+
+		if (FlxG.sound.music.playing)
+			updateText();
+
 		super.update(elapsed);
+	}
+
+	function updateText() {
+		bpmTxt.text =
+		Std.string(FlxMath.roundDecimal(Conductor.songPosition / 1000, 2)) + " / " + Std.string(FlxMath.roundDecimal(FlxG.sound.music.length / 1000, 2)) +
+		"\nSection: " + curSec +
+		"\n\nBeat: " + Std.string(curDecBeat).substring(0,4) +
+		"\n\nStep: " + curStep +
+		"\n\nBeat Snap: " + quantization + "th";
 	}
 
 	function updateZoom() {
@@ -3015,6 +3026,16 @@ class ChartingState extends MusicBeatState
 		
 		if(_song.notes[section] != null) val = _song.notes[section].sectionBeats;
 		return val != null ? val : 4;
+	}
+
+	override function updateCurStep():Void 
+	{
+
+		var lastChange = Conductor.getBPMFromSeconds(Conductor.songPosition);
+
+		var shit = ((Conductor.songPosition ) - lastChange.songTime) / lastChange.stepCrochet;
+		curDecStep = lastChange.stepTime + shit;
+		curStep = lastChange.stepTime + Math.floor(shit);
 	}
 }
 

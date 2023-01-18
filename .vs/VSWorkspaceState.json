@@ -3,7 +3,9 @@
     "",
     "\\source",
     "\\source\\animateatlas",
-    "\\source\\editors"
+    "\\source\\editors",
+    "\\source\\vlc"
   ],
+  "SelectedNode": "\\source\\vlc\\MP4Handler.hx",
   "PreviewInSolutionExplorer": false
 }

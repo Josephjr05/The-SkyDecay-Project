@@ -1,4 +1,4 @@
-package;
+package vlc;
 
 import openfl.events.Event;
 import flixel.FlxG;

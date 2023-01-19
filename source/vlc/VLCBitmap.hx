@@ -1,4 +1,4 @@
-package hxcodec.vlc;
+package vlc;
 
 #if !(desktop || android)
 #error "The current target platform isn't supported by hxCodec. If you're targeting Windows/Mac/Linux/Android and getting this message, please contact us.";
@@ -15,7 +15,7 @@ import openfl.display.BitmapData;
 import openfl.display3D.textures.RectangleTexture;
 import openfl.events.Event;
 import openfl.utils.ByteArray;
-import hxcodec.vlc.LibVLC;
+import hxcodec.vlc;
 
 /**
  * ...

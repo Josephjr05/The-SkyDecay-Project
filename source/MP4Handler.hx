@@ -7,7 +7,7 @@ import flixel.FlxG;
  * Play a video using cpp.
  * Use bitmap to connect to a graphic or use `MP4Sprite`.
  */
-class MP4Handler extends vlc.VlcBitmap
+class MP4Handler extends vlc.VLCBitmap
 {
 	public var readyCallback:Void->Void;
 	public var finishCallback:Void->Void;

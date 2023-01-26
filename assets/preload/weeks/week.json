@@ -1,0 +1,106 @@
+{
+	"storyName": "test",
+	"hideFreeplay": false,
+	"weekBackground": "stage",
+	"weekBefore": "tutorial",
+	"startUnlocked": true,
+	"weekCharacters": [
+		"gf",
+		"bf",
+		"gf"
+	],
+	"songs": [
+		[
+			"kisaragi",
+			"dnc",
+			[
+				146,
+				113,
+				253
+			]
+		],
+		[
+			"freshr",
+			"dnc",
+			[
+				146,
+				113,
+				253
+			]
+		],
+		[
+			"funk-off",
+			"dnc",
+			[
+				146,
+				113,
+				253
+			]
+		],
+		[
+			"KillerToy",
+			"dnc",
+			[
+				146,
+				113,
+				253
+			]
+		],
+		[
+			"Flash-Me-Back",
+			"dnc",
+			[
+				146,
+				113,
+				253
+			]
+		],
+		[
+			"LUIN-OF-CLETCHAR",
+			"dnc",
+			[
+				146,
+				113,
+				253
+			]
+		],
+		[
+			"Mystery-Circles-Ultra",
+			"dnc",
+			[
+				146,
+				113,
+				253
+			]
+		],
+		[
+			"Nuclear-Star",
+			"dnc",
+			[
+				146,
+				113,
+				253
+			]
+		],
+		[
+			"Terabyte-Connection",
+			"dnc",
+			[
+				146,
+				113,
+				253
+			]
+		],
+		[
+			"the-end",
+			"dnc",
+			[
+				146,
+				113,
+				253
+			]
+		]
+	],
+	"hideStoryMode": false,
+	"weekName": "Week 1"
+}

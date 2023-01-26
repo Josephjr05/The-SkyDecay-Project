@@ -1,0 +1,178 @@
+{
+	"background": [
+		{
+			"name": "sky",
+			"atlas": "sky",
+			"active": false,
+			"position": { "x": -1275, "y": -625 },
+			"antialiasing": true,
+			"scrollFactor": { "x": 1, "y": 1 },
+			"scale": {"x": 0.85, "y": 0.85}
+		},
+		{
+			"condition": "camellia_jumpscare",
+			"name": "camellia_jumpscare",
+			"atlas": "camelliaJumpscare",
+			"position": { "x": -1275, "y": -625 },
+			"antialiasing": true,
+			"scrollFactor": { "x": 1, "y": 1 },
+			"scale": {"x": 0.85, "y": 0.85}
+		},
+		{
+			"name": "crowd_back",
+			"atlas": "backcrowd",
+			"active": false,
+			"position": { "x": -1275, "y": -625 },
+			"antialiasing": true,
+			"scrollFactor": { "x": 1, "y": 1 },
+			"scale": {"x": 0.85, "y": 0.85}
+		},
+		{
+			"name": "stage",
+			"atlas": "stage",
+			"active": false,
+			"position": { "x": -1275, "y": -625 },
+			"antialiasing": true,
+			"scrollFactor": { "x": 1, "y": 1 },
+			"scale": {"x": 0.85, "y": 0.85}
+		},
+		{
+			"name": "speaker_left",
+			"atlas": "speaker_left",
+			"animations": [
+				{
+					"name": "bop",
+					"prefix": "speaker 20",
+					"frameRate": 24
+				}
+			],
+			"initAnim": "bop",
+			"position": { "x": -450, "y": 45 },
+			"antialiasing": true,
+			"scrollFactor": { "x": 1, "y": 1 },
+			"scale": {"x": 0.75, "y": 0.75},
+			"hasReflection": true,
+			"reflectionOffset": -260
+		},
+		{
+			"name": "speaker_right",
+			"atlas": "speaker_right",
+			"animations": [
+				{
+					"name": "bop",
+					"prefix": "speaker 10",
+					"frameRate": 24
+				}
+			],
+			"initAnim": "bop",
+			"position": { "x": 1225, "y": 45 },
+			"antialiasing": true,
+			"scrollFactor": { "x": 1, "y": 1 },
+			"scale": {"x": 0.75, "y": 0.75},
+			"hasReflection": true,
+			"reflectionOffset": -260
+		},
+		{
+			"name": "speaker_left2",
+			"atlas": "speakerleft",
+			"animations": [
+				{
+					"name": "bop",
+					"prefix": "speaker",
+					"frameRate": 24
+				}
+			],
+			"initAnim": "bop",
+			"position": { "x": -325, "y": 55 },
+			"antialiasing": true,
+			"scrollFactor": { "x": 1, "y": 1 },
+			"scale": {"x": 0.5, "y": 0.5},
+			"hasReflection": true,
+			"reflectionOffset": -630
+		},
+		{
+			"name": "speaker_right2",
+			"atlas": "speakerleft",
+			"animations": [
+				{
+					"name": "bop",
+					"prefix": "speaker",
+					"frameRate": 24
+				}
+			],
+			"initAnim": "bop",
+			"position": { "x": 790, "y": 55 },
+			"antialiasing": true,
+			"flipX": true,
+			"scrollFactor": { "x": 1, "y": 1 },
+			"scale": {"x": 0.5, "y": 0.5},
+			"hasReflection": true,
+			"reflectionOffset": -630
+		}
+	],
+	"groups": [
+		{
+			"name": "concertLights",
+			"objects": [
+				{
+					"name": "win1",
+					"atlas": "win1",
+					"visible": false,
+					"antialiasing": true,
+					"position": { "x": -1275, "y": -625},
+					"scale": {"x": 0.85, "y": 0.85}
+					
+				}
+			]
+		}
+	],
+	"foreground": [
+		{
+			"layer": 2,
+			"condition": "!song:lioness-pride",
+			"name": "crowd_front",
+			"atlas": "frontcrowd",
+			"position": { "x": -1275, "y": -225},
+			"scrollFactor": { "x": 1, "y": 1 },
+			"scale": {"x": 0.85, "y": 0.85}
+		},
+		{
+			"layer": 2,
+			"condition": "song:lioness-pride",
+			"name": "crowd_front",
+			"atlas": "frontcrowd_hf",
+			"position": { "x": -1275, "y": -225},
+			"scrollFactor": { "x": 1, "y": 1 },
+			"scale": {"x": 0.85, "y": 0.85}
+		},
+		{
+			"layer": 2,
+			"condition": "jabibi_amogus",
+			"name": "jabibi_amogus",
+			"atlas": "jabibi_amogus",
+			"position": { "x": -1275, "y": -625},
+			"scrollFactor": { "x": 1, "y": 1 },
+			"scale": {"x": 0.85, "y": 0.85}
+		}
+	],
+	"objectOrder": [ 
+		"sky",
+		"camellia_jumpscare", 		
+		"win1",
+		"crowd_back", 
+		"stage", 
+		"speaker_left", "speaker_right", 
+		"speaker_left2", "speaker_right2"
+	],
+	"playerPosition": { "x": 350, "y": 75 },
+	"speakerPosition": { "x": 370, "y": 150 },
+	"opponentPosition": { "x": 0, "y": 0 },
+	"lightning": false,
+	"disableCamera": true,
+	"cameraZoom": 0.59,
+	"reflection": {
+		"alphaMul": 1.0,
+		"alphaAdd": 0.1,
+		"screenStartHeight": 0.1
+	}		
+}

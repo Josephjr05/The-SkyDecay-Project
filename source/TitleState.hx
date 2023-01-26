@@ -213,19 +213,13 @@ class TitleState extends MusicBeatState
 			MusicBeatState.switchState(new FlashingState());
 		} else {
 			if (initialized)
-				var video:MP4Handler = new MP4Handler();
-				video.playVideo(Paths.video('Intro'));
-				video.finishCallback = function() {
-					startIntro();
-				}
-			}
+				startIntro();
 			else
 			{
-				var video:MP4Handler = new MP4Handler();
-				video.playVideo(Paths.video('Intro'));
-				video.finishCallback = function() {
-					startIntro();
-				}
+				new FlxTimer().start(1, function(tmr:FlxTimer)
+				{
+						startIntro();
+				});
 			}
 		}
 		#end

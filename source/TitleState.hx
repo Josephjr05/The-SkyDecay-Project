@@ -212,14 +212,20 @@ class TitleState extends MusicBeatState
 			FlxTransitionableState.skipNextTransOut = true;
 			MusicBeatState.switchState(new FlashingState());
 		} else {
-			if (initialized)
-				startIntro();
+			if (initialized){
+				var video:MP4Handler = new MP4Handler();
+				video.playVideo(Paths.video('Intro'));
+				video.finishCallback = function() {
+					startIntro();
+				}
+			}
 			else
 			{
-				new FlxTimer().start(1, function(tmr:FlxTimer)
-				{
-						startIntro();
-				});
+				var video:MP4Handler = new MP4Handler();
+				video.playVideo(Paths.video('Intro'));
+				video.finishCallback = function() {
+					startIntro();
+				}
 			}
 		}
 		#end

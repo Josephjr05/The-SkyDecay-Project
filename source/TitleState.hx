@@ -37,7 +37,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import openfl.Assets;
-import vlc.VideoHandler;
+import VideoHandler;
 
 using StringTools;
 typedef TitleData =

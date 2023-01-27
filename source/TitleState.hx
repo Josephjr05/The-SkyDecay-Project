@@ -37,7 +37,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import openfl.Assets;
-import vlc.MP4Handler;
+import vlc.VideoHandler;
 
 using StringTools;
 typedef TitleData =
@@ -213,7 +213,7 @@ class TitleState extends MusicBeatState
 			MusicBeatState.switchState(new FlashingState());
 		} else {
 			if (initialized){
-				var video:MP4Handler = new MP4Handler();
+				var video:VideoHandler = new VideoHandler();
 				video.playVideo(Paths.video('Intro'));
 				video.finishCallback = function() {
 					startIntro();
@@ -221,7 +221,7 @@ class TitleState extends MusicBeatState
 			}
 			else
 			{
-				var video:MP4Handler = new MP4Handler();
+				var video:VideoHandler = new VideoHandler();
 				video.playVideo(Paths.video('Intro'));
 				video.finishCallback = function() {
 					startIntro();

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Dad_Dialogue.png">
+	<!-- Created with Adobe Animate version 20.0.0.17400 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+<SubTexture name="dad talk LOOP0000" x="0" y="0" width="670" height="1003" frameX="0" frameY="0" frameWidth="670" frameHeight="1003" />
+<SubTexture name="dad talk LOOP0001" x="0" y="0" width="670" height="1003" frameX="0" frameY="0" frameWidth="670" frameHeight="1003" />
+<SubTexture name="dad talk LOOP0002" x="670" y="0" width="670" height="1003" frameX="0" frameY="0" frameWidth="670" frameHeight="1003" />
+<SubTexture name="dad talk LOOP0003" x="670" y="0" width="670" height="1003" frameX="0" frameY="0" frameWidth="670" frameHeight="1003" />
+<SubTexture name="dad talk LOOP0004" x="0" y="1003" width="670" height="1003" frameX="0" frameY="0" frameWidth="670" frameHeight="1003" />
+<SubTexture name="dad talk LOOP0004" x="670" y="1003" width="670" height="1003" frameX="0" frameY="0" frameWidth="670" frameHeight="1003" />
+<SubTexture name="dad talk0000" x="0" y="2006" width="670" height="1003" frameX="0" frameY="0" frameWidth="670" frameHeight="1003" />
+<SubTexture name="dad talk0001" x="0" y="2006" width="670" height="1003" frameX="0" frameY="0" frameWidth="670" frameHeight="1003" />
+<SubTexture name="dad talk0002" x="670" y="2006" width="670" height="1003" frameX="0" frameY="0" frameWidth="670" frameHeight="1003" />
+<SubTexture name="dad talk0003" x="670" y="2006" width="670" height="1003" frameX="0" frameY="0" frameWidth="670" frameHeight="1003" />
+</TextureAtlas>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Pico_Dialogue.png">
+	<!-- Created with Adobe Animate version 20.0.0.17400 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+<SubTexture name="pico talk LOOP0000" x="0" y="0" width="559" height="670" frameX="0" frameY="0" frameWidth="559" frameHeight="670" />
+<SubTexture name="pico talk LOOP0001" x="0" y="0" width="559" height="670" frameX="0" frameY="0" frameWidth="559" frameHeight="670" />
+<SubTexture name="pico talk LOOP0002" x="559" y="0" width="559" height="670" frameX="0" frameY="0" frameWidth="559" frameHeight="670" />
+<SubTexture name="pico talk LOOP0003" x="559" y="0" width="559" height="670" frameX="0" frameY="0" frameWidth="559" frameHeight="670" />
+<SubTexture name="pico talk LOOP0004" x="0" y="670" width="559" height="670" frameX="0" frameY="0" frameWidth="559" frameHeight="670" />
+<SubTexture name="pico talk LOOP0005" x="0" y="670" width="559" height="670" frameX="0" frameY="0" frameWidth="559" frameHeight="670" />
+<SubTexture name="pico talk LOOP0006" x="559" y="670" width="559" height="670" frameX="0" frameY="0" frameWidth="559" frameHeight="670" />
+<SubTexture name="pico talk LOOP0007" x="559" y="670" width="559" height="670" frameX="0" frameY="0" frameWidth="559" frameHeight="670" />
+<SubTexture name="pico talk LOOP0008" x="0" y="1340" width="559" height="670" frameX="0" frameY="0" frameWidth="559" frameHeight="670" />
+<SubTexture name="pico talk LOOP0009" x="0" y="1340" width="559" height="670" frameX="0" frameY="0" frameWidth="559" frameHeight="670" />
+<SubTexture name="pico talk LOOP0010" x="559" y="1340" width="559" height="670" frameX="0" frameY="0" frameWidth="559" frameHeight="670" />
+<SubTexture name="pico talk LOOP0011" x="559" y="1340" width="559" height="670" frameX="0" frameY="0" frameWidth="559" frameHeight="670" />
+<SubTexture name="pico talk0000" x="0" y="2010" width="559" height="670" frameX="0" frameY="0" frameWidth="559" frameHeight="670" />
+<SubTexture name="pico talk0001" x="0" y="2010" width="559" height="670" frameX="0" frameY="0" frameWidth="559" frameHeight="670" />
+<SubTexture name="pico talk0002" x="559" y="2010" width="559" height="670" frameX="0" frameY="0" frameWidth="559" frameHeight="670" />
+<SubTexture name="pico talk0003" x="559" y="2010" width="559" height="670" frameX="0" frameY="0" frameWidth="559" frameHeight="670" />
+</TextureAtlas>

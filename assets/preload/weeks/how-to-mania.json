@@ -1,0 +1,34 @@
+{
+	"storyName": "lets het this over with lmao",
+	"hideFreeplay": false,
+	"weekBackground": "",
+	"weekBefore": "tutorial",
+	"startUnlocked": true,
+	"weekCharacters": [
+		"",
+		"bf",
+		"gf"
+	],
+	"songs": [
+		[
+			"tutorial",
+			"gf",
+			[
+				165,
+				0,
+				77
+			]
+		],
+		[
+			"oshama-scramble",
+			"dad",
+			[
+				146,
+				113,
+				253
+			]
+		]
+	],
+	"hideStoryMode": false,
+	"weekName": "how to mania"
+}

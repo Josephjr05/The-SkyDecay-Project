@@ -90,7 +90,7 @@
 	<assets path="assets/scripts"        library="scripts"        exclude="*.mp3" unless="web"/>
 	<assets path="assets/custom_events"        library="custom_events"        exclude="*.ogg" if="web"/>
 	<assets path="assets/custom_events"        library="custom_events"        exclude="*.mp3" unless="web"/>
-	
+
 	<section if="MODS_ALLOWED">
 		<assets path='example_mods' rename='mods' embed='false'/>
 	</section>

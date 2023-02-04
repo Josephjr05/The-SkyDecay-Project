@@ -1,76 +1,77 @@
 {
+	"dialogue_pos": "left",
 	"position": [
 		120,
 		50
 	],
-	"dialogue_pos": "left",
+	"no_antialiasing": false,
 	"scale": 1.25,
-	"image": "PicoPsychDialogueFlipped",
 	"animations": [
 		{
-			"idle_offsets": [
-				0,
-				-13
-			],
+			"anim": "talk",
 			"loop_offsets": [
 				0,
 				-13
 			],
-			"anim": "talk",
-			"idle_name": "PicoIdle",
-			"loop_name": "PicoTalkLoop"
+			"idle_offsets": [
+				0,
+				-13
+			],
+			"loop_name": "PicoTalkLoop",
+			"idle_name": "PicoIdle"
 		},
 		{
-			"idle_offsets": [
+			"loop_offsets": [
 				1,
 				-13
 			],
 			"anim": "pissed",
-			"loop_offsets": [
+			"idle_offsets": [
 				1,
 				-13
 			],
-			"idle_name": "PicoMad",
-			"loop_name": "PicoPissedLoop"
+			"loop_name": "PicoPissedLoop",
+			"idle_name": "PicoMad"
 		},
 		{
-			"loop_offsets": [
+			"idle_offsets": [
 				0,
 				-13
 			],
 			"anim": "confused",
-			"idle_offsets": [
+			"loop_offsets": [
 				0,
 				-13
 			],
-			"loop_name": "PicoConfusedLoop",
-			"idle_name": "PicoWhat"
+			"idle_name": "PicoWhat",
+			"loop_name": "PicoConfusedLoop"
 		},
 		{
-			"loop_name": "PicoJoyLoop",
-			"idle_offsets": [
+			"loop_offsets": [
 				0,
 				0
 			],
-			"idle_name": "PicoHappy",
 			"anim": "excited",
-			"loop_offsets": [
+			"idle_offsets": [
 				0,
 				0
-			]
+			],
+			"loop_name": "PicoJoyLoop",
+			"idle_name": "PicoHappy"
 		},
 		{
-			"loop_name": "PicoAimLoop",
+			"loop_offsets": [
+				0,
+				-13
+			],
+			"anim": "gun",
 			"idle_offsets": [
 				0,
 				-13
 			],
-			"idle_name": "PicoGun",
-			"anim": "gun",
-			"loop_offsets": [
-				0,
-				-13
-			]
+			"loop_name": "PicoAimLoop",
+			"idle_name": "PicoGun"
 		}
-	]
+	],
+	"image": "PicoPsychDialogueFlipped"
 }

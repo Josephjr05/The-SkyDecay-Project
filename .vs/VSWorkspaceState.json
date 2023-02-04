@@ -3,8 +3,8 @@
     "",
     "\\source",
     "\\source\\animateatlas",
-    "\\source\\editors"
+    "\\source\\vlc"
   ],
-  "SelectedNode": "\\Project.xml",
+  "SelectedNode": "\\source\\vlc\\VLCBitmap.hx",
   "PreviewInSolutionExplorer": false
 }

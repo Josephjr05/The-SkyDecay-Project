@@ -1,24 +1,76 @@
 {
-	"dialogue_pos": "left",
 	"position": [
-		0,
+		120,
 		50
 	],
+	"dialogue_pos": "left",
 	"scale": 1.25,
+	"image": "PicoPsychDialogueFlipped",
 	"animations": [
 		{
-			"anim": "talk",
-			"loop_offsets": [
-				-61,
-				130
-			],
 			"idle_offsets": [
-				-61,
-				130
+				0,
+				-13
 			],
-			"loop_name": "pico talk LOOP",
-			"idle_name": "pico talk0"
+			"loop_offsets": [
+				0,
+				-13
+			],
+			"anim": "talk",
+			"idle_name": "PicoIdle",
+			"loop_name": "PicoTalkLoop"
+		},
+		{
+			"idle_offsets": [
+				1,
+				-13
+			],
+			"anim": "pissed",
+			"loop_offsets": [
+				1,
+				-13
+			],
+			"idle_name": "PicoMad",
+			"loop_name": "PicoPissedLoop"
+		},
+		{
+			"loop_offsets": [
+				0,
+				-13
+			],
+			"anim": "confused",
+			"idle_offsets": [
+				0,
+				-13
+			],
+			"loop_name": "PicoConfusedLoop",
+			"idle_name": "PicoWhat"
+		},
+		{
+			"loop_name": "PicoJoyLoop",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"idle_name": "PicoHappy",
+			"anim": "excited",
+			"loop_offsets": [
+				0,
+				0
+			]
+		},
+		{
+			"loop_name": "PicoAimLoop",
+			"idle_offsets": [
+				0,
+				-13
+			],
+			"idle_name": "PicoGun",
+			"anim": "gun",
+			"loop_offsets": [
+				0,
+				-13
+			]
 		}
-	],
-	"image": "Pico_Dialogue"
+	]
 }

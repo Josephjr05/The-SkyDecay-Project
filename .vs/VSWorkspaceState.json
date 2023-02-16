@@ -2,9 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\source",
-    "\\source\\animateatlas",
-    "\\source\\vlc"
+    "\\source\\editors"
   ],
-  "SelectedNode": "\\source\\vlc\\VLCBitmap.hx",
+  "SelectedNode": "\\source\\editors\\ChartingState.hx",
   "PreviewInSolutionExplorer": false
 }

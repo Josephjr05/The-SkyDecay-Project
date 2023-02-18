@@ -1,0 +1,5 @@
+Cambia el Zoom LEL
+
+Value 1: El Zoom que quieras
+
+Value 2: El tiempo que quieres que dure el zoom

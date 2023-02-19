@@ -11,8 +11,6 @@ import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.display.StageScaleMode;
 import lime.app.Application;
-import GameJolt;
-import GameJolt.GameJoltAPI;
 
 #if desktop
 import Discord.DiscordClient;
@@ -35,14 +33,13 @@ class Main extends Sprite
 	var game = {
 		width: 1280, // WINDOW width
 		height: 720, // WINDOW height
-		initialState: TitleState, // initial game state
+		initialState: VideoIntro, // initial game state
 		zoom: -1.0, // game state bounds
 		framerate: 60, // default framerate
 		skipSplash: true, // if the default flixel splash screen should be skipped
 		startFullscreen: false // if the game should start at fullscreen mode
 	};
 
-	public static var gjToastManager:GJToastManager;
 	public static var fpsVar:FPS;
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
@@ -79,9 +76,6 @@ class Main extends Sprite
 
 	private function setupGame():Void
 	{
-		gjToastManager = new GJToastManager();
-		addChild(gjToastManager);
-
 		var stageWidth:Int = Lib.current.stage.stageWidth;
 		var stageHeight:Int = Lib.current.stage.stageHeight;
 

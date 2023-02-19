@@ -5,8 +5,6 @@ import Discord.DiscordClient;
 #end
 import flixel.FlxG;
 import flixel.FlxObject;
-import GameJolt.GameJoltAPI;
-import GameJolt.GameJoltLogin;
 import flixel.FlxSprite;
 import flixel.FlxCamera;
 import flixel.addons.transition.FlxTransitionableState;

@@ -1,0 +1,9 @@
+Value1 = Lyrics.
+to put a color, you have to write thetext with the final
+"--0x" and the color parameter. For example:
+Sonic is good--0xFF0000.
+Value2 = timer,borders,cinematic,hide hud.
+if you want to put just the timer, just put the number,
+but if you want to put another action, you have to
+put like that:
+time:0.5,borders:false,cinematic:false,hidehud:false,refresh:false

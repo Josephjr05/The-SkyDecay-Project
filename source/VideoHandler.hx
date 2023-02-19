@@ -14,7 +14,7 @@ import hxcodec.vlc.VLCBitmap;
 class VideoHandler extends VLCBitmap
 {
 	public var canSkip:Bool = true;
-	public var skipKeys:Array<FlxKey> = [FlxKey.SPACE];
+	public var skipKeys:Array<FlxKey> = [FlxKey.SPACE, FlxKey.ENTER];
 
 	public var canUseSound:Bool = true;
 	public var canUseAutoResize:Bool = true;

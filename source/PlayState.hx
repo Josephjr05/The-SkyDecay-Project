@@ -329,6 +329,12 @@ class PlayState extends MusicBeatState
 	// stores the last combo score objects in an array
 	public static var lastScore:Array<FlxSprite> = [];
 
+	//The Song Boxes
+	var box:FlxSprite;
+	var songNameText:FlxText;
+	var composers:String = 'None';
+	var composerText:FlxText;
+
 	override public function create()
 	{
 		//trace('Playback Rate: ' + playbackRate);
@@ -710,6 +716,36 @@ class PlayState extends MusicBeatState
 				stageTweens.push(crowdTween2);
 		}
 
+		box = new FlxSprite().makeGraphic(FlxG.width, 120, FlxColor.BLACK);
+		// box = new FlxSprite().makeGraphic(FlxG.width, 120, FlxColor.BLACK);
+		box.screenCenter();
+		box.x -= 1280;
+		box.alpha = 0.7;
+		add(box);
+
+		songNameText = new FlxText(0, 0, 1280, '', 20);
+		songNameText.setFormat(Paths.font("vcr.ttf"), 58, FlxColor.WHITE, "center");
+		songNameText.text = songName.toUpperCase();
+		songNameText.alpha = 0;
+		songNameText.screenCenter();
+		add(songNameText);
+
+		composerText = new FlxText(0, 0, 1280, '', 20);
+		composerText.setFormat(Paths.font("vcr.ttf"), 38, FlxColor.WHITE, "center");
+		composerText.alpha = 0;
+		composerText.screenCenter();
+		composerText.y += 40;
+		add(composerText);
+		if (FileSystem.exists(Paths.json(SONG.song.toLowerCase() + "/credits")))
+		{
+			composers = File.getContent((Paths.json(SONG.song.toLowerCase() + "/credits")));
+		}
+		else
+		{
+			composers = "Unknown Composers";
+		}
+		composerText.text = composers;
+
 		#if LUA_ALLOWED
 		luaDebugGroup = new FlxTypedGroup<DebugLuaText>();
 		luaDebugGroup.cameras = [camOther];
@@ -1018,6 +1054,9 @@ class PlayState extends MusicBeatState
 		timeBarBG.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
+		box.cameras = [camHUD];
+		songNameText.cameras = [camOther];
+		composerText.cameras = [camOther];
 
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
@@ -2039,6 +2078,8 @@ class PlayState extends MusicBeatState
 							}
 						});
 						FlxG.sound.play(Paths.sound('introGo' + introSoundsSuffix), 0.6);
+
+						boxTween();
 					case 4:
 				}
 
@@ -3710,14 +3751,14 @@ class PlayState extends MusicBeatState
 
 					// if ()
 					if(!ClientPrefs.getGameplaySetting('practice', false) && !ClientPrefs.getGameplaySetting('botplay', false)) {
-						StoryMenuState.weekCompleted.set(WeekData.weeksList[storyWeek], true);
+						// StoryMenuState.weekCompleted.set(WeekData.weeksList[storyWeek], true);
 
 						if (SONG.validScore)
 						{
 							Highscore.saveWeekScore(WeekData.getWeekFileName(), campaignScore, storyDifficulty);
 						}
 
-						FlxG.save.data.weekCompleted = StoryMenuState.weekCompleted;
+						// FlxG.save.data.weekCompleted = StoryMenuState.weekCompleted;
 						FlxG.save.flush();
 					}
 					changedDifficulty = false;
@@ -4870,6 +4911,33 @@ class PlayState extends MusicBeatState
 		
 		setOnLuas('curSection', curSection);
 		callOnLuas('onSectionHit', []);
+	}
+
+	function boxTween()
+	{
+		FlxTween.tween(box, {x: 0}, 1, {ease: FlxEase.cubeOut, onComplete: function(twn:FlxTween)
+		{
+			FlxTween.tween(songNameText, {alpha: 1}, 1, {ease: FlxEase.sineIn, onComplete: function(twn:FlxTween)
+			{
+				FlxTween.tween(composerText, {alpha: 1}, 1, {ease: FlxEase.cubeOut, onComplete: function(twn:FlxTween)
+				{
+					new FlxTimer().start(1.5, function(tmr:FlxTimer) {
+						killBox();
+					});
+				}});
+			}});
+		}});
+	}
+	function killBox()
+	{
+		FlxTween.tween(box, {x: -1280}, 1);
+		FlxTween.tween(songNameText, {x: -1280}, 1);
+		FlxTween.tween(composerText, {x: -1280}, 1, {onComplete: function(twn:FlxTween)
+		{
+			box.kill();
+			songNameText.kill();
+			composerText.kill();
+		}});
 	}
 
 	#if LUA_ALLOWED

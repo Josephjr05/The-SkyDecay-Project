@@ -1,7 +1,5 @@
 package;
 
-import GameJolt;
-import GameJolt.GameJoltAPI;
 #if desktop
 import sys.thread.Thread;
 #end
@@ -196,10 +194,10 @@ class TitleState extends MusicBeatState
 			persistentDraw = true;
 		}
 
-		if (FlxG.save.data.weekCompleted != null)
+		/* if (FlxG.save.data.weekCompleted != null)
 		{
 			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
-		}
+		} */
 
 		FlxG.mouse.visible = false;
 		#if FREEPLAY
@@ -213,19 +211,11 @@ class TitleState extends MusicBeatState
 			MusicBeatState.switchState(new FlashingState());
 		} else {
 			if (initialized){
-				var video:VideoHandler = new VideoHandler();
-				video.playVideo(Paths.video('Intro'));
-				video.finishCallback = function() {
-					startIntro();
-				}
+				startIntro();
 			}
 			else
 			{
-				var video:VideoHandler = new VideoHandler();
-				video.playVideo(Paths.video('Intro'));
-				video.finishCallback = function() {
-					startIntro();
-				}
+				startIntro();
 			}
 		}
 		#end

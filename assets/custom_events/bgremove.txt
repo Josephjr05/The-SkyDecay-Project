@@ -1,0 +1,3 @@
+Gets rid of those pesky sprites.
+
+Value 1: the sprites tag

@@ -1,3 +1,0 @@
-Value 1: 'a' to make the BG white and bf black, 'b' to undo.
-
-Value 2:Fade In/Out Time.

@@ -1,2 +1,0 @@
-value1 = window title
-value2 = window message

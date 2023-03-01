@@ -1054,7 +1054,7 @@ class PlayState extends MusicBeatState
 		timeBarBG.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
-		box.cameras = [camHUD];
+		box.cameras = [camOther];
 		songNameText.cameras = [camOther];
 		composerText.cameras = [camOther];
 

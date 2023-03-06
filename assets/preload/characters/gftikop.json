@@ -1,0 +1,205 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				-9
+			],
+			"fps": 24,
+			"anim": "danceLeft",
+			"indices": [
+				30,
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14
+			],
+			"name": "GF Dancing Beat"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				-9
+			],
+			"fps": 24,
+			"anim": "danceRight",
+			"indices": [
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25,
+				26,
+				27,
+				28,
+				29
+			],
+			"name": "GF Dancing Beat"
+		},
+		{
+			"offsets": [
+				-105,
+				393
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "thereturn",
+			"indices": [
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12
+			],
+			"name": "shesback"
+		},
+		{
+			"offsets": [
+				718,
+				648
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "heshere",
+			"indices": [
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12
+			],
+			"name": "land"
+		},
+		{
+			"loop": true,
+			"offsets": [
+				343,
+				-180
+			],
+			"anim": "idle-alt",
+			"fps": 24,
+			"name": "speakrs",
+			"indices": []
+		},
+		{
+			"offsets": [
+				1,
+				138
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "idle-tik",
+			"indices": [],
+			"name": "idle"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-600,
+				-190
+			],
+			"anim": "danceLeft-alt",
+			"fps": 24,
+			"name": "speakrs",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-602,
+				-190
+			],
+			"anim": "danceRight-alt",
+			"fps": 24,
+			"name": "speakrs",
+			"indices": []
+		},
+		{
+			"offsets": [
+				116,
+				138
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "danceLeft-tik",
+			"indices": [],
+			"name": "idle"
+		},
+		{
+			"offsets": [
+				115,
+				138
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "danceRight-tik",
+			"indices": [],
+			"name": "idle"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				142,
+				448
+			],
+			"anim": "dies",
+			"fps": 24,
+			"name": "dies",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/GFAccelerant_asset",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "gf",
+	"flip_x": true,
+	"healthbar_colors": [
+		255,
+		0,
+		0
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 4,
+	"scale": 1
+}

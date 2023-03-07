@@ -2,106 +2,252 @@
 	"animations": [
 		{
 			"offsets": [
-				3,
-				0
+				107,
+				-10
 			],
 			"loop": false,
 			"fps": 24,
-			"anim": "idle",
+			"anim": "singLEFT",
 			"indices": [],
-			"name": "Pico Idle Dance"
+			"name": "Pico NOTE LEFT"
 		},
 		{
 			"offsets": [
-				21,
+				86,
+				-86
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "Pico Down Note"
+		},
+		{
+			"offsets": [
+				11,
 				27
 			],
 			"loop": false,
 			"fps": 24,
 			"anim": "singUP",
 			"indices": [],
-			"name": "pico Up note0"
+			"name": "pico Up note"
 		},
 		{
 			"offsets": [
-				84,
-				-80
+				107,
+				-10
 			],
 			"loop": false,
 			"fps": 24,
-			"anim": "singDOWN",
+			"anim": "singLEFTmiss",
 			"indices": [],
-			"name": "Pico Down Note0"
+			"name": "Pico NOTE LEFT"
 		},
 		{
 			"offsets": [
-				80,
-				-38
+				-50,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "Pico Note Right"
+		},
+		{
+			"offsets": [
+				86,
+				-86
 			],
 			"loop": false,
 			"fps": 24,
 			"anim": "singDOWNmiss",
 			"indices": [],
-			"name": "Pico Down Note MISS"
+			"name": "Pico Down Note"
 		},
 		{
 			"offsets": [
-				28,
-				67
+				-50,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHTmiss",
+			"indices": [],
+			"name": "Pico Note Right"
+		},
+		{
+			"offsets": [
+				11,
+				27
 			],
 			"loop": false,
 			"fps": 24,
 			"anim": "singUPmiss",
 			"indices": [],
-			"name": "pico Up note miss"
+			"name": "pico Up note"
 		},
 		{
 			"loop": false,
 			"offsets": [
-				-48,
-				2
+				10,
+				11
 			],
-			"anim": "singRIGHT",
+			"anim": "noAmmo",
 			"fps": 24,
-			"name": "Pico Note Right0",
+			"name": "Pico No Ammo",
+			"indices": [
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				7,
+				7,
+				7,
+				7,
+				7,
+				7,
+				7,
+				7,
+				7,
+				7,
+				7,
+				7,
+				7,
+				7,
+				7,
+				7,
+				7,
+				7
+			]
+		},
+		{
+			"loop": false,
+			"offsets": [
+				70,
+				-90
+			],
+			"anim": "dodge",
+			"fps": 24,
+			"name": "PicoDodging",
+			"indices": [
+				1,
+				2,
+				3,
+				1,
+				2,
+				3,
+				1,
+				2,
+				3,
+				1,
+				2,
+				3,
+				1,
+				2,
+				3
+			]
+		},
+		{
+			"offsets": [
+				400,
+				80
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT-alt",
+			"indices": [],
+			"name": "Pico Shootin Front"
+		},
+		{
+			"offsets": [
+				449,
+				63
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN-alt",
+			"indices": [],
+			"name": "Pico Shootin Bus"
+		},
+		{
+			"offsets": [
+				205,
+				75
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP-alt",
+			"indices": [],
+			"name": "Pico Shootin Left"
+		},
+		{
+			"offsets": [
+				449,
+				64
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT-alt",
+			"indices": [],
+			"name": "Pico Shootin Bus"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "idle-default",
+			"fps": 24,
+			"name": "Pico Idle Dance",
 			"indices": []
 		},
 		{
 			"loop": false,
 			"offsets": [
-				85,
-				-10
+				40,
+				-20
 			],
-			"anim": "singLEFT",
+			"anim": "idle-alt",
 			"fps": 24,
-			"name": "Pico NOTE LEFT0",
+			"name": "Pico I2dle Dance HYPED0",
 			"indices": []
 		},
 		{
 			"loop": false,
 			"offsets": [
-				-45,
-				50
+				146,
+				105
 			],
-			"anim": "singRIGHTmiss",
+			"anim": "idle",
 			"fps": 24,
-			"name": "Pico Note Right Miss",
-			"indices": []
+			"name": "PicoStartUp0",
+			"indices": [
+				0,
+				1,
+				2,
+				3
+			]
 		},
 		{
-			"loop": false,
 			"offsets": [
-				83,
-				28
+				146,
+				105
 			],
-			"anim": "singLEFTmiss",
+			"indices": [],
 			"fps": 24,
-			"name": "Pico NOTE LEFT miss",
-			"indices": []
+			"anim": "startup",
+			"loop": false,
+			"name": "PicoStartUp0"
 		}
 	],
 	"no_antialiasing": false,
-	"image": "characters/Pico_FNF_assetss",
+	"image": "characters/Pico",
 	"position": [
 		0,
 		300
@@ -114,8 +260,8 @@
 		85
 	],
 	"camera_position": [
-		220,
-		0
+		400,
+		-10
 	],
 	"sing_duration": 4,
 	"scale": 1

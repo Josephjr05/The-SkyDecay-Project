@@ -1,0 +1,84 @@
+{
+	"song": {
+		"speed": 2.3,
+		"stage": "stage",
+		"player1": "bf",
+		"player2": "dad",
+		"player3": null,
+		"events": [
+			[
+				0,
+				[
+					[
+						"Cinematics",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				21333.3333333333,
+				[
+					[
+						"zooming",
+						"0.8",
+						""
+					],
+					[
+						"Cinematics",
+						"",
+						"2"
+					]
+				]
+			],
+			[
+				64500,
+				[
+					[
+						"zooming",
+						"1.1",
+						""
+					]
+				]
+			],
+			[
+				85333.3333333333,
+				[
+					[
+						"ScreenRotCam",
+						"360",
+						"2"
+					]
+				]
+			],
+			[
+				106666.666666667,
+				[
+					[
+						"zooming",
+						"0.7",
+						""
+					]
+				]
+			],
+			[
+				128000,
+				[
+					[
+						"Fade Screen",
+						"5",
+						"1"
+					]
+				]
+			]
+		],
+		"notes": [],
+		"splashSkin": "noteSplashes",
+		"validScore": false,
+		"gfVersion": "gf",
+		"bpm": 90,
+		"arrowSkin": "",
+		"needsVoices": true,
+		"song": "new-sling"
+	}
+}

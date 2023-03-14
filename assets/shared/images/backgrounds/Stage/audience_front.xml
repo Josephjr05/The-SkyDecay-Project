@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="audience_front.png">
+<SubTexture name="frontbop0000" x="0" y="0" width="2564" height="1404" frameX="0" frameY="0" frameWidth="2564" frameHeight="1404" />
+<SubTexture name="frontbop0001" x="0" y="0" width="2564" height="1404" frameX="0" frameY="0" frameWidth="2564" frameHeight="1404" />
+<SubTexture name="frontbop0002" x="0" y="0" width="2564" height="1404" frameX="0" frameY="0" frameWidth="2564" frameHeight="1404" />
+<SubTexture name="frontbop0003" x="2564" y="0" width="2564" height="1404" frameX="0" frameY="0" frameWidth="2564" frameHeight="1404" />
+<SubTexture name="frontbop0004" x="2564" y="0" width="2564" height="1404" frameX="0" frameY="0" frameWidth="2564" frameHeight="1404" />
+<SubTexture name="frontbop0005" x="5128" y="0" width="2564" height="1404" frameX="0" frameY="0" frameWidth="2564" frameHeight="1404" />
+<SubTexture name="frontbop0006" x="5128" y="0" width="2564" height="1404" frameX="0" frameY="0" frameWidth="2564" frameHeight="1404" />
+</TextureAtlas>

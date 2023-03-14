@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="audience_back.png">
+<SubTexture name="backbop0000" x="0" y="0" width="2564" height="1404" frameX="0" frameY="0" frameWidth="2564" frameHeight="1404" />
+<SubTexture name="backbop0001" x="0" y="0" width="2564" height="1404" frameX="0" frameY="0" frameWidth="2564" frameHeight="1404" />
+<SubTexture name="backbop0002" x="0" y="0" width="2564" height="1404" frameX="0" frameY="0" frameWidth="2564" frameHeight="1404" />
+<SubTexture name="backbop0003" x="2564" y="0" width="2564" height="1404" frameX="0" frameY="0" frameWidth="2564" frameHeight="1404" />
+<SubTexture name="backbop0004" x="2564" y="0" width="2564" height="1404" frameX="0" frameY="0" frameWidth="2564" frameHeight="1404" />
+<SubTexture name="backbop0005" x="5128" y="0" width="2564" height="1404" frameX="0" frameY="0" frameWidth="2564" frameHeight="1404" />
+<SubTexture name="backbop0006" x="5128" y="0" width="2564" height="1404" frameX="0" frameY="0" frameWidth="2564" frameHeight="1404" />
+<SubTexture name="backbop0007" x="5128" y="0" width="2564" height="1404" frameX="0" frameY="0" frameWidth="2564" frameHeight="1404" />
+</TextureAtlas>

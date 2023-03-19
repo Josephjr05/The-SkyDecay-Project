@@ -545,23 +545,30 @@ class PlayState extends MusicBeatState
 				}
 				dadbattleSmokes = new FlxSpriteGroup(); //troll'd
 
-			case 'camellia':
-				defaultCamZoom = 0.6;
+			case "camellia":
+					defaultCamZoom = 0.5;
+					curStage = 'camellia';
 
-				var bg:FlxSprite = new FlxSprite(-250, -100).loadGraphic(Paths.image('camellia/Week1/BG_CITY'));
-				bg.scrollFactor.set(0.5, 0.5);
-				bg.scale.set(1.2, 1.2);
-				add(bg);
+					var bg:FlxSprite = new FlxSprite(-250, -100).loadGraphic(Paths.image('camellia/Week1/BG_CITY'));
+					bg.scrollFactor.set(0.5, 0.5);
+					bg.scale.set(1.55, 1.55);
+					bg.antialiasing = true;
+					bg.active = false;
+					add(bg);
 
-				var wall:FlxSprite = new FlxSprite(-250, -100).loadGraphic(Paths.image('camellia/Week1/BG_WALL'));
-				wall.scrollFactor.set(1, 1);
-				wall.scale.set(1.2, 1.2);
-				add(wall);
+					var wall:FlxSprite = new FlxSprite(-250, -100).loadGraphic(Paths.image('camellia/Week1/BG_WALL'));
+					wall.scrollFactor.set(1, 1);
+					wall.scale.set(1.55, 1.55);
+					wall.antialiasing = true;
+					wall.active = false;
+					add(wall);
 
-				var stage:FlxSprite = new FlxSprite(-250, -100).loadGraphic(Paths.image('camellia/Week1/FG_Floor'));
-				stage.scrollFactor.set(0.9, 0.9);
-				stage.scale.set(1.2, 1.2);
-				add(stage);
+					var stage:FlxSprite = new FlxSprite(-250, -100).loadGraphic(Paths.image('camellia/Week1/FG_Floor'));
+					stage.scrollFactor.set(0.9, 0.9);
+					stage.scale.set(1.55, 1.55);
+					stage.antialiasing = true;
+					stage.active = false;
+					add(stage);
 
 			case 'concert':
 				defaultCamZoom = 0.59;

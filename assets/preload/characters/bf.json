@@ -13,7 +13,7 @@
 		},
 		{
 			"offsets": [
-				5,
+				-11,
 				-6
 			],
 			"loop": false,
@@ -24,8 +24,8 @@
 		},
 		{
 			"offsets": [
-				-20,
-				-51
+				-23,
+				-54
 			],
 			"loop": false,
 			"fps": 24,
@@ -35,8 +35,8 @@
 		},
 		{
 			"offsets": [
-				-46,
-				27
+				-58,
+				29
 			],
 			"loop": false,
 			"fps": 24,
@@ -46,8 +46,8 @@
 		},
 		{
 			"offsets": [
-				-48,
-				-7
+				-58,
+				-6
 			],
 			"loop": false,
 			"fps": 24,
@@ -57,8 +57,8 @@
 		},
 		{
 			"offsets": [
-				7,
-				19
+				-11,
+				17
 			],
 			"loop": false,
 			"fps": 24,
@@ -68,8 +68,8 @@
 		},
 		{
 			"offsets": [
-				-15,
-				-19
+				-16,
+				-21
 			],
 			"loop": false,
 			"fps": 24,
@@ -79,8 +79,8 @@
 		},
 		{
 			"offsets": [
-				-46,
-				27
+				-52,
+				26
 			],
 			"loop": false,
 			"fps": 24,
@@ -90,8 +90,8 @@
 		},
 		{
 			"offsets": [
-				-44,
-				22
+				-52,
+				19
 			],
 			"loop": false,
 			"fps": 24,
@@ -101,19 +101,8 @@
 		},
 		{
 			"offsets": [
-				-3,
-				5
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "hey",
-			"indices": [],
-			"name": "BF HEY"
-		},
-		{
-			"offsets": [
-				14,
-				18
+				3,
+				19
 			],
 			"loop": false,
 			"fps": 24,
@@ -123,8 +112,19 @@
 		},
 		{
 			"offsets": [
-				-4,
-				0
+				3,
+				19
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "hurt-loop",
+			"indices": [],
+			"name": "BF hit Loop"
+		},
+		{
+			"offsets": [
+				-20,
+				1
 			],
 			"loop": true,
 			"fps": 24,
@@ -134,19 +134,8 @@
 		},
 		{
 			"offsets": [
-				-10,
-				-16
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "dodge",
-			"indices": [],
-			"name": "boyfriend dodge"
-		},
-		{
-			"offsets": [
-				294,
-				267
+				504,
+				245
 			],
 			"loop": false,
 			"fps": 24,
@@ -156,20 +145,218 @@
 		},
 		{
 			"offsets": [
-				-40,
-				-40
+				-51,
+				-38
 			],
 			"loop": false,
 			"fps": 24,
 			"anim": "pre-attack",
 			"indices": [],
 			"name": "bf pre attack"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-17,
+				5
+			],
+			"anim": "hey",
+			"fps": 24,
+			"name": "BF HEY!!",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				25,
+				6
+			],
+			"anim": "beatLEFT",
+			"fps": 24,
+			"name": "BF LEFT BEATBOX",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				24,
+				-54
+			],
+			"anim": "beatDOWN",
+			"fps": 24,
+			"name": "BF DOWN BEATBOX",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-54,
+				-2
+			],
+			"anim": "beatRIGHT",
+			"fps": 24,
+			"name": "BF RIGHT  BEATBOX",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-23,
+				27
+			],
+			"anim": "beatUP",
+			"fps": 24,
+			"name": "BF UP BEATBOX",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				9,
+				16
+			],
+			"anim": "singLEFT-alt",
+			"fps": 24,
+			"name": "ALT 2 BF LEFT",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-33,
+				-70
+			],
+			"anim": "singDOWN-alt",
+			"fps": 24,
+			"name": "ALT 2 BF DOWN",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-89,
+				64
+			],
+			"anim": "singUP-alt",
+			"fps": 24,
+			"name": "ALT 2 BF UP",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-17,
+				-8
+			],
+			"anim": "singRIGHT-alt",
+			"fps": 24,
+			"name": "ALT 2 BF RIGHT",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				5
+			],
+			"anim": "beatLEFT-alt",
+			"fps": 24,
+			"name": "beatbox-alt LEFT",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-14,
+				-50
+			],
+			"anim": "beatDOWN-alt",
+			"fps": 24,
+			"name": "beatbox-alt DOWN",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-86,
+				50
+			],
+			"anim": "beatUP-alt",
+			"fps": 24,
+			"name": "beatbox-alt UP",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-32,
+				22
+			],
+			"anim": "beatRIGHT-alt",
+			"fps": 24,
+			"name": "beatbox-alt RIGHT",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				4,
+				-40
+			],
+			"anim": "dodgeLEFT",
+			"fps": 24,
+			"name": "dodge LEFT",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				56,
+				-42
+			],
+			"anim": "dodgeDOWN",
+			"fps": 24,
+			"name": "dodge DOWN",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-50,
+				-31
+			],
+			"anim": "dodgeRIGHT",
+			"fps": 24,
+			"name": "dodge RIGHT",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-12,
+				4
+			],
+			"anim": "dodgeUP",
+			"fps": 24,
+			"name": "dodge UP",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-2,
+				92
+			],
+			"anim": "hey-alt",
+			"fps": 24,
+			"name": "BF SIN GORRA",
+			"indices": []
 		}
 	],
 	"no_antialiasing": false,
-	"image": "characters/BOYFRIEND",
+	"image": "characters/bf",
 	"position": [
-		0,
+		-10,
 		350
 	],
 	"healthicon": "bf",
@@ -180,8 +367,8 @@
 		209
 	],
 	"camera_position": [
-		0,
-		0
+		-100,
+		50
 	],
 	"sing_duration": 4,
 	"scale": 1

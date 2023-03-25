@@ -12,7 +12,7 @@ import openfl.events.Event;
 import openfl.display.StageScaleMode;
 import lime.app.Application;
 
-#if desktop
+#if cpp
 import Discord.DiscordClient;
 #end
 
@@ -110,7 +110,7 @@ class Main extends Sprite
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
 		#end
 
-		#if desktop
+		#if cpp
 		if (!DiscordClient.isInitialized) {
 			DiscordClient.initialize();
 			Application.current.window.onClose.add(function() {

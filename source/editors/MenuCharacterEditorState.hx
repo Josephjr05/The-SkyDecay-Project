@@ -1,6 +1,6 @@
 package editors;
 
-#if desktop
+#if cpp
 import Discord.DiscordClient;
 #end
 import flixel.FlxG;
@@ -48,7 +48,7 @@ class MenuCharacterEditorState extends MusicBeatState
 			confirm_anim: 'M Dad Idle',
 			flipX: false
 		};
-		#if desktop
+		#if cpp
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("Menu Character Editor", "Editting: " + characterFile.image);
 		#end
@@ -244,9 +244,9 @@ class MenuCharacterEditorState extends MusicBeatState
 		char.animation.play('idle');
 		updateOffset();
 		
-		#if desktop
+		#if cpp
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("Menu Character Editor", "Editting: " + characterFile.image);
+		DiscordClient.changePresence("Menu Character Editor", "Editing: " + characterFile.image);
 		#end
 	}
 

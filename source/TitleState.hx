@@ -1,6 +1,6 @@
 package;
 
-#if desktop
+#if cpp
 import sys.thread.Thread;
 #end
 import flixel.FlxG;

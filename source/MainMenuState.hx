@@ -1,6 +1,6 @@
 package;
 
-#if desktop
+#if cpp
 import Discord.DiscordClient;
 #end
 import flixel.FlxG;
@@ -54,7 +54,7 @@ class MainMenuState extends MusicBeatState
 		#end
 		WeekData.loadTheFirstEnabledMod();
 
-		#if desktop
+		#if cpp
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("At The Main Menu", null);
 		#end
@@ -255,7 +255,7 @@ class MainMenuState extends MusicBeatState
 					});
 				}
 			}
-			#if desktop
+			#if cpp
 			else if (FlxG.keys.anyJustPressed(debugKeys))
 			{
 				selectedSomethin = true;

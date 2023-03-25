@@ -27,7 +27,7 @@ import Type.ValueType;
 import Controls;
 import DialogueBoxPsych;
 
-#if desktop
+#if cpp
 import Discord;
 #end
 

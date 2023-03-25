@@ -1,6 +1,6 @@
 package options;
 
-#if desktop
+#if cpp
 import Discord.DiscordClient;
 #end
 import flash.text.TextField;
@@ -51,7 +51,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		if(title == null) title = 'Options';
 		if(rpcTitle == null) rpcTitle = 'Options Menu';
 		
-		#if desktop
+		#if cpp
 		DiscordClient.changePresence(rpcTitle, null);
 		#end
 		

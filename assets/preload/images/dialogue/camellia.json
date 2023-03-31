@@ -1,0 +1,128 @@
+{
+	"dialogue_pos": "left",
+	"position": [
+		-120,
+		-90
+	],
+	"scale": 0.95,
+	"animations": [
+		{
+			"anim": "talk",
+			"loop_offsets": [
+				3,
+				58
+			],
+			"idle_offsets": [
+				0,
+				0
+			],
+			"loop_name": "Camellia_Up0",
+			"idle_name": "Camellia_Idle"
+		},
+		{
+			"loop_name": "Camellia_Left0",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"idle_name": "Camellia_Idle",
+			"anim": "talk2",
+			"loop_offsets": [
+				63,
+				13
+			]
+		},
+		{
+			"loop_name": "Camellia_Right0",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"idle_name": "Camellia_Idle",
+			"anim": "talk3",
+			"loop_offsets": [
+				0,
+				-2
+			]
+		},
+		{
+			"loop_name": "Camellia_Down0",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"idle_name": "Camellia_Idle",
+			"anim": "talk4",
+			"loop_offsets": [
+				0,
+				61
+			]
+		},
+		{
+			"loop_name": "Camellia_Up_MISS0",
+			"idle_offsets": [
+				4,
+				83
+			],
+			"idle_name": "Camellia_Up_MISS0",
+			"anim": "miss1",
+			"loop_offsets": [
+				4,
+				83
+			]
+		},
+		{
+			"loop_name": "Camellia_Left_MISS0",
+			"idle_offsets": [
+				62,
+				8
+			],
+			"idle_name": "Camellia_Left_MISS0",
+			"anim": "miss2",
+			"loop_offsets": [
+				62,
+				8
+			]
+		},
+		{
+			"loop_name": "Camellia_Right_MISS0",
+			"idle_offsets": [
+				0,
+				15
+			],
+			"idle_name": "Camellia_Right_MISS0",
+			"anim": "miss3",
+			"loop_offsets": [
+				0,
+				15
+			]
+		},
+		{
+			"loop_name": "Camellia_Down_MISS0",
+			"idle_offsets": [
+				1,
+				61
+			],
+			"idle_name": "Camellia_Down_MISS0",
+			"anim": "miss4",
+			"loop_offsets": [
+				1,
+				61
+			]
+		},
+		{
+			"loop_name": "Camellia_DEATHLoop0",
+			"idle_offsets": [
+				0,
+				-10
+			],
+			"idle_name": "Camellia_DEATHLoop0",
+			"anim": "death",
+			"loop_offsets": [
+				0,
+				-10
+			]
+		}
+	],
+	"image": "camellia"
+}

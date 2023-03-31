@@ -545,147 +545,6 @@ class PlayState extends MusicBeatState
 				}
 				dadbattleSmokes = new FlxSpriteGroup(); //troll'd
 
-			case "camellia":
-					defaultCamZoom = 0.5;
-					curStage = 'camellia';
-
-					var bg:FlxSprite = new FlxSprite(-250, -100).loadGraphic(Paths.image('camellia/Week1/BG_CITY'));
-					bg.scrollFactor.set(0.5, 0.5);
-					bg.scale.set(1.55, 1.55);
-					bg.antialiasing = true;
-					bg.active = false;
-					add(bg);
-
-					var wall:FlxSprite = new FlxSprite(-250, -100).loadGraphic(Paths.image('camellia/Week1/BG_WALL'));
-					wall.scrollFactor.set(1, 1);
-					wall.scale.set(1.55, 1.55);
-					wall.antialiasing = true;
-					wall.active = false;
-					add(wall);
-
-					var stage:FlxSprite = new FlxSprite(-250, -100).loadGraphic(Paths.image('camellia/Week1/FG_Floor'));
-					stage.scrollFactor.set(0.9, 0.9);
-					stage.scale.set(1.55, 1.55);
-					stage.antialiasing = true;
-					stage.active = false;
-					add(stage);
-
-			case 'concert':
-				defaultCamZoom = 0.59;
-
-				var sky:FlxSprite = new FlxSprite(-1275, -625).loadGraphic(Paths.image('camellia/Week2/sky'));
-				sky.antialiasing = ClientPrefs.globalAntialiasing;
-				sky.scrollFactor.set(1, 1);
-				sky.scale.set(0.85, 0.85);
-				add(sky);
-
-				var concertLights:FlxSprite = new FlxSprite(-1275, -625).loadGraphic(Paths.image('camellia/Week2/win1'));
-				concertLights.visible = false;
-				concertLights.antialiasing = ClientPrefs.globalAntialiasing;
-				concertLights.scale.set(0.85, 0.85);
-				add(concertLights);
-
-				var backCrowd:FlxSprite = new FlxSprite(-1275, -625).loadGraphic(Paths.image('camellia/Week2/backcrowd'));
-				backCrowd.antialiasing = ClientPrefs.globalAntialiasing;
-				backCrowd.scrollFactor.set(1, 1);
-				backCrowd.scale.set(0.85, 0.85);
-				add(backCrowd);
-
-				//bop shit ig
-				var crowdTween1 = FlxTween.tween(backCrowd, {y: backCrowd.y - 50}, 0.3, {ease: FlxEase.sineInOut, type: PINGPONG});
-				stageTweens.push(crowdTween1);
-				//end of bop shit
-
-				var stage:FlxSprite = new FlxSprite(-1275, -625).loadGraphic(Paths.image('camellia/Week2/stage'));
-				stage.antialiasing = ClientPrefs.globalAntialiasing;
-				stage.scrollFactor.set(1, 1);
-				stage.scale.set(0.85, 0.85);
-				add(stage);
-
-				var leftSpeaker:FlxSprite = new FlxSprite(-450, 45);
-				leftSpeaker.frames = Paths.getSparrowAtlas('camellia/Week2/speaker_left');
-				leftSpeaker.animation.addByPrefix('bop', 'speaker 20', 24, true);
-				leftSpeaker.animation.play('bop');
-				leftSpeaker.antialiasing = ClientPrefs.globalAntialiasing;
-				leftSpeaker.scrollFactor.set(1, 1);
-				leftSpeaker.scale.set(0.75, 0.75);
-				add(leftSpeaker);
-
-				var leftSpeakerReflection:FlxSprite = new FlxSprite(-450, 45 + (260 * 2.3));
-				leftSpeakerReflection.frames = Paths.getSparrowAtlas('camellia/Week2/speaker_left');
-				leftSpeakerReflection.animation.addByPrefix('bop', 'speaker 20', 24, true);
-				leftSpeakerReflection.animation.play('bop');
-				leftSpeakerReflection.antialiasing = ClientPrefs.globalAntialiasing;
-				leftSpeakerReflection.scrollFactor.set(1, 1);
-				leftSpeakerReflection.scale.set(0.75, 0.75);
-				leftSpeakerReflection.flipY = true;
-				leftSpeakerReflection.alpha = 0.1;
-				add(leftSpeakerReflection);
-
-				var rightSpeaker:FlxSprite = new FlxSprite(1225, 45);
-				rightSpeaker.frames = Paths.getSparrowAtlas('camellia/Week2/speaker_right');
-				rightSpeaker.animation.addByPrefix('bop', 'speaker 10', 24, true);
-				rightSpeaker.animation.play('bop');
-				rightSpeaker.antialiasing = ClientPrefs.globalAntialiasing;
-				rightSpeaker.scrollFactor.set(1, 1);
-				rightSpeaker.scale.set(0.75, 0.75);
-				add(rightSpeaker);
-
-				var rightSpeakerReflection:FlxSprite = new FlxSprite(1225, 45 + (260 * 2.3));
-				rightSpeakerReflection.frames = Paths.getSparrowAtlas('camellia/Week2/speaker_right');
-				rightSpeakerReflection.animation.addByPrefix('bop', 'speaker 10', 24, true);
-				rightSpeakerReflection.animation.play('bop');
-				rightSpeakerReflection.antialiasing = ClientPrefs.globalAntialiasing;
-				rightSpeakerReflection.scrollFactor.set(1, 1);
-				rightSpeakerReflection.scale.set(0.75, 0.75);
-				rightSpeakerReflection.flipY = true;
-				rightSpeakerReflection.alpha = 0.1;
-				add(rightSpeakerReflection);
-
-				var leftSpeaker2:FlxSprite = new FlxSprite(-325, 55);
-				leftSpeaker2.frames = Paths.getSparrowAtlas('camellia/Week2/speakerleft');
-				leftSpeaker2.animation.addByPrefix('bop', 'speaker', 24, true);
-				leftSpeaker2.animation.play('bop');
-				leftSpeaker2.antialiasing = ClientPrefs.globalAntialiasing;
-				leftSpeaker2.scrollFactor.set(1, 1);
-				leftSpeaker2.scale.set(0.75, 0.75);
-				add(leftSpeaker2);
-
-				var leftSpeakerReflection2:FlxSprite = new FlxSprite(-325, 55 + (260 * 2.243));
-				leftSpeakerReflection2.frames = Paths.getSparrowAtlas('camellia/Week2/speakerleft');
-				leftSpeakerReflection2.animation.addByPrefix('bop', 'speaker', 24, true);
-				leftSpeakerReflection2.animation.play('bop');
-				leftSpeakerReflection2.antialiasing = ClientPrefs.globalAntialiasing;
-				leftSpeakerReflection2.scrollFactor.set(1, 1);
-				leftSpeakerReflection2.scale.set(0.75, 0.75);
-				leftSpeakerReflection2.flipY = true;
-				leftSpeakerReflection2.alpha = 0.1;
-				add(leftSpeakerReflection2);
-
-				var rightSpeaker2:FlxSprite = new FlxSprite(790, 55);
-				rightSpeaker2.frames = Paths.getSparrowAtlas('camellia/Week2/speakerleft');
-				rightSpeaker2.animation.addByPrefix('bop', 'speaker', 24, true);
-				rightSpeaker2.animation.play('bop');
-				rightSpeaker2.antialiasing = ClientPrefs.globalAntialiasing;
-				rightSpeaker2.flipX = true;
-				rightSpeaker2.scrollFactor.set(1, 1);
-				rightSpeaker2.scale.set(0.75, 0.75);
-				add(rightSpeaker2);
-
-				var rightSpeakerReflection2:FlxSprite = new FlxSprite(790, 55 + (260 * 2.243));
-				rightSpeakerReflection2.frames = Paths.getSparrowAtlas('camellia/Week2/speakerleft');
-				rightSpeakerReflection2.animation.addByPrefix('bop', 'speaker', 24, true);
-				rightSpeakerReflection2.animation.play('bop');
-				rightSpeakerReflection2.antialiasing = ClientPrefs.globalAntialiasing;
-				rightSpeakerReflection2.scrollFactor.set(1, 1);
-				rightSpeakerReflection2.scale.set(0.75, 0.75);
-				rightSpeakerReflection2.flipY = true;
-				rightSpeakerReflection2.flipX = true;
-				rightSpeakerReflection2.alpha = 0.1;
-				add(rightSpeakerReflection2);
-
-			default:
-				//Nothing lmao
 		}
 
 		switch(Paths.formatToSongPath(SONG.song))
@@ -711,16 +570,6 @@ class PlayState extends MusicBeatState
 		{
 			case 'camellia':
 				//you really thought, imagine
-			case 'concert':
-				var frontCrowd:FlxSprite = new FlxSprite(-1275, -225).loadGraphic(Paths.image('camellia/Week2/frontcrowd'));
-				frontCrowd.antialiasing = ClientPrefs.globalAntialiasing;
-				frontCrowd.scrollFactor.set(1, 1);
-				frontCrowd.scale.set(0.85, 0.85);
-				add(frontCrowd);
-
-				//bop shit ig
-				var crowdTween2 = FlxTween.tween(frontCrowd, {y: frontCrowd.y - 200}, 0.3, {ease: FlxEase.sineInOut, type: PINGPONG});
-				stageTweens.push(crowdTween2);
 		}
 
 		box = new FlxSprite().makeGraphic(FlxG.width, 120, FlxColor.BLACK);
@@ -2729,18 +2578,6 @@ class PlayState extends MusicBeatState
 		{
 			iconP1.swapOldIcon();
 		}*/
-
-		switch(curStage)
-		{
-			case 'camellia':
-				isCameraOnForcedPos = true;
-				camFollow.x = 674;
-				camFollow.y = 400;
-			case 'concert':
-				isCameraOnForcedPos = true;
-				camFollow.x = 674;
-				camFollow.y = 475;
-		}
 
 		callOnLuas('onUpdate', [elapsed]);
 

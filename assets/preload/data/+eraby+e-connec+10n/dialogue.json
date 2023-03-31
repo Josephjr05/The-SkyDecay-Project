@@ -1,0 +1,60 @@
+{
+	"dialogue": [
+		{
+			"expression": "talk4",
+			"text": "This is it, little man.",
+			"boxState": "normal",
+			"portrait": "camellia",
+			"speed": 0.035,
+			"sound": ""
+		},
+		{
+			"expression": "shocked",
+			"text": "huh?",
+			"boxState": "normal",
+			"portrait": "bf",
+			"speed": 0.035,
+			"sound": ""
+		},
+		{
+			"expression": "talk2",
+			"text": "The last song of the night, of course!",
+			"boxState": "normal",
+			"portrait": "camellia",
+			"speed": 0.035,
+			"sound": ""
+		},
+		{
+			"expression": "talk",
+			"text": "You didn't think I would stop at two, did you?",
+			"boxState": "normal",
+			"portrait": "camellia",
+			"speed": 0.05,
+			"sound": ""
+		},
+		{
+			"expression": "shocked",
+			"text": "Dude i just want to go home!",
+			"boxState": "normal",
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "bf"
+		},
+		{
+			"expression": "talk3",
+			"text": "Glad you're up for it then. Try to keep up!",
+			"boxState": "normal",
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "camellia"
+		},
+		{
+			"expression": "confused",
+			"text": "Bruh..",
+			"boxState": "normal",
+			"portrait": "bf",
+			"speed": 0.05,
+			"sound": ""
+		}
+	]
+}

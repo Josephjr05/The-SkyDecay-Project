@@ -1,0 +1,4 @@
+Zooms the camera out in the Concert stage.
+
+Value 1: 1 = full zoom out, 2 = default zoom, 3 = half zoom
+Value 2: time it takes to tween (default is .5 seconds)

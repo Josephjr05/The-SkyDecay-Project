@@ -12,6 +12,6 @@ end
 
 function onGameOver()
     songended = true
-    setPropertyFromClass('lime.app.Application', 'current.window.title', 'The SkyDecay Project'..' | BLUEBALLED')
+    setPropertyFromClass('lime.app.Application', 'current.window.title', 'The SkyDecay Project'..' | LOL, YOU DIED')
     return Function_Continue
 end

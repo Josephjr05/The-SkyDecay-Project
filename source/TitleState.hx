@@ -658,15 +658,15 @@ class TitleState extends MusicBeatState
 					createCoolText(['In association', 'with'], -40);
 					#end
 				case 8:
-					addMoreText('newgrounds', -40);
+					addMoreText('Team SkyDecay', -40);
 					ngSpr.visible = true;
-				// credTextShit.text += '\nNewgrounds';
+				// credTextShit.text += '\nTeam SkyDecay';
 				case 9:
 					deleteCoolText();
 					ngSpr.visible = false;
 				// credTextShit.visible = false;
 
-				// credTextShit.text = 'Shoutouts Tom Fulp';
+				// credTextShit.text = 'W Tom Fulp';
 				// credTextShit.screenCenter();
 				case 10:
 					createCoolText([curWacky[0]]);

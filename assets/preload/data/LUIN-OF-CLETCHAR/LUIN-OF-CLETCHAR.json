@@ -1,12 +1,11 @@
 {
 	"song": {
+		"player1": "SD-BF",
 		"sectionLengths": [],
-		"player1": "bf",
-		"events": [],
-		"gfVersion": "gf",
-		"player2": "gf",
 		"notes": [
 			{
+				"typeOfSection": 0,
+				"lengthInSteps": 160000,
 				"sectionNotes": [
 					[
 						7843,
@@ -12634,41 +12633,62 @@
 						883
 					]
 				],
-				"lengthInSteps": 160000,
-				"typeOfSection": 0,
 				"timePosition": 0,
-				"changeBPM": true,
+				"bpm": 153,
 				"mustHitSection": true,
+				"changeBPM": true
+			},
+			{
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"lengthInSteps": 16,
+				"gfSection": false,
+				"altAnim": false,
+				"mustHitSection": true,
+				"changeBPM": false,
+				"bpm": 153
+			},
+			{
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"lengthInSteps": 16,
+				"gfSection": false,
+				"altAnim": false,
+				"mustHitSection": true,
+				"changeBPM": false,
 				"bpm": 153
 			},
 			{
 				"gfSection": false,
-				"lengthInSteps": 16,
 				"altAnim": false,
 				"typeOfSection": 0,
 				"sectionNotes": [],
 				"bpm": 153,
+				"sectionBeats": 4,
 				"changeBPM": false,
 				"mustHitSection": true
 			},
 			{
 				"gfSection": false,
-				"lengthInSteps": 16,
 				"altAnim": false,
 				"typeOfSection": 0,
 				"sectionNotes": [],
 				"bpm": 153,
+				"sectionBeats": 4,
 				"changeBPM": false,
 				"mustHitSection": true
 			}
 		],
+		"player2": "camellia",
+		"gfVersion": "Ash",
+		"events": [],
 		"player3": null,
 		"song": "LUIN-OF-CLETCHAR",
-		"stage": "concerttest",
-		"validScore": true,
-		"needsVoices": true,
 		"sections": 1,
-		"bpm": 153,
-		"speed": 3.1
+		"needsVoices": true,
+		"validScore": true,
+		"stage": "camellia",
+		"speed": 3.1,
+		"bpm": 153
 	}
 }

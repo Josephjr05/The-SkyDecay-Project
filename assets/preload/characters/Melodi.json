@@ -1,59 +1,59 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [
 				30,
 				-130
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "idle",
-			"loop": false,
-			"name": "Melodi MelodiIdle"
+			"fps": 24,
+			"name": "Melodi MelodiIdle",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				23,
 				-130
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "singLEFT",
-			"loop": false,
-			"name": "Melodi MelodiLeft"
+			"fps": 24,
+			"name": "Melodi MelodiLeft",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				1,
 				-130
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "singDOWN",
-			"loop": false,
-			"name": "Melodi MelodiDown"
+			"fps": 24,
+			"name": "Melodi MelodiDown",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				40,
 				-130
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "singUP",
-			"loop": false,
-			"name": "Melodi MelodiUp"
+			"fps": 24,
+			"name": "Melodi MelodiUp",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				30,
 				-130
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "singRIGHT",
-			"loop": false,
-			"name": "Melodi MelodiRight"
+			"fps": 24,
+			"name": "Melodi MelodiRight",
+			"indices": []
 		}
 	],
 	"no_antialiasing": false,
@@ -62,16 +62,16 @@
 		0,
 		0
 	],
-	"healthicon": "face",
+	"healthicon": "melodii",
 	"flip_x": false,
 	"healthbar_colors": [
-		161,
-		161,
-		161
+		255,
+		140,
+		255
 	],
 	"camera_position": [
-		0,
-		0
+		-20,
+		280
 	],
 	"sing_duration": 6.1,
 	"scale": 1

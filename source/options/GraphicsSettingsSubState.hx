@@ -60,6 +60,14 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 			true); //Default value
 		addOption(option);
 
+		var option:Option = new Option('Light Cycle:',
+			"What Light Cycle should Camellia songs use?",
+			'lightcycle',
+			'string',
+			'Auto Lights',
+			['Auto Lights', 'Slow Lights', 'Player Lights', 'Disabled']);
+		addOption(option);
+
 		#if !html5 //Apparently other framerates isn't correctly supported on Browser? Probably it has some V-Sync shit enabled by default, idk
 		var option:Option = new Option('Framerate',
 			"Pretty self explanatory, isn't it?",

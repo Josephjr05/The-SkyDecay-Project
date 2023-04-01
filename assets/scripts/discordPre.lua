@@ -99,7 +99,7 @@ end
 function onGameOver()
 	dieee = true
 	hp = ""
-	playing = "Get BlueBalled:"
+	playing = "LOL, THEY DIED ON: "
 	pause = ""
 	truething = false
 	weekname = ""

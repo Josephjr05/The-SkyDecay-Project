@@ -2,8 +2,8 @@
 	"animations": [
 		{
 			"offsets": [
-				-19,
-				-31
+				-89,
+				-11
 			],
 			"loop": false,
 			"anim": "singRIGHT",
@@ -13,8 +13,8 @@
 		},
 		{
 			"offsets": [
-				9,
-				12
+				-31,
+				21
 			],
 			"loop": false,
 			"anim": "singUP",
@@ -24,8 +24,8 @@
 		},
 		{
 			"offsets": [
-				51,
-				-78
+				17,
+				-86
 			],
 			"loop": false,
 			"anim": "singDOWN",
@@ -36,8 +36,8 @@
 		{
 			"loop": false,
 			"offsets": [
-				12,
-				80
+				33,
+				103
 			],
 			"anim": "Shoot",
 			"fps": 24,
@@ -47,8 +47,8 @@
 		{
 			"loop": false,
 			"offsets": [
-				-4,
-				10
+				18,
+				34
 			],
 			"anim": "reload",
 			"fps": 24,
@@ -60,77 +60,88 @@
 				0,
 				0
 			],
-			"indices": [],
+			"loop": false,
 			"fps": 24,
 			"anim": "idle",
-			"loop": false,
+			"indices": [],
 			"name": "Pico Idle Dance0"
 		},
 		{
 			"offsets": [
-				59,
-				-33
+				-55,
+				-20
 			],
-			"indices": [],
+			"loop": false,
 			"fps": 24,
 			"anim": "idle-alt",
-			"loop": false,
+			"indices": [],
 			"name": "Pico Idle Dance-alt0"
 		},
 		{
 			"offsets": [
-				0,
-				-110
+				-30,
+				-85
 			],
-			"indices": [],
+			"loop": false,
 			"fps": 24,
 			"anim": "singDOWN-alt",
-			"loop": false,
+			"indices": [],
 			"name": "Pico Down Note-alt0"
 		},
 		{
 			"offsets": [
-				-50,
-				-26
+				-63,
+				-12
 			],
-			"indices": [],
+			"loop": false,
 			"fps": 24,
 			"anim": "singRIGHT-alt",
-			"loop": false,
+			"indices": [],
 			"name": "Pico NOTE LEFT-alt0"
 		},
 		{
 			"offsets": [
-				-40,
-				10
+				-30,
+				20
 			],
-			"indices": [],
+			"loop": false,
 			"fps": 24,
 			"anim": "singUP-alt",
-			"loop": false,
+			"indices": [],
 			"name": "pico Up note-alt0"
 		},
 		{
 			"offsets": [
-				26,
-				36
+				-14,
+				0
 			],
-			"indices": [],
+			"loop": false,
 			"fps": 24,
 			"anim": "singLEFT",
-			"loop": false,
+			"indices": [],
 			"name": "Pico Note Right0"
 		},
 		{
 			"offsets": [
-				60,
-				-12
+				7,
+				11
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT-alt",
+			"indices": [],
+			"name": "Pico Note Right-alt0"
+		},
+		{
+			"offsets": [
+				10,
+				-90
 			],
 			"indices": [],
 			"fps": 24,
-			"anim": "singLEFT-alt",
+			"anim": "dodge",
 			"loop": false,
-			"name": "Pico Note Right-alt0"
+			"name": "PicoDodging0"
 		}
 	],
 	"no_antialiasing": false,

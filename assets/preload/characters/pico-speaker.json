@@ -9,55 +9,55 @@
 			"fps": 24,
 			"anim": "shoot1",
 			"indices": [],
-			"name": "Pico shoot 1"
+			"name": "shoot1"
 		},
 		{
 			"offsets": [
-				-1,
-				-128
+				0,
+				-88
 			],
 			"loop": false,
 			"fps": 24,
 			"anim": "shoot2",
 			"indices": [],
-			"name": "Pico shoot 2"
+			"name": "shoot2"
 		},
 		{
 			"offsets": [
-				412,
+				361,
 				-64
 			],
 			"loop": false,
 			"fps": 24,
 			"anim": "shoot3",
 			"indices": [],
-			"name": "Pico shoot 3"
+			"name": "shoot3"
 		},
 		{
 			"offsets": [
-				439,
+				398,
 				-19
 			],
 			"loop": false,
 			"fps": 24,
 			"anim": "shoot4",
 			"indices": [],
-			"name": "Pico shoot 4"
+			"name": "shoot4"
 		},
 		{
 			"offsets": [
-				412,
-				-64
+				398,
+				-19
 			],
 			"loop": true,
 			"fps": 24,
-			"anim": "shoot3-loop",
+			"anim": "shoot4-loop",
 			"indices": [
-				50,
-				51,
-				52
+				5,
+				6,
+				7
 			],
-			"name": "Pico shoot 3"
+			"name": "shoot4"
 		},
 		{
 			"offsets": [
@@ -68,48 +68,114 @@
 			"fps": 24,
 			"anim": "shoot1-loop",
 			"indices": [
-				23,
-				24,
-				25
+				5,
+				6,
+				7
 			],
-			"name": "Pico shoot 1"
+			"name": "shoot1"
 		},
 		{
 			"offsets": [
-				1,
-				-128
+				361,
+				-64
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "shoot3-loop",
+			"indices": [
+				5,
+				6,
+				7
+			],
+			"name": "shoot3"
+		},
+		{
+			"offsets": [
+				0,
+				-88
 			],
 			"loop": true,
 			"fps": 24,
 			"anim": "shoot2-loop",
 			"indices": [
-				57,
-				58,
-				59
+				5,
+				6,
+				7
 			],
-			"name": "Pico shoot 2"
+			"name": "shoot2"
 		},
 		{
 			"offsets": [
-				439,
-				-19
+				-77,
+				-2
 			],
-			"loop": true,
+			"loop": false,
 			"fps": 24,
-			"anim": "shoot4-loop",
-			"indices": [
-				50,
-				51,
-				52
+			"anim": "singUP",
+			"indices": [],
+			"name": "singU"
+		},
+		{
+			"offsets": [
+				-77,
+				-99
 			],
-			"name": "Pico shoot 4"
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "singL"
+		},
+		{
+			"offsets": [
+				-77,
+				-51
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "singR"
+		},
+		{
+			"offsets": [
+				-77,
+				-38
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "singD"
+		},
+		{
+			"offsets": [
+				387,
+				-17
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "shootTankman",
+			"indices": [],
+			"name": "shoot at"
+		},
+		{
+			"offsets": [
+				-77,
+				-89
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "Idle",
+			"indices": [],
+			"name": "pico idle"
 		}
 	],
 	"no_antialiasing": false,
 	"image": "characters/picoSpeaker",
 	"position": [
-		120,
-		-125
+		31,
+		-144
 	],
 	"healthicon": "pico",
 	"flip_x": false,
@@ -119,8 +185,8 @@
 		85
 	],
 	"camera_position": [
-		-310,
-		100
+		50,
+		40
 	],
 	"sing_duration": 4,
 	"scale": 1

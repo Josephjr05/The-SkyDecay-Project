@@ -39,6 +39,7 @@ import flixel.util.FlxStringUtil;
 import flixel.util.FlxTimer;
 import haxe.Json;
 import lime.utils.Assets;
+import lime.app.Application;
 import openfl.Lib;
 import openfl.display.BlendMode;
 import openfl.display.StageQuality;
@@ -335,6 +336,21 @@ class PlayState extends MusicBeatState
 	var composers:String = 'None';
 	var composerText:FlxText;
 
+	//Bad apple bool check and stuff
+	var badApple:Bool = false;
+	var appleScreen:FlxSprite;
+
+	var zaBoom:Bool = false;
+	var boomCam:Float;
+	var boomHud:Float;
+
+	//cinema stuff
+	var topBar:FlxSprite;
+	var bottomBar:FlxSprite;
+
+	var kmMode:Bool = false;
+	var maxMisses:Int = 10;
+
 	override public function create()
 	{
 		//trace('Playback Rate: ' + playbackRate);
@@ -439,6 +455,9 @@ class PlayState extends MusicBeatState
 		// String for when the game is paused
 		detailsPausedText = "Paused - " + detailsText;
 		#end
+
+		topBar = new FlxSprite(0, -170).makeGraphic(1280, 170, FlxColor.BLACK);
+		bottomBar = new FlxSprite(0, 720).makeGraphic(1280, 170, FlxColor.BLACK);
 
 		GameOverSubstate.resetVariables();
 		var songName:String = Paths.formatToSongPath(SONG.song);
@@ -546,6 +565,14 @@ class PlayState extends MusicBeatState
 				dadbattleSmokes = new FlxSpriteGroup(); //troll'd
 
 		}
+
+		appleScreen = new FlxSprite();
+		appleScreen.makeGraphic(10000, 10000, FlxColor.WHITE);
+		appleScreen.x = dadGroup.x - 800;
+		appleScreen.y = dadGroup.y - 800;
+		appleScreen.alpha = 0;
+		add(appleScreen);
+
 
 		switch(Paths.formatToSongPath(SONG.song))
 		{
@@ -914,6 +941,9 @@ class PlayState extends MusicBeatState
 		songNameText.cameras = [camOther];
 		composerText.cameras = [camOther];
 
+		topBar.cameras = [camOther];
+		bottomBar.cameras = [camOther];
+
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
 		// UI_camera.zoom = 1;
@@ -1095,6 +1125,10 @@ class PlayState extends MusicBeatState
 		
 		CustomFadeTransition.nextCamera = camOther;
 		if(eventNotes.length < 1) checkEventNote();
+
+		Lib.application.window.title = 'The SkyDecay Project | Playing: ${curSong}';
+
+		// etPropertyFromClass('lime.app.Application', 'current.window.title', 'The SkyDecay Project'..' | Playing: '..getProperty('curSong'))
 	}
 
 	#if (!flash && sys)
@@ -2581,6 +2615,12 @@ class PlayState extends MusicBeatState
 
 		callOnLuas('onUpdate', [elapsed]);
 
+		if(kmMode)
+		{
+			if (songMisses > maxMisses)
+				health = 0;
+		}
+
 		healthBarFG.x = healthBar.x - 55;
 		healthBarFG.y = healthBar.y - 20;
 
@@ -3007,8 +3047,146 @@ class PlayState extends MusicBeatState
 		return pressed;
 	}
 
+	function blackWhite()
+	{
+		if (badApple) {
+			appleScreen.alpha = 0;
+			boyfriend.color = 0xFFFFFF;
+			gf.color = 0xFFFFFF;
+			dad.color = 0xFFFFFF;
+		}
+	
+		if (!badApple) {
+			appleScreen.alpha = 1;
+			boyfriend.color = 0x000000;
+			gf.color = 0x000000;
+			dad.color = 0x000000;
+		}
+	
+		badApple = !badApple;
+	}
+
 	public function triggerEventNote(eventName:String, value1:String, value2:String) {
 		switch(eventName) {
+			case 'Bad Apple':
+				blackWhite();
+
+			case 'Cam Zoom':
+				var amount:Float = Std.parseFloat(value1);
+
+				defaultCamZoom += amount;
+
+			case 'Note Spin':
+				strumLineNotes.forEach(function(tospin:FlxSprite)
+				{
+					FlxTween.angle(tospin, 0, 360, 0.8, {ease: FlxEase.quintOut});
+				});
+
+			case 'Boom Cam':
+				zaBoom = !zaBoom;
+				if (zaBoom) {
+					boomHud = Std.parseFloat(value1);
+					boomCam = Std.parseFloat(value2);
+				}
+				else {
+					boomHud = 0;
+					boomCam = 0;
+				}
+
+			case 'Cinema Bars':
+				switch(Std.parseInt(value1))
+				{
+					case 1:
+						cinematicBars(true);
+
+					case 0:
+						cinematicBars(false);
+				}
+
+			case 'UI Fade':
+				FlxTween.tween(camHUD, {alpha: Std.parseFloat(value1)}, Std.parseFloat(value2), {ease: FlxEase.quartInOut});
+
+			case 'Flash Camera':
+				FlxG.camera.flash(FlxColor.WHITE, Std.parseFloat(value1));
+
+			case 'Hide Health':
+				switch(Std.parseInt(value1))
+				{
+					case 0:
+						FlxTween.tween(healthBar, {alpha: 0}, Std.parseFloat(value2), {ease: FlxEase.linear});
+						FlxTween.tween(iconP1, {alpha: 0}, Std.parseFloat(value2), {ease: FlxEase.linear});
+						FlxTween.tween(iconP2, {alpha: 0}, Std.parseFloat(value2), {ease: FlxEase.linear});
+					case 1:
+						FlxTween.tween(healthBar, {alpha: 1}, Std.parseFloat(value2), {ease: FlxEase.linear});
+						FlxTween.tween(iconP1, {alpha: 1}, Std.parseFloat(value2), {ease: FlxEase.linear});
+						FlxTween.tween(iconP2, {alpha: 1}, Std.parseFloat(value2), {ease: FlxEase.linear});
+				}
+
+			case 'KM Toggle':
+				kmMode = !kmMode;
+				maxMisses = Std.parseInt(value1);
+
+			case 'RotScreenCam':
+				var val:Null<Float> = Std.parseFloat(value1);
+				if(val == null)
+					val = 0;
+
+				FlxTween.tween(camGame, {angle: val}, Std.parseFloat(value2), {ease: FlxEase.circOut});
+
+			case 'Fade BF':
+				var duration:Null<Float> = Std.parseFloat(value1);
+				if(duration == null)
+					duration = 0.01;
+
+				FlxTween.tween(boyfriend, {alpha: Std.parseFloat(value2)}, duration, {ease: FlxEase.linear});
+				FlxTween.tween(boyfriend, {alpha: Std.parseFloat(value2)}, duration, {ease: FlxEase.linear});
+
+			case 'Switch Cam':
+				var val:Null<String> = value2;
+				if(val == null)
+					val = 'off';
+				
+				if (val == 'on') {
+					FlxTween.tween(camHUD, {alpha: 1}, Std.parseFloat(value1), {ease: FlxEase.linear});
+					FlxTween.tween(camGame, {alpha: 1}, Std.parseFloat(value1), {ease: FlxEase.linear});
+				} else if (val == 'off') {
+					FlxTween.tween(camHUD, {alpha: 0}, Std.parseFloat(value1), {ease: FlxEase.linear});
+					FlxTween.tween(camGame, {alpha: 0}, Std.parseFloat(value1), {ease: FlxEase.linear});
+				}
+
+			case 'Window Alert':
+				Lib.application.window.alert('${value1}', '${value2}');
+
+			case 'UI Flip':
+				if(camHUD.angle != 180) {
+					FlxTween.tween(camHUD, {angle: 180}, 0.1, {ease: FlxEase.linear});
+				} else {
+					FlxTween.tween(camHUD, {angle: 0}, 0.1, {ease: FlxEase.linear});
+				}
+
+			case 'NoteDie':
+				playerStrums.forEach(function(spr:FlxSprite)
+				{
+					if (!FlxG.save.data.midscroll)
+						spr.x -= 275;
+				});
+				opponentStrums.forEach(function(spr:FlxSprite)
+				{
+					spr.x -= 1000;
+				});
+
+			case 'NoteLive':
+				playerStrums.forEach(function(spr:FlxSprite)
+				{
+					FlxTween.tween(spr, {alpha: 1}, 0.4, {ease: FlxEase.circOut});
+					if (!FlxG.save.data.midscroll)
+						spr.x += 275;
+				});
+				opponentStrums.forEach(function(spr:FlxSprite)
+				{
+					spr.x += 1000;
+				});
+
 			case 'Dadbattle Spotlight':
 				var val:Null<Int> = Std.parseInt(value1);
 				if(val == null) val = 0;
@@ -3385,40 +3563,6 @@ class PlayState extends MusicBeatState
 				} else {
 					FunkinLua.setVarInArray(this, value1, value2);
 				}
-			case 'GUI Opastity':
-				var val2:Float = Std.parseFloat(value2);
-				FlxTween.tween(camHUD, {alpha: value1}, val2, {ease: FlxEase.linear});
-
-			case 'LinearSpin':
-				var val1:Float = Std.parseFloat(value1);
-				var val2:Float = Std.parseFloat(value2);
-				strumLineNotes.forEach(function(tospin:FlxSprite)
-					{
-						FlxTween.angle(tospin, 0, val2, val1, {ease: FlxEase.linear});
-					});
-
-			case 'NoteDie':
-				playerStrums.forEach(function(spr:FlxSprite)
-				{
-					if (!FlxG.save.data.midscroll)
-						spr.x -= 275;
-				});
-				opponentStrums.forEach(function(spr:FlxSprite)
-				{
-					spr.x -= 1000;
-				});
-
-			case 'NoteLive':
-				playerStrums.forEach(function(spr:FlxSprite)
-				{
-					FlxTween.tween(spr, {alpha: 1}, 0.4, {ease: FlxEase.circOut});
-					if (!FlxG.save.data.midscroll)
-						spr.x += 275;
-				});
-				opponentStrums.forEach(function(spr:FlxSprite)
-				{
-					spr.x += 1000;
-				});
 		}
 		callOnLuas('onEvent', [eventName, value1, value2]);
 	}
@@ -4664,6 +4808,12 @@ class PlayState extends MusicBeatState
 			dad.dance();
 		}
 
+		if (zaBoom)
+		{
+			FlxG.camera.zoom += 0.015 * boomCam;
+			camHUD.zoom += 0.03 * boomHud;
+		}
+
 		switch (curStage)
 		{
 			case 'tank':
@@ -4915,6 +5065,26 @@ class PlayState extends MusicBeatState
 		setOnLuas('ratingFC', ratingFC);
 	}
 
+	function cinematicBars(appear:Bool) //IF (TRUE) MOMENT?????
+	{
+		if (appear)
+		{
+			add(topBar);
+			add(bottomBar);
+			FlxTween.tween(topBar, {y: 0}, 0.5, {ease: FlxEase.quadOut});
+			FlxTween.tween(bottomBar, {y: 550}, 0.5, {ease: FlxEase.quadOut});
+		}
+		else
+		{
+			FlxTween.tween(topBar, {y: -170}, 0.5, {ease: FlxEase.quadOut});
+			FlxTween.tween(bottomBar, {y: 720}, 0.5, {ease: FlxEase.quadOut, onComplete: function(fuckme:FlxTween)
+			{
+				remove(topBar);
+				remove(bottomBar);
+			}});
+		}
+	}
+
 	#if ACHIEVEMENTS_ALLOWED
 	private function checkForAchievement(achievesToCheck:Array<String> = null):String
 	{
@@ -4987,4 +5157,12 @@ class PlayState extends MusicBeatState
 
 	var curLight:Int = -1;
 	var curLightEvent:Int = -1;
+
+	override function switchTo(state:FlxState){
+		// DO CLEAN-UP HERE!!
+
+		Lib.application.window.title = 'The SkyDecay Project';
+
+		return super.switchTo(state);
+	}
 }

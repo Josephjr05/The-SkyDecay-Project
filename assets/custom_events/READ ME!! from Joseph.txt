@@ -1,1 +1,0 @@
-If you're editing the mod and is gonna add events, please add them in mods/custom_events. Because Assets custom_events don't work!

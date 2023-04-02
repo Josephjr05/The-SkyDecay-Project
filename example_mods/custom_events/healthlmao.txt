@@ -1,4 +1,0 @@
-Value 1: Change in health
-
-Leave blank for 0.5
-Use minus for health Gain

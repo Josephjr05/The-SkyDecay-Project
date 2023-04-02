@@ -69,15 +69,11 @@
 	<section if="PRELOAD_ALL">
 		<library name="songs"         preload="true" />
 		<library name="shared"        preload="true" />
-		<library name="scripts"        preload="true" />
-		<library name="custom_events"        preload="true" />
 	</section>
 	
 	<section if="NO_PRELOAD_ALL">
 		<library name="songs"         preload="false" />
 		<library name="shared"        preload="false" />
-		<library name="scripts"        preload="false" />
-		<library name="custom_events"        preload="false" />
 	</section>
 	
 	<assets path="assets/videos"        library="videos"        if="VIDEOS_ALLOWED"/>
@@ -85,10 +81,6 @@
 	<assets path="assets/songs"         library="songs"         exclude="*.mp3" unless="web"/>
 	<assets path="assets/shared"        library="shared"        exclude="*.ogg" if="web"/>
 	<assets path="assets/shared"        library="shared"        exclude="*.mp3" unless="web"/>
-	<assets path="assets/scripts"        library="scripts"        exclude="*.ogg" if="web"/>
-	<assets path="assets/scripts"        library="scripts"        exclude="*.mp3" unless="web"/>
-	<assets path="assets/custom_events"        library="custom_events"        exclude="*.ogg" if="web"/>
-	<assets path="assets/custom_events"        library="custom_events"        exclude="*.mp3" unless="web"/>
 
 	<section if="MODS_ALLOWED">
 		<assets path='example_mods' rename='mods' embed='false'/>

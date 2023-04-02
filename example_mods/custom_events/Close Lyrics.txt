@@ -1,5 +1,0 @@
-Close the Borders and the lyrics created
-in Lyrics event.
-
-Value 1 = duration
-Value 2 = Easing

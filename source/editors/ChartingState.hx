@@ -107,7 +107,9 @@ class ChartingState extends MusicBeatState
 		['Window Alert', "Value 1: Your message\nValue 2: The app window name"],
 		['UI Flip', "Just place the event to use it"],
 		['NoteDie', 'Place to kill opponent notes'],
-		['NoteLive', 'Place to respawn opponent notes']
+		['NoteLive', 'Place to respawn opponent notes'],
+		['Nine Star Mode', 'Toggles the Nine Star Mode\nOnly available on the Concert stage\nValue 1: 1 = mklkmklmdfkl\n2 = njkinasknfklnaskl\n 3 = hjfbdhjasbab\n 4 = njkdabnfkljnakj'],
+		['Camellia Zoom', 'Zooms in on the concert Stage\nValue 1: 1 = far zoom out, 2 = zoom out but closer, 3 = zoom back in\nValue 2: Tween Time']
 	];
 
 	var _file:FileReference;

@@ -22,12 +22,12 @@
 				]
 			],
 			[
-				40255.8139534884,
+				40186.0465116279,
 				[
 					[
 						"Change Character",
 						"BF",
-						"SD-BF"
+						"bf"
 					]
 				]
 			],
@@ -112,32 +112,12 @@
 				]
 			],
 			[
-				201000,
-				[
-					[
-						"Change Character",
-						"Dad",
-						"camelliasing"
-					]
-				]
-			],
-			[
 				201034.88372093,
 				[
 					[
 						"Play Animation",
 						"hey",
 						"BF"
-					]
-				]
-			],
-			[
-				201348.837209302,
-				[
-					[
-						"Change Character",
-						"Dad",
-						"camellia"
 					]
 				]
 			]

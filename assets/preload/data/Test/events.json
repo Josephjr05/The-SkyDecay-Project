@@ -1,0 +1,101 @@
+{
+	"song": {
+		"events": [
+			[
+				0,
+				[
+					[
+						"UI Fade",
+						"0",
+						"0.1"
+					]
+				]
+			],
+			[
+				6400,
+				[
+					[
+						"Add Camera Zoom",
+						"0.2",
+						""
+					]
+				]
+			],
+			[
+				8000,
+				[
+					[
+						"Add Camera Zoom",
+						"0.1",
+						""
+					]
+				]
+			],
+			[
+				9600,
+				[
+					[
+						"Add Camera Zoom",
+						"-0.2",
+						""
+					]
+				]
+			],
+			[
+				11200,
+				[
+					[
+						"Add Camera Zoom",
+						"0.4",
+						""
+					]
+				]
+			],
+			[
+				12100,
+				[
+					[
+						"Play Animation",
+						"cheer",
+						"gf"
+					],
+					[
+						"Play Animation",
+						"hey",
+						"dad"
+					],
+					[
+						"Play Animation",
+						"hey",
+						"bf"
+					]
+				]
+			],
+			[
+				12600,
+				[
+					[
+						"UI Fade",
+						"1",
+						"0.8"
+					]
+				]
+			],
+			[
+				128000,
+				[
+					[
+						"Add Camera Zoom",
+						"4",
+						""
+					],
+					[
+						"UI Fade",
+						"0",
+						"0.3"
+					]
+				]
+			]
+		]
+	}
+}

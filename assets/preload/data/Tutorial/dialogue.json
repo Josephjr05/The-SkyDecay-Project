@@ -1,0 +1,36 @@
+{
+	"dialogue": [
+		{
+			"sound": "",
+			"speed": 0.06,
+			"portrait": "gf",
+			"boxState": "normal",
+			"expression": "confused",
+			"text": "How about we test your audio delay?"
+		},
+		{
+			"sound": "",
+			"speed": 0.085,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "confused",
+			"text": "What are you talking about?"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "gf",
+			"boxState": "normal",
+			"expression": "shocked",
+			"text": "Nothin"
+		},
+		{
+			"sound": "",
+			"speed": 0.085,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Hmmmm, Okay."
+		}
+	]
+}

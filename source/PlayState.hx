@@ -2692,12 +2692,15 @@ class PlayState extends MusicBeatState
 		{
 			case 'concert':
 				camFollow.x = 1050;
-				camFollow.y = 390;
+				camFollow.y = 530;
 				isCameraOnForcedPos = true;
 				if(kurama) {
 					boyfriend.color = 0xff474747;
 					dad.color = 0xff474747;
 					gf.color = 0xff474747;
+				}
+				if (zooming) {
+					camZooming = false;
 				}
 		}
 
@@ -3337,7 +3340,7 @@ class PlayState extends MusicBeatState
 					if (ClientPrefs.camZooms) {
 						if (val1 == 1) {
 							zooming = true;
-							FlxTween.tween(frontCrowd, {y: 600, alpha: 1}, val2, {ease: FlxEase.sineIn});
+							FlxTween.tween(frontCrowd, {y: 760, alpha: 1}, val2, {ease: FlxEase.sineIn});
 							FlxTween.tween(camGame, {zoom: 0.41}, val2, {ease: FlxEase.sineIn, onComplete: function(twn:FlxTween)
 							{
 								defaultCamZoom = camGame.zoom;
@@ -3348,21 +3351,22 @@ class PlayState extends MusicBeatState
 							}});
 						}
 						if (val1 == 2) {
-							FlxTween.tween(frontCrowd, {y: 1000, alpha: 0}, val2, {ease: FlxEase.sineOut});
+							FlxTween.tween(frontCrowd, {y: 1100, alpha: 0}, val2, {ease: FlxEase.sineOut});
 							FlxTween.tween(camGame, {zoom: 0.59}, val2, {ease: FlxEase.sineOut, onComplete: function(twn:FlxTween)
 							{
 								defaultCamZoom = camGame.zoom;
+								zooming = false;
 							}});
 							FlxTween.tween(camHUD, {zoom: 1}, val2, {ease: FlxEase.sineOut});
-							zooming = false;
 						}
 						if (val1 == 3) {
 							zooming = true;
-							FlxTween.tween(frontCrowd, {y: 600, alpha: 1}, val2, {ease: FlxEase.sineIn});
+							FlxTween.tween(frontCrowd, {y: 760, alpha: 1}, val2, {ease: FlxEase.sineIn});
 							FlxTween.tween(camGame, {zoom: 0.47}, val2, {ease: FlxEase.sineIn});
 							FlxTween.tween(camHUD, {zoom: 0.9}, val2, {ease: FlxEase.sineIn, onComplete: function(twn:FlxTween)
 							{
 								FlxTween.tween(camHUD, {zoom: 0.9}, 0.00001, {ease: FlxEase.sineIn});
+								zooming = true;
 							}});
 						}
 					}
@@ -4835,11 +4839,6 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.camZooms) {
 			FlxG.camera.zoom += 0.015;
 			camHUD.zoom += 0.03;
-
-			if(!camZooming) { //Just a way for preventing it to be permanently zoomed until Skid & Pump hits a note
-				FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, 0.5);
-				FlxTween.tween(camHUD, {zoom: 1}, 0.5);
-			}
 		}
 
 		if(ClientPrefs.flashing) {

@@ -11,7 +11,7 @@
 	],
 	"songs": [
 		[
-			"kisaragi",
+			"Kisaragi",
 			"camellia",
 			[
 				146,
@@ -20,7 +20,7 @@
 			]
 		],
 		[
-			"freshr",
+			"Freshr",
 			"dad",
 			[
 				146,
@@ -29,7 +29,7 @@
 			]
 		],
 		[
-			"funk-off",
+			"Funk-Off",
 			"dad",
 			[
 				146,
@@ -65,15 +65,6 @@
 			]
 		],
 		[
-			"Mystery-Circles-Ultra",
-			"camellia",
-			[
-				146,
-				113,
-				253
-			]
-		],
-		[
 			"Nuclear-Star",
 			"camellia",
 			[
@@ -83,7 +74,7 @@
 			]
 		],
 		[
-			"+eraby+e-connec+10n",
+			"+ERABY+E-CONNEC+10N",
 			"camellia",
 			[
 				146,
@@ -92,7 +83,7 @@
 			]
 		],
 		[
-			"the-end",
+			"The-End",
 			"gf",
 			[
 				146,
@@ -137,7 +128,7 @@
 			]
 		],
 		[
-			"test",
+			"Test",
 			"bf-test",
 			[
 				146,
@@ -155,17 +146,8 @@
 			]
 		],
 		[
-			"oshama-scramble",
+			"Oshama-Scramble",
 			"bf",
-			[
-				146,
-				113,
-				253
-			]
-		],
-		[
-			"Test-remix",
-			"bf-test",
 			[
 				146,
 				113,
@@ -191,7 +173,7 @@
 			]
 		],
 		[
-			"tutorial-remix",
+			"Tutorial",
 			"gf",
 			[
 				146,
@@ -237,5 +219,5 @@
 		]
 	],
 	"hideStoryMode": false,
-	"weekName": "Week 1"
+	"weekName": ""
 }

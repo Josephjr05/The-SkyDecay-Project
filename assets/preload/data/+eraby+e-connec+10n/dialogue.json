@@ -4,57 +4,129 @@
 			"expression": "talk4",
 			"text": "This is it, little man.",
 			"boxState": "normal",
-			"portrait": "camellia",
-			"speed": 0.035,
-			"sound": ""
-		},
-		{
-			"expression": "shocked",
-			"text": "huh?",
-			"boxState": "normal",
-			"portrait": "bf",
-			"speed": 0.035,
-			"sound": ""
-		},
-		{
-			"expression": "talk2",
-			"text": "The last song of the night, of course!",
-			"boxState": "normal",
-			"portrait": "camellia",
-			"speed": 0.035,
-			"sound": ""
-		},
-		{
-			"expression": "talk",
-			"text": "You didn't think I would stop at two, did you?",
-			"boxState": "normal",
-			"portrait": "camellia",
-			"speed": 0.05,
-			"sound": ""
-		},
-		{
-			"expression": "shocked",
-			"text": "Dude i just want to go home!",
-			"boxState": "normal",
-			"sound": "",
-			"speed": 0.05,
-			"portrait": "bf"
-		},
-		{
-			"expression": "talk3",
-			"text": "Glad you're up for it then. Try to keep up!",
-			"boxState": "normal",
 			"sound": "",
 			"speed": 0.05,
 			"portrait": "camellia"
 		},
 		{
 			"expression": "confused",
-			"text": "Bruh..",
+			"text": "huh?",
+			"boxState": "normal",
+			"sound": "",
+			"speed": 0.07,
+			"portrait": "bf"
+		},
+		{
+			"expression": "talk2",
+			"text": "The last song of the night, of course!",
+			"boxState": "normal",
+			"sound": "",
+			"speed": 0.055,
+			"portrait": "camellia"
+		},
+		{
+			"expression": "talk",
+			"text": "You didn't think I would stop at two, did you?",
+			"boxState": "normal",
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "camellia"
+		},
+		{
+			"expression": "shocked",
+			"text": "Yeah... But i just want to go home!",
 			"boxState": "normal",
 			"portrait": "bf",
 			"speed": 0.05,
 			"sound": ""
+		},
+		{
+			"expression": "talk3",
+			"text": "Glad you're up for it then. Try to keep up!",
+			"boxState": "normal",
+			"portrait": "camellia",
+			"speed": 0.05,
+			"sound": ""
+		},
+		{
+			"expression": "confused",
+			"text": "Camellia i love doing these songs with you, but i need to get my home back.",
+			"boxState": "normal",
+			"sound": "",
+			"speed": 0.055,
+			"portrait": "bf"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "confused",
+			"text": "Are you familiar with that blue ball in the sky?"
+		},
+		{
+			"sound": "",
+			"speed": 0.08,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "confused",
+			"text": "Like."
+		},
+		{
+			"sound": "",
+			"speed": 0.145,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "confused",
+			"text": "At all..?"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "camellia",
+			"boxState": "normal",
+			"expression": "talk4",
+			"text": "Yeah i see. What about it?"
+		},
+		{
+			"sound": "",
+			"speed": 0.055,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "excited",
+			"text": "Glad someone knows about it and not look so stupid."
+		},
+		{
+			"sound": "",
+			"speed": 0.06,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Look, that thing took my home, can we go to the concert and finish this thing off with a banger?"
+		},
+		{
+			"sound": "",
+			"speed": 0.06,
+			"portrait": "camellia",
+			"boxState": "normal",
+			"expression": "talk3",
+			"text": "I see why not!"
+		},
+		{
+			"sound": "",
+			"speed": 0.055,
+			"portrait": "camellia",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "After this song little man, we will go right away!"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "excited",
+			"text": "Awesome! Lets do this!"
 		}
 	]
 }

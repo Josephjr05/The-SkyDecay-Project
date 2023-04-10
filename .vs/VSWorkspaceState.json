@@ -1,6 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\source"
   ],
+  "SelectedNode": "\\source\\ClientPrefs.hx",
   "PreviewInSolutionExplorer": false
 }

@@ -18,7 +18,7 @@ local del2 = 0;
 local drain = 0.01 -- the funne
 local allowCountdown = false
 function onStartCountdown()
-	if not allowCountdown and isStoryMode and not seenCutscene then --Block the first countdown
+	if not allowCountdown and not seenCutscene then --Block the first countdown
 			startVideo('IDK HOW TO DELETED IT TO WORK LOL');
 		
 		

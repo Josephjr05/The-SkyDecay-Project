@@ -1,6 +1,0 @@
-:bf:Beep Bop
-:bf1:Beep bep ?
-:bf:Bop Bep Skeep
-:bf1:Bop Skeed Pep !?
-:bf:Dop Bep?
-:bf1:Bop!

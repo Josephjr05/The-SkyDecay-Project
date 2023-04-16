@@ -1,7 +1,7 @@
 function onCountdownStarted()
     for i=0,3 do
 
-        setPropertyFromGroup('opponentStrums', i, 'texture', 'Kubaxon_Notes')
+        setPropertyFromGroup('opponentStrums', i, 'texture', 'cuajak/Kubaxon_Notes/Kubaxon_Notes')
 
     end
 
@@ -9,7 +9,7 @@ function onCountdownStarted()
 
         if not getPropertyFromGroup('unspawnNotes', i, 'mustPress') then
 
-            setPropertyFromGroup('unspawnNotes', i, 'texture', 'Kubaxon_Notes');
+            setPropertyFromGroup('unspawnNotes', i, 'texture', 'cuajak/Kubaxon_Notes/Kubaxon_Notes');
 
         end
 

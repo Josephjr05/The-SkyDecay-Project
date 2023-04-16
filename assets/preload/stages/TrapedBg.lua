@@ -1,8 +1,8 @@
 
 function onCreate() 
-	makeLuaSprite('bg-traped', 'bg-traped', -700, 0);
+	makeLuaSprite('bg-traped', 'traped/bg-traped', -700, 0);
 	addLuaSprite('bg-traped', false); 
-	makeLuaSprite('beds-traped', 'beds-traped', -800, 700);
+	makeLuaSprite('beds-traped', 'traped/beds-traped', -800, 700);
 	addLuaSprite('beds-traped', false);
 
 function onUpdate()

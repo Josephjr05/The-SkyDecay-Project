@@ -14,117 +14,117 @@
 			"Kisaragi",
 			"camellia",
 			[
-				146,
-				113,
-				253
+				255,
+				155,
+				60
 			]
 		],
 		[
 			"Freshr",
 			"dad",
 			[
-				146,
-				113,
-				253
+				126,
+				13,
+				255
 			]
 		],
 		[
 			"Funk-Off",
 			"dad",
 			[
-				146,
-				113,
-				253
+				126,
+				13,
+				255
 			]
 		],
 		[
 			"KillerToy",
 			"camellia",
 			[
-				146,
-				113,
-				253
+				255,
+				155,
+				60
 			]
 		],
 		[
 			"Flash-Me-Back",
 			"camellia",
 			[
-				146,
-				113,
-				253
+				255,
+				155,
+				60
 			]
 		],
 		[
 			"LUIN-OF-CLETCHAR",
 			"camellia",
 			[
-				146,
-				113,
-				253
+				255,
+				155,
+				60
 			]
 		],
 		[
 			"Nuclear-Star",
 			"camellia",
 			[
-				146,
-				113,
-				253
+				255,
+				155,
+				60
 			]
 		],
 		[
 			"+ERABY+E-CONNEC+10N",
 			"camellia",
 			[
-				146,
-				113,
-				253
+				255,
+				155,
+				60
 			]
 		],
 		[
 			"The-End",
 			"gf",
 			[
-				146,
-				113,
-				253
+				0,
+				0,
+				0
 			]
 		],
 		[
 			"Phantasia",
 			"bf",
 			[
-				146,
-				113,
-				253
+				255,
+				255,
+				255
 			]
 		],
 		[
 			"Grevious-Lady",
 			"bf",
 			[
-				146,
-				113,
-				253
+				255,
+				255,
+				255
 			]
 		],
 		[
 			"Blox-Fruit-Remix",
 			"nixvyy",
 			[
-				146,
-				113,
-				253
+				186,
+				0,
+				75
 			]
 		],
 		[
 			"Custom-ChromeLab",
 			"nixvyy",
 			[
-				146,
-				113,
-				253
+				186,
+				0,
+				75
 			]
 		],
 		[
@@ -140,18 +140,18 @@
 			"Lorelei",
 			"camellia",
 			[
-				146,
-				113,
-				253
+				255,
+				155,
+				60
 			]
 		],
 		[
 			"Oshama-Scramble",
 			"bf",
 			[
-				146,
-				113,
-				253
+				255,
+				255,
+				255
 			]
 		],
 		[
@@ -177,22 +177,22 @@
 			"gf",
 			[
 				146,
-				113,
-				253
+				0,
+				0
 			]
 		],
 		[
 			"Sendan-Life-(katagiri-Bootleg)",
-			"bf-test",
+			"melodii",
 			[
-				146,
-				113,
-				253
+				255,
+				255,
+				255
 			]
 		],
 		[
 			"tetris-beatbox",
-			"dad",
+			"asex",
 			[
 				146,
 				113,
@@ -201,7 +201,7 @@
 		],
 		[
 			"viral-beatbox-remix",
-			"dad",
+			"asex",
 			[
 				146,
 				113,
@@ -210,11 +210,65 @@
 		],
 		[
 			"overloaded-memory",
-			"dad",
+			"joseph",
 			[
 				146,
 				113,
 				253
+			]
+		],
+		[
+			"pgbs",
+			"miku",
+			[
+				86,
+				213,
+				253
+			]
+		],
+		[
+			"LongTime",
+			"dad",
+			[
+				0,
+				213,
+				0
+			]
+		],
+		[
+			"WildLife",
+			"dad",
+			[
+				0,
+				213,
+				0
+			]
+		],
+		[
+			"ShiningEyes",
+			"dad",
+			[
+				0,
+				213,
+				0
+			]
+		],
+		[
+			"ReviveR",
+			"bf",
+			[
+				255,
+				255,
+				255
+			]
+		],
+		[
+			"Compute-It-With-Some-Devilish-Alcoholic-Steampunk-Engines",
+			"camellia",
+			[
+				255,
+				155,
+				60
 			]
 		]
 	],

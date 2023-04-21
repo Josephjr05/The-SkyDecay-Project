@@ -1,0 +1,89 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "duperBambiIdle",
+			"indices": [],
+			"name": "duperBambiIdle"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "duperBambiRight",
+			"fps": 24,
+			"name": "duperBambiRight",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "duperBambiDown",
+			"fps": 24,
+			"name": "duperBambiDown",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "duperBambiLeft",
+			"fps": 24,
+			"name": "duperBambiLeft",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "duperBambiUp",
+			"fps": 24,
+			"name": "duperBambiUp",
+			"indices": []
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "duperBambiBreak",
+			"loop": false,
+			"name": "duperBambiBreak"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/duperBambi",
+	"position": [
+		-60,
+		340
+	],
+	"healthicon": "BambiDuper",
+	"flip_x": false,
+	"healthbar_colors": [
+		37,
+		191,
+		55
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 6.1,
+	"scale": 1
+}

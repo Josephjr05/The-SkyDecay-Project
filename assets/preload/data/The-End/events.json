@@ -1,0 +1,106 @@
+{
+	"song": {
+		"events": [
+			[
+				6000,
+				[
+					[
+						"Note Spin",
+						"",
+						""
+					]
+				]
+			],
+			[
+				9100,
+				[
+					[
+						"Note Spin",
+						"",
+						""
+					]
+				]
+			],
+			[
+				18000,
+				[
+					[
+						"Change Character",
+						"BF",
+						"Joseph"
+					]
+				]
+			],
+			[
+				19300,
+				[
+					[
+						"Change Character",
+						"Joseph",
+						"Nixvyy"
+					]
+				]
+			],
+			[
+				19500,
+				[
+					[
+						"Note Spin",
+						"",
+						""
+					]
+				]
+			],
+			[
+				20300,
+				[
+					[
+						"Note Spin",
+						"",
+						""
+					]
+				]
+			],
+			[
+				21100,
+				[
+					[
+						"Change Character",
+						"Nixvyy",
+						"BF"
+					]
+				]
+			],
+			[
+				72100,
+				[
+					[
+						"Change Character",
+						"BF",
+						"Joseph"
+					]
+				]
+			],
+			[
+				77900,
+				[
+					[
+						"Change Character",
+						"Joseph",
+						"Nixvyy"
+					]
+				]
+			],
+			[
+				84100,
+				[
+					[
+						"Change Character",
+						"Nixvyy",
+						"BF"
+					]
+				]
+			]
+		]
+	}
+}

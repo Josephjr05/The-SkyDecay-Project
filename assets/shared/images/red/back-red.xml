@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="back-red.png">
+	<!-- Created with Adobe Animate version 20.5.1.31044 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Back0000" x="0" y="0" width="2624" height="611" frameX="-5" frameY="0" frameWidth="2635" frameHeight="611"/>
+	<SubTexture name="Back0001" x="2624" y="0" width="2624" height="611" frameX="-5" frameY="0" frameWidth="2635" frameHeight="611"/>
+	<SubTexture name="Back0002" x="5248" y="0" width="2630" height="595" frameX="-2" frameY="-16" frameWidth="2635" frameHeight="611"/>
+	<SubTexture name="Back0003" x="0" y="611" width="2630" height="595" frameX="-2" frameY="-16" frameWidth="2635" frameHeight="611"/>
+	<SubTexture name="Back0004" x="2630" y="611" width="2635" height="589" frameX="0" frameY="-22" frameWidth="2635" frameHeight="611"/>
+	<SubTexture name="Back0005" x="5265" y="611" width="2635" height="589" frameX="0" frameY="-22" frameWidth="2635" frameHeight="611"/>
+	<SubTexture name="Back0006" x="0" y="1206" width="2630" height="592" frameX="-3" frameY="-19" frameWidth="2635" frameHeight="611"/>
+	<SubTexture name="Back0007" x="2630" y="1206" width="2630" height="592" frameX="-3" frameY="-19" frameWidth="2635" frameHeight="611"/>
+	<SubTexture name="Back0008" x="5260" y="1206" width="2630" height="592" frameX="-3" frameY="-19" frameWidth="2635" frameHeight="611"/>
+	<SubTexture name="Back0009" x="0" y="1798" width="2630" height="592" frameX="-3" frameY="-19" frameWidth="2635" frameHeight="611"/>
+	<SubTexture name="Back0010" x="2630" y="1206" width="2630" height="592" frameX="-3" frameY="-19" frameWidth="2635" frameHeight="611"/>
+	<SubTexture name="Back0011" x="5260" y="1206" width="2630" height="592" frameX="-3" frameY="-19" frameWidth="2635" frameHeight="611"/>
+	<SubTexture name="Back0012" x="0" y="1798" width="2630" height="592" frameX="-3" frameY="-19" frameWidth="2635" frameHeight="611"/>
+	<SubTexture name="Back0013" x="2630" y="1206" width="2630" height="592" frameX="-3" frameY="-19" frameWidth="2635" frameHeight="611"/>
+	<SubTexture name="Back0014" x="5260" y="1206" width="2630" height="592" frameX="-3" frameY="-19" frameWidth="2635" frameHeight="611"/>
+</TextureAtlas>

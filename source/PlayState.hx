@@ -220,7 +220,7 @@ class PlayState extends MusicBeatState
 	public var camOther:FlxCamera;
 	public var cameraSpeed:Float = 1;
 
-	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
+	var dialogue:Array<String> = ['blah blah blah', 'i am boyfriend'];
 	var dialogueJson:DialogueFile = null;
 
 	var dadbattleBlack:BGSprite;
@@ -374,6 +374,22 @@ class PlayState extends MusicBeatState
 	var kmMode:Bool = false;
 	var maxMisses:Int = 10;
 
+	//Cuajak stage
+	var cujbg:FlxSprite;
+	var cujback:FlxSprite;
+
+	//Traped collab stage
+	var bg:FlxSprite;
+	var beds:FlxSprite;
+
+	//Red stage
+	var bgred:FlxSprite;
+	var tables:FlxSprite;
+	var chairback:FlxSprite;
+	var table:FlxSprite;
+	var chair:FlxSprite;
+	var back:FlxSprite;
+
 	override public function create()
 	{
 		//trace('Playback Rate: ' + playbackRate);
@@ -496,14 +512,6 @@ class PlayState extends MusicBeatState
 					curStage = 'philly';
 				case 'milf' | 'satin-panties' | 'high':
 					curStage = 'limo';
-				case 'cocoa' | 'eggnog':
-					curStage = 'mall';
-				case 'winter-horrorland':
-					curStage = 'mallEvil';
-				case 'senpai' | 'roses':
-					curStage = 'school';
-				case 'thorns':
-					curStage = 'schoolEvil';
 				case 'ugh' | 'guns' | 'stress':
 					curStage = 'tank';
 				default:
@@ -608,7 +616,7 @@ class PlayState extends MusicBeatState
 				speakerRight2.scale.set(0.5, 0.5);
 				add(speakerRight2);
 
-			case 'stage': //Week 1
+			case 'stage': //Chapter 1 
 				var bg:BGSprite = new BGSprite('stageback', -600, -200, 0.9, 0.9);
 				add(bg);
 
@@ -633,6 +641,51 @@ class PlayState extends MusicBeatState
 					add(stageCurtains);
 				}
 				dadbattleSmokes = new FlxSpriteGroup(); //troll'd
+
+			case 'cuajak': //Kubaxon stage (Coded by Josephjr05, i got trashy skills hehe noobie skills)
+				cujbg = new FlxSprite(200, 100).loadGraphic(Paths.image('cuajak/cujbg'));
+				cujbg.scale.set(1, 1);
+				add(cujbg);
+
+				cujback = new FlxSprite(200, 330).loadGraphic(Paths.image('cuajak/cujback'));
+				cujback.scale.set(1, 1);
+				add(cujback);
+
+			case 'traped': //traped collab stage
+				bg = new FlxSprite(-700, 0).loadGraphic(Paths.image('traped/bg-traped'));
+				bg.scale.set(1, 1);
+				add(bg);
+
+				beds = new FlxSprite(-800, 700).loadGraphic(Paths.image('traped/beds-traped'));
+				beds.scale.set(1,1);
+				add(beds);
+			
+			case 'red': //traped collab stage red
+				bgred = new FlxSprite(-1900, 0).loadGraphic(Paths.image('red/bg-red'));
+				bgred.scale.set(1, 1);
+				add(bgred);
+
+				tables = new FlxSprite(-1200, 0).loadGraphic(Paths.image('red/tables-red'));
+				tables.scale.set(1, 1);
+				add(tables);
+
+				chairback = new FlxSprite(-100, 870).loadGraphic(Paths.image('red/chairback-red'));
+				chairback.scale.set(1, 1);
+				add(chairback);
+
+				table = new FlxSprite(0, 820).loadGraphic(Paths.image('red/table-red'));
+				table.scale.set(1, 1);
+				add(table);
+
+				chair = new FlxSprite(-100, 1050).loadGraphic(Paths.image('red/chair-red'));
+				chair.scale.set(1, 1);
+				add(chair);
+
+				back = new FlxSprite(-600, 800);
+				back.frames = Paths.getSparrowAtlas('red/back-red');
+				back.animation.addByPrefix('bop', 'Back', 15, false);
+				back.scale.set(0.9, 0.9);
+				add(back);
 
 		}
 
@@ -669,7 +722,7 @@ class PlayState extends MusicBeatState
 				//you really thought, imagine
 			case 'concert':
 				frontCrowd = new FlxSprite(60, 1000).loadGraphic(Paths.image('camellia/Week2/frontcrowd'));
-				frontCrowd.alpha = 0;
+				frontCrowd.alpha = 1;
 				frontCrowd.scale.set(1.75, 1.75);
 				add(frontCrowd);
 		}
@@ -3173,7 +3226,7 @@ class PlayState extends MusicBeatState
 			FlxTween.color(boyfriend, 1.3, FlxColor.WHITE, 0xff474747, {ease: FlxEase.linear});
 			FlxTween.color(dad, 1.3, FlxColor.WHITE, 0xff474747, {ease: FlxEase.linear});
 			FlxTween.color(gf, 1.3, FlxColor.WHITE, 0xff474747, {ease: FlxEase.linear});
-			FlxTween.tween(star, {y: 190}, 2.3, {ease: FlxEase.backInOut, onComplete: function(twn:FlxTween)
+			FlxTween.tween(star, {y: 90}, 2.3, {ease: FlxEase.backInOut, onComplete: function(twn:FlxTween)
 			{
 				spin = true;
 				kuraCool = false;

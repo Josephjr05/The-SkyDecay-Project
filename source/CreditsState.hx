@@ -41,7 +41,7 @@ class CreditsState extends MusicBeatState
 	{
 		#if cpp
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Menus", null);
+		DiscordClient.changePresence("In Credits", null);
 		#end
 
 		persistentUpdate = true;

@@ -1,5 +1,5 @@
 {
-	"storyName": "test",
+	"storyName": "Week",
 	"hideFreeplay": false,
 	"weekBackground": "stage",
 	"weekBefore": "tutorial",
@@ -83,7 +83,7 @@
 			]
 		],
 		[
-			"The-End",
+			"The-End-(Old)",
 			"gf",
 			[
 				0,
@@ -272,8 +272,8 @@
 			]
 		],
 		[
-			"the-end-new",
-			"dad",
+			"The-End",
+			"pico",
 			[
 				146,
 				113,

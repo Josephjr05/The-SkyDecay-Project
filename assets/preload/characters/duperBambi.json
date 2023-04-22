@@ -5,66 +5,110 @@
 				0,
 				0
 			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "duperBambiRight"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "duperBambiDown"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "duperBambiLeft"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "duperBambiUp"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
 			"loop": true,
 			"fps": 24,
-			"anim": "duperBambiIdle",
+			"anim": "idle",
 			"indices": [],
 			"name": "duperBambiIdle"
 		},
 		{
+			"offsets": [
+				0,
+				0
+			],
 			"loop": false,
-			"offsets": [
-				0,
-				0
-			],
-			"anim": "duperBambiRight",
 			"fps": 24,
-			"name": "duperBambiRight",
-			"indices": []
-		},
-		{
-			"loop": false,
-			"offsets": [
-				0,
-				0
-			],
-			"anim": "duperBambiDown",
-			"fps": 24,
-			"name": "duperBambiDown",
-			"indices": []
-		},
-		{
-			"loop": false,
-			"offsets": [
-				0,
-				0
-			],
-			"anim": "duperBambiLeft",
-			"fps": 24,
-			"name": "duperBambiLeft",
-			"indices": []
-		},
-		{
-			"loop": false,
-			"offsets": [
-				0,
-				0
-			],
-			"anim": "duperBambiUp",
-			"fps": 24,
-			"name": "duperBambiUp",
-			"indices": []
-		},
-		{
-			"offsets": [
-				0,
-				0
-			],
+			"anim": "Break",
 			"indices": [],
-			"fps": 24,
-			"anim": "duperBambiBreak",
-			"loop": false,
 			"name": "duperBambiBreak"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "singRIGHT-alt",
+			"fps": 24,
+			"name": "duperBambiBreak",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "singDOWN-alt",
+			"fps": 24,
+			"name": "duperBambiBreak",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "singLEFT-alt",
+			"fps": 24,
+			"name": "duperBambiBreak",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "singUP-alt",
+			"fps": 24,
+			"name": "duperBambiBreak",
+			"indices": []
 		}
 	],
 	"no_antialiasing": false,

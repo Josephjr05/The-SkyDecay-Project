@@ -288,6 +288,15 @@
 				255,
 				0
 			]
+		],
+		[
+			"Too-Slow-Awe",
+			"exe",
+			[
+				0,
+				0,
+				255
+			]
 		]
 	],
 	"hideStoryMode": false,

@@ -390,6 +390,9 @@ class PlayState extends MusicBeatState
 	var chair:FlxSprite;
 	var back:FlxSprite;
 
+	//Bambi
+	var corn:FlxSprite;
+
 	override public function create()
 	{
 		//trace('Playback Rate: ' + playbackRate);
@@ -616,7 +619,7 @@ class PlayState extends MusicBeatState
 				speakerRight2.scale.set(0.5, 0.5);
 				add(speakerRight2);
 
-			case 'stage': //Chapter 1 
+			case 'stage': //Chapter 1
 				var bg:BGSprite = new BGSprite('stageback', -600, -200, 0.9, 0.9);
 				add(bg);
 
@@ -652,40 +655,51 @@ class PlayState extends MusicBeatState
 				add(cujback);
 
 			case 'traped': //traped collab stage
-				bg = new FlxSprite(-700, 0).loadGraphic(Paths.image('traped/bg-traped'));
+				bg = new FlxSprite(-700, 0).loadGraphic(Paths.image('traped/traped/bg-traped'));
 				bg.scale.set(1, 1);
 				add(bg);
 
-				beds = new FlxSprite(-800, 700).loadGraphic(Paths.image('traped/beds-traped'));
+				beds = new FlxSprite(-800, 700).loadGraphic(Paths.image('traped/traped/beds-traped'));
 				beds.scale.set(1,1);
 				add(beds);
 			
-			case 'red': //traped collab stage red
-				bgred = new FlxSprite(-1900, 0).loadGraphic(Paths.image('red/bg-red'));
+			case 'red': //traped red
+				bgred = new FlxSprite(-1900, 0).loadGraphic(Paths.image('traped/red/bg-red'));
 				bgred.scale.set(1, 1);
 				add(bgred);
 
-				tables = new FlxSprite(-1200, 0).loadGraphic(Paths.image('red/tables-red'));
+				tables = new FlxSprite(-1200, 680).loadGraphic(Paths.image('traped/red/tables-red'));
 				tables.scale.set(1, 1);
 				add(tables);
 
-				chairback = new FlxSprite(-100, 870).loadGraphic(Paths.image('red/chairback-red'));
-				chairback.scale.set(1, 1);
+				chairback = new FlxSprite(-100, 870).loadGraphic(Paths.image('traped/red/chairback-red'));
+				chairback.setGraphicSize(Std.int(chairback.width * 0.6));
+				chairback.alpha - 1;
+				chairback.cameras = [camOther];
 				add(chairback);
 
-				table = new FlxSprite(0, 820).loadGraphic(Paths.image('red/table-red'));
-				table.scale.set(1, 1);
+				table = new FlxSprite(0, 820).loadGraphic(Paths.image('traped/red/table-red'));
+				table.setGraphicSize(Std.int(table.width * 0.6));
+				table.alpha - 1;
+				table.cameras = [camOther];
 				add(table);
 
-				chair = new FlxSprite(-100, 1050).loadGraphic(Paths.image('red/chair-red'));
-				chair.scale.set(1, 1);
+				chair = new FlxSprite(-100, 1050).loadGraphic(Paths.image('traped/red/chair-red'));
+				chair.setGraphicSize(Std.int(chair.width * 0.6));
+				chair.alpha = 1;
+				chair.cameras = [camOther];
 				add(chair);
 
-				back = new FlxSprite(-600, 800);
-				back.frames = Paths.getSparrowAtlas('red/back-red');
-				back.animation.addByPrefix('bop', 'Back', 15, false);
-				back.scale.set(0.9, 0.9);
+				back = new FlxSprite(-600, 800).loadGraphic(Paths.image('traped/red/back-red'));
+				back.setGraphicSize(Std.int(back.width * 0.6));
+				back.alpha = 1;
+				back.cameras = [camOther];
 				add(back);
+
+			case 'corn': //Bambi stage
+				corn = new FlxSprite(-600, -200).loadGraphic(Paths.image('bambi/corn'));
+				corn.scale.set(1, 1);
+				add(corn);
 
 		}
 

@@ -1,66 +1,66 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [
 				0,
 				15
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singUP",
-			"indices": [],
-			"name": "camellia up"
+			"fps": 24,
+			"name": "camellia up",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				0,
 				-64
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singDOWN",
-			"indices": [],
-			"name": "camellia down"
+			"fps": 24,
+			"name": "camellia down",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				0,
 				-8
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singLEFT",
-			"indices": [],
-			"name": "camellia left"
+			"fps": 24,
+			"name": "camellia left",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				0,
 				-19
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singRIGHT",
-			"indices": [],
-			"name": "camellia right"
+			"fps": 24,
+			"name": "camellia right",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				0,
 				0
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "idle",
-			"indices": [],
-			"name": "camellia idle"
+			"fps": 24,
+			"name": "camellia idle",
+			"indices": []
 		}
 	],
 	"no_antialiasing": false,
 	"image": "characters/middle_camellia_assets",
 	"position": [
-		-80,
-		-70
+		-130,
+		-90
 	],
 	"healthicon": "camellia",
 	"flip_x": false,
@@ -74,5 +74,5 @@
 		0
 	],
 	"sing_duration": 4,
-	"scale": 0.95
+	"scale": 0.85
 }

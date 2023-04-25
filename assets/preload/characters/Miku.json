@@ -1,221 +1,133 @@
 {
 	"animations": [
 		{
+			"loop": true,
 			"offsets": [
-				-5,
+				0,
 				0
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "idle",
-			"indices": [],
-			"name": "BF idle dance"
+			"fps": 24,
+			"name": "Miku idle dance",
+			"indices": []
 		},
 		{
 			"offsets": [
-				15,
-				-6
+				34,
+				2
 			],
 			"loop": false,
 			"fps": 24,
 			"anim": "singLEFT",
 			"indices": [],
-			"name": "BF NOTE LEFT0"
+			"name": "Miku Sing Note LEFT0"
 		},
 		{
 			"offsets": [
-				-10,
-				-49
+				0,
+				0
 			],
 			"loop": false,
 			"fps": 24,
 			"anim": "singDOWN",
 			"indices": [],
-			"name": "BF NOTE DOWN0"
+			"name": "Miku Sing Note DOWN0"
 		},
 		{
 			"offsets": [
-				-24,
-				33
+				17,
+				51
 			],
 			"loop": false,
 			"fps": 24,
 			"anim": "singUP",
 			"indices": [],
-			"name": "BF NOTE UP0"
+			"name": "Miku Sing Note UP0"
 		},
 		{
 			"offsets": [
-				-38,
-				3
+				-79,
+				1
 			],
 			"loop": false,
 			"fps": 24,
 			"anim": "singRIGHT",
 			"indices": [],
-			"name": "BF NOTE RIGHT0"
+			"name": "Miku Sing Note RIGHT0"
 		},
 		{
 			"offsets": [
-				7,
-				19
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singLEFTmiss",
-			"indices": [],
-			"name": "BF NOTE LEFT MISS"
-		},
-		{
-			"offsets": [
-				-15,
-				-19
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singDOWNmiss",
-			"indices": [],
-			"name": "BF NOTE DOWN MISS"
-		},
-		{
-			"offsets": [
-				-46,
-				27
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singUPmiss",
-			"indices": [],
-			"name": "BF NOTE UP MISS"
-		},
-		{
-			"offsets": [
-				-44,
-				22
+				-55,
+				-1
 			],
 			"loop": false,
 			"fps": 24,
 			"anim": "singRIGHTmiss",
 			"indices": [],
-			"name": "BF NOTE RIGHT MISS"
+			"name": "Miku Sing Note RIGHT M"
 		},
 		{
 			"offsets": [
-				-3,
-				5
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "hey",
-			"indices": [],
-			"name": "BF HEY"
-		},
-		{
-			"offsets": [
-				14,
-				18
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "hurt",
-			"indices": [],
-			"name": "BF hit"
-		},
-		{
-			"offsets": [
-				-4,
+				36,
 				0
 			],
-			"loop": true,
+			"loop": false,
 			"fps": 24,
-			"anim": "scared",
+			"anim": "singLEFTmiss",
 			"indices": [],
-			"name": "BF idle shaking"
+			"name": "Miku Sing Note LEFT M"
 		},
 		{
 			"offsets": [
-				37,
-				11
+				-2,
+				3
 			],
 			"loop": false,
 			"fps": 24,
-			"anim": "firstDeath",
+			"anim": "singDOWNmiss",
 			"indices": [],
-			"name": "BF dies"
+			"name": "Miku Sing Note DOWN M"
 		},
 		{
 			"offsets": [
-				37,
-				5
-			],
-			"loop": true,
-			"fps": 24,
-			"anim": "deathLoop",
-			"indices": [],
-			"name": "BF Dead Loop"
-		},
-		{
-			"offsets": [
-				37,
-				69
+				22,
+				55
 			],
 			"loop": false,
 			"fps": 24,
-			"anim": "deathConfirm",
+			"anim": "singUPmiss",
 			"indices": [],
-			"name": "BF Dead confirm"
+			"name": "Miku Sing Note UP M"
 		},
 		{
 			"offsets": [
-				-10,
-				-16
+				22,
+				55
 			],
 			"loop": false,
 			"fps": 24,
-			"anim": "dodge",
+			"anim": "Hey",
 			"indices": [],
-			"name": "boyfriend dodge"
-		},
-		{
-			"offsets": [
-				294,
-				267
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "attack",
-			"indices": [],
-			"name": "boyfriend attack"
-		},
-		{
-			"offsets": [
-				-40,
-				-40
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "pre-attack",
-			"indices": [],
-			"name": "bf pre attack"
+			"name": "miku hey"
 		}
 	],
 	"no_antialiasing": false,
-	"image": "characters/Miku",
+	"image": "characters/ev_miku_assets",
 	"position": [
-		90,
-		400
+		0,
+		0
 	],
 	"healthicon": "miku",
-	"flip_x": true,
+	"flip_x": false,
 	"healthbar_colors": [
 		50,
 		205,
-		205
+		204
 	],
 	"camera_position": [
-		500,
-		-110
+		0,
+		0
 	],
-	"sing_duration": 4,
+	"sing_duration": 6.1,
 	"scale": 1
 }

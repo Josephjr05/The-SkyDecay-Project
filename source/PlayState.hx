@@ -382,16 +382,33 @@ class PlayState extends MusicBeatState
 	var bg:FlxSprite;
 	var beds:FlxSprite;
 
-	//Red stage
-	var bgred:FlxSprite;
-	var tables:FlxSprite;
+	//Traped Red stage
+	var bgred:BGSprite;
+	var tables:BGSprite;
 	var chairback:FlxSprite;
 	var table:FlxSprite;
 	var chair:FlxSprite;
 	var back:FlxSprite;
 
-	//Bambi
+	//Bambi Corn Stage
 	var corn:FlxSprite;
+
+	//sonic exe stage shit
+	var midtrees1:BGSprite;
+	var treesmid:BGSprite;
+	var treesoutermid:BGSprite;
+	var treesoutermid2:BGSprite;
+	var lefttrees:BGSprite;
+	var righttrees:BGSprite;
+	var outerbush:BGSprite;
+	var outerbush2:BGSprite;
+	var grass:BGSprite;
+	var deadegg:BGSprite;
+	var deadknux:BGSprite;
+	var deadtailz:BGSprite;
+	var deadtailz1:BGSprite;
+	var deadtailz2:BGSprite;
+	var fgTrees:BGSprite;
 
 	override public function create()
 	{
@@ -663,43 +680,84 @@ class PlayState extends MusicBeatState
 				beds.scale.set(1,1);
 				add(beds);
 			
-			case 'red': //traped red
-				bgred = new FlxSprite(-1900, 0).loadGraphic(Paths.image('traped/red/bg-red'));
-				bgred.scale.set(1, 1);
-				add(bgred);
+			//case 'red': //traped red
+				//var bgred:BGSprite = new BGSprite('traped/red/bg-red', -1900, 0);
+				//bgred.scale.set(1, 1);
+				//add(bgred);
 
-				tables = new FlxSprite(-1200, 680).loadGraphic(Paths.image('traped/red/tables-red'));
-				tables.scale.set(1, 1);
-				add(tables);
-
-				chairback = new FlxSprite(-100, 870).loadGraphic(Paths.image('traped/red/chairback-red'));
-				chairback.setGraphicSize(Std.int(chairback.width * 0.6));
-				chairback.alpha - 1;
-				chairback.cameras = [camOther];
-				add(chairback);
-
-				table = new FlxSprite(0, 820).loadGraphic(Paths.image('traped/red/table-red'));
-				table.setGraphicSize(Std.int(table.width * 0.6));
-				table.alpha - 1;
-				table.cameras = [camOther];
-				add(table);
-
-				chair = new FlxSprite(-100, 1050).loadGraphic(Paths.image('traped/red/chair-red'));
-				chair.setGraphicSize(Std.int(chair.width * 0.6));
-				chair.alpha = 1;
-				chair.cameras = [camOther];
-				add(chair);
-
-				back = new FlxSprite(-600, 800).loadGraphic(Paths.image('traped/red/back-red'));
-				back.setGraphicSize(Std.int(back.width * 0.6));
-				back.alpha = 1;
-				back.cameras = [camOther];
-				add(back);
+				//var tables:BGSprite = new BGSprite('traped/red/tables-red', -1200, 680);
+				//tables.scale.set(1, 1);
+				//add(tables);
 
 			case 'corn': //Bambi stage
 				corn = new FlxSprite(-600, -200).loadGraphic(Paths.image('bambi/corn'));
 				corn.scale.set(1, 1);
 				add(corn);
+
+			case 'too-slow': // somncic!!!!
+			var sky:BGSprite = new BGSprite('exeHill/BGSky', -600, -200, 1, 1);
+			sky.setGraphicSize(Std.int(sky.width * 1.4));
+			add(sky);
+
+			var midTrees1:BGSprite = new BGSprite('exeHill/TreesMidBack', -600, -200, 0.7, 0.7);
+			midTrees1.setGraphicSize(Std.int(midTrees1.width * 1.4));
+			add(midTrees1);
+
+			var treesmid:BGSprite = new BGSprite('exeHill/TreesMid', -600, -200,  0.7, 0.7);
+			midTrees1.setGraphicSize(Std.int(midTrees1.width * 1.4));
+			add(treesmid);
+
+			var treesoutermid:BGSprite = new BGSprite('exeHill/TreesOuterMid1', -600, -200, 0.7, 0.7);
+			treesoutermid.setGraphicSize(Std.int(treesoutermid.width * 1.4));
+			add(treesoutermid);
+
+			var treesoutermid2:BGSprite = new BGSprite('exeHill/TreesOuterMid2', -600, -200,  0.7, 0.7);
+			treesoutermid2.setGraphicSize(Std.int(treesoutermid2.width * 1.4));
+			add(treesoutermid2);
+
+			var lefttrees:BGSprite = new BGSprite('exeHill/TreesLeft', -600, -200,  0.7, 0.7);
+			lefttrees.setGraphicSize(Std.int(lefttrees.width * 1.4));
+			add(lefttrees);
+
+			var righttrees:BGSprite = new BGSprite('exeHill/TreesRight', -600, -200, 0.7, 0.7);
+			righttrees.setGraphicSize(Std.int(righttrees.width * 1.4));
+			add(righttrees);
+
+			var outerbush:BGSprite = new BGSprite('exeHill/OuterBush', -600, -150, 1, 1);
+			outerbush.setGraphicSize(Std.int(outerbush.width * 1.4));
+			add(outerbush);
+
+			var outerbush2:BGSprite = new BGSprite('exeHill/OuterBushUp', -600, -200, 1, 1);
+			outerbush2.setGraphicSize(Std.int(outerbush2.width * 1.4));
+			add(outerbush2);
+
+			var grass:BGSprite = new BGSprite('exeHill/Grass', -600, -150, 1, 1);
+			grass.setGraphicSize(Std.int(grass.width * 1.4));
+			add(grass);
+
+			var deadegg:BGSprite = new BGSprite('exeHill/DeadEgg', -600, -200, 1, 1);
+			deadegg.setGraphicSize(Std.int(deadegg.width * 1.4));
+			add(deadegg);
+
+			var deadknux:BGSprite = new BGSprite('exeHill/DeadKnux', -600, -200, 1, 1);
+			deadknux.setGraphicSize(Std.int(deadknux.width * 1.4));
+			add(deadknux);
+
+			var deadtailz:BGSprite = new BGSprite('exeHill/DeadTailz', -700, -200, 1, 1);
+			deadtailz.setGraphicSize(Std.int(deadtailz.width * 1.4));
+			add(deadtailz);
+
+			var deadtailz1:BGSprite = new BGSprite('exeHill/DeadTailz1', -600, -200, 1, 1);
+			deadtailz1.setGraphicSize(Std.int(deadtailz1.width * 1.4));
+			add(deadtailz1);
+
+			var deadtailz2:BGSprite = new BGSprite('exeHill/DeadTailz2', -600, -400, 1, 1);
+			deadtailz2.setGraphicSize(Std.int(deadtailz2.width * 1.4));
+			add(deadtailz2);
+
+			var fgTrees = new BGSprite('exeHill/TreesFG', -610, -200, 1.1, 1.1);
+			fgTrees.setGraphicSize(Std.int(fgTrees.width * 1.45));
+			add(fgTrees);
 
 		}
 
@@ -739,6 +797,25 @@ class PlayState extends MusicBeatState
 				frontCrowd.alpha = 1;
 				frontCrowd.scale.set(1.75, 1.75);
 				add(frontCrowd);
+			//case 'red': //sprites infront of BF and Red
+				//chairback = new FlxSprite(-100, 870).loadGraphic(Paths.image('traped/red/chairback-red'));
+				//chairback.scale.set(1, 1);
+				//add(chairback);
+
+				//table = new FlxSprite(0, 820).loadGraphic(Paths.image('traped/red/table-red'));
+				//table.scale.set(1, 1);
+				//add(table);
+
+				//chair = new FlxSprite(-100, 1050).loadGraphic(Paths.image('traped/red/chair-red'));
+				//chair.scale.set(1, 1);
+				//add(chair);
+
+				//back = new FlxSprite(-600, 800);
+				//back.frames = Paths.getSparrowAtlas('traped/red/back-red');
+				//back.animation.addByPrefix('Back', 'Back0', 24, true);
+				//back.animation.play('Back');
+				//back.scale.set(0.9, 0.9);
+				//add(back);
 		}
 
 		box = new FlxSprite().makeGraphic(FlxG.width, 120, FlxColor.BLACK);

@@ -297,6 +297,15 @@
 				0,
 				253
 			]
+		],
+		[
+			"Future-Respawning-Button",
+			"miku",
+			[
+				86,
+				233,
+				253
+			]
 		]
 	],
 	"hideStoryMode": false,

@@ -73,7 +73,9 @@ import sys.io.File;
 #end
 
 #if VIDEOS_ALLOWED
-import VideoHandler;
+#if (hxCodec >= "2.6.1") import hxcodec.VideoHandler as VideoHandler;
+#elseif (hxCodec == "2.6.0") import VideoHandler as VideoHandler;
+#else import VideoHandler; #end
 #end
 
 using StringTools;

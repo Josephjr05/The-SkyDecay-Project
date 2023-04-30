@@ -1,12 +1,56 @@
 {
 	"animations": [
 		{
-			"loop": false,
 			"offsets": [
 				77,
 				18
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "singLEFT",
+			"indices": [],
+			"name": "Camellia_LeftAlt00"
+		},
+		{
+			"offsets": [
+				0,
+				76
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "Camellia_DownAlt00"
+		},
+		{
+			"offsets": [
+				58,
+				213
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "Camellia_UpAlt00"
+		},
+		{
+			"offsets": [
+				0,
+				-10
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "Camellia_RightAlt00"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				75,
+				18
+			],
+			"anim": "singLEFTmiss",
 			"fps": 24,
 			"name": "Camellia_LeftAlt00",
 			"indices": []
@@ -17,7 +61,7 @@
 				0,
 				76
 			],
-			"anim": "singDOWN",
+			"anim": "singDOWNmiss",
 			"fps": 24,
 			"name": "Camellia_DownAlt00",
 			"indices": []
@@ -28,7 +72,7 @@
 				58,
 				213
 			],
-			"anim": "singUP",
+			"anim": "singUPmiss",
 			"fps": 24,
 			"name": "Camellia_UpAlt00",
 			"indices": []
@@ -39,7 +83,7 @@
 				0,
 				-10
 			],
-			"anim": "singRIGHT",
+			"anim": "singRIGHTmiss",
 			"fps": 24,
 			"name": "Camellia_RightAlt00",
 			"indices": []
@@ -51,53 +95,9 @@
 			],
 			"loop": false,
 			"fps": 24,
-			"anim": "singLEFTmiss",
+			"anim": "idle",
 			"indices": [],
 			"name": "Camellia_LeftAlt00"
-		},
-		{
-			"offsets": [
-				0,
-				76
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singDOWNmiss",
-			"indices": [],
-			"name": "Camellia_DownAlt00"
-		},
-		{
-			"offsets": [
-				58,
-				213
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singUPmiss",
-			"indices": [],
-			"name": "Camellia_UpAlt00"
-		},
-		{
-			"offsets": [
-				0,
-				-10
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singRIGHTmiss",
-			"indices": [],
-			"name": "Camellia_RightAlt00"
-		},
-		{
-			"loop": false,
-			"offsets": [
-				75,
-				18
-			],
-			"anim": "idle",
-			"fps": 24,
-			"name": "Camellia_LeftAlt00",
-			"indices": []
 		}
 	],
 	"no_antialiasing": false,
@@ -114,8 +114,8 @@
 		86
 	],
 	"camera_position": [
-		80,
-		270
+		250,
+		60
 	],
 	"sing_duration": 6.1,
 	"scale": 0.8

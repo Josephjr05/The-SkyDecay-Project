@@ -324,6 +324,15 @@
 				0,
 				80
 			]
+		],
+		[
+			"Give-And-Take",
+			"dad",
+			[
+				126,
+				13,
+				255
+			]
 		]
 	],
 	"hideStoryMode": false,

@@ -212,17 +212,12 @@
 				]
 			],
 			[
-				99200,
+				99100,
 				[
 					[
 						"Change Character",
 						"Dad",
 						"getcha"
-					],
-					[
-						"Play Animation",
-						"laugh",
-						"Dad"
 					]
 				]
 			],
@@ -692,6 +687,16 @@
 				]
 			],
 			[
+				119200,
+				[
+					[
+						"Change Character",
+						"Dad",
+						"getcha2"
+					]
+				]
+			],
+			[
 				119300,
 				[
 					[
@@ -728,6 +733,16 @@
 						"Change Scroll Speed",
 						"1",
 						"0.1"
+					]
+				]
+			],
+			[
+				120700,
+				[
+					[
+						"Change Character",
+						"Dad",
+						"sonicexe"
 					]
 				]
 			],

@@ -51,8 +51,8 @@ class ClientPrefs {
 		'healthloss' => 1.0,
 		'instakill' => false,
 		'practice' => false,
+		'Play As Opponent' => false,
 		'botplay' => false,
-		'opponentplay' => false
 	];
 
 	public static var comboOffset:Array<Int> = [0, 0, 0, 0];
@@ -105,8 +105,8 @@ class ClientPrefs {
 		FlxG.save.data.lowQuality = lowQuality;
 		FlxG.save.data.shaders = shaders;
 		FlxG.save.data.framerate = framerate;
-		//FlxG.save.data.cursing = cursing;
-		//FlxG.save.data.violence = violence;
+		FlxG.save.data.cursing = cursing;
+		FlxG.save.data.violence = violence;
 		FlxG.save.data.camZooms = camZooms;
 		FlxG.save.data.noteOffset = noteOffset;
 		FlxG.save.data.hideHud = hideHud;
@@ -183,12 +183,12 @@ class ClientPrefs {
 				FlxG.updateFramerate = framerate;
 			}
 		}
-		/*if(FlxG.save.data.cursing != null) {
+		if(FlxG.save.data.cursing != null) {
 			cursing = FlxG.save.data.cursing;
 		}
 		if(FlxG.save.data.violence != null) {
 			violence = FlxG.save.data.violence;
-		}*/
+		}
 		if(FlxG.save.data.camZooms != null) {
 			camZooms = FlxG.save.data.camZooms;
 		}

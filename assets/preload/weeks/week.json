@@ -333,6 +333,15 @@
 				13,
 				255
 			]
+		],
+		[
+			"Gray-Heaven",
+			"camellia",
+			[
+				255,
+				155,
+				60
+			]
 		]
 	],
 	"hideStoryMode": false,

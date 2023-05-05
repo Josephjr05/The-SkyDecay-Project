@@ -1,0 +1,68 @@
+If you have this build, hey! 
+I'm going to be explaining about the mod and stuff so if you have questions, this should help.
+
+Q: What happened to "debugMode"?
+A: We took out the scripts folder for assets, mainly because of compiling time. In the future we might add it back.
+
+Q: What happened to mods folder? Is it still being used?
+A: No, we tend to preload everything so everything is stabled.
+
+Q: Can we add custom events and notetypes from before?
+A: Not at the moment. The events are now on source so they are into the build. You will have to workaround using the built in events we put in. Hopefully we can do something about Notetypes in the future. 
+
+Q: Why are there mostly covers? Isn't this a story mod you wished for?
+A: It takes time to get a team, and time is okay. Lots of songs are being reworked to be better! 
+The covers are actually part of the story! We want others to have a chance to be in a mod such as Kuroki (Who made Sendan Life, Grevious Lady, and ReviveR) whose songs can be charted and playable to the public in the 6 different difficulties.
+It will work out, trust me!
+
+Q: Why is this one stage crashing everytime i choose it?
+A: Because it isn't teased yet.
+
+Q: What do i do if the mod crashes?
+A: Your work isn't saved and whatever you did is on you. Make sure to put in the right actions. Always save before playing the chart.
+
+Q: What songs have available difficulties?
+A: (IN ORDER) NEW 5/4/2023
+   ----------
+Kisaragi: Normal, and Mania. (Normal is the same as Mania, just very off.)
+Freshr: All difficulties.
+Funk-Off: Hard.
+KillerToy: Mania.
+Flash-Me-Back: Insane.
+Luin-Of-Cletchar: Normal, and Hard. (They are both the same charts.)
+Nuclear-Star: Insane, Expert, Mania. (Expert will be finished at a later date)
++ERABY+E CONNEC+10N: Expert and Mania. (Expert will be finished at a later date)
+The-End-(Old): Normal.
+Phantasia: Normal. (Is finished. Good Job HPD!)
+Grevious-Lady: Mania.
+Test: All Difficulties. 
+Lorelei: Hard, Advanced, and Mania.
+Oshama-Scramble: Hard.
+Blammed: Normal. (Do you like the new Pico Sprites? Because i do.)
+Newsling: Hard.
+Tutorial: All Difficulties. (tazzah let me chart this song like last year, hopefully it was worth it)
+Sendan-Life-(katagiri-Bootleg): Mania. (Hardest one!!)
+Tetris-Beatbox: Normal.
+Viral-Beatbox-Remix: Normal.
+Overloaded-Memory: Normal.
+pgbs: Mania.
+LongTime, WildLife, ShiningEyes, and ReviveR don't have charts.
+Compute-It-With-Some-Devilish-Alcoholic-Steampunk-Engines: Insane.
+The-End: Normal. (Not finished)
+Duper: Hard.
+Too-Slow-Awe: Hard, and Mania. (Goodluck on Mania)
+Future-Respawning-Button: Insane, and Mania.
+Confronting-Yourself-FF-Mix, Final-Escape-FF-Mix, Give-And-Take, and Gray-Heaven don't have charts.
+
+
+Information:
+
+You can do whatever you want. There's nothing much in the mod besides the songs and many characters. If the mod crashes because of a character is chosen or something else, most likely it isn't in the mod. OR you did something wrong to an event or tried to get a character into the mod with the character editor. 
+
+AS OF 5/4/2023, MODS FOLDER IS NO LONGER IN USE!
+
+Go crazy with the charts!
+
+Also, if you want to learn how to make charts above Advanced, you should take inspiration from the charts that's currently in the build.
+
+ALSO, there's alot more than what's in the main game. Have fun! Look through the files :)

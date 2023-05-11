@@ -601,9 +601,9 @@ class PlayState extends MusicBeatState
 		dadGroup = new FlxSpriteGroup(DAD_X, DAD_Y);
 		gfGroup = new FlxSpriteGroup(GF_X, GF_Y);
 
-		//When adding a stage, for better visuals, add "[object].antialiasing = ClientPrefs.globalAntialiasing;" 
-		//So when the player turns off Antialiasing, it'll have loss pixels + performance boost. 
-		//And when it is turned on, it is the regular and better image quality for stages (depends on hardware performance).
+		/*When adding a stage, for better visuals, add "[object].antialiasing = ClientPrefs.globalAntialiasing;" 
+		So when the player turns off Antialiasing, it'll have loss pixels + performance boost. 
+		And when it is turned on, it is the regular and better image quality for stages (depends on hardware performance).*/
 
 		switch (curStage)
 		{

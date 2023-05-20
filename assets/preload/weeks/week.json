@@ -333,6 +333,15 @@
 				255,
 				75
 			]
+		],
+		[
+			"pixel-pig",
+			"bf-test",
+			[
+				66,
+				255,
+				75
+			]
 		]
 	],
 	"hideStoryMode": false,

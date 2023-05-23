@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="minus_tv.png">
+	<!-- Created with Adobe Animate version 21.0.9.42677 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="MINUS EVIL BF TV0000" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0001" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0002" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0003" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0004" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0005" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0006" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0007" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0008" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0009" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0010" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0011" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0012" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0013" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0014" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0015" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0016" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0017" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0018" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0019" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0020" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0021" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0022" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0023" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0024" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0025" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0026" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0027" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0028" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0029" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0030" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0031" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0032" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0033" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0034" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0035" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0036" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0037" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0038" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0039" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0040" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0041" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0042" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0043" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0044" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0045" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0046" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0047" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0048" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0049" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0050" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0051" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0052" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0053" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0054" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0055" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0056" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0057" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0058" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0059" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0060" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0061" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0062" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0063" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0064" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0065" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0066" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0067" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0068" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0069" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0070" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0071" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0072" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0073" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0074" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0075" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0076" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0077" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0078" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0079" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0080" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0081" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0082" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0083" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0084" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0085" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0086" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0087" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0088" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0089" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0090" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0091" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0092" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0093" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0094" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0095" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0096" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0097" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0098" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0099" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0100" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0101" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0102" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0103" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0104" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0105" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0106" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0107" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0108" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0109" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0110" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0111" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0112" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0113" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0114" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0115" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0116" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0117" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0118" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0119" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0120" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0121" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0122" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0123" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0124" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0125" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0126" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0127" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0128" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0129" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0130" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0131" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0132" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0133" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0134" x="2138" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0135" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0136" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0137" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0138" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0139" x="0" y="746" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0140" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0141" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0142" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0143" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0144" x="0" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0145" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0146" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0147" x="1069" y="0" width="1069" height="746"/>
+	<SubTexture name="MINUS EVIL BF TV0148" x="1069" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0149" x="1976" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0150" x="1976" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0151" x="1069" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0152" x="1069" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0153" x="1976" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0154" x="1976" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0155" x="1069" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0156" x="1069" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0157" x="1976" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0158" x="1976" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0159" x="1069" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0160" x="1069" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0161" x="1976" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0162" x="2883" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0163" x="2883" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0164" x="2883" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0165" x="2883" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0166" x="0" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0167" x="0" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0168" x="0" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0169" x="0" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0170" x="0" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0171" x="907" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0172" x="907" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0173" x="1069" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0174" x="1069" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0175" x="1976" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0176" x="1976" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0177" x="1069" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0178" x="1069" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0179" x="1976" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0180" x="1976" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0181" x="1069" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0182" x="1069" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0183" x="1976" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0184" x="1976" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0185" x="1814" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0186" x="1814" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0187" x="1814" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0188" x="1814" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0189" x="2721" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0190" x="2721" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0191" x="2721" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0192" x="2721" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0193" x="2721" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0194" x="0" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0195" x="0" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0196" x="0" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0197" x="0" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0198" x="0" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0199" x="907" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0200" x="907" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0201" x="907" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0202" x="907" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0203" x="907" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0204" x="1814" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0205" x="1814" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0206" x="1814" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0207" x="1814" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0208" x="1814" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0209" x="2721" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0210" x="2721" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0211" x="2721" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0212" x="2721" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0213" x="2721" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0214" x="0" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0215" x="0" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0216" x="0" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0217" x="0" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0218" x="0" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0219" x="907" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0220" x="907" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0221" x="907" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0222" x="907" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0223" x="907" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0224" x="1814" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0225" x="1814" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0226" x="1814" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0227" x="1814" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0228" x="1814" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0229" x="2721" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0230" x="2721" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0231" x="2721" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0232" x="2721" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0233" x="2721" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0234" x="0" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0235" x="0" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0236" x="0" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0237" x="0" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0238" x="0" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0239" x="907" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0240" x="907" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0241" x="907" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0242" x="907" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0243" x="907" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0244" x="1814" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0245" x="1814" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0246" x="1814" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0247" x="1814" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0248" x="1814" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0249" x="2721" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0250" x="2721" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0251" x="2721" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0252" x="2721" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0253" x="2721" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0254" x="0" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0255" x="0" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0256" x="0" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0257" x="0" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0258" x="0" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0259" x="907" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0260" x="907" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0261" x="907" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0262" x="907" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0263" x="907" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0264" x="1814" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0265" x="1814" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0266" x="1814" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0267" x="1814" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0268" x="1814" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0269" x="2721" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0270" x="2721" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0271" x="2721" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0272" x="2721" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0273" x="2721" y="1492" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0274" x="0" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0275" x="0" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0276" x="0" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0277" x="0" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0278" x="0" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0279" x="907" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0280" x="1976" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0281" x="1069" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0282" x="1069" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0283" x="1976" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0284" x="1976" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0285" x="1069" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0286" x="1069" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0287" x="1976" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0288" x="1976" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0289" x="1814" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0290" x="1814" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0291" x="1814" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0292" x="2721" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0293" x="2721" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0294" x="2721" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0295" x="1976" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0296" x="1976" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0297" x="1069" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0298" x="1069" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0299" x="1976" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0300" x="1976" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0301" x="2721" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0302" x="2721" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0303" x="2721" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0304" x="2721" y="2076" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0305" x="0" y="2660" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0306" x="1069" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0307" x="1976" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0308" x="1976" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0309" x="1069" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0310" x="1069" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0311" x="1976" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0312" x="1976" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0313" x="1069" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0314" x="1069" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+	<SubTexture name="MINUS EVIL BF TV0315" x="1976" y="746" width="907" height="584" frameX="-79" frameY="-79" frameWidth="1069" frameHeight="746"/>
+</TextureAtlas>

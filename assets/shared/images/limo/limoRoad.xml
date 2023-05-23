@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="limoRoad.png">
+<SubTexture name="COOLROAD0000" x="0" y="0" width="2347" height="342" frameX="-7" frameY="-425" frameWidth="2396" frameHeight="848" />
+<SubTexture name="COOLROAD0001" x="0" y="342" width="2345" height="342" frameX="-9" frameY="-425" frameWidth="2396" frameHeight="848" />
+<SubTexture name="COOLROAD0002" x="2347" y="0" width="2354" height="342" frameX="0" frameY="-425" frameWidth="2396" frameHeight="848" />
+<SubTexture name="COOLROAD0003" x="2347" y="342" width="2345" height="342" frameX="-9" frameY="-425" frameWidth="2396" frameHeight="848" />
+</TextureAtlas>

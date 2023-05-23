@@ -126,7 +126,7 @@ class Paths
 
 		if (currentLevel != null)
 		{
-			var levelPath:String = '';
+			var levelPath:String = 'stages';
 			if(currentLevel != 'shared') {
 				levelPath = getLibraryPathForce(file, currentLevel);
 				if (OpenFlAssets.exists(levelPath, type))

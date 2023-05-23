@@ -424,6 +424,26 @@ class PlayState extends MusicBeatState
 	var wall:FlxSprite;
 	var floor:FlxSprite;
 
+	//construction week 8
+	var construction:FlxSprite;
+
+	//Limo HD shit
+	var skyBG:FlxSprite;
+	var fReturn:String;
+	var lamp:FlxSprite;
+	var hitbox:FlxSprite;
+	var dodgelamp:FlxSprite;
+	var dodgepole:FlxSprite;
+	var pole:FlxSprite;
+	var dancers:BackgroundDancer;
+	var overlay:FlxSprite;
+	var datebg:FlxSprite;
+	var isHalloween:Bool = false;
+	var overlaySpook:FlxSprite;
+	var tiddies:FlxSprite;
+	public static var timerStop:Bool = false;
+	public static var poleTimer:FlxTimer;
+
 	override public function create()
 	{
 		//trace('Playback Rate: ' + playbackRate);
@@ -689,26 +709,26 @@ class PlayState extends MusicBeatState
 				stage.antialiasing = ClientPrefs.globalAntialiasing;
 				add(stage);
 
-			case 'stage': //Chapter 1
-				var bg:BGSprite = new BGSprite('stageback', -600, -200, 0.9, 0.9);
+			case 'theater': //Chapter 1
+				var bg:BGSprite = new BGSprite('theater/stageback', -600, -200, 0.9, 0.9);
 				add(bg);
 
-				var stageFront:BGSprite = new BGSprite('stagefront', -650, 600, 0.9, 0.9);
+				var stageFront:BGSprite = new BGSprite('theater/stagefront', -650, 600, 0.9, 0.9);
 				stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
 				stageFront.updateHitbox();
 				add(stageFront);
 				if(!ClientPrefs.lowQuality) {
-					var stageLight:BGSprite = new BGSprite('stage_light', -125, -100, 0.9, 0.9);
+					var stageLight:BGSprite = new BGSprite('theater/stage_light', -125, -100, 0.9, 0.9);
 					stageLight.setGraphicSize(Std.int(stageLight.width * 1.1));
 					stageLight.updateHitbox();
 					add(stageLight);
-					var stageLight:BGSprite = new BGSprite('stage_light', 1225, -100, 0.9, 0.9);
+					var stageLight:BGSprite = new BGSprite('theater/stage_light', 1225, -100, 0.9, 0.9);
 					stageLight.setGraphicSize(Std.int(stageLight.width * 1.1));
 					stageLight.updateHitbox();
 					stageLight.flipX = true;
 					add(stageLight);
 
-					var stageCurtains:BGSprite = new BGSprite('stagecurtains', -500, -300, 1.3, 1.3);
+					var stageCurtains:BGSprite = new BGSprite('theater/stagecurtains', -500, -300, 1.3, 1.3);
 					stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
 					stageCurtains.updateHitbox();
 					add(stageCurtains);
@@ -834,6 +854,26 @@ class PlayState extends MusicBeatState
 			fgTrees.setGraphicSize(Std.int(fgTrees.width * 1.45));
 			fgTrees.antialiasing = ClientPrefs.globalAntialiasing;
 			add(fgTrees);
+
+			case 'construction': //Week 8 leak wtf!!
+			construction = new FlxSprite(-751, -618).loadGraphic(Paths.image('construction/construction'));
+			construction.scale.set(0.7, 0.7);
+			add(construction);
+
+			case 'abandoned': //Week 3 abandoned
+			var bg:BGSprite = new BGSprite('abandoned-philly/sky', -100, 0, 0.1, 0.1);
+			add(bg);
+
+			var city:BGSprite = new BGSprite('abandoned-philly/city', -10, 0, 0.3, 0.3);
+			city.setGraphicSize(Std.int(city.width * 0.85));
+			city.updateHitbox();
+			add(city);
+
+			var streetBehind:BGSprite = new BGSprite('abandoned-philly/behindTrain', -40, 50);
+			add(streetBehind);
+
+			phillyStreet = new BGSprite('abandoned-philly/street', -40, 50);
+			add(phillyStreet);
 
 		}
 

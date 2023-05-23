@@ -2,8 +2,8 @@
 	"animations": [
 		{
 			"offsets": [
-				-89,
-				-11
+				-49,
+				-12
 			],
 			"loop": false,
 			"anim": "singRIGHT",
@@ -36,23 +36,12 @@
 		{
 			"loop": false,
 			"offsets": [
-				33,
-				103
+				182,
+				25
 			],
 			"anim": "Shoot",
 			"fps": 24,
 			"name": "Shoot0",
-			"indices": []
-		},
-		{
-			"loop": false,
-			"offsets": [
-				18,
-				34
-			],
-			"anim": "reload",
-			"fps": 24,
-			"name": "Reload0",
 			"indices": []
 		},
 		{
@@ -68,8 +57,8 @@
 		},
 		{
 			"offsets": [
-				-55,
-				-20
+				19,
+				-18
 			],
 			"loop": false,
 			"fps": 24,
@@ -79,8 +68,8 @@
 		},
 		{
 			"offsets": [
-				-30,
-				-85
+				-20,
+				-70
 			],
 			"loop": false,
 			"fps": 24,
@@ -90,8 +79,8 @@
 		},
 		{
 			"offsets": [
-				-63,
-				-12
+				47,
+				-13
 			],
 			"loop": false,
 			"fps": 24,
@@ -101,7 +90,7 @@
 		},
 		{
 			"offsets": [
-				-30,
+				60,
 				20
 			],
 			"loop": false,
@@ -112,8 +101,8 @@
 		},
 		{
 			"offsets": [
-				-14,
-				0
+				-17,
+				2
 			],
 			"loop": false,
 			"fps": 24,
@@ -123,8 +112,8 @@
 		},
 		{
 			"offsets": [
-				7,
-				11
+				-2,
+				6
 			],
 			"loop": false,
 			"fps": 24,
@@ -134,14 +123,69 @@
 		},
 		{
 			"offsets": [
-				10,
-				-90
+				60,
+				-70
 			],
-			"indices": [],
+			"loop": false,
 			"fps": 24,
 			"anim": "dodge",
-			"loop": false,
+			"indices": [],
 			"name": "PicoDodging0"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				151,
+				-20
+			],
+			"anim": "hey",
+			"fps": 24,
+			"name": "Pico Hey!0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				180,
+				103
+			],
+			"anim": "picoweapons",
+			"fps": 24,
+			"name": "Picotwoweapons0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				3,
+				80
+			],
+			"anim": "Shoot-down",
+			"fps": 24,
+			"name": "Pico Shootin0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-60,
+				63
+			],
+			"anim": "Shoot-up",
+			"fps": 24,
+			"name": "Pico Shootin Bus0",
+			"indices": []
+		},
+		{
+			"offsets": [
+				60,
+				-70
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "dodge-alt",
+			"indices": [],
+			"name": "PicoDodging-alt0"
 		}
 	],
 	"no_antialiasing": false,

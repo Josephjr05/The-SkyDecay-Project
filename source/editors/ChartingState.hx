@@ -240,7 +240,7 @@ class ChartingState extends MusicBeatState
 				player2: 'dad',
 				gfVersion: 'gf',
 				speed: 1,
-				stage: 'theater',
+				stage: 'stage',
 				validScore: false
 			};
 			addSection();

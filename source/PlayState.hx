@@ -427,22 +427,10 @@ class PlayState extends MusicBeatState
 	//construction week 8
 	var construction:FlxSprite;
 
-	//Limo HD shit
-	var skyBG:FlxSprite;
-	var fReturn:String;
-	var lamp:FlxSprite;
-	var hitbox:FlxSprite;
-	var dodgelamp:FlxSprite;
-	var dodgepole:FlxSprite;
-	var pole:FlxSprite;
-	var dancers:BackgroundDancer;
-	var overlay:FlxSprite;
-	var datebg:FlxSprite;
-	var isHalloween:Bool = false;
-	var overlaySpook:FlxSprite;
-	var tiddies:FlxSprite;
-	public static var timerStop:Bool = false;
-	public static var poleTimer:FlxTimer;
+	//Kapi shit NOOOO
+	var stagebackold:FlxSprite;
+	var stagefrontold:FlxSprite;
+	var lightblink:FlxSprite;
 
 	override public function create()
 	{
@@ -623,55 +611,57 @@ class PlayState extends MusicBeatState
 
 		/*When adding a stage, for better visuals, add "[object].antialiasing = ClientPrefs.globalAntialiasing;" 
 		So when the player turns off Antialiasing, it'll have loss pixels + performance boost. 
-		And when it is turned on, it is the regular and better image quality for stages (depends on hardware performance).*/
+		And when it is turned on, it is the regular and better image quality for stages (depends on hardware performance).
+
+		Also when adding a stage, it is now organized into "stages" folder so do add 'stages/' before the destination of the png.*/
 
 		switch (curStage)
 		{
 			case 'concert':
-				sky = new FlxSprite(60, 40).loadGraphic(Paths.image('camellia/Week2/sky'));
+				sky = new FlxSprite(60, 40).loadGraphic(Paths.image('stages/camellia/Week2/sky'));
 				sky.scale.set(1.75, 1.75);
 				sky.antialiasing = ClientPrefs.globalAntialiasing;
 				add(sky);
 
-				farbuildings = new FlxSprite(60, 40).loadGraphic(Paths.image('camellia/Week2/farBuildings'));
+				farbuildings = new FlxSprite(60, 40).loadGraphic(Paths.image('stages/camellia/Week2/farbuildings'));
 				farbuildings.scale.set(1.75, 1.75);
 				farbuildings.antialiasing = ClientPrefs.globalAntialiasing;
 				add(farbuildings);
 
-				buildings = new FlxSprite(60, 40).loadGraphic(Paths.image('camellia/Week2/buildings'));
+				buildings = new FlxSprite(60, 40).loadGraphic(Paths.image('stages/camellia/Week2/buildings'));
 				buildings.scale.set(1.75, 1.75);
 				buildings.antialiasing = ClientPrefs.globalAntialiasing;
 				add(buildings);
 
-				light = new FlxSprite(60, 40).loadGraphic(Paths.image('camellia/Week2/light'));
+				light = new FlxSprite(60, 40).loadGraphic(Paths.image('stages/camellia/Week2/light'));
 				light.scale.set(1.75, 1.75);
 				light.antialiasing = ClientPrefs.globalAntialiasing;
 				add(light);
 
-				backCrowd = new FlxSprite(60, 590).loadGraphic(Paths.image('camellia/Week2/backcrowd'));
+				backCrowd = new FlxSprite(60, 590).loadGraphic(Paths.image('stages/camellia/Week2/backcrowd'));
 				backCrowd.scale.set(1.75, 1.75);
 				backCrowd.antialiasing = ClientPrefs.globalAntialiasing;
 				add(backCrowd);
 				
-				star = new FlxSprite(900, 2270).loadGraphic(Paths.image('camellia/Week2/ninestars'));
+				star = new FlxSprite(900, 2270).loadGraphic(Paths.image('stages/camellia/Week2/ninestars'));
 				star.scale.set(2.5, 2.5);
 				star.antialiasing = ClientPrefs.globalAntialiasing;
 				add(star);
 
-				stage = new FlxSprite(-950, -505).loadGraphic(Paths.image('camellia/Week2/stage'));
+				stage = new FlxSprite(-950, -505).loadGraphic(Paths.image('stages/camellia/Week2/stage'));
 				stage.scale.set(0.85, 0.85);
 				stage.antialiasing = ClientPrefs.globalAntialiasing;
 				add(stage);
 
 				speakerLeft = new FlxSprite(-150, 150);
-				speakerLeft.frames = Paths.getSparrowAtlas('camellia/Week2/speaker_left');
+				speakerLeft.frames = Paths.getSparrowAtlas('stages/camellia/Week2/speaker_left');
 				speakerLeft.animation.addByPrefix('bop', 'speaker', 24, false);
 				speakerLeft.scale.set(0.75, 0.75);
 				speakerLeft.antialiasing = ClientPrefs.globalAntialiasing;
 				add(speakerLeft);
 
 				speakerRight = new FlxSprite(1530, 150);
-				speakerRight.frames = Paths.getSparrowAtlas('camellia/Week2/speaker_left');
+				speakerRight.frames = Paths.getSparrowAtlas('stages/camellia/Week2/speaker_left');
 				speakerRight.animation.addByPrefix('bop', 'speaker', 24, false);
 				speakerRight.flipX = true;
 				speakerRight.scale.set(0.75, 0.75);
@@ -679,14 +669,14 @@ class PlayState extends MusicBeatState
 				add(speakerRight);
 
 				speakerLeft2 = new FlxSprite(140, 250);
-				speakerLeft2.frames = Paths.getSparrowAtlas('camellia/Week2/speaker_left');
+				speakerLeft2.frames = Paths.getSparrowAtlas('stages/camellia/Week2/speaker_left');
 				speakerLeft2.animation.addByPrefix('bop', 'speaker', 24, false);
 				speakerLeft2.scale.set(0.5, 0.5);
 				speakerLeft2.antialiasing = ClientPrefs.globalAntialiasing;
 				add(speakerLeft2);
 
 				speakerRight2 = new FlxSprite(1260, 250);
-				speakerRight2.frames = Paths.getSparrowAtlas('camellia/Week2/speaker_left');
+				speakerRight2.frames = Paths.getSparrowAtlas('stages/camellia/Week2/speaker_left');
 				speakerRight2.animation.addByPrefix('bop', 'speaker', 24, false);
 				speakerRight2.flipX = true;
 				speakerRight2.scale.set(0.5, 0.5);
@@ -694,41 +684,41 @@ class PlayState extends MusicBeatState
 				add(speakerRight2);
 
 			case 'camellia': //easy
-				city = new FlxSprite(-750, -450).loadGraphic(Paths.image('camellia/Week1/BG_CITY'));
+				city = new FlxSprite(-750, -450).loadGraphic(Paths.image('stages/camellia/Week1/BG_CITY'));
 				city.scale.set(1.55, 1.55);
 				city.antialiasing = ClientPrefs.globalAntialiasing;
 				add(city);
 
-				wall = new FlxSprite(-750, -450).loadGraphic(Paths.image('camellia/Week1/BG_WALL'));
+				wall = new FlxSprite(-750, -450).loadGraphic(Paths.image('stages/camellia/Week1/BG_WALL'));
 				wall.scale.set(1.55, 1.55);
 				wall.antialiasing = ClientPrefs.globalAntialiasing;
 				add(wall);
 
-				stage = new FlxSprite(-750, -450).loadGraphic(Paths.image('camellia/Week1/FG_Floor'));
+				stage = new FlxSprite(-750, -450).loadGraphic(Paths.image('stages/camellia/Week1/FG_Floor'));
 				stage.scale.set(1.55, 1.55);
 				stage.antialiasing = ClientPrefs.globalAntialiasing;
 				add(stage);
 
-			case 'theater': //Chapter 1
-				var bg:BGSprite = new BGSprite('theater/stageback', -600, -200, 0.9, 0.9);
+			case 'stage': //Chapter 1
+				var bg:BGSprite = new BGSprite('stages/theater/stage/stageback', -600, -200, 0.9, 0.9);
 				add(bg);
 
-				var stageFront:BGSprite = new BGSprite('theater/stagefront', -650, 600, 0.9, 0.9);
+				var stageFront:BGSprite = new BGSprite('stages/theater/stage/stagefront', -650, 600, 0.9, 0.9);
 				stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
 				stageFront.updateHitbox();
 				add(stageFront);
 				if(!ClientPrefs.lowQuality) {
-					var stageLight:BGSprite = new BGSprite('theater/stage_light', -125, -100, 0.9, 0.9);
+					var stageLight:BGSprite = new BGSprite('stages/theater/stage/stage_light', -125, -100, 0.9, 0.9);
 					stageLight.setGraphicSize(Std.int(stageLight.width * 1.1));
 					stageLight.updateHitbox();
 					add(stageLight);
-					var stageLight:BGSprite = new BGSprite('theater/stage_light', 1225, -100, 0.9, 0.9);
+					var stageLight:BGSprite = new BGSprite('stages/theater/stage/stage_light', 1225, -100, 0.9, 0.9);
 					stageLight.setGraphicSize(Std.int(stageLight.width * 1.1));
 					stageLight.updateHitbox();
 					stageLight.flipX = true;
 					add(stageLight);
 
-					var stageCurtains:BGSprite = new BGSprite('theater/stagecurtains', -500, -300, 1.3, 1.3);
+					var stageCurtains:BGSprite = new BGSprite('stages/theater/stage/stagecurtains', -500, -300, 1.3, 1.3);
 					stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
 					stageCurtains.updateHitbox();
 					add(stageCurtains);
@@ -736,144 +726,166 @@ class PlayState extends MusicBeatState
 				dadbattleSmokes = new FlxSpriteGroup(); //troll'd
 
 			case 'cuajak': //Kubaxon stage (Coded by Josephjr05, i got trashy skills hehe noobie skills)
-				cujbg = new FlxSprite(200, 100).loadGraphic(Paths.image('cuajak/cujbg'));
+				cujbg = new FlxSprite(200, 100).loadGraphic(Paths.image('stages/cuajak/cujbg'));
 				cujbg.scale.set(1, 1);
 				cujbg.antialiasing = ClientPrefs.globalAntialiasing;
 				add(cujbg);
 
-				cujback = new FlxSprite(200, 330).loadGraphic(Paths.image('cuajak/cujback'));
+				cujback = new FlxSprite(200, 330).loadGraphic(Paths.image('stages/cuajak/cujback'));
 				cujback.scale.set(1, 1);
 				cujback.antialiasing = ClientPrefs.globalAntialiasing;
 				add(cujback);
 
 			case 'traped': //traped collab stage
-				bg = new FlxSprite(-700, 0).loadGraphic(Paths.image('traped/traped/bg-traped'));
+				bg = new FlxSprite(-700, 0).loadGraphic(Paths.image('stages/traped/traped/bg-traped'));
 				bg.scale.set(1, 1);
 				bg.antialiasing = ClientPrefs.globalAntialiasing;
 				add(bg);
 
-				beds = new FlxSprite(-800, 700).loadGraphic(Paths.image('traped/traped/beds-traped'));
+				beds = new FlxSprite(-800, 700).loadGraphic(Paths.image('stages/traped/traped/beds-traped'));
 				beds.scale.set(1,1);
 				beds.antialiasing = ClientPrefs.globalAntialiasing;
 				add(beds);
 			
 			/*case 'red': //traped red
-				var bgred:BGSprite = new BGSprite('traped/red/bg-red', -1900, 0);
+				var bgred:BGSprite = new BGSprite('stages/traped/red/bg-red', -1900, 0);
 				bgred.scale.set(1, 1);
 				bgred.antialiasing = ClientPrefs.globalAntialiasing;
 				add(bgred);
 
-				var tables:BGSprite = new BGSprite('traped/red/tables-red', -1200, 680);
+				var tables:BGSprite = new BGSprite('stages/traped/red/tables-red', -1200, 680);
 				tables.scale.set(1, 1);
 				tables.antialiasing = ClientPrefs.globalAntialiasing;
 				add(tables);*/
 
 			case 'corn': //Bambi stage
-				corn = new FlxSprite(-600, -200).loadGraphic(Paths.image('bambi/corn'));
+				corn = new FlxSprite(-600, -200).loadGraphic(Paths.image('stages/bambi/corn'));
 				corn.scale.set(1, 1);
 				corn.antialiasing = ClientPrefs.globalAntialiasing;
 				add(corn);
 
 			case 'too-slow': // somncic!!!! (Directly from EXE 2.5 code)
-			var sky:BGSprite = new BGSprite('exeHill/BGSky', -600, -200, 1, 1);
-			sky.setGraphicSize(Std.int(sky.width * 1.4));
-			sky.antialiasing = ClientPrefs.globalAntialiasing;
-			add(sky);
+				var sky:BGSprite = new BGSprite('stages/exeHill/BGSky', -600, -200, 1, 1);
+				sky.setGraphicSize(Std.int(sky.width * 1.4));
+				sky.antialiasing = ClientPrefs.globalAntialiasing;
+				add(sky);
 
-			var midTrees1:BGSprite = new BGSprite('exeHill/TreesMidBack', -600, -200, 0.7, 0.7);
-			midTrees1.setGraphicSize(Std.int(midTrees1.width * 1.4));
-			midTrees1.antialiasing = ClientPrefs.globalAntialiasing;
-			add(midTrees1);
+				var midTrees1:BGSprite = new BGSprite('stages/exeHill/TreesMidBack', -600, -200, 0.7, 0.7);
+				midTrees1.setGraphicSize(Std.int(midTrees1.width * 1.4));
+				midTrees1.antialiasing = ClientPrefs.globalAntialiasing;
+				add(midTrees1);
 
-			var treesmid:BGSprite = new BGSprite('exeHill/TreesMid', -600, -200,  0.7, 0.7);
-			treesmid.setGraphicSize(Std.int(treesmid.width * 1.4));
-			treesmid.antialiasing = ClientPrefs.globalAntialiasing;
-			add(treesmid);
+				var treesmid:BGSprite = new BGSprite('stages/exeHill/TreesMid', -600, -200,  0.7, 0.7);
+				treesmid.setGraphicSize(Std.int(treesmid.width * 1.4));
+				treesmid.antialiasing = ClientPrefs.globalAntialiasing;
+				add(treesmid);
 
-			var treesoutermid:BGSprite = new BGSprite('exeHill/TreesOuterMid1', -600, -200, 0.7, 0.7);
-			treesoutermid.setGraphicSize(Std.int(treesoutermid.width * 1.4));
-			treesoutermid.antialiasing = ClientPrefs.globalAntialiasing;
-			add(treesoutermid);
+				var treesoutermid:BGSprite = new BGSprite('stages/exeHill/TreesOuterMid1', -600, -200, 0.7, 0.7);
+				treesoutermid.setGraphicSize(Std.int(treesoutermid.width * 1.4));
+				treesoutermid.antialiasing = ClientPrefs.globalAntialiasing;
+				add(treesoutermid);
 
-			var treesoutermid2:BGSprite = new BGSprite('exeHill/TreesOuterMid2', -600, -200,  0.7, 0.7);
-			treesoutermid2.setGraphicSize(Std.int(treesoutermid2.width * 1.4));
-			treesoutermid2.antialiasing = ClientPrefs.globalAntialiasing;
-			add(treesoutermid2);
+				var treesoutermid2:BGSprite = new BGSprite('stages/exeHill/TreesOuterMid2', -600, -200,  0.7, 0.7);
+				treesoutermid2.setGraphicSize(Std.int(treesoutermid2.width * 1.4));
+				treesoutermid2.antialiasing = ClientPrefs.globalAntialiasing;
+				add(treesoutermid2);
 
-			var lefttrees:BGSprite = new BGSprite('exeHill/TreesLeft', -600, -200,  0.7, 0.7);
-			lefttrees.setGraphicSize(Std.int(lefttrees.width * 1.4));
-			lefttrees.antialiasing = ClientPrefs.globalAntialiasing;
-			add(lefttrees);
+				var lefttrees:BGSprite = new BGSprite('stages/exeHill/TreesLeft', -600, -200,  0.7, 0.7);
+				lefttrees.setGraphicSize(Std.int(lefttrees.width * 1.4));
+				lefttrees.antialiasing = ClientPrefs.globalAntialiasing;
+				add(lefttrees);
 
-			var righttrees:BGSprite = new BGSprite('exeHill/TreesRight', -600, -200, 0.7, 0.7);
-			righttrees.setGraphicSize(Std.int(righttrees.width * 1.4));
-			righttrees.antialiasing = ClientPrefs.globalAntialiasing;
-			add(righttrees);
+				var righttrees:BGSprite = new BGSprite('stages/exeHill/TreesRight', -600, -200, 0.7, 0.7);
+				righttrees.setGraphicSize(Std.int(righttrees.width * 1.4));
+				righttrees.antialiasing = ClientPrefs.globalAntialiasing;
+				add(righttrees);
 
-			var outerbush:BGSprite = new BGSprite('exeHill/OuterBush', -600, -150, 1, 1);
-			outerbush.setGraphicSize(Std.int(outerbush.width * 1.4));
-			outerbush.antialiasing = ClientPrefs.globalAntialiasing;
-			add(outerbush);
+				var outerbush:BGSprite = new BGSprite('stages/exeHill/OuterBush', -600, -150, 1, 1);
+				outerbush.setGraphicSize(Std.int(outerbush.width * 1.4));
+				outerbush.antialiasing = ClientPrefs.globalAntialiasing;
+				add(outerbush);
 
-			var outerbush2:BGSprite = new BGSprite('exeHill/OuterBushUp', -600, -200, 1, 1);
-			outerbush2.setGraphicSize(Std.int(outerbush2.width * 1.4));
-			outerbush2.antialiasing = ClientPrefs.globalAntialiasing;
-			add(outerbush2);
+				var outerbush2:BGSprite = new BGSprite('stages/exeHill/OuterBushUp', -600, -200, 1, 1);
+				outerbush2.setGraphicSize(Std.int(outerbush2.width * 1.4));
+				outerbush2.antialiasing = ClientPrefs.globalAntialiasing;
+				add(outerbush2);
 
-			var grass:BGSprite = new BGSprite('exeHill/Grass', -600, -150, 1, 1);
-			grass.setGraphicSize(Std.int(grass.width * 1.4));
-			grass.antialiasing = ClientPrefs.globalAntialiasing;
-			add(grass);
+				var grass:BGSprite = new BGSprite('stages/exeHill/Grass', -600, -150, 1, 1);
+				grass.setGraphicSize(Std.int(grass.width * 1.4));
+				grass.antialiasing = ClientPrefs.globalAntialiasing;
+				add(grass);
 
-			var deadegg:BGSprite = new BGSprite('exeHill/DeadEgg', -600, -200, 1, 1);
-			deadegg.setGraphicSize(Std.int(deadegg.width * 1.4));
-			deadegg.antialiasing = ClientPrefs.globalAntialiasing;
-			add(deadegg);
+				var deadegg:BGSprite = new BGSprite('stages/exeHill/DeadEgg', -600, -200, 1, 1);
+				deadegg.setGraphicSize(Std.int(deadegg.width * 1.4));
+				deadegg.antialiasing = ClientPrefs.globalAntialiasing;
+				add(deadegg);
 
-			var deadknux:BGSprite = new BGSprite('exeHill/DeadKnux', -600, -200, 1, 1);
-			deadknux.setGraphicSize(Std.int(deadknux.width * 1.4));
-			deadknux.antialiasing = ClientPrefs.globalAntialiasing;
-			add(deadknux);
+				var deadknux:BGSprite = new BGSprite('stages/exeHill/DeadKnux', -600, -200, 1, 1);
+				deadknux.setGraphicSize(Std.int(deadknux.width * 1.4));
+				deadknux.antialiasing = ClientPrefs.globalAntialiasing;
+				add(deadknux);
 
-			var deadtailz:BGSprite = new BGSprite('exeHill/DeadTailz', -700, -200, 1, 1);
-			deadtailz.setGraphicSize(Std.int(deadtailz.width * 1.4));
-			deadtailz.antialiasing = ClientPrefs.globalAntialiasing;
-			add(deadtailz);
+				var deadtailz:BGSprite = new BGSprite('stages/exeHill/DeadTailz', -700, -200, 1, 1);
+				deadtailz.setGraphicSize(Std.int(deadtailz.width * 1.4));
+				deadtailz.antialiasing = ClientPrefs.globalAntialiasing;
+				add(deadtailz);
 
-			var deadtailz1:BGSprite = new BGSprite('exeHill/DeadTailz1', -600, -200, 1, 1);
-			deadtailz1.setGraphicSize(Std.int(deadtailz1.width * 1.4));
-			deadtailz1.antialiasing = ClientPrefs.globalAntialiasing;
-			add(deadtailz1);
+				var deadtailz1:BGSprite = new BGSprite('stages/exeHill/DeadTailz1', -600, -200, 1, 1);
+				deadtailz1.setGraphicSize(Std.int(deadtailz1.width * 1.4));
+				deadtailz1.antialiasing = ClientPrefs.globalAntialiasing;
+				add(deadtailz1);
 
-			var deadtailz2:BGSprite = new BGSprite('exeHill/DeadTailz2', -600, -400, 1, 1);
-			deadtailz2.setGraphicSize(Std.int(deadtailz2.width * 1.4));
-			deadtailz2.antialiasing = ClientPrefs.globalAntialiasing;
-			add(deadtailz2);
+				var deadtailz2:BGSprite = new BGSprite('stages/exeHill/DeadTailz2', -600, -400, 1, 1);
+				deadtailz2.setGraphicSize(Std.int(deadtailz2.width * 1.4));
+				deadtailz2.antialiasing = ClientPrefs.globalAntialiasing;
+				add(deadtailz2);
 
-			var fgTrees = new BGSprite('exeHill/TreesFG', -610, -200, 1.1, 1.1);
-			fgTrees.setGraphicSize(Std.int(fgTrees.width * 1.45));
-			fgTrees.antialiasing = ClientPrefs.globalAntialiasing;
-			add(fgTrees);
+				var fgTrees = new BGSprite('stages/exeHill/TreesFG', -610, -200, 1.1, 1.1);
+				fgTrees.setGraphicSize(Std.int(fgTrees.width * 1.45));
+				fgTrees.antialiasing = ClientPrefs.globalAntialiasing;
+				add(fgTrees);
 
 			case 'construction': //Week 8 leak wtf!!
-			construction = new FlxSprite(-751, -618).loadGraphic(Paths.image('construction/construction'));
-			construction.scale.set(0.7, 0.7);
-			add(construction);
+				construction = new FlxSprite(-751, -618).loadGraphic(Paths.image('stages/construction/construction'));
+				construction.scale.set(1, 1);
+				construction.antialiasing = ClientPrefs.globalAntialiasing;
+				add(construction);
 
-			case 'abandoned': //Week 3 abandoned
-			var bg:BGSprite = new BGSprite('abandoned-philly/sky', -100, 0, 0.1, 0.1);
-			add(bg);
+			case 'abandonedPhilly': //Week 3 abandoned
+				var bg:BGSprite = new BGSprite('stages/abandonedPhilly/sky', -100, 0, 0.1, 0.1);
+				bg.antialiasing = ClientPrefs.globalAntialiasing;
+				add(bg);
 
-			var city:BGSprite = new BGSprite('abandoned-philly/city', -10, 0, 0.3, 0.3);
-			city.setGraphicSize(Std.int(city.width * 0.85));
-			city.updateHitbox();
-			add(city);
+				var city:BGSprite = new BGSprite('stages/abandonedPhilly/city', -10, 0, 0.3, 0.3);
+				city.setGraphicSize(Std.int(city.width * 0.85));
+				city.antialiasing = ClientPrefs.globalAntialiasing;
+				add(city);
 
-			var streetBehind:BGSprite = new BGSprite('abandoned-philly/behindTrain', -40, 50);
-			add(streetBehind);
+				var streetBehind:BGSprite = new BGSprite('stages/abandonedPhilly/behindTrain', -40, 50);
+				streetBehind.antialiasing = ClientPrefs.globalAntialiasing;
+				add(streetBehind);
 
-			phillyStreet = new BGSprite('abandoned-philly/street', -40, 50);
-			add(phillyStreet);
+				var phillyStreet:BGSprite = new BGSprite('stages/abandonedPhilly/street', -40, 50);
+				phillyStreet.antialiasing = ClientPrefs.globalAntialiasing;
+				add(phillyStreet);
+
+			case 'kapiDayOld': //Kapi time
+				stagebackold = new FlxSprite(-600, -300).loadGraphic(Paths.image('stages/arcadeShowdown/kapiOld/stagebackkapiold'));
+				stagebackold.scrollFactor.set(0.9, 0.9);
+				stagebackold.antialiasing = ClientPrefs.globalAntialiasing;
+				add(stagebackold);
+
+				stagefrontold = new FlxSprite(-650, 600).loadGraphic(Paths.image('stages/arcadeShowdown/kapiOld/stagefrontkapiold'));
+				stagefrontold.scale.set(1.1, 1.1);
+				stagefrontold.antialiasing = ClientPrefs.globalAntialiasing;
+				add(stagefrontold);
+
+				lightblink = new FlxSprite(-600, -300);
+				lightblink.frames = Paths.getSparrowAtlas('stages/arcadeShowdown/kapiOld/');
+				lightblink.animation.addByPrefix('lightBlink', 'dance', 3, true);
+				lightblink.scrollFactor.set(0.9, 0.9);
+				lightblink.antialiasing = ClientPrefs.globalAntialiasing;
+				add(lightblink);
 
 		}
 
@@ -909,7 +921,7 @@ class PlayState extends MusicBeatState
 			case 'camellia':
 				//you really thought, imagine
 			case 'concert':
-				frontCrowd = new FlxSprite(60, 1000).loadGraphic(Paths.image('camellia/Week2/frontcrowd'));
+				frontCrowd = new FlxSprite(60, 1000).loadGraphic(Paths.image('stages/camellia/Week2/frontcrowd'));
 				frontCrowd.alpha = 0;
 				frontCrowd.scale.set(1.75, 1.75);
 				frontCrowd.antialiasing = ClientPrefs.globalAntialiasing;
@@ -1467,9 +1479,9 @@ class PlayState extends MusicBeatState
 		CustomFadeTransition.nextCamera = camOther;
 		if(eventNotes.length < 1) checkEventNote();
 
-		Lib.application.window.title = 'The SkyDecay Project | Playing: ${curSong}';
+		Lib.application.window.title = 'The SkyDecay Project | Playing: ${curSong} | ${composers}';
 
-		// etPropertyFromClass('lime.app.Application', 'current.window.title', 'The SkyDecay Project'..' | Playing: '..getProperty('curSong'))
+		// etPropertyFromClass('lime.app.Application', 'current.window.title', 'The SkyDecay Project'..' | Playing: '..getProperty('curSong') getProperty('composers'))
 	}
 
 	#if (!flash && sys)

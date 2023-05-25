@@ -126,8 +126,8 @@ class Paths
 
 		if (currentLevel != null)
 		{
-			var levelPath:String = 'stages';
-			if(currentLevel != 'shared') {
+			var levelPath:String = '';
+			if(currentLevel != 'shared'){
 				levelPath = getLibraryPathForce(file, currentLevel);
 				if (OpenFlAssets.exists(levelPath, type))
 					return levelPath;
@@ -367,7 +367,7 @@ class Paths
 			localTrackedAssets.push(path);
 			return currentTrackedAssets.get(path);
 		}
-		trace('oh no its returning null NOOOO');
+		trace('oh no' + key + 'its returning null NOOOO');
 		return null;
 	}
 

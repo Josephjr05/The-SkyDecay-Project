@@ -1,6 +1,6 @@
 {
 	"song": {
-		"player1": "hev bf",
+		"player1": "bf",
 		"gfVersion": "gf",
 		"notes": [
 			{
@@ -6139,7 +6139,7 @@
 		],
 		"player2": "gf",
 		"splashSkin": "noteSplashes",
-		"song": "pixel-pig",
+		"song": "Pixel-Pig",
 		"needsVoices": true,
 		"arrowSkin": "",
 		"stage": "stage",

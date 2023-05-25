@@ -1,5 +1,6 @@
 test
 stage
+kapiDayOld
 launch
 station
 caverin

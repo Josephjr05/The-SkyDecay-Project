@@ -4,7 +4,10 @@ import flixel.input.keyboard.FlxKey;
 import flixel.FlxG;
 import openfl.Lib;
 import openfl.events.Event;
+#if sys
 import sys.FileSystem;
+import sys.io.File;
+#end
 import hxcodec.vlc.VLCBitmap;
 
 

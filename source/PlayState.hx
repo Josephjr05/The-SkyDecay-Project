@@ -424,8 +424,13 @@ class PlayState extends MusicBeatState
 	var wall:FlxSprite;
 	var floor:FlxSprite;
 
-	//construction week 8
+	//week 8
 	var construction:FlxSprite;
+	var bgcity:FlxSprite;
+	var bridge:FlxSprite;
+	var trafficSignpost:FlxSprite;
+	var carback:FlxSprite;
+	var carback2:FlxSprite;
 
 	//Kapi shit NOOOO
 	var stagebackold:FlxSprite;
@@ -725,6 +730,8 @@ class PlayState extends MusicBeatState
 				}
 				dadbattleSmokes = new FlxSpriteGroup(); //troll'd
 
+			/*case 'erect1':*/
+				
 			case 'cuajak': //Kubaxon stage (Coded by Josephjr05, i got trashy skills hehe noobie skills)
 				cujbg = new FlxSprite(200, 100).loadGraphic(Paths.image('stages/cuajak/cujbg'));
 				cujbg.scale.set(1, 1);
@@ -846,10 +853,45 @@ class PlayState extends MusicBeatState
 				add(fgTrees);
 
 			case 'construction': //Week 8 leak wtf!!
-				construction = new FlxSprite(-751, -618).loadGraphic(Paths.image('stages/construction/construction'));
-				construction.scale.set(1, 1);
+				construction = new FlxSprite(-1200, -1200).loadGraphic(Paths.image('stages/week8/construction/construction'));
+				construction.scrollFactor.set(1, 1);
 				construction.antialiasing = ClientPrefs.globalAntialiasing;
 				add(construction);
+
+			case "highwayPhilly": //official week 8 shi
+				sky = new FlxSprite(-2240, -2200).loadGraphic(Paths.image('stages/week8/highwayPhilly/sky'));
+				sky.scrollFactor.set(1, 1);
+				add(sky);
+
+				bgcity = new FlxSprite(-813.333333333333, -1176.66666666667).loadGraphic(Paths.image('stages/week8/highwayPhilly/bgcity'));
+				bgcity.scale.set(1.9, 1.9);
+				bgcity.scrollFactor.set(0.65, 0.85);
+				add(bgcity);
+
+				bridge = new FlxSprite().loadGraphic(Paths.image('stages/week8/highwayPhilly/bridge'));
+				bridge.scale.set(1.9, 1.9);
+				bridge.scrollFactor.set(0.75, 0.9);
+				add(bridge);
+
+				trafficSignpost = new FlxSprite(66, -22).loadGraphic(Paths.image('stages/week8/highwayPhilly/traffic signpost'));
+				trafficSignpost.scale.set(1.9, 1.9);
+				trafficSignpost.scrollFactor.set(0.85, 0.85);
+				add(trafficSignpost);
+
+				carback = new FlxSprite().loadGraphic(Paths.image('stages/week8/highwayPhilly/carback'));
+				carback.scale.set(1.9, 1.9);
+				carback.scrollFactor.set(0.85, 0.95);
+				add(carback);
+
+				carback2 = new FlxSprite().loadGraphic(Paths.image('stages/week8/highwayPhilly/carback2'));
+
+
+
+			case 'alleyway': //from JJ05 Wrath story
+				bg = new FlxSprite(-600, -200).loadGraphic(Paths.image('stages/week8/alleyway/alleyway'));
+				bg.scrollFactor.set(1, 1);
+				bg.antialiasing = ClientPrefs.globalAntialiasing;
+				add(bg);
 
 			case 'abandonedPhilly': //Week 3 abandoned
 				var bg:BGSprite = new BGSprite('stages/abandonedPhilly/sky', -100, 0, 0.1, 0.1);
@@ -886,6 +928,8 @@ class PlayState extends MusicBeatState
 				lightblink.scrollFactor.set(0.9, 0.9);
 				lightblink.antialiasing = ClientPrefs.globalAntialiasing;
 				add(lightblink);
+
+			/*case 'kapiMidOld':*/
 
 		}
 
@@ -949,6 +993,11 @@ class PlayState extends MusicBeatState
 				back.scale.set(0.9, 0.9);
 				back.antialiasing = ClientPrefs.globalAntialiasing;
 				add(back);*/
+
+			case 'alleyway': //stupid ass light bruh
+				light = new FlxSprite(-600, -200).loadGraphic(Paths.image('stages/week8/alleyway/light'));
+				light.scrollFactor.set(1, 1);
+				add(light);
 		}
 
 		box = new FlxSprite().makeGraphic(FlxG.width, 120, FlxColor.BLACK);
@@ -2985,6 +3034,12 @@ class PlayState extends MusicBeatState
 				camFollow.x = 250;
 				camFollow.y = 60;
 				isCameraOnForcedPos = true;
+
+			case 'alleyway':
+				camFollow.x = 800;
+				camFollow.y = 600;
+				isCameraOnForcedPos = false;
+
 		}
 
 		callOnLuas('onUpdate', [elapsed]);

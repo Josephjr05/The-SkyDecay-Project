@@ -853,7 +853,7 @@ class PlayState extends MusicBeatState
 				add(fgTrees);
 
 			case 'construction': //Week 8 leak wtf!!
-				construction = new FlxSprite(-1200, -1200).loadGraphic(Paths.image('stages/week8/construction/construction'));
+				construction = new FlxSprite(-1400, -1200).loadGraphic(Paths.image('stages/week8/construction/construction'));
 				construction.scrollFactor.set(1, 1);
 				construction.antialiasing = ClientPrefs.globalAntialiasing;
 				add(construction);
@@ -863,7 +863,7 @@ class PlayState extends MusicBeatState
 				sky.scrollFactor.set(1, 1);
 				add(sky);
 
-				bgcity = new FlxSprite(-813.333333333333, -1176.66666666667).loadGraphic(Paths.image('stages/week8/highwayPhilly/bgcity'));
+				bgcity = new FlxSprite(-813, -1176).loadGraphic(Paths.image('stages/week8/highwayPhilly/bgcity'));
 				bgcity.scale.set(1.9, 1.9);
 				bgcity.scrollFactor.set(0.65, 0.85);
 				add(bgcity);

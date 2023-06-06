@@ -1,77 +1,77 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [
 				20,
 				20
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "idle",
-			"indices": [],
-			"name": "idle"
+			"fps": 24,
+			"name": "idle",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				8,
 				25
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "Alt",
-			"indices": [],
-			"name": "HEY!"
+			"fps": 24,
+			"name": "HEY!",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				0,
 				-50
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singRIGHT",
-			"indices": [],
-			"name": "right"
+			"fps": 24,
+			"name": "right",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				30,
 				0
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singLEFT",
-			"indices": [],
-			"name": "left"
+			"fps": 24,
+			"name": "left",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				0,
 				-70
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singDOWN",
-			"indices": [],
-			"name": "down"
+			"fps": 24,
+			"name": "down",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-10,
 				50
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singUP",
-			"indices": [],
-			"name": "up"
+			"fps": 24,
+			"name": "up",
+			"indices": []
 		}
 	],
 	"no_antialiasing": false,
 	"image": "characters/darnell alt",
 	"position": [
 		50,
-		290
+		300
 	],
 	"healthicon": "darnell",
 	"flip_x": false,
@@ -81,7 +81,7 @@
 		176
 	],
 	"camera_position": [
-		470,
+		220,
 		-70
 	],
 	"sing_duration": 6.1,

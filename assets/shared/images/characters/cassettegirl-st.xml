@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="cassettegirl-st.png">
+	<!-- Created with Adobe Animate version 21.0.2.37893 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="cassettegirl cut0000" x="0" y="0" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0001" x="586" y="0" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0002" x="1172" y="0" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0003" x="1758" y="0" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0004" x="2344" y="0" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0005" x="2930" y="0" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0006" x="3516" y="0" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0007" x="4102" y="0" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0008" x="4688" y="0" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0009" x="5274" y="0" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0010" x="5860" y="0" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0011" x="6446" y="0" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0012" x="7032" y="0" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0013" x="0" y="753" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0014" x="586" y="753" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0015" x="1172" y="753" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0016" x="1758" y="753" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0017" x="2344" y="753" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0018" x="2930" y="753" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0019" x="3516" y="753" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0020" x="4102" y="753" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0021" x="4688" y="753" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0022" x="5274" y="753" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0023" x="5860" y="753" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0024" x="6446" y="753" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0025" x="7032" y="753" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0026" x="0" y="1506" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0027" x="586" y="1506" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0028" x="1172" y="1506" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0029" x="1758" y="1506" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0030" x="2344" y="1506" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0031" x="2930" y="1506" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0032" x="3516" y="1506" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0033" x="4102" y="1506" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0034" x="4688" y="1506" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0035" x="5274" y="1506" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0036" x="5860" y="1506" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0037" x="6446" y="1506" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0038" x="7032" y="1506" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0039" x="0" y="2259" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0040" x="586" y="2259" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0041" x="1172" y="2259" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0042" x="1758" y="2259" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0043" x="2344" y="2259" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0044" x="2930" y="2259" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0045" x="3516" y="2259" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0046" x="4102" y="2259" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0047" x="4688" y="2259" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0048" x="5274" y="2259" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0049" x="5860" y="2259" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0050" x="6446" y="2259" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0051" x="7032" y="2259" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0052" x="0" y="3012" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0053" x="586" y="3012" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0054" x="1172" y="3012" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0055" x="1758" y="3012" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0056" x="2344" y="3012" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0057" x="2930" y="3012" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0058" x="3516" y="3012" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0059" x="4102" y="3012" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0060" x="4688" y="3012" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0061" x="5274" y="3012" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0062" x="5860" y="3012" width="586" height="747" frameX="0" frameY="-6" frameWidth="586" frameHeight="753"/>
+	<SubTexture name="cassettegirl cut0063" x="6446" y="3012" width="586" height="747" frameX="0" frameY="-6" frameWidth="586" frameHeight="753"/>
+	<SubTexture name="cassettegirl cut0064" x="7032" y="3012" width="586" height="747" frameX="0" frameY="-6" frameWidth="586" frameHeight="753"/>
+	<SubTexture name="cassettegirl cut0065" x="0" y="3765" width="586" height="747" frameX="0" frameY="-6" frameWidth="586" frameHeight="753"/>
+	<SubTexture name="cassettegirl cut0066" x="586" y="3765" width="586" height="747" frameX="0" frameY="-6" frameWidth="586" frameHeight="753"/>
+	<SubTexture name="cassettegirl cut0067" x="1172" y="3765" width="586" height="747" frameX="0" frameY="-6" frameWidth="586" frameHeight="753"/>
+	<SubTexture name="cassettegirl cut0068" x="1758" y="3765" width="586" height="747" frameX="0" frameY="-6" frameWidth="586" frameHeight="753"/>
+	<SubTexture name="cassettegirl cut0069" x="2344" y="3765" width="586" height="747" frameX="0" frameY="-6" frameWidth="586" frameHeight="753"/>
+	<SubTexture name="cassettegirl cut0070" x="2930" y="3765" width="586" height="747" frameX="0" frameY="-6" frameWidth="586" frameHeight="753"/>
+	<SubTexture name="cassettegirl cut0071" x="3516" y="3765" width="586" height="747" frameX="0" frameY="-6" frameWidth="586" frameHeight="753"/>
+	<SubTexture name="cassettegirl cut0072" x="4102" y="3765" width="586" height="747" frameX="0" frameY="-6" frameWidth="586" frameHeight="753"/>
+	<SubTexture name="cassettegirl cut0073" x="4688" y="3765" width="586" height="747" frameX="0" frameY="-6" frameWidth="586" frameHeight="753"/>
+	<SubTexture name="cassettegirl cut0074" x="5274" y="3765" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0075" x="5860" y="3765" width="586" height="753"/>
+	<SubTexture name="cassettegirl cut0076" x="6446" y="3765" width="586" height="753"/>
+</TextureAtlas>

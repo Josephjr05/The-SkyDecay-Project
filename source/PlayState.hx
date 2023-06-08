@@ -233,6 +233,11 @@ class PlayState extends MusicBeatState
 	var dadbattleBlack:BGSprite;
 	var dadbattleLight:BGSprite;
 	var dadbattleSmokes:FlxSpriteGroup;
+	var stageBack:FlxSprite;
+	var stageFront:FlxSprite;
+	var stageCurtains:FlxSprite;
+	var stageLight:FlxSprite;
+
 
 	var halloweenBG:BGSprite;
 	var halloweenWhite:BGSprite;
@@ -436,6 +441,11 @@ class PlayState extends MusicBeatState
 	var stagebackold:FlxSprite;
 	var stagefrontold:FlxSprite;
 	var lightblink:FlxSprite;
+
+	//GALAXY STAGE Wooooo
+	var mbg:FlxSprite;
+	var fg:FlxSprite;
+	var plants:FlxSprite;
 
 	override public function create()
 	{
@@ -705,29 +715,35 @@ class PlayState extends MusicBeatState
 				add(stage);
 
 			case 'stage': //Chapter 1
-				var bg:BGSprite = new BGSprite('stages/theater/stage/stageback', -600, -200, 0.9, 0.9);
-				add(bg);
-
-				var stageFront:BGSprite = new BGSprite('stages/theater/stage/stagefront', -650, 600, 0.9, 0.9);
-				stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
+				stageFront = new FlxSprite(-900, -800).loadGraphic(Paths.image('stages/theater/stage/stageback'));
+				stageFront.scale.set(1.3, 1.3);
 				stageFront.updateHitbox();
 				add(stageFront);
-				if(!ClientPrefs.lowQuality) {
-					var stageLight:BGSprite = new BGSprite('stages/theater/stage/stage_light', -125, -100, 0.9, 0.9);
-					stageLight.setGraphicSize(Std.int(stageLight.width * 1.1));
-					stageLight.updateHitbox();
-					add(stageLight);
-					var stageLight:BGSprite = new BGSprite('stages/theater/stage/stage_light', 1225, -100, 0.9, 0.9);
-					stageLight.setGraphicSize(Std.int(stageLight.width * 1.1));
-					stageLight.updateHitbox();
-					stageLight.flipX = true;
-					add(stageLight);
 
-					var stageCurtains:BGSprite = new BGSprite('stages/theater/stage/stagecurtains', -500, -300, 1.3, 1.3);
-					stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
-					stageCurtains.updateHitbox();
-					add(stageCurtains);
-				}
+				stageFront = new FlxSprite(-1350, 500).loadGraphic(Paths.image('stages/theater/stage/stagefront'));
+				stageFront.scale.set(1.6, 1.6);
+				stageFront.updateHitbox();
+				add(stageFront);
+
+				stageLight = new FlxSprite(-425, -800).loadGraphic(Paths.image('stages/theater/stage/stage_light'));
+				stageLight.scrollFactor.set(1.9, 1.9);
+				stageLight.scale.set(1.9, 1.9);
+				stageLight.updateHitbox();
+				add(stageLight);
+
+				stageLight = new FlxSprite(1525, -800).loadGraphic(Paths.image('stages/theater/stage/stage_light'));
+				stageLight.scrollFactor.set(1.9, 1.9);
+				stageLight.scale.set(2.1, 2.1);
+				stageLight.updateHitbox();
+				stageLight.flipX = true;
+				add(stageLight);
+
+				stageCurtains = new FlxSprite(-1400, -900).loadGraphic(Paths.image('stages/theater/stage/stagecurtains'));
+				stageCurtains.scrollFactor.set(1.3, 1.3);
+				stageCurtains.scale.set(1.7, 1.7);
+				stageCurtains.updateHitbox();
+				add(stageCurtains);
+
 				dadbattleSmokes = new FlxSpriteGroup(); //troll'd
 
 			/*case 'erect1':*/
@@ -929,7 +945,21 @@ class PlayState extends MusicBeatState
 				lightblink.antialiasing = ClientPrefs.globalAntialiasing;
 				add(lightblink);
 
-			/*case 'kapiMidOld':*/
+			case 'contemporary':
+				mbg = new FlxSprite(-700, -800).loadGraphic(Paths.image('stages/contemporary/motherBG'));
+				mbg.scale.set(0.9, 0.9);
+				mbg.scrollFactor.set(0.9, 0.9);
+				add(mbg);
+
+				fg = new FlxSprite(-650, -800).loadGraphic(Paths.image('stages/contemporary/motherFG'));
+				fg.scale.set(1.1, 1.1);
+				fg.scrollFactor.set(0.9, 0.9);
+				add(fg);
+
+				plants = new FlxSprite(-1000, -1200).loadGraphic(Paths.image('stages/contemporary/plants'));
+				plants.scale.set(1.4, 1.4);
+				plants.scrollFactor.set(0.9, 0.9);
+				add(plants);
 
 		}
 

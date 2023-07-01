@@ -2,7 +2,7 @@
 	"animations": [
 		{
 			"offsets": [
-				-5,
+				0,
 				0
 			],
 			"loop": false,
@@ -24,8 +24,8 @@
 		},
 		{
 			"offsets": [
-				-20,
-				-51
+				-10,
+				-50
 			],
 			"loop": false,
 			"fps": 24,
@@ -35,7 +35,7 @@
 		},
 		{
 			"offsets": [
-				-46,
+				-29,
 				27
 			],
 			"loop": false,
@@ -79,7 +79,7 @@
 		},
 		{
 			"offsets": [
-				-46,
+				-36,
 				27
 			],
 			"loop": false,
@@ -112,7 +112,7 @@
 		},
 		{
 			"offsets": [
-				14,
+				15,
 				18
 			],
 			"loop": false,
@@ -131,6 +131,39 @@
 			"anim": "scared",
 			"indices": [],
 			"name": "BF idle shaking"
+		},
+		{
+			"offsets": [
+				37,
+				11
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "firstDeath",
+			"indices": [],
+			"name": "BF dies"
+		},
+		{
+			"offsets": [
+				37,
+				5
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "deathLoop",
+			"indices": [],
+			"name": "BF Dead Loop"
+		},
+		{
+			"offsets": [
+				37,
+				69
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "deathConfirm",
+			"indices": [],
+			"name": "BF Dead confirm"
 		},
 		{
 			"offsets": [
@@ -172,7 +205,7 @@
 		0,
 		350
 	],
-	"healthicon": "SD-BF",
+	"healthicon": "sd-bf",
 	"flip_x": true,
 	"healthbar_colors": [
 		49,

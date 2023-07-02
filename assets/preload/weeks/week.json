@@ -56,33 +56,6 @@
 			]
 		],
 		[
-			"LUIN-OF-CLETCHAR",
-			"camellia",
-			[
-				255,
-				155,
-				60
-			]
-		],
-		[
-			"Nuclear-Star",
-			"camellia",
-			[
-				255,
-				155,
-				60
-			]
-		],
-		[
-			"+ERABY+E-CONNEC+10N",
-			"camellia",
-			[
-				255,
-				155,
-				60
-			]
-		],
-		[
 			"The-End-(Old)",
 			"gf",
 			[
@@ -119,30 +92,12 @@
 			]
 		],
 		[
-			"Lorelei",
-			"camellia",
-			[
-				255,
-				155,
-				60
-			]
-		],
-		[
 			"Oshama-Scramble",
 			"SD-BF",
 			[
 				255,
 				255,
 				255
-			]
-		],
-		[
-			"blammed",
-			"pico",
-			[
-				126,
-				93,
-				193
 			]
 		],
 		[
@@ -245,15 +200,6 @@
 			]
 		],
 		[
-			"Compute-It-With-Some-Devilish-Alcoholic-Steampunk-Engines",
-			"camellia",
-			[
-				255,
-				155,
-				60
-			]
-		],
-		[
 			"The-End",
 			"pico",
 			[
@@ -287,24 +233,6 @@
 				86,
 				233,
 				253
-			]
-		],
-		[
-			"Confronting-Yourself-FF-Mix",
-			"",
-			[
-				0,
-				0,
-				153
-			]
-		],
-		[
-			"Final-Escape-FF-Mix",
-			"",
-			[
-				0,
-				0,
-				80
 			]
 		],
 		[
@@ -377,6 +305,51 @@
 				146,
 				113,
 				253
+			]
+		],
+		[
+			"Revenant",
+			"SD-BF",
+			[
+				255,
+				255,
+				255
+			]
+		],
+		[
+			"Megaton-Killer",
+			"SD-BF",
+			[
+				255,
+				255,
+				255
+			]
+		],
+		[
+			"mariannE",
+			"SD-BF",
+			[
+				255,
+				255,
+				255
+			]
+		],
+		[
+			"Infinite-Strife",
+			"SD-BF",
+			[
+				255,
+				255,
+				255
+			]
+		],
+		[
+			"Armageddon",
+			"SD-BF",
+			[
+				255,
+				255,
+				255
 			]
 		]
 	],

@@ -718,17 +718,20 @@ class PlayState extends MusicBeatState
 				stageFront = new FlxSprite(-900, -800).loadGraphic(Paths.image('stages/theater/stage/stageback'));
 				stageFront.scale.set(1.3, 1.3);
 				stageFront.updateHitbox();
+				stageFront.antialiasing = ClientPrefs.globalAntialiasing;
 				add(stageFront);
 
 				stageFront = new FlxSprite(-1350, 500).loadGraphic(Paths.image('stages/theater/stage/stagefront'));
 				stageFront.scale.set(1.6, 1.6);
 				stageFront.updateHitbox();
+				stageFront.antialiasing = ClientPrefs.globalAntialiasing;
 				add(stageFront);
 
 				stageLight = new FlxSprite(-425, -800).loadGraphic(Paths.image('stages/theater/stage/stage_light'));
 				stageLight.scrollFactor.set(1.9, 1.9);
 				stageLight.scale.set(1.9, 1.9);
 				stageLight.updateHitbox();
+				stageLight.antialiasing = ClientPrefs.globalAntialiasing;
 				add(stageLight);
 
 				stageLight = new FlxSprite(1525, -800).loadGraphic(Paths.image('stages/theater/stage/stage_light'));
@@ -736,17 +739,17 @@ class PlayState extends MusicBeatState
 				stageLight.scale.set(2.1, 2.1);
 				stageLight.updateHitbox();
 				stageLight.flipX = true;
+				stageLight.antialiasing = ClientPrefs.globalAntialiasing;
 				add(stageLight);
 
 				stageCurtains = new FlxSprite(-1400, -900).loadGraphic(Paths.image('stages/theater/stage/stagecurtains'));
 				stageCurtains.scrollFactor.set(1.3, 1.3);
 				stageCurtains.scale.set(1.7, 1.7);
 				stageCurtains.updateHitbox();
+				stageCurtains.antialiasing = ClientPrefs.globalAntialiasing;
 				add(stageCurtains);
 
 				dadbattleSmokes = new FlxSpriteGroup(); //troll'd
-
-			/*case 'erect1':*/
 				
 			case 'cuajak': //Kubaxon stage (Coded by Josephjr05, i got trashy skills hehe noobie skills)
 				cujbg = new FlxSprite(200, 100).loadGraphic(Paths.image('stages/cuajak/cujbg'));
@@ -770,7 +773,7 @@ class PlayState extends MusicBeatState
 				beds.antialiasing = ClientPrefs.globalAntialiasing;
 				add(beds);
 			
-			/*case 'red': //traped red
+			case 'red': //traped red
 				var bgred:BGSprite = new BGSprite('stages/traped/red/bg-red', -1900, 0);
 				bgred.scale.set(1, 1);
 				bgred.antialiasing = ClientPrefs.globalAntialiasing;
@@ -779,7 +782,7 @@ class PlayState extends MusicBeatState
 				var tables:BGSprite = new BGSprite('stages/traped/red/tables-red', -1200, 680);
 				tables.scale.set(1, 1);
 				tables.antialiasing = ClientPrefs.globalAntialiasing;
-				add(tables);*/
+				add(tables);
 
 			case 'corn': //Bambi stage
 				corn = new FlxSprite(-600, -200).loadGraphic(Paths.image('stages/bambi/corn'));
@@ -877,26 +880,31 @@ class PlayState extends MusicBeatState
 			case "highwayPhilly": //official week 8 shi
 				sky = new FlxSprite(-2240, -2200).loadGraphic(Paths.image('stages/week8/highwayPhilly/sky'));
 				sky.scrollFactor.set(1, 1);
+				sky.antialiasing = ClientPrefs.globalAntialiasing;
 				add(sky);
 
 				bgcity = new FlxSprite(-813, -1176).loadGraphic(Paths.image('stages/week8/highwayPhilly/bgcity'));
 				bgcity.scale.set(1.9, 1.9);
 				bgcity.scrollFactor.set(0.65, 0.85);
+				bgcity.antialiasing = ClientPrefs.globalAntialiasing;
 				add(bgcity);
 
 				bridge = new FlxSprite().loadGraphic(Paths.image('stages/week8/highwayPhilly/bridge'));
 				bridge.scale.set(1.9, 1.9);
 				bridge.scrollFactor.set(0.75, 0.9);
+				bridge.antialiasing = ClientPrefs.globalAntialiasing;
 				add(bridge);
 
 				trafficSignpost = new FlxSprite(66, -22).loadGraphic(Paths.image('stages/week8/highwayPhilly/traffic signpost'));
 				trafficSignpost.scale.set(1.9, 1.9);
 				trafficSignpost.scrollFactor.set(0.85, 0.85);
+				trafficSignpost.antialiasing = ClientPrefs.globalAntialiasing;
 				add(trafficSignpost);
 
 				carback = new FlxSprite().loadGraphic(Paths.image('stages/week8/highwayPhilly/carback'));
 				carback.scale.set(1.9, 1.9);
 				carback.scrollFactor.set(0.85, 0.95);
+				carback.antialiasing = ClientPrefs.globalAntialiasing;
 				add(carback);
 
 				carback2 = new FlxSprite().loadGraphic(Paths.image('stages/week8/highwayPhilly/carback2'));
@@ -1000,7 +1008,8 @@ class PlayState extends MusicBeatState
 				frontCrowd.scale.set(1.75, 1.75);
 				frontCrowd.antialiasing = ClientPrefs.globalAntialiasing;
 				add(frontCrowd);
-			/*case 'red': //sprites infront of BF and Red
+				
+			case 'red': //sprites infront of BF and Red
 				chairback = new FlxSprite(-100, 870).loadGraphic(Paths.image('traped/red/chairback-red'));
 				chairback.scale.set(1, 1);
 				chairback.antialiasing = ClientPrefs.globalAntialiasing;
@@ -1022,11 +1031,12 @@ class PlayState extends MusicBeatState
 				back.animation.play('Back');
 				back.scale.set(0.9, 0.9);
 				back.antialiasing = ClientPrefs.globalAntialiasing;
-				add(back);*/
+				add(back);
 
 			case 'alleyway': //stupid ass light bruh
 				light = new FlxSprite(-600, -200).loadGraphic(Paths.image('stages/week8/alleyway/light'));
 				light.scrollFactor.set(1, 1);
+				light.antialiasing = ClientPrefs.globalAntialiasing;
 				add(light);
 		}
 

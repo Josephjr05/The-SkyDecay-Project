@@ -880,30 +880,35 @@ class PlayState extends MusicBeatState
 			case "highwayPhilly": //official week 8 shi
 				sky = new FlxSprite(-2240, -2200).loadGraphic(Paths.image('stages/week8/highwayPhilly/sky'));
 				sky.scrollFactor.set(1, 1);
+				sky.updateHitbox();
 				sky.antialiasing = ClientPrefs.globalAntialiasing;
 				add(sky);
 
 				bgcity = new FlxSprite(-813, -1176).loadGraphic(Paths.image('stages/week8/highwayPhilly/bgcity'));
 				bgcity.scale.set(1.9, 1.9);
 				bgcity.scrollFactor.set(0.65, 0.85);
+				bgcity.updateHitbox();
 				bgcity.antialiasing = ClientPrefs.globalAntialiasing;
 				add(bgcity);
 
 				bridge = new FlxSprite().loadGraphic(Paths.image('stages/week8/highwayPhilly/bridge'));
 				bridge.scale.set(1.9, 1.9);
 				bridge.scrollFactor.set(0.75, 0.9);
+				bridge.updateHitbox();
 				bridge.antialiasing = ClientPrefs.globalAntialiasing;
 				add(bridge);
 
 				trafficSignpost = new FlxSprite(66, -22).loadGraphic(Paths.image('stages/week8/highwayPhilly/traffic signpost'));
 				trafficSignpost.scale.set(1.9, 1.9);
 				trafficSignpost.scrollFactor.set(0.85, 0.85);
+				trafficSignpost.updateHitbox();
 				trafficSignpost.antialiasing = ClientPrefs.globalAntialiasing;
 				add(trafficSignpost);
 
 				carback = new FlxSprite().loadGraphic(Paths.image('stages/week8/highwayPhilly/carback'));
 				carback.scale.set(1.9, 1.9);
 				carback.scrollFactor.set(0.85, 0.95);
+				carback.updateHitbox();
 				carback.antialiasing = ClientPrefs.globalAntialiasing;
 				add(carback);
 

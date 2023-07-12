@@ -6422,7 +6422,7 @@
 					[
 						"Change Character",
 						"Dad",
-						"camelliasing"
+						"camellia"
 					]
 				]
 			],
@@ -6430,9 +6430,9 @@
 				211285.714285714,
 				[
 					[
-						"Change Character",
-						"Dad",
-						"camellia"
+						"Add Camera Zoom",
+						"",
+						""
 					]
 				]
 			],
@@ -6460,9 +6460,9 @@
 				211542.857142857,
 				[
 					[
-						"Change Character",
-						"Dad",
-						"camelliasing"
+						"Add Camera Zoom",
+						"",
+						""
 					]
 				]
 			],
@@ -6480,19 +6480,9 @@
 				211714.285714286,
 				[
 					[
-						"Change Character",
-						"Dad",
-						"camelliasing"
-					]
-				]
-			],
-			[
-				211757.142857143,
-				[
-					[
-						"Change Character",
-						"Dad",
-						"camellia"
+						"Add Camera Zoom",
+						"",
+						""
 					]
 				]
 			],
@@ -6500,19 +6490,9 @@
 				211800,
 				[
 					[
-						"Change Character",
-						"Dad",
-						"camelliasing"
-					]
-				]
-			],
-			[
-				211842.857142857,
-				[
-					[
-						"Change Character",
-						"Dad",
-						"camellia"
+						"Add Camera Zoom",
+						"",
+						""
 					]
 				]
 			],
@@ -9113,6 +9093,16 @@
 						"Add Camera Zoom",
 						"",
 						""
+					]
+				]
+			],
+			[
+				285257.142857143,
+				[
+					[
+						"Change Character",
+						"BF",
+						"sd-bf"
 					]
 				]
 			],

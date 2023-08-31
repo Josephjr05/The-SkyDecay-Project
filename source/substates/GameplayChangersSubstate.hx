@@ -3,6 +3,8 @@ package substates;
 import objects.AttachedText;
 import objects.CheckboxThingie;
 
+import states.FreeplayState;
+
 class GameplayChangersSubstate extends MusicBeatSubstate
 {
 	private var curOption:GameplayOption = null;
@@ -352,6 +354,11 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		for (checkbox in checkboxGroup) {
 			checkbox.daValue = (optionsArray[checkbox.ID].getValue() == true);
 		}
+	}
+
+	override function destroy()
+	{
+		FreeplayState.inSub = false;
 	}
 }
 

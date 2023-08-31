@@ -205,6 +205,11 @@ class FreeplayState extends MusicBeatState
 				inSub = true;
 				openSubState(new DifficultySelectorSubState(songs[curSelected]));
 			}
+			if(FlxG.keys.justPressed.TAB)
+			{
+				inSub = true;
+				openSubState(new GameplayChangersSubstate());
+			}
 		}
 		if(isTyping)
 		{

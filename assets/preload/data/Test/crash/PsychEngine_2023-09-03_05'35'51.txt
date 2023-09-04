@@ -1,0 +1,17 @@
+C:\HaxeToolkit\haxe\std/cpp/_std/sys/io/File.hx (line 30)
+states/editors/ChartingState.hx (line 2642)
+states/editors/ChartingState.hx (line 2607)
+states/editors/ChartingState.hx (line 2602)
+states/editors/ChartingState.hx (line 2581)
+states/editors/ChartingState.hx (line 1645)
+flixel/FlxState.hx (line 220)
+flixel/FlxGame.hx (line 752)
+flixel/FlxGame.hx (line 682)
+flixel/FlxGame.hx (line 556)
+openfl/events/EventDispatcher.hx (line 402)
+openfl/display/DisplayObject.hx (line 1399)
+
+Uncaught Error: [file_contents,assets/characters/bf.json]
+Please report this error to the GitHub page: https://github.com/ShadowMario/FNF-PsychEngine
+
+> Crash Handler written by: sqirra-rng

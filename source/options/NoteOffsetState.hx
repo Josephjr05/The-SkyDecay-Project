@@ -7,7 +7,7 @@ import objects.Character;
 import objects.Bar;
 import flixel.addons.display.shapes.FlxShapeCircle;
 
-import states.stages.StageWeek1 as BackgroundStage;
+import states.stages.Stage as BackgroundStage;
 
 class NoteOffsetState extends MusicBeatState
 {

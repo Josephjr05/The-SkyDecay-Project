@@ -2,7 +2,7 @@ package backend;
 
 import lime.utils.Assets;
 import openfl.utils.Assets as OpenFlAssets;
-import tjson.TJSON as Json;
+import haxe.Json;
 
 typedef WeekFile =
 {
@@ -172,7 +172,7 @@ class WeekData {
 		#end
 
 		if(rawJson != null && rawJson.length > 0) {
-			return cast Json.parse(rawJson);
+			return cast tjson.TJSON.parse(rawJson);
 		}
 		return null;
 	}

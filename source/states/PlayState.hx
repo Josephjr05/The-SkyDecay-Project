@@ -151,7 +151,6 @@ class PlayState extends MusicBeatState
 	public var inst:FlxSound;
 	public var vocals:FlxSound;
 	public var opponentVocals:FlxSound;
-	public var splitVocals:Bool = false;
 
 	public var dad:Character = null;
 	public var gf:Character = null;
@@ -1274,10 +1273,7 @@ class PlayState extends MusicBeatState
 				vocals.loadEmbedded(playerVocals != null ? playerVocals : Paths.voices(songData.song));
 				
 				var oppVocals = Paths.voices(songData.song, (dad.vocalsFile == null || dad.vocalsFile.length < 1) ? 'Opponent' : dad.vocalsFile);
-				if(oppVocals != null){
-					opponentVocals.loadEmbedded(oppVocals);
-					splitVocals = true;
-				}
+				if(oppVocals != null) opponentVocals.loadEmbedded(oppVocals);
 			}
 		}
 		catch(e:Dynamic) {}
@@ -1556,10 +1552,7 @@ class PlayState extends MusicBeatState
 		{
 			if (FlxG.sound.music != null && !startingSong)
 			{
-				var vocalsToResync:Array<FlxSound> = [vocals];
-				if(splitVocals)
-					vocalsToResync.push(opponentVocals);
-				resyncVocals(vocalsToResync);
+				resyncVocals();
 			}
 			FlxTimer.globalManager.forEach(function(tmr:FlxTimer) if(!tmr.finished) tmr.active = true);
 			FlxTween.globalManager.forEach(function(twn:FlxTween) if(!twn.finished) twn.active = true);
@@ -1599,23 +1592,29 @@ class PlayState extends MusicBeatState
 		#end
 	}
 
-	function resyncVocals(vocals:Array<FlxSound>):Void
+	function resyncVocals():Void
 	{
-		if(finishTimer != null || vocals == null || !SONG.needsVoices) return;
-	
-		for(vocal in vocals){
-			vocal.pause();
+		if(finishTimer != null) return;
 
-			FlxG.sound.music.play();
-			#if FLX_PITCH FlxG.sound.music.pitch = playbackRate; #end
-			Conductor.songPosition = FlxG.sound.music.time;
+		vocals.pause();
+		opponentVocals.pause();
 
-			if(Conductor.songPosition <= vocal.length){
-				vocal.time = Conductor.songPosition;
-				#if FLX_PITCH vocal.pitch = playbackRate; #end
-			}
-			vocal.play();
+		FlxG.sound.music.play();
+		#if FLX_PITCH FlxG.sound.music.pitch = playbackRate; #end
+		Conductor.songPosition = FlxG.sound.music.time;
+		if (Conductor.songPosition <= vocals.length)
+		{
+			vocals.time = Conductor.songPosition;
+			#if FLX_PITCH vocals.pitch = playbackRate; #end
 		}
+
+		if (Conductor.songPosition <= opponentVocals.length)
+		{
+			opponentVocals.time = Conductor.songPosition;
+			#if FLX_PITCH opponentVocals.pitch = playbackRate; #end
+		}
+		vocals.play();
+		opponentVocals.play();
 	}
 
 	public var paused:Bool = false;
@@ -2901,7 +2900,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if(!splitVocals) vocals.volume = 1;
+		if(opponentVocals.length <= 0) vocals.volume = 1;
 		strumPlayAnim(true, Std.int(Math.abs(note.noteData)), Conductor.stepCrochet * 1.25 / 1000 / playbackRate);
 		note.hitByOpponent = true;
 		
@@ -3055,16 +3054,12 @@ class PlayState extends MusicBeatState
 		{
 			var timeSub:Float = Conductor.songPosition - Conductor.offset;
 			var syncTime:Float = 20 * playbackRate;
-			if (Math.abs(FlxG.sound.music.time - timeSub) > syncTime){
-				var vocalsToSync:Array<FlxSound> = [vocals];
-				if(splitVocals)
-					vocalsToSync.push(opponentVocals);
-				resyncVocals(vocalsToSync);
+			if (Math.abs(FlxG.sound.music.time - timeSub) > syncTime ||
+			(vocals.length > 0 && Math.abs(vocals.time - timeSub) > syncTime) ||
+			(opponentVocals.length > 0 && Math.abs(opponentVocals.time - timeSub) > syncTime))
+			{
+				resyncVocals();
 			}
-			if(Math.abs(vocals.time - timeSub) > syncTime)
-				resyncVocals([vocals]);
-			if(splitVocals && Math.abs(opponentVocals.time - timeSub) > syncTime)
-				resyncVocals([opponentVocals]);
 		}
 
 		super.stepHit();

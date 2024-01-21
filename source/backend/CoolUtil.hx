@@ -5,13 +5,6 @@ import lime.utils.Assets as LimeAssets;
 
 class CoolUtil
 {
-	inline public static function boundTo(value:Float, min:Float, max:Float):Float {
-		var newValue:Float = value;
-		if(newValue < min) newValue = min;
-		else if(newValue > max) newValue = max;
-		return newValue;
-	}
-
 	inline public static function quantize(f:Float, snap:Float){
 		// changed so this actually works lol
 		var m:Float = Math.fround(f * snap);

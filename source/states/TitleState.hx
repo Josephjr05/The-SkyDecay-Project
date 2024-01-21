@@ -198,7 +198,7 @@ class TitleState extends MusicBeatState
 		if (titleJSON.backgroundSprite != null && titleJSON.backgroundSprite.length > 0 && titleJSON.backgroundSprite != "none"){
 			bg.loadGraphic(Paths.image(titleJSON.backgroundSprite));
 		}else{
-			bg.loadGraphic(Paths.image('sky_cries'));
+			bg.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		}
 
 		// bg.setGraphicSize(Std.int(bg.width * 0.6));

@@ -1,14 +1,28 @@
 package backend;
 
+import flixel.util.FlxSave;
+
 import openfl.utils.Assets;
 import lime.utils.Assets as LimeAssets;
 
+#if sys
+import sys.io.File;
+import sys.FileSystem;
+#end
+
 class CoolUtil
 {
+	inline public static function boundTo(value:Float, min:Float, max:Float):Float {
+		var newValue:Float = value;
+		if(newValue < min) newValue = min;
+		else if(newValue > max) newValue = max;
+		return newValue;
+	}
+	
 	inline public static function quantize(f:Float, snap:Float){
 		// changed so this actually works lol
 		var m:Float = Math.fround(f * snap);
-		//trace(snap);
+		trace(snap);
 		return (m / snap);
 	}
 
@@ -62,7 +76,7 @@ class CoolUtil
 		var newValue:Float = Math.floor(value * tempMult);
 		return newValue / tempMult;
 	}
-
+	
 	inline public static function dominantColor(sprite:flixel.FlxSprite):Int
 	{
 		var countByColor:Map<Int, Int> = [];
@@ -107,54 +121,15 @@ class CoolUtil
 		#end
 	}
 
-	inline public static function openFolder(folder:String, absolute:Bool = false) {
-		#if sys
-			if(!absolute) folder =  Sys.getCwd() + '$folder';
-
-			folder = folder.replace('/', '\\');
-			if(folder.endsWith('/')) folder.substr(0, folder.length - 1);
-
-			#if linux
-			var command:String = '/usr/bin/xdg-open';
-			#else
-			var command:String = 'explorer.exe';
-			#end
-			Sys.command(command, [folder]);
-			trace('$command $folder');
-		#else
-			FlxG.error("Platform is not supported for CoolUtil.openFolder");
-		#end
-	}
-
-	/**
-		Helper Function to Fix Save Files for Flixel 5
-
-		-- EDIT: [November 29, 2023] --
-
-		this function is used to get the save path, period.
-		since newer flixel versions are being enforced anyways.
-		@crowplexus
+	/** Quick Function to Fix Save Files for Flixel 5
+		if you are making a mod, you are gonna wanna change "ShadowMario" to something else
+		so Base Psych saves won't conflict with yours
+		@BeastlyGabi
 	**/
-	@:access(flixel.util.FlxSave.validate)
-	inline public static function getSavePath():String {
-		final company:String = FlxG.stage.application.meta.get('company');
-		// #if (flixel < "5.0.0") return company; #else
-		return '${company}/${flixel.util.FlxSave.validate(FlxG.stage.application.meta.get('file'))}';
-		// #end
-	}
-
-	public static function setTextBorderFromString(text:FlxText, border:String)
-	{
-		switch(border.toLowerCase().trim())
-		{
-			case 'shadow':
-				text.borderStyle = SHADOW;
-			case 'outline':
-				text.borderStyle = OUTLINE;
-			case 'outline_fast', 'outlinefast':
-				text.borderStyle = OUTLINE_FAST;
-			default:
-				text.borderStyle = NONE;
-		}
+	inline public static function getSavePath(folder:String = 'ShadowMario'):String {
+		@:privateAccess
+		return #if (flixel < "5.0.0") folder #else FlxG.stage.application.meta.get('company')
+			+ '/'
+			+ FlxSave.validate(FlxG.stage.application.meta.get('file')) #end;
 	}
 }

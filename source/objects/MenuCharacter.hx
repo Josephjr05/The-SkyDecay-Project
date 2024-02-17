@@ -1,7 +1,11 @@
 package objects;
 
+#if MODS_ALLOWED
+import sys.io.File;
+import sys.FileSystem;
+#end
 import openfl.utils.Assets;
-import haxe.Json;
+import tjson.TJSON as Json;
 
 typedef MenuCharacterFile = {
 	var image:String;
@@ -49,18 +53,18 @@ class MenuCharacter extends FlxSprite
 				#if MODS_ALLOWED
 				var path:String = Paths.modFolders(characterPath);
 				if (!FileSystem.exists(path)) {
-					path = Paths.getSharedPath(characterPath);
+					path = Paths.getPreloadPath(characterPath);
 				}
 
 				if(!FileSystem.exists(path)) {
-					path = Paths.getSharedPath('images/menucharacters/' + DEFAULT_CHARACTER + '.json');
+					path = Paths.getPreloadPath('images/menucharacters/' + DEFAULT_CHARACTER + '.json');
 				}
 				rawJson = File.getContent(path);
 
 				#else
-				var path:String = Paths.getSharedPath(characterPath);
+				var path:String = Paths.getPreloadPath(characterPath);
 				if(!Assets.exists(path)) {
-					path = Paths.getSharedPath('images/menucharacters/' + DEFAULT_CHARACTER + '.json');
+					path = Paths.getPreloadPath('images/menucharacters/' + DEFAULT_CHARACTER + '.json');
 				}
 				rawJson = Assets.getText(path);
 				#end

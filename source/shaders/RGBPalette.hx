@@ -29,9 +29,9 @@ class RGBPalette {
 	}
 	
 	private function set_mult(value:Float) {
-		mult = FlxMath.bound(value, 0, 1);
+		mult = Math.max(0, Math.min(1, value));
 		shader.mult.value = [mult];
-		return mult;
+		return value;
 	}
 
 	public function new()
@@ -127,8 +127,12 @@ class RGBPaletteShader extends FlxShader {
 
 		vec4 flixel_texture2DCustom(sampler2D bitmap, vec2 coord) {
 			vec4 color = flixel_texture2D(bitmap, coord);
-			if (!hasTransform || color.a == 0.0 || mult == 0.0) {
+			if (!hasTransform) {
 				return color;
+			}
+
+			if(color.a == 0.0 || mult == 0.0) {
+				return color * openfl_Alphav;
 			}
 
 			vec4 newColor = color;

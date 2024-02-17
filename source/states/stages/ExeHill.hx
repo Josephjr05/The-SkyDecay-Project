@@ -4,6 +4,7 @@ import states.stages.objects.*;
 
 class ExeHill extends BaseStage
 {
+	//sonic exe stage shit
 	var midtrees1:BGSprite;
 	var treesmid:BGSprite;
 	var treesoutermid:BGSprite;
@@ -100,6 +101,5 @@ class ExeHill extends BaseStage
 		fgTrees.setGraphicSize(Std.int(fgTrees.width * 1.45));
 		fgTrees.antialiasing = ClientPrefs.data.antialiasing;
 		add(fgTrees);
-
 	}
 }

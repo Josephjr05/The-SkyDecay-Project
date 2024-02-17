@@ -448,9 +448,9 @@
 					]
 				],
 				"lengthInSteps": 16,
-				"bpm": 90,
 				"mustHitSection": true,
-				"changeBPM": true
+				"changeBPM": true,
+				"bpm": 90
 			},
 			{
 				"sectionBeats": 4,
@@ -541,9 +541,9 @@
 					]
 				],
 				"lengthInSteps": 16,
-				"bpm": null,
 				"mustHitSection": false,
-				"changeBPM": false
+				"changeBPM": false,
+				"bpm": null
 			},
 			{
 				"sectionNotes": [
@@ -1162,9 +1162,9 @@
 			{
 				"sectionNotes": [],
 				"lengthInSteps": 16,
-				"bpm": 173,
 				"mustHitSection": false,
-				"changeBPM": false
+				"changeBPM": false,
+				"bpm": 173
 			},
 			{
 				"sectionNotes": [],
@@ -7442,32 +7442,32 @@
 				"bpm": 90
 			},
 			{
-				"gfSection": false,
-				"altAnim": false,
 				"typeOfSection": 0,
 				"sectionNotes": [],
-				"bpm": 90,
 				"sectionBeats": 4,
+				"altAnim": false,
+				"gfSection": false,
+				"bpm": 90,
 				"changeBPM": false,
 				"mustHitSection": true
 			},
 			{
-				"gfSection": false,
-				"altAnim": false,
 				"typeOfSection": 0,
 				"sectionNotes": [],
-				"bpm": 90,
 				"sectionBeats": 4,
+				"altAnim": false,
+				"gfSection": false,
+				"bpm": 90,
 				"changeBPM": false,
 				"mustHitSection": true
 			},
 			{
-				"gfSection": false,
-				"altAnim": false,
 				"typeOfSection": 0,
 				"sectionNotes": [],
-				"bpm": 90,
 				"sectionBeats": 4,
+				"altAnim": false,
+				"gfSection": false,
+				"bpm": 90,
 				"changeBPM": false,
 				"mustHitSection": true
 			}
@@ -10948,7 +10948,7 @@
 		"player3": null,
 		"song": "Too Slow Awe",
 		"needsVoices": false,
-		"stage": "too-slow",
+		"stage": "exeHill",
 		"validScore": true,
 		"bpm": 90,
 		"speed": 3.1

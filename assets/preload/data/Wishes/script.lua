@@ -7,10 +7,10 @@ local r = 0;
 local shot = false;
 local agent = 1
 local health = 0;
-local xx = 550.00;
-local yy = 350;
-local xx2 = 770.9;
-local yy2 = 260;
+local xx = 650;
+local yy = 500;
+local xx2 = 890;
+local yy2 = 510;
 local ofs = 65;
 local followchars = true;
 local del = 0;
@@ -30,7 +30,7 @@ end
 function onUpdate()
 	if followchars == true then
         if mustHitSection == false then
-            --setProperty('defaultCamZoom',0.7)
+            setProperty('defaultCamZoom',0.62)
             if getProperty('dad.animation.curAnim.name') == 'singLEFT' then
                 triggerEvent('Camera Follow Pos',xx-ofs,yy)
             end
@@ -63,7 +63,8 @@ function onUpdate()
             end
         else
 
-            --setProperty('defaultCamZoom',0.7)
+            setProperty('defaultCamZoom',0.75)
+            yy2 = 540;
             if getProperty('boyfriend.animation.curAnim.name') == 'singLEFT' then
                 triggerEvent('Camera Follow Pos',xx2-ofs,yy2)
             end

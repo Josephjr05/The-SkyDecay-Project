@@ -91,10 +91,10 @@
 	<assets path="assets/shared"        library="shared"        exclude="*.ogg" if="web"/>
 	<assets path="assets/shared"        library="shared"        exclude="*.mp3" unless="web"/>
 	
-	<section if="MODS_ALLOWED">
+	<!-- <section if="MODS_ALLOWED">
 		<assets path='example_mods' rename='mods' embed='false'/>
 	</section>
-	<assets path='art/readme.txt' rename='do NOT readme.txt' />
+	<assets path='art/readme.txt' rename='do NOT readme.txt' /> -->
 
 	<!-- _______________________________ Libraries ______________________________ -->
 

@@ -1,0 +1,23 @@
+{
+	"storyName": "Week",
+	"hideFreeplay": false,
+	"weekBackground": "stage",
+	"weekBefore": "tutorial",
+	"startUnlocked": true,
+	"weekCharacters": [
+		"gf",
+		"bf",
+		"gf"
+	],
+	"songs": [
+		["Kisaragi", "camellia", "Tictacto", [255, 155, 60]],
+		["KillerToy", "camellia", "Nyrokushii", [255, 155, 60]],
+		["Flash-Me-Back", "camellia", "Meacho", [255, 155, 60]],
+		["Gray-Heaven", "camellia", "Divid", [255, 155, 60]],
+		["Artificial-Snow", "camellia", "", [255, 155, 60]],
+		["+eraby+e-Connec+10n", "camellia", "", [255, 155, 60]],
+		["Nuclear-Star", "camellia", "", [255, 155, 60]],
+		["Ghoul", "camellia", "", [255, 155, 60]],
+		["Burning-Aquamarine", "camellia", "", [255, 155, 60]]
+	]
+}

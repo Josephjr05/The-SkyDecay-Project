@@ -1,0 +1,7542 @@
+{
+	"sliderVelocities": [
+		{
+			"multiplier": 1,
+			"startTime": 0
+		},
+		{
+			"multiplier": 1.1699999999999997,
+			"startTime": 1015
+		},
+		{
+			"multiplier": 1.1400000000000006,
+			"startTime": 10158
+		},
+		{
+			"multiplier": 1.1199999999999997,
+			"startTime": 14623
+		},
+		{
+			"multiplier": 1.0900000000000005,
+			"startTime": 16805
+		},
+		{
+			"multiplier": 1.0700000000000005,
+			"startTime": 17871
+		},
+		{
+			"multiplier": 1.0500000000000005,
+			"startTime": 18393
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 18649
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 18899
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 19774
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 21524
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 22774
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 23399
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 25024
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 26524
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 27024
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 28774
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 30024
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 30649
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 32274
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 33774
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 34274
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 36024
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 37274
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 37899
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 39524
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 41024
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 41524
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 43274
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 44524
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 45149
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 46774
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 48274
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 48774
+		},
+		{
+			"multiplier": 1.3700000000000003,
+			"startTime": 56274
+		},
+		{
+			"multiplier": 1.3700000000000003,
+			"startTime": 57940
+		},
+		{
+			"multiplier": 1.3700000000000003,
+			"startTime": 79607
+		},
+		{
+			"multiplier": 1.3700000000000003,
+			"startTime": 92273
+		},
+		{
+			"multiplier": 1.3700000000000003,
+			"startTime": 92940
+		},
+		{
+			"multiplier": 1.3700000000000003,
+			"startTime": 119607
+		},
+		{
+			"multiplier": 1.3700000000000003,
+			"startTime": 121107
+		},
+		{
+			"multiplier": 1.3700000000000003,
+			"startTime": 122607
+		},
+		{
+			"multiplier": 1.3700000000000003,
+			"startTime": 124107
+		},
+		{
+			"multiplier": 1.3599999999999997,
+			"startTime": 125607
+		},
+		{
+			"multiplier": 1.3499999999999994,
+			"startTime": 125773
+		},
+		{
+			"multiplier": 1.3399999999999999,
+			"startTime": 125937
+		},
+		{
+			"multiplier": 1.3399999999999999,
+			"startTime": 126101
+		},
+		{
+			"multiplier": 1.3300000000000005,
+			"startTime": 126264
+		},
+		{
+			"multiplier": 1.3199999999999994,
+			"startTime": 126427
+		},
+		{
+			"multiplier": 1.3199999999999994,
+			"startTime": 126588
+		},
+		{
+			"multiplier": 1.3100000000000005,
+			"startTime": 126748
+		},
+		{
+			"multiplier": 1.3000000000000003,
+			"startTime": 126908
+		},
+		{
+			"multiplier": 1.2900000000000007,
+			"startTime": 127067
+		},
+		{
+			"multiplier": 1.2900000000000007,
+			"startTime": 127224
+		},
+		{
+			"multiplier": 1.28,
+			"startTime": 127382
+		},
+		{
+			"multiplier": 1.2699999999999994,
+			"startTime": 127538
+		},
+		{
+			"multiplier": 1.2699999999999994,
+			"startTime": 127693
+		},
+		{
+			"multiplier": 1.2599999999999996,
+			"startTime": 127848
+		},
+		{
+			"multiplier": 1.2599999999999996,
+			"startTime": 128002
+		},
+		{
+			"multiplier": 1.25,
+			"startTime": 128155
+		},
+		{
+			"multiplier": 1.2399999999999995,
+			"startTime": 128307
+		},
+		{
+			"multiplier": 1.2399999999999995,
+			"startTime": 128459
+		},
+		{
+			"multiplier": 1.2299999999999995,
+			"startTime": 128609
+		},
+		{
+			"multiplier": 1.22,
+			"startTime": 128759
+		},
+		{
+			"multiplier": 1.22,
+			"startTime": 128909
+		},
+		{
+			"multiplier": 1.2099999999999993,
+			"startTime": 129057
+		},
+		{
+			"multiplier": 1.2099999999999993,
+			"startTime": 129205
+		},
+		{
+			"multiplier": 1.2000000000000004,
+			"startTime": 129352
+		},
+		{
+			"multiplier": 1.1899999999999995,
+			"startTime": 129498
+		},
+		{
+			"multiplier": 1.1899999999999995,
+			"startTime": 129644
+		},
+		{
+			"multiplier": 1.1800000000000002,
+			"startTime": 129789
+		},
+		{
+			"multiplier": 1.1800000000000002,
+			"startTime": 129933
+		},
+		{
+			"multiplier": 1.1699999999999997,
+			"startTime": 130077
+		},
+		{
+			"multiplier": 1.1699999999999997,
+			"startTime": 130219
+		},
+		{
+			"multiplier": 1.1600000000000006,
+			"startTime": 130362
+		},
+		{
+			"multiplier": 1.1500000000000006,
+			"startTime": 130503
+		},
+		{
+			"multiplier": 1.1500000000000006,
+			"startTime": 130644
+		},
+		{
+			"multiplier": 1.1400000000000006,
+			"startTime": 130784
+		},
+		{
+			"multiplier": 1.1400000000000006,
+			"startTime": 130924
+		},
+		{
+			"multiplier": 1.1299999999999992,
+			"startTime": 131063
+		},
+		{
+			"multiplier": 1.1299999999999992,
+			"startTime": 131201
+		},
+		{
+			"multiplier": 1.1199999999999997,
+			"startTime": 131338
+		},
+		{
+			"multiplier": 1.1199999999999997,
+			"startTime": 131475
+		},
+		{
+			"multiplier": 1.1099999999999999,
+			"startTime": 131612
+		},
+		{
+			"multiplier": 1.1099999999999999,
+			"startTime": 131748
+		},
+		{
+			"multiplier": 1.1,
+			"startTime": 131883
+		},
+		{
+			"multiplier": 1.1,
+			"startTime": 132017
+		},
+		{
+			"multiplier": 1.1,
+			"startTime": 132285
+		},
+		{
+			"multiplier": 1.1,
+			"startTime": 162285
+		},
+		{
+			"multiplier": 1.1,
+			"startTime": 191749
+		},
+		{
+			"multiplier": 1.1,
+			"startTime": 195097
+		},
+		{
+			"multiplier": 1,
+			"startTime": 222376
+		},
+		{
+			"multiplier": 1,
+			"startTime": 226766
+		},
+		{
+			"multiplier": 1,
+			"startTime": 256034
+		},
+		{
+			"multiplier": 1,
+			"startTime": 279449
+		},
+		{
+			"multiplier": 1.01,
+			"startTime": 289775
+		},
+		{
+			"multiplier": 1.01,
+			"startTime": 289816
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 289857
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 289899
+		},
+		{
+			"multiplier": 1.02,
+			"startTime": 289940
+		},
+		{
+			"multiplier": 1.03,
+			"startTime": 289982
+		},
+		{
+			"multiplier": 1.03,
+			"startTime": 290024
+		},
+		{
+			"multiplier": 1.0400000000000005,
+			"startTime": 290066
+		},
+		{
+			"multiplier": 1.0400000000000005,
+			"startTime": 290108
+		},
+		{
+			"multiplier": 1.0500000000000005,
+			"startTime": 290150
+		},
+		{
+			"multiplier": 1.0500000000000005,
+			"startTime": 290193
+		},
+		{
+			"multiplier": 1.0600000000000005,
+			"startTime": 290235
+		},
+		{
+			"multiplier": 1.0600000000000005,
+			"startTime": 290278
+		},
+		{
+			"multiplier": 1.0600000000000005,
+			"startTime": 290321
+		},
+		{
+			"multiplier": 1.0700000000000005,
+			"startTime": 290365
+		},
+		{
+			"multiplier": 1.0700000000000005,
+			"startTime": 290408
+		},
+		{
+			"multiplier": 1.08,
+			"startTime": 290452
+		},
+		{
+			"multiplier": 1.08,
+			"startTime": 290496
+		},
+		{
+			"multiplier": 1.0900000000000005,
+			"startTime": 290540
+		},
+		{
+			"multiplier": 1.0900000000000005,
+			"startTime": 290584
+		},
+		{
+			"multiplier": 1.1,
+			"startTime": 290629
+		},
+		{
+			"multiplier": 1.1,
+			"startTime": 290673
+		},
+		{
+			"multiplier": 1.1099999999999999,
+			"startTime": 290718
+		},
+		{
+			"multiplier": 1.1099999999999999,
+			"startTime": 290763
+		},
+		{
+			"multiplier": 1.1199999999999997,
+			"startTime": 290808
+		},
+		{
+			"multiplier": 1.1199999999999997,
+			"startTime": 290854
+		},
+		{
+			"multiplier": 1.1299999999999992,
+			"startTime": 290899
+		},
+		{
+			"multiplier": 1.1299999999999992,
+			"startTime": 290945
+		},
+		{
+			"multiplier": 1.1400000000000006,
+			"startTime": 290991
+		},
+		{
+			"multiplier": 1.1400000000000006,
+			"startTime": 291038
+		},
+		{
+			"multiplier": 1.1500000000000006,
+			"startTime": 291084
+		},
+		{
+			"multiplier": 1.1500000000000006,
+			"startTime": 291131
+		},
+		{
+			"multiplier": 1.1600000000000006,
+			"startTime": 291178
+		},
+		{
+			"multiplier": 1.1699999999999997,
+			"startTime": 291225
+		},
+		{
+			"multiplier": 1.1699999999999997,
+			"startTime": 291272
+		},
+		{
+			"multiplier": 1.1800000000000002,
+			"startTime": 291320
+		},
+		{
+			"multiplier": 1.1800000000000002,
+			"startTime": 291368
+		},
+		{
+			"multiplier": 1.1899999999999995,
+			"startTime": 291416
+		},
+		{
+			"multiplier": 1.1899999999999995,
+			"startTime": 291464
+		},
+		{
+			"multiplier": 1.2000000000000004,
+			"startTime": 291513
+		},
+		{
+			"multiplier": 1.2099999999999993,
+			"startTime": 291562
+		},
+		{
+			"multiplier": 1.2099999999999993,
+			"startTime": 291611
+		},
+		{
+			"multiplier": 1.22,
+			"startTime": 291660
+		},
+		{
+			"multiplier": 1.22,
+			"startTime": 291709
+		},
+		{
+			"multiplier": 1.2299999999999995,
+			"startTime": 291759
+		},
+		{
+			"multiplier": 1.2399999999999995,
+			"startTime": 291809
+		},
+		{
+			"multiplier": 1.2399999999999995,
+			"startTime": 291859
+		},
+		{
+			"multiplier": 1.25,
+			"startTime": 291910
+		},
+		{
+			"multiplier": 1.2599999999999996,
+			"startTime": 291961
+		},
+		{
+			"multiplier": 1.2599999999999996,
+			"startTime": 292012
+		},
+		{
+			"multiplier": 1.2699999999999994,
+			"startTime": 292063
+		},
+		{
+			"multiplier": 1.2699999999999994,
+			"startTime": 292114
+		},
+		{
+			"multiplier": 1.28,
+			"startTime": 292166
+		},
+		{
+			"multiplier": 1.2900000000000007,
+			"startTime": 292218
+		},
+		{
+			"multiplier": 1.2900000000000007,
+			"startTime": 292271
+		},
+		{
+			"multiplier": 1.3000000000000003,
+			"startTime": 292323
+		},
+		{
+			"multiplier": 1.3100000000000005,
+			"startTime": 292376
+		},
+		{
+			"multiplier": 1.3199999999999994,
+			"startTime": 292429
+		},
+		{
+			"multiplier": 1.3199999999999994,
+			"startTime": 292483
+		},
+		{
+			"multiplier": 1.3300000000000005,
+			"startTime": 292537
+		},
+		{
+			"multiplier": 1.3399999999999999,
+			"startTime": 292591
+		},
+		{
+			"multiplier": 1.3399999999999999,
+			"startTime": 292645
+		},
+		{
+			"multiplier": 1.3499999999999994,
+			"startTime": 292700
+		},
+		{
+			"multiplier": 1.3599999999999997,
+			"startTime": 292755
+		},
+		{
+			"multiplier": 1.3700000000000003,
+			"startTime": 292810
+		},
+		{
+			"multiplier": 1.3700000000000003,
+			"startTime": 292866
+		},
+		{
+			"multiplier": 1.3800000000000006,
+			"startTime": 292921
+		},
+		{
+			"multiplier": 1.3899999999999992,
+			"startTime": 292978
+		},
+		{
+			"multiplier": 1.4000000000000006,
+			"startTime": 293034
+		},
+		{
+			"multiplier": 1.4100000000000008,
+			"startTime": 293091
+		},
+		{
+			"multiplier": 1.4100000000000008,
+			"startTime": 293148
+		},
+		{
+			"multiplier": 1.4200000000000002,
+			"startTime": 293205
+		},
+		{
+			"multiplier": 1.4300000000000006,
+			"startTime": 293263
+		},
+		{
+			"multiplier": 1.4400000000000008,
+			"startTime": 293321
+		},
+		{
+			"multiplier": 1.4500000000000002,
+			"startTime": 293380
+		},
+		{
+			"multiplier": 1.46,
+			"startTime": 293439
+		},
+		{
+			"multiplier": 1.46,
+			"startTime": 293498
+		},
+		{
+			"multiplier": 1.4699999999999986,
+			"startTime": 293557
+		},
+		{
+			"multiplier": 1.4799999999999995,
+			"startTime": 293617
+		},
+		{
+			"multiplier": 1.4900000000000009,
+			"startTime": 293678
+		},
+		{
+			"multiplier": 1.4999999999999993,
+			"startTime": 293738
+		},
+		{
+			"multiplier": 1.5100000000000002,
+			"startTime": 293799
+		},
+		{
+			"multiplier": 1.5200000000000005,
+			"startTime": 293860
+		},
+		{
+			"multiplier": 1.53,
+			"startTime": 293922
+		},
+		{
+			"multiplier": 1.540000000000001,
+			"startTime": 293984
+		},
+		{
+			"multiplier": 1.549999999999999,
+			"startTime": 294047
+		},
+		{
+			"multiplier": 1.56,
+			"startTime": 294110
+		},
+		{
+			"multiplier": 1.5699999999999992,
+			"startTime": 294173
+		},
+		{
+			"multiplier": 1.5800000000000007,
+			"startTime": 294237
+		},
+		{
+			"multiplier": 1.5899999999999996,
+			"startTime": 294301
+		},
+		{
+			"multiplier": 1.6,
+			"startTime": 294365
+		},
+		{
+			"multiplier": 1.6100000000000008,
+			"startTime": 294430
+		},
+		{
+			"multiplier": 1.6199999999999999,
+			"startTime": 294496
+		},
+		{
+			"multiplier": 1.630000000000001,
+			"startTime": 294561
+		},
+		{
+			"multiplier": 1.639999999999999,
+			"startTime": 294628
+		},
+		{
+			"multiplier": 1.6500000000000001,
+			"startTime": 294694
+		},
+		{
+			"multiplier": 1.6599999999999997,
+			"startTime": 294761
+		},
+		{
+			"multiplier": 1.6699999999999995,
+			"startTime": 294829
+		},
+		{
+			"multiplier": 1.6800000000000008,
+			"startTime": 294897
+		},
+		{
+			"multiplier": 1.7000000000000002,
+			"startTime": 294965
+		},
+		{
+			"multiplier": 1.7099999999999997,
+			"startTime": 295034
+		},
+		{
+			"multiplier": 1.7200000000000009,
+			"startTime": 295104
+		},
+		{
+			"multiplier": 1.7299999999999998,
+			"startTime": 295174
+		},
+		{
+			"multiplier": 1.7399999999999998,
+			"startTime": 295244
+		},
+		{
+			"multiplier": 1.7600000000000007,
+			"startTime": 295315
+		},
+		{
+			"multiplier": 1.7700000000000011,
+			"startTime": 295387
+		},
+		{
+			"multiplier": 1.7799999999999991,
+			"startTime": 295459
+		},
+		{
+			"multiplier": 1.7999999999999985,
+			"startTime": 295531
+		},
+		{
+			"multiplier": 1.8099999999999996,
+			"startTime": 295604
+		},
+		{
+			"multiplier": 1.8200000000000016,
+			"startTime": 295678
+		},
+		{
+			"multiplier": 1.8400000000000007,
+			"startTime": 295752
+		},
+		{
+			"multiplier": 1.8500000000000019,
+			"startTime": 295826
+		},
+		{
+			"multiplier": 1.8600000000000019,
+			"startTime": 295901
+		},
+		{
+			"multiplier": 1.880000000000001,
+			"startTime": 295977
+		},
+		{
+			"multiplier": 1.8900000000000003,
+			"startTime": 296054
+		},
+		{
+			"multiplier": 1.9099999999999993,
+			"startTime": 296130
+		},
+		{
+			"multiplier": 1.9200000000000013,
+			"startTime": 296208
+		},
+		{
+			"multiplier": 1.9400000000000008,
+			"startTime": 296286
+		},
+		{
+			"multiplier": 1.9499999999999993,
+			"startTime": 296365
+		},
+		{
+			"multiplier": 1.9699999999999982,
+			"startTime": 296444
+		},
+		{
+			"multiplier": 1.9800000000000002,
+			"startTime": 296524
+		},
+		{
+			"multiplier": 2,
+			"startTime": 296605
+		},
+		{
+			"multiplier": 2.02,
+			"startTime": 296686
+		},
+		{
+			"multiplier": 2.0299999999999985,
+			"startTime": 296768
+		},
+		{
+			"multiplier": 2.050000000000002,
+			"startTime": 296851
+		},
+		{
+			"multiplier": 2.069999999999998,
+			"startTime": 296934
+		},
+		{
+			"multiplier": 2.0799999999999987,
+			"startTime": 297018
+		},
+		{
+			"multiplier": 2.100000000000001,
+			"startTime": 297103
+		},
+		{
+			"multiplier": 2.120000000000001,
+			"startTime": 297188
+		},
+		{
+			"multiplier": 2.140000000000001,
+			"startTime": 297275
+		},
+		{
+			"multiplier": 2.16,
+			"startTime": 297361
+		},
+		{
+			"multiplier": 2.180000000000001,
+			"startTime": 297449
+		},
+		{
+			"multiplier": 2.1999999999999975,
+			"startTime": 297538
+		},
+		{
+			"multiplier": 2.220000000000002,
+			"startTime": 297627
+		},
+		{
+			"multiplier": 2.240000000000002,
+			"startTime": 297717
+		},
+		{
+			"multiplier": 2.2599999999999985,
+			"startTime": 297808
+		},
+		{
+			"multiplier": 2.280000000000001,
+			"startTime": 297900
+		},
+		{
+			"multiplier": 2.300000000000001,
+			"startTime": 297992
+		},
+		{
+			"multiplier": 2.3199999999999985,
+			"startTime": 298086
+		},
+		{
+			"multiplier": 2.340000000000002,
+			"startTime": 298180
+		},
+		{
+			"multiplier": 2.370000000000001,
+			"startTime": 298275
+		},
+		{
+			"multiplier": 2.390000000000001,
+			"startTime": 298372
+		},
+		{
+			"multiplier": 2.4099999999999975,
+			"startTime": 298469
+		},
+		{
+			"multiplier": 2.439999999999997,
+			"startTime": 298567
+		},
+		{
+			"multiplier": 2.460000000000002,
+			"startTime": 298666
+		},
+		{
+			"multiplier": 2.479999999999999,
+			"startTime": 298766
+		},
+		{
+			"multiplier": 2.51,
+			"startTime": 298867
+		},
+		{
+			"multiplier": 2.5399999999999987,
+			"startTime": 298969
+		},
+		{
+			"multiplier": 2.56,
+			"startTime": 299072
+		},
+		{
+			"multiplier": 2.5900000000000007,
+			"startTime": 299176
+		},
+		{
+			"multiplier": 2.620000000000001,
+			"startTime": 299281
+		},
+		{
+			"multiplier": 2.649999999999998,
+			"startTime": 299388
+		},
+		{
+			"multiplier": 2.6699999999999964,
+			"startTime": 299495
+		},
+		{
+			"multiplier": 2.7000000000000024,
+			"startTime": 299604
+		},
+		{
+			"multiplier": 2.730000000000002,
+			"startTime": 299714
+		},
+		{
+			"multiplier": 2.760000000000001,
+			"startTime": 299825
+		},
+		{
+			"multiplier": 2.800000000000001,
+			"startTime": 299937
+		},
+		{
+			"multiplier": 2.8299999999999996,
+			"startTime": 300051
+		},
+		{
+			"multiplier": 2.8599999999999968,
+			"startTime": 300166
+		},
+		{
+			"multiplier": 2.8899999999999975,
+			"startTime": 300282
+		},
+		{
+			"multiplier": 2.9300000000000006,
+			"startTime": 300400
+		},
+		{
+			"multiplier": 2.959999999999999,
+			"startTime": 300519
+		},
+		{
+			"multiplier": 3.000000000000003,
+			"startTime": 300639
+		},
+		{
+			"multiplier": 3.0399999999999965,
+			"startTime": 300761
+		},
+		{
+			"multiplier": 3.079999999999997,
+			"startTime": 300885
+		},
+		{
+			"multiplier": 3.1099999999999963,
+			"startTime": 301010
+		},
+		{
+			"multiplier": 3.1500000000000044,
+			"startTime": 301136
+		},
+		{
+			"multiplier": 3.190000000000004,
+			"startTime": 301264
+		},
+		{
+			"multiplier": 3.2399999999999998,
+			"startTime": 301394
+		},
+		{
+			"multiplier": 3.279999999999998,
+			"startTime": 301526
+		},
+		{
+			"multiplier": 3.3200000000000047,
+			"startTime": 301659
+		},
+		{
+			"multiplier": 3.3700000000000045,
+			"startTime": 301794
+		},
+		{
+			"multiplier": 3.4200000000000053,
+			"startTime": 301931
+		},
+		{
+			"multiplier": 3.4600000000000053,
+			"startTime": 302070
+		},
+		{
+			"multiplier": 3.509999999999999,
+			"startTime": 302211
+		},
+		{
+			"multiplier": 3.570000000000002,
+			"startTime": 302354
+		},
+		{
+			"multiplier": 3.619999999999999,
+			"startTime": 302499
+		},
+		{
+			"multiplier": 3.6699999999999937,
+			"startTime": 302646
+		},
+		{
+			"multiplier": 3.7300000000000044,
+			"startTime": 302795
+		},
+		{
+			"multiplier": 0.7699999999999992,
+			"startTime": 308250
+		},
+		{
+			"multiplier": 0.7699999999999992,
+			"startTime": 309000
+		},
+		{
+			"multiplier": 0.7699999999999992,
+			"startTime": 309750
+		},
+		{
+			"multiplier": 0.7699999999999992,
+			"startTime": 318375
+		},
+		{
+			"multiplier": 0.7699999999999992,
+			"startTime": 319125
+		},
+		{
+			"multiplier": 0.7699999999999992,
+			"startTime": 319875
+		},
+		{
+			"multiplier": 0.7699999999999992,
+			"startTime": 320062
+		},
+		{
+			"multiplier": 0.7699999999999992,
+			"startTime": 320437
+		},
+		{
+			"multiplier": 0.7699999999999992,
+			"startTime": 332437
+		},
+		{
+			"multiplier": 0.7699999999999992,
+			"startTime": 338437
+		},
+		{
+			"multiplier": 0.7699999999999992,
+			"startTime": 344437
+		},
+		{
+			"multiplier": 0.7699999999999992,
+			"startTime": 355312
+		},
+		{
+			"multiplier": 0.7699999999999992,
+			"startTime": 356437
+		},
+		{
+			"multiplier": 0.7699999999999992,
+			"startTime": 362249
+		},
+		{
+			"multiplier": 0.7699999999999992,
+			"startTime": 362437
+		},
+		{
+			"multiplier": 0.7699999999999992,
+			"startTime": 368249
+		}
+	],
+	"bpmChanges": [
+		{
+			"bpm": 210,
+			"startTime": 1015
+		},
+		{
+			"bpm": 215,
+			"startTime": 10158
+		},
+		{
+			"bpm": 220,
+			"startTime": 14623
+		},
+		{
+			"bpm": 225,
+			"startTime": 16805
+		},
+		{
+			"bpm": 230,
+			"startTime": 17871
+		},
+		{
+			"bpm": 235,
+			"startTime": 18393
+		},
+		{
+			"bpm": 240,
+			"startTime": 18649
+		},
+		{
+			"bpm": 180,
+			"startTime": 56274
+		},
+		{
+			"bpm": 181,
+			"startTime": 125607
+		},
+		{
+			"bpm": 182,
+			"startTime": 125773
+		},
+		{
+			"bpm": 183,
+			"startTime": 125937
+		},
+		{
+			"bpm": 184,
+			"startTime": 126101
+		},
+		{
+			"bpm": 185,
+			"startTime": 126264
+		},
+		{
+			"bpm": 186,
+			"startTime": 126427
+		},
+		{
+			"bpm": 187,
+			"startTime": 126588
+		},
+		{
+			"bpm": 188,
+			"startTime": 126748
+		},
+		{
+			"bpm": 189,
+			"startTime": 126908
+		},
+		{
+			"bpm": 190,
+			"startTime": 127067
+		},
+		{
+			"bpm": 191,
+			"startTime": 127224
+		},
+		{
+			"bpm": 192,
+			"startTime": 127382
+		},
+		{
+			"bpm": 193,
+			"startTime": 127538
+		},
+		{
+			"bpm": 194,
+			"startTime": 127693
+		},
+		{
+			"bpm": 195,
+			"startTime": 127848
+		},
+		{
+			"bpm": 196,
+			"startTime": 128002
+		},
+		{
+			"bpm": 197,
+			"startTime": 128155
+		},
+		{
+			"bpm": 198,
+			"startTime": 128307
+		},
+		{
+			"bpm": 199,
+			"startTime": 128459
+		},
+		{
+			"bpm": 200,
+			"startTime": 128609
+		},
+		{
+			"bpm": 201,
+			"startTime": 128759
+		},
+		{
+			"bpm": 202,
+			"startTime": 128909
+		},
+		{
+			"bpm": 203,
+			"startTime": 129057
+		},
+		{
+			"bpm": 204,
+			"startTime": 129205
+		},
+		{
+			"bpm": 205,
+			"startTime": 129352
+		},
+		{
+			"bpm": 206,
+			"startTime": 129498
+		},
+		{
+			"bpm": 207,
+			"startTime": 129644
+		},
+		{
+			"bpm": 208,
+			"startTime": 129789
+		},
+		{
+			"bpm": 209,
+			"startTime": 129933
+		},
+		{
+			"bpm": 210,
+			"startTime": 130077
+		},
+		{
+			"bpm": 211,
+			"startTime": 130219
+		},
+		{
+			"bpm": 212,
+			"startTime": 130362
+		},
+		{
+			"bpm": 213,
+			"startTime": 130503
+		},
+		{
+			"bpm": 214,
+			"startTime": 130644
+		},
+		{
+			"bpm": 215,
+			"startTime": 130784
+		},
+		{
+			"bpm": 216,
+			"startTime": 130924
+		},
+		{
+			"bpm": 217,
+			"startTime": 131063
+		},
+		{
+			"bpm": 218,
+			"startTime": 131201
+		},
+		{
+			"bpm": 219,
+			"startTime": 131338
+		},
+		{
+			"bpm": 220,
+			"startTime": 131475
+		},
+		{
+			"bpm": 221,
+			"startTime": 131612
+		},
+		{
+			"bpm": 222,
+			"startTime": 131748
+		},
+		{
+			"bpm": 223,
+			"startTime": 131883
+		},
+		{
+			"bpm": 224,
+			"startTime": 132017
+		},
+		{
+			"bpm": 246,
+			"startTime": 196035
+		},
+		{
+			"bpm": 245,
+			"startTime": 289734
+		},
+		{
+			"bpm": 244,
+			"startTime": 289775
+		},
+		{
+			"bpm": 243,
+			"startTime": 289816
+		},
+		{
+			"bpm": 242,
+			"startTime": 289857
+		},
+		{
+			"bpm": 241,
+			"startTime": 289899
+		},
+		{
+			"bpm": 240,
+			"startTime": 289940
+		},
+		{
+			"bpm": 239,
+			"startTime": 289982
+		},
+		{
+			"bpm": 238,
+			"startTime": 290024
+		},
+		{
+			"bpm": 237,
+			"startTime": 290066
+		},
+		{
+			"bpm": 236,
+			"startTime": 290108
+		},
+		{
+			"bpm": 235,
+			"startTime": 290150
+		},
+		{
+			"bpm": 234,
+			"startTime": 290193
+		},
+		{
+			"bpm": 233,
+			"startTime": 290235
+		},
+		{
+			"bpm": 232,
+			"startTime": 290278
+		},
+		{
+			"bpm": 231,
+			"startTime": 290321
+		},
+		{
+			"bpm": 230,
+			"startTime": 290365
+		},
+		{
+			"bpm": 229,
+			"startTime": 290408
+		},
+		{
+			"bpm": 228,
+			"startTime": 290452
+		},
+		{
+			"bpm": 227,
+			"startTime": 290496
+		},
+		{
+			"bpm": 226,
+			"startTime": 290540
+		},
+		{
+			"bpm": 225,
+			"startTime": 290584
+		},
+		{
+			"bpm": 224,
+			"startTime": 290629
+		},
+		{
+			"bpm": 223,
+			"startTime": 290673
+		},
+		{
+			"bpm": 222,
+			"startTime": 290718
+		},
+		{
+			"bpm": 221,
+			"startTime": 290763
+		},
+		{
+			"bpm": 220,
+			"startTime": 290808
+		},
+		{
+			"bpm": 219,
+			"startTime": 290854
+		},
+		{
+			"bpm": 218,
+			"startTime": 290899
+		},
+		{
+			"bpm": 217,
+			"startTime": 290945
+		},
+		{
+			"bpm": 216,
+			"startTime": 290991
+		},
+		{
+			"bpm": 215,
+			"startTime": 291038
+		},
+		{
+			"bpm": 214,
+			"startTime": 291084
+		},
+		{
+			"bpm": 213,
+			"startTime": 291131
+		},
+		{
+			"bpm": 212,
+			"startTime": 291178
+		},
+		{
+			"bpm": 211,
+			"startTime": 291225
+		},
+		{
+			"bpm": 210,
+			"startTime": 291272
+		},
+		{
+			"bpm": 209,
+			"startTime": 291320
+		},
+		{
+			"bpm": 208,
+			"startTime": 291368
+		},
+		{
+			"bpm": 207,
+			"startTime": 291416
+		},
+		{
+			"bpm": 206,
+			"startTime": 291464
+		},
+		{
+			"bpm": 205,
+			"startTime": 291513
+		},
+		{
+			"bpm": 204,
+			"startTime": 291562
+		},
+		{
+			"bpm": 203,
+			"startTime": 291611
+		},
+		{
+			"bpm": 202,
+			"startTime": 291660
+		},
+		{
+			"bpm": 201,
+			"startTime": 291709
+		},
+		{
+			"bpm": 200,
+			"startTime": 291759
+		},
+		{
+			"bpm": 199,
+			"startTime": 291809
+		},
+		{
+			"bpm": 198,
+			"startTime": 291859
+		},
+		{
+			"bpm": 197,
+			"startTime": 291910
+		},
+		{
+			"bpm": 196,
+			"startTime": 291961
+		},
+		{
+			"bpm": 195,
+			"startTime": 292012
+		},
+		{
+			"bpm": 194,
+			"startTime": 292063
+		},
+		{
+			"bpm": 193,
+			"startTime": 292114
+		},
+		{
+			"bpm": 192,
+			"startTime": 292166
+		},
+		{
+			"bpm": 191,
+			"startTime": 292218
+		},
+		{
+			"bpm": 190,
+			"startTime": 292271
+		},
+		{
+			"bpm": 189,
+			"startTime": 292323
+		},
+		{
+			"bpm": 188,
+			"startTime": 292376
+		},
+		{
+			"bpm": 187,
+			"startTime": 292429
+		},
+		{
+			"bpm": 186,
+			"startTime": 292483
+		},
+		{
+			"bpm": 185,
+			"startTime": 292537
+		},
+		{
+			"bpm": 184,
+			"startTime": 292591
+		},
+		{
+			"bpm": 183,
+			"startTime": 292645
+		},
+		{
+			"bpm": 182,
+			"startTime": 292700
+		},
+		{
+			"bpm": 181,
+			"startTime": 292755
+		},
+		{
+			"bpm": 180,
+			"startTime": 292810
+		},
+		{
+			"bpm": 179,
+			"startTime": 292866
+		},
+		{
+			"bpm": 178,
+			"startTime": 292921
+		},
+		{
+			"bpm": 177,
+			"startTime": 292978
+		},
+		{
+			"bpm": 176,
+			"startTime": 293034
+		},
+		{
+			"bpm": 175,
+			"startTime": 293091
+		},
+		{
+			"bpm": 174,
+			"startTime": 293148
+		},
+		{
+			"bpm": 173,
+			"startTime": 293205
+		},
+		{
+			"bpm": 172,
+			"startTime": 293263
+		},
+		{
+			"bpm": 171,
+			"startTime": 293321
+		},
+		{
+			"bpm": 170,
+			"startTime": 293380
+		},
+		{
+			"bpm": 169,
+			"startTime": 293439
+		},
+		{
+			"bpm": 168,
+			"startTime": 293498
+		},
+		{
+			"bpm": 167,
+			"startTime": 293557
+		},
+		{
+			"bpm": 166,
+			"startTime": 293617
+		},
+		{
+			"bpm": 165,
+			"startTime": 293678
+		},
+		{
+			"bpm": 164,
+			"startTime": 293738
+		},
+		{
+			"bpm": 163,
+			"startTime": 293799
+		},
+		{
+			"bpm": 162,
+			"startTime": 293860
+		},
+		{
+			"bpm": 161,
+			"startTime": 293922
+		},
+		{
+			"bpm": 160,
+			"startTime": 293984
+		},
+		{
+			"bpm": 159,
+			"startTime": 294047
+		},
+		{
+			"bpm": 158,
+			"startTime": 294110
+		},
+		{
+			"bpm": 157,
+			"startTime": 294173
+		},
+		{
+			"bpm": 156,
+			"startTime": 294237
+		},
+		{
+			"bpm": 155,
+			"startTime": 294301
+		},
+		{
+			"bpm": 154,
+			"startTime": 294365
+		},
+		{
+			"bpm": 153,
+			"startTime": 294430
+		},
+		{
+			"bpm": 152,
+			"startTime": 294496
+		},
+		{
+			"bpm": 151,
+			"startTime": 294561
+		},
+		{
+			"bpm": 150,
+			"startTime": 294628
+		},
+		{
+			"bpm": 149,
+			"startTime": 294694
+		},
+		{
+			"bpm": 148,
+			"startTime": 294761
+		},
+		{
+			"bpm": 147,
+			"startTime": 294829
+		},
+		{
+			"bpm": 146,
+			"startTime": 294897
+		},
+		{
+			"bpm": 145,
+			"startTime": 294965
+		},
+		{
+			"bpm": 144,
+			"startTime": 295034
+		},
+		{
+			"bpm": 143,
+			"startTime": 295104
+		},
+		{
+			"bpm": 142,
+			"startTime": 295174
+		},
+		{
+			"bpm": 141,
+			"startTime": 295244
+		},
+		{
+			"bpm": 140,
+			"startTime": 295315
+		},
+		{
+			"bpm": 139,
+			"startTime": 295387
+		},
+		{
+			"bpm": 138,
+			"startTime": 295459
+		},
+		{
+			"bpm": 137,
+			"startTime": 295531
+		},
+		{
+			"bpm": 136,
+			"startTime": 295604
+		},
+		{
+			"bpm": 135,
+			"startTime": 295678
+		},
+		{
+			"bpm": 134,
+			"startTime": 295752
+		},
+		{
+			"bpm": 133,
+			"startTime": 295826
+		},
+		{
+			"bpm": 132,
+			"startTime": 295901
+		},
+		{
+			"bpm": 131,
+			"startTime": 295977
+		},
+		{
+			"bpm": 130,
+			"startTime": 296054
+		},
+		{
+			"bpm": 129,
+			"startTime": 296130
+		},
+		{
+			"bpm": 128,
+			"startTime": 296208
+		},
+		{
+			"bpm": 127,
+			"startTime": 296286
+		},
+		{
+			"bpm": 126,
+			"startTime": 296365
+		},
+		{
+			"bpm": 125,
+			"startTime": 296444
+		},
+		{
+			"bpm": 124,
+			"startTime": 296524
+		},
+		{
+			"bpm": 123,
+			"startTime": 296605
+		},
+		{
+			"bpm": 122,
+			"startTime": 296686
+		},
+		{
+			"bpm": 121,
+			"startTime": 296768
+		},
+		{
+			"bpm": 120,
+			"startTime": 296851
+		},
+		{
+			"bpm": 119,
+			"startTime": 296934
+		},
+		{
+			"bpm": 118,
+			"startTime": 297018
+		},
+		{
+			"bpm": 117,
+			"startTime": 297103
+		},
+		{
+			"bpm": 116,
+			"startTime": 297188
+		},
+		{
+			"bpm": 115,
+			"startTime": 297275
+		},
+		{
+			"bpm": 114,
+			"startTime": 297361
+		},
+		{
+			"bpm": 113,
+			"startTime": 297449
+		},
+		{
+			"bpm": 112,
+			"startTime": 297538
+		},
+		{
+			"bpm": 111,
+			"startTime": 297627
+		},
+		{
+			"bpm": 110,
+			"startTime": 297717
+		},
+		{
+			"bpm": 109,
+			"startTime": 297808
+		},
+		{
+			"bpm": 108,
+			"startTime": 297900
+		},
+		{
+			"bpm": 107,
+			"startTime": 297992
+		},
+		{
+			"bpm": 106,
+			"startTime": 298086
+		},
+		{
+			"bpm": 105,
+			"startTime": 298180
+		},
+		{
+			"bpm": 104,
+			"startTime": 298275
+		},
+		{
+			"bpm": 103,
+			"startTime": 298372
+		},
+		{
+			"bpm": 102,
+			"startTime": 298469
+		},
+		{
+			"bpm": 101,
+			"startTime": 298567
+		},
+		{
+			"bpm": 100,
+			"startTime": 298666
+		},
+		{
+			"bpm": 99,
+			"startTime": 298766
+		},
+		{
+			"bpm": 98,
+			"startTime": 298867
+		},
+		{
+			"bpm": 97,
+			"startTime": 298969
+		},
+		{
+			"bpm": 96,
+			"startTime": 299072
+		},
+		{
+			"bpm": 95,
+			"startTime": 299176
+		},
+		{
+			"bpm": 94,
+			"startTime": 299281
+		},
+		{
+			"bpm": 93,
+			"startTime": 299388
+		},
+		{
+			"bpm": 92,
+			"startTime": 299495
+		},
+		{
+			"bpm": 91,
+			"startTime": 299604
+		},
+		{
+			"bpm": 90,
+			"startTime": 299714
+		},
+		{
+			"bpm": 89,
+			"startTime": 299825
+		},
+		{
+			"bpm": 88,
+			"startTime": 299937
+		},
+		{
+			"bpm": 87,
+			"startTime": 300051
+		},
+		{
+			"bpm": 86,
+			"startTime": 300166
+		},
+		{
+			"bpm": 85,
+			"startTime": 300282
+		},
+		{
+			"bpm": 84,
+			"startTime": 300400
+		},
+		{
+			"bpm": 83,
+			"startTime": 300519
+		},
+		{
+			"bpm": 82,
+			"startTime": 300639
+		},
+		{
+			"bpm": 81,
+			"startTime": 300761
+		},
+		{
+			"bpm": 80,
+			"startTime": 300885
+		},
+		{
+			"bpm": 79,
+			"startTime": 301010
+		},
+		{
+			"bpm": 78,
+			"startTime": 301136
+		},
+		{
+			"bpm": 77,
+			"startTime": 301264
+		},
+		{
+			"bpm": 76,
+			"startTime": 301394
+		},
+		{
+			"bpm": 75,
+			"startTime": 301526
+		},
+		{
+			"bpm": 74,
+			"startTime": 301659
+		},
+		{
+			"bpm": 73,
+			"startTime": 301794
+		},
+		{
+			"bpm": 72,
+			"startTime": 301931
+		},
+		{
+			"bpm": 71,
+			"startTime": 302070
+		},
+		{
+			"bpm": 70,
+			"startTime": 302211
+		},
+		{
+			"bpm": 69,
+			"startTime": 302354
+		},
+		{
+			"bpm": 68,
+			"startTime": 302499
+		},
+		{
+			"bpm": 67,
+			"startTime": 302646
+		},
+		{
+			"bpm": 66,
+			"startTime": 302795
+		},
+		{
+			"bpm": 320,
+			"startTime": 308250
+		}
+	],
+	"song": {
+		"player2": "Dad",
+		"player1": "BF",
+		"speed": 3.4,
+		"needsVoices": false,
+		"sectionLengths": [],
+		"song": "HALL",
+		"bpm": 0,
+		"sections": 0,
+		"validScore": true,
+		"notes": [
+			{
+				"mustHitSection": true,
+				"typeOfSection": 0,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						1015,
+						3,
+						8785
+					],
+					[
+						3372,
+						2,
+						6357
+					],
+					[
+						5372,
+						1,
+						4500
+					],
+					[
+						6300,
+						0,
+						3572
+					],
+					[
+						9800,
+						2,
+						0
+					],
+					[
+						9872,
+						3,
+						0
+					],
+					[
+						9919,
+						1,
+						0
+					],
+					[
+						9979,
+						3,
+						0
+					],
+					[
+						10015,
+						2,
+						0
+					],
+					[
+						10062,
+						1,
+						0
+					],
+					[
+						10110,
+						0,
+						0
+					],
+					[
+						10158,
+						1,
+						69
+					],
+					[
+						10158,
+						3,
+						0
+					],
+					[
+						10158,
+						2,
+						0
+					],
+					[
+						10204,
+						0,
+						0
+					],
+					[
+						10251,
+						3,
+						0
+					],
+					[
+						10277,
+						1,
+						0
+					],
+					[
+						10317,
+						2,
+						0
+					],
+					[
+						10357,
+						3,
+						0
+					],
+					[
+						10390,
+						0,
+						0
+					],
+					[
+						10437,
+						2,
+						0
+					],
+					[
+						10476,
+						1,
+						0
+					],
+					[
+						10516,
+						3,
+						0
+					],
+					[
+						10556,
+						2,
+						0
+					],
+					[
+						10596,
+						0,
+						0
+					],
+					[
+						10636,
+						1,
+						0
+					],
+					[
+						10676,
+						0,
+						0
+					],
+					[
+						10716,
+						3,
+						0
+					],
+					[
+						10756,
+						1,
+						0
+					],
+					[
+						10795,
+						2,
+						0
+					],
+					[
+						10835,
+						3,
+						0
+					],
+					[
+						10875,
+						2,
+						0
+					],
+					[
+						10915,
+						0,
+						0
+					],
+					[
+						10955,
+						3,
+						0
+					],
+					[
+						10995,
+						1,
+						0
+					],
+					[
+						11041,
+						0,
+						0
+					],
+					[
+						11088,
+						1,
+						0
+					],
+					[
+						11134,
+						2,
+						0
+					],
+					[
+						11181,
+						0,
+						0
+					],
+					[
+						11227,
+						3,
+						0
+					],
+					[
+						11274,
+						2,
+						0
+					],
+					[
+						11320,
+						3,
+						0
+					],
+					[
+						11367,
+						1,
+						0
+					],
+					[
+						11413,
+						2,
+						0
+					],
+					[
+						11460,
+						0,
+						0
+					],
+					[
+						11506,
+						1,
+						0
+					],
+					[
+						11553,
+						0,
+						0
+					],
+					[
+						11609,
+						3,
+						0
+					],
+					[
+						11664,
+						0,
+						0
+					],
+					[
+						11720,
+						2,
+						0
+					],
+					[
+						11776,
+						3,
+						0
+					],
+					[
+						11832,
+						2,
+						0
+					],
+					[
+						11888,
+						0,
+						0
+					],
+					[
+						11944,
+						2,
+						0
+					],
+					[
+						11999,
+						1,
+						0
+					],
+					[
+						12055,
+						0,
+						0
+					],
+					[
+						12111,
+						3,
+						0
+					],
+					[
+						12111,
+						2,
+						0
+					],
+					[
+						12181,
+						3,
+						0
+					],
+					[
+						12251,
+						0,
+						0
+					],
+					[
+						12251,
+						1,
+						0
+					],
+					[
+						12320,
+						0,
+						0
+					],
+					[
+						12390,
+						2,
+						0
+					],
+					[
+						12390,
+						3,
+						0
+					],
+					[
+						12390,
+						1,
+						0
+					],
+					[
+						12460,
+						0,
+						0
+					],
+					[
+						12530,
+						3,
+						0
+					],
+					[
+						12564,
+						1,
+						0
+					],
+					[
+						12599,
+						0,
+						0
+					],
+					[
+						12634,
+						2,
+						0
+					],
+					[
+						12669,
+						1,
+						0
+					],
+					[
+						12669,
+						3,
+						0
+					],
+					[
+						12739,
+						0,
+						0
+					],
+					[
+						12809,
+						3,
+						0
+					],
+					[
+						12931,
+						2,
+						0
+					],
+					[
+						12948,
+						0,
+						279
+					],
+					[
+						13105,
+						1,
+						0
+					],
+					[
+						13192,
+						3,
+						0
+					],
+					[
+						13280,
+						2,
+						0
+					],
+					[
+						13349,
+						2,
+						0
+					],
+					[
+						13460,
+						3,
+						0
+					],
+					[
+						13483,
+						1,
+						0
+					],
+					[
+						13506,
+						2,
+						0
+					],
+					[
+						13553,
+						3,
+						0
+					],
+					[
+						13646,
+						0,
+						0
+					],
+					[
+						13716,
+						3,
+						0
+					],
+					[
+						13762,
+						1,
+						0
+					],
+					[
+						13809,
+						2,
+						0
+					],
+					[
+						13832,
+						0,
+						0
+					],
+					[
+						13925,
+						3,
+						0
+					],
+					[
+						13948,
+						2,
+						0
+					],
+					[
+						13971,
+						0,
+						0
+					],
+					[
+						14064,
+						0,
+						0
+					],
+					[
+						14064,
+						3,
+						0
+					],
+					[
+						14204,
+						1,
+						0
+					],
+					[
+						14204,
+						2,
+						0
+					],
+					[
+						14274,
+						0,
+						0
+					],
+					[
+						14344,
+						2,
+						0
+					],
+					[
+						14344,
+						3,
+						0
+					],
+					[
+						14413,
+						3,
+						0
+					],
+					[
+						14483,
+						0,
+						0
+					],
+					[
+						14483,
+						1,
+						0
+					],
+					[
+						14553,
+						0,
+						0
+					],
+					[
+						14623,
+						1,
+						0
+					],
+					[
+						14623,
+						2,
+						0
+					],
+					[
+						14623,
+						3,
+						0
+					],
+					[
+						14668,
+						0,
+						0
+					],
+					[
+						14691,
+						2,
+						0
+					],
+					[
+						14713,
+						3,
+						0
+					],
+					[
+						14759,
+						0,
+						0
+					],
+					[
+						14827,
+						2,
+						0
+					],
+					[
+						14850,
+						1,
+						0
+					],
+					[
+						14963,
+						2,
+						0
+					],
+					[
+						14986,
+						1,
+						0
+					],
+					[
+						15100,
+						3,
+						0
+					],
+					[
+						15123,
+						2,
+						0
+					],
+					[
+						15145,
+						1,
+						0
+					],
+					[
+						15168,
+						0,
+						273
+					],
+					[
+						15282,
+						3,
+						0
+					],
+					[
+						15304,
+						2,
+						0
+					],
+					[
+						15441,
+						3,
+						0
+					],
+					[
+						15463,
+						1,
+						0
+					],
+					[
+						15577,
+						1,
+						0
+					],
+					[
+						15600,
+						3,
+						0
+					],
+					[
+						15623,
+						2,
+						0
+					],
+					[
+						15713,
+						1,
+						0
+					],
+					[
+						15713,
+						3,
+						0
+					],
+					[
+						15713,
+						0,
+						0
+					],
+					[
+						15774,
+						2,
+						0
+					],
+					[
+						15804,
+						3,
+						0
+					],
+					[
+						15827,
+						1,
+						0
+					],
+					[
+						15986,
+						1,
+						0
+					],
+					[
+						16009,
+						2,
+						0
+					],
+					[
+						16123,
+						3,
+						0
+					],
+					[
+						16191,
+						0,
+						0
+					],
+					[
+						16213,
+						1,
+						0
+					],
+					[
+						16259,
+						2,
+						0
+					],
+					[
+						16327,
+						3,
+						0
+					],
+					[
+						16395,
+						1,
+						0
+					],
+					[
+						16463,
+						2,
+						0
+					],
+					[
+						16532,
+						1,
+						0
+					],
+					[
+						16532,
+						0,
+						0
+					],
+					[
+						16600,
+						0,
+						0
+					],
+					[
+						16668,
+						3,
+						0
+					],
+					[
+						16668,
+						2,
+						0
+					],
+					[
+						16736,
+						3,
+						0
+					],
+					[
+						16804,
+						0,
+						0
+					],
+					[
+						16804,
+						2,
+						0
+					],
+					[
+						16805,
+						1,
+						0
+					],
+					[
+						16849,
+						3,
+						0
+					],
+					[
+						16871,
+						0,
+						0
+					],
+					[
+						16893,
+						1,
+						0
+					],
+					[
+						16916,
+						2,
+						0
+					],
+					[
+						16938,
+						3,
+						0
+					],
+					[
+						16971,
+						0,
+						0
+					],
+					[
+						17005,
+						1,
+						0
+					],
+					[
+						17071,
+						3,
+						134
+					],
+					[
+						17205,
+						2,
+						0
+					],
+					[
+						17227,
+						0,
+						0
+					],
+					[
+						17249,
+						1,
+						0
+					],
+					[
+						17338,
+						2,
+						267
+					],
+					[
+						17338,
+						0,
+						133
+					],
+					[
+						17405,
+						3,
+						0
+					],
+					[
+						17605,
+						0,
+						0
+					],
+					[
+						17649,
+						3,
+						0
+					],
+					[
+						17693,
+						1,
+						0
+					],
+					[
+						17738,
+						2,
+						0
+					],
+					[
+						17782,
+						1,
+						0
+					],
+					[
+						17871,
+						2,
+						0
+					],
+					[
+						17871,
+						3,
+						0
+					],
+					[
+						17871,
+						1,
+						0
+					],
+					[
+						18001,
+						2,
+						0
+					],
+					[
+						18066,
+						1,
+						0
+					],
+					[
+						18262,
+						1,
+						0
+					],
+					[
+						18294,
+						3,
+						0
+					],
+					[
+						18327,
+						2,
+						0
+					],
+					[
+						18393,
+						3,
+						0
+					],
+					[
+						18393,
+						0,
+						0
+					],
+					[
+						18456,
+						0,
+						0
+					],
+					[
+						18520,
+						3,
+						0
+					],
+					[
+						18520,
+						1,
+						0
+					],
+					[
+						18584,
+						3,
+						0
+					],
+					[
+						18648,
+						2,
+						0
+					],
+					[
+						18648,
+						1,
+						0
+					],
+					[
+						18649,
+						0,
+						0
+					],
+					[
+						18774,
+						1,
+						0
+					],
+					[
+						18899,
+						0,
+						0
+					],
+					[
+						18899,
+						3,
+						0
+					],
+					[
+						18961,
+						0,
+						0
+					],
+					[
+						19024,
+						2,
+						0
+					],
+					[
+						19086,
+						2,
+						0
+					],
+					[
+						19149,
+						1,
+						125
+					],
+					[
+						19149,
+						3,
+						0
+					],
+					[
+						19274,
+						2,
+						0
+					],
+					[
+						19274,
+						0,
+						0
+					],
+					[
+						19399,
+						0,
+						0
+					],
+					[
+						19399,
+						3,
+						0
+					],
+					[
+						19461,
+						2,
+						0
+					],
+					[
+						19524,
+						0,
+						0
+					],
+					[
+						19555,
+						1,
+						0
+					],
+					[
+						19586,
+						3,
+						0
+					],
+					[
+						19617,
+						2,
+						0
+					],
+					[
+						19649,
+						1,
+						0
+					],
+					[
+						19680,
+						0,
+						0
+					],
+					[
+						19711,
+						3,
+						0
+					],
+					[
+						19774,
+						1,
+						187
+					],
+					[
+						19774,
+						0,
+						62
+					],
+					[
+						19774,
+						2,
+						250
+					],
+					[
+						19899,
+						3,
+						125
+					],
+					[
+						20024,
+						1,
+						62
+					],
+					[
+						20024,
+						0,
+						125
+					],
+					[
+						20149,
+						2,
+						187
+					],
+					[
+						20149,
+						1,
+						125
+					],
+					[
+						20149,
+						3,
+						62
+					],
+					[
+						20274,
+						0,
+						125
+					],
+					[
+						20399,
+						1,
+						187
+					],
+					[
+						20399,
+						2,
+						250
+					],
+					[
+						20399,
+						3,
+						62
+					],
+					[
+						20524,
+						3,
+						125
+					],
+					[
+						20524,
+						0,
+						62
+					],
+					[
+						20649,
+						1,
+						62
+					],
+					[
+						20649,
+						0,
+						125
+					],
+					[
+						20774,
+						2,
+						250
+					],
+					[
+						20774,
+						1,
+						187
+					],
+					[
+						20774,
+						3,
+						125
+					],
+					[
+						20899,
+						0,
+						125
+					],
+					[
+						21024,
+						1,
+						62
+					],
+					[
+						21024,
+						3,
+						0
+					],
+					[
+						21086,
+						3,
+						0
+					],
+					[
+						21149,
+						1,
+						187
+					],
+					[
+						21149,
+						0,
+						62
+					],
+					[
+						21149,
+						2,
+						250
+					],
+					[
+						21274,
+						3,
+						125
+					],
+					[
+						21399,
+						0,
+						62
+					],
+					[
+						21399,
+						1,
+						0
+					],
+					[
+						21461,
+						1,
+						0
+					],
+					[
+						21524,
+						2,
+						187
+					],
+					[
+						21524,
+						0,
+						62
+					],
+					[
+						21524,
+						3,
+						250
+					],
+					[
+						21649,
+						0,
+						125
+					],
+					[
+						21774,
+						2,
+						62
+					],
+					[
+						21774,
+						1,
+						125
+					],
+					[
+						21899,
+						2,
+						187
+					],
+					[
+						21899,
+						3,
+						62
+					],
+					[
+						21899,
+						0,
+						125
+					],
+					[
+						22024,
+						1,
+						125
+					],
+					[
+						22149,
+						0,
+						187
+					],
+					[
+						22149,
+						2,
+						250
+					],
+					[
+						22149,
+						3,
+						62
+					],
+					[
+						22274,
+						3,
+						125
+					],
+					[
+						22336,
+						1,
+						0
+					],
+					[
+						22399,
+						0,
+						125
+					],
+					[
+						22524,
+						1,
+						250
+					],
+					[
+						22524,
+						3,
+						62
+					],
+					[
+						22524,
+						2,
+						187
+					],
+					[
+						22649,
+						3,
+						125
+					],
+					[
+						22649,
+						0,
+						62
+					],
+					[
+						22774,
+						2,
+						0
+					],
+					[
+						22836,
+						0,
+						0
+					],
+					[
+						22867,
+						3,
+						0
+					],
+					[
+						22899,
+						2,
+						0
+					],
+					[
+						22940,
+						3,
+						0
+					],
+					[
+						22961,
+						1,
+						0
+					],
+					[
+						23024,
+						0,
+						0
+					],
+					[
+						23086,
+						2,
+						0
+					],
+					[
+						23149,
+						3,
+						0
+					],
+					[
+						23190,
+						0,
+						0
+					],
+					[
+						23253,
+						1,
+						0
+					],
+					[
+						23274,
+						3,
+						0
+					],
+					[
+						23315,
+						2,
+						0
+					],
+					[
+						23399,
+						1,
+						187
+					],
+					[
+						23399,
+						0,
+						250
+					],
+					[
+						23399,
+						3,
+						62
+					],
+					[
+						23524,
+						3,
+						125
+					],
+					[
+						23649,
+						1,
+						62
+					],
+					[
+						23649,
+						2,
+						125
+					],
+					[
+						23774,
+						1,
+						125
+					],
+					[
+						23774,
+						0,
+						187
+					],
+					[
+						23774,
+						3,
+						62
+					],
+					[
+						23899,
+						3,
+						125
+					],
+					[
+						24024,
+						2,
+						250
+					],
+					[
+						24024,
+						1,
+						187
+					],
+					[
+						24024,
+						0,
+						62
+					],
+					[
+						24149,
+						0,
+						125
+					],
+					[
+						24149,
+						3,
+						62
+					],
+					[
+						24274,
+						3,
+						62
+					],
+					[
+						24274,
+						1,
+						125
+					],
+					[
+						24399,
+						0,
+						125
+					],
+					[
+						24399,
+						3,
+						250
+					],
+					[
+						24399,
+						2,
+						125
+					],
+					[
+						24524,
+						1,
+						0
+					],
+					[
+						24586,
+						1,
+						0
+					],
+					[
+						24649,
+						2,
+						62
+					],
+					[
+						24649,
+						0,
+						0
+					],
+					[
+						24711,
+						0,
+						0
+					],
+					[
+						24774,
+						3,
+						62
+					],
+					[
+						24774,
+						2,
+						187
+					],
+					[
+						24774,
+						1,
+						125
+					],
+					[
+						24899,
+						3,
+						0
+					],
+					[
+						24940,
+						0,
+						0
+					],
+					[
+						24982,
+						1,
+						0
+					],
+					[
+						25024,
+						2,
+						250
+					],
+					[
+						25024,
+						3,
+						187
+					],
+					[
+						25024,
+						0,
+						62
+					],
+					[
+						25149,
+						1,
+						125
+					],
+					[
+						25211,
+						0,
+						125
+					],
+					[
+						25274,
+						3,
+						125
+					],
+					[
+						25399,
+						1,
+						187
+					],
+					[
+						25399,
+						0,
+						62
+					],
+					[
+						25399,
+						2,
+						125
+					],
+					[
+						25524,
+						3,
+						125
+					],
+					[
+						25649,
+						1,
+						125
+					],
+					[
+						25649,
+						2,
+						250
+					],
+					[
+						25649,
+						0,
+						62
+					],
+					[
+						25774,
+						3,
+						125
+					],
+					[
+						25836,
+						1,
+						0
+					],
+					[
+						25899,
+						0,
+						0
+					],
+					[
+						25961,
+						0,
+						0
+					],
+					[
+						26024,
+						2,
+						125
+					],
+					[
+						26024,
+						1,
+						125
+					],
+					[
+						26024,
+						3,
+						125
+					],
+					[
+						26149,
+						0,
+						125
+					],
+					[
+						26211,
+						2,
+						63
+					],
+					[
+						26211,
+						1,
+						63
+					],
+					[
+						26274,
+						3,
+						0
+					],
+					[
+						26336,
+						2,
+						125
+					],
+					[
+						26336,
+						1,
+						125
+					],
+					[
+						26336,
+						0,
+						188
+					],
+					[
+						26440,
+						3,
+						84
+					],
+					[
+						26524,
+						2,
+						0
+					],
+					[
+						26524,
+						1,
+						0
+					],
+					[
+						26586,
+						0,
+						0
+					],
+					[
+						26586,
+						1,
+						0
+					],
+					[
+						26649,
+						3,
+						0
+					],
+					[
+						26649,
+						2,
+						0
+					],
+					[
+						26711,
+						0,
+						0
+					],
+					[
+						26711,
+						2,
+						0
+					],
+					[
+						26774,
+						1,
+						0
+					],
+					[
+						26774,
+						3,
+						0
+					],
+					[
+						26836,
+						2,
+						0
+					],
+					[
+						26836,
+						0,
+						0
+					],
+					[
+						26899,
+						2,
+						0
+					],
+					[
+						26899,
+						3,
+						0
+					],
+					[
+						26961,
+						1,
+						0
+					],
+					[
+						27024,
+						2,
+						62
+					],
+					[
+						27024,
+						3,
+						187
+					],
+					[
+						27024,
+						0,
+						250
+					],
+					[
+						27149,
+						2,
+						125
+					],
+					[
+						27274,
+						1,
+						125
+					],
+					[
+						27274,
+						3,
+						62
+					],
+					[
+						27399,
+						2,
+						62
+					],
+					[
+						27399,
+						3,
+						187
+					],
+					[
+						27399,
+						0,
+						125
+					],
+					[
+						27524,
+						1,
+						125
+					],
+					[
+						27649,
+						3,
+						62
+					],
+					[
+						27649,
+						0,
+						187
+					],
+					[
+						27649,
+						2,
+						250
+					],
+					[
+						27774,
+						3,
+						62
+					],
+					[
+						27774,
+						1,
+						125
+					],
+					[
+						27899,
+						3,
+						125
+					],
+					[
+						27899,
+						0,
+						62
+					],
+					[
+						28024,
+						0,
+						187
+					],
+					[
+						28024,
+						1,
+						125
+					],
+					[
+						28024,
+						2,
+						250
+					],
+					[
+						28149,
+						3,
+						125
+					],
+					[
+						28211,
+						1,
+						0
+					],
+					[
+						28274,
+						0,
+						0
+					],
+					[
+						28336,
+						1,
+						0
+					],
+					[
+						28399,
+						0,
+						62
+					],
+					[
+						28399,
+						2,
+						187
+					],
+					[
+						28399,
+						3,
+						250
+					],
+					[
+						28524,
+						1,
+						125
+					],
+					[
+						28649,
+						2,
+						62
+					],
+					[
+						28649,
+						0,
+						0
+					],
+					[
+						28711,
+						0,
+						0
+					],
+					[
+						28774,
+						2,
+						250
+					],
+					[
+						28774,
+						3,
+						187
+					],
+					[
+						28774,
+						1,
+						250
+					],
+					[
+						28899,
+						0,
+						62
+					],
+					[
+						29024,
+						0,
+						125
+					],
+					[
+						29024,
+						3,
+						62
+					],
+					[
+						29149,
+						2,
+						62
+					],
+					[
+						29149,
+						3,
+						187
+					],
+					[
+						29149,
+						1,
+						125
+					],
+					[
+						29211,
+						0,
+						0
+					],
+					[
+						29274,
+						2,
+						0
+					],
+					[
+						29315,
+						1,
+						0
+					],
+					[
+						29357,
+						2,
+						0
+					],
+					[
+						29399,
+						1,
+						187
+					],
+					[
+						29399,
+						0,
+						250
+					],
+					[
+						29399,
+						3,
+						62
+					],
+					[
+						29524,
+						3,
+						125
+					],
+					[
+						29586,
+						2,
+						0
+					],
+					[
+						29649,
+						1,
+						125
+					],
+					[
+						29774,
+						2,
+						62
+					],
+					[
+						29774,
+						0,
+						187
+					],
+					[
+						29774,
+						3,
+						250
+					],
+					[
+						29899,
+						2,
+						62
+					],
+					[
+						29899,
+						1,
+						125
+					],
+					[
+						30070,
+						0,
+						0
+					],
+					[
+						30086,
+						3,
+						31
+					],
+					[
+						30180,
+						1,
+						62
+					],
+					[
+						30180,
+						3,
+						0
+					],
+					[
+						30227,
+						2,
+						0
+					],
+					[
+						30336,
+						3,
+						47
+					],
+					[
+						30336,
+						0,
+						0
+					],
+					[
+						30367,
+						2,
+						0
+					],
+					[
+						30492,
+						1,
+						94
+					],
+					[
+						30492,
+						3,
+						110
+					],
+					[
+						30539,
+						2,
+						63
+					],
+					[
+						30602,
+						0,
+						109
+					],
+					[
+						30649,
+						2,
+						125
+					],
+					[
+						30649,
+						3,
+						125
+					],
+					[
+						30649,
+						1,
+						187
+					],
+					[
+						30774,
+						0,
+						125
+					],
+					[
+						30836,
+						3,
+						125
+					],
+					[
+						30899,
+						1,
+						62
+					],
+					[
+						30899,
+						2,
+						187
+					],
+					[
+						31024,
+						0,
+						187
+					],
+					[
+						31024,
+						1,
+						125
+					],
+					[
+						31024,
+						3,
+						62
+					],
+					[
+						31149,
+						2,
+						125
+					],
+					[
+						31211,
+						3,
+						250
+					],
+					[
+						31274,
+						0,
+						62
+					],
+					[
+						31274,
+						1,
+						250
+					],
+					[
+						31399,
+						0,
+						62
+					],
+					[
+						31399,
+						2,
+						125
+					],
+					[
+						31524,
+						3,
+						62
+					],
+					[
+						31524,
+						0,
+						125
+					],
+					[
+						31649,
+						2,
+						125
+					],
+					[
+						31649,
+						1,
+						125
+					],
+					[
+						31649,
+						3,
+						250
+					],
+					[
+						31774,
+						0,
+						0
+					],
+					[
+						31836,
+						0,
+						0
+					],
+					[
+						31899,
+						1,
+						250
+					],
+					[
+						31899,
+						2,
+						0
+					],
+					[
+						31961,
+						2,
+						0
+					],
+					[
+						32024,
+						3,
+						62
+					],
+					[
+						32024,
+						0,
+						125
+					],
+					[
+						32149,
+						2,
+						0
+					],
+					[
+						32211,
+						0,
+						0
+					],
+					[
+						32274,
+						2,
+						62
+					],
+					[
+						32274,
+						3,
+						125
+					],
+					[
+						32274,
+						1,
+						250
+					],
+					[
+						32399,
+						0,
+						125
+					],
+					[
+						32524,
+						2,
+						62
+					],
+					[
+						32524,
+						3,
+						125
+					],
+					[
+						32649,
+						2,
+						62
+					],
+					[
+						32649,
+						0,
+						125
+					],
+					[
+						32649,
+						1,
+						187
+					],
+					[
+						32774,
+						2,
+						125
+					],
+					[
+						32899,
+						1,
+						125
+					],
+					[
+						32899,
+						0,
+						62
+					],
+					[
+						32899,
+						3,
+						250
+					],
+					[
+						33024,
+						0,
+						125
+					],
+					[
+						33086,
+						2,
+						0
+					],
+					[
+						33149,
+						1,
+						0
+					],
+					[
+						33211,
+						1,
+						0
+					],
+					[
+						33274,
+						2,
+						125
+					],
+					[
+						33274,
+						3,
+						125
+					],
+					[
+						33274,
+						0,
+						125
+					],
+					[
+						33399,
+						1,
+						125
+					],
+					[
+						33461,
+						2,
+						63
+					],
+					[
+						33461,
+						0,
+						63
+					],
+					[
+						33524,
+						3,
+						0
+					],
+					[
+						33586,
+						2,
+						125
+					],
+					[
+						33586,
+						0,
+						188
+					],
+					[
+						33586,
+						1,
+						188
+					],
+					[
+						33649,
+						3,
+						125
+					],
+					[
+						33774,
+						2,
+						0
+					],
+					[
+						33815,
+						3,
+						0
+					],
+					[
+						33857,
+						2,
+						0
+					],
+					[
+						33899,
+						1,
+						0
+					],
+					[
+						33961,
+						0,
+						0
+					],
+					[
+						33992,
+						3,
+						0
+					],
+					[
+						34024,
+						2,
+						0
+					],
+					[
+						34044,
+						1,
+						0
+					],
+					[
+						34086,
+						3,
+						0
+					],
+					[
+						34107,
+						0,
+						0
+					],
+					[
+						34169,
+						2,
+						0
+					],
+					[
+						34190,
+						1,
+						0
+					],
+					[
+						34232,
+						3,
+						0
+					],
+					[
+						34274,
+						1,
+						187
+					],
+					[
+						34274,
+						2,
+						62
+					],
+					[
+						34274,
+						0,
+						312
+					],
+					[
+						34399,
+						3,
+						187
+					],
+					[
+						34524,
+						1,
+						125
+					],
+					[
+						34524,
+						2,
+						62
+					],
+					[
+						34649,
+						3,
+						187
+					],
+					[
+						34649,
+						0,
+						62
+					],
+					[
+						34649,
+						2,
+						187
+					],
+					[
+						34774,
+						0,
+						125
+					],
+					[
+						34899,
+						2,
+						187
+					],
+					[
+						34899,
+						1,
+						312
+					],
+					[
+						34899,
+						3,
+						41
+					],
+					[
+						35024,
+						3,
+						187
+					],
+					[
+						35024,
+						0,
+						62
+					],
+					[
+						35149,
+						2,
+						62
+					],
+					[
+						35149,
+						0,
+						125
+					],
+					[
+						35274,
+						1,
+						187
+					],
+					[
+						35274,
+						2,
+						250
+					],
+					[
+						35274,
+						3,
+						125
+					],
+					[
+						35399,
+						0,
+						187
+					],
+					[
+						35524,
+						3,
+						0
+					],
+					[
+						35524,
+						1,
+						62
+					],
+					[
+						35586,
+						3,
+						0
+					],
+					[
+						35649,
+						0,
+						187
+					],
+					[
+						35649,
+						1,
+						62
+					],
+					[
+						35649,
+						2,
+						250
+					],
+					[
+						35774,
+						3,
+						187
+					],
+					[
+						35899,
+						0,
+						0
+					],
+					[
+						35899,
+						1,
+						62
+					],
+					[
+						35961,
+						0,
+						0
+					],
+					[
+						36024,
+						1,
+						187
+					],
+					[
+						36024,
+						2,
+						312
+					],
+					[
+						36024,
+						3,
+						312
+					],
+					[
+						36149,
+						0,
+						62
+					],
+					[
+						36274,
+						1,
+						62
+					],
+					[
+						36274,
+						0,
+						125
+					],
+					[
+						36399,
+						3,
+						62
+					],
+					[
+						36399,
+						1,
+						187
+					],
+					[
+						36399,
+						2,
+						187
+					],
+					[
+						36524,
+						0,
+						125
+					],
+					[
+						36649,
+						2,
+						312
+					],
+					[
+						36649,
+						1,
+						187
+					],
+					[
+						36649,
+						3,
+						62
+					],
+					[
+						36774,
+						0,
+						187
+					],
+					[
+						36836,
+						3,
+						0
+					],
+					[
+						36899,
+						3,
+						125
+					],
+					[
+						37024,
+						2,
+						62
+					],
+					[
+						37024,
+						0,
+						187
+					],
+					[
+						37024,
+						1,
+						250
+					],
+					[
+						37149,
+						2,
+						125
+					],
+					[
+						37149,
+						3,
+						62
+					],
+					[
+						37274,
+						3,
+						0
+					],
+					[
+						37315,
+						0,
+						0
+					],
+					[
+						37357,
+						1,
+						0
+					],
+					[
+						37399,
+						2,
+						0
+					],
+					[
+						37399,
+						0,
+						0
+					],
+					[
+						37461,
+						3,
+						0
+					],
+					[
+						37524,
+						1,
+						62
+					],
+					[
+						37524,
+						2,
+						0
+					],
+					[
+						37649,
+						2,
+						0
+					],
+					[
+						37649,
+						1,
+						0
+					],
+					[
+						37711,
+						3,
+						188
+					],
+					[
+						37711,
+						0,
+						0
+					],
+					[
+						37836,
+						0,
+						0
+					],
+					[
+						37899,
+						1,
+						312
+					],
+					[
+						37899,
+						2,
+						187
+					],
+					[
+						37899,
+						0,
+						62
+					],
+					[
+						38024,
+						3,
+						187
+					],
+					[
+						38149,
+						0,
+						125
+					],
+					[
+						38149,
+						2,
+						62
+					],
+					[
+						38274,
+						1,
+						187
+					],
+					[
+						38274,
+						2,
+						187
+					],
+					[
+						38274,
+						3,
+						62
+					],
+					[
+						38399,
+						3,
+						125
+					],
+					[
+						38524,
+						1,
+						312
+					],
+					[
+						38524,
+						0,
+						187
+					],
+					[
+						38524,
+						2,
+						62
+					],
+					[
+						38649,
+						2,
+						62
+					],
+					[
+						38649,
+						3,
+						187
+					],
+					[
+						38774,
+						0,
+						62
+					],
+					[
+						38774,
+						2,
+						125
+					],
+					[
+						38899,
+						0,
+						250
+					],
+					[
+						38899,
+						3,
+						187
+					],
+					[
+						38899,
+						1,
+						125
+					],
+					[
+						39024,
+						2,
+						0
+					],
+					[
+						39086,
+						2,
+						0
+					],
+					[
+						39149,
+						3,
+						333
+					],
+					[
+						39149,
+						1,
+						0
+					],
+					[
+						39274,
+						0,
+						125
+					],
+					[
+						39274,
+						2,
+						187
+					],
+					[
+						39274,
+						1,
+						62
+					],
+					[
+						39399,
+						1,
+						0
+					],
+					[
+						39482,
+						0,
+						0
+					],
+					[
+						39524,
+						3,
+						62
+					],
+					[
+						39524,
+						1,
+						187
+					],
+					[
+						39524,
+						2,
+						687
+					],
+					[
+						39649,
+						3,
+						187
+					],
+					[
+						39774,
+						0,
+						62
+					],
+					[
+						39774,
+						1,
+						62
+					],
+					[
+						39899,
+						0,
+						62
+					],
+					[
+						39899,
+						1,
+						187
+					],
+					[
+						39899,
+						3,
+						187
+					],
+					[
+						40024,
+						0,
+						62
+					],
+					[
+						40149,
+						3,
+						187
+					],
+					[
+						40149,
+						1,
+						125
+					],
+					[
+						40149,
+						0,
+						812
+					],
+					[
+						40274,
+						2,
+						187
+					],
+					[
+						40399,
+						3,
+						0
+					],
+					[
+						40461,
+						1,
+						0
+					],
+					[
+						40524,
+						2,
+						125
+					],
+					[
+						40524,
+						1,
+						62
+					],
+					[
+						40524,
+						3,
+						187
+					],
+					[
+						40649,
+						1,
+						125
+					],
+					[
+						40711,
+						2,
+						63
+					],
+					[
+						40774,
+						3,
+						0
+					],
+					[
+						40836,
+						3,
+						188
+					],
+					[
+						40836,
+						2,
+						188
+					],
+					[
+						40836,
+						1,
+						125
+					],
+					[
+						41024,
+						1,
+						0
+					],
+					[
+						41044,
+						0,
+						0
+					],
+					[
+						41107,
+						2,
+						0
+					],
+					[
+						41128,
+						3,
+						0
+					],
+					[
+						41211,
+						1,
+						0
+					],
+					[
+						41232,
+						0,
+						0
+					],
+					[
+						41274,
+						3,
+						0
+					],
+					[
+						41274,
+						2,
+						0
+					],
+					[
+						41357,
+						0,
+						0
+					],
+					[
+						41357,
+						1,
+						0
+					],
+					[
+						41440,
+						3,
+						0
+					],
+					[
+						41461,
+						2,
+						0
+					],
+					[
+						41524,
+						3,
+						62
+					],
+					[
+						41524,
+						0,
+						187
+					],
+					[
+						41524,
+						1,
+						312
+					],
+					[
+						41649,
+						2,
+						187
+					],
+					[
+						41774,
+						0,
+						312
+					],
+					[
+						41774,
+						3,
+						62
+					],
+					[
+						41899,
+						1,
+						62
+					],
+					[
+						41899,
+						2,
+						187
+					],
+					[
+						41899,
+						3,
+						187
+					],
+					[
+						42024,
+						1,
+						125
+					],
+					[
+						42149,
+						2,
+						62
+					],
+					[
+						42149,
+						0,
+						187
+					],
+					[
+						42149,
+						3,
+						312
+					],
+					[
+						42274,
+						1,
+						187
+					],
+					[
+						42274,
+						2,
+						62
+					],
+					[
+						42399,
+						2,
+						187
+					],
+					[
+						42399,
+						0,
+						62
+					],
+					[
+						42524,
+						3,
+						125
+					],
+					[
+						42524,
+						0,
+						187
+					],
+					[
+						42524,
+						1,
+						250
+					],
+					[
+						42774,
+						0,
+						0
+					],
+					[
+						42774,
+						3,
+						62
+					],
+					[
+						42836,
+						0,
+						0
+					],
+					[
+						42899,
+						3,
+						187
+					],
+					[
+						42899,
+						1,
+						62
+					],
+					[
+						42899,
+						2,
+						250
+					],
+					[
+						43024,
+						1,
+						187
+					],
+					[
+						43149,
+						3,
+						0
+					],
+					[
+						43149,
+						0,
+						62
+					],
+					[
+						43211,
+						3,
+						0
+					],
+					[
+						43274,
+						0,
+						187
+					],
+					[
+						43274,
+						1,
+						312
+					],
+					[
+						43274,
+						2,
+						312
+					],
+					[
+						43399,
+						3,
+						62
+					],
+					[
+						43524,
+						0,
+						125
+					],
+					[
+						43524,
+						3,
+						62
+					],
+					[
+						43649,
+						1,
+						62
+					],
+					[
+						43649,
+						2,
+						187
+					],
+					[
+						43649,
+						3,
+						187
+					],
+					[
+						43774,
+						1,
+						125
+					],
+					[
+						43899,
+						3,
+						187
+					],
+					[
+						43899,
+						0,
+						312
+					],
+					[
+						44024,
+						1,
+						187
+					],
+					[
+						44086,
+						2,
+						0
+					],
+					[
+						44149,
+						2,
+						125
+					],
+					[
+						44274,
+						1,
+						187
+					],
+					[
+						44274,
+						0,
+						62
+					],
+					[
+						44274,
+						3,
+						250
+					],
+					[
+						44399,
+						0,
+						125
+					],
+					[
+						44399,
+						2,
+						62
+					],
+					[
+						44524,
+						1,
+						0
+					],
+					[
+						44524,
+						2,
+						0
+					],
+					[
+						44628,
+						1,
+						0
+					],
+					[
+						44628,
+						3,
+						0
+					],
+					[
+						44649,
+						2,
+						0
+					],
+					[
+						44732,
+						3,
+						0
+					],
+					[
+						44753,
+						0,
+						0
+					],
+					[
+						44836,
+						2,
+						0
+					],
+					[
+						44836,
+						1,
+						0
+					],
+					[
+						44961,
+						3,
+						83
+					],
+					[
+						44961,
+						1,
+						125
+					],
+					[
+						45044,
+						2,
+						105
+					],
+					[
+						45149,
+						3,
+						62
+					],
+					[
+						45149,
+						1,
+						125
+					],
+					[
+						45149,
+						0,
+						125
+					],
+					[
+						45274,
+						3,
+						187
+					],
+					[
+						45336,
+						2,
+						125
+					],
+					[
+						45399,
+						1,
+						187
+					],
+					[
+						45399,
+						0,
+						62
+					],
+					[
+						45524,
+						2,
+						187
+					],
+					[
+						45524,
+						3,
+						125
+					],
+					[
+						45586,
+						0,
+						188
+					],
+					[
+						45649,
+						1,
+						62
+					],
+					[
+						45711,
+						3,
+						125
+					],
+					[
+						45774,
+						1,
+						312
+					],
+					[
+						45774,
+						2,
+						62
+					],
+					[
+						45836,
+						0,
+						125
+					],
+					[
+						45899,
+						2,
+						187
+					],
+					[
+						45899,
+						3,
+						62
+					],
+					[
+						46024,
+						0,
+						145
+					],
+					[
+						46024,
+						3,
+						62
+					],
+					[
+						46149,
+						2,
+						187
+					],
+					[
+						46149,
+						1,
+						125
+					],
+					[
+						46149,
+						3,
+						250
+					],
+					[
+						46274,
+						0,
+						0
+					],
+					[
+						46336,
+						0,
+						0
+					],
+					[
+						46399,
+						2,
+						62
+					],
+					[
+						46399,
+						1,
+						0
+					],
+					[
+						46461,
+						1,
+						0
+					],
+					[
+						46524,
+						2,
+						62
+					],
+					[
+						46524,
+						3,
+						125
+					],
+					[
+						46524,
+						0,
+						125
+					],
+					[
+						46649,
+						1,
+						41
+					],
+					[
+						46690,
+						0,
+						42
+					],
+					[
+						46732,
+						3,
+						42
+					],
+					[
+						46774,
+						1,
+						187
+					],
+					[
+						46774,
+						0,
+						312
+					],
+					[
+						46774,
+						2,
+						62
+					],
+					[
+						46899,
+						2,
+						187
+					],
+					[
+						47024,
+						3,
+						125
+					],
+					[
+						47024,
+						1,
+						62
+					],
+					[
+						47149,
+						0,
+						187
+					],
+					[
+						47149,
+						2,
+						187
+					],
+					[
+						47149,
+						1,
+						187
+					],
+					[
+						47274,
+						3,
+						125
+					],
+					[
+						47399,
+						2,
+						312
+					],
+					[
+						47399,
+						0,
+						125
+					],
+					[
+						47399,
+						1,
+						83
+					],
+					[
+						47524,
+						1,
+						187
+					],
+					[
+						47586,
+						3,
+						0
+					],
+					[
+						47649,
+						0,
+						0
+					],
+					[
+						47711,
+						0,
+						0
+					],
+					[
+						47774,
+						1,
+						62
+					],
+					[
+						47774,
+						2,
+						125
+					],
+					[
+						47774,
+						3,
+						187
+					],
+					[
+						47899,
+						1,
+						125
+					],
+					[
+						47961,
+						2,
+						63
+					],
+					[
+						47961,
+						0,
+						63
+					],
+					[
+						48024,
+						3,
+						0
+					],
+					[
+						48086,
+						1,
+						188
+					],
+					[
+						48086,
+						0,
+						188
+					],
+					[
+						48086,
+						2,
+						188
+					],
+					[
+						48274,
+						3,
+						0
+					],
+					[
+						48336,
+						1,
+						0
+					],
+					[
+						48399,
+						2,
+						0
+					],
+					[
+						48440,
+						1,
+						0
+					],
+					[
+						48461,
+						3,
+						0
+					],
+					[
+						48524,
+						0,
+						0
+					],
+					[
+						48565,
+						2,
+						0
+					],
+					[
+						48649,
+						3,
+						0
+					],
+					[
+						48711,
+						0,
+						0
+					],
+					[
+						48774,
+						2,
+						187
+					],
+					[
+						48774,
+						1,
+						125
+					],
+					[
+						48836,
+						0,
+						63
+					],
+					[
+						48899,
+						3,
+						125
+					],
+					[
+						48961,
+						1,
+						188
+					],
+					[
+						49024,
+						2,
+						62
+					],
+					[
+						49024,
+						0,
+						125
+					],
+					[
+						49086,
+						3,
+						63
+					],
+					[
+						49149,
+						2,
+						62
+					],
+					[
+						49211,
+						0,
+						63
+					],
+					[
+						49274,
+						1,
+						187
+					],
+					[
+						49274,
+						2,
+						125
+					],
+					[
+						49336,
+						0,
+						188
+					],
+					[
+						49399,
+						3,
+						62
+					],
+					[
+						49461,
+						2,
+						63
+					],
+					[
+						49524,
+						1,
+						187
+					],
+					[
+						49524,
+						3,
+						62
+					],
+					[
+						49586,
+						0,
+						125
+					],
+					[
+						49649,
+						3,
+						125
+					],
+					[
+						49711,
+						2,
+						63
+					],
+					[
+						49774,
+						0,
+						187
+					],
+					[
+						49774,
+						1,
+						187
+					],
+					[
+						49836,
+						3,
+						63
+					],
+					[
+						49899,
+						2,
+						125
+					],
+					[
+						49961,
+						3,
+						63
+					],
+					[
+						50024,
+						0,
+						125
+					],
+					[
+						50024,
+						1,
+						187
+					],
+					[
+						50086,
+						3,
+						63
+					],
+					[
+						50149,
+						2,
+						62
+					],
+					[
+						50211,
+						3,
+						63
+					],
+					[
+						50274,
+						2,
+						62
+					],
+					[
+						50274,
+						0,
+						62
+					],
+					[
+						50336,
+						3,
+						63
+					],
+					[
+						50399,
+						0,
+						62
+					],
+					[
+						50461,
+						1,
+						63
+					],
+					[
+						50524,
+						2,
+						62
+					],
+					[
+						50524,
+						3,
+						125
+					],
+					[
+						50586,
+						0,
+						63
+					],
+					[
+						50649,
+						1,
+						125
+					],
+					[
+						50711,
+						2,
+						63
+					],
+					[
+						50774,
+						0,
+						62
+					],
+					[
+						50774,
+						3,
+						125
+					],
+					[
+						50836,
+						1,
+						125
+					],
+					[
+						50899,
+						2,
+						125
+					],
+					[
+						50961,
+						0,
+						125
+					],
+					[
+						51024,
+						3,
+						125
+					],
+					[
+						51024,
+						1,
+						187
+					],
+					[
+						51086,
+						2,
+						125
+					],
+					[
+						51149,
+						0,
+						125
+					],
+					[
+						51211,
+						3,
+						125
+					],
+					[
+						51274,
+						2,
+						125
+					],
+					[
+						51274,
+						1,
+						62
+					],
+					[
+						51336,
+						0,
+						125
+					],
+					[
+						51399,
+						3,
+						62
+					],
+					[
+						51474,
+						1,
+						50
+					],
+					[
+						51524,
+						2,
+						62
+					],
+					[
+						51524,
+						3,
+						200
+					],
+					[
+						51574,
+						0,
+						100
+					],
+					[
+						51624,
+						1,
+						100
+					],
+					[
+						51674,
+						2,
+						150
+					],
+					[
+						51724,
+						0,
+						50
+					],
+					[
+						51774,
+						1,
+						100
+					],
+					[
+						51774,
+						3,
+						150
+					],
+					[
+						51874,
+						0,
+						150
+					],
+					[
+						51924,
+						2,
+						50
+					],
+					[
+						51974,
+						1,
+						100
+					],
+					[
+						52024,
+						2,
+						100
+					],
+					[
+						52024,
+						3,
+						150
+					],
+					[
+						52124,
+						1,
+						100
+					],
+					[
+						52174,
+						0,
+						100
+					],
+					[
+						52224,
+						2,
+						100
+					],
+					[
+						52274,
+						1,
+						150
+					],
+					[
+						52274,
+						3,
+						100
+					],
+					[
+						52374,
+						0,
+						100
+					],
+					[
+						52424,
+						2,
+						50
+					],
+					[
+						52474,
+						3,
+						100
+					],
+					[
+						52524,
+						2,
+						50
+					],
+					[
+						52524,
+						1,
+						150
+					],
+					[
+						52574,
+						0,
+						150
+					],
+					[
+						52624,
+						3,
+						150
+					],
+					[
+						52674,
+						2,
+						150
+					],
+					[
+						52774,
+						1,
+						150
+					],
+					[
+						52774,
+						0,
+						100
+					],
+					[
+						52899,
+						3,
+						62
+					],
+					[
+						53024,
+						2,
+						0
+					],
+					[
+						53149,
+						3,
+						0
+					],
+					[
+						53274,
+						3,
+						0
+					],
+					[
+						53524,
+						0,
+						0
+					],
+					[
+						53524,
+						3,
+						0
+					],
+					[
+						53774,
+						2,
+						0
+					],
+					[
+						53774,
+						0,
+						0
+					],
+					[
+						54024,
+						3,
+						0
+					],
+					[
+						54399,
+						3,
+						0
+					],
+					[
+						54774,
+						3,
+						0
+					],
+					[
+						55149,
+						3,
+						0
+					],
+					[
+						55524,
+						3,
+						0
+					],
+					[
+						55899,
+						3,
+						0
+					],
+					[
+						56274,
+						2,
+						333
+					],
+					[
+						56357,
+						1,
+						0
+					],
+					[
+						56357,
+						3,
+						167
+					],
+					[
+						56440,
+						0,
+						167
+					],
+					[
+						56524,
+						1,
+						0
+					],
+					[
+						56607,
+						3,
+						167
+					],
+					[
+						56690,
+						0,
+						0
+					],
+					[
+						56774,
+						1,
+						0
+					],
+					[
+						56774,
+						2,
+						250
+					],
+					[
+						56899,
+						0,
+						0
+					],
+					[
+						57035,
+						1,
+						0
+					],
+					[
+						57107,
+						3,
+						167
+					],
+					[
+						57190,
+						0,
+						167
+					],
+					[
+						57274,
+						2,
+						416
+					],
+					[
+						57315,
+						1,
+						375
+					],
+					[
+						57357,
+						3,
+						0
+					],
+					[
+						57540,
+						0,
+						0
+					],
+					[
+						57774,
+						1,
+						0
+					],
+					[
+						57815,
+						2,
+						0
+					],
+					[
+						57857,
+						1,
+						0
+					],
+					[
+						57899,
+						2,
+						0
+					],
+					[
+						57940,
+						0,
+						0
+					],
+					[
+						57940,
+						1,
+						0
+					],
+					[
+						57996,
+						2,
+						0
+					],
+					[
+						58107,
+						1,
+						0
+					],
+					[
+						58190,
+						2,
+						0
+					],
+					[
+						58246,
+						3,
+						0
+					],
+					[
+						58274,
+						0,
+						0
+					],
+					[
+						58440,
+						1,
+						0
+					],
+					[
+						58440,
+						2,
+						0
+					],
+					[
+						58496,
+						0,
+						0
+					],
+					[
+						58607,
+						2,
+						0
+					],
+					[
+						58690,
+						1,
+						0
+					],
+					[
+						58746,
+						0,
+						0
+					],
+					[
+						58774,
+						2,
+						0
+					],
+					[
+						58940,
+						3,
+						0
+					],
+					[
+						58940,
+						1,
+						0
+					],
+					[
+						58996,
+						2,
+						0
+					],
+					[
+						59107,
+						0,
+						0
+					],
+					[
+						59190,
+						3,
+						0
+					],
+					[
+						59246,
+						1,
+						0
+					],
+					[
+						59274,
+						0,
+						0
+					],
+					[
+						59440,
+						3,
+						0
+					],
+					[
+						59440,
+						2,
+						0
+					],
+					[
+						59496,
+						0,
+						0
+					],
+					[
+						59607,
+						1,
+						0
+					],
+					[
+						59690,
+						0,
+						0
+					],
+					[
+						59746,
+						3,
+						0
+					],
+					[
+						59773,
+						2,
+						0
+					],
+					[
+						59940,
+						0,
+						0
+					],
+					[
+						59940,
+						3,
+						0
+					],
+					[
+						59996,
+						1,
+						0
+					],
+					[
+						60107,
+						2,
+						0
+					],
+					[
+						60190,
+						3,
+						0
+					],
+					[
+						60246,
+						2,
+						0
+					],
+					[
+						60273,
+						0,
+						0
+					],
+					[
+						60440,
+						1,
+						0
+					],
+					[
+						60440,
+						3,
+						0
+					],
+					[
+						60496,
+						2,
+						0
+					],
+					[
+						60607,
+						1,
+						0
+					],
+					[
+						60690,
+						2,
+						0
+					],
+					[
+						60746,
+						3,
+						0
+					],
+					[
+						60773,
+						1,
+						0
+					],
+					[
+						60940,
+						2,
+						0
+					],
+					[
+						60940,
+						1,
+						0
+					],
+					[
+						60996,
+						0,
+						0
+					],
+					[
+						61107,
+						3,
+						0
+					],
+					[
+						61190,
+						1,
+						0
+					],
+					[
+						61246,
+						0,
+						0
+					],
+					[
+						61273,
+						2,
+						0
+					],
+					[
+						61440,
+						1,
+						0
+					],
+					[
+						61440,
+						2,
+						0
+					],
+					[
+						61496,
+						0,
+						0
+					],
+					[
+						61607,
+						1,
+						0
+					],
+					[
+						61690,
+						2,
+						0
+					],
+					[
+						61746,
+						3,
+						0
+					],
+					[
+						61773,
+						1,
+						0
+					],
+					[
+						61940,
+						2,
+						0
+					],
+					[
+						61940,
+						1,
+						0
+					],
+					[
+						61996,
+						3,
+						0
+					],
+					[
+						62107,
+						2,
+						0
+					],
+					[
+						62190,
+						1,
+						0
+					],
+					[
+						62246,
+						3,
+						0
+					],
+					[
+						62273,
+						0,
+						0
+					],
+					[
+						62440,
+						2,
+						0
+					],
+					[
+						62440,
+						1,
+						0
+					],
+					[
+						62496,
+						3,
+						0
+					],
+					[
+						62607,
+						0,
+						0
+					],
+					[
+						62690,
+						1,
+						0
+					],
+					[
+						62746,
+						3,
+						0
+					],
+					[
+						62773,
+						2,
+						0
+					],
+					[
+						62940,
+						2,
+						0
+					],
+					[
+						62940,
+						0,
+						0
+					],
+					[
+						62996,
+						3,
+						0
+					],
+					[
+						63107,
+						2,
+						0
+					],
+					[
+						63190,
+						0,
+						0
+					],
+					[
+						63246,
+						3,
+						0
+					],
+					[
+						63273,
+						1,
+						0
+					],
+					[
+						63440,
+						3,
+						0
+					],
+					[
+						63440,
+						2,
+						0
+					],
+					[
+						63496,
+						0,
+						0
+					],
+					[
+						63607,
+						2,
+						0
+					],
+					[
+						63690,
+						1,
+						0
+					],
+					[
+						63746,
+						3,
+						0
+					],
+					[
+						63773,
+						0,
+						0
+					],
+					[
+						63940,
+						2,
+						0
+					],
+					[
+						63940,
+						1,
+						0
+					],
+					[
+						63996,
+						0,
+						0
+					],
+					[
+						64107,
+						1,
+						0
+					],
+					[
+						64190,
+						2,
+						0
+					],
+					[
+						64246,
+						3,
+						0
+					],
+					[
+						64273,
+						1,
+						0
+					],
+					[
+						64440,
+						1,
+						0
+					],
+					[
+						64440,
+						2,
+						0
+					],
+					[
+						64496,
+						0,
+						0
+					],
+					[
+						64607,
+						2,
+						194
+					],
+					[
+						64607,
+						3,
+						194
+					],
+					[
+						64607,
+						1,
+						0
+					],
+					[
+						64773,
+						1,
+						0
+					],
+					[
+						64857,
+						2,
+						194
+					],
+					[
+						64857,
+						3,
+						194
+					],
+					[
+						64940,
+						1,
+						0
+					],
+					[
+						65107,
+						2,
+						194
+					],
+					[
+						65107,
+						3,
+						194
+					],
+					[
+						65107,
+						1,
+						0
+					],
+					[
+						65273,
+						1,
+						0
+					],
+					[
+						65357,
+						2,
+						111
+					],
+					[
+						65357,
+						3,
+						111
+					],
+					[
+						65440,
+						1,
+						0
+					],
+					[
+						65523,
+						2,
+						195
+					],
+					[
+						65523,
+						3,
+						195
+					],
+					[
+						65607,
+						1,
+						0
+					],
+					[
+						65773,
+						2,
+						195
+					],
+					[
+						65773,
+						3,
+						195
+					],
+					[
+						65773,
+						1,
+						0
+					],
+					[
+						65940,
+						1,
+						0
+					],
+					[
+						66023,
+						2,
+						195
+					],
+					[
+						66023,
+						3,
+						195
+					],
+					[
+						66107,
+						1,
+						0
+					],
+					[
+						66273,
+						1,
+						0
+					],
+					[
+						66440,
+						0,
+						0
+					],
+					[
+						66440,
+						2,
+						0
+					],
+					[
+						66496,
+						3,
+						0
+					],
+					[
+						66607,
+						2,
+						0
+					],
+					[
+						66690,
+						3,
+						0
+					],
+					[
+						66746,
+						1,
+						0
+					],
+					[
+						66773,
+						0,
+						0
+					],
+					[
+						66940,
+						3,
+						0
+					],
+					[
+						66940,
+						1,
+						0
+					],
+					[
+						66996,
+						0,
+						0
+					],
+					[
+						67107,
+						2,
+						0
+					],
+					[
+						67190,
+						3,
+						0
+					],
+					[
+						67246,
+						0,
+						0
+					],
+					[
+						67273,
+						1,
+						0
+					],
+					[
+						67440,
+						2,
+						0
+					],
+					[
+						67440,
+						0,
+						0
+					],
+					[
+						67496,
+						3,
+						0
+					],
+					[
+						67607,
+						2,
+						0
+					],
+					[
+						67690,
+						1,
+						0
+					],
+					[
+						67746,
+						0,
+						0
+					],
+					[
+						67773,
+						2,
+						0
+					],
+					[
+						67940,
+						2,
+						195
+					],
+					[
+						67940,
+						3,
+						195
+					],
+					[
+						67940,
+						0,
+						0
+					],
+					[
+						68107,
+						0,
+						0
+					],
+					[
+						68190,
+						2,
+						195
+					],
+					[
+						68190,
+						3,
+						195
+					],
+					[
+						68273,
+						0,
+						0
+					],
+					[
+						68440,
+						2,
+						195
+					],
+					[
+						68440,
+						3,
+						195
+					],
+					[
+						68440,
+						0,
+						0
+					],
+					[
+						68607,
+						0,
+						0
+					],
+					[
+						68690,
+						2,
+						111
+					],
+					[
+						68690,
+						3,
+						111
+					],
+					[
+						68773,
+						0,
+						0
+					],
+					[
+						68857,
+						2,
+						194
+					],
+					[
+						68857,
+						3,
+						194
+					],
+					[
+						68940,
+						0,
+						0
+					],
+					[
+						69107,
+						2,
+						194
+					],
+					[
+						69107,
+						3,
+						194
+					],
+					[
+						69107,
+						0,
+						0
+					],
+					[
+						69273,
+						0,
+						0
+					],
+					[
+						69357,
+						2,
+						194
+					],
+					[
+						69357,
+						3,
+						194
+					],
+					[
+						69440,
+						0,
+						0
+					],
+					[
+						71273,
+						3,
+						0
+					],
+					[
+						71273,
+						2,
+						0
+					],
+					[
+						71523,
+						0,
+						0
+					],
+					[
+						71523,
+						2,
+						0
+					],
+					[
+						71773,
+						3,
+						0
+					],
+					[
+						71773,
+						2,
+						0
+					],
+					[
+						72023,
+						0,
+						0
+					],
+					[
+						72023,
+						2,
+						0
+					],
+					[
+						72190,
+						3,
+						0
+					],
+					[
+						72190,
+						2,
+						0
+					],
+					[
+						72440,
+						0,
+						0
+					],
+					[
+						72440,
+						2,
+						0
+					],
+					[
+						72690,
+						3,
+						0
+					],
+					[
+						72690,
+						2,
+						0
+					],
+					[
+						72940,
+						1,
+						0
+					],
+					[
+						72940,
+						2,
+						0
+					],
+					[
+						73190,
+						1,
+						0
+					],
+					[
+						73190,
+						3,
+						0
+					],
+					[
+						73440,
+						1,
+						0
+					],
+					[
+						73440,
+						0,
+						0
+					],
+					[
+						73690,
+						1,
+						0
+					],
+					[
+						73690,
+						2,
+						0
+					],
+					[
+						73857,
+						1,
+						0
+					],
+					[
+						73857,
+						0,
+						0
+					],
+					[
+						74107,
+						1,
+						0
+					],
+					[
+						74107,
+						0,
+						0
+					],
+					[
+						74357,
+						1,
+						0
+					],
+					[
+						74357,
+						3,
+						0
+					],
+					[
+						74607,
+						2,
+						0
+					],
+					[
+						74607,
+						3,
+						0
+					],
+					[
+						74857,
+						1,
+						0
+					],
+					[
+						74857,
+						2,
+						0
+					],
+					[
+						75107,
+						0,
+						0
+					],
+					[
+						75107,
+						2,
+						0
+					],
+					[
+						75357,
+						3,
+						0
+					],
+					[
+						75357,
+						2,
+						0
+					],
+					[
+						75523,
+						2,
+						0
+					],
+					[
+						75523,
+						3,
+						0
+					],
+					[
+						75773,
+						2,
+						0
+					],
+					[
+						75773,
+						0,
+						0
+					],
+					[
+						76023,
+						3,
+						0
+					],
+					[
+						76023,
+						2,
+						0
+					],
+					[
+						76273,
+						1,
+						0
+					],
+					[
+						76273,
+						0,
+						0
+					],
+					[
+						76523,
+						1,
+						0
+					],
+					[
+						76523,
+						0,
+						0
+					],
+					[
+						76773,
+						1,
+						0
+					],
+					[
+						76773,
+						3,
+						0
+					],
+					[
+						77023,
+						1,
+						0
+					],
+					[
+						77023,
+						0,
+						0
+					],
+					[
+						77190,
+						1,
+						0
+					],
+					[
+						77190,
+						0,
+						0
+					],
+					[
+						77440,
+						1,
+						0
+					],
+					[
+						77440,
+						2,
+						0
+					],
+					[
+						77690,
+						1,
+						0
+					],
+					[
+						77690,
+						0,
+						0
+					],
+					[
+						133624,
+						0,
+						0
+					],
+					[
+						369937,
+						3,
+						0
+					]
+				]
+			}
+		]
+	}
+}

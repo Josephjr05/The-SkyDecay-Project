@@ -3,8 +3,6 @@ package substates;
 import objects.AttachedText;
 import objects.CheckboxThingie;
 
-import states.FreeplayState;
-
 class GameplayChangersSubstate extends MusicBeatSubstate
 {
 	private var curOption:GameplayOption = null;
@@ -37,7 +35,7 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		}
 		optionsArray.push(option);
 
-		#if !html5
+		#if FLX_PITCH
 		var option:GameplayOption = new GameplayOption('Playback Rate', 'songspeed', 'float', 1);
 		option.scrollSpeed = 1;
 		option.minValue = 0.5;
@@ -64,14 +62,9 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		option.displayFormat = '%vX';
 		optionsArray.push(option);
 
-		var option:GameplayOption = new GameplayOption('Instakill on Miss', 'instakill', 'bool', false);
-		optionsArray.push(option);
-
-		var option:GameplayOption = new GameplayOption('Practice Mode', 'practice', 'bool', false);
-		optionsArray.push(option);
-
-		var option:GameplayOption = new GameplayOption('Botplay', 'botplay', 'bool', false);
-		optionsArray.push(option);
+		optionsArray.push(new GameplayOption('Instakill on Miss', 'instakill', 'bool', false));
+		optionsArray.push(new GameplayOption('Practice Mode', 'practice', 'bool', false));
+		optionsArray.push(new GameplayOption('Botplay', 'botplay', 'bool', false));
 	}
 
 	public function getOptionByName(name:String)

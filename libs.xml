@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<libraries>
+	<!-- Dependencies for Vs Gary -->
+	<lib name="actuate" version="1.9.0" />
+	<lib name="away3d" version="5.0.9" />
+	<lib name="box2d" version="1.2.3" />
+	<git name="discord_rpc" url="https://github.com/Aidan63/linc_discord-rpc.git" />
+	<lib name="flixel-addons" version="3.2.1" />
+	<lib name="flixel-demos" version="2.9.0" />
+	<lib name="flixel-templates" version="2.6.6" />
+	<lib name="flixel-tools" version="1.5.1" />
+	<lib name="flixel-ui" version="2.5.0" />
+	<lib name="flixel" version="5.5.0" />
+	<git name="flxanimate" url="https://github.com/ShadowMario/flxanimate dev" />
+	<lib name="format" version="3.6.0" />
+	<lib name="haxelib" version="4.1.0" />
+	<lib name="hmm" version="3.0.0" />
+	<lib name="hscript" version="2.5.0" />
+	<git name="hxCodec" url="https://github.com/polybiusproxy/hxCodec.git" />
+	<lib name="hxcpp-debug-server" version="1.2.4" />
+	<lib name="hxcpp" version="4.3.2" />
+	<git name="hxdiscord_rpc" url="https://github.com/MAJigsaw77/hxdiscord_rpc.git" />
+	<lib name="hxp" version="1.3.0" />
+	<lib name="layout" version="1.2.1" />
+	<lib name="lime-samples" version="7.0.0" />
+	<lib name="lime" version="8.1.1" />
+	<git name="linc_luajit" url="https://github.com/superpowers04/linc_luajit.git" />
+	<lib name="openfl-samples" version="8.7.0" />
+	<lib name="openfl" version="9.2.1" />
+	<lib name="polymod" version="1.7.0" />
+	<lib name="refactor" version="4.2.0" />
+	<lib name="SScript" version="7.7.0" />
+	<lib name="systools" version="1.1.0" />
+	<lib name="tjson" version="1.4.0" />
+	<!-- End of Dependencies -->
+</libraries>

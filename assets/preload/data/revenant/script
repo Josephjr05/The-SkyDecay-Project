@@ -1,5 +1,0 @@
-function onPause()
-	health = getProperty('health')
-	setProperty('health', health - 200);
-	return Function_Stop;
-end

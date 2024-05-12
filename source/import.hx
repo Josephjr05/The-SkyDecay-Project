@@ -1,6 +1,6 @@
 #if !macro
 //Discord API
-#if desktop
+#if DISCORD_ALLOWED
 import backend.Discord;
 #end
 
@@ -10,6 +10,18 @@ import llua.*;
 import llua.Lua;
 #end
 
+#if ACHIEVEMENTS_ALLOWED
+import backend.Achievements;
+#end
+
+#if sys
+import sys.*;
+import sys.io.*;
+#elseif js
+import js.html.*;
+#end
+
+import backend.cppFiles.CppAPI;
 import backend.Paths;
 import backend.Controls;
 import backend.CoolUtil;
@@ -28,16 +40,17 @@ import objects.BGSprite;
 import states.PlayState;
 import states.LoadingState;
 
-//Flixel
-#if (flixel >= "5.3.0")
-import flixel.sound.FlxSound;
-#else
-import flixel.system.FlxSound;
+#if flxanimate
+import flxanimate.*;
 #end
+
+//Flixel
+import flixel.sound.FlxSound;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxCamera;
 import flixel.math.FlxMath;
+import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import flixel.text.FlxText;

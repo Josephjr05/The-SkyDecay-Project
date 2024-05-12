@@ -1,0 +1,11 @@
+bf
+dad
+gf
+spooky
+pico
+bf-pixel-opponent
+tankman
+pico-speaker
+bf-holding-gf
+pico-player
+tankman-player

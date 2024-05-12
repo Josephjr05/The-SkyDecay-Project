@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="bopper1.png">
+	<!-- Created with Adobe Animate version 21.0.2.37893 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="crowd10000" x="4" y="4" width="1403" height="552" frameX="0" frameY="-8" frameWidth="1410" frameHeight="560"/>
+	<SubTexture name="crowd10001" x="4" y="4" width="1403" height="552" frameX="0" frameY="-8" frameWidth="1410" frameHeight="560"/>
+	<SubTexture name="crowd10002" x="4" y="556" width="1403" height="560" frameX="-7" frameY="0" frameWidth="1410" frameHeight="560"/>
+	<SubTexture name="crowd10003" x="4" y="556" width="1403" height="560" frameX="-7" frameY="0" frameWidth="1410" frameHeight="560"/>
+	<SubTexture name="crowd10004" x="4" y="1116" width="1404" height="559" frameX="-4" frameY="-1" frameWidth="1410" frameHeight="560"/>
+	<SubTexture name="crowd10005" x="4" y="1116" width="1404" height="559" frameX="-4" frameY="-1" frameWidth="1410" frameHeight="560"/>
+	<SubTexture name="crowd10006" x="4" y="1116" width="1404" height="559" frameX="-4" frameY="-1" frameWidth="1410" frameHeight="560"/>
+	<SubTexture name="crowd10007" x="4" y="1116" width="1404" height="559" frameX="-4" frameY="-1" frameWidth="1410" frameHeight="560"/>
+	<SubTexture name="crowd10008" x="4" y="1116" width="1404" height="559" frameX="-4" frameY="-1" frameWidth="1410" frameHeight="560"/>
+	<SubTexture name="crowd10009" x="4" y="1116" width="1404" height="559" frameX="-4" frameY="-1" frameWidth="1410" frameHeight="560"/>
+	<SubTexture name="crowd10010" x="4" y="1116" width="1404" height="559" frameX="-4" frameY="-1" frameWidth="1410" frameHeight="560"/>
+	<SubTexture name="crowd10011" x="4" y="1116" width="1404" height="559" frameX="-4" frameY="-1" frameWidth="1410" frameHeight="560"/>
+	<SubTexture name="crowd10012" x="4" y="1116" width="1404" height="559" frameX="-4" frameY="-1" frameWidth="1410" frameHeight="560"/>
+	<SubTexture name="crowd10013" x="4" y="1116" width="1404" height="559" frameX="-4" frameY="-1" frameWidth="1410" frameHeight="560"/>
+</TextureAtlas>

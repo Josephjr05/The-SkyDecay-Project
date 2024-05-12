@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="bf running.png">
+	<!-- Created with Adobe Animate version 21.0.5.40714 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="bf running0000" x="1056" y="30" width="483" height="677" frameX="-2" frameY="0" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0001" x="543" y="30" width="483" height="682" frameX="-2" frameY="0" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0002" x="543" y="742" width="476" height="624" frameX="0" frameY="-60" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0003" x="1056" y="737" width="476" height="625" frameX="0" frameY="-60" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0004" x="2553" y="1427" width="403" height="589" frameX="-95" frameY="-96" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0005" x="2054" y="1428" width="403" height="589" frameX="-95" frameY="-96" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0006" x="3532" y="743" width="442" height="635" frameX="-57" frameY="-52" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0007" x="30" y="748" width="442" height="635" frameX="-57" frameY="-52" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0008" x="3090" y="30" width="447" height="683" frameX="-40" frameY="-4" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0009" x="3567" y="30" width="447" height="683" frameX="-40" frameY="-4" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0010" x="1569" y="30" width="477" height="665" frameX="-28" frameY="-23" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0011" x="1569" y="30" width="477" height="665" frameX="-28" frameY="-23" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0012" x="1562" y="1383" width="462" height="603" frameX="-30" frameY="-85" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0013" x="1562" y="1383" width="462" height="603" frameX="-30" frameY="-85" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0014" x="502" y="1396" width="417" height="632" frameX="-75" frameY="-56" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0015" x="502" y="1396" width="417" height="632" frameX="-75" frameY="-56" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0016" x="30" y="30" width="483" height="688" frameX="-2" frameY="0" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0017" x="30" y="30" width="483" height="688" frameX="-2" frameY="0" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0018" x="1569" y="725" width="476" height="628" frameX="0" frameY="-60" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0019" x="1569" y="725" width="476" height="628" frameX="0" frameY="-60" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0020" x="3060" y="1409" width="403" height="592" frameX="-95" frameY="-96" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0021" x="30" y="1413" width="403" height="592" frameX="-95" frameY="-96" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0022" x="3060" y="743" width="442" height="636" frameX="-57" frameY="-52" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0023" x="3060" y="743" width="442" height="636" frameX="-57" frameY="-52" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0024" x="2583" y="714" width="447" height="683" frameX="-40" frameY="-4" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0025" x="2076" y="717" width="447" height="681" frameX="-40" frameY="-4" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0026" x="2076" y="30" width="477" height="657" frameX="-28" frameY="-23" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0027" x="2583" y="30" width="477" height="654" frameX="-28" frameY="-23" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0028" x="1049" y="1392" width="462" height="592" frameX="-30" frameY="-85" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0029" x="1049" y="1392" width="462" height="592" frameX="-30" frameY="-85" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0030" x="3532" y="1408" width="417" height="621" frameX="-75" frameY="-56" frameWidth="505" frameHeight="688"/>
+	<SubTexture name="bf running0031" x="3532" y="1408" width="417" height="621" frameX="-75" frameY="-56" frameWidth="505" frameHeight="688"/>
+</TextureAtlas>

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Cujniocek.png">
+	<!-- Created with Adobe Animate version 20.5.0.29329 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="down — wystąpienie 10000" x="0" y="0" width="225" height="429" frameX="-4" frameY="-4" frameWidth="229" frameHeight="433"/>
+	<SubTexture name="down — wystąpienie 10001" x="0" y="0" width="225" height="429" frameX="-4" frameY="-4" frameWidth="229" frameHeight="433"/>
+	<SubTexture name="down — wystąpienie 10002" x="225" y="0" width="221" height="433" frameX="0" frameY="0" frameWidth="229" frameHeight="433"/>
+	<SubTexture name="down — wystąpienie 10003" x="225" y="0" width="221" height="433" frameX="0" frameY="0" frameWidth="229" frameHeight="433"/>
+	<SubTexture name="down — wystąpienie 10004" x="446" y="0" width="221" height="433" frameX="0" frameY="0" frameWidth="229" frameHeight="433"/>
+	<SubTexture name="idle — wystąpienie 10000" x="667" y="0" width="219" height="447" frameX="-4" frameY="0" frameWidth="223" frameHeight="447"/>
+	<SubTexture name="idle — wystąpienie 10001" x="886" y="0" width="218" height="446" frameX="-3" frameY="-1" frameWidth="223" frameHeight="447"/>
+	<SubTexture name="idle — wystąpienie 10002" x="1104" y="0" width="218" height="444" frameX="-2" frameY="-3" frameWidth="223" frameHeight="447"/>
+	<SubTexture name="idle — wystąpienie 10003" x="1322" y="0" width="218" height="444" frameX="-1" frameY="-3" frameWidth="223" frameHeight="447"/>
+	<SubTexture name="idle — wystąpienie 10004" x="1540" y="0" width="217" height="444" frameX="-1" frameY="-3" frameWidth="223" frameHeight="447"/>
+	<SubTexture name="idle — wystąpienie 10005" x="1757" y="0" width="218" height="444" frameX="0" frameY="-3" frameWidth="223" frameHeight="447"/>
+	<SubTexture name="idle — wystąpienie 10006" x="0" y="447" width="217" height="445" frameX="0" frameY="-2" frameWidth="223" frameHeight="447"/>
+	<SubTexture name="idle — wystąpienie 10007" x="217" y="447" width="217" height="445" frameX="0" frameY="-2" frameWidth="223" frameHeight="447"/>
+	<SubTexture name="idle — wystąpienie 10008" x="434" y="447" width="217" height="445" frameX="0" frameY="-2" frameWidth="223" frameHeight="447"/>
+	<SubTexture name="idle — wystąpienie 10009" x="651" y="447" width="217" height="445" frameX="0" frameY="-2" frameWidth="223" frameHeight="447"/>
+	<SubTexture name="idle — wystąpienie 10010" x="868" y="447" width="216" height="445" frameX="0" frameY="-2" frameWidth="223" frameHeight="447"/>
+	<SubTexture name="idle — wystąpienie 10011" x="1084" y="447" width="216" height="445" frameX="0" frameY="-2" frameWidth="223" frameHeight="447"/>
+	<SubTexture name="idle — wystąpienie 10012" x="1300" y="447" width="216" height="445" frameX="0" frameY="-2" frameWidth="223" frameHeight="447"/>
+	<SubTexture name="idle — wystąpienie 10013" x="1516" y="447" width="218" height="444" frameX="0" frameY="-3" frameWidth="223" frameHeight="447"/>
+	<SubTexture name="idle — wystąpienie 10014" x="1734" y="447" width="218" height="444" frameX="-1" frameY="-3" frameWidth="223" frameHeight="447"/>
+	<SubTexture name="idle — wystąpienie 10015" x="0" y="892" width="218" height="444" frameX="-2" frameY="-3" frameWidth="223" frameHeight="447"/>
+	<SubTexture name="idle — wystąpienie 10016" x="218" y="892" width="218" height="445" frameX="-3" frameY="-2" frameWidth="223" frameHeight="447"/>
+	<SubTexture name="idle — wystąpienie 10017" x="436" y="892" width="219" height="446" frameX="-3" frameY="-1" frameWidth="223" frameHeight="447"/>
+	<SubTexture name="idle — wystąpienie 10018" x="655" y="892" width="219" height="447" frameX="-4" frameY="0" frameWidth="223" frameHeight="447"/>
+	<SubTexture name="idle — wystąpienie 10019" x="655" y="892" width="219" height="447" frameX="-4" frameY="0" frameWidth="223" frameHeight="447"/>
+	<SubTexture name="idle — wystąpienie 10020" x="655" y="892" width="219" height="447" frameX="-4" frameY="0" frameWidth="223" frameHeight="447"/>
+	<SubTexture name="idle — wystąpienie 10021" x="655" y="892" width="219" height="447" frameX="-4" frameY="0" frameWidth="223" frameHeight="447"/>
+	<SubTexture name="left — wystąpienie 10000" x="874" y="892" width="248" height="447"/>
+	<SubTexture name="left — wystąpienie 10001" x="874" y="892" width="248" height="447"/>
+	<SubTexture name="left — wystąpienie 10002" x="1122" y="892" width="234" height="447" frameX="-2" frameY="0" frameWidth="248" frameHeight="447"/>
+	<SubTexture name="left — wystąpienie 10003" x="1356" y="892" width="234" height="447" frameX="-2" frameY="0" frameWidth="248" frameHeight="447"/>
+	<SubTexture name="left — wystąpienie 10004" x="1590" y="892" width="234" height="447" frameX="-2" frameY="0" frameWidth="248" frameHeight="447"/>
+	<SubTexture name="right — wystąpienie 10000" x="0" y="1339" width="228" height="447" frameX="0" frameY="0" frameWidth="229" frameHeight="447"/>
+	<SubTexture name="right — wystąpienie 10001" x="0" y="1339" width="228" height="447" frameX="0" frameY="0" frameWidth="229" frameHeight="447"/>
+	<SubTexture name="right — wystąpienie 10002" x="228" y="1339" width="222" height="447" frameX="-7" frameY="0" frameWidth="229" frameHeight="447"/>
+	<SubTexture name="right — wystąpienie 10003" x="228" y="1339" width="222" height="447" frameX="-7" frameY="0" frameWidth="229" frameHeight="447"/>
+	<SubTexture name="right — wystąpienie 10004" x="228" y="1339" width="222" height="447" frameX="-7" frameY="0" frameWidth="229" frameHeight="447"/>
+	<SubTexture name="up — wystąpienie 10000" x="450" y="1339" width="211" height="466" frameX="0" frameY="0" frameWidth="217" frameHeight="466"/>
+	<SubTexture name="up — wystąpienie 10001" x="450" y="1339" width="211" height="466" frameX="0" frameY="0" frameWidth="217" frameHeight="466"/>
+	<SubTexture name="up — wystąpienie 10002" x="661" y="1339" width="216" height="462" frameX="-1" frameY="-4" frameWidth="217" frameHeight="466"/>
+	<SubTexture name="up — wystąpienie 10003" x="661" y="1339" width="216" height="462" frameX="-1" frameY="-4" frameWidth="217" frameHeight="466"/>
+	<SubTexture name="up — wystąpienie 10004" x="661" y="1339" width="216" height="462" frameX="-1" frameY="-4" frameWidth="217" frameHeight="466"/>
+</TextureAtlas>

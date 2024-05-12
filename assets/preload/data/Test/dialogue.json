@@ -1,0 +1,12 @@
+{
+	"dialogue": [
+		{
+			"sound": "",
+			"speed": 0.07,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "confused",
+			"text": "Lets do this i guess.."
+		}
+	]
+}

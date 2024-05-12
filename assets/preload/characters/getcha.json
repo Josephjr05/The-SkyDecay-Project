@@ -1,0 +1,34 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				-60,
+				-80
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "im gonna getchaaa"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/getCHA",
+	"position": [
+		-58,
+		-80
+	],
+	"healthicon": "sonicexe",
+	"flip_x": false,
+	"healthbar_colors": [
+		0,
+		85,
+		142
+	],
+	"camera_position": [
+		-10,
+		110
+	],
+	"sing_duration": 4,
+	"scale": 1
+}

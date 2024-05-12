@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				30,
+				-130
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "Melodi MelodiIdle",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				23,
+				-130
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "Melodi MelodiLeft",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				1,
+				-130
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "Melodi MelodiDown",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				40,
+				-130
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "Melodi MelodiUp",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				30,
+				-130
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "Melodi MelodiRight",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/Melodi",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "melodii",
+	"flip_x": false,
+	"healthbar_colors": [
+		255,
+		140,
+		255
+	],
+	"camera_position": [
+		-20,
+		280
+	],
+	"sing_duration": 6.1,
+	"scale": 1
+}

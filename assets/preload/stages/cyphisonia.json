@@ -1,0 +1,15 @@
+{
+	"directory": "camellia",
+	"defaultZoom": 0.3,
+	"isPixelStage": false,
+	
+	"fixedCam_x": 0,
+	"fixedCam_y": 410,
+
+	"boyfriend": [600, 450],
+	"girlfriend": [100, 70],
+	"opponent": [-1000, 400],
+
+	"hide_girlfriend": true,
+	"has_reflections": false
+}

@@ -58,6 +58,19 @@
 			],
 			"idle_name": "GF DEMON0",
 			"loop_name": "GF DEMON LOOP"
+		},
+		{
+			"loop_name": "GF EXCITED LOOP",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"idle_name": "GF EXCITED0",
+			"anim": "excited",
+			"loop_offsets": [
+				0,
+				0
+			]
 		}
 	]
 }

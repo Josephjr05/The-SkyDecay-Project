@@ -1,0 +1,6 @@
+E x a c t l y what QT does, Have fun, Dodge on the 3rd beat like always.
+Spacebar = Dodge
+(dodges automatically if botplay is enabled)
+
+v1 = Amount of saws("one","two","three","four")
+v2 = Amount of ticks(for three saws onwards ONLY("two", "three")

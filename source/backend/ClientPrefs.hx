@@ -73,7 +73,7 @@ import states.TitleState;
 	public var sickWindow:Int = 50;
 	public var goodWindow:Int = 70;
 	public var badWindow:Int = 100;
-	public var safeFrames:Float = 7.7; //Gladly makes charts fair with fast patterns (Like Mania difficulty)
+	public var safeFrames:Float = 8; //Gladly makes charts fair with fast patterns (Like Mania difficulty)
 	public var guitarHeroSustains:Bool = true;
 	public var discordRPC:Bool = true;
 }

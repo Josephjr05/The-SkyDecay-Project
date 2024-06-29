@@ -7,9 +7,9 @@ import objects.StrumNote;
 // CONFIG & PRESETS:
 
 // Default
-final COYOTE_TIME:Float = 0.5; // (60 FPS) forgiveness frames [ 0 + ]
-final STEP_TIME:Float = 0.5; // stepCrochet forgiveness multiplier [ 0 to 1 ]
-final STRETCH:Float = 0.5; // distance multiplier, more value = more forgiving [ 0 to 1 ]
+// final COYOTE_TIME:Float = 0.5; // (60 FPS) forgiveness frames [ 0 + ]
+// final STEP_TIME:Float = 0.5; // stepCrochet forgiveness multiplier [ 0 to 1 ]
+// final STRETCH:Float = 0.5; // distance multiplier, more value = more forgiving [ 0 to 1 ]
 
 // Release at hit, no forgiveness
 // final COYOTE_TIME:Float = 0;
@@ -22,9 +22,9 @@ final STRETCH:Float = 0.5; // distance multiplier, more value = more forgiving [
 // final STRETCH:Float = 0;
 
 // A little more fair
-// final COYOTE_TIME:Float = 1;
-// final STEP_TIME:Float = 0;
-// final STRETCH:Float = 0.25;
+final COYOTE_TIME:Float = 1;
+final STEP_TIME:Float = 0;
+final STRETCH:Float = 0.25;
 
 function getSustainHit(note) {
     for (i in note.tail) {

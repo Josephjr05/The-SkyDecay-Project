@@ -972,17 +972,19 @@ class EditorPlayState extends MusicBeatSubstate
 	
 	function fullComboUpdate()
 	{
-		var sicks:Int = ratingsData[0].hits;
-		var goods:Int = ratingsData[1].hits;
-		var bads:Int = ratingsData[2].hits;
-		var shits:Int = ratingsData[3].hits;
+		var marvelouss:Int = ratingsData[0].hits; //over to playstate
+		var sicks:Int = ratingsData[1].hits;
+		var goods:Int = ratingsData[2].hits;
+		var bads:Int = ratingsData[3].hits;
+		var shits:Int = ratingsData[4].hits;
 
 		ratingFC = 'Clear';
 		if(songMisses < 1)
 		{
 			if (bads > 0 || shits > 0) ratingFC = 'FC';
 			else if (goods > 0) ratingFC = 'GFC';
-			else if (sicks > 0) ratingFC = 'SFC';
+			else if (sicks > 0) ratingFC = 'PFC';
+			else if (marvelouss > 0) ratingFC = 'PFC'; //over to playstate
 		}
 		else if (songMisses < 10)
 			ratingFC = 'SDCB';

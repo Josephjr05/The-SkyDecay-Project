@@ -45,14 +45,14 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		addOption(option);
 		
 		var option:Option = new Option('Auto Pause',
-			"If checked, the game automatically freezes if the screen isn't focused.\n Which the mouse isn't on the game window",
+			"If checked, the game automatically freezes if the screen isn't focused.\nWhich the mouse isn't on the game window",
 			'autoPause',
 			'bool');
 		addOption(option);
 		option.onChange = onChangeAutoPause;
 
 		var option:Option = new Option('Disable Reset Button',
-			"If checked, pressing Reset keybind won't do anything.\n(Is Recommended to turn on)",
+			"If checked, pressing Reset keybind won't do anything. (Is Recommended to turn on)",
 			'noReset',
 			'bool');
 		addOption(option);
@@ -79,8 +79,18 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.maxValue = 30;
 		//addOption(option);
 
+		var option:Option = new Option('Marvelous!! Hit Window',
+			'(This is LOCKED for SDPJ) -\nChanges the amount of time you have for hitting a "MARVELOUS!!" in milliseconds',
+			'marvelousWindow',
+			'int');
+			option.displayFormat = '%vms';
+			option.scrollSpeed = 5;
+			option.minValue = 25;
+			option.maxValue = 25;
+			addOption(option);
+
 		var option:Option = new Option('Sick! Hit Window',
-			'(This is Locked for SDPJ) - Changes the amount of time you have\nfor hitting a "Sick!" in milliseconds.',
+			'(This is LOCKED for SDPJ) -\nChanges the amount of time you have for hitting a "Sick!" in milliseconds.',
 			'sickWindow',
 			'int');
 		option.displayFormat = '%vms';
@@ -90,7 +100,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Good Hit Window',
-			'(This is Locked for SDPJ) - Changes the amount of time you have\nfor hitting a "Good" in milliseconds.',
+			'(This is LOCKED for SDPJ) -\nChanges the amount of time you have for hitting a "Good" in milliseconds.',
 			'goodWindow',
 			'int');
 		option.displayFormat = '%vms';
@@ -100,7 +110,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Bad Hit Window',
-			'(This is Locked for SDPJ) - Changes the amount of time you have\nfor hitting a "Bad" in milliseconds.',
+			'(This is LOCKED for SDPJ) -\nChanges the amount of time you have for hitting a "Bad" in milliseconds.',
 			'badWindow',
 			'int');
 		option.displayFormat = '%vms';
@@ -110,7 +120,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Safe Frames',
-			'(This is Locked for SDPJ) - Changes how many frames you have for\nhitting a note earlier or late.',
+			'(This is LOCKED for SDPJ) -\nChanges how many frames you have for hitting a note earlier or late.',
 			'safeFrames',
 			'float');
 		option.scrollSpeed = 5;

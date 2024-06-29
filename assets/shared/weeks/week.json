@@ -13,291 +13,33 @@
 		["Kisaragi", "camellia", "Ticacto", [255,155,60]],
 		["Funk-Off", "dad", "360Gavin", [126,13,255]],
 		["KillerToy", "camellia", "Nyrokushii", [255,155,60]],
-		["Flash-Me-Back", "camellia", "JustDazzel", [255,155,60]],
+		["Flash-Me-Back", "camellia", "Camellia x JustDazzel", [255,155,60]],
 		["Phantasia", "SD-BF", "kuroki", [255,255,255]],
 		["Grievous-Lady", "SD-BF", "kuroki",[255,255,255]],
 		["Oshama-Scramble", "SD-BF", "nicko", [255,255,255]],
 		["Newsling", "kubaxon", "kubaxon", [146,113,253]],
-		[
-			"Tutorial",
-			"gf",
-			[
-				146,
-				0,
-				0
-			]
-		],
-		[
-			"Sendan-Life-(katagiri-Bootleg)",
-			"gf",
-			[
-				255,
-				255,
-				255
-			]
-		],
-		[
-			"tetris-beatbox",
-			"asex",
-			[
-				186,
-				0,
-				0
-			]
-		],
-		[
-			"viral-beatbox-remix",
-			"asex",
-			[
-				186,
-				0,
-				0
-			]
-		],
-		[
-			"LongTime",
-			"dad",
-			[
-				0,
-				213,
-				0
-			]
-		],
-		[
-			"WildLife",
-			"dad",
-			[
-				0,
-				213,
-				0
-			]
-		],
-		[
-			"ShiningEyes",
-			"dad",
-			[
-				0,
-				213,
-				0
-			]
-		],
-		[
-			"ReviveR",
-			"SD-BF",
-			[
-				255,
-				255,
-				255
-			]
-		],
-		[
-			"Duper",
-			"BambiDuper",
-			[
-				0,
-				255,
-				0
-			]
-		],
-		[
-			"Too-Slow-Awe",
-			"sonicexe",
-			[
-				6,
-				0,
-				253
-			]
-		],
-		[
-			"Give-And-Take",
-			"dad",
-			[
-				126,
-				13,
-				255
-			]
-		],
-		[
-			"Gray-Heaven",
-			"camellia",
-			[
-				255,
-				155,
-				60
-			]
-		],
-		[
-			"Last-Resort",
-			"SD-BF",
-			[
-				255,
-				255,
-				255
-			]
-		],
-		[
-			"Pixel-Pig",
-			"bf-test",
-			[
-				255,
-				255,
-				255
-			]
-		],
-		[
-			"Wishes",
-			"mom",
-			[
-				255,
-				113,
-				253
-			]
-		],
-		[
-			"surefire",
-			"darnell",
-			[
-				186,
-				0,
-				255
-			]
-		],
-		[
-			"Flamed",
-			"darnell",
-			[
-				186,
-				0,
-				255
-			]
-		],
-		[
-			"Revenant",
-			"SD-BF",
-			[
-				255,
-				255,
-				255
-			]
-		],
-		[
-			"Megaton-Killer",
-			"SD-BF",
-			[
-				255,
-				255,
-				255
-			]
-		],
-		[
-			"mariannE",
-			"SD-BF",
-			[
-				255,
-				255,
-				255
-			]
-		],
-		[
-			"Infinite-Strife",
-			"SD-BF",
-			[
-				255,
-				255,
-				255
-			]
-		],
-		[
-			"Armageddon",
-			"SD-BF",
-			[
-				255,
-				255,
-				255
-			]
-		],
-		[
-			"FNF2",
-			"bf2",
-			[
-				146,
-				113,
-				253
-			]
-		],
-		[
-			"pingu",
-			"",
-			[
-				146,
-				113,
-				253
-			]
-		],
-		[
-			"Ephemeral-Echoes",
-			"dad",
-			[
-				146,
-				113,
-				253
-			]
-		],
-		[
-			"(Unkown^",
-			"face",
-			[
-				0,
-				0,
-				0
-			]
-		],
-		[
-			"artificial-snow",
-			"camellia",
-			[
-				255,
-				155,
-				60
-			]
-		],
-		[
-			"+eraby+e-connec+10n",
-			"camellia",
-			[
-				255,
-				155,
-				60
-			]
-		],
-		[
-			"nuclear-star",
-			"camellia",
-			[
-				255,
-				155,
-				60
-			]
-		],
-		[
-			"ghoul",
-			"camellia",
-			[
-				255,
-				155,
-				60
-			]
-		],
-		[
-			"burning-aquamarine",
-			"camellia",
-			[
-				255,
-				155,
-				60
-			]
-		]
-	],
-	"hideStoryMode": false,
-	"weekName": ""
+		["Tutorial", "gf", "locator1", [146,0,0]],
+		["Sendan-Life-(katagiri-Bootleg)", "gf", "kuroki", [255,255,255]],
+		["ReviveR", "SD-BF", "kuroki", [255,255,255]],
+		["Duper", "BambiDuper", "AadstaPinwheel", [0,255,0]],
+		["Give-And-Take", "dad", "Smesh", [126,13,255]],
+		["Gray-Heaven", "camellia", "Camellia x DIVID", [255,155,60]],
+		["Last-Resort", "SD-BF", "kuroki", [255,255,255]],
+		["surefire", "darnell", "Zeroh", [186,0,255]],
+		["Flamed", "darnell", "jayze", [186,0,255]],
+		["Revenant", "SD-BF", "gog 112", [255,255,255]],
+		["Megaton-Killer", "SD-BF", "gog 112", [255,255,255]],
+		["mariannE", "SD-BF", "gog 112", [255,255,255]],
+		["Infinite-Strife", "SD-BF", "gog 112", [255,255,255]],
+		["Armageddon", "SD-BF", "gog 112", [255,255,255]],
+		["pingu", "", "i forgot", [146,113,253]],
+		["Ephemeral-Echoes", "dad", "locator1", [146,113,253]],
+		["(Unkown^", "face", "locator1", [0,0,0]],
+		["artificial-snow", "camellia", "Camellia x JustDazzel", [255,155,60]],
+		["+eraby+e-connec+10n", "camellia", "Camellia x JustDazzel", [255,155,60]],
+		["nuclear-star", "camellia", "Camellia x JustDazzel", [255,155,60]],
+		["ghoul", "camellia", "Camellia x JustDazzel", [255,155,60]],
+		["burning-aquamarine", "camellia", "Camellia x JustDazzel", [255,155,60]],
+		["chrono-groove", "Cassettegirl", "CBMusic", [0,0,0]]
+	]
 }

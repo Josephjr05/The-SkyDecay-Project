@@ -63,7 +63,7 @@ class Note extends FlxSprite
 	public var blockHit:Bool = false; // only works for player
 
 	public var sustainLength:Float = 0;
-	public var isSustainNote:Bool = false;
+	public var isSustainNote:Bool = true;
 	public var noteType(default, set):String = null;
 
 	public var eventName:String = '';
@@ -186,7 +186,7 @@ class Note extends FlxSprite
 
 					// gameplay data
 					lowPriority = true;
-					missHealth = isSustainNote ? 0.25 : 0.1;
+					// missHealth = isSustainNote ? 0.25 : 0.1;
 					hitCausesMiss = true;
 					hitsound = 'cancelMenu';
 					hitsoundChartEditor = false;

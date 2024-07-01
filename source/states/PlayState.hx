@@ -214,6 +214,7 @@ class PlayState extends MusicBeatState
 	public var songMisses:Int = 0;
 	public var scoreTxt:FlxText;
 	var timeTxt:FlxText;
+	var songNameTxt:FlxText;
 	var scoreTxtTween:FlxTween;
 
 	public static var campaignScore:Int = 0;
@@ -380,15 +381,12 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
-			case 'stage': new states.stages.StageWeek1(); //Week 1
-			case 'spooky': new states.stages.Spooky(); //Week 2
+			case 'stage': new states.stages.Stage(); //Week 1
 			case 'philly': new states.stages.Philly(); //Week 3
 			case 'limo': new states.stages.Limo(); //Week 4
-			case 'mall': new states.stages.Mall(); //Week 5 - Cocoa, Eggnog
-			case 'mallEvil': new states.stages.MallEvil(); //Week 5 - Winter Horrorland
-			case 'school': new states.stages.School(); //Week 6 - Senpai, Roses
-			case 'schoolEvil': new states.stages.SchoolEvil(); //Week 6 - Thorns
-			case 'tank': new states.stages.Tank(); //Week 7 - Ugh, Guns, Stress
+			case 'camellia': new states.stages.Camellia(); //camellia studio
+			case 'concert': new states.stages.CamelliaConcert(); //camellia concert
+			case 'planet': new states.stages.Planet(); //camellia alt Planet
 		}
 
 		if(isPixelStage) {
@@ -3475,6 +3473,8 @@ class PlayState extends MusicBeatState
 		}
 	}
 	#end
+
+	// lib.application.window.title = 'The SkyDecay Project | Playing: ${curSong} | ${composers}'; Lycranoc?
 
 	#if (!flash && sys)
 	public var runtimeShaders:Map<String, Array<String>> = new Map<String, Array<String>>();

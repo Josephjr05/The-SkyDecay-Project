@@ -1,9 +1,9 @@
 {
-	"name": "Name",
-	"description": "Description",
+	"name": "The-SkyDecay-Project-Mods",
+	"description": "DO NOT TURN OFF IF MODS=TRUE. MODS FOLDER IS ONLY INTENDED FOR SCRIPTS EMBED!",
 	"restart":false,
-	"runsGlobally": false,
+	"runsGlobally": true,
 	"color": [170, 0, 255],
-	"discordRPC": "863222024192262205",
+	"discordRPC": "",
 	"iconFramerate": 10
 }

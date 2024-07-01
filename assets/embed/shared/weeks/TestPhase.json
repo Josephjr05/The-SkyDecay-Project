@@ -1,0 +1,104 @@
+{
+	"storyName": "Your New Week",
+	"difficulties": "",
+	"hideFreeplay": false,
+	"weekBackground": "stage",
+	"weekBefore": "tutorial",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"startUnlocked": true,
+	"hideStoryMode": false,
+	"songs": [
+		[
+			"ArchangeL",
+			"bf",
+			[
+				255,
+				0,
+				0
+			]
+		],
+		[
+			"Revenant",
+			"bf",
+			[
+				255,
+				0,
+				0
+			]
+		],
+		[
+			"Dreamless-Wanderer",
+			"camellia",
+			[
+				186,
+				113,
+				0
+			]
+		],
+		[
+			"Drenched-in-Air",
+			"camellia",
+			[
+				186,
+				113,
+				0
+			]
+		],
+		[
+			"(Unkown^",
+			"bf",
+			[
+				0,
+				0,
+				0
+			]
+		],
+		[
+			"finorza",
+			"camellia",
+			[
+				186,
+				113,
+				0
+			]
+		],
+		[
+			"Tutorial",
+			"gf",
+			[
+				255,
+				115,
+				253
+			]
+		],
+		[
+			"Flash-Me-Back",
+			"camellia",
+			[
+				186,
+				113,
+				0
+			]
+		],
+		[
+			"Kisaragi",
+			"camellia",
+			[
+				186,
+				113,
+				0
+			]
+		]
+	],
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
+	"hiddenUntilUnlocked": false,
+	"weekName": "TestPhasev1SDPJ"
+}

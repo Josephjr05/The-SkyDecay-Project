@@ -5,6 +5,8 @@ import objects.Character;
 import psychlua.LuaUtils;
 import psychlua.CustomSubstate;
 
+import substates.ReleaseTiming;
+
 #if LUA_ALLOWED
 import psychlua.FunkinLua;
 #end

@@ -14,6 +14,9 @@ import states.TitleState;
 	public var showFPS:Bool = true;
 	public var flashing:Bool = true;
 	public var autoPause:Bool = false;
+	public var CustomFade:String = 'Move';
+	public var CustomFadeSound:Float = 0.5;
+	public var CustomFadeText:Bool = true;
 	public var antialiasing:Bool = true;
 	public var noteSkin:String = 'Default';
 	public var splashSkin:String = 'Psych';
@@ -37,6 +40,8 @@ import states.TitleState;
 		[0xFFFF884E, 0xFFFFFAF5, 0xFF6C0000]];
 
 	public var ghostTapping:Bool = true;
+	public var opponentPlay:Bool = false;
+	public var mirror:Bool = false;
 	public var timeBarType:String = 'Time Left';
 	public var scoreZoom:Bool = true;
 	public var noReset:Bool = true;
@@ -64,17 +69,20 @@ import states.TitleState;
 		'instakill' => false,
 		'practice' => false,
 		'botplay' => false,
-		'opponentplay' => false
+		// 'opponentplay' => false
 	];
 
 	public var comboOffset:Array<Int> = [0, 0, 0, 0];
 	public var ratingOffset:Int = 0;
-	public var marvelousWindow:Int = 25;
-	public var sickWindow:Int = 50;
-	public var goodWindow:Int = 70;
-	public var badWindow:Int = 100;
-	public var safeFrames:Float = 8; //Gladly makes charts fair with fast patterns (Like Mania difficulty)
+	public var marvelousRating:Bool = true;	
+	public var marvelousSprite:Bool = true;	
+	public var marvelousWindow:Int = 16; // Osu Mania OD 8 (So you're right on time with the music!)
+	public var sickWindow:Int = 40;
+	public var goodWindow:Int = 73;
+	public var badWindow:Int = 127;
+	public var safeFrames:Float = 10;
 	public var guitarHeroSustains:Bool = true;
+	public var resultsScreen:Bool = true;
 	public var discordRPC:Bool = true;
 }
 

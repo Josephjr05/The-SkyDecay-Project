@@ -1,5 +1,9 @@
 package backend;
 
+import flixel.FlxG;
+
+using StringTools;
+
 class Highscore
 {
 	public static var weekScores:Map<String, Int> = new Map();

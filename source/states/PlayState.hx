@@ -20,6 +20,7 @@ import lime.utils.Assets;
 import openfl.utils.Assets as OpenFlAssets;
 import openfl.events.KeyboardEvent;
 import haxe.Json;
+import openfl.Lib;
 
 import cutscenes.CutsceneHandler;
 import cutscenes.DialogueBoxPsych;
@@ -31,6 +32,8 @@ import states.editors.CharacterEditorState;
 
 import substates.PauseSubState;
 import substates.GameOverSubstate;
+import substates.ReleaseTiming; // Release Timing Script
+import substates.ResultsScreen;
 
 #if !flash
 import flixel.addons.display.FlxRuntimeShader;
@@ -168,6 +171,8 @@ class PlayState extends MusicBeatState
 	public var playerStrums:FlxTypedGroup<StrumNote>;
 	public var grpNoteSplashes:FlxTypedGroup<NoteSplash>;
 
+	public static var trackCrashed:Bool = false;
+
 	public var camZooming:Bool = false;
 	public var camZoomingMult:Float = 1;
 	public var camZoomingDecay:Float = 1;
@@ -175,11 +180,36 @@ class PlayState extends MusicBeatState
 
 	public var gfSpeed:Int = 1;
 	public var health(default, set):Float = 1;
+	private var displayedHealth:Float = 1;
 	public var combo:Int = 0;
+	public var maxCombo:Int = 0;
+	public var highestCombo:Int = 0; // New Results Screen fuckers
+
+	public var NoteMs:Array<Float> = [];
+    public var NoteTime:Array<Float> = [];
+
+	var rsCheck:Bool = false;
+
+	var notesHitArray:Array<Date> = [];
+    var nps:Int = 0;
+	var maxNPS:Int = 0;
+	var npsCheck:Int = 0;
 
 	public var healthBar:Bar;
 	public var timeBar:Bar;
 	var songPercent:Float = 0;
+
+	public static var marvelouss:Int = 0; // Added for ResultsScreen. (old)
+	public static var sicks:Int = 0;
+	public static var goods:Int = 0;
+	public static var bads:Int = 0;
+	public static var shits:Int = 0;
+
+	public static var campaignMarvelouss:Int = 0; // campaign is Story Mode. Used for ResultScreen.
+	public static var campaignSicks:Int = 0;
+	public static var campaignGoods:Int = 0;
+	public static var campaignBads:Int = 0;
+	public static var campaignShits:Int = 0;
 
 	public var ratingsData:Array<Rating> = Rating.loadDefault();
 
@@ -224,13 +254,16 @@ class PlayState extends MusicBeatState
 
 	public var defaultCamZoom:Float = 1.05;
 
+	//The Song Boxes | The SkyDecay Project!
+	public var composers:String = 'None';
+
 	// how big to stretch the pixel art assets
 	public static var daPixelZoom:Float = 6;
 	private var singAnimations:Array<String> = ['singLEFT', 'singDOWN', 'singUP', 'singRIGHT'];
 
 	public var inCutscene:Bool = false;
 	public var skipCountdown:Bool = false;
-	var songLength:Float = 0;
+	public var songLength:Float = 0;
 
 	public var boyfriendCameraOffset:Array<Float> = null;
 	public var opponentCameraOffset:Array<Float> = null;
@@ -388,7 +421,7 @@ class PlayState extends MusicBeatState
 			case 'concert': new states.stages.CamelliaConcert(); //camellia concert
 			case 'planet': new states.stages.Planet(); //camellia alt Planet
 		}
-
+	
 		if(isPixelStage) {
 			introSoundsSuffix = '-pixel';
 		}
@@ -396,6 +429,16 @@ class PlayState extends MusicBeatState
 		add(gfGroup);
 		add(dadGroup);
 		add(boyfriendGroup);
+
+		if (FileSystem.exists(Paths.json(SONG.song.toLowerCase() + "/credits")))
+		{
+			composers = File.getContent((Paths.json(SONG.song.toLowerCase() + "/credits")));
+		}
+		else
+		{
+			composers = "Unknown Composers";
+		}
+		// composerText.text = composers; once we add back Song Boxes, this will be enabled.
 
 		#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
 		luaDebugGroup = new FlxTypedGroup<psychlua.DebugLuaText>();
@@ -473,7 +516,7 @@ class PlayState extends MusicBeatState
 		Conductor.songPosition = -5000 / Conductor.songPosition;
 		var showTime:Bool = (ClientPrefs.data.timeBarType != 'Disabled');
 		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
-		timeTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		timeTxt.setFormat(Paths.font("Prototype.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		timeTxt.scrollFactor.set();
 		timeTxt.alpha = 0;
 		timeTxt.borderSize = 2;
@@ -527,10 +570,10 @@ class PlayState extends MusicBeatState
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
 		moveCameraSection();
 
-		healthBar = new Bar(0, FlxG.height * (!ClientPrefs.data.downScroll ? 0.89 : 0.11), 'healthBar', function() return health, 0, 2);
+		healthBar = new Bar(1, FlxG.height * (!ClientPrefs.data.downScroll ? 1.89 : 1.11), 'healthBar', function() return displayedHealth, 0, 2);
 		healthBar.screenCenter(X);
 		healthBar.leftToRight = false;
-		healthBar.scrollFactor.set();
+		healthBar.scrollFactor.set(0.2, 0.2);
 		healthBar.visible = !ClientPrefs.data.hideHud;
 		healthBar.alpha = ClientPrefs.data.healthBarAlpha;
 		reloadHealthBarColors();
@@ -549,7 +592,7 @@ class PlayState extends MusicBeatState
 		uiGroup.add(iconP2);
 
 		scoreTxt = new FlxText(0, healthBar.y + 40, FlxG.width, "", 20);
-		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		scoreTxt.setFormat(Paths.font("Prototype.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		scoreTxt.borderSize = 1.25;
 		scoreTxt.visible = !ClientPrefs.data.hideHud;
@@ -557,7 +600,7 @@ class PlayState extends MusicBeatState
 		uiGroup.add(scoreTxt);
 
 		botplayTxt = new FlxText(400, timeBar.y + 55, FlxG.width - 800, "BOTPLAY", 32);
-		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		botplayTxt.setFormat(Paths.font("Prototype.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		botplayTxt.scrollFactor.set();
 		botplayTxt.borderSize = 1.25;
 		botplayTxt.visible = cpuControlled;
@@ -636,7 +679,12 @@ class PlayState extends MusicBeatState
 		super.create();
 		Paths.clearUnusedMemory();
 
+		CustomFadeTransition.nextCamera = camOther;
 		if(eventNotes.length < 1) checkEventNote();
+		#if desktop
+		Lib.application.window.title = 'The SkyDecay Project | Playing: ${curSong} | ${composers}';
+		#end
+		// getPropertyFromClass('lime.app.Application', 'current.window.title', 'The SkyDecay Project'..' | Playing: '..getProperty('curSong') getProperty('composers'))
 	}
 
 	function set_songSpeed(value:Float):Float
@@ -1122,8 +1170,8 @@ class PlayState extends MusicBeatState
 			str += ' (${percent}%) - ${ratingFC}';
 		}
 
-		var tempScore:String = 'Score: ${songScore}'
-		+ (!instakillOnMiss ? ' • Misses: ${songMisses}' : "")
+		var tempScore:String = '${songScore}'
+		+ (!instakillOnMiss ? ' • Misses: ${songMisses}' : "") // Why do you need to know how many misses you have when you have a results screen?
 		+ ' • Rating: ${str}';
 		// "tempScore" variable is used to prevent another memory leak, just in case
 		// "\n" here prevents the text from being cut off by beat zooms
@@ -1645,6 +1693,11 @@ class PlayState extends MusicBeatState
 		setOnScripts('curDecStep', curDecStep);
 		setOnScripts('curDecBeat', curDecBeat);
 
+		if(combo > maxCombo) // maxCombo = combo (for ResultsScreen.hx)
+		{
+			maxCombo = combo;
+		}
+
 		if(botplayTxt != null && botplayTxt.visible) {
 			botplaySine += 180 * elapsed;
 			botplayTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
@@ -1667,7 +1720,8 @@ class PlayState extends MusicBeatState
 		}
 
 		if (healthBar.bounds.max != null && health > healthBar.bounds.max)
-			health = healthBar.bounds.max;
+			health = Math.max(health - 0.02, 0.001);
+			displayedHealth = FlxMath.lerp(displayedHealth, health, .2/(ClientPrefs.data.framerate / 60));
 
 		updateIconsScale(elapsed);
 		updateIconsPosition();
@@ -1714,6 +1768,7 @@ class PlayState extends MusicBeatState
 			trace("RESET = True");
 		}
 		doDeathCheck();
+		// trackCrashed = true; CHECKES IF DEATH OR SONG CRASHED
 
 		if (unspawnNotes[0] != null)
 		{
@@ -1804,11 +1859,46 @@ class PlayState extends MusicBeatState
 		}
 		#end
 
+		{
+			var balls = notesHitArray.length - 1;
+			while (balls >= 0)
+			{
+				var cock:Date = notesHitArray[balls];
+				if (cock != null && cock.getTime() + 1000 < Date.now().getTime())
+					notesHitArray.remove(cock);
+				else
+					balls = 0;
+				balls--;
+			}
+			nps = notesHitArray.length;
+			if (nps > maxNPS)
+				maxNPS = nps;
+				
+			setOnLuas('nps', nps);
+			setOnLuas('maxFPS', maxNPS);	
+				
+			if (npsCheck != nps) {
+			
+			    npsCheck = nps;			    
+			    scoreTxtUpdate();				  
+			}
+		}
+
 		setOnScripts('cameraX', camFollow.x);
 		setOnScripts('cameraY', camFollow.y);
 		setOnScripts('botPlay', cpuControlled);
 		callOnScripts('onUpdatePost', [elapsed]);
 	}
+
+    public function scoreTxtUpdate():Void // Used in general but also for ResultsScreen (NPS = Notes Per Second). [Meaning how many notes you're hitting per second]
+		{
+			scoreTxt.text = 
+					"NPS: "
+					+ nps
+					+ " (Max: "
+					+ maxNPS
+					+ ")";			
+		}
 
 	// Health icon updaters
 	public dynamic function updateIconsScale(elapsed:Float)
@@ -1881,12 +1971,14 @@ class PlayState extends MusicBeatState
 		FlxG.camera.followLerp = 0;
 		persistentUpdate = false;
 		paused = true;
+		cancelMusicFadeTween();
+		CustomFadeTransition.nextCamera = camOther;
 		if(FlxG.sound.music != null)
 			FlxG.sound.music.stop();
 		chartingMode = true;
 
 		#if DISCORD_ALLOWED
-		DiscordClient.changePresence("Chart Editor", null, null, true);
+		DiscordClient.changePresence("Chart Editor", null, true, songLength);
 		DiscordClient.resetClientID();
 		#end
 
@@ -1931,11 +2023,15 @@ class PlayState extends MusicBeatState
 
 				openSubState(new GameOverSubstate());
 
+				#if desktop
+				Lib.application.window.title = 'The SkyDecay Project | LOL YOU DIED';
+				#end
+
 				// MusicBeatState.switchState(new GameOverState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 
 				#if DISCORD_ALLOWED
 				// Game Over doesn't get his its variable because it's only used here
-				if(autoUpdateRPC) DiscordClient.changePresence("Game Over - " + detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+				if(autoUpdateRPC) DiscordClient.changePresence("LOL YOU DIED - " + detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
 				#end
 				isDead = true;
 				return true;
@@ -2341,6 +2437,11 @@ class PlayState extends MusicBeatState
 			{
 				campaignScore += songScore;
 				campaignMisses += songMisses;
+				campaignMarvelouss += marvelouss;
+				campaignSicks += sicks;
+				campaignGoods += goods;
+				campaignBads += bads;
+				campaignShits += shits;
 
 				storyPlaylist.remove(storyPlaylist[0]);
 
@@ -2350,7 +2451,13 @@ class PlayState extends MusicBeatState
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
 					#if DISCORD_ALLOWED DiscordClient.resetClientID(); #end
 
-					MusicBeatState.switchState(new StoryMenuState());
+					cancelMusicFadeTween();
+					CustomFadeTransition.nextCamera = camOther;
+					if (FlxTransitionableState.skipNextTransIn)
+					{
+						CustomFadeTransition.nextCamera = null;
+					}
+					MusicBeatState.switchState(new StoryMenuState()); // can't
 
 					// if ()
 					if(!ClientPrefs.getGameplaySetting('practice') && !ClientPrefs.getGameplaySetting('botplay')) {
@@ -2375,19 +2482,26 @@ class PlayState extends MusicBeatState
 
 					PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0] + difficulty, PlayState.storyPlaylist[0]);
 					FlxG.sound.music.stop();
-
 					LoadingState.loadAndSwitchState(new PlayState());
 				}
 			}
 			else
 			{
-				trace('WENT BACK TO FREEPLAY??');
+				trace('WENT BACK TO OSU MANIA??');
 				Mods.loadTopMod();
 				#if DISCORD_ALLOWED DiscordClient.resetClientID(); #end
 
-				MusicBeatState.switchState(new FreeplayState());
-				FlxG.sound.playMusic(Paths.music('freakyMenu'));
-				changedDifficulty = false;
+				if(ClientPrefs.data.resultsScreen){								    
+                    rsCheck = true;                                                            
+				    openSubState(new ResultsScreen(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
+				}
+				else{
+					Mods.loadTopMod();
+					MusicBeatState.switchState(new FreeplayState());
+				    FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
+				    FlxG.sound.music.fadeIn(4, 0, 0.7);
+				}
+				changedDifficulty = false;	
 			}
 			transitioning = true;
 		}
@@ -2447,9 +2561,12 @@ class PlayState extends MusicBeatState
 			}
 		}
 
+		NoteMs.push(noteDiff / playbackRate);
+		NoteTime.push(note.strumTime);
+
 		var placement:Float = FlxG.width * 0.35;
 		var rating:FlxSprite = new FlxSprite();
-		var score:Int = 350;
+		var score:Int = 300; // Make Osu on FNF plz thanks!!
 
 		//tryna do MS based judgment due to popular demand
 		var daRating:Rating = Conductor.judgeNote(ratingsData, noteDiff / playbackRate);
@@ -2495,6 +2612,8 @@ class PlayState extends MusicBeatState
 		rating.x += ClientPrefs.data.comboOffset[0];
 		rating.y -= ClientPrefs.data.comboOffset[1];
 		rating.antialiasing = antialias;
+
+		var msTiming = CoolUtil.truncateFloat(noteDiff, 3);
 
 		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(uiPrefix + 'combo' + uiSuffix));
 		comboSpr.screenCenter();
@@ -2694,7 +2813,7 @@ class PlayState extends MusicBeatState
 			spr.resetAnim = 0;
 		}
 		callOnScripts('onKeyRelease', [key]);
-	}
+	}	
 
 	public static function getKeyFromEvent(arr:Array<String>, key:FlxKey):Int
 	{
@@ -2809,9 +2928,9 @@ class PlayState extends MusicBeatState
 				note.missed = true;
 				note.canBeHit = false;
 
-				//subtract += 0.385; // you take more damage if playing with this gameplay changer enabled.
+				subtract += 0; // you take more damage if playing with this gameplay changer enabled.
 				// i mean its fair :p -Crow
-				subtract *= note.tail.length + 1;
+				subtract *= note.tail.length + 2;
 				// i think it would be fair if damage multiplied based on how long the sustain is -Tahir
 			}
 
@@ -2831,6 +2950,9 @@ class PlayState extends MusicBeatState
 					child.tooLate = true;
 				}
 			}
+
+			NoteMs.push(167);
+		    NoteTime.push(note.strumTime); //it will work better for ResultsScreen
 		}
 
 		if(instakillOnMiss)
@@ -2842,6 +2964,11 @@ class PlayState extends MusicBeatState
 
 		var lastCombo:Int = combo;
 		combo = 0;
+
+		if (note != null && !note.isSustainNote){
+		    NoteMs.push(167);
+		    NoteTime.push(note.strumTime);
+		}
 
 		health -= subtract * healthLoss;
 		if(!practiceMode) songScore -= 10;
@@ -2982,10 +3109,12 @@ class PlayState extends MusicBeatState
 		{
 			combo++;
 			if(combo > 9999) combo = 9999;
+			if (combo > highestCombo) highestCombo = combo;
+			notesHitArray.unshift(Date.now());
 			popUpScore(note);
 		}
 		var gainHealth:Bool = true; // prevent health gain, *if* sustains are treated as a singular note
-		if (guitarHeroSustains && note.isSustainNote) gainHealth = false;
+		if (guitarHeroSustains && note.isSustainNote) gainHealth = true;
 		if (gainHealth) health += note.hitHealth * healthGain;
 
 		var result:Dynamic = callOnLuas('goodNoteHit', [notes.members.indexOf(note), leData, leType, isSus]);
@@ -3046,6 +3175,15 @@ class PlayState extends MusicBeatState
 		instance = null;
 		super.destroy();
 	}
+
+	public static function cancelMusicFadeTween() // General and ResultsScreen.
+	{
+		if (FlxG.sound.music.fadeTween != null)
+		{
+			FlxG.sound.music.fadeTween.cancel();
+		}
+		FlxG.sound.music.fadeTween = null;
+	}	
 
 	var lastStepHit:Int = -1;
 	override function stepHit()
@@ -3473,8 +3611,6 @@ class PlayState extends MusicBeatState
 		}
 	}
 	#end
-
-	// lib.application.window.title = 'The SkyDecay Project | Playing: ${curSong} | ${composers}'; Lycranoc?
 
 	#if (!flash && sys)
 	public var runtimeShaders:Map<String, Array<String>> = new Map<String, Array<String>>();

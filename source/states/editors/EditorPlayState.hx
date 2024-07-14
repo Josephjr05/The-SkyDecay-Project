@@ -147,7 +147,7 @@ class EditorPlayState extends MusicBeatSubstate
 		
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence (with Time Left)
-		DiscordClient.changePresence('Playtesting on Chart Editor', PlayState.SONG.song, null, true, songLength);
+		DiscordClient.changePresence('Playtesting on Chart Editor', PlayState.SONG.song, null, true, songLength); // Added to main playstate SDPJ
 		#end
 		RecalculateRating();
 	}
@@ -532,7 +532,7 @@ class EditorPlayState extends MusicBeatSubstate
 		coolText.x = FlxG.width * 0.35;
 
 		var rating:FlxSprite = new FlxSprite();
-		var score:Int = 350;
+		var score:Int = 300;
 
 		//tryna do MS based judgment due to popular demand
 		var daRating:Rating = Conductor.judgeNote(ratingsData, noteDiff / playbackRate);

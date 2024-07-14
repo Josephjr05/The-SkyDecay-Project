@@ -32,7 +32,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 
-		var option:Option = new Option('Opponent Notes',
+		var option:Option = new Option('Show Opponent Notes',
 			'If unchecked, opponent side notes get hidden.',
 			'opponentStrums',
 			'bool');
@@ -55,6 +55,12 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			"If checked, pressing Reset keybind won't do anything. (Is Recommended to turn on)",
 			'noReset',
 			'bool');
+		addOption(option); // Reset key shouldn't really exist for this mod, should i just disable it?
+
+		var option:Option = new Option('Results Screen',
+		'If checked, Results Screen will show after passing a song',
+		'resultsScreen',
+		'bool');
 		addOption(option);
 
 		var option:Option = new Option('Hitsound Volume',
@@ -67,7 +73,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.maxValue = 1;
 		option.changeValue = 0.1;
 		option.decimals = 1;
-		option.onChange = onChangeHitsoundVolume;
+		option.onChange = onChangeHitsoundVolume; // Your keyboard should be your hitsounds are you joking?
 
 		var option:Option = new Option('Rating Offset',
 			'Changes how late/early you have to hit for a "Sick!"\nHigher values mean you have to hit later.',
@@ -77,7 +83,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.scrollSpeed = 20;
 		option.minValue = -30;
 		option.maxValue = 30;
-		//addOption(option);
+		//addOption(option); We don't need this lmao
 
 		var option:Option = new Option('Marvelous!! Hit Window',
 			'(This is LOCKED for SDPJ) -\nChanges the amount of time you have for hitting a "MARVELOUS!!" in milliseconds',
@@ -85,8 +91,8 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'int');
 			option.displayFormat = '%vms';
 			option.scrollSpeed = 5;
-			option.minValue = 25;
-			option.maxValue = 25;
+			option.minValue = 16;
+			option.maxValue = 16; // 16 is the max value for a Marvelous (or rainbow 300) in Osu Mania no matter the OD.
 			addOption(option);
 
 		var option:Option = new Option('Sick! Hit Window',
@@ -95,8 +101,8 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'int');
 		option.displayFormat = '%vms';
 		option.scrollSpeed = 15;
-		option.minValue = 50;
-		option.maxValue = 50;
+		option.minValue = 40;
+		option.maxValue = 40;
 		addOption(option);
 
 		var option:Option = new Option('Good Hit Window',
@@ -105,8 +111,8 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'int');
 		option.displayFormat = '%vms';
 		option.scrollSpeed = 30;
-		option.minValue = 70;
-		option.maxValue = 70;
+		option.minValue = 73;
+		option.maxValue = 73;
 		addOption(option);
 
 		var option:Option = new Option('Bad Hit Window',
@@ -115,8 +121,8 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'int');
 		option.displayFormat = '%vms';
 		option.scrollSpeed = 60;
-		option.minValue = 100;
-		option.maxValue = 100;
+		option.minValue = 127;
+		option.maxValue = 127; //Should be harder to get a BAD now after TestPhasev1.
 		addOption(option);
 
 		var option:Option = new Option('Safe Frames',
@@ -124,8 +130,8 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'safeFrames',
 			'float');
 		option.scrollSpeed = 5;
-		option.minValue = 8;
-		option.maxValue = 8;
+		option.minValue = 10;
+		option.maxValue = 10; // Safe frames should just be disabled cause why is this neccessary when inputs are how you hit a note early or late?
 		option.changeValue = 0.1;
 		addOption(option);
 
@@ -133,7 +139,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			"If checked, Hold Notes can't be pressed if you miss,\nand count as a single Hit/Miss.\nUncheck this if you prefer the old Input System.",
 			'guitarHeroSustains',
 			'bool');
-		//addOption(option);
+		//addOption(option); 
 
 		super();
 	}

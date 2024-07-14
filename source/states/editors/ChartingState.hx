@@ -25,6 +25,7 @@ import openfl.events.IOErrorEvent;
 import openfl.media.Sound;
 import openfl.net.FileReference;
 import openfl.utils.Assets as OpenFlAssets;
+import openfl.Lib;
 
 import backend.Song;
 import backend.Section;
@@ -211,7 +212,7 @@ class ChartingState extends MusicBeatState
 			PlayState.SONG = _song;
 		}
 
-		// Paths.clearMemory();
+		//Paths.clearUnusedMemory();
 
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence

@@ -140,5 +140,5 @@ class Option
 		}
 		type = newValue;
 		return type;
-	}
+	}	
 }

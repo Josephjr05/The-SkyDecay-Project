@@ -41,6 +41,8 @@ class Note extends FlxSprite
 	public var extraData:Map<String, Dynamic> = new Map<String, Dynamic>();
 
 	public var strumTime:Float = 0;
+	public var diff:Float = 0;
+	public var resultRating = 'shit'; // Okay?
 	public var noteData:Int = 0;
 
 	public var mustPress:Bool = false;
@@ -112,7 +114,7 @@ class Note extends FlxSprite
 	public var hitHealth:Float = 0.023;
 	public var missHealth:Float = 0.0475;
 	public var rating:String = 'unknown';
-	public var ratingMod:Float = 0; //9 = unknown, 0.25 = shit, 0.5 = bad, 0.75 = good, 1 = sick
+	public var ratingMod:Float = 0; //9 = unknown, 0.25 = shit, 0.5 = bad, 0.75 = good, 1 = sick 1 = marvelous (Joseph addition lol)
 	public var ratingDisabled:Bool = false;
 
 	public var texture(default, set):String = null;
@@ -187,7 +189,7 @@ class Note extends FlxSprite
 					// gameplay data
 					lowPriority = true;
 					// missHealth = isSustainNote ? 0.25 : 0.1;
-					hitCausesMiss = true;
+					hitCausesMiss = false;
 					hitsound = 'cancelMenu';
 					hitsoundChartEditor = false;
 				case 'Alt Animation':

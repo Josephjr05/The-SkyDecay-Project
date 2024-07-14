@@ -20,6 +20,7 @@ import shaders.ColorSwap;
 import states.StoryMenuState;
 import states.OutdatedState;
 import states.MainMenuState;
+import states.TitleState;
 
 typedef TitleData =
 {
@@ -63,6 +64,7 @@ class TitleState extends MusicBeatState
 	#end
 
 	var mustUpdate:Bool = false;
+	public static var playedIntro:Bool = false;
 
 	var titleJSON:TitleData;
 
@@ -160,17 +162,22 @@ class TitleState extends MusicBeatState
 			FlxTransitionableState.skipNextTransIn = true;
 			FlxTransitionableState.skipNextTransOut = true;
 			MusicBeatState.switchState(new FlashingState());
-		} else {
-			if (initialized)
-				startIntro();
-			else
-			{
-				new FlxTimer().start(1, function(tmr:FlxTimer)
-				{
-					startIntro();
-				});
-			}
-		}
+		} else if (!playedIntro) { // Thanks notmagnill - Joseph
+            FlxTransitionableState.skipNextTransIn = true;
+            FlxTransitionableState.skipNextTransOut = true;
+            MusicBeatState.switchState(new VideoIntro());
+            playedIntro = false;
+        } else {
+            if (initialized)
+                startIntro();
+            else
+            {
+                new FlxTimer().start(1, function(tmr:FlxTimer)
+                {
+                    startIntro();
+                });
+            }
+        }
 		#end
 	}
 

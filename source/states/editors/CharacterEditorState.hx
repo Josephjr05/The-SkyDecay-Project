@@ -178,7 +178,7 @@ class CharacterEditorState extends MusicBeatState
 		\nA/D - Frame Advance (Back/Forward)
 		\n
 		\nOTHER
-		\nF12 - Toggle Silhouettes
+		\nF1 - Toggle Silhouettes
 		\nHold Shift - Move Offsets 10x faster and Camera 4x faster
 		\nHold Control - Move camera 4x slower";
 
@@ -1021,7 +1021,7 @@ class CharacterEditorState extends MusicBeatState
 		frameAdvanceText.color = clr;
 
 		// OTHER CONTROLS
-		if(FlxG.keys.justPressed.F12)
+		if(FlxG.keys.justPressed.F1)
 			silhouettes.visible = !silhouettes.visible;
 
 		if(FlxG.keys.justPressed.F1 || (helpBg.visible && FlxG.keys.justPressed.ESCAPE))

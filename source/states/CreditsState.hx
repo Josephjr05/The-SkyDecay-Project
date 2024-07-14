@@ -2,6 +2,8 @@ package states;
 
 import objects.AttachedSprite;
 
+import openfl.Lib;
+
 class CreditsState extends MusicBeatState
 {
 	var curSelected:Int = -1;
@@ -22,7 +24,11 @@ class CreditsState extends MusicBeatState
 	{
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Menus", null);
+		DiscordClient.changePresence("Looking at Credits", null);
+		#end
+
+		#if desktop
+		Lib.application.window.title = 'The SkyDecay Project | Look at all those lovely people who worked on this mod! Arent they amazing?';
 		#end
 
 		persistentUpdate = true;
@@ -39,6 +45,45 @@ class CreditsState extends MusicBeatState
 		#end
 
 		var defaultList:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
+			['The SkyDecay Project Team',	'sdpj',	'All 50+ members who worked on SDPJ!',	'https://gamebanana.com/wips/68022',	'1480E7'],
+			['Josephjr05',	'joseph',	'Commander of SkyDecay/SDPJ. Voice Actor, Mania Charter, and Writer.',	'https://www.youtube.com/@josephjr05',	'C5967A'],
+			['Nixvyy',	'nixvyy',	'Co-Writer, Charter, Voice Actor, Tester, Dialogue Editor, etc..',	'https://www.twitch.tv/thelegendbro736',	'FF6A6A'],
+			['Lycranok',	'razalzy',	'Lead Coder for SkyDecay Engine (Psych Fork) and Mod',	'https://www.youtube.com/@razalzy',	'FEA096'],
+			['RexDX',	'rexdx',	'Lua Coder and Spanish Translator for SDPJ',	'',	'D8BDBB'],
+			['Syan',	'syan',	'Lua Coder for SDPJ',	'',	'D8BDBB'], // no profile
+			['Casual_fr1days',	'casual-fr1days', 'Background Artist for SDPJ',	'https://www.instagram.com/casual_fr1days/',	'6C79A5'],
+			['Caydenedd',	'caydenedd',	'General Artist and a Charter for SDPJ',	'',	''], // no profile
+			['Ray_8946',	'ray',	'Corruption ShowDown (x SDPJ) Creator, also General Artist and Voice Actor for SDPJ.', 'https://www.youtube.com/@Rayflowers-06',	'8994A8'],
+			['Rhovanon',	'rhovanon',	'Promotional Artist and "Voidicious" character creator!',	'',	'630D7D'], // no profile
+			['Juliouxz',	'juliouxz',	'Animator for SDPJ',	'',	''], // no profile
+			['RealMelonMan',	'realmelonman',	'2D and 3D Animator/Sprite Artist, Musician and Chromatic Scaler for SDPJ.',	'',	'ADBFE3'],
+			['Star546',	'star',	'Animator and Musician for SDPJ',	'https://www.youtube.com/@ST4_R',	'FFDD16'],
+			['Tazzah', 'zaz',	'Sprite and Background Artist/Animator for SDPJ',	'',	'00CBFF'],
+			['theoriginaldevel',	'theoriginaldevel',	'Chromatic Scaler for SDPJ',	'',	''], // no profile
+			['3w3mk',	'3w3mk',	'Musician for SDPJ',	'',	'FF5100'], // no profile
+			['CBMusic',	'cb',	'Musician of 2 songs and Swedish Translator for SDPJ', 'https://linktr.ee/capslockovershift',	'FF5100'],
+			['Gavin360',	'gavin360',	'Musician for SDPJ',	'',	'A00303'], // no profile
+			['Exosceletic',	'exo',	'Musician for SDPJ',	'https://gamebanana.com/mods/499509',	'00279E'], // no profile
+			['To Much Masks',	'tomuchmasks',	'Among us Trapped (x SDPJ) creator and Musician for SDPJ', 'https://gamebanana.com/wips/74197',	'A205C1'],
+			['Kytchu',	'kytchu',	'Musician for SDPJ',	'https://www.youtube.com/@Kytchuthedeermusic',	'129E1D'],
+			['Genowrld',	'genowrld',	'MUSIC PRODUCER *insert fire emoji*',	'https://youtu.be/rY7X97eRFKM?si=Whpcs48vPQPVskMY',	'EBEBEB'],
+			['UltraCakra',	'ultracakra',	'Musician for SDPJ',	'https://twitter.com/Funkin_at_UandI',	'E1E2DD'],
+			['Zestery Trox',	'zestery-trox',	'Musician for SDPJ',	'',	'FFFFFF'], // gone?
+			['HPD',	'hpd',	'Aggressive Charter	for SDPJ',	'',	'80DBF4'],
+			['KotaCyote',	'kotecyote',	'Mania Charter for SDPJ',	'',	'D80101'],
+			['alumence',	'alu',	'Mania Charter for SDPJ',	'',	'0C3C9A'],
+			['HealsGood',	'healsgood',	'Mania Charter for SDPJ',	'',	''],
+			['MIGATTE',	'migatte',	'Mania Charter for SDPJ',	'',	''],
+			['mMYTHh',	'usermania',	'Mania Charter for SDPJ',	'',	''],
+			['Czeck',	'czeck',	'Charter for SDPJ',	'',	''],
+			['E-M',	'em2502',	'Charter for SDPJ',	'',	''],
+			['juney2008',	'juney2008',	'Charter for SDPJ',	'',	''],
+			['IronXavier',	'lemon',	'Charter for SDPJ',	'',	''],
+			['tehememan',	'tehememan',	'Charter for SDPJ',	'',	''],
+			['Notmrpolo',	'mrpolo',	'Charter for SDPJ',	'',	''],
+			['SakuraCharter',	'sakuracharter',	'Charter for SDPJ',	'',	''],
+			['BallisticFullPower',	'ballisticfullpower',	'Charter for SDPJ',	'',	''],
+			[''],
 			['Psych Engine Team'],
 			['Shadow Mario',		'shadowmario',		'Main Programmer and Head of Psych Engine',					 'https://ko-fi.com/shadowmario',		'444444'],
 			['Riveren',				'riveren',			'Main Artist/Animator of Psych Engine',						 'https://twitter.com/riverennn',		'14967B'],

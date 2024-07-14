@@ -60,7 +60,7 @@ class Loadup extends MusicBeatState
 
         FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
         
-        MusicBeatState.switchState(new FreeplayState());
+        MusicBeatState.switchState(new TitleState());
         
         // preload("assets/");
         // load();

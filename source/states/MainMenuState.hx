@@ -7,6 +7,8 @@ import lime.app.Application;
 import states.editors.MasterEditorMenu;
 import options.OptionsState;
 
+import openfl.Lib;
+
 class MainMenuState extends MusicBeatState
 {
 	public static var psychEngineVersion:String = '0.1'; // This is also used for Discord RPC
@@ -27,8 +29,18 @@ class MainMenuState extends MusicBeatState
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
 
+	private var descBox:FlxSprite;
+	private var descText:FlxText;
+
+	public var title:String;
+
 	override function create()
 	{
+
+		#if desktop
+		Lib.application.window.title = 'The SkyDecay Project';
+		#end
+
 		#if MODS_ALLOWED
 		Mods.pushGlobalMods();
 		#end
@@ -145,13 +157,45 @@ class MainMenuState extends MusicBeatState
 
 			if (controls.ACCEPT)
 			{
-				FlxG.sound.play(Paths.sound('confirmMenu'));
 				if (optionShit[curSelected] == 'donate')
 				{
 					CoolUtil.browserLoad('https://youtu.be/UXxlfkeevFA?si=OmTcd9hSEu9EPTFY');
 				}
+
+				if (optionShit[curSelected] == 'story_mode') // locks Story Mode for TestPhase builds.
+				{
+					for (item in menuItems)
+					{
+						if(item.ID == curSelected)
+						{
+							FlxG.sound.play(Paths.sound('errorsfx'));
+							FlxFlicker.flicker(item, 0.4, 0.06, true);
+						}
+					}
+					for (item in menuItems.members)
+					{
+						var daChoice:String = optionShit[curSelected];
+						if (daChoice=='story_mode'){
+							FlxG.sound.play(Paths.sound('errorsfx'), 0.8);
+							if (item.ID==curSelected){
+									FlxFlicker.flicker(item, 0.4, 0.06, true, false);
+							}
+						}
+					}
+				
+					descBox = new FlxSprite().makeGraphic(1, 1, FlxColor.BLACK);
+					descBox.alpha = 0.6;
+					add(descBox);
+				
+					descText = new FlxText(50, 600, 1180, "We are actively working on Story Mode. You may only enter when it's available!", 32);
+					descText.setFormat(Paths.font("Prototype.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+					descText.scrollFactor.set();
+					descText.borderSize = 2.4;
+					add(descText);
+				}
 				else
 				{
+					FlxG.sound.play(Paths.sound('confirmMenu'));
 					selectedSomethin = true;
 
 					if (ClientPrefs.data.flashing)
@@ -161,8 +205,6 @@ class MainMenuState extends MusicBeatState
 					{
 						switch (optionShit[curSelected])
 						{
-							case 'story_mode':
-								MusicBeatState.switchState(new StoryMenuState());
 							case 'freeplay':
 								MusicBeatState.switchState(new FreeplayState());
 

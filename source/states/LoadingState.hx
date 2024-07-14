@@ -12,6 +12,8 @@ import lime.utils.AssetManifest;
 
 import backend.StageData;
 
+import flixel.graphics.frames.FlxFilterFrames;
+
 import haxe.io.Path;
 
 class LoadingState extends MusicBeatState

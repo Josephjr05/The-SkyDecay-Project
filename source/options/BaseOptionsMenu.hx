@@ -10,6 +10,8 @@ import objects.AttachedText;
 import options.Option;
 import backend.InputFormatter;
 
+import openfl.Lib;
+
 class BaseOptionsMenu extends MusicBeatSubstate
 {
 	private var curOption:Option = null;
@@ -36,6 +38,10 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		
 		#if DISCORD_ALLOWED
 		DiscordClient.changePresence(rpcTitle, null);
+		#end
+
+		#if desktop
+		Lib.application.window.title = 'The SkyDecay Project | Changing Options';
 		#end
 		
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));

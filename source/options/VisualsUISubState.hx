@@ -143,7 +143,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			"Uncheck this to prevent accidental leaks, it will hide the Application from your \"Playing\" box on Discord",
 			'discordRPC',
 			'bool');
-		addOption(option);
+		// addOption(option);
 		#end
 
 		var option:Option = new Option('Combo Stacking',

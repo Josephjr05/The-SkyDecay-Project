@@ -32,8 +32,8 @@ class VideoIntro extends MusicBeatState
         FlxTween.tween(tip, {alpha: 1}, 0.5, {ease: FlxEase.quadInOut});
         new FlxTimer().start(3, function (tmr:FlxTimer) {
             FlxTween.tween(tip, {alpha: 0}, 0.5, {ease: FlxEase.quadInOut});
-            new FlxTimer().start(0.5, function (tmr:FlxTimer) {
-                epicIntro.play(Paths.video('Intro'), false);
+            new FlxTimer().start(0.36667, function (tmr:FlxTimer) {
+                epicIntro.play(Paths.video('TPV2Intro'), false);
                 FlxTween.tween(epicIntro, {alpha: 1}, 0.5, {ease: FlxEase.quadInOut});
                 new FlxTimer().start(6, function (tmr:FlxTimer) {
                     MusicBeatState.switchState(new TitleState());

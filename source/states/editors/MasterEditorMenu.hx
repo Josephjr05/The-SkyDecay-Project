@@ -10,6 +10,7 @@ import states.FreeplayState;
 class MasterEditorMenu extends MusicBeatState
 {
 	var options:Array<String> = [
+		'XML Editor',
 		'Chart Editor',
 		'Character Editor',
 		'Week Editor',
@@ -104,6 +105,8 @@ class MasterEditorMenu extends MusicBeatState
 		if (controls.ACCEPT)
 		{
 			switch(options[curSelected]) {
+				case 'XML Editor':// MME Type Shit - Joseph
+					LoadingState.loadAndSwitchState(new XMLEditorState(), false);
 				case 'Chart Editor'://felt it would be cool maybe
 					LoadingState.loadAndSwitchState(new ChartingState(), false);
 				case 'Character Editor':

@@ -39,6 +39,9 @@ import states.TitleState;
 		[0xFF71E300, 0xFFF6FFE6, 0xFF003100],
 		[0xFFFF884E, 0xFFFFFAF5, 0xFF6C0000]];
 
+	public var lossless:Bool = false;
+	public var quality:Int = 100;
+	public var renderGCRate:Float = 5.0;
 	public var ghostTapping:Bool = true;
 	public var opponentPlay:Bool = false;
 	public var mirror:Bool = false;

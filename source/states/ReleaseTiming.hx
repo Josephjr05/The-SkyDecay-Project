@@ -1,4 +1,4 @@
-package substates;
+package states;
 
 import objects.Note;
 import objects.StrumNote;
@@ -38,10 +38,10 @@ function lerp(from:Float, to:Float, i:Float):Float {
 
 var sustains:Array<Null<Float>> = [null, null, null, null];
 function goodNoteHit(note:Note):Void {
-    if (note.isSustainNote) {
-        // debugPrint(getSustainHit(note.parent));
-        sustains[note.parent.noteData] = null; // don't worry about this, not needed technically but i have upcoming stuff with possible conflicts
-        sustains[note.noteData] = getSustainHit(note.parent) ? (note.strumTime + (COYOTE_TIME / 60 * 1000) + Conductor.stepCrochet * STEP_TIME) : null;
+    if (!note.isSustainNote) return;
+    {   // debugPrint(getSustainHit(note.parent));
+    	sustains[note.parent.noteData] = null; // don't worry about this, not needed technically but i have upcoming stuff with possible conflicts
+    	sustains[note.noteData] = getSustainHit(note.parent) ? (note.strumTime + (COYOTE_TIME / 60 * 1000) + Conductor.stepCrochet * STEP_TIME) : null;
     }
 }
 

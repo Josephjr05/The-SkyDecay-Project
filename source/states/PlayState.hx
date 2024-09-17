@@ -29,10 +29,12 @@ import states.StoryMenuState;
 import states.FreeplayState;
 import states.editors.ChartingState;
 import states.editors.CharacterEditorState;
+import states.ReleaseTiming; // Release Timing Script
+import states.OsuFreeplayState;
+import states.FreeplayStateNew;
 
 import substates.PauseSubState;
 import substates.GameOverSubstate;
-import substates.ReleaseTiming; // Release Timing Script
 import substates.ResultsScreen;
 
 #if !flash
@@ -131,6 +133,8 @@ class PlayState extends MusicBeatState
 	public var noteKillOffset:Float = 350;
 
 	public var playbackRate(default, set):Float = 1;
+
+	public var frameCaptured:Int = 0;
 
 	public var boyfriendGroup:FlxSpriteGroup;
 	public var dadGroup:FlxSpriteGroup;
@@ -236,6 +240,7 @@ class PlayState extends MusicBeatState
 	public var iconP2:HealthIcon;
 	public var camHUD:FlxCamera;
 	public var camGame:FlxCamera;
+	public var camFGame:FlxCamera;
 	public var camOther:FlxCamera;
 	public var cameraSpeed:Float = 1;
 
@@ -294,13 +299,17 @@ class PlayState extends MusicBeatState
 	private var keysArray:Array<String>;
 	public var songName:String;
 
+	// Screenshot function
+	var renderGCRate = ClientPrefs.data.renderGCRate;
+	static var capture:Screenshot = new Screenshot();
+
 	// Callbacks for stages
 	public var startCallback:Void->Void = null;
 	public var endCallback:Void->Void = null;
 
 	override public function create()
 	{
-		//trace('Playback Rate: ' + playbackRate);
+		trace('Playback Rate: ' + playbackRate);
 		Paths.clearStoredMemory();
 
 		startCallback = startCountdown;
@@ -332,6 +341,7 @@ class PlayState extends MusicBeatState
 
 		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = initPsychCamera();
+		camFGame = new FlxCamera(); // cam FUCK Game nigga - Joseph
 		camHUD = new FlxCamera();
 		camOther = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
@@ -1754,7 +1764,6 @@ class PlayState extends MusicBeatState
 		if (camZooming)
 		{
 			FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom, FlxG.camera.zoom, Math.exp(-elapsed * 3.125 * camZoomingDecay * playbackRate));
-			camHUD.zoom = FlxMath.lerp(1, camHUD.zoom, Math.exp(-elapsed * 3.125 * camZoomingDecay * playbackRate));
 		}
 
 		FlxG.watch.addQuick("secShit", curSection);
@@ -2105,7 +2114,6 @@ class PlayState extends MusicBeatState
 					if(flValue2 == null) flValue2 = 0.03;
 
 					FlxG.camera.zoom += flValue1;
-					camHUD.zoom += flValue2;
 				}
 
 			case 'Play Animation':
@@ -2497,8 +2505,8 @@ class PlayState extends MusicBeatState
 				}
 				else{
 					Mods.loadTopMod();
-					MusicBeatState.switchState(new FreeplayState());
-				    FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
+					MusicBeatState.switchState(new OsuFreeplayState());
+				    FlxG.sound.playMusic(Paths.music('triangles'), 0);
 				    FlxG.sound.music.fadeIn(4, 0, 0.7);
 				}
 				changedDifficulty = false;	
@@ -3265,7 +3273,6 @@ class PlayState extends MusicBeatState
 			if (camZooming && FlxG.camera.zoom < 1.35 && ClientPrefs.data.camZooms)
 			{
 				FlxG.camera.zoom += 0.015 * camZoomingMult;
-				camHUD.zoom += 0.03 * camZoomingMult;
 			}
 
 			if (SONG.notes[curSection].changeBPM)

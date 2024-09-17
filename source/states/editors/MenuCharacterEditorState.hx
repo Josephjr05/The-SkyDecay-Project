@@ -16,12 +16,14 @@ import objects.MenuCharacter;
 
 class MenuCharacterEditorState extends MusicBeatState
 {
+	var music:EditingMusic;
 	var grpWeekCharacters:FlxTypedGroup<MenuCharacter>;
 	var characterFile:MenuCharacterFile = null;
 	var txtOffsets:FlxText;
 	var defaultCharacters:Array<String> = ['dad', 'bf', 'gf'];
 
 	override function create() {
+		music = new EditingMusic();
 		characterFile = {
 			image: 'Menu_Dad',
 			scale: 1,
@@ -32,7 +34,7 @@ class MenuCharacterEditorState extends MusicBeatState
 		};
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("Menu Character Editor", "Editting: " + characterFile.image);
+		DiscordClient.changePresence("Menu Character Editor", "Editing: " + characterFile.image);
 		#end
 
 		grpWeekCharacters = new FlxTypedGroup<MenuCharacter>();
@@ -264,6 +266,8 @@ class MenuCharacterEditorState extends MusicBeatState
 		if(!blockInput) {
 			ClientPrefs.toggleVolumeKeys(true);
 			if(FlxG.keys.justPressed.ESCAPE) {
+				super.update(elapsed);
+				music.update(elapsed);
 				MusicBeatState.switchState(new states.editors.MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 			}

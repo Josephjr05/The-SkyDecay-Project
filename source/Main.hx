@@ -16,11 +16,14 @@ import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.display.StageScaleMode;
 import lime.app.Application;
+import backend.SSPlugin as ScreenShotPlugin;
 import states.Loadup;
 
 #if linux
 import lime.graphics.Image;
 #end
+
+using StringTools;
 
 //crash handler stuff
 #if CRASH_HANDLER
@@ -116,6 +119,17 @@ class Main extends Sprite
 		if(fpsVar != null) {
 			fpsVar.visible = ClientPrefs.data.showFPS;
 		}
+		#end
+
+		#if (!web && flixel < "5.5.0")
+		FlxG.plugins.add(new ScreenShotPlugin());
+		#elseif (flixel >= "5.6.0")
+		FlxG.plugins.addIfUniqueType(new ScreenShotPlugin());
+		#end
+
+		#if FLX_POST_PROCESS
+		if (postProcesses[0] != null)
+			postProcesses[0].capture();
 		#end
 
 		#if linux

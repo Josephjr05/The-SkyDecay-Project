@@ -75,7 +75,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			'If checked, hides most HUD elements.',
 			'hideHud',
 			'bool');
-		addOption(option);
+		// addOption(option); why would you need this?
 		
 		var option:Option = new Option('Time Bar:',
 			"What should the Time Bar display?",
@@ -91,7 +91,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Camera Zooms',
-			"If unchecked, the camera won't zoom in on a beat hit.",
+			"If unchecked, the game camera won't bop to the BPM of the song.",
 			'camZooms',
 			'bool');
 		addOption(option);
@@ -100,7 +100,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			"If unchecked, disables the Score text zooming\neverytime you hit a note.",
 			'scoreZoom',
 			'bool');
-		addOption(option);
+		// addOption(option);
 
 		var option:Option = new Option('Health Bar Opacity',
 			'How much transparent should the health bar and icons be.',
@@ -126,7 +126,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			"What song do you prefer for the Pause Screen?",
 			'pauseMusic',
 			'string',
-			['None', 'Breakfast', 'Tea Time']);
+			['None', 'Breakfast', 'Tea Time', 'Pausing Calmness']);
 		addOption(option);
 		option.onChange = onChangePauseMusic;
 		
@@ -150,7 +150,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			"If unchecked, Ratings and Combo won't stack, saving on System Memory and making them easier to read",
 			'comboStacking',
 			'bool');
-		addOption(option);
+		// addOption(option);
 
 		super();
 		add(notes);

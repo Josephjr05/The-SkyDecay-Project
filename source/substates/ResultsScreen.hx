@@ -4,6 +4,8 @@ import flixel.addons.transition.FlxTransitionableState;
 
 import states.PlayState;
 import states.FreeplayState;
+import states.OsuFreeplayState; // Osu State
+import states.FreeplayStateNew; // Quaver state
 import states.MainMenuState;
 
 import backend.Conductor;
@@ -24,6 +26,11 @@ import openfl.Lib;
 import openfl.filters.BlurFilter;
 import flixel.graphics.frames.FlxFilterFrames;
 
+#if sys
+import sys.FileSystem; // to actually save the-
+import sys.io.FileOutput; // results in a txt file.
+#end
+
 class ResultsScreen extends MusicBeatSubstate
 {
 	var background:FlxSprite;	
@@ -33,42 +40,45 @@ class ResultsScreen extends MusicBeatSubstate
     var modsBG:FlxSprite;
     var modsMenu:FlxSprite;
     var modsText:FlxText;
-    //Results for what mod you played
+    // Results for what mod you played (SD ENGINE)
     
     var mesBG:FlxSprite;
     var mesTextNumber:FlxTypedGroup<FlxText>;
-    //Results for song message
+    // Results for song message
     
     var scBG:FlxSprite;
     var scTextNumber:FlxTypedGroup<FlxText>;
-    //Results for score
+    // Results for score
     
     var opBG:FlxSprite;
     var opTextNumber:FlxTypedGroup<FlxText>;
-    //Results for option
+    // Results for option
     
     var graphBG:FlxSprite;
     var graphNote:FlxSprite;
-    //Results for note offset
+    // Results for note offset
     
     var percentBG:FlxSprite;
     var percentRectNumber:FlxTypedGroup<FlxSprite>;
     var percentRectBGNumber:FlxTypedGroup<FlxSprite>;
     var percentTextNumber:FlxTypedGroup<FlxText>;
-    //Results for note rate percent
+    // Results for note rate percent
     
 	var backText:FlxText;
     var backBG:FlxSprite;
-	//back image
+	// back image
 	
 	var camOther:FlxCamera;        
-    //camera
+    // camera
     
     var game = PlayState.instance;
+	// game instance
 
 	private var curSong:String = "";
 	var composers:String = 'None';
+	// uses curSong and composers
     
+	// colors for each judgement
     var ColorArray:Array<FlxColor> = [
     		0xFF00FFFF, //marvelous
     		0xFFFFFF00, //sick 
@@ -91,13 +101,13 @@ class ResultsScreen extends MusicBeatSubstate
 	public function new(x:Float, y:Float)
 	{
 		super();
-		
+
 		#if DISCORD_ALLOWED
 		DiscordClient.changePresence('In: ${PlayState.SONG.song} Results Screen', null);
 		#end
 
 		#if desktop
-		Lib.application.window.title = 'The SkyDecay Project TestPhaseV2 | ${PlayState.SONG.song} Results Screen';
+		Lib.application.window.title = 'The SkyDecay Project TestPhaseV2 | ${PlayState.SONG.song} Results Screen | Thank you for testing V2!';
 		#end
 
 		FlxG.sound.playMusic(Paths.music('girlfriendsRingtone'), 0.7);
@@ -130,7 +140,7 @@ class ResultsScreen extends MusicBeatSubstate
 		modsMenu.updateHitbox();		
 		modsMenu.antialiasing = ClientPrefs.data.antialiasing;
 		modsMenu.alpha = 0;
-		add(modsMenu);
+		// add(modsMenu);
 		
 		modsText = new FlxText(20, 20 + modsMenu.height, 0, 'The SkyDecay Project Test PhaseV2'); // This is included within in the window name
 		modsText.size = 16;		
@@ -141,7 +151,7 @@ class ResultsScreen extends MusicBeatSubstate
 	    modsText.alpha = 0;
 	    add(modsText);		
 	    modsText.x += modsBG.width / 2 - modsText.width / 2;
-	    if (modsText.width > 600) modsText.scale.x = 600 / modsText.width; //fix width problem
+	    if (modsText.width > 600) modsText.scale.x = 600 / modsText.width; 
 	    modsText.offset.x = 0;
 	    
 	    //-------------------------		    		    
@@ -303,10 +313,12 @@ class ResultsScreen extends MusicBeatSubstate
 	{
 		if (FlxG.keys.justPressed.F12)
 		{
-			if (!FileSystem.exists('SDPJ-Saved-Scores'))
-		  		FileSystem.createDirectory('SDPJ-Saved-Scores');
+			if (FileSystem.exists('SDPJ-Saved-Scores'))
+		  	FileSystem.createDirectory('SDPJ-Saved-Scores');
 	
-			var saveTxt:String = 'Saved Score For: ${PlayState.SONG.song}
+			var saveTxt:String = 'The SkyDecay Project
+			
+			Saved Score For: ${PlayState.SONG.song}
 			By ${PlayState.instance.composers}
 			At: ${Date.now().toString()}
 			Difficulty: ${Difficulty.getString()}
@@ -338,8 +350,8 @@ class ResultsScreen extends MusicBeatSubstate
 			// ('PracticeMode: ' + practice);
 			// ('Instakill: ' + instakill);
 			// ('Botplay: ' + botplay);
-	
-			File.saveContent('SDPJ-Saved-Scores/SkyDecay-Project-${curSong}.txt', saveTxt);
+
+		File.saveContent('SDPJ-Saved-Scores/SkyDecay-Project-${curSong}.txt', saveTxt);
 		}
 	}
 
@@ -685,8 +697,8 @@ class ResultsScreen extends MusicBeatSubstate
 				onComplete: function(twn:FlxTween) {
 				    FlxTransitionableState.skipNextTransIn = true;
 				    Mods.loadTopMod();
-					MusicBeatState.switchState(new FreeplayState());
-					FlxG.sound.playMusic(Paths.music('freakyMenu'), 1);
+					MusicBeatState.switchState(new OsuFreeplayState());
+					FlxG.sound.playMusic(Paths.music('triangles'), 1);
 				},
 			ease: FlxEase.expoInOut});
 			
@@ -748,8 +760,8 @@ class ResultsScreen extends MusicBeatSubstate
 				onComplete: function(twn:FlxTween) {
 				    FlxTransitionableState.skipNextTransIn = true;
 				    Mods.loadTopMod();
-					MusicBeatState.switchState(new FreeplayState());
-					FlxG.sound.playMusic(Paths.music('freakyMenu'), 1);
+					MusicBeatState.switchState(new OsuFreeplayState());
+					FlxG.sound.playMusic(Paths.music('triangles'), 1);
 				},
 			ease: FlxEase.sineInOut});
 			

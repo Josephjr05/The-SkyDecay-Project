@@ -23,6 +23,7 @@ class DialogueCharacterEditorState extends MusicBeatState
 {
 	var box:FlxSprite;
 	var daText:TypedAlphabet = null;
+	var music:EditingMusic;
 
 	private static var TIP_TEXT_MAIN:String =
 	'JKLI - Move camera (Hold Shift to move 4x faster)
@@ -64,6 +65,8 @@ class DialogueCharacterEditorState extends MusicBeatState
 		camHUD = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
 		FlxG.cameras.add(camHUD, false);
+
+		music = new EditingMusic();
 		
 		mainGroup = new FlxSpriteGroup();
 		mainGroup.cameras = [camGame];
@@ -647,6 +650,8 @@ class DialogueCharacterEditorState extends MusicBeatState
 			}
 
 			if(FlxG.keys.justPressed.ESCAPE) {
+				super.update(elapsed);
+				music.update(elapsed);
 				MusicBeatState.switchState(new states.editors.MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'), 1);
 				transitioning = true;

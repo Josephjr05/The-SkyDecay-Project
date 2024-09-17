@@ -38,8 +38,8 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		#if FLX_PITCH
 		var option:GameplayOption = new GameplayOption('Playback Rate', 'songspeed', 'float', 1);
 		option.scrollSpeed = 1;
-		option.minValue = 0.5;
-		option.maxValue = 3.0;
+		option.minValue = 0.75;
+		option.maxValue = 1.50;
 		option.changeValue = 0.05;
 		option.displayFormat = '%vX';
 		option.decimals = 2;
@@ -48,16 +48,16 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 
 		var option:GameplayOption = new GameplayOption('Health Gain Multiplier', 'healthgain', 'float', 1);
 		option.scrollSpeed = 2.5;
-		option.minValue = 0;
-		option.maxValue = 5;
+		option.minValue = 0.5;
+		option.maxValue = 0.5;
 		option.changeValue = 0.1;
 		option.displayFormat = '%vX';
 		optionsArray.push(option);
 
 		var option:GameplayOption = new GameplayOption('Health Loss Multiplier', 'healthloss', 'float', 1);
 		option.scrollSpeed = 2.5;
-		option.minValue = 0.5;
-		option.maxValue = 5;
+		option.minValue = 4;
+		option.maxValue = 4;
 		option.changeValue = 0.1;
 		option.displayFormat = '%vX';
 		optionsArray.push(option);
@@ -230,7 +230,7 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 											updateTextFrom(oOption);
 										}
 									}
-									//trace(curOption.options[num]);
+									trace(curOption.options[num]);
 							}
 							updateTextFrom(curOption);
 							curOption.change();

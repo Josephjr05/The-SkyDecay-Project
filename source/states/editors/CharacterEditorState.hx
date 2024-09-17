@@ -22,6 +22,7 @@ import objects.Bar;
 
 class CharacterEditorState extends MusicBeatState
 {
+	var music:EditingMusic;
 	var character:Character;
 	var ghost:FlxSprite;
 	var animateGhost:FlxAnimate;
@@ -67,6 +68,7 @@ class CharacterEditorState extends MusicBeatState
 	override function create()
 	{
 		if(ClientPrefs.data.cacheOnGPU) Paths.clearStoredMemory();
+		music = new EditingMusic();
 
 		FlxG.sound.music.stop();
 		camEditor = initPsychCamera();
@@ -1031,6 +1033,8 @@ class CharacterEditorState extends MusicBeatState
 		}
 		else if(FlxG.keys.justPressed.ESCAPE)
 		{
+			super.update(elapsed);
+			music.update(elapsed);
 			FlxG.mouse.visible = false;
 			if(!_goToPlayState)
 			{

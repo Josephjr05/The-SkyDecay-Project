@@ -19,6 +19,7 @@ import cutscenes.DialogueCharacter;
 
 class DialogueEditorState extends MusicBeatState
 {
+	var music:EditingMusic;
 	var character:DialogueCharacter;
 	var box:FlxSprite;
 	var daText:TypedAlphabet;
@@ -32,6 +33,8 @@ class DialogueEditorState extends MusicBeatState
 	override function create() {
 		persistentUpdate = persistentDraw = true;
 		FlxG.camera.bgColor = FlxColor.fromHSL(0, 0, 0.5);
+
+		music = new EditingMusic();
 
 		defaultLine = {
 			portrait: DialogueCharacter.DEFAULT_CHARACTER,
@@ -333,6 +336,8 @@ class DialogueEditorState extends MusicBeatState
 				reloadText(false);
 			}
 			if(FlxG.keys.justPressed.ESCAPE) {
+				super.update(elapsed);
+				music.update(elapsed);
 				MusicBeatState.switchState(new states.editors.MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'), 1);
 				transitioning = true;

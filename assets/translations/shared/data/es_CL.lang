@@ -1,0 +1,307 @@
+Español (Chile)
+
+// Difficulties
+difficulty_: ""
+
+difficulty_easy: "Facilisimo"
+difficulty_normal: "Mediocre"
+difficulty_hard: "Duro"
+difficulty_insane: "Insano"
+difficulty‑mania: "Mania"
+
+// Achievements
+achievement_: ""
+description_: ""
+
+achievement_friday_night_play: "Caliente Un Viernes Por la noche"
+description_friday_night_play: "Juega FNF el viernes por la noche DUH."
+
+achievement_week1_nomiss: "Yo tambien soy su papi"
+description_week1_nomiss: "Completa la semana 1 sin fallar en dificultad duro."
+
+achievement_week2_nomiss: "Mejor es Navidad"
+description_week2_nomiss: "Completa la semana 2 sin fallar en dificultad duro."
+
+achievement_week3_nomiss: "Y el pico?"
+description_week3_nomiss: "Completa la semana 2 sin fallar en dificultad duro."
+
+achievement_week4_nomiss: "Viejitas candentes buscar"
+description_week4_nomiss: "Completa la semana 4 sin fallar en dificultad duro."
+
+achievement_week5_nomiss: "Mejor es Halloween"
+description_week5_nomiss: "Completa la semana 5 sin fallar en dificultad duro."
+
+achievement_week6_nomiss: "Se le olvidó que no era el prota"
+description_week6_nomiss: "Completa la semana 6 sin fallar en dificultad duro."
+
+achievement_week7_nomiss: "Con tanque y equipo vs un enano con gorra."
+description_week7_nomiss: "Completa la semana 7 sin fallar en dificultad duro."
+
+achievement_ur_bad: "Lo hiciste a posta?"
+description_ur_bad: "Completa una cancion con un rating menor a 20%."
+
+achievement_ur_good: "Qliao capo"
+description_ur_good: "Completa una cancion con un rating de 100%."
+
+achievement_roadkill_enthusiast: "Homicida indirecto"
+description_roadkill_enthusiast: "Mira a los demonios de la semana 4 morir 50 veces."
+
+achievement_oversinging: "El dolor de garganta viene despues"
+description_oversinging: "Canta por 10 segundos sin parar."
+
+achievement_hype: "Wn piuyento"
+description_hype: "Termina una cancion sin volver a la pose idle."
+
+achievement_two_keys: "4k para que?"
+description_two_keys: "Termina una cancion presionando solo 2 teclas."
+
+achievement_toastie: "Mejor juega Doom 1993"
+description_toastie: "PC qliao malo."
+
+achievement_debugger: "Hacker"
+description_debugger: "Completa la cancion de prueba de el editor de Charteo."
+
+// Freeplay
+musicplayer_playing: "REPRODUCIENDO: {1}"
+musicplayer_paused: "REPRODUCIENDO: {1} (EN PAUSA)"
+musicplayer_tip: "Presiona ESPACIO para Pausar / Presiona ESCAPE para Salir / Presiona R para Reiniciar la Cancion"
+
+// Options
+setting_scroll_type: "Tipo de Scroll:"
+setting_scroll_type-constant: "Constante"
+setting_scroll_type-multiplicative: "Multiplicativo"
+
+setting_scroll_speed: "Velocidad del Scroll:"
+setting_playback_rate: "Velocidad de la Cancion:"
+setting_health_gain_multiplier: "Multiplic. ganado de Vida:"
+setting_health_loss_multiplier: "Multiplic. perdida de Vida:"
+setting_instakill_on_miss: "Muerte Instantanea al fallar"
+setting_practice_mode: "Modo Practica"
+setting_botplay: "Botplay"
+
+gameplay_menu: "Opciones de Juego"
+graphics_menu: "Opciones Graficas"
+visuals_menu: "Opciones Visuales"
+
+setting_low_quality: "Baja Calidad"
+description_low_quality: "Si esta activado, deshabilita algunos detalles del fondo,\n hace que algunas canciones carguen mas rapido y mejora el Rendimiento."
+
+setting_anti-aliasing: "Suavizado de Bordes"
+description_anti-aliasing: "Si no esta activado, deshabilita el suavizado de bordes,\n Incrementa el Rendimiento a costa de imagenes mas puntiagudas."
+
+setting_shaders: "Shaders"
+description_shaders: "Si no esta activado, deshabilita los shaders.\n Se utilizan para efectos visuales, Come mucha CPU en PCs mas debiles."
+
+setting_gpu_caching: "cacheado de GPU"
+description_gpu_caching: "If esta activado, Permite que la GPU almacene texturas, bajando el uso de RAM.\n No lo actives si tu tarjeta grafica es una mierda."
+
+setting_framerate: "Fotogramas"
+description_framerate: "Algo obvio no?"
+
+setting_note_skins: "Skins de Notas:"
+setting_note_skins-default: "Normales"
+setting_note_skins-future: "Futuristas"
+setting_note_skins-chip: "Chip"
+
+description_note_skins: "Elige tu estilo de notas preferido."
+setting_note_splashes: "Salpicado de Nota:"
+setting_note_splashes-diamond: "Diamante"
+setting_note_splashes-electric: "Electrico"
+setting_note_splashes-sparkles: "Chispitas"
+setting_note_splashes-vanilla: "Normal"
+
+description_note_splashes: "Elije tu estilo de Salpicado de notas preferido,\n o simplemente deshabilitalo."
+
+setting_note_splash_opacity: "Opacidad del Salpicado"
+description_note_splash_opacity: "Que tan transparente deberia verse el Salpicado de notas."
+
+setting_hide_hud: "Esconder HUD"
+description_hide_hud: "Si esta activado, Esconde Gran parte de la HUD."
+
+setting_time_bar: "Barra de Tiempo:"
+setting_time_bar-time_left: "Tiempo\n Restante"
+setting_time_bar-time_elapsed: "Tiempo\n Transcurrido"
+setting_time_bar-song_name: "Nombre de\n la Cancion"
+setting_time_bar-disabled: "Desactivado"
+
+description_time_bar: "Lo que quieres que la Barra de Tiempo indique"
+
+setting_flashing_lights: "Luces Parpadeantes"
+description_flashing_lights: "Desactiva esto si eres sensible a las Luces Parpadeantes\n (Recomendado si sufres de Epilepsia)"
+
+setting_camera_zooms: "Zooms de la Camara"
+description_camera_zooms: "Si esta desactivado, la Camara no se acercara cuando se detecte un ritmo."
+
+setting_score_text_grow_on_hit: "Crecimiento del Texto\n de puntuacion al tocar"
+description_score_text_grow_on_hit: "Si esta desactivado, evita que el Texto de puntuacion Crezca cada vez que tocas una nota."
+
+setting_health_bar_opacity: "Opacidad de la Barra de Vida"
+description_health_bar_opacity: "Que tan transparente deberian ser la Barra de vida y sus iconos."
+
+setting_fps_counter: "Contador de FPS"
+description_fps_counter: "Si esta desactivado, esconde el Contador de FPS."
+
+setting_pause_music: "Musica de espera"
+description_pause_music: "Que cancion prefieres en la pantalla de Pausa?"
+
+setting_check_for_updates: "Revisar actualizaciones"
+description_check_for_updates: "En versiones oficiales, activa esto para que el juego revise si hay una actualizacion cada que inicie."
+
+setting_discord_rich_presence: "Discord Rich Presence"
+description_discord_rich_presence: "Desactiva esto para evitar que vean que cancion juegas, Si no esta activado no muestra tu actividad en el juego en discord."
+
+setting_combo_stacking: "Apilamiento de Combo"
+description_combo_stacking: "Si esta desactivado, el Rating y el Combo no se apilaran,\n ahorrando memoria del sistema y haciendo el combo mas facil de leer"
+
+setting_downscroll: "Downscroll"
+description_downscroll: "Si esta activado, las notas van a ir abajo en lugar de ir arriba."
+
+setting_middlescroll: "Middlescroll"
+description_middlescroll: "Si esta activado, tus notas se centran."
+
+setting_opponent_notes: "Notas del Oponente"
+description_opponent_notes: "Si esta desactivado, las notas del oponente se ocultan."
+
+setting_ghost_tapping: "Ghost Tapping"
+description_ghost_tapping: "Si esta activado, no obtendrás fallos al presionar una nota\n mientras no haya notas para tocar."
+
+setting_auto_pause: "Pausado Automatico"
+description_auto_pause: "Si esta activado, el juego automaticamente se pausará si el juego no esta enfocado en la pantalla."
+
+setting_disable_reset_button: "Desactivar el Boton de Reinicio"
+description_disable_reset_button: "Si esta activado, Presionar el boton de reinicio no hara nada."
+
+setting_hitsound_volume: "Volumen del Sonido De Notas"
+description_hitsound_volume: "Las notas harán "Tick!" las toques."
+
+setting_rating_offset: "Compensacion del Rating"
+description_rating_offset: "Cambia que tan Tarde o pronto tienes que presionar para obtener un "Asombroso!"\n Valores mas altos haran que tengas que presionar mas tarde."
+
+setting_sick_hit_window: "Ventana de golpe para\n Asombroso!"
+description_sick_hit_window: "Cambia el tiempo que tienes\n para obtener un "Asombroso!" en milisegundos."
+
+setting_good_hit_window: "Ventana de golpe para\n Bien"
+description_good_hit_window: "Cambia el tiempo que tienes\n para obtener un "Bien" en milisegundos."
+
+setting_bad_hit_window: "Ventana de golpe para\n Malisimo"
+description_bad_hit_window: "Cambia el tiempo que tienes\n para obtener un "Malisimo" en milisegundos."
+
+setting_safe_frames: "Frames Seguros"
+description_safe_frames: "Cambia cuantos frames tienes para tocar una nota antes o despues."
+
+setting_sustains_as_one_note: "Sustains como una Una Nota"
+description_sustains_as_one_note: "Si esta activado, las notas Largas no pueden ser pulsadas si fallas,\n y cuentan como una sola nota/fallo.\n Desactivalo si prefieres el viejo Input."
+
+// Control Rebinding
+controls_rebinding: "Cambiando {1}"
+controls_rebinding2: "Manten ESC para Cancelar\n Manten Retroceso para Eliminar"
+
+keygroup_NOTES: "NOTAS"
+key_note_left: "Izq."
+key_note_down: "Abajo"
+key_note_up: "Arriba"
+key_note_right: "Derecha"
+
+keygroup_UI: "UI"
+key_ui_left: "Izq."
+key_ui_down: "Abajo"
+key_ui_up: "Arriba"
+key_ui_right: "Derecha"
+key_reset: "Reinicio"
+key_accept: "Aceptar"
+key_back: "Atras"
+key_pause: "Pausa"
+
+keygroup_VOLUME: "VOLUMEN"
+key_volume_mute: "Silencio"
+key_volume_up: "Subir"
+key_volume_down: "Bajar"
+
+keygroup_DEBUG: "DESAROLLO"
+key_debug_1: "Cosa 1"
+key_debug_2: "Cosa 2"
+
+delay_beat_hit: "Ritmo!"
+combo_rating_offset: "Dezplazamiento del Rating:"
+combo_numbers_offset: "Desplazamiento de los Numeros:"
+delay_curren"t_offset: "Compensacion actual: {1} ms"
+combo_offset: "Desplazamiento del Combo"
+note_delay: "Retraso del Ritmo/Nota"
+switch_on_accept: "(Presiona Aceptar para Cambiar)"
+switch_on_start: "(Presiona Pausa para cambiar)"
+
+note_colors_tip: "Presiona REINICIAR to Reniciar la parte seleccionada de la nota."
+note_colors_shift: "Shift"
+note_colors_lb: "Gatillo Izquierdo"
+note_colors_hold_tip: "Manten {1} Y presiona la tecla REINICIAR para Reiniciar la nota seleccionada."
+
+options_note_colors: "Color de las Notas"
+options_controls: "Controles"
+options_adjust_delay_and_combo: "Retraso Y Combo"
+options_graphics: "Graficos"
+options_visuals: "Visuales"
+options_gameplay: "Jugabilidad"
+options_language: "Idioma"
+
+reset_achievement: "Reiniciar Logros:"
+
+yes: "Si"
+no: "No"
+
+freeplay_tip: "Pulsa ESPACIO para escuchar la cancion|Pulsa CTRL para abrir el Menu de Modificadores|Pulsa REINICIO para Reiniciar tu Puntaje y Precision."
+personal_best: "Mejor Marca: {1} ({2}%)"
+
+now_loading: "Cargando{1}"
+
+reload_button: "RECARGAR"
+enable_all_button: "ACTIVAR TODOS"
+disable_all_button: "DESACTIVAR TODOS"
+no_mods_installed: "SIN MODS INSTALADOS\n PRESIONA "ATRAS" PARA SALIR O INSTALAR UN MOD"
+no_mods_found: "No se encontraron mods."
+mod_restart: "* Cambiar o alternar el mod reiniciara el juego."
+
+botplay: "Mira Y Aprende"
+
+rating_you_suck: "Eres una Mierda"
+rating_shit: "Horrible"
+rating_bad: "Malisimo"
+rating_bruh: "Malo"
+rating_meh: "Podría mejorar"
+rating_nice: "Decente"
+rating_good: "Bien"
+rating_great: "Genial"
+rating_sick: "Asombroso!"
+rating_perfect: "Mejor No Hay!!"
+
+clear: "Pasado"
+sdcb: "SDCB"
+fc: "FC"
+gfc: "GFC"
+sfc: "SFC"
+
+score_text: "Puntaje: {1} | Fallos: {2} | Calificacion: {3}"
+score_text_instakill: "Puntaje: {1} | Calificacion: {2}"
+
+week_score: "PUNTAJE DE LA SEMANA: {1}"
+
+blueballed: "Muertes: {1}"
+practice_mode: "Modo Practica"
+charting_mode: "Modo de Charteo"
+
+pause_resume: "Continuar"
+pause_restart_song: "Reiniciar Cancion"
+pause_change_difficulty: "Cambiar Dificultad"
+pause_options: "Opciones"
+pause_exit_to_menu: "Salir al Menu"
+
+reset_score: "Reiniciar el puntaje de"
+
+storyname_tutorial: "Tutorial"
+storyname_week1: "Daddy Dearest"
+storyname_week2: "Noche De Brujas"
+storyname_week3: "Pico"
+storyname_week4: "Mami quiere matar"
+storyname_week5: "Nieve Carmesi"
+storyname_week6: "Discordia Visual ft. Moawling"
+storyname_week7: "Tankman"
+storyname_weekend1: "Deudas Sin Saldar"

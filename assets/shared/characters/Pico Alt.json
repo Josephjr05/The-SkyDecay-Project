@@ -1,0 +1,133 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				-70,
+				-10
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "Pico Idle Dance HYPE"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "Pico NOTE LEFT"
+		},
+		{
+			"offsets": [
+				-10,
+				-70
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "Pico Down Note"
+		},
+		{
+			"offsets": [
+				-100,
+				30
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "pico Up note"
+		},
+		{
+			"offsets": [
+				-140,
+				10
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "Pico Note Right"
+		},
+		{
+			"offsets": [
+				330,
+				70
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "Shoot",
+			"indices": [],
+			"name": "Pico Shootin Bus"
+		},
+		{
+			"offsets": [
+				90,
+				80
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "Shoot Left",
+			"indices": [],
+			"name": "Pico Shootin Left"
+		},
+		{
+			"offsets": [
+				-138,
+				-10
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "Taunt",
+			"indices": [],
+			"name": "Pico Taunt"
+		},
+		{
+			"offsets": [
+				-100,
+				20
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "No Ammo",
+			"indices": [],
+			"name": "Pico No Ammo"
+		},
+		{
+			"offsets": [
+				50,
+				106
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "start",
+			"indices": [],
+			"name": "PicoStartUp"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/pico-alt",
+	"position": [
+		-100,
+		300
+	],
+	"healthicon": "pico",
+	"flip_x": true,
+	"healthbar_colors": [
+		183,
+		215,
+		87
+	],
+	"camera_position": [
+		220,
+		0
+	],
+	"sing_duration": 6.1,
+	"scale": 1
+}

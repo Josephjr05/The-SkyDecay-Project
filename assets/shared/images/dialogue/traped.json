@@ -1,0 +1,63 @@
+{
+	"position": [
+		200,
+		70
+	],
+	"dialogue_pos": "left",
+	"scale": 1.25,
+	"image": "traped",
+	"animations": [
+		{
+			"loop_offsets": [
+				0,
+				0
+			],
+			"anim": "what?",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"loop_name": "BF LOOP",
+			"idle_name": "what"
+		},
+		{
+			"loop_offsets": [
+				0,
+				0
+			],
+			"anim": "uh",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"loop_name": "BF LOOP",
+			"idle_name": "uh"
+		},
+		{
+			"loop_offsets": [
+				0,
+				0
+			],
+			"anim": "wtf",
+			"idle_offsets": [
+				0,
+				10
+			],
+			"loop_name": "BF LOOP",
+			"idle_name": "wtf"
+		},
+		{
+			"loop_name": "BF LOOP",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"idle_name": "Traped",
+			"anim": "Traped",
+			"loop_offsets": [
+				0,
+				0
+			]
+		}
+	]
+}

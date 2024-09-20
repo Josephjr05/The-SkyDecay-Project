@@ -30,6 +30,7 @@ import haxe.io.Path;
 #end
 
 import backend.Highscore;
+import backend.cppFiles.CppAPI;
 
 #if linux
 @:cppInclude('./external/gamemode_client.h')
@@ -170,6 +171,7 @@ class Main extends Sprite
 			if (FlxG.game != null)
 			resetSpriteCache(FlxG.game);
 		});
+
 		#if cpp
 		CppAPI.darkMode();
 		CppAPI.allowHighDPI();

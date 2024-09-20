@@ -3117,6 +3117,7 @@ class PlayState extends MusicBeatState
 		{
 			combo++;
 			if(combo > 9999) combo = 9999;
+			if(combo % 100) gf.playAnim('cheer', true);
 			if (combo > highestCombo) highestCombo = combo;
 			notesHitArray.unshift(Date.now());
 			popUpScore(note);

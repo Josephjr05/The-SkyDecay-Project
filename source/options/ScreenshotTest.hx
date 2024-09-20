@@ -39,12 +39,6 @@ class ScreenshotTest extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 
-		var option:Option = new Option('Garbage Collection Rate',
-			"After how many seconds rendered should a garbage collection be performed?\nIf it's set to 0, the game will not garbage collect at all.",
-			'renderGCRate',
-			'float');
-		// addOption(option);
-
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length-1]];
 		
 		super();

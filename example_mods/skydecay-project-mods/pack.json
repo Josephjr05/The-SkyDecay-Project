@@ -1,9 +1,0 @@
-{
-	"name": "The-SkyDecay-Project-Mods",
-	"description": "DO NOT TURN OFF IF MODS=TRUE. MODS FOLDER IS ONLY INTENDED FOR SCRIPTS EMBED TESTING!",
-	"restart":false,
-	"runsGlobally": true,
-	"color": [170, 0, 255],
-	"discordRPC": "",
-	"iconFramerate": 10
-}

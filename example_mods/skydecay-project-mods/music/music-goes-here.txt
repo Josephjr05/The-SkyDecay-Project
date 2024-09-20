@@ -1,2 +1,0 @@
-This is NOT where you should put your custom week's songs.
-This is about music that can be loaded on lua through playSound method

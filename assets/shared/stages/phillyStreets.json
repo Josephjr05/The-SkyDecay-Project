@@ -1,0 +1,41 @@
+{
+	"directory": "",
+	"defaultZoom": 0.77,
+	"stageUI": "",
+
+	"boyfriend": [1930, 450],
+	"girlfriend": [1175, 200],
+	"opponent": [620, 445],
+	"hide_girlfriend": false,
+
+	"camera_boyfriend": [-220, -15],
+	"camera_opponent": [450, -110],
+	"camera_girlfriend": [0, 0],
+	"camera_speed": 1,
+
+	"preload": {
+		"images/abot/": 3,
+		"images/abot/systemEyes/": 3,
+		"images/abot/abotSystem/": 3,
+
+		"images/stages/weekend1/SpraycanPile": 3,
+		"images/stages/weekend1/phillyStreets/phillyConstruction": 3,
+		"images/stages/weekend1/phillyStreets/phillyHighwayLights": 3,
+		"images/stages/weekend1/phillyStreets/phillyHighway": 3,
+		"images/stages/weekend1/phillyStreets/phillyForeground": 3,
+		"images/stages/weekend1/phillyStreets/phillySkybox": 2,
+		"images/stages/weekend1/phillyStreets/phillySkyline": 2,
+		"images/stages/weekend1/phillyStreets/phillyHighwayLights_lightmap": 2,
+		"images/stages/weekend1/phillyStreets/phillySmog": 2,
+		"images/stages/weekend1/phillyStreets/phillyCars": 2,
+		"images/stages/weekend1/phillyStreets/phillyTraffic": 2,
+		"images/stages/weekend1/phillyStreets/phillyTraffic_lightmap": 2,
+		"images/stages/weekend1/phillyStreets/phillyForegroundCity": 2
+	},
+
+	"_editorMeta": {
+		"dad": "darnell",
+		"boyfriend": "pico-playable",
+		"gf": "nene"
+	}
+}

@@ -1,78 +1,55 @@
 {
 	"animations": [
 		{
-			"offsets": [
-				12,
-				11
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [12, 11],
 			"anim": "idle",
-			"indices": [],
-			"name": "idle"
+			"fps": 24,
+			"name": "idle",
+			"indices": []
 		},
 		{
-			"offsets": [
-				7,
-				-4
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [7, -4],
 			"anim": "singDOWN",
-			"indices": [],
-			"name": "down"
+			"fps": 24,
+			"name": "down",
+			"indices": []
 		},
 		{
-			"offsets": [
-				2,
-				31
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [2, 31],
 			"anim": "singUP",
-			"indices": [],
-			"name": "up"
+			"fps": 24,
+			"name": "up",
+			"indices": []
 		},
 		{
-			"offsets": [
-				38,
-				10
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [38, 10],
 			"anim": "singLEFT",
-			"indices": [],
-			"name": "right"
+			"fps": 24,
+			"name": "right",
+			"indices": []
 		},
 		{
-			"offsets": [
-				-10,
-				11
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [-10, 11],
 			"anim": "singRIGHT",
-			"indices": [],
-			"name": "left"
+			"fps": 24,
+			"name": "left",
+			"indices": []
 		}
 	],
+	"vocals_file": "",
 	"no_antialiasing": false,
-	"image": "characters/Kubaxon",
-	"position": [
-		1200,
-		640
-	],
+	"image": "characters/Kubaxon/Kubaxon",
+	"position": [1200, 640],
 	"healthicon": "icon-kubaxon",
 	"flip_x": false,
-	"healthbar_colors": [
-		0,
-		102,
-		255
-	],
-	"camera_position": [
-		-30,
-		-160
-	],
+	"healthbar_colors": [0, 102, 255],
+	"camera_position": [-30, -160],
 	"sing_duration": 6.1,
-	"scale": 1.2
+	"scale": 1.2,
+	"_editor_isPlayer": false
 }

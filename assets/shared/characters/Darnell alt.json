@@ -1,89 +1,63 @@
 {
 	"animations": [
 		{
+			"offsets": [20, 20],
 			"loop": false,
-			"offsets": [
-				20,
-				20
-			],
+			"fps": 24,
 			"anim": "idle",
-			"fps": 24,
-			"name": "idle",
-			"indices": []
+			"indices": [],
+			"name": "idle"
 		},
 		{
+			"offsets": [8, 25],
 			"loop": false,
-			"offsets": [
-				8,
-				25
-			],
+			"fps": 24,
 			"anim": "Alt",
-			"fps": 24,
-			"name": "HEY!",
-			"indices": []
+			"indices": [],
+			"name": "HEY!"
 		},
 		{
+			"offsets": [0, -50],
 			"loop": false,
-			"offsets": [
-				0,
-				-50
-			],
+			"fps": 24,
 			"anim": "singRIGHT",
-			"fps": 24,
-			"name": "right",
-			"indices": []
+			"indices": [],
+			"name": "right"
 		},
 		{
+			"offsets": [30, 0],
 			"loop": false,
-			"offsets": [
-				30,
-				0
-			],
+			"fps": 24,
 			"anim": "singLEFT",
-			"fps": 24,
-			"name": "left",
-			"indices": []
+			"indices": [],
+			"name": "left"
 		},
 		{
+			"offsets": [0, -70],
 			"loop": false,
-			"offsets": [
-				0,
-				-70
-			],
+			"fps": 24,
 			"anim": "singDOWN",
-			"fps": 24,
-			"name": "down",
-			"indices": []
+			"indices": [],
+			"name": "down"
 		},
 		{
+			"offsets": [-10, 50],
 			"loop": false,
-			"offsets": [
-				-10,
-				50
-			],
-			"anim": "singUP",
 			"fps": 24,
-			"name": "up",
-			"indices": []
+			"anim": "singUP",
+			"indices": [],
+			"name": "up"
 		}
 	],
+	"vocals_file": "",
 	"no_antialiasing": false,
 	"image": "characters/darnell alt",
-	"position": [
-		50,
-		300
-	],
+	"position": [0, 270],
 	"healthicon": "darnell",
 	"flip_x": false,
-	"healthbar_colors": [
-		114,
-		94,
-		176
-	],
-	"camera_position": [
-		220,
-		-70
-	],
+	"healthbar_colors": [114, 94, 176],
+	"camera_position": [-150, 100],
 	"sing_duration": 6.1,
-	"scale": 1
+	"scale": 1,
+	"_editor_isPlayer": false
 }

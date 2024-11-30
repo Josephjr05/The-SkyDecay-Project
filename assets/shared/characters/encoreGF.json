@@ -1,45 +1,31 @@
 {
 	"animations": [
 		{
-			"offsets": [
-				0,
-				0
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [0, 0],
 			"anim": "danceLeft",
-			"indices": [],
-			"name": "dancin2"
+			"fps": 24,
+			"name": "dancin2",
+			"indices": []
 		},
 		{
-			"offsets": [
-				0,
-				0
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [0, 0],
 			"anim": "danceRight",
-			"indices": [],
-			"name": "dancin1"
+			"fps": 24,
+			"name": "dancin1",
+			"indices": []
 		}
 	],
+	"vocals_file": "",
 	"no_antialiasing": false,
-	"image": "characters/EncoreGF",
-	"position": [
-		100,
-		80
-	],
+	"image": "characters/SonicLegacy/EncoreGF",
+	"position": [100, 80],
 	"healthicon": "gf",
 	"flip_x": false,
-	"healthbar_colors": [
-		165,
-		0,
-		77
-	],
-	"camera_position": [
-		0,
-		0
-	],
+	"healthbar_colors": [165, 0, 77],
+	"camera_position": [0, 0],
 	"sing_duration": 6.1,
-	"scale": 0.8
+	"scale": 0.8,
+	"_editor_isPlayer": false
 }

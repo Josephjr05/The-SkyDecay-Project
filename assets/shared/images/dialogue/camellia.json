@@ -1,128 +1,76 @@
 {
-	"dialogue_pos": "left",
 	"position": [
 		-120,
-		-90
+		-80
 	],
+	"dialogue_pos": "right",
 	"scale": 0.95,
+	"image": "camellia",
 	"animations": [
 		{
-			"anim": "talk",
 			"loop_offsets": [
-				3,
-				58
+				0,
+				0
 			],
+			"anim": "normal",
 			"idle_offsets": [
 				0,
 				0
 			],
-			"loop_name": "Camellia_Up0",
-			"idle_name": "Camellia_Idle"
+			"loop_name": "Camellia normal",
+			"idle_name": "Camellia normal0000"
 		},
 		{
-			"loop_name": "Camellia_Left0",
+			"loop_offsets": [
+				0,
+				0
+			],
+			"anim": "excited",
 			"idle_offsets": [
 				0,
 				0
 			],
-			"idle_name": "Camellia_Idle",
-			"anim": "talk2",
-			"loop_offsets": [
-				63,
-				13
-			]
+			"loop_name": "Camellia excited",
+			"idle_name": "Camellia excited"
 		},
 		{
-			"loop_name": "Camellia_Right0",
+			"loop_offsets": [
+				0,
+				0
+			],
+			"anim": "shocked",
 			"idle_offsets": [
 				0,
 				0
 			],
-			"idle_name": "Camellia_Idle",
-			"anim": "talk3",
-			"loop_offsets": [
-				0,
-				-2
-			]
+			"loop_name": "Camellia shocked",
+			"idle_name": "Camellia shocked"
 		},
 		{
-			"loop_name": "Camellia_Down0",
+			"loop_offsets": [
+				0,
+				0
+			],
+			"anim": "thankful",
 			"idle_offsets": [
 				0,
 				0
 			],
-			"idle_name": "Camellia_Idle",
-			"anim": "talk4",
-			"loop_offsets": [
-				0,
-				61
-			]
+			"loop_name": "Camellia thankful",
+			"idle_name": "Camellia thankful"
 		},
 		{
-			"loop_name": "Camellia_Up_MISS0",
-			"idle_offsets": [
-				4,
-				83
-			],
-			"idle_name": "Camellia_Up_MISS0",
-			"anim": "miss1",
-			"loop_offsets": [
-				4,
-				83
-			]
-		},
-		{
-			"loop_name": "Camellia_Left_MISS0",
-			"idle_offsets": [
-				62,
-				8
-			],
-			"idle_name": "Camellia_Left_MISS0",
-			"anim": "miss2",
-			"loop_offsets": [
-				62,
-				8
-			]
-		},
-		{
-			"loop_name": "Camellia_Right_MISS0",
-			"idle_offsets": [
-				0,
-				15
-			],
-			"idle_name": "Camellia_Right_MISS0",
-			"anim": "miss3",
 			"loop_offsets": [
 				0,
-				15
-			]
-		},
-		{
-			"loop_name": "Camellia_Down_MISS0",
-			"idle_offsets": [
-				1,
-				61
+				0
 			],
-			"idle_name": "Camellia_Down_MISS0",
-			"anim": "miss4",
-			"loop_offsets": [
-				1,
-				61
-			]
-		},
-		{
-			"loop_name": "Camellia_DEATHLoop0",
+			"anim": "pensive",
 			"idle_offsets": [
 				0,
-				-10
+				0
 			],
-			"idle_name": "Camellia_DEATHLoop0",
-			"anim": "death",
-			"loop_offsets": [
-				0,
-				-10
-			]
+			"loop_name": "Camellia pensive",
+			"idle_name": "Camellia pensive"
 		}
-	],
-	"image": "camellia"
+	]
 }

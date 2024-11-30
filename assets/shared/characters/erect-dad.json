@@ -1,169 +1,103 @@
 {
 	"animations": [
 		{
+			"offsets": [101, -47],
 			"loop": false,
-			"offsets": [
-				101,
-				-47
-			],
-			"fps": 24,
 			"anim": "singLEFT",
-			"indices": [],
+			"fps": 24,
+			"name": "Dad Sing Note LEFT",
+			"indices": []
+		},
+		{
+			"offsets": [59, -92],
+			"loop": false,
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "Dad Sing Note DOWN",
+			"indices": []
+		},
+		{
+			"offsets": [55, -37],
+			"loop": false,
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "Dad Sing Note RIGHT",
+			"indices": []
+		},
+		{
+			"offsets": [0, 0],
+			"loop": false,
+			"anim": "idle",
+			"fps": 24,
+			"name": "Dad idle dance",
+			"indices": []
+		},
+		{
+			"offsets": [0, 0],
+			"loop": true,
+			"fps": 24,
+			"anim": "idle-loop",
+			"indices": [10, 11, 12, 12],
+			"name": "Dad idle dance"
+		},
+		{
+			"offsets": [89, -46],
+			"loop": true,
+			"fps": 24,
+			"anim": "singLEFT-loop",
+			"indices": [12, 13, 14, 15],
 			"name": "Dad Sing Note LEFT"
 		},
 		{
-			"loop": false,
-			"offsets": [
-				59,
-				-92
-			],
+			"offsets": [55, -35],
+			"loop": true,
 			"fps": 24,
-			"anim": "singDOWN",
-			"indices": [],
-			"name": "Dad Sing Note DOWN"
-		},
-		{
-			"loop": false,
-			"offsets": [
-				55,
-				-37
-			],
-			"fps": 24,
-			"anim": "singRIGHT",
-			"indices": [],
+			"anim": "singRIGHT-loop",
+			"indices": [15, 16, 17, 18],
 			"name": "Dad Sing Note RIGHT"
 		},
 		{
 			"loop": false,
-			"offsets": [
-				0,
-				0
-			],
-			"fps": 24,
-			"anim": "idle",
-			"indices": [],
-			"name": "Dad idle dance"
-		},
-		{
-			"loop": true,
-			"offsets": [
-				0,
-				0
-			],
-			"anim": "idle-loop",
-			"fps": 24,
-			"name": "Dad idle dance",
-			"indices": [
-				10,
-				11,
-				12,
-				12
-			]
-		},
-		{
-			"loop": true,
-			"offsets": [
-				89,
-				-46
-			],
-			"anim": "singLEFT-loop",
-			"fps": 24,
-			"name": "Dad Sing Note LEFT",
-			"indices": [
-				12,
-				13,
-				14,
-				15
-			]
-		},
-		{
-			"loop": true,
-			"offsets": [
-				55,
-				-35
-			],
-			"anim": "singRIGHT-loop",
-			"fps": 24,
-			"name": "Dad Sing Note RIGHT",
-			"indices": [
-				15,
-				16,
-				17,
-				18
-			]
-		},
-		{
-			"offsets": [
-				-7,
-				-11
-			],
-			"loop": false,
-			"fps": 24,
+			"offsets": [-7, -11],
 			"anim": "singUP",
-			"indices": [],
-			"name": "Dad Sing Note UP"
-		},
-		{
-			"offsets": [
-				-7,
-				-11
-			],
-			"loop": true,
 			"fps": 24,
-			"anim": "singUP-loop",
-			"indices": [
-				5,
-				6,
-				7,
-				8
-			],
-			"name": "Dad Sing Note UP"
-		},
-		{
-			"offsets": [
-				59,
-				-95
-			],
-			"loop": true,
-			"fps": 24,
-			"anim": "singDOWN-loop",
-			"indices": [
-				5,
-				6,
-				7,
-				8
-			],
-			"name": "Dad Sing Note DOWN"
-		},
-		{
-			"loop": true,
-			"offsets": [
-				-7,
-				-25
-			],
-			"anim": "scared",
-			"fps": 24,
-			"name": "DAD SCARED",
+			"name": "Dad Sing Note UP",
 			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [-7, -11],
+			"anim": "singUP-loop",
+			"fps": 24,
+			"name": "Dad Sing Note UP",
+			"indices": [5, 6, 7, 8]
+		},
+		{
+			"loop": true,
+			"offsets": [59, -95],
+			"anim": "singDOWN-loop",
+			"fps": 24,
+			"name": "Dad Sing Note DOWN",
+			"indices": [5, 6, 7, 8]
+		},
+		{
+			"offsets": [-7, -25],
+			"loop": true,
+			"fps": 24,
+			"anim": "scared",
+			"indices": [],
+			"name": "DAD SCARED"
 		}
 	],
+	"vocals_file": "",
 	"no_antialiasing": false,
-	"image": "characters/DADDY_ERECTER",
-	"position": [
-		60,
-		-100
-	],
+	"image": "characters/ERECT/DADDY_ERECTER",
+	"position": [60, -100],
 	"healthicon": "daddy-erect",
 	"flip_x": false,
-	"healthbar_colors": [
-		171,
-		58,
-		106
-	],
-	"camera_position": [
-		200,
-		100
-	],
+	"healthbar_colors": [171, 58, 106],
+	"camera_position": [200, 100],
 	"sing_duration": 6.1,
-	"scale": 1
+	"scale": 1,
+	"_editor_isPlayer": false
 }

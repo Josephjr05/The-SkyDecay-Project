@@ -1,133 +1,95 @@
 {
 	"animations": [
 		{
+			"offsets": [0, 0],
 			"loop": true,
-			"offsets": [
-				0,
-				0
-			],
-			"anim": "idle",
 			"fps": 24,
-			"name": "Miku idle dance",
+			"anim": "idle",
+			"indices": [],
+			"name": "Miku idle dance"
+		},
+		{
+			"loop": false,
+			"offsets": [34, 2],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "Miku Sing Note LEFT0",
 			"indices": []
 		},
 		{
-			"offsets": [
-				34,
-				2
-			],
 			"loop": false,
-			"fps": 24,
-			"anim": "singLEFT",
-			"indices": [],
-			"name": "Miku Sing Note LEFT0"
-		},
-		{
-			"offsets": [
-				0,
-				0
-			],
-			"loop": false,
-			"fps": 24,
+			"offsets": [0, 0],
 			"anim": "singDOWN",
-			"indices": [],
-			"name": "Miku Sing Note DOWN0"
+			"fps": 24,
+			"name": "Miku Sing Note DOWN0",
+			"indices": []
 		},
 		{
-			"offsets": [
-				17,
-				51
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [17, 51],
 			"anim": "singUP",
-			"indices": [],
-			"name": "Miku Sing Note UP0"
+			"fps": 24,
+			"name": "Miku Sing Note UP0",
+			"indices": []
 		},
 		{
-			"offsets": [
-				-79,
-				1
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [-79, 1],
 			"anim": "singRIGHT",
-			"indices": [],
-			"name": "Miku Sing Note RIGHT0"
+			"fps": 24,
+			"name": "Miku Sing Note RIGHT0",
+			"indices": []
 		},
 		{
-			"offsets": [
-				-55,
-				-1
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [-55, -1],
 			"anim": "singRIGHTmiss",
-			"indices": [],
-			"name": "Miku Sing Note RIGHT M"
+			"fps": 24,
+			"name": "Miku Sing Note RIGHT M",
+			"indices": []
 		},
 		{
-			"offsets": [
-				36,
-				0
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [36, 0],
 			"anim": "singLEFTmiss",
-			"indices": [],
-			"name": "Miku Sing Note LEFT M"
+			"fps": 24,
+			"name": "Miku Sing Note LEFT M",
+			"indices": []
 		},
 		{
-			"offsets": [
-				-2,
-				3
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [-2, 3],
 			"anim": "singDOWNmiss",
-			"indices": [],
-			"name": "Miku Sing Note DOWN M"
+			"fps": 24,
+			"name": "Miku Sing Note DOWN M",
+			"indices": []
 		},
 		{
-			"offsets": [
-				22,
-				55
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [22, 55],
 			"anim": "singUPmiss",
-			"indices": [],
-			"name": "Miku Sing Note UP M"
+			"fps": 24,
+			"name": "Miku Sing Note UP M",
+			"indices": []
 		},
 		{
-			"offsets": [
-				22,
-				55
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [22, 55],
 			"anim": "Hey",
-			"indices": [],
-			"name": "miku hey"
+			"fps": 24,
+			"name": "miku hey",
+			"indices": []
 		}
 	],
+	"vocals_file": "",
 	"no_antialiasing": false,
-	"image": "characters/ev_miku_assets",
-	"position": [
-		0,
-		0
-	],
+	"image": "characters/camellia/ev_miku_assets",
+	"position": [0, 0],
 	"healthicon": "miku",
 	"flip_x": false,
-	"healthbar_colors": [
-		50,
-		205,
-		204
-	],
-	"camera_position": [
-		0,
-		0
-	],
+	"healthbar_colors": [50, 205, 204],
+	"camera_position": [0, 0],
 	"sing_duration": 6.1,
-	"scale": 1
+	"scale": 1,
+	"_editor_isPlayer": false
 }

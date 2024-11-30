@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="bluedark.png">
+	<!-- Created with Adobe Animate version 20.5.1.31044 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Bluedark0000" x="0" y="0" width="401" height="443"/>
+	<SubTexture name="Bluedark0001" x="401" y="0" width="399" height="443" frameX="0" frameY="0" frameWidth="401" frameHeight="443"/>
+	<SubTexture name="Bluedark0002" x="800" y="0" width="399" height="427" frameX="0" frameY="-16" frameWidth="401" frameHeight="443"/>
+	<SubTexture name="Bluedark0003" x="1199" y="0" width="399" height="427" frameX="0" frameY="-16" frameWidth="401" frameHeight="443"/>
+	<SubTexture name="Bluedark0004" x="1598" y="0" width="396" height="423" frameX="0" frameY="-20" frameWidth="401" frameHeight="443"/>
+	<SubTexture name="Bluedark0005" x="1994" y="0" width="397" height="423" frameX="0" frameY="-20" frameWidth="401" frameHeight="443"/>
+	<SubTexture name="Bluedark0006" x="2391" y="0" width="397" height="423" frameX="0" frameY="-20" frameWidth="401" frameHeight="443"/>
+	<SubTexture name="Bluedark0007" x="1598" y="0" width="396" height="423" frameX="0" frameY="-20" frameWidth="401" frameHeight="443"/>
+	<SubTexture name="Bluedark0008" x="1994" y="0" width="397" height="423" frameX="0" frameY="-20" frameWidth="401" frameHeight="443"/>
+	<SubTexture name="Bluedark0009" x="2391" y="0" width="397" height="423" frameX="0" frameY="-20" frameWidth="401" frameHeight="443"/>
+	<SubTexture name="Bluedark0010" x="1598" y="0" width="396" height="423" frameX="0" frameY="-20" frameWidth="401" frameHeight="443"/>
+	<SubTexture name="Bruh0000" x="2788" y="0" width="401" height="388"/>
+	<SubTexture name="Bruh0001" x="3189" y="0" width="399" height="388" frameX="0" frameY="0" frameWidth="401" frameHeight="388"/>
+	<SubTexture name="Bruh0002" x="3588" y="0" width="399" height="382" frameX="0" frameY="-6" frameWidth="401" frameHeight="388"/>
+	<SubTexture name="Bruh0003" x="0" y="443" width="399" height="382" frameX="0" frameY="-6" frameWidth="401" frameHeight="388"/>
+	<SubTexture name="Bruh0004" x="399" y="443" width="396" height="382" frameX="0" frameY="-6" frameWidth="401" frameHeight="388"/>
+	<SubTexture name="Bruh0005" x="795" y="443" width="397" height="382" frameX="0" frameY="-6" frameWidth="401" frameHeight="388"/>
+	<SubTexture name="Bruh0006" x="1192" y="443" width="397" height="382" frameX="0" frameY="-6" frameWidth="401" frameHeight="388"/>
+	<SubTexture name="Bruh0007" x="399" y="443" width="396" height="382" frameX="0" frameY="-6" frameWidth="401" frameHeight="388"/>
+	<SubTexture name="Bruh0008" x="795" y="443" width="397" height="382" frameX="0" frameY="-6" frameWidth="401" frameHeight="388"/>
+	<SubTexture name="Bruh0009" x="1192" y="443" width="397" height="382" frameX="0" frameY="-6" frameWidth="401" frameHeight="388"/>
+	<SubTexture name="Bruh0010" x="399" y="443" width="396" height="382" frameX="0" frameY="-6" frameWidth="401" frameHeight="388"/>
+	<SubTexture name="angry0000" x="1589" y="443" width="401" height="388"/>
+	<SubTexture name="angry0001" x="1990" y="443" width="399" height="388" frameX="0" frameY="0" frameWidth="401" frameHeight="388"/>
+	<SubTexture name="angry0002" x="2389" y="443" width="399" height="382" frameX="0" frameY="-6" frameWidth="401" frameHeight="388"/>
+	<SubTexture name="angry0003" x="2788" y="443" width="399" height="382" frameX="0" frameY="-6" frameWidth="401" frameHeight="388"/>
+	<SubTexture name="angry0004" x="3187" y="443" width="396" height="382" frameX="0" frameY="-6" frameWidth="401" frameHeight="388"/>
+	<SubTexture name="angry0005" x="3583" y="443" width="397" height="382" frameX="0" frameY="-6" frameWidth="401" frameHeight="388"/>
+	<SubTexture name="angry0006" x="0" y="831" width="397" height="382" frameX="0" frameY="-6" frameWidth="401" frameHeight="388"/>
+	<SubTexture name="angry0007" x="3187" y="443" width="396" height="382" frameX="0" frameY="-6" frameWidth="401" frameHeight="388"/>
+	<SubTexture name="angry0008" x="3583" y="443" width="397" height="382" frameX="0" frameY="-6" frameWidth="401" frameHeight="388"/>
+	<SubTexture name="angry0009" x="0" y="831" width="397" height="382" frameX="0" frameY="-6" frameWidth="401" frameHeight="388"/>
+	<SubTexture name="angry0010" x="3187" y="443" width="396" height="382" frameX="0" frameY="-6" frameWidth="401" frameHeight="388"/>
+	<SubTexture name="what0000" x="397" y="831" width="401" height="427"/>
+	<SubTexture name="what0001" x="798" y="831" width="399" height="427" frameX="0" frameY="0" frameWidth="401" frameHeight="427"/>
+	<SubTexture name="what0002" x="1197" y="831" width="399" height="406" frameX="0" frameY="-21" frameWidth="401" frameHeight="427"/>
+	<SubTexture name="what0003" x="1596" y="831" width="399" height="406" frameX="0" frameY="-21" frameWidth="401" frameHeight="427"/>
+	<SubTexture name="what0004" x="1995" y="831" width="396" height="412" frameX="0" frameY="-15" frameWidth="401" frameHeight="427"/>
+	<SubTexture name="what0005" x="2391" y="831" width="397" height="412" frameX="0" frameY="-15" frameWidth="401" frameHeight="427"/>
+	<SubTexture name="what0006" x="2788" y="831" width="397" height="412" frameX="0" frameY="-15" frameWidth="401" frameHeight="427"/>
+	<SubTexture name="what0007" x="1995" y="831" width="396" height="412" frameX="0" frameY="-15" frameWidth="401" frameHeight="427"/>
+	<SubTexture name="what0008" x="2391" y="831" width="397" height="412" frameX="0" frameY="-15" frameWidth="401" frameHeight="427"/>
+	<SubTexture name="what0009" x="2788" y="831" width="397" height="412" frameX="0" frameY="-15" frameWidth="401" frameHeight="427"/>
+	<SubTexture name="what0010" x="1995" y="831" width="396" height="412" frameX="0" frameY="-15" frameWidth="401" frameHeight="427"/>
+</TextureAtlas>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.1.2 https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="Dialogue_Box.png" width="7927" height="1278">
+	<SubTexture name="P5_Box0000" x="720" y="0" width="721" height="316" frameX="-1" frameY="-7" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0036" x="0" y="0" width="720" height="315" frameX="-2" frameY="-7" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0001" x="1441" y="0" width="721" height="316" frameX="-1" frameY="-7" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0033" x="2162" y="0" width="719" height="316" frameX="-2" frameY="-6" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0034" x="2881" y="0" width="719" height="316" frameX="-2" frameY="-6" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0035" x="3600" y="0" width="720" height="316" frameX="-2" frameY="-6" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0037" x="4320" y="0" width="720" height="316" frameX="-2" frameY="-7" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0038" x="5040" y="0" width="720" height="316" frameX="-2" frameY="-7" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0039" x="5760" y="0" width="720" height="316" frameX="-2" frameY="-7" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0003" x="6480" y="0" width="722" height="317" frameX="-0" frameY="-6" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0030" x="7202" y="0" width="719" height="317" frameX="-2" frameY="-5" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0031" x="0" y="315" width="719" height="317" frameX="-2" frameY="-5" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0032" x="719" y="316" width="720" height="317" frameX="-2" frameY="-5" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0002" x="1439" y="316" width="722" height="318" frameX="-1" frameY="-6" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0029" x="2161" y="316" width="719" height="318" frameX="-2" frameY="-4" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0004" x="2880" y="316" width="721" height="319" frameX="-0" frameY="-5" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0006" x="3601" y="316" width="723" height="319" frameX="-0" frameY="-3" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0022" x="4324" y="316" width="719" height="319" frameX="-1" frameY="-1" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0027" x="5043" y="316" width="719" height="319" frameX="-2" frameY="-3" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0028" x="5762" y="317" width="719" height="319" frameX="-2" frameY="-3" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0005" x="6481" y="317" width="723" height="320" frameX="-0" frameY="-4" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0007" x="7204" y="317" width="723" height="320" frameX="-0" frameY="-2" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0021" x="0" y="632" width="719" height="320" frameX="-1" frameY="-0" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0023" x="719" y="633" width="719" height="320" frameX="-1" frameY="-1" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0024" x="1438" y="634" width="720" height="320" frameX="-1" frameY="-1" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0025" x="2158" y="634" width="719" height="320" frameX="-2" frameY="-1" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0026" x="2877" y="635" width="719" height="320" frameX="-2" frameY="-2" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0016" x="3596" y="635" width="723" height="321" frameX="-0" frameY="-0" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0017" x="4319" y="635" width="720" height="321" frameX="-0" frameY="-0" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0018" x="5039" y="635" width="720" height="321" frameX="-0" frameY="-0" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0019" x="5759" y="636" width="720" height="321" frameX="-0" frameY="-0" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0020" x="6479" y="637" width="720" height="321" frameX="-0" frameY="-0" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0008" x="7199" y="637" width="723" height="322" frameX="-0" frameY="-0" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0009" x="0" y="952" width="719" height="322" frameX="-0" frameY="-0" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0014" x="719" y="953" width="719" height="322" frameX="-0" frameY="-0" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0010" x="1438" y="954" width="723" height="322" frameX="-0" frameY="-0" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0011" x="2161" y="955" width="723" height="322" frameX="-0" frameY="-0" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0012" x="2884" y="956" width="723" height="322" frameX="-0" frameY="-0" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0013" x="3607" y="956" width="723" height="322" frameX="-0" frameY="-0" frameWidth="723" frameHeight="324"/>
+	<SubTexture name="P5_Box0015" x="4330" y="956" width="723" height="322" frameX="-0" frameY="-0" frameWidth="723" frameHeight="324"/>
+</TextureAtlas>

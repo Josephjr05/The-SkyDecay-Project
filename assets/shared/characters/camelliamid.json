@@ -1,78 +1,55 @@
 {
 	"animations": [
 		{
+			"offsets": [0, 15],
 			"loop": false,
-			"offsets": [
-				0,
-				15
-			],
+			"fps": 24,
 			"anim": "singUP",
-			"fps": 24,
-			"name": "camellia up",
-			"indices": []
+			"indices": [],
+			"name": "camellia up"
 		},
 		{
+			"offsets": [0, -64],
 			"loop": false,
-			"offsets": [
-				0,
-				-64
-			],
+			"fps": 24,
 			"anim": "singDOWN",
-			"fps": 24,
-			"name": "camellia down",
-			"indices": []
+			"indices": [],
+			"name": "camellia down"
 		},
 		{
+			"offsets": [0, -8],
 			"loop": false,
-			"offsets": [
-				0,
-				-8
-			],
+			"fps": 24,
 			"anim": "singLEFT",
-			"fps": 24,
-			"name": "camellia left",
-			"indices": []
+			"indices": [],
+			"name": "camellia left"
 		},
 		{
+			"offsets": [0, -19],
 			"loop": false,
-			"offsets": [
-				0,
-				-19
-			],
+			"fps": 24,
 			"anim": "singRIGHT",
-			"fps": 24,
-			"name": "camellia right",
-			"indices": []
+			"indices": [],
+			"name": "camellia right"
 		},
 		{
+			"offsets": [0, 0],
 			"loop": false,
-			"offsets": [
-				0,
-				0
-			],
-			"anim": "idle",
 			"fps": 24,
-			"name": "camellia idle",
-			"indices": []
+			"anim": "idle",
+			"indices": [],
+			"name": "camellia idle"
 		}
 	],
+	"vocals_file": "",
 	"no_antialiasing": false,
-	"image": "characters/middle_camellia_assets",
-	"position": [
-		-130,
-		-90
-	],
+	"image": "characters/camellia/middle_camellia_assets",
+	"position": [-130, -90],
 	"healthicon": "camellia",
 	"flip_x": false,
-	"healthbar_colors": [
-		213,
-		95,
-		86
-	],
-	"camera_position": [
-		0,
-		0
-	],
+	"healthbar_colors": [213, 95, 86],
+	"camera_position": [0, 0],
 	"sing_duration": 4,
-	"scale": 0.85
+	"scale": 0.85,
+	"_editor_isPlayer": false
 }

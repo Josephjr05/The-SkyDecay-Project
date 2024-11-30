@@ -1,78 +1,55 @@
 {
 	"animations": [
 		{
+			"offsets": [-9, 10],
 			"loop": false,
-			"offsets": [
-				-9,
-				10
-			],
-			"fps": 24,
 			"anim": "singLEFT",
-			"indices": [],
-			"name": "Dad Sing Note LEFT"
+			"fps": 24,
+			"name": "Dad Sing Note LEFT",
+			"indices": []
 		},
 		{
+			"offsets": [0, -30],
 			"loop": false,
-			"offsets": [
-				0,
-				-30
-			],
-			"fps": 24,
 			"anim": "singDOWN",
-			"indices": [],
-			"name": "Dad Sing Note DOWN"
+			"fps": 24,
+			"name": "Dad Sing Note DOWN",
+			"indices": []
 		},
 		{
+			"offsets": [-6, 50],
 			"loop": false,
-			"offsets": [
-				-6,
-				50
-			],
-			"fps": 24,
 			"anim": "singUP",
-			"indices": [],
-			"name": "Dad Sing Note UP"
+			"fps": 24,
+			"name": "Dad Sing Note UP",
+			"indices": []
 		},
 		{
+			"offsets": [0, 27],
 			"loop": false,
-			"offsets": [
-				0,
-				27
-			],
-			"fps": 24,
 			"anim": "singRIGHT",
-			"indices": [],
-			"name": "Dad Sing Note RIGHT"
+			"fps": 24,
+			"name": "Dad Sing Note RIGHT",
+			"indices": []
 		},
 		{
+			"offsets": [0, 0],
 			"loop": false,
-			"offsets": [
-				0,
-				0
-			],
-			"fps": 24,
 			"anim": "idle",
-			"indices": [],
-			"name": "Dad idle dance"
+			"fps": 24,
+			"name": "Dad idle dance",
+			"indices": []
 		}
 	],
+	"vocals_file": "",
 	"no_antialiasing": false,
-	"image": "characters/Carol",
-	"position": [
-		0,
-		0
-	],
+	"image": "characters/Carol/Carol",
+	"position": [0, 0],
 	"healthicon": "carol",
 	"flip_x": false,
-	"healthbar_colors": [
-		102,
-		102,
-		153
-	],
-	"camera_position": [
-		120,
-		60
-	],
+	"healthbar_colors": [102, 102, 153],
+	"camera_position": [120, 60],
 	"sing_duration": 6.1,
-	"scale": 1
+	"scale": 1,
+	"_editor_isPlayer": false
 }

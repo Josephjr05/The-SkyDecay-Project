@@ -1,122 +1,87 @@
 {
 	"animations": [
 		{
-			"offsets": [
-				-152,
-				69
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [-152, 69],
 			"anim": "idle",
-			"indices": [],
-			"name": "idle0"
+			"fps": 24,
+			"name": "idle0",
+			"indices": []
 		},
 		{
+			"offsets": [-213, 22],
 			"loop": false,
-			"offsets": [
-				-213,
-				22
-			],
+			"fps": 24,
 			"anim": "singDOWN",
-			"fps": 24,
-			"name": "down0",
-			"indices": []
+			"indices": [],
+			"name": "down0"
 		},
 		{
+			"offsets": [-117, 69],
 			"loop": false,
-			"offsets": [
-				-117,
-				69
-			],
+			"fps": 24,
 			"anim": "singLEFT",
-			"fps": 24,
-			"name": "Left0",
-			"indices": []
+			"indices": [],
+			"name": "Left0"
 		},
 		{
+			"offsets": [-216, 107],
 			"loop": false,
-			"offsets": [
-				-216,
-				107
-			],
+			"fps": 24,
 			"anim": "singUP",
-			"fps": 24,
-			"name": "up0",
-			"indices": []
+			"indices": [],
+			"name": "up0"
 		},
 		{
+			"offsets": [-175, 39],
 			"loop": false,
-			"offsets": [
-				-175,
-				39
-			],
+			"fps": 24,
 			"anim": "singRIGHT",
-			"fps": 24,
-			"name": "right0",
-			"indices": []
+			"indices": [],
+			"name": "right0"
 		},
 		{
+			"offsets": [-107, 69],
 			"loop": false,
-			"offsets": [
-				-107,
-				69
-			],
+			"fps": 24,
 			"anim": "singLEFTmiss",
-			"fps": 24,
-			"name": "miss LEFT0",
-			"indices": []
+			"indices": [],
+			"name": "miss LEFT0"
 		},
 		{
+			"offsets": [-203, 7],
 			"loop": false,
-			"offsets": [
-				-203,
-				7
-			],
+			"fps": 24,
 			"anim": "singDOWNmiss",
-			"fps": 24,
-			"name": "miss DOWN",
-			"indices": []
+			"indices": [],
+			"name": "miss DOWN"
 		},
 		{
+			"offsets": [-218, 124],
 			"loop": false,
-			"offsets": [
-				-218,
-				124
-			],
+			"fps": 24,
 			"anim": "singUPmiss",
-			"fps": 24,
-			"name": "miss UP",
-			"indices": []
+			"indices": [],
+			"name": "miss UP"
 		},
 		{
+			"offsets": [-193, 40],
 			"loop": false,
-			"offsets": [
-				-193,
-				40
-			],
-			"anim": "singRIGHTmiss",
 			"fps": 24,
-			"name": "miss RIGHT",
-			"indices": []
+			"anim": "singRIGHTmiss",
+			"indices": [],
+			"name": "miss RIGHT"
 		}
 	],
+	"vocals_file": "",
 	"no_antialiasing": false,
-	"image": "characters/EncoreSD-BF",
-	"position": [
-		-280,
-		300
-	],
+	"image": "characters/SonicLegacy/EncoreSD-BF",
+	"position": [-280, 300],
 	"healthicon": "encore-SD-BF",
 	"flip_x": true,
-	"healthbar_colors": [
-		49,
-		176,
-		209
-	],
-	"camera_position": [
-		-265,
-		5
-	],
+	"healthbar_colors": [49, 176, 209],
+	"camera_position": [-265, 5],
 	"sing_duration": 4,
-	"scale": 0.7
+	"scale": 0.7,
+	"_editor_isPlayer": false
 }

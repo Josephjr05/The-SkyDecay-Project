@@ -2,10 +2,7 @@
 	"animations": [
 		{
 			"loop": false,
-			"offsets": [
-				5,
-				-1
-			],
+			"offsets": [5, -1],
 			"anim": "idle",
 			"fps": 24,
 			"name": "Camellia_Idle",
@@ -13,10 +10,7 @@
 		},
 		{
 			"loop": false,
-			"offsets": [
-				75,
-				15
-			],
+			"offsets": [75, 15],
 			"anim": "singLEFT",
 			"fps": 24,
 			"name": "Camellia_Left0",
@@ -24,10 +18,7 @@
 		},
 		{
 			"loop": false,
-			"offsets": [
-				0,
-				-2
-			],
+			"offsets": [0, -2],
 			"anim": "singRIGHT",
 			"fps": 24,
 			"name": "Camellia_Right0",
@@ -35,10 +26,7 @@
 		},
 		{
 			"loop": false,
-			"offsets": [
-				82,
-				9
-			],
+			"offsets": [82, 9],
 			"anim": "singLEFTmiss",
 			"fps": 24,
 			"name": "Camellia_Left_MISS",
@@ -46,10 +34,7 @@
 		},
 		{
 			"loop": false,
-			"offsets": [
-				3,
-				19
-			],
+			"offsets": [3, 19],
 			"anim": "singRIGHTmiss",
 			"fps": 24,
 			"name": "Camellia_Right_MISS",
@@ -57,10 +42,7 @@
 		},
 		{
 			"loop": false,
-			"offsets": [
-				4,
-				71
-			],
+			"offsets": [4, 71],
 			"anim": "singUP",
 			"fps": 24,
 			"name": "Camellia_Up0",
@@ -68,10 +50,7 @@
 		},
 		{
 			"loop": false,
-			"offsets": [
-				2,
-				101
-			],
+			"offsets": [2, 101],
 			"anim": "singUPmiss",
 			"fps": 24,
 			"name": "Camellia_Up_MISS",
@@ -79,10 +58,7 @@
 		},
 		{
 			"loop": false,
-			"offsets": [
-				-2,
-				75
-			],
+			"offsets": [-2, 75],
 			"anim": "singDOWNmiss",
 			"fps": 24,
 			"name": "Camellia_Down_MISS",
@@ -90,20 +66,14 @@
 		},
 		{
 			"loop": false,
-			"offsets": [
-				0,
-				74
-			],
+			"offsets": [0, 74],
 			"anim": "singDOWN",
 			"fps": 24,
 			"name": "Camellia_Down0",
 			"indices": []
 		},
 		{
-			"offsets": [
-				20,
-				-12
-			],
+			"offsets": [20, -12],
 			"loop": false,
 			"fps": 24,
 			"anim": "firstDeath",
@@ -111,10 +81,7 @@
 			"name": "Camellia_DEATH0"
 		},
 		{
-			"offsets": [
-				2,
-				-13
-			],
+			"offsets": [2, -13],
 			"loop": true,
 			"fps": 24,
 			"anim": "deathLoop",
@@ -122,10 +89,7 @@
 			"name": "Camellia_DEATHLoop"
 		},
 		{
-			"offsets": [
-				2,
-				-13
-			],
+			"offsets": [2, -13],
 			"loop": false,
 			"fps": 24,
 			"anim": "deathConfirm",
@@ -133,23 +97,15 @@
 			"name": "Camellia_DEATHLoop0"
 		}
 	],
+	"vocals_file": "",
 	"no_antialiasing": false,
-	"image": "characters/camellia",
-	"position": [
-		-1450,
-		0
-	],
+	"image": "characters/camellia/camellia",
+	"position": [-1450, 0],
 	"healthicon": "camellia",
 	"flip_x": true,
-	"healthbar_colors": [
-		213,
-		95,
-		86
-	],
-	"camera_position": [
-		250,
-		60
-	],
+	"healthbar_colors": [213, 95, 86],
+	"camera_position": [250, 60],
 	"sing_duration": 6.1,
-	"scale": 0.8
+	"scale": 0.8,
+	"_editor_isPlayer": false
 }

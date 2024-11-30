@@ -1,78 +1,55 @@
 {
 	"animations": [
 		{
+			"offsets": [30, -130],
 			"loop": false,
-			"offsets": [
-				30,
-				-130
-			],
+			"fps": 24,
 			"anim": "idle",
-			"fps": 24,
-			"name": "Melodi MelodiIdle",
-			"indices": []
+			"indices": [],
+			"name": "Melodi MelodiIdle"
 		},
 		{
+			"offsets": [23, -130],
 			"loop": false,
-			"offsets": [
-				23,
-				-130
-			],
+			"fps": 24,
 			"anim": "singLEFT",
-			"fps": 24,
-			"name": "Melodi MelodiLeft",
-			"indices": []
+			"indices": [],
+			"name": "Melodi MelodiLeft"
 		},
 		{
+			"offsets": [1, -130],
 			"loop": false,
-			"offsets": [
-				1,
-				-130
-			],
+			"fps": 24,
 			"anim": "singDOWN",
-			"fps": 24,
-			"name": "Melodi MelodiDown",
-			"indices": []
+			"indices": [],
+			"name": "Melodi MelodiDown"
 		},
 		{
+			"offsets": [40, -130],
 			"loop": false,
-			"offsets": [
-				40,
-				-130
-			],
+			"fps": 24,
 			"anim": "singUP",
-			"fps": 24,
-			"name": "Melodi MelodiUp",
-			"indices": []
+			"indices": [],
+			"name": "Melodi MelodiUp"
 		},
 		{
+			"offsets": [30, -130],
 			"loop": false,
-			"offsets": [
-				30,
-				-130
-			],
-			"anim": "singRIGHT",
 			"fps": 24,
-			"name": "Melodi MelodiRight",
-			"indices": []
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "Melodi MelodiRight"
 		}
 	],
+	"vocals_file": "",
 	"no_antialiasing": false,
-	"image": "characters/Melodi",
-	"position": [
-		0,
-		0
-	],
+	"image": "characters/ScratchinMelodii/Melodi",
+	"position": [0, 0],
 	"healthicon": "melodii",
 	"flip_x": false,
-	"healthbar_colors": [
-		255,
-		140,
-		255
-	],
-	"camera_position": [
-		-20,
-		280
-	],
+	"healthbar_colors": [255, 140, 255],
+	"camera_position": [-20, 280],
 	"sing_duration": 6.1,
-	"scale": 1
+	"scale": 1,
+	"_editor_isPlayer": false
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<TextureAtlas imagePath="bullethole.png">
+	<!-- Created with Adobe Flash CS6 version 12.0.0.481 -->
+	<!-- http://www.adobe.com/products/flash.html -->
+	<SubTexture name="gunshot0000" x="0" y="0" width="525" height="369"/>
+	<SubTexture name="gunshot0001" x="0" y="0" width="525" height="369"/>
+	<SubTexture name="gunshot0002" x="525" y="0" width="525" height="369"/>
+	<SubTexture name="gunshot0003" x="1050" y="0" width="525" height="369"/>
+	<SubTexture name="gunshot0004" x="0" y="369" width="525" height="369"/>
+	<SubTexture name="gunshot0005" x="525" y="369" width="525" height="369"/>
+	<SubTexture name="gunshot0006" x="1050" y="369" width="525" height="369"/>
+	<SubTexture name="gunshot0007" x="1050" y="369" width="525" height="369"/>
+	<SubTexture name="gunshot0008" x="0" y="738" width="525" height="369"/>
+	<SubTexture name="gunshot0009" x="0" y="738" width="525" height="369"/>
+	<SubTexture name="gunshot0010" x="0" y="738" width="525" height="369"/>
+	<SubTexture name="gunshot0011" x="525" y="738" width="525" height="369"/>
+	<SubTexture name="gunshot0012" x="525" y="738" width="525" height="369"/>
+	<SubTexture name="gunshot0013" x="525" y="738" width="525" height="369"/>
+	<SubTexture name="gunshot0014" x="1050" y="738" width="525" height="369"/>
+	<SubTexture name="gunshot0015" x="1050" y="738" width="525" height="369"/>
+	<SubTexture name="gunshot0016" x="1050" y="738" width="525" height="369"/>
+	<SubTexture name="gunshot0017" x="0" y="1107" width="525" height="369"/>
+	<SubTexture name="gunshot0018" x="0" y="1107" width="525" height="369"/>
+</TextureAtlas>

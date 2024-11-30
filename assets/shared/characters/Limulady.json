@@ -1,0 +1,55 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [0, 0],
+			"anim": "idle",
+			"fps": 24,
+			"name": "Limulady idle dance",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [-2, 0],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "Limulady note left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [0, 0],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "Limulady note down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [-1, 1],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "Limulady note right",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [0, 0],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "Limulady note up",
+			"indices": []
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/Limu/Limulady",
+	"position": [0, 100],
+	"healthicon": "Limulady",
+	"flip_x": false,
+	"healthbar_colors": [75, 20, 40],
+	"camera_position": [-20, 60],
+	"sing_duration": 4,
+	"scale": 1,
+	"_editor_isPlayer": false
+}

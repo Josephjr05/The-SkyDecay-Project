@@ -1,0 +1,63 @@
+{
+	"position": [
+		-10,
+		-420
+	],
+	"dialogue_pos": "right",
+	"scale": 0.849999999999999,
+	"image": "Ivy_Dialogue",
+	"animations": [
+		{
+			"loop_name": "Ivy_Dialogue Ivy Agrees",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"idle_name": "Ivy_Dialogue Ivy Agrees",
+			"anim": "agree",
+			"loop_offsets": [
+				0,
+				0
+			]
+		},
+		{
+			"loop_name": "Ivy_Dialogue Ivy Asks",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"idle_name": "Ivy_Dialogue Ivy Asks",
+			"anim": "ask",
+			"loop_offsets": [
+				0,
+				0
+			]
+		},
+		{
+			"loop_name": "Ivy_Dialogue Ivy Confused",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"idle_name": "Ivy_Dialogue Ivy Confused",
+			"anim": "confused",
+			"loop_offsets": [
+				0,
+				0
+			]
+		},
+		{
+			"loop_name": "Ivy_Dialogue Ivy Why Not",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"idle_name": "Ivy_Dialogue Ivy Why Not",
+			"anim": "why not",
+			"loop_offsets": [
+				0,
+				0
+			]
+		}
+	]
+}

@@ -1,0 +1,34 @@
+{
+	"timeFormat": "ms",
+	"artist": "kanemiko",
+	"charter": "-[Ulazis]-",
+	"offsets": {
+		"altInstrumentals": {},
+		"instrumental": 0,
+		"vocals": {}
+	},
+	"playData": {
+		"stage": "mainStage",
+		"songVariations": [],
+		"noteStyle": "funkin",
+		"difficulties": [
+			"hard"
+		],
+		"characters": {
+			"girlfriend": "gf",
+			"opponent": "dad",
+			"player": "bf"
+		}
+	},
+	"songName": "cccccclv",
+	"timeChanges": [
+		{
+			"d": 4,
+			"n": 4,
+			"t": 0,
+			"bpm": 250
+		}
+	],
+	"generatedBy": "Moonchart 0.4.0",
+	"version": "2.2.2"
+}

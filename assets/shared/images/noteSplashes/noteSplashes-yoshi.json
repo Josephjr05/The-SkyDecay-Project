@@ -1,0 +1,120 @@
+{
+	"animations": {
+		"purple": {
+			"prefix": "yoshi splash purple 10",
+			"offsets": [
+				92,
+				12
+			],
+			"indices": [],
+			"fps": [
+				22,
+				26
+			],
+			"name": "purple",
+			"noteData": 0
+		},
+		"blue2": {
+			"prefix": "yoshi splash blue 20",
+			"offsets": [
+				62,
+				82
+			],
+			"indices": [],
+			"fps": [
+				22,
+				26
+			],
+			"name": "blue2",
+			"noteData": 5
+		},
+		"red": {
+			"prefix": "yoshi splash red 10",
+			"offsets": [
+				92,
+				12
+			],
+			"indices": [],
+			"fps": [
+				22,
+				26
+			],
+			"name": "red",
+			"noteData": 3
+		},
+		"red2": {
+			"prefix": "yoshi splash red 20",
+			"offsets": [
+				62,
+				82
+			],
+			"indices": [],
+			"fps": [
+				22,
+				26
+			],
+			"name": "red2",
+			"noteData": 7
+		},
+		"blue": {
+			"prefix": "yoshi splash blue 10",
+			"offsets": [
+				92,
+				12
+			],
+			"indices": [],
+			"fps": [
+				22,
+				26
+			],
+			"name": "blue",
+			"noteData": 1
+		},
+		"purple2": {
+			"prefix": "yoshi splash purple 20",
+			"offsets": [
+				62,
+				82
+			],
+			"indices": [],
+			"fps": [
+				22,
+				26
+			],
+			"name": "purple2",
+			"noteData": 4
+		},
+		"green": {
+			"prefix": "yoshi splash green 10",
+			"offsets": [
+				92,
+				12
+			],
+			"indices": [],
+			"fps": [
+				22,
+				26
+			],
+			"name": "green",
+			"noteData": 2
+		},
+		"green2": {
+			"prefix": "yoshi splash green 20",
+			"offsets": [
+				62,
+				82
+			],
+			"indices": [],
+			"fps": [
+				22,
+				26
+			],
+			"name": "green2",
+			"noteData": 6
+		}
+	},
+	"allowRGB": true,
+	"allowPixel": true,
+	"rgb": null,
+	"scale": 1
+}

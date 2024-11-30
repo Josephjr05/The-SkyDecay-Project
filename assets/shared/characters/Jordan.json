@@ -1,78 +1,55 @@
 {
 	"animations": [
 		{
-			"offsets": [
-				0,
-				0
-			],
-			"indices": [],
-			"fps": 24,
+			"loop": false,
+			"offsets": [0, 0],
 			"anim": "idle",
-			"loop": false,
-			"name": "jordan idle"
+			"fps": 24,
+			"name": "jordan idle",
+			"indices": []
 		},
 		{
-			"offsets": [
-				0,
-				0
-			],
-			"indices": [],
-			"fps": 24,
+			"loop": false,
+			"offsets": [0, 0],
 			"anim": "singLEFT",
-			"loop": false,
-			"name": "jordan left"
+			"fps": 24,
+			"name": "jordan left",
+			"indices": []
 		},
 		{
-			"offsets": [
-				0,
-				0
-			],
-			"indices": [],
-			"fps": 24,
+			"loop": false,
+			"offsets": [0, 0],
 			"anim": "singDOWN",
-			"loop": false,
-			"name": "jordan down"
+			"fps": 24,
+			"name": "jordan down",
+			"indices": []
 		},
 		{
-			"offsets": [
-				0,
-				0
-			],
-			"indices": [],
-			"fps": 24,
+			"loop": false,
+			"offsets": [0, 0],
 			"anim": "singUP",
-			"loop": false,
-			"name": "jordan up"
+			"fps": 24,
+			"name": "jordan up",
+			"indices": []
 		},
 		{
-			"offsets": [
-				0,
-				0
-			],
-			"indices": [],
-			"fps": 24,
-			"anim": "singRIGHT",
 			"loop": false,
-			"name": "jordan right"
+			"offsets": [0, 0],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "jordan right",
+			"indices": []
 		}
 	],
+	"vocals_file": "",
 	"no_antialiasing": false,
-	"image": "characters/jordan_assets",
-	"position": [
-		0,
-		0
-	],
+	"image": "characters/SDPJ/jordan_assets",
+	"position": [0, 0],
 	"healthicon": "jordan",
 	"flip_x": false,
-	"healthbar_colors": [
-		161,
-		161,
-		161
-	],
-	"camera_position": [
-		0,
-		0
-	],
+	"healthbar_colors": [161, 161, 161],
+	"camera_position": [0, 0],
 	"sing_duration": 6.1,
-	"scale": 1
+	"scale": 1,
+	"_editor_isPlayer": false
 }

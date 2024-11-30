@@ -67,6 +67,14 @@ class DialogueBox extends FlxSpriteGroup
 				hasDialog = false;
 		}
 
+		switch (curStage)
+		{
+			case 'camellia':
+				box.frames = Paths.getSparrowAtlas('stages/camellia/Dialogue_Box');
+				box.animation.addByPrefix('start', 'P5_Box', 24, false);
+				box.animation.addByIndices('go', 'P5_Box0', [4], '', 24);
+		}
+
 		this.dialogueList = dialogueList;
 		
 		if (!hasDialog)

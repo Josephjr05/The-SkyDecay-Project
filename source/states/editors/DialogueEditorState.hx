@@ -18,6 +18,7 @@ class DialogueEditorState extends MusicBeatState implements PsychUIEventHandler.
 	var box:FlxSprite;
 	var daText:TypedAlphabet;
 
+	var music:EditingMusic;
 	var selectedText:FlxText;
 	var animText:FlxText;
 
@@ -28,6 +29,8 @@ class DialogueEditorState extends MusicBeatState implements PsychUIEventHandler.
 	override function create() {
 		persistentUpdate = persistentDraw = true;
 		FlxG.camera.bgColor = FlxColor.fromHSL(0, 0, 0.5);
+
+		music = new EditingMusic();
 
 		defaultLine = {
 			portrait: DialogueCharacter.DEFAULT_CHARACTER,
@@ -65,17 +68,17 @@ class DialogueEditorState extends MusicBeatState implements PsychUIEventHandler.
 		FlxG.mouse.visible = true;
 
 		var addLineText:FlxText = new FlxText(10, 10, FlxG.width - 20, 'Press O to remove the current dialogue line, Press P to add another line after the current one.', 8);
-		addLineText.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		addLineText.setFormat(Paths.font("Prototype.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		addLineText.scrollFactor.set();
 		add(addLineText);
 
 		selectedText = new FlxText(10, 32, FlxG.width - 20, '', 8);
-		selectedText.setFormat(Paths.font("vcr.ttf"), 24, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		selectedText.setFormat(Paths.font("Prototype.ttf"), 24, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		selectedText.scrollFactor.set();
 		add(selectedText);
 
 		animText = new FlxText(10, 62, FlxG.width - 20, '', 8);
-		animText.setFormat(Paths.font("vcr.ttf"), 24, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		animText.setFormat(Paths.font("Prototype.ttf"), 24, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		animText.scrollFactor.set();
 		add(animText);
 		
@@ -358,6 +361,7 @@ class DialogueEditorState extends MusicBeatState implements PsychUIEventHandler.
 		}
 		else ClientPrefs.toggleVolumeKeys(false);
 		super.update(elapsed);
+		music.update(elapsed);
 	}
 
 	function changeText(add:Int = 0) {
@@ -420,7 +424,7 @@ class DialogueEditorState extends MusicBeatState implements PsychUIEventHandler.
 		_file.addEventListener(#if desktop Event.SELECT #else Event.COMPLETE #end, onLoadComplete);
 		_file.addEventListener(Event.CANCEL, onLoadCancel);
 		_file.addEventListener(IOErrorEvent.IO_ERROR, onLoadError);
-		_file.browse([jsonFilter]);
+		_file.browse([#if !mac jsonFilter #end]);
 	}
 
 	function onLoadComplete(_):Void

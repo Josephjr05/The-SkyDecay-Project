@@ -76,7 +76,7 @@ class ResultsScreen extends MusicBeatSubstate
 	var composers:String = 'None';
 	// uses curSong and composers
     
-	// colors for each judgement
+	// colors for each judgement (Osu Mania!)
     var ColorArray:Array<FlxColor> = [
     		0xFF00FFFF, //perfect
     		0xFFFFFF00, //great
@@ -117,8 +117,8 @@ class ResultsScreen extends MusicBeatSubstate
 	    FlxG.cameras.add(camOther, false);		
         
         background = new FlxSprite(0, 0).loadGraphic(Paths.image('the-kwell-end'));
-		background.scale.x = 1.05;
-		background.scale.y = 1.05;
+		background.scale.x = 1;
+		background.scale.y = 1;
 		background.antialiasing = ClientPrefs.data.antialiasing;
 		background.screenCenter();
 		background.alpha = 0;
@@ -308,7 +308,7 @@ class ResultsScreen extends MusicBeatSubstate
 
 	function saveScoreResults()
 	{
-		if (FlxG.keys.justPressed.F12)
+		if (FlxG.keys.justPressed.F12) // will do something with this
 		{
 			if (FileSystem.exists('SDPJ-Saved-Scores'))
 		  	FileSystem.createDirectory('SDPJ-Saved-Scores');
@@ -671,7 +671,7 @@ class ResultsScreen extends MusicBeatSubstate
     		loadLeft.setGraphicSize(FlxG.width, FlxG.height);
     		loadLeft.updateHitbox();
 		
-    		WaterMark = new FlxText(isTransIn ? 50 : -1230, 720 - 50 - 50 * 2, 0, 'SD ENGINE V' + MainMenuState.psychEngineVersion, 50);
+    		WaterMark = new FlxText(isTransIn ? 50 : -1230, 720 - 50 - 50 * 2, 0, 'SD ENGINE V' + MainMenuState.sdEngineVersion, 50);
     		WaterMark.scrollFactor.set();
     		WaterMark.setFormat(Assets.getFont("assets/fonts/Prototype.ttf").fontName, 50, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
     		WaterMark.antialiasing = ClientPrefs.data.antialiasing;
@@ -692,7 +692,6 @@ class ResultsScreen extends MusicBeatSubstate
 				    FlxTransitionableState.skipNextTransIn = true;
 				    Mods.loadTopMod();
 					MusicBeatState.switchState(new FreeplayState());
-					FlxG.sound.playMusic(Paths.music('triangles'), 1);
 				},
 			ease: FlxEase.expoInOut});
 			

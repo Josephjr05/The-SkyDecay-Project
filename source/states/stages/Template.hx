@@ -24,8 +24,13 @@ class Template extends BaseStage
 		// Code here
 	}
 
+	override function destroy()
+	{
+		// Code here
+	}
+
 	
-	override function countdownTick(count:BaseStage.Countdown, num:Int)
+	override function countdownTick(count:Countdown, num:Int)
 	{
 		switch(count)
 		{
@@ -35,6 +40,11 @@ class Template extends BaseStage
 			case GO: //num 3
 			case START: //num 4
 		}
+	}
+
+	override function startSong()
+	{
+		// Code here
 	}
 
 	// Steps, Beats and Sections:
@@ -119,5 +129,58 @@ class Template extends BaseStage
 						//precacheMusic('myMusicThree') //preloads music/myMusicThree.ogg
 				}
 		}
+	}
+
+	// Note Hit/Miss
+	override function goodNoteHit(note:Note)
+	{
+		// Code here
+	}
+
+	override function opponentNoteHit(note:Note)
+	{
+		// Code here
+	}
+
+	override function noteMiss(note:Note)
+	{
+		// Code here
+	}
+
+	override function noteMissPress(direction:Int)
+	{
+		// Code here
+	}
+
+	override function onDialogueStart() 
+	{
+		// Called when a dialogue starts
+	}
+	
+	override function onCharacterMove(reason, character, startingPos, offsetPos, elapsed)
+	{
+		// Called whenever a dialogue character needs to move
+		// reason: The reason of the movement (enter or exit)
+		// character: Name of the character being moved
+		// startingPos: Starting position of the character (from DialogueCharacter.hx(OR .hxs)/DialogueCharacterFile.position) 
+		// offsetPos: ??? (default to -600)
+		// returns: Should the character move according to the default system? 
+	}
+	
+	override function onDialogueEvent(name, args)
+	{
+		// Called when a dialog event is triggered
+	}
+	
+	override function onDialogueConfirm()
+	{
+		// Called to see if the player can confirm the current dialog
+		// returns: Should the player be able to confirm the dialogue?
+	}
+	
+	override function onDialogueTextUpdate(text)
+	{
+		// Called when the dialogue text is updated
+		// text: Current text being displayed
 	}
 }

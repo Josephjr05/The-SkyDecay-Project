@@ -10,11 +10,16 @@ import flixel.addons.display.FlxBackdrop;
 import flixel.addons.display.FlxGridOverlay;
 import flixel.math.FlxRect;
 import flixel.util.FlxDestroyUtil;
+
+import openfl.utils.Assets;
+
 import openfl.display.Sprite;
 
 import openfl.net.FileReference;
+
 import openfl.events.Event;
 import openfl.events.IOErrorEvent;
+
 import psychlua.ModchartSprite;
 import flash.net.FileFilter;
 
@@ -34,6 +39,8 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 	var camGame:FlxCamera;
 	public var camHUD:FlxCamera;
 
+	var music:EditingMusic;
+	
 	var UI_stagebox:PsychUIBox;
 	var UI_box:PsychUIBox;
 	var spriteList_box:PsychUIBox;
@@ -62,6 +69,7 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
+		music = new EditingMusic();
 		camGame = initPsychCamera();
 		camHUD = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
@@ -122,11 +130,7 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 	var showSelectionQuad:Bool = true;
 	function addHelpScreen()
 	{
-		#if FLX_DEBUG
-		var btn = 'F3';
-		#else
-		var btn = 'F2';
-		#end
+		final btn = #if FLX_DEBUG 'F3' #else 'F2' #end;
 
 		var str:Array<String> = ["E/Q - Camera Zoom In/Out",
 			"J/K/L/I - Move Camera",
@@ -392,20 +396,23 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 				}
 			}
 
-			for (num => anim in copiedMeta.animations)
+			if(copiedMeta.animations != null)
 			{
-				if(anim == null || anim.anim == null) continue;
-
-				if(anim.indices != null && anim.indices.length > 0)
-					copiedSpr.animation.addByIndices(anim.anim, anim.name, anim.indices, '', anim.fps, anim.loop);
-				else
-					copiedSpr.animation.addByPrefix(anim.anim, anim.name, anim.fps, anim.loop);
-
-				if(anim.offsets != null && anim.offsets.length > 1)
-					copiedSpr.addOffset(anim.anim, anim.offsets[0], anim.offsets[1]);
-
-				if(copiedSpr.animation.curAnim == null || copiedMeta.firstAnimation == anim.anim)
-					copiedSpr.playAnim(anim.anim, true);
+				for (num => anim in copiedMeta.animations)
+				{
+					if(anim == null || anim.anim == null) continue;
+	
+					if(anim.indices != null && anim.indices.length > 0)
+						copiedSpr.animation.addByIndices(anim.anim, anim.name, anim.indices, '', anim.fps, anim.loop);
+					else
+						copiedSpr.animation.addByPrefix(anim.anim, anim.name, anim.fps, anim.loop);
+	
+					if(anim.offsets != null && anim.offsets.length > 1)
+						copiedSpr.addOffset(anim.anim, anim.offsets[0], anim.offsets[1]);
+	
+					if(copiedSpr.animation.curAnim == null || copiedMeta.firstAnimation == anim.anim)
+						copiedSpr.playAnim(anim.anim, true);
+				}
 			}
 			copiedMeta.setScale(copiedMeta.scale[0], copiedMeta.scale[1]);
 			copiedMeta.setScrollFactor(copiedMeta.scroll[0], copiedMeta.scroll[1]);
@@ -759,6 +766,7 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 	var flipYCheckBox:PsychUICheckBox;
 	var lowQualityCheckbox:PsychUICheckBox;
 	var highQualityCheckbox:PsychUICheckBox;
+	var blendDropDown:PsychUIDropDownMenu;
 
 	function getSelected(blockReserved:Bool = true)
 	{
@@ -928,6 +936,19 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 		};
 		tab_group.add(angleStepper);
 
+		final blendList:Array<String> = [
+			'normal', 'add', 'alpha', 'darken', 'difference', 'erase', 'hardlight', 'invert',
+			'layer', 'lighten', 'multiply', 'overlay', 'screen', 'shader', 'subtract'
+		];
+		tab_group.add(new FlxText(objX + 90, objY - 18, 80, 'Blend Mode:'));
+		blendDropDown = new PsychUIDropDownMenu(objX + 90, objY, blendList, function(sel:Int, value:String) {
+			// blend mode
+			var selected = getSelected();
+			if(selected != null)
+				selected.blend = value;
+		});
+		blendDropDown.selectedLabel = blendList[0];
+
 		function updateFlip()
 		{
 			//flip X and flip Y
@@ -975,6 +996,7 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 		highQualityCheckbox.onClick = recalcFilter;
 		tab_group.add(lowQualityCheckbox);
 		tab_group.add(highQualityCheckbox);
+		tab_group.add(blendDropDown);
 	}
 
 	var oppDropdown:PsychUIDropDownMenu;
@@ -1242,6 +1264,7 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 		scrollStepperY.value = selected.scroll[1];
 		angleStepper.value = selected.angle;
 		alphaStepper.value = selected.alpha;
+		blendDropDown.selectedLabel = selected.blend;
 
 		// Checkboxes
 		antialiasingCheckbox.checked = selected.antialiasing;
@@ -1333,6 +1356,7 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 			basic.update(curFilters, elapsed);
 
 		super.update(elapsed);
+		music.update(elapsed);
 		
 		outputTime = Math.max(0, outputTime - elapsed);
 		outputTxt.alpha = outputTime;
@@ -1400,10 +1424,11 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 		// CAMERA CONTROLS
 		var camX:Float = 0;
 		var camY:Float = 0;
-		if (FlxG.keys.pressed.J) camX -= elapsed * 500 * shiftMult * ctrlMult;
-		if (FlxG.keys.pressed.K) camY += elapsed * 500 * shiftMult * ctrlMult;
-		if (FlxG.keys.pressed.L) camX += elapsed * 500 * shiftMult * ctrlMult;
-		if (FlxG.keys.pressed.I) camY -= elapsed * 500 * shiftMult * ctrlMult;
+		var camMove:Float = elapsed * 500 * shiftMult * ctrlMult;
+		if (FlxG.keys.pressed.J) camX -= camMove;
+		if (FlxG.keys.pressed.K) camY += camMove;
+		if (FlxG.keys.pressed.L) camX += camMove;
+		if (FlxG.keys.pressed.I) camY -= camMove;
 
 		if(camX != 0 || camY != 0)
 		{
@@ -1552,24 +1577,28 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 			return;
 
 		@:privateAccess
-		var rect = spr.getBoundingBox(FlxG.camera);
-		var lineSize:Int = Math.round(3 / FlxG.camera.zoom);
+		var lineSize:Int = Std.int(Math.max(2, Math.floor(3 / FlxG.camera.zoom)));
+
+		var sprX:Float = spr.x + spr.offset.x;
+		var sprY:Float = spr.y + spr.offset.y;
+		var sprWidth:Int = Std.int(spr.frameWidth * spr.scale.x);
+		var sprHeight:Int = Std.int(spr.frameHeight * spr.scale.y);
 		for (num => sel in selectionSprites.members)
 		{
-			sel.x = spr.x;
-			sel.y = spr.y;
+			sel.x = sprX;
+			sel.y = sprY;
 			switch(num)
 			{
 				case 0: //Top
-					sel.setGraphicSize(Std.int(rect.width), lineSize);
+					sel.setGraphicSize(sprWidth, lineSize);
 				case 1: //Bottom
-					sel.setGraphicSize(Std.int(rect.width), lineSize);
-					sel.y += rect.height - lineSize;
+					sel.setGraphicSize(sprWidth, lineSize);
+					sel.y += sprHeight - lineSize;
 				case 2: //Left
-					sel.setGraphicSize(lineSize, Std.int(rect.height));
+					sel.setGraphicSize(lineSize, sprHeight);
 				case 3: //Right
-					sel.setGraphicSize(lineSize, Std.int(rect.height));
-					sel.x += rect.width - lineSize;
+					sel.setGraphicSize(lineSize, sprHeight);
+					sel.x += sprWidth - lineSize;
 			}
 			sel.updateHitbox();
 			sel.scrollFactor.set(spr.scrollFactor.x, spr.scrollFactor.y);
@@ -1649,7 +1678,7 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 		_file.addEventListener(IOErrorEvent.IO_ERROR, onLoadError);
 
 		final filters = [new FileFilter('PNG (Image)', '*.png'), new FileFilter('XML (Sparrow)', '*.xml'), new FileFilter('JSON (Aseprite)', '*.json'), new FileFilter('TXT (Packer)', '*.txt')];
-		_file.browse(filters);
+		_file.browse(#if !mac filters #else [] #end);
 	}
 	
 	private function onLoadComplete(_):Void
@@ -1664,41 +1693,101 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 		@:privateAccess
 		if(_file.__path != null) fullPath = _file.__path;
 
+		function loadSprite(imageToLoad:String)
+		{
+			if(_makeNewSprite != null)
+			{
+				if(_makeNewSprite == 'animatedSprite' && !Paths.fileExists('images/$imageToLoad.xml', TEXT) &&
+					!Paths.fileExists('images/$imageToLoad.json', TEXT) && !Paths.fileExists('images/$imageToLoad.txt', TEXT))
+				{
+					showOutput('No Animation file found with the same name of the image!', true);
+					_makeNewSprite = null;
+					_file = null;
+					return;
+				}
+				insertMeta(new StageEditorMetaSprite({type: _makeNewSprite, name: findUnoccupiedName()}, new ModchartSprite()));
+			}
+			var selected = getSelected();
+			tryLoadImage(selected, imageToLoad);
+			
+			if(_makeNewSprite != null)
+			{
+				selected.sprite.x = Math.round(FlxG.camera.scroll.x + FlxG.width/2 - selected.sprite.width/2);
+				selected.sprite.y = Math.round(FlxG.camera.scroll.y + FlxG.height/2 - selected.sprite.height/2);
+				posTxt.visible = true;
+				posTxt.text = 'X: ${selected.sprite.x}\nY: ${selected.sprite.y}';
+			}
+			_makeNewSprite = null;
+		}
+		_file = null;
+
 		if(fullPath != null)
 		{
 			fullPath = fullPath.replace('\\', '/');
 			var exePath = Sys.getCwd().replace('\\', '/');
-			if((fullPath.startsWith(exePath + 'assets/') #if MODS_ALLOWED || fullPath.startsWith(exePath + 'mods/') #end) && fullPath.contains('/images/'))
+			if(fullPath.startsWith(exePath))
 			{
-				var imageToLoad:String = fullPath.substring(fullPath.indexOf('/images/') + '/images/'.length, fullPath.indexOf('.'));
-				if(_makeNewSprite != null)
+				fullPath = fullPath.substr(exePath.length);
+				if((fullPath.startsWith('assets/') #if MODS_ALLOWED || fullPath.startsWith('mods/') #end) && fullPath.contains('/images/'))
 				{
-					if(_makeNewSprite == 'animatedSprite' && !Paths.fileExists('images/$imageToLoad.xml', TEXT) &&
-						!Paths.fileExists('images/$imageToLoad.json', TEXT) && !Paths.fileExists('images/$imageToLoad.txt', TEXT))
-					{
-						showOutput('No Animation file found with the same name of the image!', true);
-						_makeNewSprite = null;
-						_file = null;
-						return;
-					}
-					insertMeta(new StageEditorMetaSprite({type: _makeNewSprite, name: findUnoccupiedName()}, new ModchartSprite()));
+					loadSprite(fullPath.substring(fullPath.indexOf('/images/') + '/images/'.length, fullPath.lastIndexOf('.')));
+					//trace('Inside Psych Engine Folder');
+					return;
 				}
-				var selected = getSelected();
-				tryLoadImage(selected, imageToLoad);
-				
-				if(_makeNewSprite != null)
-				{
-					selected.sprite.x = Math.round(FlxG.camera.scroll.x + FlxG.width/2 - selected.sprite.width/2);
-					selected.sprite.y = Math.round(FlxG.camera.scroll.y + FlxG.height/2 - selected.sprite.height/2);
-					posTxt.visible = true;
-					posTxt.text = 'X: ${selected.sprite.x}\nY: ${selected.sprite.y}';
-				}
-				_makeNewSprite = null;
-				//trace('Inside Psych Engine Folder');
 			}
-			else showOutput('Can\'t load files outside of "images/" folder', true);
-			//TO DO: Maybe make copy of loaded file to an usable folder automatically? That would be very practical
-			//TO DO: Bring this to Character Editor too
+
+			createPopup.visible = createPopup.active = false;
+			#if MODS_ALLOWED
+			var modFolder:String = (Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0) ? Paths.mods('${Mods.currentModDirectory}/images/') : Paths.mods('images/');
+			openSubState(new BasePrompt(480, 160, 'This file is not inside Psych Engine.', function(state:BasePrompt)
+			{
+				var txt:FlxText = new FlxText(0, state.bg.y + 60, 460, 'Copy to: "$modFolder"?', 11);
+				txt.alignment = CENTER;
+				txt.screenCenter(X);
+				txt.cameras = state.cameras;
+				state.add(txt);
+				
+				var btnY = 390;
+				var btn:PsychUIButton = new PsychUIButton(0, btnY, 'OK', function() {
+					var fileName:String = fullPath.substring(fullPath.lastIndexOf('/') + 1, fullPath.lastIndexOf('.'));
+					var pathNoExt:String = fullPath.substring(0, fullPath.lastIndexOf('.'));
+					function saveFile(ext:String)
+					{
+						var p1:String = '$pathNoExt.$ext';
+						var p2:String = modFolder + '$fileName.$ext';
+						trace(p1, p2);
+						if(FileSystem.exists(p1))
+							File.saveBytes(p2, File.getBytes(p1));
+					}
+
+					FileSystem.createDirectory(modFolder);
+					saveFile('png');
+					saveFile('xml');
+					saveFile('txt');
+					saveFile('json');
+					loadSprite(fileName);
+					state.close();
+				});
+				btn.normalStyle.bgColor = FlxColor.GREEN;
+				btn.normalStyle.textColor = FlxColor.WHITE;
+				btn.screenCenter(X);
+				btn.x -= 100;
+				btn.cameras = state.cameras;
+				state.add(btn);
+
+				var btn:PsychUIButton = new PsychUIButton(0, btnY, 'Cancel', function()
+				{
+					_makeNewSprite = null;
+					state.close();
+				});
+				btn.screenCenter(X);
+				btn.x += 100;
+				btn.cameras = state.cameras;
+				state.add(btn);
+			}));
+			#else
+			showOutput('ERROR! File cannot be used, move it to "assets" and recompile.', true);
+			#end
 		}
 		_file = null;
 		#else
@@ -1785,6 +1874,13 @@ class StageEditorMetaSprite
 	function set_alpha(v:Float) return (sprite.alpha = v);
 	function get_angle() return sprite.angle;
 	function set_angle(v:Float) return (sprite.angle = v);
+	
+	public var blend(default, set):String = 'normal';
+	function set_blend(v:String)
+	{
+		sprite.blend = LuaUtils.blendModeFromString(v);
+		return (blend = v);
+	}
 
 	public var color(default, set):String = 'FFFFFF';
 	function set_color(v:String)
@@ -1854,7 +1950,7 @@ class StageEditorMetaSprite
 		switch(this.type)
 		{
 			case 'sprite', 'square', 'animatedSprite':
-				for (v in ['name', 'image', 'scale', 'scroll', 'color', 'filters', 'antialiasing'])
+				for (v in ['name', 'image', 'scale', 'scroll', 'color', 'blend', 'filters', 'antialiasing'])
 				{
 					var dat:Dynamic = Reflect.field(data, v);
 					if(dat != null) Reflect.setField(this, v, dat);
@@ -1882,6 +1978,7 @@ class StageEditorMetaSprite
 				obj.alpha = alpha;
 				obj.angle = angle;
 				obj.color = color;
+				obj.blend = blend;
 				obj.filters = filters;
 
 				if(type != 'square')
@@ -2298,10 +2395,11 @@ class StageEditorAnimationSubstate extends MusicBeatSubstate {
 		// CAMERA CONTROLS
 		var camX:Float = 0;
 		var camY:Float = 0;
-		if (FlxG.keys.pressed.J) camX -= elapsed * 500 * shiftMult * ctrlMult;
-		if (FlxG.keys.pressed.K) camY += elapsed * 500 * shiftMult * ctrlMult;
-		if (FlxG.keys.pressed.L) camX += elapsed * 500 * shiftMult * ctrlMult;
-		if (FlxG.keys.pressed.I) camY -= elapsed * 500 * shiftMult * ctrlMult;
+		var camMove:Float = elapsed * 500 * shiftMult * ctrlMult;
+		if (FlxG.keys.pressed.J) camX -= camMove;
+		if (FlxG.keys.pressed.K) camY += camMove;
+		if (FlxG.keys.pressed.L) camX += camMove;
+		if (FlxG.keys.pressed.I) camY -= camMove;
 
 		if(camX != 0 || camY != 0)
 		{

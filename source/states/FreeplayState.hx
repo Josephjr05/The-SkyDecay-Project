@@ -12,6 +12,9 @@ import substates.ResetScoreSubState;
 
 import flixel.math.FlxMath;
 import flixel.util.FlxDestroyUtil;
+
+import openfl.utils.Assets;
+
 import haxe.Json;
 
 class FreeplayState extends MusicBeatState
@@ -51,8 +54,8 @@ class FreeplayState extends MusicBeatState
 
 	override function create()
 	{
-		//Paths.clearStoredMemory();
-		//Paths.clearUnusedMemory();
+		Paths.clearStoredMemory();
+		Paths.clearUnusedMemory();
 		
 		persistentUpdate = true;
 		PlayState.isStoryMode = false;
@@ -60,18 +63,18 @@ class FreeplayState extends MusicBeatState
 
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Menus", null);
+		DiscordClient.changePresence("Freeplay Area", null);
 		#end
 
 		if(WeekData.weeksList.length < 1)
-			{
-				FlxTransitionableState.skipNextTransIn = true;
-				persistentUpdate = false;
-				MusicBeatState.switchState(new states.ErrorState("NO WEEKS ADDED FOR FREEPLAY\n\nPress ACCEPT to go to the Week Editor Menu.\nPress BACK to return to Main Menu.",
-					function() MusicBeatState.switchState(new states.editors.WeekEditorState()),
-					function() MusicBeatState.switchState(new states.MainMenuState())));
-				return;
-			}
+		{
+			FlxTransitionableState.skipNextTransIn = true;
+			persistentUpdate = false;
+			MusicBeatState.switchState(new states.ErrorState("NO WEEKS ADDED FOR FREEPLAY\n\nPress ACCEPT to go to the Week Editor Menu.\nPress BACK to return to Main Menu.",
+				function() MusicBeatState.switchState(new states.editors.WeekEditorState()),
+				function() MusicBeatState.switchState(new states.MainMenuState())));
+			return;
+		}
 
 		for (i in 0...WeekData.weeksList.length)
 		{
@@ -435,7 +438,7 @@ class FreeplayState extends MusicBeatState
 
 			LoadingState.prepareToSong();
 			LoadingState.loadAndSwitchState(new PlayState());
-			#if SHOW_LOADING_SCREEN FlxG.sound.music.stop(); #end
+			#if !SHOW_LOADING_SCREEN FlxG.sound.music.stop(); #end
 			stopMusicPlay = true;
 
 			destroyFreeplayVocals();

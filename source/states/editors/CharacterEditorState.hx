@@ -20,6 +20,7 @@ import states.editors.content.PsychJsonPrinter;
 
 class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler.PsychUIEvent
 {
+	var music:EditingMusic;
 	var character:Character;
 	var ghost:FlxSprite;
 	var animateGhost:FlxAnimate;
@@ -68,7 +69,9 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 
 	override function create()
 	{
-		if(ClientPrefs.data.cacheOnGPU) Paths.clearStoredMemory();
+		music = new EditingMusic();
+		Paths.clearStoredMemory();
+		Paths.clearUnusedMemory();
 
 		FlxG.sound.music.stop();
 		camEditor = initPsychCamera();
@@ -815,22 +818,7 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 		}
 		else
 		{
-			var split:Array<String> = character.imageFile.split(',');
-			var charFrames:FlxAtlasFrames = Paths.getAtlas(split[0].trim());
-			
-			if(split.length > 1)
-			{
-				var original:FlxAtlasFrames = charFrames;
-				charFrames = new FlxAtlasFrames(charFrames.parent);
-				charFrames.addAtlas(original, true);
-				for (i in 1...split.length)
-				{
-					var extraFrames:FlxAtlasFrames = Paths.getAtlas(split[i].trim());
-					if(extraFrames != null)
-						charFrames.addAtlas(extraFrames, true);
-				}
-			}
-			character.frames = charFrames;
+			character.frames = Paths.getMultiAtlas(character.imageFile.split(','));
 		}
 
 		for (anim in anims) {
@@ -877,6 +865,7 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
+		music.update(elapsed);
 
 		if(PsychUIInputText.focusOn != null)
 		{
@@ -1078,7 +1067,6 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 		}
 		else if(FlxG.keys.justPressed.ESCAPE)
 		{
-			FlxG.mouse.visible = false;
 			if(!_goToPlayState)
 			{
 				if(!unsavedProgress)
@@ -1088,7 +1076,11 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 				}
 				else openSubState(new ExitConfirmationPrompt());
 			}
-			else MusicBeatState.switchState(new PlayState());
+			else
+			{
+				FlxG.mouse.visible = false;				   
+				MusicBeatState.switchState(new PlayState());
+			}
 			return;
 		}
 	}
@@ -1244,7 +1236,7 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 
 	var characterList:Array<String> = [];
 	function reloadCharacterDropDown() {
-		characterList = Mods.mergeAllTextsNamed('data/characterList.txt');
+		characterList = Mods.mergeAllTextsNamed('characterList.txt');
 		var foldersToCheck:Array<String> = Mods.directoriesWithFile(Paths.getSharedPath(), 'characters/');
 		for (folder in foldersToCheck)
 			for (file in FileSystem.readDirectory(folder))

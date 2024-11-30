@@ -4,11 +4,15 @@ import backend.WeekData;
 import backend.Highscore;
 import backend.Song;
 
+import openfl.filters.BlurFilter;
+
 import flixel.util.FlxStringUtil;
 
 import states.StoryMenuState;
 import states.FreeplayState;
 import options.OptionsState;
+
+import substates.StickerSubState;
 
 class PauseSubState extends MusicBeatSubstate
 {
@@ -17,9 +21,11 @@ class PauseSubState extends MusicBeatSubstate
 	var menuItems:Array<String> = [];
 	var menuItemsOG:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Options', 'Exit to menu'];
 	var difficultyChoices = [];
+	var optionChoices = [];
 	var curSelected:Int = 0;
 
 	var pauseMusic:FlxSound;
+	var optionsText:FlxText;
 	var practiceText:FlxText;
 	var skipTimeText:FlxText;
 	var skipTimeTracker:Alphabet;
@@ -56,6 +62,10 @@ class PauseSubState extends MusicBeatSubstate
 		}
 		difficultyChoices.push('BACK');
 
+		for (i in OptionsState.options) {
+			optionChoices.push(i);
+		}
+		optionChoices.push('BACK');
 
 		pauseMusic = new FlxSound();
 		try
@@ -119,6 +129,13 @@ class PauseSubState extends MusicBeatSubstate
 		levelDifficulty.x = FlxG.width - (levelDifficulty.width + 20);
 		blueballedTxt.x = FlxG.width - (blueballedTxt.width + 20);
 
+		optionsText = new FlxText(20, 15 + 101, 0, Language.getPhrase("options_in_pause_warning", "WARNING: Not all options are supported!\nSome options may not update until you restart."), 32);
+		optionsText.scrollFactor.set();
+		optionsText.setFormat(Paths.font('Prototype.ttf'), 32, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		optionsText.borderSize = 4;
+		optionsText.y = FlxG.height - (optionsText.height + 20);
+		optionsText.updateHitbox();
+
 		FlxTween.tween(bg, {alpha: 0.6}, 0.4, {ease: FlxEase.quartInOut});
 		FlxTween.tween(levelInfo, {alpha: 1, y: 20}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.3});
 		FlxTween.tween(levelDifficulty, {alpha: 1, y: levelDifficulty.y + 5}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.5});
@@ -169,6 +186,14 @@ class PauseSubState extends MusicBeatSubstate
 		{
 			close();
 			return;
+		}
+
+		if(FlxG.keys.justPressed.F5)
+		{
+			FlxTransitionableState.skipNextTransIn = true;
+			FlxTransitionableState.skipNextTransOut = true;
+			PlayState.nextReloadAll = true;
+			MusicBeatState.resetState();
 		}
 
 		updateSkipTextStuff();
@@ -249,9 +274,35 @@ class PauseSubState extends MusicBeatSubstate
 					return;
 				}
 
-
 				menuItems = menuItemsOG;
 				regenMenu();
+			}
+
+			if (menuItems == optionChoices) {
+				switch(daSelected)
+				{
+					case 'Screenshot Settings':
+						openSubState(new options.ScreenshotTest());
+					case 'Note Colors':
+						openSubState(new options.NotesColorSubState());
+					case 'Controls':
+						openSubState(new options.ControlsSubState());
+					case 'Graphics':
+						openSubState(new options.GraphicsSettingsSubState());
+					case 'Visuals':
+						openSubState(new options.VisualsSettingsSubState());
+					case 'Gameplay':
+						openSubState(new options.GameplaySettingsSubState());
+					case 'Adjust Delay and Combo':
+						MusicBeatState.switchState(new options.NoteOffsetState());
+					case 'Language':
+						openSubState(new options.LanguageSubState());
+					default:
+						menuItems = menuItemsOG;
+						regenMenu();
+						remove(optionsText); // no need for visible, just remove it
+				}
+				return;
 			}
 
 			switch (daSelected)
@@ -298,17 +349,10 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.instance.botplayTxt.alpha = 1;
 					PlayState.instance.botplaySine = 0;
 				case 'Options':
-					PlayState.instance.paused = true; // For lua
-					PlayState.instance.vocals.volume = 0;
-					PlayState.instance.canResync = false;
-					MusicBeatState.switchState(new OptionsState());
-					if(ClientPrefs.data.pauseMusic != 'None')
-					{
-						FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.data.pauseMusic)), pauseMusic.volume);
-						FlxTween.tween(FlxG.sound.music, {volume: 1}, 0.8);
-						FlxG.sound.music.time = pauseMusic.time;
-					}
-					OptionsState.onPlayState = true;
+					menuItems = optionChoices;
+					deleteSkipTimeText();
+					regenMenu();
+					add(optionsText);
 				case "Exit to menu":
 					#if DISCORD_ALLOWED DiscordClient.resetClientID(); #end
 					PlayState.deathCounter = 0;
@@ -316,11 +360,15 @@ class PauseSubState extends MusicBeatSubstate
 
 					PlayState.instance.canResync = false;
 					Mods.loadTopMod();
-					if(PlayState.isStoryMode)
-						MusicBeatState.switchState(new StoryMenuState());
-					else 
-						MusicBeatState.switchState(new FreeplayState());
-
+					if (PlayState.isStoryMode)
+					{
+						PlayState.storyPlaylist = [];
+						openSubState(new StickerSubState(null, (sticker) -> new StoryMenuState())); // sticker transition that kinda works
+					}
+					else
+					{
+						openSubState(new StickerSubState(null, (sticker) -> new FreeplayState())); // sticker transition that kinda works
+					}
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
 					PlayState.changedDifficulty = false;
 					PlayState.chartingMode = false;
@@ -394,6 +442,8 @@ class PauseSubState extends MusicBeatSubstate
 
 		for (num => str in menuItems) {
 			var item = new Alphabet(90, 320, Language.getPhrase('pause_$str', str), true);
+			item.changeX = false;
+			item.screenCenter(X); // centers the pause items
 			item.isMenuItem = true;
 			item.targetY = num;
 			grpMenuShit.add(item);

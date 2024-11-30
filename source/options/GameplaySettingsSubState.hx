@@ -37,6 +37,46 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		'resultsScreen',
 		BOOL);
 		addOption(option);
+
+		var option:Option = new Option('Groovin Results',
+		'If checked, Results Screen from Graffiti Groovin will show after passing a song',
+		'resultsGroovin',
+		BOOL);
+		addOption(option);
+
+		var option:Option = new Option('Opponent Lane Underlay Visibility',
+		'Sets visibility of opponent\'s lane underlay.',
+		'opponentUnderlaneVisibility',
+		PERCENT);	
+		option.scrollSpeed = 1;
+		option.minValue = 0.0;
+		option.maxValue = 1;
+		option.changeValue = 0.1;
+		option.decimals = 1;
+		addOption(option);
+
+		var option:Option = new Option('Lane Underlay Visibility',
+			'Sets visibility of lane underlay.',
+			'underlaneVisibility',
+			PERCENT);	
+		option.scrollSpeed = 1;
+		option.minValue = 0.0;
+		option.maxValue = 1;
+		option.changeValue = 0.1;
+		option.decimals = 1;
+		addOption(option);
+
+		var option:Option = new Option('Base Game Activation',
+		'If checked, Base Game elements will take effect.',
+		'BaseGame',
+		BOOL);
+		// addOption(option);
+
+		var option:Option = new Option('Combo Burst GF Edition',
+		'If checked, every 100 combo you hit, GF will cheer \nlike in Etterna or Osu',
+		'comboBurst',
+		BOOL);
+		addOption(option);
 		
 		var option:Option = new Option('Auto Pause',
 			"If checked, the game automatically pauses if the screen isn't on focus.",
@@ -79,8 +119,8 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			FLOAT);
 			option.displayFormat = '%vms';
 			option.scrollSpeed = 5;
-			option.minValue = 16.0;
-			option.maxValue = 16.0; // 16 is the max value for a Marvelous (or rainbow 300) in Osu Mania no matter the OD.
+			option.minValue = 16;
+			option.maxValue = 16; // 16 is the max value for a Marvelous (or rainbow 300) in Osu Mania no matter the OD.
 			option.changeValue = 0.1;
 			option.decimals = 2;
 			addOption(option);
@@ -91,8 +131,8 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			FLOAT);
 		option.displayFormat = '%vms';
 		option.scrollSpeed = 15;
-		option.minValue = 40.0;
-		option.maxValue = 40.0;
+		option.minValue = 43;
+		option.maxValue = 43;
 		option.changeValue = 0.1;
 		option.decimals = 2;
 		addOption(option);
@@ -103,8 +143,8 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			FLOAT);
 		option.displayFormat = '%vms';
 		option.scrollSpeed = 30;
-		option.minValue = 73.0;
-		option.maxValue = 73.0;
+		option.minValue = 76;
+		option.maxValue = 76;
 		option.changeValue = 0.1;
 		option.decimals = 2;
 		addOption(option);
@@ -115,21 +155,21 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			FLOAT);
 		option.displayFormat = '%vms';
 		option.scrollSpeed = 60;
-		option.minValue = 127.0;
-		option.maxValue = 127.0; //Should be harder to get a BAD now after TestPhasev1.
+		option.minValue = 106;
+		option.maxValue = 106; //Should be harder to get a BAD now after TestPhasev1.
 		option.changeValue = 0.1;
 		option.decimals = 2;
 		addOption(option);
 
 		var option:Option = new Option('Safe Frames',
-			'Changes how many frames you have for\nhitting a note earlier or late.',
+			'(This is LOCKED for SDPJ) -\nSafe Frames (Input Window)',
 			'safeFrames',
 			FLOAT);
 		option.scrollSpeed = 5;
 		option.minValue = 10;
 		option.maxValue = 10;
 		option.changeValue = 0.1;
-		addOption(option); // why exactly?
+		// addOption(option); // why exactly?
 
 		var option:Option = new Option('Sustains as One Note',
 			"If checked, Hold Notes can't be pressed if you miss,\nand count as a single Hit/Miss.\nUncheck this if you prefer the old Input System.",

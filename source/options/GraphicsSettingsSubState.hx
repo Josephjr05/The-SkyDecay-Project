@@ -52,6 +52,13 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 			INT);
 		addOption(option);
 
+		var option:Option = new Option('Light Cycle:',
+		"What Light Cycle should Camellia songs use?",
+		'lightcycle',
+		STRING,
+		['Auto Lights', 'Slow Lights', 'Player Lights', 'Disabled']);
+		addOption(option);
+
 		final refreshRate:Int = FlxG.stage.application.window.displayMode.refreshRate;
 		option.minValue = 60;
 		option.maxValue = 240;

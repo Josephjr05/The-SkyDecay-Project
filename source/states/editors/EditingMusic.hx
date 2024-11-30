@@ -19,7 +19,7 @@ class EditingMusic extends flixel.FlxBasic
 
 		public function shuffle() {
 			music.time = 0;
-			music.loadEmbedded(Paths.music('editorMusic/' + Std.string(FlxG.random.int(0, 4))));
+			music.loadEmbedded(Paths.music('editorMusic/' + Std.string(FlxG.random.int(0, 5))));
 			music.fadeIn(1, 0, 0.5);
 			music.onComplete = shuffle;
 		}

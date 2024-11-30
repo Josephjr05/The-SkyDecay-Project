@@ -21,6 +21,18 @@ import sys.io.*;
 import js.html.*;
 #end
 
+#if SCEModchartingTools
+import substates.MusicBeatSubstate;
+#else
+import backend.MusicBeatSubstate;
+#end
+import objects.Note;
+#if SCEModchartingTools
+import objects.StrumArrow;
+#else
+import objects.StrumNote;
+#end
+
 import backend.Paths;
 import backend.Controls;
 import backend.CoolUtil;
@@ -38,6 +50,7 @@ import backend.ui.*; //Psych-UI
 
 import objects.Alphabet;
 import objects.BGSprite;
+import objects.shape.ShapeEX;
 
 import states.PlayState;
 import states.LoadingState;

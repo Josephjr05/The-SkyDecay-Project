@@ -3,6 +3,9 @@ package backend;
 import openfl.utils.Assets;
 import lime.utils.Assets as LimeAssets;
 
+import flixel.util.FlxAxes;
+import flixel.FlxObject;
+
 class CoolUtil
 {
 
@@ -38,6 +41,17 @@ class CoolUtil
 		if(Assets.exists(path)) daList = Assets.getText(path);
 		#end
 		return daList != null ? listFromString(daList) : [];
+	}
+
+	public static function zeroFill(value:Int, digits:Int) {
+		var length:Int = Std.string(value).length;
+		var format:String = "";
+		if(length < digits) {
+			for (i in 0...(digits - length))
+				format += "0";
+			format += Std.string(value);
+		} else format = Std.string(value);
+		return format;
 	}
 
 	inline public static function colorFromString(color:String):FlxColor
@@ -78,14 +92,16 @@ class CoolUtil
 	inline public static function dominantColor(sprite:flixel.FlxSprite):Int
 	{
 		var countByColor:Map<Int, Int> = [];
-		for(col in 0...sprite.frameWidth) {
-			for(row in 0...sprite.frameHeight) {
-				var colorOfThisPixel:Int = sprite.pixels.getPixel32(col, row);
-				if(colorOfThisPixel != 0) {
-					if(countByColor.exists(colorOfThisPixel))
-						countByColor[colorOfThisPixel] = countByColor[colorOfThisPixel] + 1;
-					else if(countByColor[colorOfThisPixel] != 13520687 - (2*13520687))
-						countByColor[colorOfThisPixel] = 1;
+		for(col in 0...sprite.frameWidth)
+			{
+				for(row in 0...sprite.frameHeight)
+				{
+					var colorOfThisPixel:FlxColor = sprite.pixels.getPixel32(col, row);
+					if(colorOfThisPixel.alphaFloat > 0.05)
+					{
+						colorOfThisPixel = FlxColor.fromRGB(colorOfThisPixel.red, colorOfThisPixel.green, colorOfThisPixel.blue, 255);
+						var count:Int = countByColor.exists(colorOfThisPixel) ? countByColor[colorOfThisPixel] : 0;
+						countByColor[colorOfThisPixel] = count + 1;
 				}
 			}
 		}
@@ -93,9 +109,11 @@ class CoolUtil
 		var maxCount = 0;
 		var maxKey:Int = 0; //after the loop this will store the max color
 		countByColor[FlxColor.BLACK] = 0;
-		for(key in countByColor.keys()) {
-			if(countByColor[key] >= maxCount) {
-				maxCount = countByColor[key];
+		for(key => count in countByColor)
+			{
+				if(count >= maxCount)
+				{
+					maxCount = count;
 				maxKey = key;
 			}
 		}
@@ -167,6 +185,42 @@ class CoolUtil
 				text.borderStyle = OUTLINE_FAST;
 			default:
 				text.borderStyle = NONE;
+		}
+	}
+
+	public static function recursivelyReadFolders(path:String, ?erasePath:Bool = true) {
+		var ret:Array<String> = [];
+		for (i in FileSystem.readDirectory(path)) {
+			returnFileName(i, ret, path);
+		}
+		if (erasePath) {
+			path+='/';
+			for (i in 0...ret.length) {
+				ret[i] = ret[i].replace(path, '');
+			}
+		}
+		return ret;
+	}
+
+	static function returnFileName(path:String, toAdd:Array<String>, full:String) {
+		if (FileSystem.isDirectory(full+'/'+path)) {
+			for (i in FileSystem.readDirectory(full+'/'+path)) {
+				returnFileName(i, toAdd, full+'/'+path);
+			}
+		} else {
+			toAdd.push((full+'/'+path).replace('.json', ''));
+		}
+	}
+
+	public static inline function cameraCenter(obj:FlxObject, cam:PsychCamera, axes:FlxAxes = XY) {
+		switch(axes) {
+			case XY:
+				obj.setPosition((cam.width - obj.width) / 2, (cam.height - obj.height) / 2);
+			case X:
+				obj.x = (cam.width - obj.width) / 2;
+			case Y:
+				obj.y = (cam.height - obj.height) / 2;
+			case NONE:
 		}
 	}
 }

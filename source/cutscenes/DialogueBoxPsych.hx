@@ -43,10 +43,10 @@ class DialogueBoxPsych extends FlxSpriteGroup
 	var offsetPos:Float = -600;
 	var skipText:FlxText;
 
-	var textBoxTypes:Array<String> = ['normal', 'angry'];
+	var textBoxTypes:Array<String> = ['normal', 'angry', 'camellia'];
 	
 	var curCharacter:String = "";
-	//var charPositionList:Array<String> = ['left', 'center', 'right'];
+	var charPositionList:Array<String> = ['left', 'center', 'right'];
 
 	public function new(dialogueList:DialogueFile, ?song:String = null)
 	{
@@ -85,6 +85,16 @@ class DialogueBoxPsych extends FlxSpriteGroup
 		box.animation.play('normal', true);
 		box.visible = false;
 		box.setGraphicSize(Std.int(box.width * 0.9));
+		box.updateHitbox();
+		add(box);
+
+		box = new FlxSprite(70, 370);
+		box.antialiasing = ClientPrefs.data.antialiasing;
+		box.frames = Paths.getSparrowAtlas('stages/camellia/Dialogue_Box');
+		box.animation.addByPrefix('start', 'P5_Box', 24, false);
+		box.animation.play('start', true);
+		box.visible = true; // make sure it stays when selected
+		box.setGraphicSize(Std.int(box.width));
 		box.updateHitbox();
 		add(box);
 
@@ -411,6 +421,9 @@ class DialogueBoxPsych extends FlxSpriteGroup
 			box.offset.set(50, 65);
 		} else if(box.animation.curAnim.name.startsWith('center-angry')) {
 			box.offset.set(50, 30);
+		}
+		  else if(box.animation.curAnim.name.startsWith('start')) { // camellia
+			box.offset.set(50, 65);
 		} else {
 			box.offset.set(10, 0);
 		}

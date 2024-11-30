@@ -5,6 +5,8 @@ import objects.CheckboxThingie;
 
 import options.Option.OptionType;
 
+import backend.StageData;
+
 class GameplayChangersSubstate extends MusicBeatSubstate
 {
 	private var curSelected:Int = 0;
@@ -16,6 +18,8 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 
 	private var curOption(get, never):GameplayOption;
 	function get_curOption() return optionsArray[curSelected]; //shorter lol
+	
+	public static var onPlayState:Bool = false; // ohhh yess i fucking love you
 
 	function getOptions()
 	{
@@ -52,16 +56,16 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 
 		var option:GameplayOption = new GameplayOption('Health Gain Multiplier', 'healthgain', FLOAT, 1); // should depend on difficulty in SDPJ
 		option.scrollSpeed = 2.5;
-		option.minValue = 0.5;
-		option.maxValue = 0.5;
+		option.minValue = 1.24; //this is locked to 7.7 OD now
+		option.maxValue = 1.24;
 		option.changeValue = 0.1;
 		option.displayFormat = '%vX';
 		optionsArray.push(option);
 
 		var option:GameplayOption = new GameplayOption('Health Loss Multiplier', 'healthloss', FLOAT, 1); // should depend on difficulty in SDPJ
 		option.scrollSpeed = 2.5;
-		option.minValue = 4;
-		option.maxValue = 4;
+		option.minValue = 1.5; //this is locked to 7.7 OD now
+		option.maxValue = 1.5;
 		option.changeValue = 0.1;
 		option.displayFormat = '%vX';
 		optionsArray.push(option);
@@ -139,6 +143,15 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		reloadCheckboxes();
 	}
 
+	override function closeSubState()
+	{
+		super.closeSubState();
+		ClientPrefs.saveSettings();
+		#if DISCORD_ALLOWED
+		DiscordClient.changePresence("YOU'RE CHEATING!!", null);
+		#end
+	}
+
 	var nextAccept:Int = 5;
 	var holdTime:Float = 0;
 	var holdValue:Float = 0;
@@ -155,6 +168,12 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 			close();
 			ClientPrefs.saveSettings();
 			FlxG.sound.play(Paths.sound('cancelMenu'));
+			if(onPlayState)
+			{
+				StageData.loadDirectory(PlayState.SONG);
+				LoadingState.loadAndSwitchState(new PlayState());
+				FlxG.sound.music.volume = 0;
+			}
 		}
 
 		if(nextAccept <= 0)

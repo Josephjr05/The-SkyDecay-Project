@@ -29,7 +29,7 @@ class SpraycanAtlasSprite extends FlxSpriteGroup
 		add(canAtlas);
 
 		explosion = new FlxSprite(x - 25, y - 450);
-		explosion.frames = Paths.getSparrowAtlas('spraypaintExplosionEZ');
+		explosion.frames = Paths.getSparrowAtlas('stages/weekend1/spraypaintExplosionEZ');
 		explosion.animation.addByPrefix('idle', 'explosion round 1 short0', 24, false);
 		explosion.animation.finishCallback = (name:String) -> explosion.visible = explosion.active = false;
 		explosion.visible = explosion.active = false;

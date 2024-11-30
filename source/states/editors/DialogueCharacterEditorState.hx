@@ -46,6 +46,7 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 	var mainGroup:FlxSpriteGroup;
 	var hudGroup:FlxSpriteGroup;
 
+	var music:EditingMusic;
 	var character:DialogueCharacter;
 	var ghostLoop:DialogueCharacter;
 	var ghostIdle:DialogueCharacter;
@@ -54,6 +55,7 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 	var unsavedProgress:Bool = false;
 
 	override function create() {
+		music = new EditingMusic();
 		persistentUpdate = persistentDraw = true;
 		camGame = initPsychCamera();
 		camGame.bgColor = FlxColor.fromHSL(0, 0, 0.5);
@@ -440,6 +442,7 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 	var transitioning:Bool = false;
 	override function update(elapsed:Float) {
 		super.update(elapsed);
+		music.update(elapsed);
 		if(transitioning)
 			return;
 
@@ -624,7 +627,7 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 		_file.addEventListener(#if desktop Event.SELECT #else Event.COMPLETE #end, onLoadComplete);
 		_file.addEventListener(Event.CANCEL, onLoadCancel);
 		_file.addEventListener(IOErrorEvent.IO_ERROR, onLoadError);
-		_file.browse([jsonFilter]);
+		_file.browse([#if !mac jsonFilter #end]);
 	}
 
 	function onLoadComplete(_):Void

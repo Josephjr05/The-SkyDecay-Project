@@ -1,5 +1,6 @@
 package states.stages;
 
+import states.PlayState;
 import states.stages.objects.*;
 
 class CamelliaConcert extends BaseStage
@@ -22,7 +23,7 @@ class CamelliaConcert extends BaseStage
 	//Light stuff
 	var light:FlxSprite;
 	var citycycle:Int = 1;
-	//var lightcycle:String = ClientPrefs.lightcycle;
+	var lightcycle:String = ClientPrefs.data.lightcycle;
 
 	//Star Stuff
 	var star:FlxSprite;
@@ -108,83 +109,104 @@ class CamelliaConcert extends BaseStage
 	}
 
 	override function update(elapsed:Float)
-		{
-			game.camFollow.x = 1050;
-			game.camFollow.y = 530;
+	{
+		if(kurama) {
+			boyfriend.color = 0xff474747;
+			dad.color = 0xff474747;
+			gf.color = 0xff474747;
+		}
+		if (zooming) {
+			game.camZooming = false;
 		}
 
-	function kcmMode(kuramaInt:Int)
-		{
-			trace(kuramaInt);
-			kuraCool = true;
-			if(kuramaInt == 1)
+	}
+
+	override function stepHit()
+	{
+		if (curStep % 1 == 0 && spin) {
+			spin = false;
+			FlxTween.tween(star, {angle: 360}, 5, {ease: FlxEase.backInOut, onComplete: function(twn:FlxTween)
 			{
-				FlxTween.color(backCrowd, 1.3, FlxColor.WHITE, 0xff474747, {ease: FlxEase.linear});
-				FlxTween.color(stage, 1.3, FlxColor.WHITE, 0xff474747, {ease: FlxEase.linear});
-				FlxTween.color(speakerLeft, 1.3, FlxColor.WHITE, 0xff474747, {ease: FlxEase.linear});
-				FlxTween.color(speakerRight, 1.3, FlxColor.WHITE, 0xff474747, {ease: FlxEase.linear});
-				FlxTween.color(speakerLeft2, 1.3, FlxColor.WHITE, 0xff474747, {ease: FlxEase.linear});
-				FlxTween.color(speakerRight2, 1.3, FlxColor.WHITE, 0xff474747, {ease: FlxEase.linear});
-				FlxTween.color(frontCrowd, 1.3, FlxColor.WHITE, 0xff474747, {ease: FlxEase.linear});
-				FlxTween.color(boyfriend, 1.3, FlxColor.WHITE, 0xff474747, {ease: FlxEase.linear});
-				FlxTween.color(dad, 1.3, FlxColor.WHITE, 0xff474747, {ease: FlxEase.linear});
-				FlxTween.color(gf, 1.3, FlxColor.WHITE, 0xff474747, {ease: FlxEase.linear});
-				FlxTween.tween(star, {y: 90}, 2.3, {ease: FlxEase.backInOut, onComplete: function(twn:FlxTween)
+				FlxTween.tween(star, {angle: 0}, 0.01, {ease: FlxEase.linear, onComplete: function(twn:FlxTween)
 				{
 					spin = true;
-					kuraCool = false;
-					kurama = true;
 				}});
-			}
-			if(kuramaInt == 2)
-			{
-				kurama = false;
-				FlxTween.color(backCrowd, 1.3, 0xff474747, 0xFFFFFFFF, {ease: FlxEase.linear});
-				FlxTween.color(stage, 1.3, 0xff474747, 0xFFFFFFFF, {ease: FlxEase.linear});
-				FlxTween.color(speakerLeft, 1.3, 0xff474747, 0xFFFFFFFF, {ease: FlxEase.linear});
-				FlxTween.color(speakerRight, 1.3, 0xff474747, 0xFFFFFFFF, {ease: FlxEase.linear});
-				FlxTween.color(speakerLeft2, 1.3, 0xff474747, 0xFFFFFFFF, {ease: FlxEase.linear});
-				FlxTween.color(speakerRight2, 1.3, 0xff474747, 0xFFFFFFFF, {ease: FlxEase.linear});
-				FlxTween.color(frontCrowd, 1.3, 0xff474747, 0xFFFFFFFF, {ease: FlxEase.linear});
-				FlxTween.color(boyfriend, 1.3, 0xff474747, 0xFFFFFFFF, {ease: FlxEase.linear});
-				FlxTween.color(dad, 1.3, 0xff474747, 0xFFFFFFFF, {ease: FlxEase.linear});
-				FlxTween.color(gf, 1.3, 0xff474747, 0xFFFFFFFF, {ease: FlxEase.linear});
-				FlxTween.tween(star, {y: 2230}, 2.3, {ease: FlxEase.backInOut, onComplete: function(twn:FlxTween)
-				{
-					spin = false;
-					kuraCool = false;
-				}});
-			}
+			}});
 		}
+
+		if (FlxG.keys.justPressed.LEFT && lightcycle == 'Player Lights') {
+			light.color = 0x00b1ff;
+		} else if (FlxG.keys.justPressed.UP && lightcycle == 'Player Lights') {
+			light.color = 0xff432c;
+		} else if (FlxG.keys.justPressed.DOWN && lightcycle == 'Player Lights') {
+			light.color = 0xff30fa;
+		} else if (FlxG.keys.justPressed.RIGHT && lightcycle == 'Player Lights') {
+			light.color = 0x00fd86;
+		}
+	}
+	
+	override function beatHit()
+	{
+		if (curBeat % 2 == 0) {
+			speakerLeft.animation.play('bop');
+			speakerRight.animation.play('bop');
+			speakerLeft2.animation.play('bop');
+			speakerRight2.animation.play('bop');
+		} else if (curBeat % 3 == 0 && citycycle == 1 && lightcycle == 'Auto Lights') {
+			light.color = 0xff00b1ff; citycycle = 2;
+		} else if (curBeat % 3 == 0 && citycycle == 2 && lightcycle == 'Auto Lights') {
+			light.color =0xff432c; citycycle = 3;
+		} else if (curBeat % 3 == 0 && citycycle == 3 && lightcycle == 'Auto Lights') {
+			light.color = 0xff30fa; citycycle = 4;
+		} else if (curBeat % 3 == 0 && citycycle == 4 && lightcycle == 'Auto Lights') {
+			light.color =0x00fd86; citycycle = 5;
+		} else if (curBeat % 3 == 0 && citycycle == 5 && lightcycle == 'Auto Lights') {
+			light.color = 0xffa71f; citycycle = 1;
+		} 
+		else if (curBeat % 3 == 0 && citycycle == 1 && lightcycle == 'Slow Lights') {
+			FlxTween.color(light, 0.5, 0xffffa71f, 0xff00b1ff); citycycle = 2;
+		} else if (curBeat % 3 == 0 && citycycle == 2 && lightcycle == 'Slow Lights') {
+			FlxTween.color(light, 0.5, 0xff00b1ff, 0xffff432c); citycycle = 3;
+		} else if (curBeat % 3 == 0 && citycycle == 3 && lightcycle == 'Slow Lights') {
+			FlxTween.color(light, 0.5, 0xffff432c, 0xffff30fa); citycycle = 4;
+		} else if (curBeat % 3 == 0 && citycycle == 4 && lightcycle == 'Slow Lights') {
+			FlxTween.color(light, 0.5, 0xffff30fa, 0xff00fd86); citycycle = 5;
+		} else if (curBeat % 3 == 0 && citycycle == 5 && lightcycle == 'Slow Lights') {
+			FlxTween.color(light, 0.5, 0xff00fd86, 0xffffa71f); citycycle = 1;
+		}
+		if (curBeat % 2 == 0 && zooming) {
+			//Backcrowd bopping
+			FlxTween.tween(backCrowd.scale, {x: 1.85, y: 1.85}, 0.01, {ease: FlxEase.linear});
+			FlxTween.tween(backCrowd.scale, {x: 1.75, y: 1.75}, 0.5, {ease: FlxEase.quartOut});
+			//Frontcrowd bopping
+			FlxTween.tween(frontCrowd.scale, {x: 1.85, y: 1.85}, 0.01, {ease: FlxEase.linear});
+			FlxTween.tween(frontCrowd.scale, {x: 1.75, y: 1.75}, 0.5, {ease: FlxEase.quartOut});
+		}
+	}
 
 	override function eventCalled(eventName:String, value1:String, value2:String, flValue1:Null<Float>, flValue2:Null<Float>, strumTime:Float)
 	{
 		switch(eventName)
 		{
 			case 'Nine Star Mode':
-				if(curStage == 'concert' && !kuraCool) {
+				if(!kuraCool) {
 					kcmMode(Std.parseInt(value1));
 				}
 
-			case 'Camellia Zoom':
-				if(curStage == 'concert') {
+				case 'Camellia Zoom':
 					var val1:Int = Std.parseInt(value1);
 					var val2:Null<Float> = Std.parseFloat(value2);
 
 					if(val2 == null)
 						val2 = 0.5;
 
-					if (ClientPrefs.data.camZooms) {
+					if (ClientPrefs.data.camZooms) { // took out camHUD IT'S UNNECESSARY!!
 						if (val1 == 1) {
 							zooming = true;
 							FlxTween.tween(frontCrowd, {y: 760, alpha: 1}, val2, {ease: FlxEase.sineIn});
 							FlxTween.tween(camGame, {zoom: 0.41}, val2, {ease: FlxEase.sineIn, onComplete: function(twn:FlxTween)
 							{
 								defaultCamZoom = camGame.zoom;
-							}});
-							FlxTween.tween(camHUD, {zoom: 0.8}, val2, {ease: FlxEase.sineIn, onComplete: function(twn:FlxTween)
-							{
-								FlxTween.tween(camHUD, {zoom: 0.8}, 0.00001, {ease: FlxEase.sineIn});
 							}});
 						}
 						if (val1 == 2) {
@@ -194,20 +216,59 @@ class CamelliaConcert extends BaseStage
 								defaultCamZoom = camGame.zoom;
 								zooming = false;
 							}});
-							FlxTween.tween(camHUD, {zoom: 1}, val2, {ease: FlxEase.sineOut});
 						}
 						if (val1 == 3) {
 							zooming = true;
 							FlxTween.tween(frontCrowd, {y: 760, alpha: 1}, val2, {ease: FlxEase.sineIn});
 							FlxTween.tween(camGame, {zoom: 0.47}, val2, {ease: FlxEase.sineIn});
-							FlxTween.tween(camHUD, {zoom: 0.9}, val2, {ease: FlxEase.sineIn, onComplete: function(twn:FlxTween)
 							{
-								FlxTween.tween(camHUD, {zoom: 0.9}, 0.00001, {ease: FlxEase.sineIn});
 								zooming = true;
-							}});
-						}
-					}
-				}
+							}};
+						}	
+		}
+	}
+
+	function kcmMode(kuramaInt:Int)
+	{
+		trace(kuramaInt);
+		kuraCool = true;
+		if(kuramaInt == 1)
+		{
+			FlxTween.color(backCrowd, 1.3, FlxColor.WHITE, 0xff474747, {ease: FlxEase.linear});
+			FlxTween.color(stage, 1.3, FlxColor.WHITE, 0xff474747, {ease: FlxEase.linear});
+			FlxTween.color(speakerLeft, 1.3, FlxColor.WHITE, 0xff474747, {ease: FlxEase.linear});
+			FlxTween.color(speakerRight, 1.3, FlxColor.WHITE, 0xff474747, {ease: FlxEase.linear});
+			FlxTween.color(speakerLeft2, 1.3, FlxColor.WHITE, 0xff474747, {ease: FlxEase.linear});
+			FlxTween.color(speakerRight2, 1.3, FlxColor.WHITE, 0xff474747, {ease: FlxEase.linear});
+			FlxTween.color(frontCrowd, 1.3, FlxColor.WHITE, 0xff474747, {ease: FlxEase.linear});
+			FlxTween.color(boyfriend, 1.3, FlxColor.WHITE, 0xff474747, {ease: FlxEase.linear});
+			FlxTween.color(dad, 1.3, FlxColor.WHITE, 0xff474747, {ease: FlxEase.linear});
+			FlxTween.color(gf, 1.3, FlxColor.WHITE, 0xff474747, {ease: FlxEase.linear});
+			FlxTween.tween(star, {y: 90}, 2.3, {ease: FlxEase.backInOut, onComplete: function(twn:FlxTween)
+			{
+				spin = true;
+				kuraCool = false;
+				kurama = true;
+			}});
+		}
+		if(kuramaInt == 2)
+		{
+			kurama = false;
+			FlxTween.color(backCrowd, 1.3, 0xff474747, 0xFFFFFFFF, {ease: FlxEase.linear});
+			FlxTween.color(stage, 1.3, 0xff474747, 0xFFFFFFFF, {ease: FlxEase.linear});
+			FlxTween.color(speakerLeft, 1.3, 0xff474747, 0xFFFFFFFF, {ease: FlxEase.linear});
+			FlxTween.color(speakerRight, 1.3, 0xff474747, 0xFFFFFFFF, {ease: FlxEase.linear});
+			FlxTween.color(speakerLeft2, 1.3, 0xff474747, 0xFFFFFFFF, {ease: FlxEase.linear});
+			FlxTween.color(speakerRight2, 1.3, 0xff474747, 0xFFFFFFFF, {ease: FlxEase.linear});
+			FlxTween.color(frontCrowd, 1.3, 0xff474747, 0xFFFFFFFF, {ease: FlxEase.linear});
+			FlxTween.color(boyfriend, 1.3, 0xff474747, 0xFFFFFFFF, {ease: FlxEase.linear});
+			FlxTween.color(dad, 1.3, 0xff474747, 0xFFFFFFFF, {ease: FlxEase.linear});
+			FlxTween.color(gf, 1.3, 0xff474747, 0xFFFFFFFF, {ease: FlxEase.linear});
+			FlxTween.tween(star, {y: 2230}, 2.3, {ease: FlxEase.backInOut, onComplete: function(twn:FlxTween)
+			{
+				spin = false;
+				kuraCool = false;
+			}});
 		}
 	}
 }

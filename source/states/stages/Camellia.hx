@@ -26,8 +26,8 @@ class Camellia extends BaseStage
 	}
 
 	override function update(elapsed:Float)
-		{
-			game.camFollow.x = 250;
-			game.camFollow.y = 60;
-		}
+	{
+		game.camFollow.x = 250;
+		game.camFollow.y = 60;
+	}
 }

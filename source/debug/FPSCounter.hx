@@ -33,7 +33,7 @@ class FPSCounter extends TextField
 		currentFPS = 0;
 		selectable = false;
 		mouseEnabled = false;
-		defaultTextFormat = new TextFormat("_sans", 14, color);
+		defaultTextFormat = new TextFormat("_sans", 12, color);
 		autoSize = LEFT;
 		multiline = true;
 		text = "FPS: ";
@@ -50,7 +50,7 @@ class FPSCounter extends TextField
 		times.push(now);
 		while (times[0] < now - 1000) times.shift();
 		// prevents the overlay from updating every frame, why would you need to anyways @crowplexus
-		if (deltaTimeout < 1000) {
+		if (deltaTimeout < 50) {
 			deltaTimeout += deltaTime;
 			return;
 		}
@@ -62,13 +62,16 @@ class FPSCounter extends TextField
 
 	public dynamic function updateText():Void { // so people can override it in hscript
 		text = 'FPS: ${currentFPS}'
-		+ '\nMemory: ${flixel.util.FlxStringUtil.formatBytes(memoryMegas)}';
+		+ '\nMemory: ${flixel.util.FlxStringUtil.formatBytes(memoryMegas)}'
+		+ '\n${Std.string(Type.getClassName(Type.getClass(FlxG.state)))}'
+		+ '\nSkyDecay Engine 0.2';
 
 		textColor = 0xFFFFFFFF;
 		if (currentFPS < FlxG.drawFramerate * 0.5)
-			textColor = 0xFFFF0000;
+			textColor = 0xFF036EFA;
 	}
 
-	inline function get_memoryMegas():Float
+	inline function get_memoryMegas():Float {
 		return cpp.vm.Gc.memInfo64(cpp.vm.Gc.MEM_INFO_USAGE);
+	}
 }

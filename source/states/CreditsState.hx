@@ -38,6 +38,60 @@ class CreditsState extends MusicBeatState
 		#end
 
 		var defaultList:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
+			['The SkyDecay Project Team',	'sdpj',	'All 50+ members who worked on SDPJ!',	'https://gamebanana.com/wips/68022',	'1480E7'],
+			['Owners'],
+			['Josephjr05',	'joseph',	'Commander of SkyDecay/SDPJ. Voice Actor, Mania Charter, and Writer.',	'https://www.youtube.com/@josephjr05',	'C5967A'],
+			['Nixvyy',	'nixvyy',	'Co-Writer, Charter, Voice Actor, Tester, Dialogue Editor, etc..',	'https://www.twitch.tv/thelegendbro736',	'FF6A6A'],
+			['Lycranok',	'razalzy',	'Lead Coder for SkyDecay Engine (Psych Fork) and Mod',	'https://www.youtube.com/@razalzy',	'FEA096'],
+			['Coders'],
+			['RexDX',	'rexdx',	'Lua Coder and Spanish Translator for SDPJ (also the one writing some stuff on the credits lol)',	'',	'FF2600'],
+			['Syan',	'syan',	'Lua Coder for SDPJ',	'',	'D8BDBB'], // no profile
+			['Artists'],
+			['Casual_fr1days',	'casual-fr1days', 'Background Artist for SDPJ',	'https://www.instagram.com/casual_fr1days/',	'6C79A5'],
+			['Caydenedd',	'caydenedd',	'General Artist and a Charter for SDPJ',	'',	''], // no profile
+			['Ray_8946',	'ray',	'Corruption ShowDown (x SDPJ) Creator, also General Artist and Voice Actor for SDPJ.', 'https://www.youtube.com/@Rayflowers-06',	'8994A8'],
+			['Rhovanon',	'rhovanon',	'Promotional Artist and "Voidicious" character creator!',	'',	'630D7D'], // no profile
+			['Juliouxz',	'juliouxz',	'Animator for SDPJ',	'',	''], // no profile
+			['RealMelonMan',	'realmelonman',	'2D and 3D Animator/Sprite Artist, Musician and Chromatic Scaler for SDPJ.',	'',	'ADBFE3'], // hacked
+			['Tazzah', 'zaz',	'Sprite and Background Artist/Animator for SDPJ',	'',	'00CBFF'],
+			['Musicians'],
+			['Star546',	'star',	'Animator and Musician for SDPJ',	'https://www.youtube.com/@ST4_R',	'FFDD16'],
+			['theoriginaldevel',	'theoriginaldevel',	'Chromatic Scaler for SDPJ',	'',	''], // no profile
+			['3w3mk',	'3w3mk',	'Musician for SDPJ',	'',	'FF5100'], // no profile
+			['CBMusic',	'cb',	'Musician of 2 songs and Swedish Translator for SDPJ', 'https://linktr.ee/capslockovershift',	'FF5100'],
+			['Gavin360',	'gavin360',	'Musician for SDPJ',	'',	'A00303'], // no profile
+			['Exosceletic',	'exo',	'Musician for SDPJ',	'https://gamebanana.com/mods/499509',	'00279E'], // no profile
+			['To Much Masks',	'tomuchmasks',	'Among us Trapped (x SDPJ) creator and Musician for SDPJ', 'https://gamebanana.com/wips/74197',	'A205C1'],
+			['Kytchu',	'kytchu',	'Musician for SDPJ',	'https://www.youtube.com/@Kytchuthedeermusic',	'129E1D'],
+			['Genowrld',	'genowrld',	'MUSIC PRODUCER *insert fire emoji*',	'https://youtu.be/rY7X97eRFKM?si=Whpcs48vPQPVskMY',	'EBEBEB'],
+			['UltraCakra',	'ultracakra',	'Musician for SDPJ',	'https://twitter.com/Funkin_at_UandI',	'E1E2DD'],
+			['Zestery Trox',	'zestery-trox',	'Musician for SDPJ',	'',	'FFFFFF'], // gone?
+			['Charters'],
+			['HPD',	'hpd',	'Aggressive Charter	for SDPJ',	'',	'80DBF4'],
+			['KotaCyote',	'kotecyote',	'Mania Charter for SDPJ',	'',	'D80101'],
+			['alumence',	'alu',	'Mania Charter for SDPJ',	'',	'0C3C9A'],
+			['HealsGood',	'healsgood',	'Mania Charter for SDPJ',	'',	''],
+			['MIGATTE',	'migatte',	'Mania Charter for SDPJ',	'',	''],
+			['mMYTHh',	'usermania',	'Mania Charter for SDPJ',	'',	''],
+			['Czeck',	'czeck',	'Charter for SDPJ',	'',	''],
+			['E-M',	'em2502',	'Charter for SDPJ',	'',	''],
+			['juney2008',	'juney2008',	'Charter for SDPJ',	'',	''],
+			['IronXavier',	'lemon',	'Charter for SDPJ',	'',	''],
+			['tehememan',	'tehememan',	'Charter for SDPJ',	'',	''],
+			['Notmrpolo',	'mrpolo',	'Charter for SDPJ',	'',	''],
+			['SakuraCharter',	'sakuracharter',	'Charter for SDPJ',	'',	''],
+			['BallisticFullPower',	'ballisticfullpower',	'Charter for SDPJ',	'',	''],
+			['STILL WIP'],
+			['Collabs'],
+			['Camellia ALT', 'camelliaAlt', 'A highly osu-sided mod where you will rap against camellia, a very known Musician among the Rythm game community, Feeling Worthy enough? try the mod NOW', 'https://gamebanana.com/mods/413258', 'DF00DF'],
+			['Corruption Showdown', 'corruptionshowdown', 'A Pibby Corruption Mod where you will face corrupted creatures from your good old cartoons, Ready to face the corruption?', '', '170017'],
+			['Sonic Legacy', 'sonicLegacy', 'Is that sonic from the sonic.exe mod????!!!! Face sonic the hedgehog himself, probably the fastest (and maybe deadliest) opponent Boyfriend has faced at the moment, but... something is off..., will you survive?', 'https://gamebanana.com/mods/496733', '0000AE'],
+			['Among Us Trapped', 'amogustrapped', '', '', '800080'],
+			['Vs Whitty', 'whittyfromfnf', 'Did Somebody hear a fuse? Rap against the legend itself... Whitty!!!, A retired rapper forced to hide and move among the shadows, he might be though but he is a good bomb, just dont make him angry...', 'https://gamebanana.com/mods/354884', 'FF8000'],
+			['Vs Carol', 'carol', 'Of course we couldnt forget about carol, a woman known for being a close friend of girlfriend, who after rapping boyfriend, would invite them to a little golf session, she is also dating Whitty', 'https://gamebanana.com/mods/42811', '400000'], //i actually did forget about her lol
+			[''],
+			['Allowed Assets'],
+			['Limu', 'Limu comes from the Late Night City Tales mod, the owner didnt specifically give us perms, but he didnt say no either (.-.)', 'https://gamebanana.com/mods/397745', '008063'],
 			["Psych Engine Team"],
 			["Shadow Mario",		"shadowmario",		"Main Programmer and Head of Psych Engine",					"https://ko-fi.com/shadowmario",	"444444"],
 			["Riveren",				"riveren",			"Main Artist/Animator of Psych Engine",						"https://x.com/riverennn",			"14967B"],
@@ -253,11 +307,11 @@ class CreditsState extends MusicBeatState
 	#if MODS_ALLOWED
 	function pushModCreditsToList(folder:String)
 	{
-		var creditsFile:String = Paths.mods(folder + '/data/credits.txt');
+		var creditsFile:String = Paths.mods(folder + '/credits.txt');
 		
 		#if TRANSLATIONS_ALLOWED
 		//trace('/data/credits-${ClientPrefs.data.language}.txt');
-		var translatedCredits:String = Paths.mods(folder + '/data/credits-${ClientPrefs.data.language}.txt');
+		var translatedCredits:String = Paths.mods(folder + '/credits-${ClientPrefs.data.language}.txt');
 		#end
 
 		if (#if TRANSLATIONS_ALLOWED (FileSystem.exists(translatedCredits) && (creditsFile = translatedCredits) == translatedCredits) || #end FileSystem.exists(creditsFile))

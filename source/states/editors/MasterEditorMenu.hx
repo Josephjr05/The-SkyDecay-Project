@@ -7,10 +7,16 @@ import objects.Character;
 import states.MainMenuState;
 import states.FreeplayState;
 
+// import modcharting.ModchartEditorState; // just incase
+
 class MasterEditorMenu extends MusicBeatState
 {
 	var options:Array<String> = [
+		// 'Modchart Editor',
+		// '3D Benchmark',
 		'Chart Editor',
+		// 'Credits Editor',
+		'Sticker Test',
 		'Character Editor',
 		'Stage Editor',
 		'Week Editor',
@@ -105,8 +111,20 @@ class MasterEditorMenu extends MusicBeatState
 		if (controls.ACCEPT)
 		{
 			switch(options[curSelected]) {
+				// case 'Modchart Editor':
+				// 	LoadingState.loadAndSwitchState(new ModchartEditorState(), false);
+				// case '3D Benchmark':
+				//	LoadingState.loadAndSwitchState(new BenchmarkState(), false);
+				case 'XML Editor':// finally?
+					LoadingState.loadAndSwitchState(new XMLEditorState(), false);
 				case 'Chart Editor'://felt it would be cool maybe
 					LoadingState.loadAndSwitchState(new ChartingState(), false);
+				case 'Sticker Test':
+					LoadingState.loadAndSwitchState(new StickerTest(), false);
+				// case 'Credit Editor':
+				//	MusicBeatState.switchState(new CreditsEditor());
+				//case 'Chart Editor Legacy': // for the boomers
+				//	LoadingState.loadAndSwitchState(new ChartingStateLegacy(), false);
 				case 'Character Editor':
 					LoadingState.loadAndSwitchState(new CharacterEditorState(Character.DEFAULT_CHARACTER, false));
 				case 'Stage Editor':

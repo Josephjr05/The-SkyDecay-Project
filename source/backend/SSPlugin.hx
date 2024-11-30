@@ -133,7 +133,6 @@ class SSPlugin extends flixel.FlxBasic
 	{
 		if (FlxG.keys.checkStatus(screenshotKey, JUST_PRESSED) && enabled)
 			screenshot();
-			FlxG.sound.play(Paths.sound('screenshot'), 0.5);
 
 		if (flashSprite.alpha > 0 || screenshotSprite.alpha > 0) aliveTime += elapsed;
 		else aliveTime = 0;
@@ -148,6 +147,7 @@ class SSPlugin extends flixel.FlxBasic
 
 	private function screenshot():Void
 	{
+		FlxG.sound.play(Paths.sound('screenshot'), 0.5);
 		FlxTween.cancelTweensOf(flashSprite);
 		FlxTween.cancelTweensOf(screenshotSprite);
 		flashSprite.alpha = 0;

@@ -8,6 +8,8 @@ import flixel.util.FlxStringUtil;
 import flixel.util.FlxDestroyUtil;
 import flixel.input.keyboard.FlxKey;
 
+import openfl.events.KeyboardEvent;
+
 import lime.utils.Assets;
 import lime.media.AudioBuffer;
 
@@ -27,11 +29,14 @@ import backend.Song;
 import backend.StageData;
 import backend.Highscore;
 import backend.Difficulty;
+import objects.Note;
 
 import objects.Character;
 import objects.HealthIcon;
 import objects.Note;
 import objects.StrumNote;
+
+import openfl.net.FileReference; // for Base Game 
 
 using DateTools;
 
@@ -50,9 +55,11 @@ enum abstract UndoAction(String)
 
 enum abstract ChartingTheme(String)
 {
+	var SKYDECAY = 'skydecay';
 	var LIGHT = 'light';
-	var DEFAULT = 'default';
 	var DARK = 'dark';
+	var DEFAULT = 'default';
+	var VSLICE = 'vslice';
 }
 
 enum abstract WaveformTarget(String)
@@ -60,6 +67,7 @@ enum abstract WaveformTarget(String)
 	var INST = 'inst';
 	var PLAYER = 'voc';
 	var OPPONENT = 'opp';
+	var EVERYTHING = 'all';
 }
 
 class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychUIEvent
@@ -73,8 +81,9 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		['Philly Glow', "Exclusive to Week 3\nValue 1: 0/1/2 = OFF/ON/Reset Gradient\n \nNo, i won't add it to other weeks."],
 		['Kill Henchmen', "For Mom's songs, don't use this please, i love them :("],
 		['Add Camera Zoom', "Used on MILF on that one \"hard\" part\nValue 1: Camera zoom add (Default: 0.015)\nValue 2: UI zoom add (Default: 0.03)\nLeave the values blank if you want to use Default."],
-		['BG Freaks Expression', "Should be used only in \"school\" Stage!"],
-		['Trigger BG Ghouls', "Should be used only in \"schoolEvil\" Stage!"],
+		['Set Camera Zoom', "Value 1: Amount of zoom"],
+		// ['BG Freaks Expression', "Should be used only in \"school\" Stage!"],
+		// ['Trigger BG Ghouls', "Should be used only in \"schoolEvil\" Stage!"],
 		['Play Animation', "Plays an animation on a Character,\nonce the animation is completed,\nthe animation changes to Idle\n\nValue 1: Animation to play.\nValue 2: Character (Dad, BF, GF)"],
 		['Camera Follow Pos', "Value 1: X\nValue 2: Y\n\nThe camera won't change the follow point\nafter using this, for getting it back\nto normal, leave both values blank."],
 		['Alt Idle Animation', "Sets a specified postfix after the idle animation name.\nYou can use this to trigger 'idle-alt' if you set\nValue 2 to -alt\n\nValue 1: Character to set (Dad, BF or GF)\nValue 2: New postfix (Leave it blank to disable)"],
@@ -82,15 +91,36 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		['Change Character', "Value 1: Character to change (Dad, BF, GF)\nValue 2: New character's name"],
 		['Change Scroll Speed', "Value 1: Scroll Speed Multiplier (1 is default)\nValue 2: Time it takes to change fully in seconds."],
 		['Set Property', "Value 1: Variable name\nValue 2: New value"],
-		['Play Sound', "Value 1: Sound file name\nValue 2: Volume (Default: 1), ranges from 0 to 1"]
+		['Play Sound', "Value 1: Sound file name\nValue 2: Volume (Default: 1), ranges from 0 to 1"],
+		['Move Camera To', "Value 1: Character to go to (Dad, BF, GF)\nValue 2: Should the camera snap to the new position?"], // true or leave blank
+		['Bad Apple', "No need to put any numbers or letters"],
+		['Note Spin', " "],
+		['Boom Cam', "Value 1: Speed\nValue 2: Intensity"],
+		['Cinema Bars', "Toggles cinematic bars\n\nPlace event to use"],
+		['UI Fade', "Value 1: Alpha\nValue 2: Tween Time"],
+		['Flash Camera', "Value 1: Flash Timer"],
+		['Black Camera Fades', "Place for black fade out."],
+		['Hide Health', "Value 1: 1 = appear, 0 = dissapear\nValue 2: Tween Time"],
+		['KM Toggle', "Toggles Kill Miss Mode\n\nValue 1: Max amount of misses"],
+		['RotScreenCam', "Value 1: Angle\nValue 2 Tween Time"],
+		['Fade BF', "Value 1: duration\nValue 2: Target Alpha"],
+		['Switch Cam', "Value 2: either type on or off to toggle the Screen Camera\nValue 1: The duration of the tween"],
+		['Window Alert', "Value 1: Your message\nValue 2: The app window name"],
+		['UI Flip', "Just place the event to use it"],
+		['NoteDie', 'Place to kill opponent notes'],
+		['NoteLive', 'Place to respawn opponent notes'],
+		['Nine Star Mode', 'Toggles the Nine Star Mode\nOnly available on the Concert stage\nValue 1: 1 = mklkmklmdfkl\n2 = njkinasknfklnaskl\n 3 = hjfbdhjasbab\n 4 = njkdabnfkljnakj'],
+		['Camellia Zoom', 'Zooms in on the concert Stage\nValue 1: 1 = far zoom out, 2 = zoom out but closer, 3 = zoom back in\nValue 2: Tween Time']
 	];
 	
-	public static var keysArray:Array<String> = [ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT]; //Used for Vortex Editor
+	public static var keysArray:Array<FlxKey> = [ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT]; //Used for Vortex Editor
 	public static var SHOW_EVENT_COLUMN = true;
 	public static var GRID_COLUMNS_PER_PLAYER = 4;
 	public static var GRID_PLAYERS = 2;
 	public static var GRID_SIZE = 40;
 	final BACKUP_EXT = '.bkp';
+
+	public static var mouseAction = 0;
 
 	public var quantizations:Array<Int> = [
 		4,
@@ -183,6 +213,12 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	var vocals:FlxSound = new FlxSound();
 	var opponentVocals:FlxSound = new FlxSound();
 
+	var idleMusic:EditingMusic;
+
+	var lilStage:FlxSprite;
+	var lilBf:FlxSprite;
+	var lilOpp:FlxSprite;
+
 	var timeLine:FlxSprite;
 	var infoText:FlxText;
 
@@ -200,24 +236,38 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	}
 
 	var bg:FlxSprite;
-	var theme:ChartingTheme = DEFAULT;
+	var sd:FlxSprite;
+	var theme:ChartingTheme = SKYDECAY;
 
 	var copiedNotes:Array<Dynamic> = [];
 	var copiedEvents:Array<Dynamic> = [];
 	
 	var _keysPressedBuffer:Array<Bool> = [];
+	var _heldNotes:Array<MetaNote> = [];
 
 	var tipBg:FlxSprite;
 	var fullTipText:FlxText;
+
+	var vortexMoved:Bool = true;
+	var allowInput:Bool = false;
+	var vortexInput:Bool = false;
 	
 	var vortexEnabled:Bool = false;
 	var waveformEnabled:Bool = false;
 	var waveformTarget:WaveformTarget = INST;
 
+	var lilBuddiesOn:Bool = false;
+
+	public static var idleMusicAllow:Bool = false;
+
+	var downscroll:Bool = true;
+	var downscrollEnabled:Bool = false;
+
 	override function create()
 	{
 		if(Difficulty.list.length < 1) Difficulty.resetList();
 		_keysPressedBuffer.resize(keysArray.length);
+		_heldNotes.resize(keysArray.length);
 
 		if(_shouldReset) Conductor.songPosition = 0;
 		persistentUpdate = false;
@@ -243,9 +293,47 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		bg.scrollFactor.set();
 		add(bg);
 
+		sd = new FlxSprite().loadGraphic(Paths.image('chartSD'));
+		sd.antialiasing = ClientPrefs.data.antialiasing;
+		sd.scrollFactor.set();
+		add(sd);
+
+		lilStage = new FlxSprite(32, 432).loadGraphic(Paths.image("editors/lilStage"));
+		lilStage.scrollFactor.set();
+		add(lilStage);
+
+		lilBf = new FlxSprite(32, 432).loadGraphic(Paths.image("editors/lilBf"), true, 300, 256);
+		lilBf.animation.add("idle", [0, 1], 12, true);
+		lilBf.animation.add("0", [3, 4, 5], 12, false);
+		lilBf.animation.add("1", [6, 7, 8], 12, false);
+		lilBf.animation.add("2", [9, 10, 11], 12, false);
+		lilBf.animation.add("3", [12, 13, 14], 12, false);
+		lilBf.animation.add("yeah", [17, 20, 23], 12, false);
+		lilBf.animation.play("idle");
+		lilBf.animation.finishCallback = function(name:String){
+			lilBf.animation.play(name, true, false, lilBf.animation.getByName(name).numFrames - 2);
+		}
+		lilBf.scrollFactor.set();
+		add(lilBf);
+
+		lilOpp = new FlxSprite(32, 432).loadGraphic(Paths.image("editors/lilOpp"), true, 300, 256);
+		lilOpp.animation.add("idle", [0, 1], 12, true);
+		lilOpp.animation.add("0", [3, 4, 5], 12, false);
+		lilOpp.animation.add("1", [6, 7, 8], 12, false);
+		lilOpp.animation.add("2", [9, 10, 11], 12, false);
+		lilOpp.animation.add("3", [12, 13, 14], 12, false);
+		lilOpp.animation.play("idle");
+		lilOpp.animation.finishCallback = function(name:String){
+			lilOpp.animation.play(name, true, false, lilOpp.animation.getByName(name).numFrames - 2);
+		}
+		lilOpp.scrollFactor.set();
+		add(lilOpp);
+
 		if(chartEditorSave.data.autoSave != null) autoSaveCap = chartEditorSave.data.autoSave;
 		if(chartEditorSave.data.backupLimit != null) backupLimit = chartEditorSave.data.backupLimit;
 		if(chartEditorSave.data.vortex != null) vortexEnabled = chartEditorSave.data.vortex;
+		if(chartEditorSave.data.lilBuddiesBox != null) lilBuddiesOn = chartEditorSave.data.lilBuddiesBox;
+		// if(chartEditorSave.data.downscroll != null) downscrollEnabled = chartEditorSave.data.downscroll;
 		
 		changeTheme(chartEditorSave.data.theme != null ? chartEditorSave.data.theme : DEFAULT, false);
 
@@ -310,6 +398,12 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			note.updateHitbox();
 			note.x += GRID_SIZE/2 - note.width/2;
 			note.y += GRID_SIZE/2 - note.height/2;
+
+			if (downscroll) {
+				note.updateHitbox();
+				note.x += GRID_SIZE/-2 - note.width/-2;
+				note.y += GRID_SIZE/-2 - note.width/-2;
+			}
 			strumLineNotes.add(note);
 		}
 
@@ -374,7 +468,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		infoBox.getTab('Information').menu.add(infoText);
 		add(infoBox);
 
-		mainBox = new PsychUIBox(mainBoxPosition.x, mainBoxPosition.y, 300, 280, ['Charting', 'Data', 'Events', 'Note', 'Section', 'Song']);
+		mainBox = new PsychUIBox(mainBoxPosition.x, mainBoxPosition.y, 300, 280, ['Charting', 'Data', 'Events', 'Note', 'Section', 'Song', 'MetaData']);
 		mainBox.selectedName = 'Song';
 		mainBox.scrollFactor.set();
 		mainBox.cameras = [camUI];
@@ -491,10 +585,10 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		fullTipText.text = [
 			"W/S/Mouse Wheel - Move Conductor's Time",
 			"A/D - Change Sections",
-			"Q/E - Decrease/Increase Note Sustain Length",
-			"Hold Shift/Alt to Increase/Decrease move by 4x",
+			"Q/E/CTRL + Mouse Wheel / Hold Left Mouse Click - Decrease / Increase Long Note Length",
+			"Hold Shift / Alt to Increase / Decrease move by 4x",
 			"",
-			"F12 - Preview Chart",
+			"F11 - Preview Chart", // changed it because screenshot bind
 			"Enter - Playtest Chart",
 			"Space - Stop/Resume song",
 			"",
@@ -503,8 +597,11 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			"Right Click - Selection Box",
 			"",
 			"R - Reset Section",
+			"Home / Shift + R - Jump to the Start of the Song",
+			"End - Jump to the End of the Song",
 			"Z/X - Zoom in/out",
-			"Left/Right - Change Snap",
+			"Left/Right - Change Snap (in Vortex Mode)",
+			"Page/Arrows Up/Down - Scroll (in Vortex Mode)",
 			#if FLX_PITCH
 			"Left Bracket / Right Bracket - Change Song Playback Rate",
 			"ALT + Left Bracket / Right Bracket - Reset Song Playback Rate",
@@ -520,7 +617,11 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		].join('\n');
 		fullTipText.screenCenter();
 		add(fullTipText);
+
 		super.create();
+
+		FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDown);
+		FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, keyUp);
 	}
 
 	var gridColors:Array<FlxColor>;
@@ -534,15 +635,32 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 
 		switch(theme)
 		{
+			case SKYDECAY:
+				bg.visible = false;
+				sd.visible = true;
+				gridColors = [0xFF04A0FA, 0xFF178BEB];
+				gridColorsOther = [0xFF0D4381, 0xFF103780]; // gotta find out how to switch sections (or just use the event i added)
 			case LIGHT:
+				sd.visible = false;
+				bg.visible = true;
 				bg.color = 0xFFA0A0A0;
 				gridColors = [0xFFDFDFDF, 0xFFBFBFBF];
 				gridColorsOther = [0xFF5F5F5F, 0xFF4A4A4A];
 			case DARK:
+				sd.visible = false;
+				bg.visible = true;
 				bg.color = 0xFF222222;
 				gridColors = [0xFF3F3F3F, 0xFF2F2F2F];
 				gridColorsOther = [0xFF1F1F1F, 0xFF111111];
+			case VSLICE:
+				sd.visible = false;
+				bg.visible = true;
+				bg.color = 0xFF673AB7;
+				gridColors = [0xFFD0D0D0, 0xFFAFAFAF];
+				gridColorsOther = [0xFF595959, 0xFF464646];
 			default:
+				sd.visible = false;
+				bg.visible = true;
 				bg.color = 0xFF303030;
 				gridColors = [0xFFDFDFDF, 0xFFBFBFBF];
 				gridColorsOther = [0xFF5F5F5F, 0xFF4A4A4A];
@@ -558,13 +676,13 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			}
 			if(prevGridBg != null)
 			{
-				prevGridBg.loadGrid(gridColorsOther[0], gridColorsOther[1]);
+				prevGridBg.loadGrid(gridColors[0], gridColors[1]); // gridColorsOther
 				prevGridBg.vortexLineEnabled = vortexEnabled;
 				prevGridBg.vortexLineSpace = GRID_SIZE * 4 * curZoom;
 			}
 			if(nextGridBg != null)
 			{
-				nextGridBg.loadGrid(gridColorsOther[0], gridColorsOther[1]);
+				nextGridBg.loadGrid(gridColors[0], gridColors[1]); // gridColorsOther
 				nextGridBg.vortexLineEnabled = vortexEnabled;
 				nextGridBg.vortexLineSpace = GRID_SIZE * 4 * curZoom;
 			}
@@ -574,19 +692,988 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	function openNewChart()
 	{
 		var song:SwagSong = {
-			song: 'Test',
-			notes: [],
-			events: [],
-			bpm: 150,
+			song: 'FNF2',
+			notes: [
+				{
+					"sectionNotes": [
+						[394.736842105263, 6, 0],
+						[631.578947368421, 4, 0],
+						[789.473684210526, 5, 0],
+						[1026.31578947368, 7, 78.9473684210526],
+						[1184.21052631579, 6, 0]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": false
+				},
+				{
+					"sectionNotes": [
+						[1342.10526315789, 5, 157.894736842105],
+						[1500, 4, 0],
+						[1736.84210526316, 6, 0],
+						[1973.68421052632, 5, 0],
+						[2210.52631578947, 4, 0]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": false
+				},
+				{
+					"sectionNotes": [
+						[2526.31578947368, 6, 236.842105263158],
+						[2684.21052631579, 7, 157.894736842105],
+						[2921.05263157895, 5, 0],
+						[3157.8947368421, 4, 0]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": false
+				},
+				{
+					"sectionNotes": [
+						[4184.21052631579, 1, 0, "Hey!"]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": true
+				},
+				{
+					"sectionNotes": [
+						[5210.52631578947, 6, 0],
+						[5526.31578947368, 5, 0],
+						[5842.1052631579, 4, 0],
+						[6157.8947368421, 6, 0]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": false
+				},
+				{
+					"sectionNotes": [
+						[6315.78947368421, 5, 157.894736842105],
+						[6631.57894736842, 7, 0],
+						[6789.47368421053, 6, 0],
+						[6947.36842105263, 5, 0],
+						[7105.26315789474, 4, 0],
+						[7342.10526315789, 7, 0]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": false
+				},
+				{
+					"sectionNotes": [
+						[7578.94736842105, 5, 0],
+						[8289.47368421052, 6, 0],
+						[8605.26315789474, 7, 0]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": false
+				},
+				{
+					"sectionNotes": [
+						[8921.05263157895, 5, 0],
+						[9157.8947368421, 4, 394.736842105263],
+						[9278.28947368421, 6, 78.9473684210526]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": false
+				},
+				{
+					"sectionNotes": [
+						[10263.1578947368, 4, 0],
+						[10421.0526315789, 5, 0],
+						[10578.947368421, 7, 0],
+						[10736.8421052632, 6, 0],
+						[10894.7368421053, 5, 0],
+						[11052.6315789474, 7, 0],
+						[11210.5263157895, 5, 236.842105263158]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": false
+				},
+				{
+					"sectionNotes": [
+						[11526.3157894737, 6, 0],
+						[11684.2105263158, 7, 0],
+						[11684.2105263158, 4, 0],
+						[11842.1052631579, 5, 0],
+						[12000, 4, 0],
+						[12157.8947368421, 5, 0],
+						[12315.7894736842, 4, 0],
+						[12315.7894736842, 6, 78.9473684210526]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": false
+				},
+				{
+					"sectionNotes": [
+						[12789.4736842105, 6, 0],
+						[12947.3684210526, 5, 0],
+						[13105.2631578947, 7, 0],
+						[13263.1578947368, 4, 0],
+						[13421.0526315789, 5, 0],
+						[13578.947368421, 7, 0],
+						[13736.8421052632, 5, 0]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": false
+				},
+				{
+					"sectionNotes": [
+						[13894.7368421053, 6, 0],
+						[14210.5263157895, 6, 0],
+						[14526.3157894737, 6, 0],
+						[14684.2105263158, 5, 0],
+						[14842.1052631579, 7, 236.842105263158],
+						[14842.1052631579, 6, 0]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": false
+				},
+				{
+					"sectionNotes": [
+						[15315.7894736842, 1, 0],
+						[15473.6842105263, 0, 0],
+						[15631.5789473684, 1, 0],
+						[15789.4736842105, 2, 0],
+						[15947.3684210526, 2, 0],
+						[16105.2631578947, 3, 0],
+						[16263.1578947368, 2, 78.9473684210526]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": true
+				},
+				{
+					"sectionNotes": [
+						[16421.0526315789, 5, 0],
+						[16578.947368421, 1, 0],
+						[16736.8421052632, 0, 0],
+						[16894.7368421053, 6, 0],
+						[16894.7368421053, 2, 0],
+						[17052.6315789474, 3, 0],
+						[17210.5263157895, 1, 0],
+						[17289.4736842105, 4, 157.894736842105],
+						[17368.4210526316, 2, 0],
+						[17447.3684210526, 5, 157.894736842105],
+						[17526.3157894737, 0, 236.842105263158]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": true
+				},
+				{
+					"sectionNotes": [
+						[17684.2105263158, 6, 0],
+						[17842.1052631579, 2, 0],
+						[18000, 3, 0],
+						[18157.8947368421, 2, 0],
+						[18315.7894736842, 1, 0],
+						[18394.7368421053, 0, 0],
+						[18473.6842105263, 3, 0],
+						[18631.5789473684, 1, 0],
+						[18789.4736842105, 0, 0],
+						[18789.4736842105, 1, 78.9473684210526]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": true
+				},
+				{
+					"sectionNotes": [
+						[19026.3157894737, 5, 0],
+						[19105.2631578947, 2, 0],
+						[19263.1578947368, 3, 0],
+						[19263.1578947368, 4, 0],
+						[19421.0526315789, 1, 0],
+						[19421.0526315789, 7, 0],
+						[19578.947368421, 0, 0],
+						[19736.8421052632, 2, 0],
+						[19736.8421052632, 6, 236.842105263158],
+						[19894.7368421053, 3, 236.842105263158],
+						[19894.7368421053, 1, 0],
+						[19914.4736842105, 5, 236.842105263158]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": true
+				},
+				{
+					"sectionNotes": [
+						[20210.5263157895, 4, 0],
+						[20526.3157894737, 5, 0],
+						[20842.1052631579, 6, 0],
+						[21000, 7, 0],
+						[21157.8947368421, 5, 0],
+						[21315.7894736842, 6, 0]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": false
+				},
+				{
+					"sectionNotes": [
+						[21473.6842105263, 4, 0],
+						[21631.5789473684, 7, 0],
+						[21789.4736842105, 5, 0],
+						[21947.3684210526, 7, 0],
+						[22105.2631578947, 6, 0],
+						[22263.1578947368, 6, 0],
+						[22421.0526315789, 4, 78.9473684210526]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": false
+				},
+				{
+					"sectionNotes": [
+						[22736.8421052632, 5, 0],
+						[22894.7368421053, 6, 0],
+						[23052.6315789474, 4, 0],
+						[23210.5263157895, 7, 0],
+						[23368.4210526316, 5, 0],
+						[23526.3157894737, 6, 0],
+						[23684.2105263158, 4, 0],
+						[23842.1052631579, 6, 0]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": false
+				},
+				{
+					"sectionNotes": [
+						[24000, 5, 39.4736842105263],
+						[24000, 7, 0],
+						[24315.7894736842, 4, 0],
+						[24473.6842105263, 6, 0],
+						[24473.6842105263, 7, 39.4736842105263],
+						[24789.4736842105, 5, 0],
+						[24789.4736842105, 0, 0],
+						[24947.3684210526, 4, 236.842105263158],
+						[24947.3684210526, 3, 0],
+						[25105.2631578947, 1, 0]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": false
+				},
+				{
+					"sectionNotes": [
+						[25263.1578947368, 2, 0],
+						[25421.052631579, 3, 0],
+						[25578.9473684211, 0, 0],
+						[25736.8421052632, 2, 0],
+						[25894.7368421053, 3, 78.9473684210526],
+						[25894.7368421053, 1, 236.842105263158],
+						[26210.5263157895, 0, 0],
+						[26289.4736842105, 3, 0],
+						[26368.4210526316, 2, 236.842105263158]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": true
+				},
+				{
+					"sectionNotes": [
+						[26684.2105263158, 1, 0],
+						[26763.1578947368, 0, 0],
+						[26842.1052631579, 3, 78.9473684210526],
+						[27000, 1, 78.9473684210526],
+						[27157.8947368421, 2, 0],
+						[27236.8421052632, 0, 0],
+						[27315.7894736842, 1, 0],
+						[27394.7368421053, 2, 0],
+						[27473.6842105263, 3, 78.9473684210526],
+						[27631.5789473684, 1, 236.842105263158]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": true
+				},
+				{
+					"sectionNotes": [
+						[27789.4736842105, 6, 0],
+						[27947.3684210526, 2, 0],
+						[28105.2631578947, 3, 0],
+						[28184.2105263158, 0, 0],
+						[28263.1578947369, 1, 0],
+						[28263.1578947369, 6, 0],
+						[28342.1052631579, 3, 0],
+						[28421.052631579, 2, 0],
+						[28500, 1, 0],
+						[28578.9473684211, 0, 78.9473684210526],
+						[28736.8421052632, 1, 0],
+						[28736.8421052632, 6, 0],
+						[28894.7368421053, 2, 236.842105263158],
+						[28894.7368421053, 3, 0]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": true
+				},
+				{
+					"sectionNotes": [
+						[29210.5263157895, 0, 0],
+						[29368.4210526316, 1, 0],
+						[29447.3684210526, 5, 0],
+						[29526.3157894737, 0, 0],
+						[29684.2105263158, 1, 0],
+						[29842.1052631579, 0, 0],
+						[29842.1052631579, 6, 0],
+						[30000, 3, 236.842105263158],
+						[30000, 2, 0],
+						[30000, 7, 0],
+						[30157.8947368421, 5, 0]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": true
+				},
+				{
+					"sectionNotes": [
+						[30315.7894736842, 4, 0],
+						[30473.6842105263, 5, 0],
+						[30631.5789473684, 4, 0],
+						[30789.4736842105, 7, 0],
+						[30947.3684210526, 5, 0],
+						[31105.2631578947, 5, 0],
+						[31263.1578947369, 6, 0],
+						[31421.052631579, 4, 0]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": false
+				},
+				{
+					"sectionNotes": [
+						[31578.9473684211, 7, 236.842105263158],
+						[31750.6578947369, 5, 78.9473684210526],
+						[32052.6315789474, 4, 0],
+						[32526.3157894737, 6, 0]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": false
+				},
+				{
+					"sectionNotes": [
+						[32842.1052631579, 7, 0],
+						[33000, 5, 0],
+						[33157.8947368421, 7, 0],
+						[33315.7894736842, 4, 0],
+						[33473.6842105263, 6, 0],
+						[33631.5789473684, 7, 0],
+						[33789.4736842105, 5, 157.894736842105]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": false
+				},
+				{
+					"sectionNotes": [
+						[34105.2631578947, 4, 0],
+						[34263.1578947369, 6, 0],
+						[34421.052631579, 7, 0],
+						[34578.9473684211, 7, 0],
+						[34736.8421052632, 4, 0],
+						[34894.7368421053, 5, 0],
+						[35052.6315789474, 6, 236.842105263158],
+						[35052.6315789474, 7, 197.368421052632],
+						[35052.6315789474, 4, 197.368421052632],
+						[35052.6315789474, 5, 197.368421052632]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": false
+				},
+				{
+					"sectionNotes": [
+						[35368.4210526316, 3, 0],
+						[35526.3157894737, 0, 0],
+						[35684.2105263158, 1, 0],
+						[35842.1052631579, 3, 0],
+						[36000, 1, 0],
+						[36157.8947368421, 1, 0],
+						[36315.7894736842, 2, 0],
+						[36473.6842105263, 3, 0, "Hey!"]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": true
+				},
+				{
+					"sectionNotes": [
+						[36631.5789473684, 1, 0],
+						[37105.2631578947, 0, 0],
+						[37578.9473684211, 2, 0, "Hey!"]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": true
+				},
+				{
+					"sectionNotes": [
+						[37894.7368421053, 3, 0],
+						[38052.6315789474, 1, 0],
+						[38210.5263157895, 1, 0],
+						[38368.4210526316, 0, 0],
+						[38526.3157894737, 1, 0],
+						[38684.2105263158, 1, 0],
+						[38842.1052631579, 2, 0],
+						[39000, 2, 0]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": true
+				},
+				{
+					"sectionNotes": [
+						[39157.8947368421, 3, 0],
+						[39315.7894736842, 1, 0],
+						[39473.6842105263, 1, 0],
+						[39631.5789473684, 3, 0],
+						[39789.4736842105, 1, 0],
+						[39947.3684210526, 1, 0],
+						[40105.2631578947, 2, 0],
+						[40263.1578947368, 2, 0]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": true
+				},
+				{
+					"sectionNotes": [
+						[40421.0526315789, 5, 0],
+						[40578.9473684211, 4, 0],
+						[40657.8947368421, 7, 0],
+						[40736.8421052632, 6, 0],
+						[40894.7368421053, 4, 0],
+						[40973.6842105263, 7, 0],
+						[41052.6315789474, 5, 0],
+						[41210.5263157895, 6, 0],
+						[41368.4210526316, 5, 236.842105263158]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": false
+				},
+				{
+					"sectionNotes": [
+						[41684.2105263158, 6, 0],
+						[41842.1052631579, 7, 0],
+						[41921.0526315789, 4, 0],
+						[42000, 5, 0],
+						[42157.8947368421, 4, 0],
+						[42236.8421052632, 7, 0],
+						[42315.7894736842, 6, 0],
+						[42394.7368421053, 4, 0],
+						[42473.6842105263, 7, 0],
+						[42631.5789473684, 5, 0],
+						[42789.4736842105, 6, 0]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": false
+				},
+				{
+					"sectionBeats": 4,
+					"sectionNotes": [
+						[42947.3684210526, 4, 0],
+						[43026.3157894737, 7, 0],
+						[43105.2631578947, 5, 0],
+						[43184.2105263158, 6, 0],
+						[43342.1052631579, 4, 0],
+						[43421.0526315789, 7, 0],
+						[43500, 5, 0],
+						[43578.947368421, 6, 0],
+						[43657.8947368421, 4, 0],
+						[43815.7894736842, 6, 0],
+						[43894.7368421053, 7, 0],
+						[43973.6842105263, 5, 0],
+						[44131.5789473684, 4, 0]
+					],
+					"gfSection": false,
+					"altAnim": false,
+					"mustHitSection": false,
+					"changeBPM": false,
+					"bpm": 150
+				},
+				{
+					"sectionNotes": [
+						[44289.4736842105, 6, 0],
+						[44447.3684210526, 7, 0],
+						[44605.2631578947, 5, 0],
+						[44763.1578947368, 5, 0],
+						[44921.0526315789, 4, 0],
+						[45078.947368421, 7, 0],
+						[45236.8421052632, 6, 157.894736842105]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": false
+				},
+				{
+					"sectionNotes": [
+						[45473.6842105263, 5, 0],
+						[45631.5789473684, 4, 0],
+						[45789.4736842105, 6, 0],
+						[45947.3684210526, 7, 0],
+						[46105.2631578947, 5, 0],
+						[46263.1578947368, 6, 0],
+						[46421.0526315789, 4, 0],
+						[46578.947368421, 6, 0]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": false
+				},
+				{
+					"sectionNotes": [
+						[46736.8421052631, 5, 0],
+						[46894.7368421053, 7, 0],
+						[47052.6315789474, 4, 0],
+						[47210.5263157895, 5, 0],
+						[47368.4210526316, 6, 0],
+						[47526.3157894737, 4, 0],
+						[47684.2105263158, 5, 0],
+						[47842.1052631579, 6, 0]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": false
+				},
+				{
+					"sectionNotes": [
+						[48000, 7, 0],
+						[48078.947368421, 4, 0],
+						[48157.8947368421, 5, 0],
+						[48315.7894736842, 6, 0],
+						[48473.6842105263, 7, 0],
+						[48552.6315789474, 4, 0],
+						[48631.5789473684, 5, 0],
+						[48789.4736842105, 6, 0],
+						[48868.4210526316, 7, 0],
+						[48947.3684210526, 4, 0],
+						[49105.2631578947, 6, 0]
+					],
+					"sectionBeats": 4,
+					"altAnim": false,
+					"gfSection": false,
+					"bpm": 150,
+					"changeBPM": false,
+					"mustHitSection": false
+				},
+				{
+					"sectionBeats": 4,
+					"sectionNotes": [
+						[49263.1578947368, 7, 0],
+						[49342.1052631579, 4, 0],
+						[49421.0526315789, 5, 0],
+						[49578.947368421, 6, 0],
+						[49736.8421052631, 7, 0],
+						[49815.7894736842, 4, 0],
+						[49894.7368421052, 5, 0],
+						[49973.6842105263, 7, 0],
+						[50052.6315789474, 4, 0],
+						[50210.5263157895, 5, 0],
+						[50289.4736842105, 4, 0],
+						[50368.4210526316, 6, 0],
+						[50447.3684210526, 7, 0]
+					],
+					"gfSection": false,
+					"altAnim": false,
+					"mustHitSection": false,
+					"changeBPM": false,
+					"bpm": 150
+				},
+				{
+					"sectionBeats": 4,
+					"sectionNotes": [
+						[50526.3157894737, 1, 0],
+						[50684.2105263158, 0, 0],
+						[50842.1052631579, 2, 0],
+						[51000, 0, 236.842105263158],
+						[51315.7894736842, 1, 0],
+						[51473.6842105263, 3, 0],
+						[51631.5789473684, 2, 0]
+					],
+					"gfSection": false,
+					"altAnim": false,
+					"mustHitSection": true,
+					"changeBPM": false,
+					"bpm": 150
+				},
+				{
+					"sectionBeats": 4,
+					"sectionNotes": [
+						[51789.4736842105, 0, 0],
+						[51947.3684210526, 3, 0],
+						[52026.3157894737, 0, 0],
+						[52105.2631578947, 2, 0],
+						[52263.1578947368, 3, 0],
+						[52342.1052631579, 0, 0],
+						[52421.0526315789, 1, 0],
+						[52500, 2, 0],
+						[52578.947368421, 3, 0],
+						[52657.8947368421, 1, 0],
+						[52736.8421052631, 0, 0],
+						[52894.7368421052, 2, 0]
+					],
+					"gfSection": false,
+					"altAnim": false,
+					"mustHitSection": true,
+					"changeBPM": false,
+					"bpm": 150
+				},
+				{
+					"sectionBeats": 4,
+					"sectionNotes": [
+						[53052.6315789473, 3, 0],
+						[53210.5263157895, 1, 0],
+						[53289.4736842105, 2, 0],
+						[53368.4210526316, 3, 0],
+						[53526.3157894737, 0, 0],
+						[53605.2631578947, 2, 0],
+						[53684.2105263158, 3, 0],
+						[53763.1578947368, 1, 0],
+						[53842.1052631579, 2, 0],
+						[53921.0526315789, 1, 0],
+						[54000, 0, 0],
+						[54078.947368421, 2, 0],
+						[54157.8947368421, 1, 0]
+					],
+					"gfSection": false,
+					"altAnim": false,
+					"mustHitSection": true,
+					"changeBPM": false,
+					"bpm": 150
+				},
+				{
+					"sectionBeats": 4,
+					"sectionNotes": [
+						[54315.7894736842, 2, 0],
+						[54394.7368421052, 3, 0],
+						[54473.6842105263, 0, 0],
+						[54552.6315789473, 1, 0],
+						[54631.5789473684, 0, 0],
+						[54789.4736842105, 2, 0],
+						[54868.4210526316, 3, 0],
+						[54947.3684210526, 1, 0],
+						[55026.3157894737, 0, 0],
+						[55105.2631578947, 1, 0],
+						[55184.2105263158, 2, 0],
+						[55263.1578947368, 3, 0],
+						[55342.1052631579, 0, 0],
+						[55421.0526315789, 1, 0]
+					],
+					"gfSection": false,
+					"altAnim": false,
+					"mustHitSection": true,
+					"changeBPM": false,
+					"bpm": 150
+				},
+				{
+					"sectionBeats": 4,
+					"sectionNotes": [
+						[55578.947368421, 2, 0],
+						[55657.8947368421, 0, 0],
+						[55736.8421052631, 1, 0],
+						[55894.7368421052, 3, 0],
+						[56210.5263157894, 2, 0],
+						[56289.4736842105, 1, 0],
+						[56368.4210526316, 0, 0],
+						[56447.3684210526, 3, 0],
+						[56526.3157894737, 2, 0],
+						[56684.2105263158, 1, 0]
+					],
+					"gfSection": false,
+					"altAnim": false,
+					"mustHitSection": true,
+					"changeBPM": false,
+					"bpm": 150
+				},
+				{
+					"sectionBeats": 4,
+					"sectionNotes": [
+						[56842.1052631579, 0, 0],
+						[56921.0526315789, 3, 0],
+						[57000, 1, 0],
+						[57157.8947368421, 2, 0],
+						[57315.7894736842, 3, 0],
+						[57394.7368421052, 0, 0],
+						[57473.6842105263, 1, 0],
+						[57631.5789473684, 2, 0],
+						[57789.4736842105, 3, 0],
+						[57947.3684210526, 1, 0, "Hey!"]
+					],
+					"gfSection": false,
+					"altAnim": false,
+					"mustHitSection": true,
+					"changeBPM": false,
+					"bpm": 150
+				},
+				{
+					"sectionBeats": 4,
+					"sectionNotes": [
+						[58105.2631578947, 2, 0],
+						[58184.2105263158, 0, 0],
+						[58263.1578947368, 3, 0],
+						[58421.0526315789, 1, 0],
+						[58578.947368421, 2, 0],
+						[58657.8947368421, 3, 0],
+						[58736.8421052631, 0, 0],
+						[58894.7368421052, 1, 0],
+						[58973.6842105263, 3, 0],
+						[59052.6315789473, 0, 0],
+						[59210.5263157894, 2, 0]
+					],
+					"gfSection": false,
+					"altAnim": false,
+					"mustHitSection": true,
+					"changeBPM": false,
+					"bpm": 150
+				},
+				{
+					"sectionBeats": 4,
+					"sectionNotes": [
+						[59368.4210526315, 1, 0],
+						[59447.3684210526, 0, 0],
+						[59526.3157894737, 1, 0],
+						[59605.2631578947, 0, 0],
+						[59684.2105263158, 2, 0],
+						[59842.1052631579, 0, 0],
+						[59921.0526315789, 1, 0],
+						[60000, 0, 0],
+						[60078.947368421, 1, 0],
+						[60157.8947368421, 2, 0],
+						[60315.7894736842, 3, 0],
+						[60394.7368421052, 1, 0],
+						[60473.6842105263, 3, 0],
+						[60552.6315789473, 1, 0]
+					],
+					"gfSection": false,
+					"altAnim": false,
+					"mustHitSection": true,
+					"changeBPM": false,
+					"bpm": 150
+				},
+				{
+					"sectionBeats": 4,
+					"sectionNotes": [
+						[60631.5789473684, 2, 0, "Hey!"],
+						[60639.4736842105, 7, 1815.78947368421],
+						[60746.0526315789, 4, 1657.89473684211],
+						[60850.6578947368, 5, 1578.94736842105],
+						[60984.8684210526, 6, 1500],
+						[61128.947368421, 4, 78.9473684210526],
+						[61140.7894736842, 4, 78.9473684210526],
+						[61207.8947368421, 7, 78.9473684210526],
+						[61223.6842105263, 5, 0],
+						[61231.5789473684, 7, 78.9473684210526],
+						[61348.0263157894, 6, 78.9473684210526],
+						[61385.5263157894, 4, 0],
+						[61399.3421052631, 6, 78.9473684210526],
+						[61403.2894736842, 6, 78.9473684210526],
+						[61425, 5, 0],
+						[61458.5526315789, 5, 0],
+						[61496.0526315789, 4, 78.9473684210526],
+						[61519.7368421052, 6, 0],
+						[61551.3157894736, 5, 78.9473684210526],
+						[61567.1052631579, 6, 0],
+						[61598.6842105263, 6, 78.9473684210526],
+						[61606.5789473684, 7, 0],
+						[61659.8684210526, 7, 0],
+						[61673.6842105263, 4, 78.9473684210526],
+						[61719.0789473684, 7, 0],
+						[61725, 6, 0],
+						[61780.2631578947, 6, 0],
+						[61796.0526315789, 7, 0],
+						[61825.6578947368, 7, 0],
+						[61851.3157894736, 7, 0],
+						[61890.7894736842, 6, 0]
+					],
+					"gfSection": false,
+					"altAnim": false,
+					"mustHitSection": true,
+					"changeBPM": false,
+					"bpm": 150
+				},
+				{
+					"sectionBeats": 4,
+					"sectionNotes": [],
+					"gfSection": false,
+					"altAnim": false,
+					"mustHitSection": true,
+					"changeBPM": false,
+					"bpm": 150
+				},
+				{
+					"sectionBeats": 4,
+					"sectionNotes": [],
+					"gfSection": false,
+					"altAnim": false,
+					"mustHitSection": true,
+					"changeBPM": false,
+					"bpm": 150
+				},
+				{
+					"sectionBeats": 4,
+					"sectionNotes": [],
+					"gfSection": false,
+					"altAnim": false,
+					"mustHitSection": true,
+					"changeBPM": false,
+					"bpm": 150
+				}
+			],
+			events: [
+				[
+					60631.5789473684,
+					[
+						["Camera Switch", "1.8", "off"]
+					]
+				],
+				[
+					62526.3157894736,
+					[
+						["Add Camera Zoom", "0.5", "0.5"]
+					]
+				],
+				[
+					62605.2631578947,
+					[
+						["Change Character", "bf2", "invisibru"]
+					]
+				]		
+			],
+			bpm: 190,
 			needsVoices: true,
-			speed: 1,
+			speed: 3,
 			offset: 0,
 
 			player1: 'bf',
-			player2: 'dad',
+			player2: 'bf2',
 			gfVersion: 'gf',
 			stage: 'stage',
-			format: 'psych_v1'
+			format: 'psych_v1_convert'
 		};
 		Song.chartPath = null;
 		loadChart(song);
@@ -646,14 +1733,14 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	var lastBeatHit:Int = 0;
 	override function update(elapsed:Float)
 	{
+		vortexInput = false;
 		if(!fileDialog.completed)
 		{
 			lastFocus = PsychUIInputText.focusOn;
 			return;
 		}
 
-		for (num => key in keysArray)
-			_keysPressedBuffer[num] = FlxG.keys.checkStatus(key, JUST_PRESSED);
+		var charterFocus:Bool = PsychUIInputText.focusOn == null && lastFocus == null;
 
 		if(autoSaveCap > 0)
 		{
@@ -669,8 +1756,8 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				var chartName:String = 'unknown';
 				if(Song.chartPath != null)
 				{
-					chartName = Song.chartPath.replace('/', '\\');
-					chartName = chartName.substring(chartName.lastIndexOf('\\')+1, chartName.lastIndexOf('.'));
+					chartName = Song.chartPath.replace('\\', '/');
+					chartName = chartName.substring(chartName.lastIndexOf('/')+1, chartName.lastIndexOf('.'));
 				}
 				chartName += DateTools.format(Date.now(), '_%Y-%m-%d_%H-%M-%S');
 				var songCopy:SwagSong = Reflect.copy(PlayState.SONG);
@@ -732,16 +1819,16 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			}
 		}
 
-		ClientPrefs.toggleVolumeKeys(PsychUIInputText.focusOn == null);
+		ClientPrefs.toggleVolumeKeys(charterFocus);
 
 		var lastTime:Float = Conductor.songPosition;
 		outputAlpha = Math.max(0, outputAlpha - elapsed);
 		var holdingAlt:Bool = FlxG.keys.pressed.ALT;
 		if(FlxG.sound.music != null)
 		{
-			if(PsychUIInputText.focusOn == null) //If not typing anything
+			if(charterFocus) //If not typing anything
 			{
-				if(FlxG.keys.justPressed.F12)
+				if(FlxG.keys.justPressed.F11)
 				{
 					super.update(elapsed);
 					openEditorPlayState();
@@ -773,84 +1860,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 					playbackSlider.value = playbackRate;
 				}
 
-				if(vortexEnabled && _keysPressedBuffer.contains(true))
-				{
-					var typeSelected:String = noteTypes[noteTypeDropDown.selectedIndex];
-					if(typeSelected != null)
-					{
-						typeSelected = typeSelected.trim();
-						if(typeSelected.length < 1) typeSelected = null;
-					}
-
-					var sectionStart:Float = cachedSectionTimes[curSec];
-					var strumTime:Float = Conductor.songPosition - sectionStart;
-					strumTime -= strumTime % (Conductor.stepCrochet * 16 / curQuant);
-					strumTime += sectionStart;
-
-					trace('Vortex editor press at time: $strumTime');
-					var deletedNotes:Array<MetaNote> = [];
-					var addedNotes:Array<MetaNote> = [];
-					for (num => press in _keysPressedBuffer)
-					{
-						if(!press) continue;
-
-						// Try to find a note to delete first
-						var didDelete:Bool = false;
-						for (note in curRenderedNotes)
-						{
-							if(note == null || note.isEvent) continue;
-
-							if(note.songData[1] == num && Math.abs(strumTime - note.strumTime) < 1)
-							{
-								deletedNotes.push(note);
-								didDelete = true;
-								break;
-							}
-						}
-
-						if(didDelete) continue;
-
-						// If no notes were found, add a new in its place
-						var didAdd:Bool = false;
-						var noteSetupData:Array<Dynamic> = [strumTime, num, 0];
-						if(typeSelected != null) noteSetupData.push(typeSelected);
-	
-						var noteAdded:MetaNote = createNote(noteSetupData);
-						for (num in sectionFirstNoteID...notes.length)
-						{
-							var note = notes[num];
-							if(note.strumTime >= strumTime)
-							{
-								notes.insert(num, noteAdded);
-								didAdd = true;
-								break;
-							}
-						}
-						if(!didAdd) notes.push(noteAdded);
-						addedNotes.push(noteAdded);
-					}
-
-					if(deletedNotes.length > 0)
-					{
-						var wasSelected:Bool = false;
-						for (note in deletedNotes)
-						{
-							if(selectedNotes.contains(note))
-							{
-								selectedNotes.remove(note);
-								wasSelected = true;
-							}
-							notes.remove(note);
-						}
-						if(wasSelected) onSelectNote();
-						addUndoAction(DELETE_NOTE, {notes: deletedNotes});
-					}
-					if(addedNotes.length > 0)
-						addUndoAction(ADD_NOTE, {notes: addedNotes});
-
-					softReloadNotes(true);
-				}
-				else if(FlxG.keys.justPressed.A != FlxG.keys.justPressed.D && !holdingAlt)
+				if(FlxG.keys.justPressed.A != FlxG.keys.justPressed.D && !holdingAlt)
 				{
 					if(FlxG.sound.music.playing)
 						setSongPlaying(false);
@@ -864,7 +1874,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 						if(shiftAdd > 0)
 						{
 							loadSection(curSec - shiftAdd);
-							Conductor.songPosition = FlxG.sound.music.time = cachedSectionTimes[curSec] + 0.000001;
+							Conductor.songPosition = FlxG.sound.music.time = cachedSectionTimes[curSec] - Conductor.offset + 0.000001;
 						}
 					}
 					else if(FlxG.keys.justPressed.D)
@@ -874,20 +1884,34 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 						if(shiftAdd > 0)
 						{
 							loadSection(curSec + shiftAdd);
-							Conductor.songPosition = FlxG.sound.music.time = cachedSectionTimes[curSec] + 0.000001;
+							Conductor.songPosition = FlxG.sound.music.time = cachedSectionTimes[curSec] - Conductor.offset + 0.000001;
 						}
 					}
 				}
 				else if(FlxG.keys.justPressed.R)
 				{
-					Conductor.songPosition = FlxG.sound.music.time = cachedSectionTimes[curSec] + (curSec > 0 ? 0.000001 : 0);
+					var timeToGoBack:Float = 0;
+					if(!FlxG.keys.pressed.SHIFT) timeToGoBack = cachedSectionTimes[curSec] + (curSec > 0 ? 0.000001 : 0);
+					else loadSection(0);
+					Conductor.songPosition = FlxG.sound.music.time = vocals.time = opponentVocals.time = timeToGoBack;
 				}
-				else if(FlxG.keys.pressed.W != FlxG.keys.pressed.S || FlxG.mouse.wheel != 0)
+				else if (FlxG.keys.justPressed.HOME)
 				{
+					loadSection(0);
+					Conductor.songPosition = FlxG.sound.music.time = vocals.time = opponentVocals.time = 0;
+				}
+				else if (FlxG.keys.justPressed.END)
+				{
+					loadSection(cachedSectionTimes.length - 1);
+					Conductor.songPosition = FlxG.sound.music.time = vocals.time = opponentVocals.time = FlxG.sound.music.length;
+				}
+				else if(FlxG.keys.pressed.W != FlxG.keys.pressed.S || (FlxG.mouse.wheel != 0 && !FlxG.keys.pressed.CONTROL))
+				{
+					resetBuddies();
 					if(FlxG.sound.music.playing)
 						setSongPlaying(false);
 
-					if(mouseSnapCheckBox.checked && FlxG.mouse.wheel != 0)
+					if(mouseSnapCheckBox.checked && (FlxG.mouse.wheel != 0 && !FlxG.keys.pressed.CONTROL))
 					{
 						var snap:Float = Conductor.stepCrochet / (curQuant/16) / curZoom;
 						var timeAdd:Float = (FlxG.keys.pressed.SHIFT ? 4 : 1) / (holdingAlt ? 4 : 1) * -FlxG.mouse.wheel * snap;
@@ -899,17 +1923,18 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 					{
 						var speedMult:Float = (FlxG.keys.pressed.SHIFT ? 4 : 1) * (FlxG.mouse.wheel != 0 ? 4 : 1) / (holdingAlt ? 4 : 1);
 						if(FlxG.keys.pressed.W || FlxG.mouse.wheel > 0)
-							FlxG.sound.music.time -= Conductor.crochet * speedMult * elapsed / curZoom;
-						else if(FlxG.keys.pressed.S || FlxG.mouse.wheel < 0)
-							FlxG.sound.music.time += Conductor.crochet * speedMult * elapsed / curZoom;
+							FlxG.sound.music.time -= Conductor.crochet * speedMult * 1.5 * elapsed / curZoom; // speed up yeah
+						else if(FlxG.keys.pressed.S || (FlxG.mouse.wheel < 0 && !FlxG.keys.pressed.CONTROL))
+							FlxG.sound.music.time += Conductor.crochet * speedMult * 1.5 * elapsed / curZoom; // speed up yeah
 					}
 
 					FlxG.sound.music.time = FlxMath.bound(FlxG.sound.music.time, 0, FlxG.sound.music.length - 1);
 					if(FlxG.sound.music.playing) setSongPlaying(!FlxG.sound.music.playing);
 				}
-				else if(FlxG.keys.justPressed.SPACE)
+				if(FlxG.keys.justPressed.SPACE)
 				{
 					setSongPlaying(!FlxG.sound.music.playing);
+					resetBuddies();
 				}
 			}
 
@@ -938,7 +1963,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				loadSection(curSec + 1);
 		}
 
-		if(PsychUIInputText.focusOn == null && lastFocus == null)
+		if(charterFocus)
 		{
 			var doCut:Bool = false;
 			var canContinue:Bool = true;
@@ -1028,6 +2053,13 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				else if(FlxG.keys.justPressed.S) // Save (Ctrl + S)
 					saveChart();
 			}
+
+			vortexInput = (allowInput && canContinue && vortexEnabled);
+			allowInput = true;
+			if (vortexInput && FlxG.sound.music != null && FlxG.sound.music.playing) {
+				updateVortexHolds();
+				vortexMoved = true;
+			}
 			
 			if(doCut || FlxG.keys.justPressed.DELETE || FlxG.keys.justPressed.BACKSPACE || (isMovingNotes && (FlxG.mouse.justPressedRight || FlxG.keys.justPressed.ESCAPE))) // Delete button
 			{
@@ -1041,7 +2073,8 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 						selectedNotes.shift();
 						if(note == null) continue;
 		
-						trace('Removed ${!note.isEvent ? 'note' : 'event'} at time: ${note.strumTime}');
+						var kind:String = !note.isEvent ? 'note' : 'event';
+						trace('Removed $kind at time: ${note.strumTime}');
 						if(!note.isEvent)
 						{
 							notes.remove(note);
@@ -1094,6 +2127,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 							curSectionTime = cachedSectionTimes[noteSec];
 						}
 						positionNoteYOnTime(note, noteSec);
+						note.updateSustainToZoom(cachedSectionCrochets[noteSec] / 4, curZoom);
 					}
 	
 					for (event in events)
@@ -1123,6 +2157,8 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 					resetSelectedNotes();
 
 				var selectionBounds = selectionBox.getScreenBounds(null, camUI);
+				selectionBounds.setPosition(selectionBounds.x + GRID_SIZE * .5, selectionBounds.y + GRID_SIZE * .5);
+				selectionBounds.setSize(selectionBounds.width - GRID_SIZE, selectionBounds.height - GRID_SIZE);
 				for (note in curRenderedNotes)
 				{
 					if(note == null) continue;
@@ -1290,16 +2326,15 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 							else if(!holdingAlt)
 							{
 								resetSelectedNotes();
-								selectedNotes = sel.copy();
 								selectedNotes.remove(closest);
 								addUndoAction(SELECT_NOTE, {old: sel, current: selectedNotes.copy()});
 							}
-
 							trace('Notes selected: ' + selectedNotes.length);
 						}
 						else if(!FlxG.keys.pressed.CONTROL) // Remove Note/Event
 						{
-							trace('Removed ${!closest.isEvent ? 'note' : 'event'} at time: ${closest.strumTime}');
+							var kind:String = !closest.isEvent ? 'note' : 'event';
+							trace('Removed $kind at time: ${closest.strumTime}');
 							if(!closest.isEvent)
 								notes.remove(closest);
 							else
@@ -1400,48 +2435,22 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				if(infoText.autoSize) infoText.autoSize = false;
 			}
 
-			var vortexPlaying:Bool = (vortexEnabled && FlxG.sound.music != null && FlxG.sound.music.playing);
-			var canPlayHitSound:Bool = (FlxG.sound.music != null && FlxG.sound.music.playing && lastTime < Conductor.songPosition);
-			var hitSoundPlayer:Bool = (hitsoundPlayerStepper.value > 0);
-			var hitSoundOpp:Bool = (hitsoundOpponentStepper.value > 0);
 			for (note in curRenderedNotes)
 			{
 				if(note == null || note.isEvent) continue;
 
-				note.alpha = (note.strumTime >= Conductor.songPosition) ? 1 : 0.6;
-				if(Conductor.songPosition > note.strumTime && lastTime <= note.strumTime)
-				{
-					if(canPlayHitSound)
-					{
-						if(hitSoundPlayer && note.mustPress)
-						{
-							FlxG.sound.play(Paths.sound('hitsound'), hitsoundPlayerStepper.value);
-							hitSoundPlayer = false;
-						}
-						else if(hitSoundOpp && !note.mustPress)
-						{
-							FlxG.sound.play(Paths.sound('hitsound'), hitsoundOpponentStepper.value);
-							hitSoundOpp = false;
-						}
-					}
-
-					if(vortexPlaying)
-					{
-						var strumNote:StrumNote = strumLineNotes.members[note.songData[1]];
-						if(strumNote != null)
-						{
-							strumNote.playAnim('confirm', true);
-							strumNote.resetAnim = Math.max(200, note.sustainLength) / 1000.0;
-						}
-					}
-				}
+				var offsetTime:Float = note.strumTime + .001;
+				var hitAlpha:Float = (FlxG.sound.music.playing ? .4 : .6);
+				note.alpha = (offsetTime > Conductor.songPosition) ? 1 : hitAlpha;
+				if (Conductor.songPosition > offsetTime && lastTime <= offsetTime)
+					hitNote(note);
 			}
 			forceDataUpdate = false;
-			
+		
 			// moved from beatHit()
 			if(metronomeStepper.value > 0 && lastBeatHit != curBeat)
 				FlxG.sound.play(Paths.sound('Metronome_Tick'), metronomeStepper.value);
-
+	
 			lastBeatHit = curBeat;
 		}
 
@@ -1451,23 +2460,27 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			var sineValue:Float = 0.75 + Math.cos(Math.PI * noteSelectionSine * (isMovingNotes ? 8 : 2)) / 4;
 			//trace(sineValue);
 
-			var qPress = FlxG.keys.justPressed.Q;
-			var ePress = FlxG.keys.justPressed.E;
+			var qPress = FlxG.keys.justPressed.Q || ((FlxG.mouse.wheel == 1) && FlxG.keys.pressed.CONTROL);
+			var ePress = FlxG.keys.justPressed.E || ((FlxG.mouse.wheel == -1) && FlxG.keys.pressed.CONTROL);
 			var addSus = (FlxG.keys.pressed.SHIFT ? 4 : 1) * (Conductor.stepCrochet / 2);
 			if(qPress) addSus *= -1;
 
 			if(qPress != ePress && selectedNotes.length != 1)
 				susLengthStepper.value += addSus;
 
+			var noteSec:Int = 0;
 			for (note in selectedNotes)
 			{
 				if(note == null || !note.exists) continue;
 
 				if(!note.isEvent)
 				{
-					if(qPress != ePress)
+					if(charterFocus && qPress != ePress)
 					{
-						note.setSustainLength(note.sustainLength + addSus, Conductor.stepCrochet, curZoom);
+						while(cachedSectionTimes.length > noteSec + 1 && cachedSectionTimes[noteSec + 1] <= note.strumTime)
+							noteSec++;
+
+						note.setSustainLength(note.sustainLength + addSus, cachedSectionCrochets[noteSec] / 4, curZoom);
 						if(selectedNotes.length == 1)
 							susLengthStepper.value = note.sustainLength;
 					}
@@ -1482,6 +2495,62 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		outputTxt.visible = (outputAlpha > 0);
 		FlxG.camera.scroll.y = scrollY;
 		lastFocus = PsychUIInputText.focusOn;
+	}
+
+	function hitNote(note:MetaNote) {
+	var vortexPlaying:Bool = (vortexEnabled && FlxG.sound.music != null && FlxG.sound.music.playing);
+	var lilBuddiesSing:Bool = (lilBuddiesOn && FlxG.sound.music != null && FlxG.sound.music.playing);
+	var canPlayHitSound:Bool = (FlxG.sound.music != null && FlxG.sound.music.playing); // && lastTime < Conductor.songPosition)
+	var hitSoundPlayer:Bool = (hitsoundPlayerStepper.value > 0);
+	var hitSoundOpp:Bool = (hitsoundOpponentStepper.value > 0);
+	var data:Int = note.noteData % 4;
+	note.alpha = (note.strumTime >= Conductor.songPosition) ? 1 : 0.6;
+
+		if(canPlayHitSound)
+		{
+			if(hitSoundPlayer && note.mustPress)
+			{
+				FlxG.sound.play(Paths.sound('hitsound'), hitsoundPlayerStepper.value).pan = (note.noteData < 4? -0.3 : 0.3) * ClientPrefs.data.hitsoundVolume;
+				hitSoundPlayer = false;
+			}
+			else if(hitSoundOpp && !note.mustPress)
+			{
+				FlxG.sound.play(Paths.sound('hitsound'), hitsoundOpponentStepper.value).pan = (note.noteData < 4? -0.3 : 0.3) * ClientPrefs.data.hitsoundVolume;
+				hitSoundOpp = false;
+			}
+		}
+		data = note.noteData;
+		if(lilBuddiesSing) // yesssss i'm cumming
+		{
+			data += 4;
+			if(note.mustPress && lilBuddiesOn)
+			{
+				lilBf.animation.play("" + (data % 4), true);
+				lilBf.color = note.rgbShader.r;
+			}
+			else if(!note.mustPress && lilBuddiesOn)
+			{
+				lilOpp.animation.play("" + (data % 4), true);
+				lilOpp.color = note.rgbShader.r;
+			}			
+		}
+
+		if(vortexPlaying)
+		{
+			var strumNote:StrumNote = strumLineNotes.members[note.songData[1]];
+			if(strumNote != null)
+			{
+				strumNote.playAnim('confirm', true);
+				strumNote.resetAnim = Math.max(Conductor.stepCrochet * 1.25, note.sustainLength) / 1000 / playbackRate;
+			}
+		}
+	}
+
+	function resetBuddies() 
+	{
+		lilBf.animation.play("idle");
+		lilOpp.animation.play("idle");
+		lilBf.color = lilOpp.color = FlxColor.WHITE;
 	}
 
 	function moveSelectedNotes(noteData:Int = 0, lastY:Float) //This turns selected notes into moving notes
@@ -1621,7 +2690,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			note.colorTransform.redMultiplier = note.colorTransform.greenMultiplier = note.colorTransform.blueMultiplier = 1;
 			if(note.animation.curAnim != null) note.animation.curAnim.curFrame = 0;
 		}
-		selectedNotes = [];
+		selectedNotes.resize(0);
 		onSelectNote();
 		forceDataUpdate = true;
 	}
@@ -1712,8 +2781,8 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		gridBg = new ChartingGridSprite(columnCount, gridColors[0], gridColors[1]);
 		gridBg.screenCenter(X);
 
-		prevGridBg = new ChartingGridSprite(columnCount, gridColorsOther[0], gridColorsOther[1]);
-		nextGridBg = new ChartingGridSprite(columnCount, gridColorsOther[0], gridColorsOther[1]);
+		prevGridBg = new ChartingGridSprite(columnCount, gridColorsOther[0], gridColorsOther[1]); // gridColorsOther[0], gridColorsOther[1]
+		nextGridBg = new ChartingGridSprite(columnCount, gridColorsOther[0], gridColorsOther[1]); // gridColorsOther[0], gridColorsOther[1]
 		prevGridBg.x = nextGridBg.x = gridBg.x;
 		prevGridBg.stripes = nextGridBg.stripes = gridBg.stripes = stripes;
 		
@@ -1809,7 +2878,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		}
 
 		#if DISCORD_ALLOWED
-		DiscordClient.changePresence('Chart Editor', 'Song: ' + PlayState.SONG.song);
+		DiscordClient.changePresence('SD Charter Editor', 'Song: ' + PlayState.SONG.song);
 		#end
 
 		updateAudioVolume();
@@ -1851,6 +2920,8 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	{
 		if(FlxG.sound.music == null) return;
 
+		forceDataUpdate = true;
+
 		vocals.time = FlxG.sound.music.time;
 		opponentVocals.time = FlxG.sound.music.time;
 
@@ -1865,6 +2936,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			FlxG.sound.music.pause();
 			vocals.pause();
 			opponentVocals.pause();
+			resetBuddies(); // makes lil buddies stand up straight FUCGGGGGGGGGGGHKKKKKKED!!!!!!!!
 		}
 
 		for (note in strumLineNotes)
@@ -2124,6 +3196,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		prevGridBg.vortexLineEnabled = gridBg.vortexLineEnabled = nextGridBg.vortexLineEnabled = vortexEnabled;
 		prevGridBg.vortexLineSpace = gridBg.vortexLineSpace = nextGridBg.vortexLineSpace = GRID_SIZE * 4 * curZoom;
 		updateWaveform();
+		resetBuddies(); // makes lil buddies stand up straight FUCGGGGGGGGGGGHKKKKKKED!!!!!!!!
 	}
 
 	function softReloadNotes(onlyCurrent:Bool = false)
@@ -2184,7 +3257,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				for(note in notes.filter(otherSecFilter))
 				{
 					behindRenderedNotes.add(note);
-					note.alpha = 0.4;
+					note.alpha = 1; // keep consistent
 					if(note.hasSustain) note.updateSustainToZoom(cachedSectionCrochets[curSec] / 4, curZoom);
 				}
 
@@ -2193,7 +3266,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 					for(event in events.filter(otherSecFilter))
 					{
 						behindRenderedNotes.add(event);
-						event.alpha = 0.4;
+						event.alpha = 1; // keep consistent
 						event.eventText.visible = false;
 					}
 				}
@@ -2235,7 +3308,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		var noteY:Float = (time / cachedSectionCrochets[section]) * GRID_SIZE * 4 * curZoom;
 		noteY += cachedSectionRow[section] * GRID_SIZE * curZoom;
 		noteY = Math.max(noteY, -150);
-		note.y = noteY + (GRID_SIZE/2 - note.height/2) * curZoom;
+		note.y = noteY + (GRID_SIZE/2 - note.height/2);
 		note.chartY = noteY;
 		//trace(gridBg.y, noteY);
 	}
@@ -2297,7 +3370,6 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	var hitsoundPlayerStepper:PsychUINumericStepper;
 	var hitsoundOpponentStepper:PsychUINumericStepper;
 	var metronomeStepper:PsychUINumericStepper;
-
 	var instVolumeStepper:PsychUINumericStepper;
 	var instMuteCheckBox:PsychUICheckBox;
 	var playerVolumeStepper:PsychUINumericStepper;
@@ -2310,12 +3382,12 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		var objX = 10;
 		var objY = 10;
 
-		var txt = new FlxText(objX, objY, 280, "Any options here won't actually affect gameplay!");
+		var txt = new FlxText(objX, objY, 280, "SDPJ Mania charts are converted. They're meant to not be snapped and have improper BPM placements!"); // Osu to FNF is fucking horrible but wtv it feels good
 		txt.alignment = CENTER;
 		tab_group.add(txt);
 
 		objY += 25;
-		playbackSlider = new PsychUISlider(50, objY, function(v:Float) setPitch(playbackRate = v), 1, 0.5, 3, 200);
+		playbackSlider = new PsychUISlider(50, objY, function(v:Float) setPitch(playbackRate = v), 1, 0.25, 1, 200); // Osu Mania playback is enough.
 		playbackSlider.label = 'Playback Rate';
 		
 		objY += 60;
@@ -2369,6 +3441,9 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	var gameOverSndInputText:PsychUIInputText;
 	var gameOverLoopInputText:PsychUIInputText;
 	var gameOverRetryInputText:PsychUIInputText;
+	var creditInputText:PsychUIInputText;
+	var creditPathInputText:PsychUIInputText;
+	var creditIconInputText:PsychUIInputText;
 	var noRGBCheckBox:PsychUICheckBox;
 	var noteTextureInputText:PsychUIInputText;
 	var noteSplashesInputText:PsychUIInputText;
@@ -2434,6 +3509,24 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 							note.setGraphicSize(0, GRID_SIZE);
 		
 						note.updateHitbox();
+					}
+					for (strum in strumLineNotes) {
+						if (strum == null) continue;
+						var tex:String = noteTextureInputText.text;
+						if (tex.trim() == '') { // ok
+							tex = Note.defaultNoteSkin;
+							var customSkin:String = tex + Note.getNoteSkinPostfix();
+							if (Paths.fileExists('images/$customSkin.png', IMAGE)) tex = customSkin;
+						}
+						strum.texture = tex;
+
+						if(strum.width > strum.height)
+							strum.setGraphicSize(GRID_SIZE);
+						else
+							strum.setGraphicSize(0, GRID_SIZE);
+
+						strum.playAnim('static');
+						strum.updateHitbox();
 					}
 					if(noteTextureInputText.text.trim().length > 0) showOutput('Reloaded notes to: "$textureLoad"');
 					else showOutput('Reloaded notes to default texture');
@@ -2622,7 +3715,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	var susLengthStepper:PsychUINumericStepper;
 	var strumTimeStepper:PsychUINumericStepper;
 	var noteTypeDropDown:PsychUIDropDownMenu;
-	var noteTypes:Array<String>;
+	public static var noteTypes:Array<String>;
 	function addNoteTab()
 	{
 		var tab_group = mainBox.getTab('Note').menu;
@@ -2788,19 +3881,19 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			}
 		}
 
-		mustHitCheckBox = new PsychUICheckBox(objX, objY, 'Must Hit Sec.', 70, function()
+		mustHitCheckBox = new PsychUICheckBox(objX, objY, 'Section Camera', 80, function()
 		{
 			var sec = getCurChartSection();
 			if(sec != null) sec.mustHitSection = mustHitCheckBox.checked;
 			updateHeads(true);
 		});
-		gfSectionCheckBox = new PsychUICheckBox(objX + 100, objY, 'GF Section', 70, function()
+		gfSectionCheckBox = new PsychUICheckBox(objX + 100, objY, 'Middle Camera', 80, function() // GF Section
 		{
 			var sec = getCurChartSection();
 			if(sec != null) sec.gfSection = gfSectionCheckBox.checked;
 			updateHeads(true);
 		});
-		altAnimSectionCheckBox = new PsychUICheckBox(objX + 200, objY, 'Alt Anim', 70, function()
+		altAnimSectionCheckBox = new PsychUICheckBox(objX + 200, objY, 'Alt Animations', 80, function()
 		{
 			var sec = getCurChartSection();
 			if(sec != null) sec.altAnim = altAnimSectionCheckBox.checked;
@@ -2820,7 +3913,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		});
 
 		objY += 25;
-		changeBpmStepper = new PsychUINumericStepper(objX, objY, 1, 0, 1, 400, 3);
+		changeBpmStepper = new PsychUINumericStepper(objX, objY, 1, 0, 1, 999999999, 3); // please you should be able to use custom any bpm - Joseph
 		changeBpmStepper.onValueChange = function()
 		{
 			var sec = getCurChartSection();
@@ -2859,15 +3952,10 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				if(note == null) continue;
 
 				if(!note.isEvent && affectNotes.checked)
-				{
 					notes.remove(note);
-					trace('removed normal note');
-				}
 				if(note.isEvent && affectEvents.checked)
-				{
 					events.remove(cast (note, EventMetaNote));
-					trace('removed event note');
-				}
+
 				selectedNotes.remove(note);
 			}
 			softReloadNotes(true);
@@ -3022,7 +4110,10 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		{
 			var exts:Array<String> = ['.txt'];
 			#if LUA_ALLOWED exts.push('.lua'); #end
-			#if HSCRIPT_ALLOWED exts.push('.hx'); #end
+			#if HSCRIPT_ALLOWED 
+			exts.push('.hx'); 
+			exts.push('.hxs');
+			#end
 			noteTypes = loadFileList('custom_notetypes/', exts);
 			for (id => noteType in Note.defaultNoteTypes)
 				if(!noteTypes.contains(noteType))
@@ -3030,8 +4121,8 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 
 			if(Song.chartPath != null && Song.chartPath.length > 0)
 			{
-				var parentFolder:String = Song.chartPath.replace('/', '\\');
-				parentFolder = parentFolder.substr(0, Song.chartPath.lastIndexOf('\\')+1);
+				var parentFolder:String = Song.chartPath.replace('\\', '/');
+				parentFolder = parentFolder.substr(0, Song.chartPath.lastIndexOf('/')+1);
 				var notetypeFile:Array<String> = CoolUtil.coolTextFile(parentFolder + 'notetypes.txt');
 				if(notetypeFile.length > 0)
 				{
@@ -3165,7 +4256,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		scrollSpeedStepper = new PsychUINumericStepper(objX + 90, objY, 0.1, 1, 0.1, 10, 2);
 		scrollSpeedStepper.onValueChange = function() PlayState.SONG.speed = scrollSpeedStepper.value;
 
-		audioOffsetStepper = new PsychUINumericStepper(objX + 180, objY, 1, 0, -500, 500, 0);
+		audioOffsetStepper = new PsychUINumericStepper(objX + 180, objY, 1, 0, -9999999999, 9999999999, 0); //new offset lmao!!
 		audioOffsetStepper.onValueChange = function()
 		{
 			PlayState.SONG.offset = audioOffsetStepper.value;
@@ -3231,6 +4322,62 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		tab_group.add(playerDropDown);
 	}
 
+	var ratingInput:PsychUINumericStepper;
+	var prevStartInput:PsychUINumericStepper;
+	var prevEndInput:PsychUINumericStepper;
+	var characterName:PsychUIInputText;
+	var albumName:PsychUIInputText;
+	var exportMetadataBtn:PsychUIButton;
+	var maxTime:Float = 0.0;
+	function addMetadataTab()
+	{
+		var tab_group = mainBox.getTab('Metadata').menu;
+		ratingInput = new PsychUINumericStepper(20, 30,1,0,0,99,0,60);
+		prevStartInput = new PsychUINumericStepper(20, 100,1,0,0,999,2,80); 
+		prevEndInput = new PsychUINumericStepper(20, 150,1,0,0,999,2,80);
+		characterName = new PsychUIInputText(160,100,100,"",8);
+		albumName = new PsychUIInputText(160,150,100,"",8);
+
+		exportMetadataBtn = new PsychUIButton(20,200,"Export metadata",onMetadataSaveClick.bind(),110);
+
+		tab_group.add(new FlxText(ratingInput.x, ratingInput.y - 15, 80, 'Rating:'));
+		tab_group.add(ratingInput);
+
+		tab_group.add(new FlxText(prevStartInput.x, prevStartInput.y - 15, 150, 'Freeplay preview start sec:'));
+		tab_group.add(prevStartInput);
+
+		tab_group.add(new FlxText(prevEndInput.x, prevEndInput.y - 15, 150, 'Freeplay preview end sec:'));
+		tab_group.add(prevEndInput);
+
+		tab_group.add(new FlxText(characterName.x, characterName.y - 15, 150, 'Player character:'));
+		tab_group.add(characterName);
+
+		tab_group.add(new FlxText(albumName.x, albumName.y - 15, 150, 'Song album:'));
+		tab_group.add(albumName);
+
+		tab_group.add(exportMetadataBtn);
+	}
+
+	function onMetadataSaveClick() {
+		/* // var meta:FreeplayMetaJSON = new FreeplayMetaJSON();
+		var meta:Float; // for now, float it.
+		
+		meta.songRating = Std.int(ratingInput.value);
+		meta.freeplayPrevStart = prevStartInput.value;
+		meta.freeplayPrevEnd = prevEndInput.value;
+		meta.albumId = albumName.text;
+		meta.freeplayCharacter = characterName.text;
+		meta.freeplaySongLength = FlxG.sound.music.length/1000;
+		
+		var data:String = haxe.Json.stringify(meta, "\t");
+		if (data.length > 0)
+		{
+			var _file = new FileReference();
+			_file.save(data, "metadata.json");
+		}
+		*/
+	}
+
 	function addFileTab()
 	{
 		var tab = upperBox.getTab('File');
@@ -3266,8 +4413,8 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			{
 				try
 				{
-					var filePath:String = fileDialog.path.replace('/', '\\');
-					var loadedChart:SwagSong = Song.parseJSON(fileDialog.data, filePath.substr(filePath.lastIndexOf('\\')));
+					var filePath:String = fileDialog.path.replace('\\', '/');
+					var loadedChart:SwagSong = Song.parseJSON(fileDialog.data, filePath.substr(filePath.lastIndexOf('/')));
 					if(loadedChart == null || !Reflect.hasField(loadedChart, 'song')) //Check if chart is ACTUALLY a chart and valid
 					{
 						showOutput('Error: File loaded is not a Psych Engine/FNF 0.2.x.x chart.', true);
@@ -3399,8 +4546,8 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				{
 					try
 					{
-						var filePath:String = fileDialog.path.replace('/', '\\');
-						var eventsFile:SwagSong = Song.parseJSON(fileDialog.data, filePath.substr(filePath.lastIndexOf('\\')));
+						var filePath:String = fileDialog.path.replace('\\', '/');
+						var eventsFile:SwagSong = Song.parseJSON(fileDialog.data, filePath.substr(filePath.lastIndexOf('/')));
 						if(eventsFile == null || Reflect.hasField(eventsFile, 'scrollSpeed') || eventsFile.events == null)
 						{
 							showOutput('Error: File loaded is not a Psych Engine chart/events file.', true);
@@ -3568,13 +4715,13 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			{
 				try
 				{
-					var path:String = fileDialog.path.replace('/', '\\');
+					var path:String = fileDialog.path.replace('\\', '/');
 
 					var chartName:String = Paths.formatToSongPath(PlayState.SONG.song) + '.json';
-					chartName = chartName.substring(chartName.lastIndexOf('\\')+1, chartName.lastIndexOf('.'));
+					chartName = chartName.substring(chartName.lastIndexOf('/')+1, chartName.lastIndexOf('.'));
 
-					var chartFile:String = '$path\\$chartName-chart.json';
-					var metadataFile:String = '$path\\$chartName-metadata.json';
+					var chartFile:String = '$path/$chartName-chart.json';
+					var metadataFile:String = '$path/$chartName-metadata.json';
 
 					updateChartData();
 					var pack:VSlicePackage = VSlice.export(PlayState.SONG);
@@ -3651,8 +4798,8 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 
 			fileDialog.open('song.json', 'Open a Psych Engine Chart JSON', function()
 			{
-				var filePath:String = fileDialog.path.replace('/', '\\');
-				var loadedChart:SwagSong = Song.parseJSON(fileDialog.data, filePath.substr(filePath.lastIndexOf('\\')));
+				var filePath:String = fileDialog.path.replace('\\', '/');
+				var loadedChart:SwagSong = Song.parseJSON(fileDialog.data, filePath.substr(filePath.lastIndexOf('/')));
 				if(loadedChart == null || !Reflect.hasField(loadedChart, 'song')) //Check if chart is ACTUALLY a chart and valid
 				{
 					showOutput('Error: File loaded is not a Psych Engine 0.x.x/FNF 0.2.x.x chart.', true);
@@ -3671,7 +4818,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 					function(state:BasePrompt)
 					{
 						var songName:String = Paths.formatToSongPath(pack.metadata.songName);
-						var parentFolder:String = filePath.substring(0, filePath.lastIndexOf('\\')+1);
+						var parentFolder:String = filePath.substring(0, filePath.lastIndexOf('/')+1);
 						var artistInput, charterInput, difficultiesInput:PsychUIInputText = null;
 
 						var btnX = 640;
@@ -3730,8 +4877,8 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 									fileDialog.openDirectory('Save V-Slice Chart/Metadata JSONs', function()
 									{
 										overwriteSavedSomething = false;
-										var path:String = fileDialog.path.replace('/', '\\');
-										if(path.endsWith('\\')) path = path.substr(0, path.length-1);
+										var path:String = fileDialog.path.replace('\\', '/');
+										if(path.endsWith('/')) path = path.substr(0, path.length-1);
 										overwriteCheck('$path/$songName-chart.json', '$songName-chart.json', PsychJsonPrinter.print(pack.chart, ['events', 'notes', 'scrollSpeed']), function()
 										{
 											overwriteCheck('$path/$songName-metadata.json', '$songName-metadata.json', PsychJsonPrinter.print(pack.metadata, ['characters', 'difficulties', 'timeChanges']), function()
@@ -3839,8 +4986,8 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 						{
 							fileDialog.openDirectory('Save Converted Psych JSONs', function()
 							{
-								var path:String = fileDialog.path.replace('/', '\\');
-								if(!path.endsWith('\\')) path += '\\';
+								var path:String = fileDialog.path.replace('\\', '/');
+								if(!path.endsWith('/')) path += '/';
 
 								var diffs:Array<String> = metadata.playData.difficulties.copy();
 								var defaultDiff:String = Paths.formatToSongPath(Difficulty.getDefault());
@@ -3900,8 +5047,8 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				var oldSong = PlayState.SONG;
 				try
 				{
-					var filePath:String = fileDialog.path.replace('/', '\\');
-					filePath = filePath.substring(filePath.lastIndexOf('\\')+1, filePath.lastIndexOf('.'));
+					var filePath:String = fileDialog.path.replace('\\', '/');
+					filePath = filePath.substring(filePath.lastIndexOf('/')+1, filePath.lastIndexOf('.'));
 
 					var loadedChart:SwagSong = Song.parseJSON(fileDialog.data, filePath, '');
 					if(loadedChart == null || !Reflect.hasField(loadedChart, 'song')) //Check if chart is ACTUALLY a chart and valid
@@ -3935,7 +5082,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 
 		btnY++;
 		btnY += 20;
-		var btn:PsychUIButton = new PsychUIButton(btnX, btnY, '  Preview (F12)', openEditorPlayState, btnWid);
+		var btn:PsychUIButton = new PsychUIButton(btnX, btnY, '  Preview (F11)', openEditorPlayState, btnWid);
 		btn.text.alignment = LEFT;
 		tab_group.add(btn);
 		
@@ -4119,6 +5266,8 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	var showNextGridButton:PsychUIButton;
 	var noteTypeLabelsButton:PsychUIButton;
 	var vortexEditorButton:PsychUIButton;
+	var lilBuddiesBoxButton:PsychUIButton;
+	var downscrollEditorButton:PsychUIButton;
 	function addViewTab()
 	{
 		var tab = upperBox.getTab('View');
@@ -4133,6 +5282,8 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			waveformTarget = chartEditorSave.data.waveformTarget;
 		if(chartEditorSave.data.waveformColor != null)
 			waveformSprite.color = CoolUtil.colorFromString(chartEditorSave.data.waveformColor);
+		if(chartEditorSave.data.waveformAlpha != null)
+			waveformSprite.alpha = chartEditorSave.data.waveformAlpha;
 
 		showLastGridButton = new PsychUIButton(btnX, btnY, '', function()
 		{
@@ -4179,13 +5330,36 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		}, btnWid);
 		vortexEditorButton.text.alignment = LEFT;
 		tab_group.add(vortexEditorButton);
+
+		btnY++;
+		btnY += 20;
+		lilBuddiesBoxButton = new PsychUIButton(btnX, btnY, lilBuddiesOn ? '  Lil Buddies ON' : '  Lil Buddies OFF', function()
+		{
+			lilBuddiesOn = !lilBuddiesOn;
+			chartEditorSave.data.lilBuddiesBox = lilBuddiesOn;
+			lilStage.visible = lilBf.visible = lilOpp.visible = lilStage.active = lilBf.active = lilOpp.active = lilBuddiesOn;
+			lilBuddiesBoxButton.text.text = lilBuddiesOn ? '  Lil Buddies ON' : '  Lil Buddies OFF';
+		}, btnWid);
+		lilBuddiesBoxButton.text.alignment = LEFT;
+		tab_group.add(lilBuddiesBoxButton);
+
+		/* btnY++;
+		btnY += 20;
+		downscroll = new PsychUIButton(btnX, btnY, downscrollEnabled ? ' Reverse Scroll ON' : ' Reverse Scroll OFF', function()
+		{
+			downscrollEnabled = !downscrollEnabled;
+			chartEditorSave.data.downscroll = downscrollEnabled;
+			downscrollEditorButton.text.text = downscrollEnabled ? ' Reverse Scroll ON' : ' Reverse Scroll OFF';
+		}, btnWid);
+		downscrollEditorButton.text.alignment = LEFT;
+		tab_group.add(downscrollEditorButton); */
 		
 		btnY++;
 		btnY += 20;
 		var btn:PsychUIButton = new PsychUIButton(btnX, btnY, '  Waveform...', function()
 		{
 			ClientPrefs.toggleVolumeKeys(false);
-			openSubState(new BasePrompt(320, 200, 'Waveform Settings',
+			openSubState(new BasePrompt(320, 215, 'Waveform Settings',
 				function(state:BasePrompt) {
 					upperBox.isMinimized = true;
 					upperBox.bg.visible = false;
@@ -4208,7 +5382,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 					if(chartEditorSave.data.waveformColor != null)
 						waveformC = chartEditorSave.data.waveformColor;
 
-					var input:PsychUIInputText = new PsychUIInputText(check.x, check.y + 50, 60, waveformC, 10);
+					var input:PsychUIInputText = new PsychUIInputText(check.x, check.y + 42, 60, waveformC, 10);
 					input.onChange = function(old:String, cur:String)
 					{
 						chartEditorSave.data.waveformColor = cur;
@@ -4219,8 +5393,19 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 					input.cameras = state.cameras;
 					input.forceCase = UPPER_CASE;
 
-					var options:Array<WaveformTarget> = [INST, PLAYER, OPPONENT];
-					var radioGrp:PsychUIRadioGroup = new PsychUIRadioGroup(check.x + 120, check.y, ['Instrumental', 'Main Vocals', 'Opponent Vocals']);
+					state.add(new FlxText(check.x, input.y + 25, 80, 'Opacity:'));
+					var alphaStepper:PsychUINumericStepper = new PsychUINumericStepper(check.x, input.y + 40, 0.1, 1, 0, 1, 2, true);
+					alphaStepper.onValueChange = function() {
+						var alpha:Float = alphaStepper.value;
+						chartEditorSave.data.waveformAlpha = alpha;
+						waveformSprite.alpha = alpha;
+					};
+					alphaStepper.value = waveformSprite.alpha;
+					alphaStepper.cameras = state.cameras;
+					state.add(alphaStepper);
+
+					var options:Array<WaveformTarget> = [INST, PLAYER, OPPONENT, EVERYTHING];
+					var radioGrp:PsychUIRadioGroup = new PsychUIRadioGroup(check.x + 120, check.y, ['Instrumental', 'Main Vocals', 'Opponent Vocals', 'Every Track']);
 					radioGrp.cameras = state.cameras;
 					radioGrp.onClick = function()
 					{
@@ -4327,7 +5512,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			upperBox.isMinimized = true;
 			upperBox.bg.visible = false;
 
-			openSubState(new BasePrompt('Chart Editor Theme',
+			openSubState(new BasePrompt(500, 160, 'Chart Editor Theme',
 				function(state:BasePrompt)
 				{
 					var btn:PsychUIButton = new PsychUIButton(state.bg.x + state.bg.width - 40, state.bg.y, 'X', state.close, 40);
@@ -4335,20 +5520,34 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 					state.add(btn);
 
 					var btnY = 390;
+
+					var btn:PsychUIButton = new PsychUIButton(0, btnY, 'SkyDecay', changeTheme.bind(SKYDECAY));
+					btn.screenCenter(X);
+					btn.x -= 240;
+					btn.cameras = state.cameras;
+					state.add(btn);
+
 					var btn:PsychUIButton = new PsychUIButton(0, btnY, 'Light', changeTheme.bind(LIGHT));
 					btn.screenCenter(X);
-					btn.x -= 125;
+					btn.x -= 180;
+					btn.cameras = state.cameras;
+					state.add(btn);
+			
+					var btn:PsychUIButton = new PsychUIButton(0, btnY, 'Dark', changeTheme.bind(DARK));
+					btn.screenCenter(X);
+					btn.x -= 60;
 					btn.cameras = state.cameras;
 					state.add(btn);
 					
 					var btn:PsychUIButton = new PsychUIButton(0, btnY, 'Default', changeTheme.bind(DEFAULT));
 					btn.screenCenter(X);
 					btn.cameras = state.cameras;
+					btn.x += 60;
 					state.add(btn);
 			
-					var btn:PsychUIButton = new PsychUIButton(0, btnY, 'Dark', changeTheme.bind(DARK));
+					var btn:PsychUIButton = new PsychUIButton(0, btnY, 'V-Slice', changeTheme.bind(VSLICE));
 					btn.screenCenter(X);
-					btn.x += 125;
+					btn.x += 180;
 					btn.cameras = state.cameras;
 					state.add(btn);
 				}
@@ -4412,12 +5611,12 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		else
 		{
 			var chartName:String = Paths.formatToSongPath(PlayState.SONG.song) + '.json';
-			if(Song.chartPath != null) chartName = Song.chartPath.substr(Song.chartPath.lastIndexOf('\\')).trim();
+			if(Song.chartPath != null) chartName = Song.chartPath.substr(Song.chartPath.lastIndexOf('/')).trim();
 			fileDialog.save(chartName, chartData,
 				function()
 				{
 					var newPath:String = fileDialog.path;
-					Song.chartPath = newPath.replace('/', '\\');
+					Song.chartPath = newPath.replace('\\', '/');
 					reloadNotesDropdowns();
 					showOutput('Chart saved successfully to: $newPath');
 
@@ -4519,7 +5718,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 					loadSection();
 					return;
 				}
-				//trace('changed section: $noteSec, $oldNextSectionTime, $oldCurSectionTime, $nextSectionTime, $curSectionTime');
+				trace('changed section: $noteSec, $oldNextSectionTime, $oldCurSectionTime, $nextSectionTime, $curSectionTime');
 			}
 
 			var shouldBound:Bool = (note.strumTime >= oldCurSectionTime && note.strumTime < oldNextSectionTime);
@@ -4532,6 +5731,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				note.setStrumTime(FlxMath.bound(note.strumTime, curSectionTime, nextSectionTime));
 
 			positionNoteYOnTime(note, noteSec);
+			note.updateSustainToStepCrochet(cachedSectionCrochets[noteSec] / 4);
 		}
 		
 		for (event in events)
@@ -4649,6 +5849,188 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		MetaNote.noteTypeTexts = [];
 		fileDialog.destroy();
 		super.destroy();
+
+		FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN, keyDown);
+		FlxG.stage.removeEventListener(KeyboardEvent.KEY_UP, keyUp);
+	}
+
+	function keyDown(event:KeyboardEvent) {
+		var eventKey:FlxKey = event.keyCode;
+
+		if (!vortexInput) return;
+
+		var num:Int = keysArray.indexOf(eventKey);
+		if (num != -1 && FlxG.keys.checkStatus(eventKey, JUST_PRESSED)) { // note placement
+			_keysPressedBuffer[num] = true;
+
+			var typeSelected:String = noteTypes[noteTypeDropDown.selectedIndex];
+			if(typeSelected != null)
+			{
+				typeSelected = typeSelected.trim();
+				if(typeSelected.length < 1) typeSelected = null;
+			}
+
+			var sectionStart:Float = cachedSectionTimes[curSec];
+			var snapCrochet:Float = Conductor.crochet * 4 / curQuant;
+			var strumTime:Float = Math.round((Conductor.songPosition - sectionStart) / snapCrochet) * snapCrochet + sectionStart;
+
+			var deletedNotes:Array<MetaNote> = [];
+			var addedNotes:Array<MetaNote> = [];
+
+			trace('Vortex editor press at time: $strumTime');
+
+			// Try to find a note to delete first
+			var didDelete:Bool = false;
+			for (note in curRenderedNotes) {
+				if(note == null || note.isEvent) continue;
+
+				var roundTime:Float = Math.round((note.strumTime - sectionStart) / snapCrochet) * snapCrochet + sectionStart;
+				if (note.songData[1] == num && strumTime == roundTime) {
+					deletedNotes.push(note);
+					didDelete = true;
+					break;
+				}
+			}
+
+			// If no notes were found, add a new in its place
+			if (!didDelete) {
+				var didAdd:Bool = false;
+				var noteSetupData:Array<Dynamic> = [strumTime, num, 0];
+				var typeSelected:String = noteTypes[noteTypeDropDown.selectedIndex];
+				if (typeSelected != null) noteSetupData.push(typeSelected.trim());
+
+				var noteAdded:MetaNote = createNote(noteSetupData);
+				for (num in sectionFirstNoteID...notes.length)
+				{
+					var note = notes[num];
+					if(note.strumTime >= strumTime)
+					{
+						notes.insert(num, noteAdded);
+						didAdd = true;
+						break;
+					}
+				}
+				if(!didAdd) notes.push(noteAdded);
+				addedNotes.push(noteAdded);
+				_heldNotes[num] = noteAdded;
+				if (vortexMoved)
+					resetSelectedNotes();
+				selectedNotes.push(noteAdded);
+
+				if (Conductor.songPosition > noteAdded.strumTime + .001 && FlxG.sound.music != null && FlxG.sound.music.playing)
+					hitNote(noteAdded);
+			}
+
+			if (deletedNotes.length > 0) {
+				var wasSelected:Bool = false;
+				for (note in deletedNotes)
+				{
+					if(selectedNotes.contains(note))
+					{
+						selectedNotes.remove(note);
+						wasSelected = true;
+					}
+					notes.remove(note);
+				}
+				if(wasSelected) onSelectNote();
+				addUndoAction(DELETE_NOTE, {notes: deletedNotes});
+			}
+			if(addedNotes.length > 0)
+				addUndoAction(ADD_NOTE, {notes: addedNotes});
+
+			softReloadNotes(true);
+			vortexMoved = false;
+		}
+
+		// quant scrolling
+		var page:Bool = (eventKey == FlxKey.PAGEUP || eventKey == FlxKey.PAGEDOWN);
+		if (eventKey == FlxKey.UP || eventKey == FlxKey.DOWN || page) {
+			var up:Bool = (eventKey == FlxKey.UP || eventKey == FlxKey.PAGEUP);
+			if (FlxG.sound.music.playing) setSongPlaying(false);
+
+			var secStartTime:Null<Float> = cast cachedSectionTimes[curSec];
+			var secCrochet:Null<Float> = cast cachedSectionCrochets[curSec];
+			if (secStartTime == null || secCrochet == null) return;
+
+			var snap:Float = (page ? 1 : (curQuant / 4));
+			var snapCrochet:Float = secCrochet / snap;
+
+			var strumTime:Float = Math.round((Conductor.songPosition - secStartTime) / snapCrochet) * snapCrochet + secStartTime;
+			var addedNotes:Array<MetaNote> = [];
+			for (num => held in _keysPressedBuffer) {
+				if (held && _heldNotes[num] == null) {
+					var noteSetupData:Array<Dynamic> = [strumTime, num, 0];
+					var typeSelected:String = noteTypes[noteTypeDropDown.selectedIndex];
+					if (typeSelected != null) noteSetupData.push(typeSelected.trim());
+
+					var didAdd:Bool = false;
+					var noteAdded:MetaNote = createNote(noteSetupData);
+					for (num in sectionFirstNoteID...notes.length) {
+						var note = notes[num];
+						if (note.strumTime >= strumTime) {
+							notes.insert(num, noteAdded);
+							didAdd = true;
+							break;
+						}
+					}
+					if (!didAdd) notes.push(noteAdded);
+					_heldNotes[num] = noteAdded;
+					addedNotes.push(noteAdded);
+					softReloadNotes(true);
+				}
+			}
+			if (addedNotes.length > 0) {
+				if (vortexMoved)
+					resetSelectedNotes();
+				for (note in addedNotes)
+					selectedNotes.push(note);
+				addUndoAction(ADD_NOTE, {notes: addedNotes});
+			}
+
+			var nextTime:Float = Conductor.songPosition - secStartTime;
+			var snapLeniency:Float = .24;
+			if (up)
+				nextTime = Math.ceil(nextTime / snapCrochet - .002 - 1 - snapLeniency);
+			else
+				nextTime = Math.floor(nextTime / snapCrochet + .002 + 1 + snapLeniency);
+			nextTime *= snapCrochet;
+			if (nextTime < 0) {
+				loadSection(curSec = Std.int(Math.max(curSec - 1, 0)));
+				nextTime = secStartTime - cachedSectionCrochets[curSec] / snap;
+			} else {
+				nextTime += secStartTime;
+			}
+			Conductor.songPosition = FlxG.sound.music.time = Math.max(0, Math.min(nextTime + .0001, FlxG.sound.music.length));
+			if (curSec < cachedSectionTimes.length - 1 && Conductor.songPosition >= cachedSectionTimes[curSec + 1])
+				loadSection(curSec + 1);
+			forceDataUpdate = true;
+			updateScrollY();
+			updateVortexHolds();
+			vortexMoved = true;
+		}
+	}
+
+	function keyUp(event:KeyboardEvent) {
+		var eventKey:FlxKey = event.keyCode;
+
+		var num:Int = keysArray.indexOf(eventKey);
+		if (num != -1) {
+			_keysPressedBuffer[num] = false;
+			_heldNotes[num] = null;
+		}
+	}
+
+	function updateVortexHolds() {
+		for (num => key in keysArray) {
+			if (_heldNotes[num] != null) {
+				var noteSec:Int = 0;
+				var note:MetaNote = _heldNotes[num];
+				while (cachedSectionTimes.length > noteSec + 1 && cachedSectionTimes[noteSec + 1] <= note.strumTime)
+					noteSec++;
+				note.sustainLength = FlxG.sound.music.time - note.strumTime;
+				note.setSustainLength(note.sustainLength, cachedSectionCrochets[noteSec] / 4, curZoom);
+			}
+		}
 	}
 
 	function loadFileList(mainFolder:String, ?optionalList:String = null, ?fileTypes:Array<String> = null)
@@ -4700,7 +6082,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				#if MODS_ALLOWED
 				var unparsedJson = File.getContent(path);
 				#else
-				var unparsedJson = OpenFlAssets.getText(path);
+				var unparsedJson = Assets.getText(path);
 				#end
 				return cast Json.parse(unparsedJson);
 			}
@@ -4748,7 +6130,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		if(currentUndo > 0) undoActions = undoActions.slice(currentUndo);
 		currentUndo = 0;
 		undoActions.insert(0, {action: action, data: data});
-		while(undoActions.length > 15)
+		while(undoActions.length > 99999999) // again, ShadowMario i swear to fucking god. Rhythm Games support more than this!! Fuck FNF at this point. I really fucking hate this. I'm struggling to fuckin select ALL notes when it only selects "all" in a section. Literally ShadowMario, WTF! Kade, Codename, Restructure Engines support Selecting every single note. Fuck you. Literally i fucking hate you.
 		{
 			var lastAction:UndoStruct = undoActions.pop();
 			if(lastAction != null)
@@ -4787,6 +6169,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			case MOVE_NOTE:
 				actionRemoveNotes(action.data.movedNotes, action.data.movedEvents);
 				actionPushNotes(action.data.originalNotes, action.data.originalEvents);
+				onSelectNote();
 
 			case SELECT_NOTE:
 				resetSelectedNotes();
@@ -4819,6 +6202,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			case MOVE_NOTE:
 				actionRemoveNotes(action.data.originalNotes, action.data.originalEvents);
 				actionPushNotes(action.data.movedNotes, action.data.movedEvents);
+				onSelectNote();
 
 			case SELECT_NOTE:
 				resetSelectedNotes();
@@ -4841,6 +6225,8 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				{
 					notes.push(note);
 					selectedNotes.push(note);
+					note.songData[0] = note.strumTime;
+					note.songData[1] = note.chartNoteData;
 				}
 			}
 			notes.sort(PlayState.sortByTime);
@@ -4853,6 +6239,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				{
 					events.push(event);
 					selectedNotes.push(event);
+					event.songData[0] = event.strumTime;
 				}
 			}
 			events.sort(PlayState.sortByTime);
@@ -4870,6 +6257,12 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				{
 					notes.remove(note);
 					selectedNotes.remove(note);
+
+					if(note.exists)
+					{
+						note.colorTransform.redMultiplier = note.colorTransform.greenMultiplier = note.colorTransform.blueMultiplier = 1;
+						if(note.animation.curAnim != null) note.animation.curAnim.curFrame = 0;
+					}
 				}
 
 			}
@@ -4882,6 +6275,12 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				{
 					trace(events.remove(event));
 					selectedNotes.remove(event);
+
+					if(event.exists)
+					{
+						event.colorTransform.redMultiplier = event.colorTransform.greenMultiplier = event.colorTransform.blueMultiplier = 1;
+						if(event.animation.curAnim != null) event.animation.curAnim.curFrame = 0;
+					}
 				}
 			}
 		}
@@ -4925,13 +6324,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		}
 		waveformSprite.pixels.fillRect(new Rectangle(0, 0, width, height), 0x00FFFFFF);
 
-		wavData[0][0].resize(0);
-		wavData[0][1].resize(0);
-		wavData[1][0].resize(0);
-		wavData[1][1].resize(0);
-
-		var sound:FlxSound = switch(waveformTarget)
-		{
+		drawOnWaveform(switch(waveformTarget) {
 			case INST:
 				FlxG.sound.music;
 			case PLAYER:
@@ -4940,13 +6333,32 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				opponentVocals;
 			default:
 				null;
+			}, width, height);
+
+			if (waveformTarget == EVERYTHING) {
+				drawOnWaveform(vocals, width, height, -.25, .75);
+				drawOnWaveform(opponentVocals, width, height, .25, .75);
+				drawOnWaveform(FlxG.sound.music, width, height, 0, .5);
+			}
+	
+			#else
+			waveformSprite.visible = false;
+			#end
 		}
-		
+	
+		#if (lime_cffi && !macro)
+		function drawOnWaveform(sound:FlxSound, width:Int, height:Int, offset:Float = 0, amp:Float = 1) {
 		@:privateAccess
-		if (sound != null && sound._sound != null && sound._sound.__buffer != null)
-		{
-			var bytes:Bytes = sound._sound.__buffer.data.toBytes();
-			wavData = waveformData(sound._sound.__buffer, bytes, cachedSectionTimes[curSec] - Conductor.offset, cachedSectionTimes[curSec+1] - Conductor.offset, 1, wavData, height);
+		if (sound == null || sound._sound == null || sound._sound.__buffer == null) return;
+
+		wavData[0][0].resize(0);
+		wavData[0][1].resize(0);
+		wavData[1][0].resize(0);
+		wavData[1][1].resize(0);
+
+		@:privateAccess {
+		var bytes:Bytes = sound._sound.__buffer.data.toBytes();
+		wavData = waveformData(sound._sound.__buffer, bytes, cachedSectionTimes[curSec] - Conductor.offset, cachedSectionTimes[curSec+1] - Conductor.offset, 1, wavData, height);
 		}
 
 		// Draws
@@ -4967,12 +6379,12 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			var rmin:Float = FlxMath.bound(((index < wavData[1][0].length && index >= 0) ? wavData[1][0][index] : 0) * (gSize / 1.12), -hSize, hSize) / 2;
 			var rmax:Float = FlxMath.bound(((index < wavData[1][1].length && index >= 0) ? wavData[1][1][index] : 0) * (gSize / 1.12), -hSize, hSize) / 2;
 
-			waveformSprite.pixels.fillRect(new Rectangle(hSize - (lmin + rmin), index * size, (lmin + rmin) + (lmax + rmax), size), FlxColor.WHITE);
+			var ww:Float = ((lmin + rmin) + (lmax + rmax)) * amp;
+			var xx:Float = /*Math.max(0, Math.min(gSize - ww, */hSize - ww * .5 + (gSize * offset);//));
+			waveformSprite.pixels.fillRect(new Rectangle(xx, index * size, ww, size), FlxColor.WHITE);
 		}
-		#else
-		waveformSprite.visible = false;
-		#end
 	}
+	#end
 
 	function waveformData(buffer:AudioBuffer, bytes:Bytes, time:Float, endTime:Float, multiply:Float = 1, ?array:Array<Array<Array<Float>>>, ?steps:Float):Array<Array<Array<Float>>>
 	{

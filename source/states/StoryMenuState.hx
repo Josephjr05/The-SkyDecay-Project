@@ -54,7 +54,7 @@ class StoryMenuState extends MusicBeatState
 
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Menus", null);
+		DiscordClient.changePresence("The Story Beholds Here..", null);
 		#end
 
 		if(WeekData.weeksList.length < 1)
@@ -196,7 +196,7 @@ class StoryMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		if(grpWeekText.length < 1)
+		if(WeekData.weeksList.length < 1)
 		{
 			if (controls.BACK && !movedBack && !selectedWeek)
 			{
@@ -351,7 +351,7 @@ class StoryMenuState extends MusicBeatState
 			LoadingState.prepareToSong();
 			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
-				#if SHOW_LOADING_SCREEN FlxG.sound.music.stop(); #end
+				#if !SHOW_LOADING_SCREEN FlxG.sound.music.stop(); #end
 				LoadingState.loadAndSwitchState(new PlayState(), true);
 				FreeplayState.destroyFreeplayVocals();
 			});

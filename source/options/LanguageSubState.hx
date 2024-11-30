@@ -20,7 +20,7 @@ class LanguageSubState extends MusicBeatSubstate
 
 		languages.push(ClientPrefs.defaultData.language); //English (US)
 		displayLanguages.set(ClientPrefs.defaultData.language, Language.defaultLangName);
-		var directories:Array<String> = Mods.directoriesWithFile(Paths.getSharedPath(), 'data/');
+		var directories:Array<String> = Mods.directoriesWithFile(Paths.getSharedPath(), '');
 		for (directory in directories)
 		{
 			for (file in FileSystem.readDirectory(directory))
@@ -90,6 +90,8 @@ class LanguageSubState extends MusicBeatSubstate
 			grpLanguages.add(text);
 		}
 		changeSelected();
+		
+		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 	}
 
 	var changedLanguage:Bool = false;

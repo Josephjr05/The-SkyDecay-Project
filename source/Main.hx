@@ -17,9 +17,14 @@ import openfl.events.Event;
 import openfl.display.StageScaleMode;
 import lime.app.Application;
 import states.TitleState;
+import backend.SSPlugin as ScreenShotPlugin;
 
 #if linux
 import lime.graphics.Image;
+#end
+
+#if desktop
+import backend.ALSoftConfig; // Just to make sure DCE doesn't remove this, since it's not directly referenced anywhere else.
 #end
 
 //crash handler stuff
@@ -137,6 +142,12 @@ class Main extends Sprite
 		}
 		#end
 
+		#if (!web && flixel < "5.5.0")
+		FlxG.plugins.add(new ScreenShotPlugin());
+		#elseif (flixel >= "5.6.0")
+		FlxG.plugins.addIfUniqueType(new ScreenShotPlugin());
+		#end
+
 		#if linux
 		var icon = Image.fromFile("icon.png");
 		Lib.current.stage.window.setIcon(icon);
@@ -198,7 +209,7 @@ class Main extends Sprite
 		dateNow = dateNow.replace(" ", "_");
 		dateNow = dateNow.replace(":", "'");
 
-		path = "./crash/" + "PsychEngine_" + dateNow + ".txt";
+		path = "./crash/" + "SkyDecayEngine_" + dateNow + ".txt";
 
 		for (stackItem in callStack)
 		{
@@ -218,7 +229,7 @@ class Main extends Sprite
 		*/
 		// 
 		#if officialBuild
-		errMsg += "\nPlease report this error to the GitHub page: https://github.com/ShadowMario/FNF-PsychEngine\n\n> Crash Handler written by: sqirra-rng";
+		errMsg += "\nPlease report this error to the GitHub page:https://github.com/Josephjr05/The-SkyDecay-Project\n\n> Crash Handler originally written by: sqirra-rng\nFrom Psych Engine";
 		#end
 
 		if (!FileSystem.exists("./crash/"))

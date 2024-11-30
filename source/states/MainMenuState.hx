@@ -15,7 +15,7 @@ enum MainMenuColumn {
 class MainMenuState extends MusicBeatState
 {
 	public static var psychEngineVersion:String = '1.0-prerelease'; // This is also used for Discord RPC
-	public static var SDEngineVersion:String = '0.2';
+	public static var sdEngineVersion:String = '0.2';
 	public static var curSelected:Int = 0;
 	public static var curColumn:MainMenuColumn = CENTER;
 	var allowMouse:Bool = true; //Turn this off to block mouse movement in menus
@@ -26,9 +26,9 @@ class MainMenuState extends MusicBeatState
 
 	//Centered/Text options
 	var optionShit:Array<String> = [
-		'story_mode',
+		// 'story_mode',
 		'freeplay',
-		#if MODS_ALLOWED 'mods', #end
+		// #if MODS_ALLOWED 'mods', #end
 		'credits'
 	];
 
@@ -92,7 +92,7 @@ class MainMenuState extends MusicBeatState
 			rightItem.x -= rightItem.width;
 		}
 
-		var psychVer:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + psychEngineVersion, 12);
+		var psychVer:FlxText = new FlxText(12, FlxG.height - 44, 0, "SkyDecay Engine v" + sdEngineVersion, 12);
 		psychVer.scrollFactor.set();
 		psychVer.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(psychVer);
@@ -290,7 +290,7 @@ class MainMenuState extends MusicBeatState
 							case 'story_mode':
 								MusicBeatState.switchState(new StoryMenuState());
 							case 'freeplay':
-								MusicBeatState.switchState(new FreeplayState());
+								MusicBeatState.switchState(new FreeplayState());	
 
 							#if MODS_ALLOWED
 							case 'mods':

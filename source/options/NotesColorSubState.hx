@@ -13,7 +13,7 @@ import objects.Note;
 import shaders.RGBPalette;
 import shaders.RGBPalette.RGBShaderReference;
 
-class NotesSubState extends MusicBeatSubstate
+class NotesColorSubState extends MusicBeatSubstate
 {
 	var onModeColumn:Bool = true;
 	var curSelectedMode:Int = 0;
@@ -54,6 +54,7 @@ class NotesSubState extends MusicBeatSubstate
 		DiscordClient.changePresence("Note Colors Menu", null);
 		#end
 		
+		onPixel = PlayState.isPixelStage;
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFFEA71FD;
 		bg.screenCenter();
@@ -166,6 +167,7 @@ class NotesSubState extends MusicBeatSubstate
 		FlxG.mouse.visible = !controls.controllerMode;
 		controllerPointer.visible = controls.controllerMode;
 		_lastControllerMode = controls.controllerMode;
+		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 	}
 
 	function updateTip()

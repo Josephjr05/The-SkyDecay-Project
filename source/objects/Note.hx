@@ -1,5 +1,8 @@
 package objects;
 
+//Import FlxSkewedSprite at the top
+import flixel.addons.effects.FlxSkewedSprite;
+
 import backend.animation.PsychAnimationController;
 import backend.NoteTypesConfig;
 
@@ -7,6 +10,7 @@ import shaders.RGBPalette;
 import shaders.RGBPalette.RGBShaderReference;
 
 import objects.StrumNote;
+import objects.SustainSplash;
 
 import flixel.math.FlxRect;
 
@@ -35,6 +39,10 @@ typedef NoteSplashData = {
 **/
 class Note extends FlxSprite
 {
+  //add these 2 variables for the renderer
+  // public var mesh:modcharting.SustainStrip = null;
+  public var z:Float = 0;
+  
 	//This is needed for the hardcoded note types to appear on the Chart Editor,
 	//It's also used for backwards compatibility with 0.1 - 0.3.2 charts.
 	public static final defaultNoteTypes:Array<String> = [
@@ -45,11 +53,11 @@ class Note extends FlxSprite
 		'GF Sing',
 		'No Animation'
 	];
-
 	public var extraData:Map<String, Dynamic> = new Map<String, Dynamic>();
 
 	public var strumTime:Float = 0;
 	public var noteData:Int = 0;
+	public var strumLine:Int = 0;
 
 	public var mustPress:Bool = false;
 	public var canBeHit:Bool = false;
@@ -68,6 +76,7 @@ class Note extends FlxSprite
 
 	public var tail:Array<Note> = []; // for sustains
 	public var parent:Note;
+	public var noteHoldSplash:SustainSplash;
 	
 	public var blockHit:Bool = false; // only works for player
 
@@ -202,14 +211,14 @@ class Note extends FlxSprite
 					rgbShader.b = 0xFF990022;
 
 					// splash data and colors
-					//noteSplashData.r = 0xFFFF0000;
-					//noteSplashData.g = 0xFF101010;
+					// noteSplashData.r = 0xFFFF0000;
+					// noteSplashData.g = 0xFF101010;
 					noteSplashData.texture = 'noteSplashes-electric';
 
 					// gameplay data
 					lowPriority = true;
 					missHealth = isSustainNote ? 0.25 : 0.1;
-					hitCausesMiss = true;
+					hitCausesMiss = false;
 					hitsound = 'cancelMenu';
 					hitsoundChartEditor = false;
 				case 'Alt Animation':
@@ -273,15 +282,15 @@ class Note extends FlxSprite
 
 		if (isSustainNote && prevNote != null)
 		{
-			alpha = 0.6;
-			multAlpha = 0.6;
+			alpha = ClientPrefs.data.holdAlpha;
+			multAlpha = ClientPrefs.data.holdAlpha;
 			hitsoundDisabled = true;
 			if(ClientPrefs.data.downScroll) flipY = true;
 
 			offsetX += width / 2;
 			copyAngle = false;
 
-			animation.play(colArray[noteData % colArray.length] + 'holdend');
+			animation.play(colArray[noteData % colArray.length] + 'holdend'); // somehow gotta make it so it uses goodNoteHit here
 
 			updateHitbox();
 
@@ -477,10 +486,11 @@ class Note extends FlxSprite
 		{
 			canBeHit = false;
 
-			if (strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult))
+			if (!wasGoodHit && strumTime <= Conductor.songPosition)
 			{
-				if((isSustainNote && prevNote.wasGoodHit) || strumTime <= Conductor.songPosition)
+				if(!isSustainNote || (prevNote.wasGoodHit && !ignoreNote)) {
 					wasGoodHit = true;
+				} // wait release timing??m | nope
 			}
 		}
 
@@ -508,7 +518,6 @@ class Note extends FlxSprite
 		distance = (0.45 * (Conductor.songPosition - strumTime) * songSpeed * multSpeed);
 		if (!myStrum.downScroll) distance *= -1;
 
-		var angleDir = strumDirection * Math.PI / 180;
 		if (copyAngle)
 			angle = strumDirection - 90 + strumAngle + offsetAngle;
 
@@ -516,11 +525,15 @@ class Note extends FlxSprite
 			alpha = strumAlpha * multAlpha;
 
 		if(copyX)
-			x = strumX + offsetX + Math.cos(angleDir) * distance;
+		{
+			@:privateAccess
+			x = strumX + offsetX + myStrum._dirCos * distance;
+		}
 
 		if(copyY)
 		{
-			y = strumY + offsetY + correctionOffset + Math.sin(angleDir) * distance;
+			@:privateAccess
+			y = strumY + offsetY + correctionOffset + myStrum._dirSin * distance;
 			if(myStrum.downScroll && isSustainNote)
 			{
 				if(PlayState.isPixelStage)
@@ -535,8 +548,7 @@ class Note extends FlxSprite
 	public function clipToStrumNote(myStrum:StrumNote)
 	{
 		var center:Float = myStrum.y + offsetY + Note.swagWidth / 2;
-		if(isSustainNote && (mustPress || !ignoreNote) &&
-			(!mustPress || (wasGoodHit || (prevNote.wasGoodHit && !canBeHit))))
+		if((isSustainNote && mustPress || !ignoreNote) && (!mustPress) || (wasGoodHit || (prevNote.wasGoodHit && !canBeHit)))
 		{
 			var swagRect:FlxRect = clipRect;
 			if(swagRect == null) swagRect = new FlxRect(0, 0, frameWidth, frameHeight);

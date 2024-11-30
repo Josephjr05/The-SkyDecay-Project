@@ -36,9 +36,6 @@ import states.TitleState;
 		[0xFF71E300, 0xFFF6FFE6, 0xFF003100],
 		[0xFFFF884E, 0xFFFFFAF5, 0xFF6C0000]];
 
-	public var lossless:Bool = false;
-	public var quality:Int = 100;
-	public var renderGCRate:Float = 5.0;
 	public var ghostTapping:Bool = true;
 	public var opponentPlay:Bool = false;
 	public var mirror:Bool = false;
@@ -48,7 +45,7 @@ import states.TitleState;
 	public var healthBarAlpha:Float = 1;
 	public var hitsoundVolume:Float = 0;
 	public var pauseMusic:String = 'Tea Time';
-	public var checkForUpdates:Bool = false;
+	public var checkForUpdates:Bool = true;
 	public var comboStacking:Bool = false;
 	public var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
@@ -77,15 +74,39 @@ import states.TitleState;
 	public var perfectRating:Bool = true;	
 	public var perfectSprite:Bool = true;
 	public var perfectWindow:Float = 16.0; // decimal adds precise value to hit window (similar to Osu Mania)
-	public var greatWindow:Float = 40.0;
-	public var goodWindow:Float = 73.0;
-	public var okWindow:Float = 123.0;
-	public var safeFrames:Float = 10.0;
-	public var guitarHeroSustains:Bool = false;
+	public var greatWindow:Float = 43.0;
+	public var goodWindow:Float = 76.0;
+	public var okWindow:Float = 106.0;
+	public var safeFrames:Float = 10.0; // safe frames takes your input instantly!!
+	public var guitarHeroSustains:Bool = false; // fuck u
 	public var discordRPC:Bool = true;
 	public var loadingScreen:Bool = true;
-	public var resultsScreen:Bool = true;
 	public var language:String = 'en-US';
+
+	// SkyDecay Engine variables
+		public var skipTitleVideo:Bool = false;
+
+		public var holdSplashAlpha:Float = 0.6;
+		public var holdAlpha:Float = 0.6;
+
+		public var lightcycle:String = 'Auto Lights';
+
+		public var comboBurst:Bool = true; // take my cheer GF PLEASE!!
+		public var resultsScreen:Bool = true;
+		public var resultsGroovin:Bool = false;
+		public var BaseGame:Bool = true;
+
+		// screenshot shit
+		public var ah:Bool = false;
+		public var lossless:Bool = false;
+		public var quality:Int = 100;
+		public var renderSS:Float = 5.0;
+		public var targetFPS:Float = 60;
+		public var screenShotMode:Bool = false;
+
+		// lane underlay
+		public var underlaneVisibility:Float = 0;
+		public var opponentUnderlaneVisibility:Float = 0;
 }
 
 class ClientPrefs {

@@ -70,7 +70,7 @@ class LoadingState extends MusicBeatState
 
 	override function create()
 	{
-		#if SHOW_LOADING_SCREEN
+		#if !SHOW_LOADING_SCREEN
 		while(true)
 		#end
 		{
@@ -81,12 +81,14 @@ class LoadingState extends MusicBeatState
 				onLoad();
 				return;
 			}
-			#if SHOW_LOADING_SCREEN
+			#if !SHOW_LOADING_SCREEN
 			Sys.sleep(0.001);
 			#end
 		}
 
 		#if SD_WATERMARKS // SD LOADING SCREEN
+		FlxG.sound.playMusic(Paths.music('loadingScreen/0'));
+
 		var bg = new FlxSprite().loadGraphic(Paths.image('loading_screen/refloading'));
 		bg.setGraphicSize(Std.int(FlxG.width));
 		bg.updateHitbox();
@@ -97,22 +99,21 @@ class LoadingState extends MusicBeatState
 		loadingText.borderSize = 2;
 		add(loadingText);
 	
-		logo = new FlxSprite(0, 0).loadGraphic(Paths.image('loading_screen/sdpjPROD'));
-		logo.scale.set(0.75, 0.75);
+		logo = new FlxSprite(200, 200).loadGraphic(Paths.image('loading_screen/kweLOAD'));
+		logo.scale.set(0.4, 0.4);
 		logo.updateHitbox();
 		logo.antialiasing = ClientPrefs.data.antialiasing;
-		logo.screenCenter();
 		logo.x -= 50;
 		logo.y -= 40;
 		add(logo);
 
-		whiteBF = new FlxSprite(700, 140);
+		whiteBF = new FlxSprite(650, 235);
+		whiteBF.scale.set(0.3, 0.3);
 		whiteBF.frames = Paths.getSparrowAtlas('loading_screen/bf-running');
-		whiteBF.animation.addByPrefix('bf running', 'bf running', 31, true);
+		whiteBF.animation.addByPrefix('bfRun', 'bf-running', 24, true);
+		whiteBF.animation.play('bfRun'); // remember this now bitch - Joseph
 		whiteBF.antialiasing = ClientPrefs.data.antialiasing;
-		whiteBF.flipX = (logo.offset.x > 0);
-		whiteBF.x = FlxG.width + 200;
-		whiteBF.velocity.x = -1100;
+		add(whiteBF);
 
 		#else // BASE GAME LOADING SCREEN
 		var bg = new FlxSprite().makeGraphic(1, 1, 0xFFCAFF4D);
@@ -170,9 +171,10 @@ class LoadingState extends MusicBeatState
 			bar.updateHitbox();
 		}
 
-		#if SD_WATERMARKS // PSYCH LOADING SCREEN
+		#if SD_WATERMARKS // SD LOADING SCREEN
 		timePassed += elapsed;
 		shakeFl += elapsed * 3000;
+		shakeMult = 1;
 		var dots:String = '';
 		switch(Math.floor(timePassed % 1 * 3))
 		{
@@ -184,60 +186,8 @@ class LoadingState extends MusicBeatState
 				dots = '...';
 		}
 		loadingText.text = Language.getPhrase('now_loading', 'Now Loading{1}', [dots]);
-
-		/* if(!spawnedPessy) for reference!! - Joseph
-		{
-			if(!transitioning && controls.ACCEPT)
-			{
-				shakeMult = 1;
-				FlxG.sound.play(Paths.sound('cancelMenu'));
-				pressedTimes++;
-			}
-			shakeMult = Math.max(0, shakeMult - elapsed * 5);
-			logo.offset.x = Math.sin(shakeFl * Math.PI / 180) * shakeMult * 100;
-
-			if(pressedTimes >= 5)
-			{
-				FlxG.camera.fade(0xAAFFFFFF, 0.5, true);
-				logo.visible = false;
-				spawnedPessy = true;
-				canChangeState = false;
-				FlxG.sound.play(Paths.sound('secret'));
-
-				pessy = new FlxSprite(700, 140);
-				pessy.frames = Paths.getSparrowAtlas('loading_screen/pessy');
-				pessy.animation.addByPrefix('run', 'run', 24, true);
-				pessy.animation.addByPrefix('spin', 'spin', 24, true);
-				pessy.antialiasing = ClientPrefs.data.antialiasing;
-				pessy.flipX = (logo.offset.x > 0);
-				pessy.x = FlxG.width + 200;
-				pessy.velocity.x = -1100;
-
-				new FlxTimer().start(0.01, function(tmr:FlxTimer) {
-					if(pessy.flipX)
-					{
-						pessy.x = -pessy.width - 200;
-						pessy.velocity.x *= -1;
-					}
-		
-					pessy.animation.play('run', true);
-					Achievements.unlock('pessy_easter_egg');
-					
-					insert(members.indexOf(loadingText), pessy);
-					new FlxTimer().start(5, function(tmr:FlxTimer) canChangeState = true);
-				});
-			}
-		}
-		else if(!isSpinning && (pessy.flipX && pessy.x > FlxG.width) || (!pessy.flipX && pessy.x < -pessy.width))
-		{
-			isSpinning = true;
-			pessy.animation.play('spin', true);
-			pessy.flipX = false;
-			pessy.x = 500;
-			pessy.y = FlxG.height + 500;
-			pessy.velocity.x = 0;
-			FlxTween.tween(pessy, {y: 10}, 0.65, {ease: FlxEase.quadOut});
-		} */
+		shakeMult = Math.max(0, shakeMult - elapsed * 2);
+		logo.offset.x = Math.sin(shakeFl * Math.PI / 180) * shakeMult * 4;
 		#end
 	}
 	
@@ -626,7 +576,7 @@ class LoadingState extends MusicBeatState
 		{
 			if (#if sys FileSystem.exists(file) || #end OpenFlAssets.exists(file, SOUND))
 			{
-				var sound:Sound = OpenFlAssets.getSound(file, false);
+				var sound:Sound = #if sys Sound.fromFile(file) #else OpenFlAssets.getSound(file, false) #end;
 				mutex.acquire();
 				Paths.currentTrackedSounds.set(file, sound);
 				mutex.release();

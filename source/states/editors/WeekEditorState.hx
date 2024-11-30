@@ -19,6 +19,7 @@ import states.editors.content.Prompt;
 
 class WeekEditorState extends MusicBeatState implements PsychUIEventHandler.PsychUIEvent
 {
+	var music:EditingMusic;
 	var txtWeekTitle:FlxText;
 	var bgSprite:FlxSprite;
 	var lock:FlxSprite;
@@ -39,6 +40,7 @@ class WeekEditorState extends MusicBeatState implements PsychUIEventHandler.Psyc
 	}
 
 	override function create() {
+		music = new EditingMusic();
 		txtWeekTitle = new FlxText(FlxG.width * 0.7, 10, 0, "", 32);
 		txtWeekTitle.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
 		txtWeekTitle.alpha = 0.7;
@@ -411,6 +413,7 @@ class WeekEditorState extends MusicBeatState implements PsychUIEventHandler.Psyc
 		else ClientPrefs.toggleVolumeKeys(false);
 
 		super.update(elapsed);
+		music.update(elapsed);
 
 		lock.y = weekThing.y;
 		missingFileText.y = weekThing.y + 36;
@@ -428,7 +431,7 @@ class WeekEditorState extends MusicBeatState implements PsychUIEventHandler.Psyc
 		_file.addEventListener(#if desktop Event.SELECT #else Event.COMPLETE #end, onLoadComplete);
 		_file.addEventListener(Event.CANCEL, onLoadCancel);
 		_file.addEventListener(IOErrorEvent.IO_ERROR, onLoadError);
-		_file.browse([jsonFilter]);
+		_file.browse([#if !mac jsonFilter #end]);
 	}
 	
 	public static var loadedWeek:WeekFile = null;
@@ -542,6 +545,7 @@ class WeekEditorState extends MusicBeatState implements PsychUIEventHandler.Psyc
 
 class WeekEditorFreeplayState extends MusicBeatState implements PsychUIEventHandler.PsychUIEvent
 {
+	var music:EditingMusic;
 	var weekFile:WeekFile = null;
 	public function new(weekFile:WeekFile = null)
 	{
@@ -557,6 +561,7 @@ class WeekEditorFreeplayState extends MusicBeatState implements PsychUIEventHand
 	var curSelected = 0;
 
 	override function create() {
+		music = new EditingMusic();
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		bg.color = FlxColor.WHITE;

@@ -30,6 +30,7 @@ class NoteSplashEditorState extends MusicBeatState
     var properUI:PsychUIBox;
     var shaderUI:PsychUIBox;
 
+    var music:EditingMusic;
     override function create()
     {
         if (imageSkin == null)
@@ -80,7 +81,7 @@ class NoteSplashEditorState extends MusicBeatState
         for (i in 0...4)
         {
             var babyArrow:StrumNote = new StrumNote(-273, 50, i % 4, 1);
-            babyArrow.postAddedToGroup();
+            babyArrow.playerPosition();
             babyArrow.screenCenter(Y);
             babyArrow.ID = i;
             strums.add(babyArrow);
@@ -504,6 +505,7 @@ class NoteSplashEditorState extends MusicBeatState
     override function update(elapsed:Float)
     { 
         super.update(elapsed);
+        music.update(elapsed);
 
         errorText.x = FlxG.width - errorText.width - 5;
 
@@ -830,7 +832,7 @@ class NoteSplashEditorState extends MusicBeatState
 		_file.addEventListener(Event.SELECT, onLoadComplete);
 		_file.addEventListener(Event.CANCEL, onLoadCancel);
 		_file.addEventListener(IOErrorEvent.IO_ERROR, onLoadError);
-		_file.browse([#if windows jsonFilter #end]);
+		_file.browse([#if !mac jsonFilter #end]);
 	}
 
 	function onLoadComplete(_):Void

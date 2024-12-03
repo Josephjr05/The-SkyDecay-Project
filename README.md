@@ -1,4 +1,4 @@
-# Friday Night Funkin' - SkyDecay Engine
+# SkyDecay Engine
 A very heavy fork and heavily overhaul of FNF - Psych Engine. Aiming to actually, and LITERALLY have everything an engine should have/need. That uses other rhythm games's systems and settings to make FNF a completely different, and original ideal game! As of now, SkyDecay Engine is only used for The SkyDecay Project (https://gamebanana.com/wips/68022) by Josephjr05 (Creator of the engine).
 
 ## Psych Engine LUA API:

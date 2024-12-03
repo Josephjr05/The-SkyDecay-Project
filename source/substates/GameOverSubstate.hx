@@ -62,27 +62,24 @@ class GameOverSubstate extends MusicBeatSubstate
 		Conductor.songPosition = 0;
 
 		if(boyfriend == null)
-		{
-			boyfriend = new Character(PlayState.instance.boyfriend.getScreenPosition().x, PlayState.instance.boyfriend.getScreenPosition().y, characterName, true);
-			boyfriend.x += boyfriend.positionArray[0] - PlayState.instance.boyfriend.positionArray[0];
-			boyfriend.y += boyfriend.positionArray[1] - PlayState.instance.boyfriend.positionArray[1];
-		}
-		boyfriend.setPosition(PlayState.instance.boyfriend.getScreenPosition().x, PlayState.instance.boyfriend.getScreenPosition().y);
+			boyfriend = new Character(PlayState.instance.boyfriend.getPosition().x, PlayState.instance.boyfriend.getPosition().y, characterName, true);
+		boyfriend.setPosition(PlayState.instance.boyfriend.getPosition().x, PlayState.instance.boyfriend.getPosition().y);
 		boyfriend.skipDance = true;
 		add(boyfriend);
 
+		if (camFollow == null)
+			camFollow = new FlxObject();
+		camFollow.setPosition(PlayState.instance.boyfriend.getMidpoint().x, PlayState.instance.boyfriend.getMidpoint().y);
+		
+
 		FlxG.sound.play(Paths.sound(deathSoundName));
 		FlxG.camera.scroll.set();
-		FlxG.camera.target = null;
+		FlxG.camera.target = camFollow;
 
 		boyfriend.playAnim('firstDeath');
 
 		PlayState.instance.camOther.alpha = 0;
 		PlayState.instance.camHUD.alpha = 0;
-
-		// i am so sorry for this long ahh code just for the camera to fucking act right!!
-		camFollow.setPosition((PlayState.instance.boyfriend.getMidpoint().x - 100) - PlayState.instance.boyfriend.cameraPosition[0] - PlayState.instance.boyfriendCameraOffset[0], (PlayState.instance.boyfriend.getMidpoint().y - 100) + PlayState.instance.boyfriend.cameraPosition[1] + PlayState.instance.boyfriendCameraOffset[1]);
-		add(camFollow);
 
 		PlayState.instance.setOnScripts('inGameOver', true);
 		PlayState.instance.callOnScripts('onGameOverStart', []);

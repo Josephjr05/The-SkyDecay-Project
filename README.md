@@ -71,6 +71,7 @@ _____________________________________
 
 ## Playfield (SWIP):
 * The playfield strums are now in it's own cam, go crazy on Lua!
+* CamHUD doesn't bop anymore (for many reasons why it shouldn't).
 * The playfield strums have also been moved (and on downscroll) to help read notes easier.
 (Will make a playfield editor to edit to your liking!)
 * Multi Key up to 18 keys is supported!
@@ -83,6 +84,6 @@ _____________________________________
 * Even if Base Game will have these, currently it doesn't.
 
 ## Other Stuff:
-* Disabled unnecessary options
+* Disabled unnecessary options (Like score txt zoom and combo stacking)
 * Disabled Base Game code (for optimization)
 * A new game.

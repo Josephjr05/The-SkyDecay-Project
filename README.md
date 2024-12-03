@@ -73,6 +73,7 @@ _____________________________________
 * The playfield strums are now in it's own cam, go crazy on Lua!
 * The playfield strums have also been moved (and on downscroll) to help read notes easier.
 (Will make a playfield editor to edit to your liking!)
+* Multi Key up to 18 keys is supported!
 
 ## Online Support (WIP):
 * With The SkyDecay Project and the engine, we will be adding support for not just leaderboards, also rankable maps by BNs! Heavily source coded for this engine (soon).

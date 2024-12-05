@@ -308,7 +308,7 @@ class ResultsScreen extends MusicBeatSubstate
 
 	function saveScoreResults()
 	{
-		if (FlxG.keys.justPressed.F12) // will do something with this
+		if (FlxG.keys.justPressed.F11) // will do something with this
 		{
 			if (FileSystem.exists('SDPJ-Saved-Scores'))
 		  	FileSystem.createDirectory('SDPJ-Saved-Scores');

@@ -138,7 +138,7 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 			"Arrow Keys/Mouse & Right Click - Move Object",
 			"",
 			'$btn - Toggle HUD',
-			"F12 - Toggle Selection Rectangle",
+			"F3 - Toggle Selection Rectangle",
 			"Hold Shift - Move Objects and Camera 4x faster",
 			"Hold Control - Move Objects pixel-by-pixel and Camera 4x slower"
 		];
@@ -1413,7 +1413,7 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 			spriteListRadioGroup.updateRadioItems();
 		}
 		
-		if(FlxG.keys.justPressed.F12)
+		if(FlxG.keys.justPressed.F3)
 			showSelectionQuad = !showSelectionQuad;
 		
 		var shiftMult:Float = 1;

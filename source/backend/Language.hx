@@ -11,8 +11,8 @@ class Language
 	{
 		#if TRANSLATIONS_ALLOWED
 		var langFile:String = ClientPrefs.data.language;
-		var loadedText:Array<String> = Mods.mergeAllTextsNamed('languages/$langFile.lang'); // keep data so languages can be added
-		trace(loadedText);
+		var loadedText:Array<String> = Mods.mergeAllTextsNamed('languages/$langFile.lang'); // keep languages so they can be added
+		// trace(loadedText);
 
 		phrases.clear();
 		var hasPhrases:Bool = false;
@@ -57,7 +57,7 @@ class Language
 	inline public static function getPhrase(key:String, ?defaultPhrase:String, values:Array<Dynamic> = null):String
 	{
 		#if TRANSLATIONS_ALLOWED
-		//trace(formatKey(key));
+		trace(formatKey(key));
 		var str:String = phrases.get(formatKey(key));
 		if(str == null) str = defaultPhrase;
 		#else

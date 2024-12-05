@@ -20,7 +20,7 @@ class LanguageSubState extends MusicBeatSubstate
 
 		languages.push(ClientPrefs.defaultData.language); //English (US)
 		displayLanguages.set(ClientPrefs.defaultData.language, Language.defaultLangName);
-		var directories:Array<String> = Mods.directoriesWithFile(Paths.getSharedPath(), '');
+		var directories:Array<String> = Mods.directoriesWithFile(Paths.getSharedPath(), 'languages/');
 		for (directory in directories)
 		{
 			for (file in FileSystem.readDirectory(directory))

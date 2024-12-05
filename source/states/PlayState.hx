@@ -36,9 +36,7 @@ import flixel.addons.display.FlxRuntimeShader;
 import openfl.filters.ShaderFilter;
 #end
 
-#if VIDEOS_ALLOWED
-import objects.FunkinVideo; // took from Psych PR by 
-#end
+import objects.VideoSprite;
 
 import objects.Note.EventNote;
 import objects.*;
@@ -1013,7 +1011,7 @@ class PlayState extends MusicBeatState
 	}
 
 	public var videoCutscene:VideoSprite = null;
-	public function startVideo(name:String, skippable:Bool = true, loop:Bool = false)
+	public function startVideo(name:String, forMidSong:Bool = false, canSkip:Bool = true, loop:Bool = false, playOnLoad:Bool = true)
 	{
 		#if VIDEOS_ALLOWED
 		inCutscene = true;
@@ -1021,34 +1019,60 @@ class PlayState extends MusicBeatState
 
 		var foundFile:Bool = false;
 		var fileName:String = Paths.video(name);
-		var filepath = Paths.video(name);
 
-		if(#if sys !FileSystem.exists(filepath) #else !OpenFlAssets.exists(filepath) #end && !name.startsWith("https://")) {
-			#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
-			addTextToDebug('Video not found: $fileName', FlxColor.RED);
-			#else
-			FlxG.log.error('Video not found: $fileName');
-			#end
+		#if sys
+		if (FileSystem.exists(fileName))
+		#else
+		if (OpenFlAssets.exists(fileName))
+		#end
+		foundFile = true;
+
+		if (foundFile)
+		{
+			videoCutscene = new VideoSprite(fileName, forMidSong, canSkip, loop);
+
+			// Finish callback cause FunkinVideo don't work
+			if (!forMidSong)
+			{
+				function onVideoEnd()
+				{
+					if (generatedMusic && PlayState.SONG.notes[Std.int(curStep / 16)] != null && !endingSong && !isCameraOnForcedPos)
+					{
+						moveCameraSection();
+						FlxG.camera.snapToTarget();
+					}
+					videoCutscene = null;
+					canPause = false;
+					inCutscene = false;
+			startAndEnd();
 			startAndEnd();
 			return;
-		}
-
-		var videoCutscene:FunkinVideo = new FunkinVideo(filepath, skippable);
-		videoCutscene.onFinish = (skipped:Bool) -> {
-			callOnScripts('onVideoCompleted', [name, skipped]);
+			startAndEnd();
 			startAndEnd();
 			canPause = true;
+					startAndEnd();
+			canPause = true;
 			return;
-		};
-		add(videoCutscene);
+				}
+				videoCutscene.finishCallback = onVideoEnd;
+				videoCutscene.onSkip = onVideoEnd;
+			}
+			add(videoCutscene);
 
-		if(videoCutscene.loadVideo(filepath, loop)) videoCutscene.playVideo();
-		else FlxG.log.warn('Video "$name" could not be properly loaded/played.');
+			if (playOnLoad)
+				videoCutscene.videoSprite.play();
+			return videoCutscene;
+		}
+		#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
+		else addTextToDebug("Video not found: " + fileName, FlxColor.RED);
+		#else
+		else FlxG.log.error("Video not found: " + fileName);
+		#end
 		#else
 		FlxG.log.warn('Platform not supported!');
 		startAndEnd();
-		return;
 		#end
+		return null;
 	}
 
 	function startAndEnd()
@@ -1756,6 +1780,7 @@ class PlayState extends MusicBeatState
 
 	override function openSubState(SubState:FlxSubState)
 	{
+		// var videoCutscene:FunkinVideo = null;
 		if(videoCutscene != null)
 			videoCutscene.videoSprite.pause();
 
@@ -1778,6 +1803,7 @@ class PlayState extends MusicBeatState
 	public var canResync:Bool = true;
 	override function closeSubState()
 	{
+		// var videoCutscene:FunkinVideo = null;
 		if(videoCutscene != null)
 			videoCutscene.videoSprite.resume();
 

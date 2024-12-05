@@ -1006,7 +1006,7 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 	{
 		var tab_group = UI_box.getTab('Meta').menu;
 
-		var characterList = Mods.mergeAllTextsNamed('data/characterList.txt');
+		var characterList = Mods.mergeAllTextsNamed('characterList.txt');
 		var foldersToCheck:Array<String> = Mods.directoriesWithFile(Paths.getSharedPath(), 'characters/');
 		for (folder in foldersToCheck)
 			for (file in FileSystem.readDirectory(folder))

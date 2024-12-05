@@ -1246,14 +1246,14 @@ class FunkinLua {
 			var path:String;
 			var songPath:String = Paths.formatToSongPath(Song.loadedSongName);
 			#if TRANSLATIONS_ALLOWED
-			path = Paths.getPath('data/$songPath/${dialogueFile}_${ClientPrefs.data.language}.json', TEXT);
+			path = Paths.getPath('songs/$songPath/${dialogueFile}_${ClientPrefs.data.language}.json', TEXT);
 			#if MODS_ALLOWED
 			if(!FileSystem.exists(path))
 			#else
 			if(!Assets.exists(path, TEXT))
 			#end
 			#end
-				path = Paths.getPath('data/$songPath/$dialogueFile.json', TEXT);
+				path = Paths.getPath('songs/$songPath/$dialogueFile.json', TEXT);
 
 			luaTrace('startDialogue: Trying to load dialogue: ' + path);
 

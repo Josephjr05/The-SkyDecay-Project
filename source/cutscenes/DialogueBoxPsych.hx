@@ -35,6 +35,7 @@ class DialogueBoxPsych extends FlxSpriteGroup
 	public var skipDialogueThing:Void->Void = null;
 	var bgFade:FlxSprite = null;
 	var box:FlxSprite;
+	var cbox:FlxSprite;
 	var textToType:String = '';
 
 	var arrayCharacters:Array<DialogueCharacter> = [];
@@ -88,15 +89,15 @@ class DialogueBoxPsych extends FlxSpriteGroup
 		box.updateHitbox();
 		add(box);
 
-		box = new FlxSprite(70, 370);
-		box.antialiasing = ClientPrefs.data.antialiasing;
-		box.frames = Paths.getSparrowAtlas('stages/camellia/Dialogue_Box');
-		box.animation.addByPrefix('start', 'P5_Box', 24, false);
-		box.animation.play('start', true);
-		box.visible = true; // make sure it stays when selected
-		box.setGraphicSize(Std.int(box.width));
-		box.updateHitbox();
-		add(box);
+		cbox = new FlxSprite(70, 370);
+		cbox.antialiasing = ClientPrefs.data.antialiasing;
+		cbox.frames = Paths.getSparrowAtlas('stages/camellia/Dialogue_Box');
+		cbox.animation.addByPrefix('start', 'P5_Box', 24, false);
+		cbox.animation.play('start', true);
+		cbox.visible = false; // make sure it stays when selected
+		cbox.setGraphicSize(Std.int(cbox.width));
+		cbox.updateHitbox();
+		add(cbox);
 
 		daText = new TypedAlphabet(DEFAULT_TEXT_X, DEFAULT_TEXT_Y, '');
 		daText.setScale(0.7);

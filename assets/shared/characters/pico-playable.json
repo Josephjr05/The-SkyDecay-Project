@@ -74,50 +74,50 @@
 		},
 		{
 			"offsets": [256, 232],
-			"indices": [],
+			"loop": false,
 			"fps": 24,
 			"anim": "shoot",
-			"loop": false,
+			"indices": [],
 			"name": "Pico Shoot Hip Full0"
 		},
 		{
 			"offsets": [0, 0],
-			"indices": [],
+			"loop": false,
 			"fps": 24,
 			"anim": "shootMISS",
-			"loop": false,
+			"indices": [],
 			"name": "Pico Hit Can0"
 		},
 		{
 			"offsets": [0, 0],
-			"indices": [],
+			"loop": false,
 			"fps": 24,
 			"anim": "cock",
-			"loop": false,
+			"indices": [],
 			"name": "Pico Reload0"
 		},
 		{
 			"offsets": [60, 0],
-			"indices": [],
+			"loop": false,
 			"fps": 24,
 			"anim": "intro1",
-			"loop": false,
+			"indices": [],
 			"name": "Pico Gets Pissed0"
 		},
 		{
 			"offsets": [0, 0],
-			"indices": [],
+			"loop": false,
 			"fps": 24,
 			"anim": "cockCutscene",
-			"loop": false,
+			"indices": [],
 			"name": "cutscene cock0"
 		},
 		{
 			"offsets": [255, 231],
-			"indices": [],
+			"loop": false,
 			"fps": 24,
 			"anim": "intro2",
-			"loop": false,
+			"indices": [],
 			"name": "shoot and return0"
 		}
 	],

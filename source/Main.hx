@@ -19,6 +19,8 @@ import lime.app.Application;
 import states.TitleState;
 import backend.SSPlugin as ScreenShotPlugin;
 
+import backend.AudioSwitchFix;
+
 #if linux
 import lime.graphics.Image;
 #end
@@ -57,6 +59,11 @@ class Main extends Sprite
 	};
 
 	public static var fpsVar:FPSCounter;
+
+	public static var noTerminalColor:Bool = false;
+	@:dox(hide)
+	public static var audioDisconnected:Bool = false;
+	public static var changeID:Int = 0;
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
 
@@ -113,6 +120,8 @@ class Main extends Sprite
 			game.height = Math.ceil(stageHeight / game.zoom);
 		}
 
+		AudioSwitchFix.init();
+		
 		#if LUA_ALLOWED
 		Mods.pushGlobalMods();
 		#end

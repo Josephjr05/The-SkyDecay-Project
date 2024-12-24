@@ -25,7 +25,7 @@ _____________________________________
 
 ## Ver:
 * Psych Engine mixed with Codename, and Restructure Engine features.
-(To have Osu Mania, Etterna, and Quaver features in FNF!)
+(To have Osu Mania, Etterna, Quaver, and NotITG features in FNF!)
   
 ## Optimized:
 * No matter how many notes there are in a chart (or on Botplay), it won't ever lagspike or drain some fps! But do make sure it's working well for your device.

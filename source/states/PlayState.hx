@@ -492,6 +492,7 @@ class PlayState extends MusicBeatState
 			case 'limo': new states.stages.Limo(); //Week 4
 			case 'camellia': new states.stages.Camellia(); //camellia studio
 			case 'concert': new states.stages.CamelliaConcert(); //camellia concert
+			case 'cyphisonia': new states.stages.Cyphisonia(); // cyphisonia ghost camellia stage!
 			case 'planet': new states.stages.Planet(); //camellia alt Planet
 			case 'limuCastle': new states.stages.LimuCastle(); // Limu stage 1!
 			case 'cornMaze': new states.stages.CornMaze(); // Bambi stage
@@ -2317,14 +2318,14 @@ class PlayState extends MusicBeatState
 		if (badApple) {
 			appleScreen.alpha = 0;
 			boyfriend.color = 0xFFFFFF;
-			gf.color = 0xFFFFFF;
+			// gf.color = 0xFFFFFF;
 			dad.color = 0xFFFFFF;
 		}
 	
 		if (!badApple) {
 			appleScreen.alpha = 1;
 			boyfriend.color = 0x000000;
-			gf.color = 0x000000;
+			// gf.color = 0x000000;
 			dad.color = 0x000000;
 		}
 	

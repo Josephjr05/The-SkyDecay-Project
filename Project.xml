@@ -125,6 +125,7 @@
 	<haxelib name="hxvlc" if="VIDEOS_ALLOWED" version="1.9.2"/>
 	<haxelib name="hxdiscord_rpc" version="1.2.4" if="DISCORD_ALLOWED"/>
 	<haxelib name="flxanimate"/>
+	<haxelib name="hxWindowColorMode" version="0.2.0" if="windows"/>
 
 	<!-- Disable Discord IO Thread -->
 	<haxedef name="DISCORD_DISABLE_IO_THREAD" if="hxdiscord_rpc" />
@@ -138,6 +139,8 @@
 
     <!--Uncomment if you want to use moonchart, which allows usage of chart formats from other rhythm games and fnf engines-->
     <haxelib name="moonchart" version="git" if="native"/>
+
+	<haxelib name="hxgamejolt-api"/>
 	
 	<!-- ______________________________ Haxedefines _____________________________ -->
 

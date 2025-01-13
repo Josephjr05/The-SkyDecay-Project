@@ -166,6 +166,9 @@ class HScript extends Iris {
 		#if flxanimate
 		set('FlxAnimate', FlxAnimate);
 		#end
+		#if hxWindowColorMode
+		set('WindowColorMode', hxwindowmode.WindowColorMode);
+		#end
 
 		// Functions & Variables
 		set('setVar', function(name:String, value:Dynamic) {

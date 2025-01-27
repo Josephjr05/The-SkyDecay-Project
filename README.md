@@ -27,7 +27,7 @@ _____________________________________
 * Psych Engine mixed with Codename, and Restructure Engine features.
 (To have Osu Mania, Etterna, Quaver, and NotITG features in FNF!)
   
-## Optimized:
+## Optimization:
 * No matter how many notes there are in a chart (or on Botplay), it won't ever lagspike or drain some fps! But do make sure it's working well for your device.
 * Notes are easier to read and faster computing.
 
@@ -58,9 +58,9 @@ _____________________________________
 * Simply, help adjust xml files with this editor.
 * Shows the sprites and you can edit nodes + more!
 
-## Psych 0.7.3 and lower chart editor (WIP):
-* For charters that don't like Psych 1.0's chart editor, we will include the first ever double chart editors!
-* Use this chart editor for your personal preference.
+## Modchart Editor (WIP):
+* Make modcharts with a built in editor ofcourse! 
+* It takes json files of the modchart and simply brings it to life.
 
 ## More lua, more freedom!:
 * You love lua? Well you'll love the extensive freedom of Lua scripting with a whole lot of new variables and more!
@@ -72,18 +72,26 @@ _____________________________________
 ## Playfield (SWIP):
 * The playfield strums are now in it's own cam, go crazy on Lua!
 * CamHUD doesn't bop anymore (for many reasons why it shouldn't).
-* The playfield strums have also been moved (and on downscroll) to help read notes easier.
-(Will make a playfield editor to edit to your liking!)
+* The playfield strums have also been repositioned (and on downscroll) to help read notes easier.
+* A Playfield editor can help reposition the area to your liking! (Middlescroll only)
 * Multi Key up to 18 keys is supported!
 
-## Online Support (WIP):
-* With The SkyDecay Project and the engine, we will be adding support for not just leaderboards, also rankable maps by BNs! Heavily source coded for this engine (soon).
-* We will also make our own file extension so this can work on the engine/game.
-* Modding support will only be effected by the extension. (By forcing assets folder in it. With songs, characters, images, stages, etc..)
-* Multiplayer addition by creating multiple servers when someone makes a lobby (max up to 15 players)
-* Even if Base Game will have these, currently it doesn't.
+## EVENTS!
+* A whole lot of built in events are here! Including the most wanted one: Change Stages!
+* Instead of using Lua for most of your events, you have them in the palm of your hands. Mess around with them with more than 10 event text fields for each function that event does dependent on it.
+* Ofcourse if you don't see an event you want, make it yourself in Lua OR request it!
 
 ## Other Stuff:
 * Disabled unnecessary options (Like score txt zoom and combo stacking)
 * Disabled Base Game code (for optimization)
 * A new game.
+
+# Extras:
+* Improved camera movement
+* Improved asset loading
+* Improved options with more customization
+* Improved note spawning and lag-free
+* Improved chart editor
+* Improved systems
+* Improved engine music
+* Improved general aspects of fnf mixed with other rhythm games.

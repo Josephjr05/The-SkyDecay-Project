@@ -24,6 +24,8 @@ class MainMenuState extends MusicBeatState
 	var leftItem:FlxSprite;
 	var rightItem:FlxSprite;
 
+	var gameJoltButton:FlxSprite;
+
 	//Centered/Text options
 	var optionShit:Array<String> = [
 		// 'story_mode',
@@ -254,6 +256,19 @@ class MainMenuState extends MusicBeatState
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				MusicBeatState.switchState(new TitleState());
 			}
+
+			/*if (FlxG.mouse.overlaps(gameJoltButton))
+        	{
+        	  if (gameJoltButton.color != 0xB8F500) gameJoltButton.color = 0xB8F500;
+        	  if (FlxG.mouse.justPressed)
+        	  {
+        	    LoadingState.loadAndSwitchState(new gamejolt.GameJoltGroup.GameJoltLogin());
+        	  }
+        	}
+        	else
+        	{
+        	  if (gameJoltButton.color != 0xFFFFFF) gameJoltButton.color = 0xFFFFFF;
+      		}*/
 
 			if (controls.ACCEPT || (FlxG.mouse.justPressed && allowMouse))
 			{

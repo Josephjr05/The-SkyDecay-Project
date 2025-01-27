@@ -39,6 +39,9 @@ import haxe.io.Path;
 import backend.Highscore;
 import backend.cppFiles.CppAPI;
 
+import gamejolt.GameJoltGroup.GJToastManager;
+import gamejolt.*;
+
 #if linux
 @:cppInclude('./external/gamemode_client.h')
 @:cppFileCode('
@@ -59,6 +62,8 @@ class Main extends Sprite
 	};
 
 	public static var fpsVar:FPSCounter;
+
+	public static var gjToastManager:GJToastManager;
 
 	public static var noTerminalColor:Bool = false;
 	@:dox(hide)
@@ -140,6 +145,13 @@ class Main extends Sprite
 		@:privateAccess
 		game._customSoundTray = backend.FunkinSoundTray;
 		addChild(game);
+		addChild(gjToastManager = new GJToastManager());
+
+		if (Main.checkGJKeysAndId())
+		{
+		  GameJoltAPI.connect();
+		  GameJoltAPI.authDaUser(ClientPrefs.data.gjUser, ClientPrefs.data.gjToken, true);
+		}
 
 		#if !mobile
 		fpsVar = new FPSCounter(10, 3, 0xFFFFFF);
@@ -203,6 +215,12 @@ class Main extends Sprite
 		        sprite.__cacheBitmap = null;
 			sprite.__cacheBitmapData = null;
 		}
+	}
+
+	public static function checkGJKeysAndId():Bool
+	{
+	  var result:Bool = (GJKeys.key != '' && GJKeys.id != 0);
+	  return result;
 	}
 
 	// Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!

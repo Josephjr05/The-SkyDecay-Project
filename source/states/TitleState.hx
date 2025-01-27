@@ -107,6 +107,12 @@ class TitleState extends MusicBeatState
 		}
 		#end
 
+		if (Main.checkGJKeysAndId())
+		{
+			GameJoltAPI.connect();
+			GameJoltAPI.authDaUser(ClientPrefs.data.gjUser, ClientPrefs.data.gjToken);
+		}
+
 		if(!initialized)
 		{
 			if(FlxG.save.data != null && FlxG.save.data.fullscreen)

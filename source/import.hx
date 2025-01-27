@@ -21,6 +21,14 @@ import sys.io.*;
 import js.html.*;
 #end
 
+//gamejolt
+import gamejolt.GJKeys;
+import gamejolt.GameJoltAPI;
+
+// Use own Debug class
+//import backend.Debug.*;
+//import backend.Debug;
+
 #if SCEModchartingTools
 import substates.MusicBeatSubstate;
 #else

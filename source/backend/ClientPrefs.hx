@@ -107,6 +107,11 @@ import states.TitleState;
 		// lane underlay
 		public var underlaneVisibility:Float = 0;
 		public var opponentUnderlaneVisibility:Float = 0;
+
+		// gamejolt
+		public var gjUser:String = "";
+		public var gjToken:String = "";
+		public var gjleaderboardToggle:Bool = false;
 }
 
 class ClientPrefs {

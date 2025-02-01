@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="RexDX-Reworked.png">
+	<!-- Made using Maru Aseprite JSON to XML converter -->
+	<SubTexture name="Idle00000" x="0" y="0" width="32" height="32"/>
+	<SubTexture name="Idle00001" x="32" y="0" width="32" height="32"/>
+	<SubTexture name="Idle00002" x="64" y="0" width="32" height="32"/>
+	<SubTexture name="Idle00003" x="96" y="0" width="32" height="32"/>
+	<SubTexture name="singLEFT00000" x="128" y="0" width="32" height="32"/>
+	<SubTexture name="singLEFT00001" x="160" y="0" width="32" height="32"/>
+	<SubTexture name="singLEFT00002" x="0" y="64" width="32" height="32"/>
+	<SubTexture name="singDOWN00000" x="0" y="32" width="32" height="32"/>
+	<SubTexture name="singDOWN00001" x="32" y="32" width="32" height="32"/>
+	<SubTexture name="singDOWN00002" x="32" y="64" width="32" height="32"/>
+	<SubTexture name="singUP00000" x="64" y="32" width="32" height="32"/>
+	<SubTexture name="singUP00001" x="96" y="32" width="32" height="32"/>
+	<SubTexture name="singUP00002" x="64" y="64" width="32" height="32"/>
+	<SubTexture name="singRIGHT00000" x="128" y="32" width="32" height="32"/>
+	<SubTexture name="singRIGHT00001" x="160" y="32" width="32" height="32"/>
+	<SubTexture name="singRIGHT00002" x="96" y="64" width="32" height="32"/>
+	<SubTexture name="idleAlt00000" x="128" y="64" width="32" height="32"/>
+	<SubTexture name="idleAlt00001" x="160" y="64" width="32" height="32"/>
+	<SubTexture name="idleAlt00002" x="0" y="96" width="32" height="32"/>
+	<SubTexture name="idleAlt00003" x="32" y="96" width="32" height="32"/>
+	<SubTexture name="LeftAlt00000" x="64" y="96" width="32" height="32"/>
+	<SubTexture name="LeftAlt00001" x="96" y="96" width="32" height="32"/>
+	<SubTexture name="DownAlt00000" x="128" y="96" width="32" height="32"/>
+	<SubTexture name="DownAlt00001" x="160" y="96" width="32" height="32"/>
+	<SubTexture name="UpAlt00000" x="0" y="128" width="32" height="32"/>
+	<SubTexture name="UpAlt00001" x="32" y="128" width="32" height="32"/>
+	<SubTexture name="RightAlt00000" x="64" y="128" width="32" height="32"/>
+	<SubTexture name="RightAlt00001" x="96" y="128" width="32" height="32"/>
+	<SubTexture name="LeftMiss00000" x="128" y="128" width="32" height="32"/>
+	<SubTexture name="DownMiss00000" x="160" y="128" width="32" height="32"/>
+	<SubTexture name="UpMiss00000" x="0" y="160" width="32" height="32"/>
+	<SubTexture name="RightMiss00000" x="32" y="160" width="32" height="32"/>
+	<SubTexture name="Hey00000" x="64" y="160" width="32" height="32"/>
+	<SubTexture name="Hey00001" x="96" y="160" width="32" height="32"/>
+	<SubTexture name="Hey00002" x="128" y="160" width="32" height="32"/>
+	<SubTexture name="Hey00003" x="128" y="160" width="32" height="32"/>
+</TextureAtlas>

@@ -1,0 +1,89 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				-5,
+				0
+			],
+			"loop": false,
+			"fps": 8,
+			"anim": "idle",
+			"indices": [1,2,0],
+			"name": "Idle"
+		},
+		{
+			"offsets": [
+				-5,
+				0
+			],
+			"loop": false,
+			"fps": 8,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "SingRight"
+		},
+		{
+			"offsets": [
+				-5,
+				0
+			],
+			"loop": false,
+			"fps": 8,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "SingDown"
+		},
+		{
+			"offsets": [
+				-5,
+				0
+			],
+			"loop": false,
+			"fps": 8,
+			"anim": "singUP",
+			"indices": [],
+			"name": "SingUp"
+		},
+		{
+			"offsets": [
+				-5,
+				0
+			],
+			"loop": false,
+			"fps": 8,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "SingLeft"
+		},
+		{
+			"offsets": [
+				-5,
+				0
+			],
+			"indices": [0,1,1,1,2,3],
+			"fps": 8,
+			"anim": "hey",
+			"loop": false,
+			"name": "Hey"
+		}
+	],
+	"no_antialiasing": true,
+	"image": "characters/RexDXPixel",
+	"position": [
+		20,
+		530
+	],
+	"healthicon": "RexDXPix",
+	"flip_x": false,
+	"healthbar_colors": [
+		195,
+		0,
+		0
+	],
+	"camera_position": [
+		-140,
+		-200
+	],
+	"sing_duration": 4,
+	"scale": 14
+}

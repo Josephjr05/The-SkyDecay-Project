@@ -108,6 +108,12 @@ class VisualsSettingsSubState extends BaseOptionsMenu
 		option.decimals = 1;
 		addOption(option);
 
+		var option:Option = new Option('BreakTimer',
+			'If checked, you get the Voiid Chronicles timer!',
+			'breakTimer',
+			BOOL);
+		addOption(option);
+		
 		var option:Option = new Option('Hide HUD',
 			'If checked, hides most HUD elements.',
 			'hideHud',

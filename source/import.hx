@@ -21,6 +21,10 @@ import sys.io.*;
 import js.html.*;
 #end
 
+// Modcharting Tools
+#if SCEModchartingTools
+// something code shit
+#end
 //gamejolt
 import gamejolt.GJKeys;
 import gamejolt.GameJoltAPI;

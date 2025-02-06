@@ -8,6 +8,32 @@ import flixel.FlxObject;
 
 class CoolUtil
 {
+	public static function checkForUpdates(url:String = null):String {
+		if (url == null || url.length == 0)
+			url = "https://raw.githubusercontent.com/ShadowMario/FNF-PsychEngine/main/gitVersion.txt";
+		var version:String = states.MainMenuState.psychEngineVersion.trim();
+		if(ClientPrefs.data.checkForUpdates) {
+			trace('checking for updates...');
+			var http = new haxe.Http(url);
+			http.onData = function (data:String)
+			{
+				var newVersion:String = data.split('\n')[0].trim();
+				trace('version online: $newVersion, your version: $version');
+				if(newVersion != version) {
+					trace('versions arent matching! please update');
+					version = newVersion;
+					http.onData = null;
+					http.onError = null;
+					http = null;
+				}
+			}
+			http.onError = function (error) {
+				trace('error: $error');
+			}
+			http.request();
+		}
+		return version;
+	}
 
 	inline public static function boundTo(value:Float, min:Float, max:Float):Float { // screw you Lycranoc i had to add this so many times!!
 		var newValue:Float = value;
@@ -93,15 +119,15 @@ class CoolUtil
 	{
 		var countByColor:Map<Int, Int> = [];
 		for(col in 0...sprite.frameWidth)
+		{
+			for(row in 0...sprite.frameHeight)
 			{
-				for(row in 0...sprite.frameHeight)
+				var colorOfThisPixel:FlxColor = sprite.pixels.getPixel32(col, row);
+				if(colorOfThisPixel.alphaFloat > 0.05)
 				{
-					var colorOfThisPixel:FlxColor = sprite.pixels.getPixel32(col, row);
-					if(colorOfThisPixel.alphaFloat > 0.05)
-					{
-						colorOfThisPixel = FlxColor.fromRGB(colorOfThisPixel.red, colorOfThisPixel.green, colorOfThisPixel.blue, 255);
-						var count:Int = countByColor.exists(colorOfThisPixel) ? countByColor[colorOfThisPixel] : 0;
-						countByColor[colorOfThisPixel] = count + 1;
+					colorOfThisPixel = FlxColor.fromRGB(colorOfThisPixel.red, colorOfThisPixel.green, colorOfThisPixel.blue, 255);
+					var count:Int = countByColor.exists(colorOfThisPixel) ? countByColor[colorOfThisPixel] : 0;
+					countByColor[colorOfThisPixel] = count + 1;
 				}
 			}
 		}
@@ -110,10 +136,10 @@ class CoolUtil
 		var maxKey:Int = 0; //after the loop this will store the max color
 		countByColor[FlxColor.BLACK] = 0;
 		for(key => count in countByColor)
+		{
+			if(count >= maxCount)
 			{
-				if(count >= maxCount)
-				{
-					maxCount = count;
+				maxCount = count;
 				maxKey = key;
 			}
 		}

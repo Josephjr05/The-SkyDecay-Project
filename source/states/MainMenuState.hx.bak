@@ -40,7 +40,6 @@ class MainMenuState extends MusicBeatState
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
 
-	static var showOutdatedWarning:Bool = true;
 	override function create()
 	{
 		super.create();
@@ -119,9 +118,8 @@ class MainMenuState extends MusicBeatState
 		#end
 
 		#if CHECK_FOR_UPDATES
-		if (showOutdatedWarning && ClientPrefs.data.checkForUpdates && substates.OutdatedSubState.updateVersion != psychEngineVersion) {
+		if (substates.OutdatedSubState.updateVersion != psychEngineVersion) {
 			persistentUpdate = false;
-			showOutdatedWarning = false;
 			openSubState(new substates.OutdatedSubState());
 		}
 		#end
@@ -282,77 +280,73 @@ class MainMenuState extends MusicBeatState
 			if (controls.ACCEPT || (FlxG.mouse.justPressed && allowMouse))
 			{
 				FlxG.sound.play(Paths.sound('confirmMenu'));
-				selectedSomethin = true;
-				FlxG.mouse.visible = false;
-
-				if (ClientPrefs.data.flashing)
-					FlxFlicker.flicker(magenta, 1.1, 0.15, false);
-
-				var item:FlxSprite;
-				var option:String;
-				switch(curColumn)
+				if (optionShit[curSelected] != 'donate')
 				{
-					case CENTER:
-						option = optionShit[curSelected];
-						item = menuItems.members[curSelected];
+					selectedSomethin = true;
+					FlxG.mouse.visible = false;
 
-					case LEFT:
-						option = leftOption;
-						item = leftItem;
+					if (ClientPrefs.data.flashing)
+						FlxFlicker.flicker(magenta, 1.1, 0.15, false);
 
-					case RIGHT:
-						option = rightOption;
-						item = rightItem;
-				}
-
-				FlxFlicker.flicker(item, 1, 0.06, false, false, function(flick:FlxFlicker)
-				{
-					switch (option)
+					var item:FlxSprite;
+					var option:String;
+					switch(curColumn)
 					{
-						case 'story_mode':
-							MusicBeatState.switchState(new StoryMenuState());
-						case 'freeplay':
-							MusicBeatState.switchState(new FreeplayState());
+						case CENTER:
+							option = optionShit[curSelected];
+							item = menuItems.members[curSelected];
 
-						#if MODS_ALLOWED
-						case 'mods':
-							MusicBeatState.switchState(new ModsMenuState());
-						#end
+						case LEFT:
+							option = leftOption;
+							item = leftItem;
 
-						#if ACHIEVEMENTS_ALLOWED
-						case 'achievements':
-							MusicBeatState.switchState(new AchievementsMenuState());
-						#end
-
-						case 'credits':
-							MusicBeatState.switchState(new CreditsState());
-						case 'options':
-							MusicBeatState.switchState(new OptionsState());
-							OptionsState.onPlayState = false;
-							if (PlayState.SONG != null)
-							{
-								PlayState.SONG.arrowSkin = null;
-								PlayState.SONG.splashSkin = null;
-								PlayState.stageUI = 'normal';
-							}
-						case 'donate':
-							CoolUtil.browserLoad('https://ninja-muffin24.itch.io/funkin');
-							selectedSomethin = false;
-							item.visible = true;
-						default:
-							trace('Menu Item ${option} doesn\'t do anything');
-							selectedSomethin = false;
-							item.visible = true;
+						case RIGHT:
+							option = rightOption;
+							item = rightItem;
 					}
-				});
-				
-				for (memb in menuItems)
-				{
-					if(memb == item)
-						continue;
 
-					FlxTween.tween(memb, {alpha: 0}, 0.4, {ease: FlxEase.quadOut});
+					FlxFlicker.flicker(item, 1, 0.06, false, false, function(flick:FlxFlicker)
+					{
+						switch (option)
+						{
+							case 'story_mode':
+								MusicBeatState.switchState(new StoryMenuState());
+							case 'freeplay':
+								MusicBeatState.switchState(new FreeplayState());	
+
+							#if MODS_ALLOWED
+							case 'mods':
+								MusicBeatState.switchState(new ModsMenuState());
+							#end
+
+							#if ACHIEVEMENTS_ALLOWED
+							case 'achievements':
+								MusicBeatState.switchState(new AchievementsMenuState());
+							#end
+
+							case 'credits':
+								MusicBeatState.switchState(new CreditsState());
+							case 'options':
+								MusicBeatState.switchState(new OptionsState());
+								OptionsState.onPlayState = false;
+								if (PlayState.SONG != null)
+								{
+									PlayState.SONG.arrowSkin = null;
+									PlayState.SONG.splashSkin = null;
+									PlayState.stageUI = 'normal';
+								}
+						}
+					});
+					
+					for (memb in menuItems)
+					{
+						if(memb == item)
+							continue;
+
+						FlxTween.tween(memb, {alpha: 0}, 0.4, {ease: FlxEase.quadOut});
+					}
 				}
+				else CoolUtil.browserLoad('https://ninja-muffin24.itch.io/funkin');
 			}
 			#if desktop
 			if (controls.justPressed('debug_1'))

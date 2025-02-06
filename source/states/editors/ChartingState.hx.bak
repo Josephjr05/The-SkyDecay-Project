@@ -593,7 +593,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		fullTipText.text = [
 			"W/S/Mouse Wheel - Move Conductor's Time",
 			"A/D - Change Sections",
-			"Q/E/CTRL + Mouse Wheel Decrease/Increase Long Note",
+			"Q/E/CTRL + Mouse Wheel / Hold Left Mouse Click - Decrease / Increase Long Note Length",
 			"Hold Shift / Alt to Increase / Decrease move by 4x",
 			"",
 			"F11 - Preview Chart", // changed it because screenshot bind

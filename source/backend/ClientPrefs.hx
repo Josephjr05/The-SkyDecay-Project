@@ -20,7 +20,8 @@ import states.TitleState;
 	public var splashAlpha:Float = 0.6;
 	public var lowQuality:Bool = false;
 	public var shaders:Bool = true;
-	public var cacheOnGPU:Bool = #if !switch false #else true #end; //From Stilic
+	public var cacheOnGPU:Bool = #if !switch false #else true #end; // GPU Caching made by Raltyro
+	public var multiThreading:Bool = true;
 	public var framerate:Int = 60;
 	public var camZooms:Bool = true;
 	public var hideHud:Bool = false;
@@ -66,7 +67,9 @@ import states.TitleState;
 		'instakill' => false,
 		'practice' => false,
 		'botplay' => false,
-		'opponentplay' => false
+		'opponentplay' => false,
+		//modcharts (sce ported)
+		'modchart' => true,
 	];
 
 	public var comboOffset:Array<Int> = [0, 0, 0, 0];
@@ -96,6 +99,8 @@ import states.TitleState;
 		public var resultsGroovin:Bool = false;
 		public var BaseGame:Bool = true;
 
+		public var heyIntro:Bool = true;
+
 		// screenshot shit
 		public var ah:Bool = false;
 		public var lossless:Bool = false;
@@ -112,6 +117,9 @@ import states.TitleState;
 		public var gjUser:String = "";
 		public var gjToken:String = "";
 		public var gjleaderboardToggle:Bool = false;
+
+		//voiid chronicles additions
+		public var breakTimer:Bool = false;
 }
 
 class ClientPrefs {

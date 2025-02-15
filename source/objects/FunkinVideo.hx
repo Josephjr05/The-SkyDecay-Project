@@ -1,84 +1,170 @@
 package objects;
 
-import flixel.FlxG;
-#if VIDEOS_ALLOWED
+import flixel.addons.display.FlxPieDial;
+
+#if hxvlc
 import hxvlc.flixel.FlxVideoSprite;
-import hxvlc.flixel.FlxVideo; //Just so it's compiled into the build for something like hscript-iris
 #end
 
-//VideoSprite.hx was broken when it reached the end of a video so I made a new class (Originally from My Psych fork) -TBar
-class FunkinVideo extends FlxVideoSprite {
-	public var onFinish:(skipped:Bool) -> Void;
-	
-	public var skippable:Bool = false;
-	public var loaded:Bool = false;
-	
-	public function new(videoName:String, canSkip:Bool = true, loop:Bool = false) {
-		this.skippable = canSkip;
-		
+class VideoSprite extends FlxSpriteGroup {
+	#if VIDEOS_ALLOWED
+	public var finishCallback:Void->Void = null;
+	public var onSkip:Void->Void = null;
+
+	final _timeToSkip:Float = 1;
+	public var holdingTime:Float = 0;
+	public var videoSprite:FlxVideoSprite;
+	public var skipSprite:FlxPieDial;
+	public var cover:FlxSprite;
+	public var canSkip(default, set):Bool = false;
+
+	private var videoName:String;
+
+	public var waiting:Bool = false;
+
+	public function new(videoName:String, isWaiting:Bool, canSkip:Bool = false, shouldLoop:Dynamic = false) {
 		super();
-		
-		antialiasing = ClientPrefs.data.antialiasing;
+
+		this.videoName = videoName;
 		scrollFactor.set();
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
-		
-		bitmap.onFormatSetup.add(function() {
-			if (this != null && bitmap != null && bitmap.bitmapData != null) {
-				final scale:Float = Math.min(FlxG.width / bitmap.bitmapData.width, FlxG.height / bitmap.bitmapData.height);
 
-				setGraphicSize(Std.int(bitmap.bitmapData.width * scale), Std.int(bitmap.bitmapData.height * scale));
-				updateHitbox();
-				screenCenter();
-				
-				#if FLX_SOUND_SYSTEM
-				autoVolumeHandle = false;
-				bitmap.volume = getVolumeFromFlxG(); //The video is just too quiet...
-				#end
-			}
+		waiting = isWaiting;
+		if(!waiting)
+		{
+			cover = new FlxSprite().makeGraphic(1, 1, FlxColor.BLACK);
+			cover.scale.set(FlxG.width + 100, FlxG.height + 100);
+			cover.screenCenter();
+			cover.scrollFactor.set();
+			add(cover);
+		}
+
+		// initialize sprites
+		videoSprite = new FlxVideoSprite();
+		videoSprite.antialiasing = ClientPrefs.data.antialiasing;
+		add(videoSprite);
+		if(canSkip) this.canSkip = true;
+
+		// callbacks
+		if(!shouldLoop) videoSprite.bitmap.onEndReached.add(finishVideo);
+
+		videoSprite.bitmap.onFormatSetup.add(function()
+		{
+			/*
+			#if hxvlc
+			var wd:Int = videoSprite.bitmap.formatWidth;
+			var hg:Int = videoSprite.bitmap.formatHeight;
+			trace('Video Resolution: ${wd}x${hg}');
+			videoSprite.scale.set(FlxG.width / wd, FlxG.height / hg);
+			#end
+			*/
+			videoSprite.setGraphicSize(FlxG.width);
+			videoSprite.updateHitbox();
+			videoSprite.screenCenter();
 		});
+
+		// start video and adjust resolution to screen size
+		videoSprite.load(videoName, shouldLoop ? ['input-repeat=65545'] : null);
+	}
+
+	var alreadyDestroyed:Bool = false;
+	override function destroy()
+	{
+		if(alreadyDestroyed)
+			return;
+
+		trace('Video destroyed');
+		if(cover != null)
+		{
+			remove(cover);
+			cover.destroy();
+		}
 		
-		bitmap.onEndReached.add(function() {
-			if(onFinish != null) onFinish(false);
+		finishCallback = null;
+		onSkip = null;
+
+		if(FlxG.state != null)
+		{
+			if(FlxG.state.members.contains(this))
+				FlxG.state.remove(this);
+
+			if(FlxG.state.subState != null && FlxG.state.subState.members.contains(this))
+				FlxG.state.subState.remove(this);
+		}
+		super.destroy();
+		alreadyDestroyed = true;
+	}
+	function finishVideo()
+	{
+		if (!alreadyDestroyed)
+		{
+			if(finishCallback != null)
+				finishCallback();
+			
 			destroy();
-		});
-	}
-	
-	public function loadVideo(filePath:String, ?loop:Dynamic = false):Bool {
-		if(!loaded) {
-			this.load(filePath, loop ? ['input-repeat=65545'] : null);
-			loaded = true;
-			return true;
 		}
-		trace("WARNING: Video already has it's data loaded!");
-		return false;
 	}
-	
-	public function playVideo():Bool {
-		if(!loaded) {
-			trace("WARNING: Cannot play video because it has not been loaded!");
-			return false;
-		}
-		this.play();
-		return true;
-	}
-	
+
 	override function update(elapsed:Float)
 	{
-		super.update(elapsed);
-		
-		bitmap.volume = getVolumeFromFlxG();
-		if(skippable && FlxG.keys.justPressed.SPACE) {
-			if(onFinish != null) onFinish(true);
-			this.destroy();
+		if(canSkip)
+		{
+			if(Controls.instance.pressed('accept'))
+			{
+				holdingTime = Math.max(0, Math.min(_timeToSkip, holdingTime + elapsed));
+			}
+			else if (holdingTime > 0)
+			{
+				holdingTime = Math.max(0, FlxMath.lerp(holdingTime, -0.1, FlxMath.bound(elapsed * 3, 0, 1)));
+			}
+			updateSkipAlpha();
+
+			if(holdingTime >= _timeToSkip)
+			{
+				if(onSkip != null) onSkip();
+				finishCallback = null;
+				videoSprite.bitmap.onEndReached.dispatch();
+				trace('Skipped video');
+				return;
+			}
 		}
+		super.update(elapsed);
 	}
-	
-	override function destroy() {
-		onFinish = null;
-		super.destroy();
+
+	function set_canSkip(newValue:Bool)
+	{
+		canSkip = newValue;
+		if(canSkip)
+		{
+			if(skipSprite == null)
+			{
+				skipSprite = new FlxPieDial(0, 0, 40, FlxColor.WHITE, 40, true, 24);
+				skipSprite.replaceColor(FlxColor.BLACK, FlxColor.TRANSPARENT);
+				skipSprite.x = FlxG.width - (skipSprite.width + 80);
+				skipSprite.y = FlxG.height - (skipSprite.height + 72);
+				skipSprite.amount = 0;
+				add(skipSprite);
+			}
+		}
+		else if(skipSprite != null)
+		{
+			remove(skipSprite);
+			skipSprite.destroy();
+			skipSprite = null;
+		}
+		return canSkip;
 	}
-	
-	private function getVolumeFromFlxG():Int {
-		return Std.int(3 * ((FlxG.sound.muted ? 0 : 1) * FlxG.sound.volume) * 100);
+
+	function updateSkipAlpha()
+	{
+		if(skipSprite == null) return;
+
+		skipSprite.amount = Math.min(1, Math.max(0, (holdingTime / _timeToSkip) * 1.025));
+		skipSprite.alpha = FlxMath.remapToRange(skipSprite.amount, 0.025, 1, 0, 1);
 	}
+
+	public function play() videoSprite?.play();
+	public function resume() videoSprite?.resume();
+	public function pause() videoSprite?.pause();
+	#end
 }

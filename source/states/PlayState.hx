@@ -1,5 +1,6 @@
 package states;
 
+import sys.thread.Thread;
 import backend.Highscore;
 import backend.StageData;
 import backend.WeekData;
@@ -248,7 +249,7 @@ class PlayState extends MusicBeatState
 	private var singAnimations:Array<String> = ['singLEFT', 'singDOWN', 'singUP', 'singRIGHT'];
 
 	public var inCutscene:Bool = false;
-	public var skipCountdown:Bool = true; // THIS IS THE BEST WAY TO START SONGS!!
+	public var skipCountdown:Bool = false;
 	public var songLength:Float = 0;
 
 	public var boyfriendCameraOffset:Array<Float> = null;
@@ -359,6 +360,12 @@ class PlayState extends MusicBeatState
 
 		//gamejolt 
 		public var GJUser:String = ClientPrefs.data.gjUser;
+
+		// after lag spiking, go back to that point
+		private var shutdownThread:Bool = false;
+		private var gameFroze:Bool = false;
+		private var requiresSyncing:Bool = false;
+		private var lastCorrectSongPos:Float = -1.0;
 
 	override public function create()
 	{
@@ -1496,8 +1503,8 @@ class PlayState extends MusicBeatState
 
 		// Song duration in a float, useful for the time left feature
 		songLength = FlxG.sound.music.length;
-		FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
-		FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+		FlxTween.tween(timeBar, {alpha: 1}, 0.5 / playbackRate, {ease: FlxEase.circOut});
+		FlxTween.tween(timeTxt, {alpha: 1}, 0.5 / playbackRate, {ease: FlxEase.circOut});
 
 		var fade:FlxTimer;
 
@@ -1513,6 +1520,8 @@ class PlayState extends MusicBeatState
 		#end
 		setOnScripts('songLength', songLength);
 		callOnScripts('onSongStart');
+
+		runSongSyncThread();
 	}
 
 	private var noteTypes:Array<String> = [];
@@ -1860,11 +1869,14 @@ class PlayState extends MusicBeatState
 			paused = false;
 			callOnScripts('onResume');
 			resetRPC(startTimer != null && startTimer.finished);
+			runSongSyncThread();
 		}
 	}
 
 	override public function onFocus():Void
 	{
+		shutdownThread = false;
+		runSongSyncThread();
 		super.onFocus();
 		if (!paused)
 		{
@@ -1877,7 +1889,8 @@ class PlayState extends MusicBeatState
 
 	override public function onFocusLost():Void
 	{
-		super.onFocus();
+		shutdownThread = true;
+		super.onFocusLost();
 		if (!paused)
 		{
 			#if DISCORD_ALLOWED
@@ -2033,13 +2046,13 @@ class PlayState extends MusicBeatState
 
 			if(ClientPrefs.data.timeBarType == 'Time Elapsed') songCalc = curTime; // amount of time passed is ok
 
-			var secondsTotal:Int = Math.floor(songCalc / 1000);
+			var secondsTotal:Int = Math.floor((songCalc / 1000) / playbackRate);
 			if(secondsTotal < 0) secondsTotal = 0;
 
 			if(ClientPrefs.data.timeBarType != 'Song Name')
 				timeTxt.text = FlxStringUtil.formatTime(secondsTotal, false);
 			else { // this is what was fucked up, hopefully this fixes it.
-				var secondsTotal:Int = Math.floor(songCalc/1000);
+				var secondsTotal:Int = Math.floor((songCalc / 1000) / playbackRate);
 				if(secondsTotal < 0) secondsTotal = 0;
 				timeTxt.text = FlxStringUtil.formatTime(secondsTotal,false);
 			}
@@ -3806,6 +3819,8 @@ class PlayState extends MusicBeatState
 
 		NoteSplash.configs.clear();
 		instance = null;
+		shutdownThread = true;
+		FlxG.signals.preUpdate.remove(checkForResync);
 		super.destroy();
 	}
 
@@ -4296,5 +4311,41 @@ class PlayState extends MusicBeatState
 		var img = lime.app.Application.current.window.readPixels(new lime.math.Rectangle(FlxG.scaleMode.offset.x, FlxG.scaleMode.offset.y, FlxG.scaleMode.gameSize.x, FlxG.scaleMode.gameSize.y));
 		var bytes = img.getPixels(new lime.math.Rectangle(0, 0, img.width, img.height));
 		process.stdin.writeBytes(bytes, 0, bytes.length);
+	}
+
+	function checkForResync()
+	{
+		if (endingSong || paused || shutdownThread) return;
+	
+		if (requiresSyncing)
+		{
+			requiresSyncing = false;
+			setSongTime(lastCorrectSongPos);
+		}
+	
+		gameFroze = false;
+	}
+	
+	public function runSongSyncThread()
+	{
+		Thread.create(function() {
+			while (!endingSong && !paused && !shutdownThread)
+			{
+				if (requiresSyncing) continue;
+	
+				if (gameFroze)
+				{
+					lastCorrectSongPos = Conductor.songPosition;
+					requiresSyncing = true;
+					continue;
+				}
+				gameFroze = true;
+	
+				Sys.sleep(0.25);
+			}
+		});
+	
+		if (!FlxG.signals.preUpdate.has(checkForResync))
+			FlxG.signals.preUpdate.add(checkForResync);
 	}
 }

@@ -268,6 +268,10 @@ class LuaUtils
 		return (value == null || isOfTypes(value, [Bool, Int, Float, String, Array]) || Type.typeof(value) == Type.ValueType.TObject);
 	}
 	
+	public static function isLuaSupported(value:Any):Bool {
+		return (value == null || isOfTypes(value, [Bool, Int, Float, String, Array]) || Type.typeof(value) == ValueType.TObject);
+	}
+	
 	public static function getTargetInstance()
 	{
 		if(PlayState.instance != null) return PlayState.instance.isDead ? GameOverSubstate.instance : PlayState.instance;

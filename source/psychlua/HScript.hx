@@ -15,6 +15,8 @@ import crowplexus.iris.IrisConfig;
 import crowplexus.hscript.Expr.Error as IrisError;
 import crowplexus.hscript.Printer;
 
+import haxe.ValueException;
+
 typedef HScriptInfos = {
 	> haxe.PosInfos,
 	var ?funcName:String;
@@ -360,7 +362,7 @@ class HScript extends Iris
 				final retVal:IrisCall = funk.hscript.call(funcToRun, funcArgs);
 				if (retVal != null)
 				{
-					return (retVal.returnValue == null || LuaUtils.isOfTypes(retVal.returnValue, [Bool, Int, Float, String, Array])) ? retVal.returnValue : null;
+					return (LuaUtils.isLuaSupported(retVal.returnValue)) ? retVal.returnValue : null;
 				}
 				else if (funk.hscript.returnValue != null)
 				{
@@ -376,7 +378,7 @@ class HScript extends Iris
 				final retVal:IrisCall = funk.hscript.call(funcToRun, funcArgs);
 				if (retVal != null)
 				{
-					return (retVal.returnValue == null || LuaUtils.isOfTypes(retVal.returnValue, [Bool, Int, Float, String, Array])) ? retVal.returnValue : null;
+					return (LuaUtils.isLuaSupported(retVal.returnValue)) ? retVal.returnValue : null;
 				}
 			}
 			else
@@ -443,6 +445,9 @@ class HScript extends Iris
 				if (parentLua.lastCalledFunction != '') pos.funcName = parentLua.lastCalledFunction;
 			}
 			Iris.error(Printer.errorToString(e, false), pos);
+		}
+		catch (e:ValueException) { // this is thrown for invalid field access and stuff
+			Iris.error('$funcToRun: $e');
 		}
 		return null;
 	}
@@ -532,6 +537,25 @@ class CustomInterp extends crowplexus.hscript.Interp
 	{
 		super();
 	}
+
+	override function fcall(o:Dynamic, funcToRun:String, args:Array<Dynamic>):Dynamic {
+		for (_using in usings) {
+			var v = _using.call(o, funcToRun, args);
+			if (v != null)
+				return v;
+		}
+
+		var f = get(o, funcToRun);
+
+		if (f == null) {
+			Iris.error('Tried to call null function $funcToRun', posInfos());
+			return null;
+		}
+
+		return Reflect.callMethod(o, f, args);
+	}
+
+
 
 	override function resolve(id: String): Dynamic {
 		if (locals.exists(id)) {

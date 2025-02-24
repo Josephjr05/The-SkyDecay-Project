@@ -335,7 +335,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		if(chartEditorSave.data.backupLimit != null) backupLimit = chartEditorSave.data.backupLimit;
 		if(chartEditorSave.data.vortex != null) vortexEnabled = chartEditorSave.data.vortex;
 		if(chartEditorSave.data.lilBuddiesBox != null) lilBuddiesOn = chartEditorSave.data.lilBuddiesBox;
-		// if(chartEditorSave.data.downscroll != null) downscrollEnabled = chartEditorSave.data.downscroll;
+		if(chartEditorSave.data.downscroll != null) downscrollEnabled = chartEditorSave.data.downscroll;
 
 		if(chartEditorSave.data.customBgColor == null) chartEditorSave.data.customBgColor = '303030';
 		if(chartEditorSave.data.customGridColors == null || chartEditorSave.data.customGridColors.length < 2)
@@ -406,13 +406,6 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			note.updateHitbox();
 			note.x += GRID_SIZE/2 - note.width/2;
 			note.y += GRID_SIZE/2 - note.height/2;
-
-			if (downscroll) {
-				note.updateHitbox();
-				note.x += GRID_SIZE/-2 - note.width/-2;
-				note.y += GRID_SIZE/-2 - note.width/-2;
-			}
-			strumLineNotes.add(note);
 		}
 
 		var columns:Int = 0;
@@ -641,6 +634,10 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		chartEditorSave.data.theme = changeTo;
 		if(doSave) chartEditorSave.flush();
 
+		var gridBgWidth = gridBg == null ? null : gridBg.width;
+		var prevGridBgWidth = prevGridBg == null ? null : prevGridBg.width;
+		var nextGridBgWidth = nextGridBg == null ? null : nextGridBg.width;
+		
 		switch(theme)
 		{
 			case SKYDECAY:
@@ -687,18 +684,21 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				gridBg.loadGrid(gridColors[0], gridColors[1]);
 				gridBg.vortexLineEnabled = vortexEnabled;
 				gridBg.vortexLineSpace = GRID_SIZE * 4 * curZoom;
+				if (gridBgWidth != null) gridBg.width = gridBgWidth;
 			}
 			if(prevGridBg != null)
 			{
 				prevGridBg.loadGrid(gridColors[0], gridColors[1]); // gridColorsOther
 				prevGridBg.vortexLineEnabled = vortexEnabled;
 				prevGridBg.vortexLineSpace = GRID_SIZE * 4 * curZoom;
+				if (prevGridBgWidth != null) prevGridBg.width = prevGridBgWidth;
 			}
 			if(nextGridBg != null)
 			{
 				nextGridBg.loadGrid(gridColors[0], gridColors[1]); // gridColorsOther
 				nextGridBg.vortexLineEnabled = vortexEnabled;
 				nextGridBg.vortexLineSpace = GRID_SIZE * 4 * curZoom;
+				if (nextGridBgWidth != null) prevGridBg.width = nextGridBgWidth;
 			}
 		}
 	}
@@ -5398,21 +5398,22 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			lilBuddiesOn = !lilBuddiesOn;
 			chartEditorSave.data.lilBuddiesBox = lilBuddiesOn;
 			lilStage.visible = lilBf.visible = lilOpp.visible = lilStage.active = lilBf.active = lilOpp.active = lilBuddiesOn;
-			lilBuddiesBoxButton.text.text = lilBuddiesOn ? '  Lil Buddies ON' : '  Lil Buddies OFF';
+			lilBuddiesBoxButton.text.text = lilBuddiesOn ? '	Lil Buddies ON' : '  Lil Buddies OFF';
 		}, btnWid);
 		lilBuddiesBoxButton.text.alignment = LEFT;
 		tab_group.add(lilBuddiesBoxButton);
 
-		/* btnY++;
+		btnY++;
 		btnY += 20;
-		downscroll = new PsychUIButton(btnX, btnY, downscrollEnabled ? ' Reverse Scroll ON' : ' Reverse Scroll OFF', function()
+		downscrollEditorButton = new PsychUIButton(btnX, btnY, downscrollEnabled ? '  Reverse Scroll ON' : ' Reverse Scroll OFF', function()
 		{
 			downscrollEnabled = !downscrollEnabled;
 			chartEditorSave.data.downscroll = downscrollEnabled;
-			downscrollEditorButton.text.text = downscrollEnabled ? ' Reverse Scroll ON' : ' Reverse Scroll OFF';
+			// flipY = true basically.
+			downscrollEditorButton.text.text = downscrollEnabled ? '  Reverse Scroll ON' : ' Reverse Scroll OFF';
 		}, btnWid);
 		downscrollEditorButton.text.alignment = LEFT;
-		tab_group.add(downscrollEditorButton); */
+		tab_group.add(downscrollEditorButton);
 		
 		btnY++;
 		btnY += 20;

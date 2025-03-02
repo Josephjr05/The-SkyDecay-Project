@@ -5,21 +5,26 @@ import lime.utils.Assets;
 
 import objects.Note;
 
+//a full change of organization to match Osu's map files
 typedef SwagSong =
 {
 	var song:String;
-	var notes:Array<SwagSection>;
-	var events:Array<Dynamic>;
-	var bpm:Float;
-	var needsVoices:Bool;
-	var speed:Float;
-	var offset:Float;
+	var	songArtists:String;
+	var artists:String;
+	var charters:String;
+	var vfx:String;
+	var scripters:String;
 
 	var player1:String;
 	var player2:String;
 	var gfVersion:String;
 	var stage:String;
 	var format:String;
+	var needsVoices:Bool;
+
+	var speed:Float;
+	var bpm:Float;
+	var offset:Float;
 
 	@:optional var gameOverChar:String;
 	@:optional var gameOverSound:String;
@@ -30,6 +35,10 @@ typedef SwagSong =
 
 	@:optional var arrowSkin:String;
 	@:optional var splashSkin:String;
+
+	var events:Array<Dynamic>;
+
+	var notes:Array<SwagSection>;
 }
 
 typedef SwagSection =
@@ -57,12 +66,12 @@ class Song
 	public var gameOverLoop:String;
 	public var gameOverEnd:String;
 	public var disableNoteRGB:Bool = false;
-	public var speed:Float = 1;
+	public var speed:Float = 2.6;
 	public var stage:String;
 	public var player1:String = 'bf';
-	public var player2:String = 'dad';
+	public var player2:String = 'bf-opponent';
 	public var gfVersion:String = 'gf';
-	public var format:String = 'psych_v1';
+	public var format:String = 'skydecay_beta';
 
 	public static function convert(songJson:Dynamic) // Convert old charts to psych_v1 format
 	{
@@ -171,7 +180,7 @@ class Song
 				case 'psych_v1':
 					if(!fmt.startsWith('psych_v1')) //Convert to Psych 1.0 format
 					{
-						trace('converting chart $nameForError with format $fmt to psych_v1 format...');
+						trace('converting chart $nameForError with format $fmt to skydecay_beta format...');
 						songJson.format = 'psych_v1_convert';
 						convert(songJson);
 					}

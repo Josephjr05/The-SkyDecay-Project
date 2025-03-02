@@ -99,6 +99,7 @@
 	<section if="MODS_ALLOWED">
 		<assets path='example_mods' rename='mods' embed='true' type='template' unless='mac'/>
 		<assets path='example_mods' rename='mods' embed='true' if="mac"/>
+		<assets path='list.txt' rename='modsList.txt' />
 	</section>
 	<assets path='art/readme.txt' rename='do NOT readme.txt' />
 	<haxelib name="grig.audio" />
@@ -117,7 +118,9 @@
 	<haxelib name="tjson" version="1.4.0"/>
 
 	<!-- why doesn't this work? idk but fuck u-->
-	<haxelib name="away3d"/>
+	<haxelib name="away3d" />
+
+	<haxedef name="message.reporting" value="pretty" />
 
 	<!--Psych stuff needed-->
 	<haxelib name="linc_luajit" if="LUA_ALLOWED"/>

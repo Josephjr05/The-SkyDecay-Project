@@ -161,6 +161,7 @@ class PsychUIBox extends FlxSpriteGroup
 		{
 			if(broadcastBoxEvents)
 				PsychUIEventHandler.event(MINIMIZE_EVENT, this);
+				FlxG.sound.play(Paths.sound('chartingSounds/clickDown'), 0.5);
 		}
 		else if(selectedTab != null && !isMinimized)
 			selectedTab.updateMenu(this, elapsed);
@@ -170,6 +171,7 @@ class PsychUIBox extends FlxSpriteGroup
 			isMinimized = true;
 			if(broadcastBoxEvents)
 				PsychUIEventHandler.event(MINIMIZE_EVENT, this);
+				FlxG.sound.play(Paths.sound('chartingSounds/clickUp'), 0.5);
 		}
 	}
 

@@ -36,7 +36,7 @@ import objects.HealthIcon;
 import objects.Note;
 import objects.StrumNote;
 
-import openfl.net.FileReference; // for Base Game 
+import openfl.net.FileReference; // for Base Game
 
 using DateTools;
 
@@ -201,6 +201,11 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	var events:Array<EventMetaNote> = [];
 	var notes:Array<MetaNote> = [];
 
+	var	songArtists:String;
+	var artists:String;
+	var charters:String;
+	var vfx:String;
+	var scripters:String;
 	var behindRenderedNotes:FlxTypedGroup<MetaNote> = new FlxTypedGroup<MetaNote>();
 	var curRenderedNotes:FlxTypedGroup<MetaNote> = new FlxTypedGroup<MetaNote>();
 	var movingNotes:FlxTypedGroup<MetaNote> = new FlxTypedGroup<MetaNote>();
@@ -259,6 +264,10 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	var waveformTarget:WaveformTarget = INST;
 
 	var lilBuddiesOn:Bool = false;
+	
+	var lilPlayer:Character;
+	var lilOpponent:Character;
+	var singAnimations:Array<String> = ['singLEFT', 'singDOWN', 'singUP', 'singRIGHT'];
 
 	public static var idleMusicAllow:Bool = false;
 
@@ -299,12 +308,15 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		sd.antialiasing = ClientPrefs.data.antialiasing;
 		sd.scrollFactor.set();
 		add(sd);
-
-		lilStage = new FlxSprite(32, 432).loadGraphic(Paths.image("editors/lilStage"));
+		
+		//lil buddies from fps plus
+		lilStage = new FlxSprite(32, 332).loadGraphic(Paths.image("editors/lilStage"));
 		lilStage.scrollFactor.set();
+		lilStage.antialiasing = true;
+		lilStage.visible = lilBuddiesOn;
 		add(lilStage);
 
-		lilBf = new FlxSprite(32, 432).loadGraphic(Paths.image("editors/lilBf"), true, 300, 256);
+		lilBf = new FlxSprite(32, 332).loadGraphic(Paths.image("editors/lilBf"), true, 300, 256);
 		lilBf.animation.add("idle", [0, 1], 12, true);
 		lilBf.animation.add("0", [3, 4, 5], 12, false);
 		lilBf.animation.add("1", [6, 7, 8], 12, false);
@@ -316,9 +328,11 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			lilBf.animation.play(name, true, false, lilBf.animation.getByName(name).numFrames - 2);
 		}
 		lilBf.scrollFactor.set();
+		lilBf.antialiasing = true;
+		lilBf.visible = lilBuddiesOn;
 		add(lilBf);
 
-		lilOpp = new FlxSprite(32, 432).loadGraphic(Paths.image("editors/lilOpp"), true, 300, 256);
+		lilOpp = new FlxSprite(32, 332).loadGraphic(Paths.image("editors/lilOpp"), true, 300, 256);
 		lilOpp.animation.add("idle", [0, 1], 12, true);
 		lilOpp.animation.add("0", [3, 4, 5], 12, false);
 		lilOpp.animation.add("1", [6, 7, 8], 12, false);
@@ -329,7 +343,31 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			lilOpp.animation.play(name, true, false, lilOpp.animation.getByName(name).numFrames - 2);
 		}
 		lilOpp.scrollFactor.set();
+		lilOpp.visible = false;
+		lilOpp.antialiasing = lilBuddiesOn;
 		add(lilOpp);
+
+		//shows actual characters (From Moon's Modded Psych Engine)
+		lilPlayer = new Character(100, 405, 'bf', false);
+		lilPlayer.scrollFactor.set();
+		lilPlayer.setGraphicSize(Std.int(lilPlayer.width * 0.4));
+        add(lilPlayer);
+
+		lilPlayer.flipX = !lilPlayer.flipX;
+
+		lilOpponent = new Character(-50, 405, 'bf-opponent', false); // for now, i'll find out how to make it so when you select a character, it changes it as well.
+		lilOpponent.scrollFactor.set();
+		lilOpponent.setGraphicSize(Std.int(lilPlayer.width * 0.45));
+        add(lilOpponent);
+		
+		for (key in lilPlayer.animOffsets.keys()) {
+            lilPlayer.animOffsets[key][0] *= lilPlayer.scale.x;
+            lilPlayer.animOffsets[key][1] *= lilPlayer.scale.y;
+        }
+        for (keyt in lilOpponent.animOffsets.keys()) {
+            lilOpponent.animOffsets[keyt][0] *= lilOpponent.scale.x;
+            lilOpponent.animOffsets[keyt][1] *= lilOpponent.scale.y;
+        }
 
 		if(chartEditorSave.data.autoSave != null) autoSaveCap = chartEditorSave.data.autoSave;
 		if(chartEditorSave.data.backupLimit != null) backupLimit = chartEditorSave.data.backupLimit;
@@ -406,6 +444,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			note.updateHitbox();
 			note.x += GRID_SIZE/2 - note.width/2;
 			note.y += GRID_SIZE/2 - note.height/2;
+			strumLineNotes.add(note);
 		}
 
 		var columns:Int = 0;
@@ -469,7 +508,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		infoBox.getTab('Information').menu.add(infoText);
 		add(infoBox);
 
-		mainBox = new PsychUIBox(mainBoxPosition.x, mainBoxPosition.y, 300, 280, ['Charting', 'Data', 'Events', 'Note', 'Section', 'Song', 'MetaData']);
+		mainBox = new PsychUIBox(mainBoxPosition.x, mainBoxPosition.y, 300, 280, ['Misc', 'Data', 'Events', 'Note', 'Section', 'Song', 'MetaData']);
 		mainBox.selectedName = 'Song';
 		mainBox.scrollFactor.set();
 		mainBox.cameras = [camUI];
@@ -706,988 +745,27 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	function openNewChart()
 	{
 		var song:SwagSong = {
-			song: 'FNF2',
-			notes: [
-				{
-					"sectionNotes": [
-						[394.736842105263, 6, 0],
-						[631.578947368421, 4, 0],
-						[789.473684210526, 5, 0],
-						[1026.31578947368, 7, 78.9473684210526],
-						[1184.21052631579, 6, 0]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": false
-				},
-				{
-					"sectionNotes": [
-						[1342.10526315789, 5, 157.894736842105],
-						[1500, 4, 0],
-						[1736.84210526316, 6, 0],
-						[1973.68421052632, 5, 0],
-						[2210.52631578947, 4, 0]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": false
-				},
-				{
-					"sectionNotes": [
-						[2526.31578947368, 6, 236.842105263158],
-						[2684.21052631579, 7, 157.894736842105],
-						[2921.05263157895, 5, 0],
-						[3157.8947368421, 4, 0]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": false
-				},
-				{
-					"sectionNotes": [
-						[4184.21052631579, 1, 0, "Hey!"]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": true
-				},
-				{
-					"sectionNotes": [
-						[5210.52631578947, 6, 0],
-						[5526.31578947368, 5, 0],
-						[5842.1052631579, 4, 0],
-						[6157.8947368421, 6, 0]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": false
-				},
-				{
-					"sectionNotes": [
-						[6315.78947368421, 5, 157.894736842105],
-						[6631.57894736842, 7, 0],
-						[6789.47368421053, 6, 0],
-						[6947.36842105263, 5, 0],
-						[7105.26315789474, 4, 0],
-						[7342.10526315789, 7, 0]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": false
-				},
-				{
-					"sectionNotes": [
-						[7578.94736842105, 5, 0],
-						[8289.47368421052, 6, 0],
-						[8605.26315789474, 7, 0]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": false
-				},
-				{
-					"sectionNotes": [
-						[8921.05263157895, 5, 0],
-						[9157.8947368421, 4, 394.736842105263],
-						[9278.28947368421, 6, 78.9473684210526]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": false
-				},
-				{
-					"sectionNotes": [
-						[10263.1578947368, 4, 0],
-						[10421.0526315789, 5, 0],
-						[10578.947368421, 7, 0],
-						[10736.8421052632, 6, 0],
-						[10894.7368421053, 5, 0],
-						[11052.6315789474, 7, 0],
-						[11210.5263157895, 5, 236.842105263158]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": false
-				},
-				{
-					"sectionNotes": [
-						[11526.3157894737, 6, 0],
-						[11684.2105263158, 7, 0],
-						[11684.2105263158, 4, 0],
-						[11842.1052631579, 5, 0],
-						[12000, 4, 0],
-						[12157.8947368421, 5, 0],
-						[12315.7894736842, 4, 0],
-						[12315.7894736842, 6, 78.9473684210526]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": false
-				},
-				{
-					"sectionNotes": [
-						[12789.4736842105, 6, 0],
-						[12947.3684210526, 5, 0],
-						[13105.2631578947, 7, 0],
-						[13263.1578947368, 4, 0],
-						[13421.0526315789, 5, 0],
-						[13578.947368421, 7, 0],
-						[13736.8421052632, 5, 0]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": false
-				},
-				{
-					"sectionNotes": [
-						[13894.7368421053, 6, 0],
-						[14210.5263157895, 6, 0],
-						[14526.3157894737, 6, 0],
-						[14684.2105263158, 5, 0],
-						[14842.1052631579, 7, 236.842105263158],
-						[14842.1052631579, 6, 0]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": false
-				},
-				{
-					"sectionNotes": [
-						[15315.7894736842, 1, 0],
-						[15473.6842105263, 0, 0],
-						[15631.5789473684, 1, 0],
-						[15789.4736842105, 2, 0],
-						[15947.3684210526, 2, 0],
-						[16105.2631578947, 3, 0],
-						[16263.1578947368, 2, 78.9473684210526]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": true
-				},
-				{
-					"sectionNotes": [
-						[16421.0526315789, 5, 0],
-						[16578.947368421, 1, 0],
-						[16736.8421052632, 0, 0],
-						[16894.7368421053, 6, 0],
-						[16894.7368421053, 2, 0],
-						[17052.6315789474, 3, 0],
-						[17210.5263157895, 1, 0],
-						[17289.4736842105, 4, 157.894736842105],
-						[17368.4210526316, 2, 0],
-						[17447.3684210526, 5, 157.894736842105],
-						[17526.3157894737, 0, 236.842105263158]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": true
-				},
-				{
-					"sectionNotes": [
-						[17684.2105263158, 6, 0],
-						[17842.1052631579, 2, 0],
-						[18000, 3, 0],
-						[18157.8947368421, 2, 0],
-						[18315.7894736842, 1, 0],
-						[18394.7368421053, 0, 0],
-						[18473.6842105263, 3, 0],
-						[18631.5789473684, 1, 0],
-						[18789.4736842105, 0, 0],
-						[18789.4736842105, 1, 78.9473684210526]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": true
-				},
-				{
-					"sectionNotes": [
-						[19026.3157894737, 5, 0],
-						[19105.2631578947, 2, 0],
-						[19263.1578947368, 3, 0],
-						[19263.1578947368, 4, 0],
-						[19421.0526315789, 1, 0],
-						[19421.0526315789, 7, 0],
-						[19578.947368421, 0, 0],
-						[19736.8421052632, 2, 0],
-						[19736.8421052632, 6, 236.842105263158],
-						[19894.7368421053, 3, 236.842105263158],
-						[19894.7368421053, 1, 0],
-						[19914.4736842105, 5, 236.842105263158]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": true
-				},
-				{
-					"sectionNotes": [
-						[20210.5263157895, 4, 0],
-						[20526.3157894737, 5, 0],
-						[20842.1052631579, 6, 0],
-						[21000, 7, 0],
-						[21157.8947368421, 5, 0],
-						[21315.7894736842, 6, 0]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": false
-				},
-				{
-					"sectionNotes": [
-						[21473.6842105263, 4, 0],
-						[21631.5789473684, 7, 0],
-						[21789.4736842105, 5, 0],
-						[21947.3684210526, 7, 0],
-						[22105.2631578947, 6, 0],
-						[22263.1578947368, 6, 0],
-						[22421.0526315789, 4, 78.9473684210526]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": false
-				},
-				{
-					"sectionNotes": [
-						[22736.8421052632, 5, 0],
-						[22894.7368421053, 6, 0],
-						[23052.6315789474, 4, 0],
-						[23210.5263157895, 7, 0],
-						[23368.4210526316, 5, 0],
-						[23526.3157894737, 6, 0],
-						[23684.2105263158, 4, 0],
-						[23842.1052631579, 6, 0]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": false
-				},
-				{
-					"sectionNotes": [
-						[24000, 5, 39.4736842105263],
-						[24000, 7, 0],
-						[24315.7894736842, 4, 0],
-						[24473.6842105263, 6, 0],
-						[24473.6842105263, 7, 39.4736842105263],
-						[24789.4736842105, 5, 0],
-						[24789.4736842105, 0, 0],
-						[24947.3684210526, 4, 236.842105263158],
-						[24947.3684210526, 3, 0],
-						[25105.2631578947, 1, 0]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": false
-				},
-				{
-					"sectionNotes": [
-						[25263.1578947368, 2, 0],
-						[25421.052631579, 3, 0],
-						[25578.9473684211, 0, 0],
-						[25736.8421052632, 2, 0],
-						[25894.7368421053, 3, 78.9473684210526],
-						[25894.7368421053, 1, 236.842105263158],
-						[26210.5263157895, 0, 0],
-						[26289.4736842105, 3, 0],
-						[26368.4210526316, 2, 236.842105263158]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": true
-				},
-				{
-					"sectionNotes": [
-						[26684.2105263158, 1, 0],
-						[26763.1578947368, 0, 0],
-						[26842.1052631579, 3, 78.9473684210526],
-						[27000, 1, 78.9473684210526],
-						[27157.8947368421, 2, 0],
-						[27236.8421052632, 0, 0],
-						[27315.7894736842, 1, 0],
-						[27394.7368421053, 2, 0],
-						[27473.6842105263, 3, 78.9473684210526],
-						[27631.5789473684, 1, 236.842105263158]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": true
-				},
-				{
-					"sectionNotes": [
-						[27789.4736842105, 6, 0],
-						[27947.3684210526, 2, 0],
-						[28105.2631578947, 3, 0],
-						[28184.2105263158, 0, 0],
-						[28263.1578947369, 1, 0],
-						[28263.1578947369, 6, 0],
-						[28342.1052631579, 3, 0],
-						[28421.052631579, 2, 0],
-						[28500, 1, 0],
-						[28578.9473684211, 0, 78.9473684210526],
-						[28736.8421052632, 1, 0],
-						[28736.8421052632, 6, 0],
-						[28894.7368421053, 2, 236.842105263158],
-						[28894.7368421053, 3, 0]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": true
-				},
-				{
-					"sectionNotes": [
-						[29210.5263157895, 0, 0],
-						[29368.4210526316, 1, 0],
-						[29447.3684210526, 5, 0],
-						[29526.3157894737, 0, 0],
-						[29684.2105263158, 1, 0],
-						[29842.1052631579, 0, 0],
-						[29842.1052631579, 6, 0],
-						[30000, 3, 236.842105263158],
-						[30000, 2, 0],
-						[30000, 7, 0],
-						[30157.8947368421, 5, 0]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": true
-				},
-				{
-					"sectionNotes": [
-						[30315.7894736842, 4, 0],
-						[30473.6842105263, 5, 0],
-						[30631.5789473684, 4, 0],
-						[30789.4736842105, 7, 0],
-						[30947.3684210526, 5, 0],
-						[31105.2631578947, 5, 0],
-						[31263.1578947369, 6, 0],
-						[31421.052631579, 4, 0]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": false
-				},
-				{
-					"sectionNotes": [
-						[31578.9473684211, 7, 236.842105263158],
-						[31750.6578947369, 5, 78.9473684210526],
-						[32052.6315789474, 4, 0],
-						[32526.3157894737, 6, 0]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": false
-				},
-				{
-					"sectionNotes": [
-						[32842.1052631579, 7, 0],
-						[33000, 5, 0],
-						[33157.8947368421, 7, 0],
-						[33315.7894736842, 4, 0],
-						[33473.6842105263, 6, 0],
-						[33631.5789473684, 7, 0],
-						[33789.4736842105, 5, 157.894736842105]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": false
-				},
-				{
-					"sectionNotes": [
-						[34105.2631578947, 4, 0],
-						[34263.1578947369, 6, 0],
-						[34421.052631579, 7, 0],
-						[34578.9473684211, 7, 0],
-						[34736.8421052632, 4, 0],
-						[34894.7368421053, 5, 0],
-						[35052.6315789474, 6, 236.842105263158],
-						[35052.6315789474, 7, 197.368421052632],
-						[35052.6315789474, 4, 197.368421052632],
-						[35052.6315789474, 5, 197.368421052632]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": false
-				},
-				{
-					"sectionNotes": [
-						[35368.4210526316, 3, 0],
-						[35526.3157894737, 0, 0],
-						[35684.2105263158, 1, 0],
-						[35842.1052631579, 3, 0],
-						[36000, 1, 0],
-						[36157.8947368421, 1, 0],
-						[36315.7894736842, 2, 0],
-						[36473.6842105263, 3, 0, "Hey!"]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": true
-				},
-				{
-					"sectionNotes": [
-						[36631.5789473684, 1, 0],
-						[37105.2631578947, 0, 0],
-						[37578.9473684211, 2, 0, "Hey!"]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": true
-				},
-				{
-					"sectionNotes": [
-						[37894.7368421053, 3, 0],
-						[38052.6315789474, 1, 0],
-						[38210.5263157895, 1, 0],
-						[38368.4210526316, 0, 0],
-						[38526.3157894737, 1, 0],
-						[38684.2105263158, 1, 0],
-						[38842.1052631579, 2, 0],
-						[39000, 2, 0]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": true
-				},
-				{
-					"sectionNotes": [
-						[39157.8947368421, 3, 0],
-						[39315.7894736842, 1, 0],
-						[39473.6842105263, 1, 0],
-						[39631.5789473684, 3, 0],
-						[39789.4736842105, 1, 0],
-						[39947.3684210526, 1, 0],
-						[40105.2631578947, 2, 0],
-						[40263.1578947368, 2, 0]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": true
-				},
-				{
-					"sectionNotes": [
-						[40421.0526315789, 5, 0],
-						[40578.9473684211, 4, 0],
-						[40657.8947368421, 7, 0],
-						[40736.8421052632, 6, 0],
-						[40894.7368421053, 4, 0],
-						[40973.6842105263, 7, 0],
-						[41052.6315789474, 5, 0],
-						[41210.5263157895, 6, 0],
-						[41368.4210526316, 5, 236.842105263158]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": false
-				},
-				{
-					"sectionNotes": [
-						[41684.2105263158, 6, 0],
-						[41842.1052631579, 7, 0],
-						[41921.0526315789, 4, 0],
-						[42000, 5, 0],
-						[42157.8947368421, 4, 0],
-						[42236.8421052632, 7, 0],
-						[42315.7894736842, 6, 0],
-						[42394.7368421053, 4, 0],
-						[42473.6842105263, 7, 0],
-						[42631.5789473684, 5, 0],
-						[42789.4736842105, 6, 0]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": false
-				},
-				{
-					"sectionBeats": 4,
-					"sectionNotes": [
-						[42947.3684210526, 4, 0],
-						[43026.3157894737, 7, 0],
-						[43105.2631578947, 5, 0],
-						[43184.2105263158, 6, 0],
-						[43342.1052631579, 4, 0],
-						[43421.0526315789, 7, 0],
-						[43500, 5, 0],
-						[43578.947368421, 6, 0],
-						[43657.8947368421, 4, 0],
-						[43815.7894736842, 6, 0],
-						[43894.7368421053, 7, 0],
-						[43973.6842105263, 5, 0],
-						[44131.5789473684, 4, 0]
-					],
-					"gfSection": false,
-					"altAnim": false,
-					"mustHitSection": false,
-					"changeBPM": false,
-					"bpm": 150
-				},
-				{
-					"sectionNotes": [
-						[44289.4736842105, 6, 0],
-						[44447.3684210526, 7, 0],
-						[44605.2631578947, 5, 0],
-						[44763.1578947368, 5, 0],
-						[44921.0526315789, 4, 0],
-						[45078.947368421, 7, 0],
-						[45236.8421052632, 6, 157.894736842105]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": false
-				},
-				{
-					"sectionNotes": [
-						[45473.6842105263, 5, 0],
-						[45631.5789473684, 4, 0],
-						[45789.4736842105, 6, 0],
-						[45947.3684210526, 7, 0],
-						[46105.2631578947, 5, 0],
-						[46263.1578947368, 6, 0],
-						[46421.0526315789, 4, 0],
-						[46578.947368421, 6, 0]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": false
-				},
-				{
-					"sectionNotes": [
-						[46736.8421052631, 5, 0],
-						[46894.7368421053, 7, 0],
-						[47052.6315789474, 4, 0],
-						[47210.5263157895, 5, 0],
-						[47368.4210526316, 6, 0],
-						[47526.3157894737, 4, 0],
-						[47684.2105263158, 5, 0],
-						[47842.1052631579, 6, 0]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": false
-				},
-				{
-					"sectionNotes": [
-						[48000, 7, 0],
-						[48078.947368421, 4, 0],
-						[48157.8947368421, 5, 0],
-						[48315.7894736842, 6, 0],
-						[48473.6842105263, 7, 0],
-						[48552.6315789474, 4, 0],
-						[48631.5789473684, 5, 0],
-						[48789.4736842105, 6, 0],
-						[48868.4210526316, 7, 0],
-						[48947.3684210526, 4, 0],
-						[49105.2631578947, 6, 0]
-					],
-					"sectionBeats": 4,
-					"altAnim": false,
-					"gfSection": false,
-					"bpm": 150,
-					"changeBPM": false,
-					"mustHitSection": false
-				},
-				{
-					"sectionBeats": 4,
-					"sectionNotes": [
-						[49263.1578947368, 7, 0],
-						[49342.1052631579, 4, 0],
-						[49421.0526315789, 5, 0],
-						[49578.947368421, 6, 0],
-						[49736.8421052631, 7, 0],
-						[49815.7894736842, 4, 0],
-						[49894.7368421052, 5, 0],
-						[49973.6842105263, 7, 0],
-						[50052.6315789474, 4, 0],
-						[50210.5263157895, 5, 0],
-						[50289.4736842105, 4, 0],
-						[50368.4210526316, 6, 0],
-						[50447.3684210526, 7, 0]
-					],
-					"gfSection": false,
-					"altAnim": false,
-					"mustHitSection": false,
-					"changeBPM": false,
-					"bpm": 150
-				},
-				{
-					"sectionBeats": 4,
-					"sectionNotes": [
-						[50526.3157894737, 1, 0],
-						[50684.2105263158, 0, 0],
-						[50842.1052631579, 2, 0],
-						[51000, 0, 236.842105263158],
-						[51315.7894736842, 1, 0],
-						[51473.6842105263, 3, 0],
-						[51631.5789473684, 2, 0]
-					],
-					"gfSection": false,
-					"altAnim": false,
-					"mustHitSection": true,
-					"changeBPM": false,
-					"bpm": 150
-				},
-				{
-					"sectionBeats": 4,
-					"sectionNotes": [
-						[51789.4736842105, 0, 0],
-						[51947.3684210526, 3, 0],
-						[52026.3157894737, 0, 0],
-						[52105.2631578947, 2, 0],
-						[52263.1578947368, 3, 0],
-						[52342.1052631579, 0, 0],
-						[52421.0526315789, 1, 0],
-						[52500, 2, 0],
-						[52578.947368421, 3, 0],
-						[52657.8947368421, 1, 0],
-						[52736.8421052631, 0, 0],
-						[52894.7368421052, 2, 0]
-					],
-					"gfSection": false,
-					"altAnim": false,
-					"mustHitSection": true,
-					"changeBPM": false,
-					"bpm": 150
-				},
-				{
-					"sectionBeats": 4,
-					"sectionNotes": [
-						[53052.6315789473, 3, 0],
-						[53210.5263157895, 1, 0],
-						[53289.4736842105, 2, 0],
-						[53368.4210526316, 3, 0],
-						[53526.3157894737, 0, 0],
-						[53605.2631578947, 2, 0],
-						[53684.2105263158, 3, 0],
-						[53763.1578947368, 1, 0],
-						[53842.1052631579, 2, 0],
-						[53921.0526315789, 1, 0],
-						[54000, 0, 0],
-						[54078.947368421, 2, 0],
-						[54157.8947368421, 1, 0]
-					],
-					"gfSection": false,
-					"altAnim": false,
-					"mustHitSection": true,
-					"changeBPM": false,
-					"bpm": 150
-				},
-				{
-					"sectionBeats": 4,
-					"sectionNotes": [
-						[54315.7894736842, 2, 0],
-						[54394.7368421052, 3, 0],
-						[54473.6842105263, 0, 0],
-						[54552.6315789473, 1, 0],
-						[54631.5789473684, 0, 0],
-						[54789.4736842105, 2, 0],
-						[54868.4210526316, 3, 0],
-						[54947.3684210526, 1, 0],
-						[55026.3157894737, 0, 0],
-						[55105.2631578947, 1, 0],
-						[55184.2105263158, 2, 0],
-						[55263.1578947368, 3, 0],
-						[55342.1052631579, 0, 0],
-						[55421.0526315789, 1, 0]
-					],
-					"gfSection": false,
-					"altAnim": false,
-					"mustHitSection": true,
-					"changeBPM": false,
-					"bpm": 150
-				},
-				{
-					"sectionBeats": 4,
-					"sectionNotes": [
-						[55578.947368421, 2, 0],
-						[55657.8947368421, 0, 0],
-						[55736.8421052631, 1, 0],
-						[55894.7368421052, 3, 0],
-						[56210.5263157894, 2, 0],
-						[56289.4736842105, 1, 0],
-						[56368.4210526316, 0, 0],
-						[56447.3684210526, 3, 0],
-						[56526.3157894737, 2, 0],
-						[56684.2105263158, 1, 0]
-					],
-					"gfSection": false,
-					"altAnim": false,
-					"mustHitSection": true,
-					"changeBPM": false,
-					"bpm": 150
-				},
-				{
-					"sectionBeats": 4,
-					"sectionNotes": [
-						[56842.1052631579, 0, 0],
-						[56921.0526315789, 3, 0],
-						[57000, 1, 0],
-						[57157.8947368421, 2, 0],
-						[57315.7894736842, 3, 0],
-						[57394.7368421052, 0, 0],
-						[57473.6842105263, 1, 0],
-						[57631.5789473684, 2, 0],
-						[57789.4736842105, 3, 0],
-						[57947.3684210526, 1, 0, "Hey!"]
-					],
-					"gfSection": false,
-					"altAnim": false,
-					"mustHitSection": true,
-					"changeBPM": false,
-					"bpm": 150
-				},
-				{
-					"sectionBeats": 4,
-					"sectionNotes": [
-						[58105.2631578947, 2, 0],
-						[58184.2105263158, 0, 0],
-						[58263.1578947368, 3, 0],
-						[58421.0526315789, 1, 0],
-						[58578.947368421, 2, 0],
-						[58657.8947368421, 3, 0],
-						[58736.8421052631, 0, 0],
-						[58894.7368421052, 1, 0],
-						[58973.6842105263, 3, 0],
-						[59052.6315789473, 0, 0],
-						[59210.5263157894, 2, 0]
-					],
-					"gfSection": false,
-					"altAnim": false,
-					"mustHitSection": true,
-					"changeBPM": false,
-					"bpm": 150
-				},
-				{
-					"sectionBeats": 4,
-					"sectionNotes": [
-						[59368.4210526315, 1, 0],
-						[59447.3684210526, 0, 0],
-						[59526.3157894737, 1, 0],
-						[59605.2631578947, 0, 0],
-						[59684.2105263158, 2, 0],
-						[59842.1052631579, 0, 0],
-						[59921.0526315789, 1, 0],
-						[60000, 0, 0],
-						[60078.947368421, 1, 0],
-						[60157.8947368421, 2, 0],
-						[60315.7894736842, 3, 0],
-						[60394.7368421052, 1, 0],
-						[60473.6842105263, 3, 0],
-						[60552.6315789473, 1, 0]
-					],
-					"gfSection": false,
-					"altAnim": false,
-					"mustHitSection": true,
-					"changeBPM": false,
-					"bpm": 150
-				},
-				{
-					"sectionBeats": 4,
-					"sectionNotes": [
-						[60631.5789473684, 2, 0, "Hey!"],
-						[60639.4736842105, 7, 1815.78947368421],
-						[60746.0526315789, 4, 1657.89473684211],
-						[60850.6578947368, 5, 1578.94736842105],
-						[60984.8684210526, 6, 1500],
-						[61128.947368421, 4, 78.9473684210526],
-						[61140.7894736842, 4, 78.9473684210526],
-						[61207.8947368421, 7, 78.9473684210526],
-						[61223.6842105263, 5, 0],
-						[61231.5789473684, 7, 78.9473684210526],
-						[61348.0263157894, 6, 78.9473684210526],
-						[61385.5263157894, 4, 0],
-						[61399.3421052631, 6, 78.9473684210526],
-						[61403.2894736842, 6, 78.9473684210526],
-						[61425, 5, 0],
-						[61458.5526315789, 5, 0],
-						[61496.0526315789, 4, 78.9473684210526],
-						[61519.7368421052, 6, 0],
-						[61551.3157894736, 5, 78.9473684210526],
-						[61567.1052631579, 6, 0],
-						[61598.6842105263, 6, 78.9473684210526],
-						[61606.5789473684, 7, 0],
-						[61659.8684210526, 7, 0],
-						[61673.6842105263, 4, 78.9473684210526],
-						[61719.0789473684, 7, 0],
-						[61725, 6, 0],
-						[61780.2631578947, 6, 0],
-						[61796.0526315789, 7, 0],
-						[61825.6578947368, 7, 0],
-						[61851.3157894736, 7, 0],
-						[61890.7894736842, 6, 0]
-					],
-					"gfSection": false,
-					"altAnim": false,
-					"mustHitSection": true,
-					"changeBPM": false,
-					"bpm": 150
-				},
-				{
-					"sectionBeats": 4,
-					"sectionNotes": [],
-					"gfSection": false,
-					"altAnim": false,
-					"mustHitSection": true,
-					"changeBPM": false,
-					"bpm": 150
-				},
-				{
-					"sectionBeats": 4,
-					"sectionNotes": [],
-					"gfSection": false,
-					"altAnim": false,
-					"mustHitSection": true,
-					"changeBPM": false,
-					"bpm": 150
-				},
-				{
-					"sectionBeats": 4,
-					"sectionNotes": [],
-					"gfSection": false,
-					"altAnim": false,
-					"mustHitSection": true,
-					"changeBPM": false,
-					"bpm": 150
-				}
-			],
-			events: [
-				[
-					60631.5789473684,
-					[
-						["Camera Switch", "1.8", "off"]
-					]
-				],
-				[
-					62526.3157894736,
-					[
-						["Add Camera Zoom", "0.5", "0.5"]
-					]
-				],
-				[
-					62605.2631578947,
-					[
-						["Change Character", "bf2", "invisibru"]
-					]
-				]		
-			],
-			bpm: 190,
-			needsVoices: true,
-			speed: 3,
-			offset: 0,
+			song: '',
+			songArtists: '',
+			artists: '',
+			charters: '',
+			vfx: '',
+			scripters: '',
 
 			player1: 'bf',
-			player2: 'bf2',
+			player2: 'bf-opponent',
 			gfVersion: 'gf',
 			stage: 'stage',
-			format: 'psych_v1_convert'
+			format: 'skydecay_beta',
+			needsVoices: true,
+
+			speed: 2.8, // recommended scroll speeds is 2.6-3.4
+			bpm: 0,
+			offset: 0,
+
+			events: [],
+			
+			notes: [],
 		};
 		Song.chartPath = null;
 		loadChart(song);
@@ -1734,6 +812,12 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		gameOverLoopInputText.text = PlayState.SONG.gameOverLoop;
 		gameOverRetryInputText.text = PlayState.SONG.gameOverEnd;
 
+		songArtistInputText.text = songArtists;
+		artistsInputText.text = artists;
+		chartersInputText.text = charters;
+		vfxInputText.text = vfx;
+		scriptersInputText.text = scripters;
+
 		noRGBCheckBox.checked = (PlayState.SONG.disableNoteRGB == true);
 
 		noteTextureInputText.text = PlayState.SONG.arrowSkin;
@@ -1752,6 +836,9 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	var autoSaveTime:Float = 0;
 	var autoSaveCap:Int = 2; //in minutes
 	var backupLimit:Int = 10;
+
+	var lilBfResetAnim:Float = 0;
+	var lilOppResetAnim:Float = 0;
 
 	var lastBeatHit:Int = 0;
 	override function update(elapsed:Float)
@@ -1965,6 +1052,22 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			updateScrollY();
 		}
 
+		if(lilOppResetAnim > 0) {
+			lilOppResetAnim -= elapsed;
+			if(lilOppResetAnim <= 0) {
+				lilOpp.animation.play('idle');
+				lilOppResetAnim = 0;
+			}
+		}
+		
+		if(lilBfResetAnim > 0) {
+			lilBfResetAnim -= elapsed;
+			if(lilBfResetAnim <= 0) {
+				lilBf.animation.play('idle');
+				lilBfResetAnim = 0;
+			}
+		}
+
 		super.update(elapsed);
 		
 		if(songFinished)
@@ -2070,10 +1173,12 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 					var sel = selectedNotes;
 					selectedNotes = curRenderedNotes.members.copy();
 					addUndoAction(SELECT_NOTE, {old: sel, current: selectedNotes.copy()});
+					FlxG.sound.play(Paths.sound('fav'), 0.5);
 					onSelectNote();
 					trace('Notes selected: ' + selectedNotes.length);
 				}
 				else if(FlxG.keys.justPressed.S) // Save (Ctrl + S)
+					FlxG.sound.play(Paths.sound('noteComboSound'), 0.5);
 					saveChart();
 			}
 
@@ -2098,6 +1203,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		
 						var kind:String = !note.isEvent ? 'note' : 'event';
 						trace('Removed $kind at time: ${note.strumTime}');
+						FlxG.sound.play(Paths.sound('chartingSounds/noteErase'), 0.5);
 						if(!note.isEvent)
 						{
 							notes.remove(note);
@@ -2358,6 +1464,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 						{
 							var kind:String = !closest.isEvent ? 'note' : 'event';
 							trace('Removed $kind at time: ${closest.strumTime}');
+							FlxG.sound.play(Paths.sound('chartingSounds/noteErase'), 0.5);
 							if(!closest.isEvent)
 								notes.remove(closest);
 							else
@@ -2376,6 +1483,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 						if(noteData >= 0)
 						{
 							trace('Added note at time: $strumTime');
+							FlxG.sound.play(Paths.sound('chartingSounds/noteLay'), 0.5);
 							var didAdd:Bool = false;
 
 							var noteSetupData:Array<Dynamic> = [strumTime, noteData, 0];
@@ -2405,6 +1513,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 						else if(!lockedEvents)
 						{
 							trace('Added event at time: $strumTime');
+							FlxG.sound.play(Paths.sound('chartingSounds/noteLay'), 0.5);
 							var didAdd:Bool = false;
 
 							var eventAdded:EventMetaNote = createEvent([strumTime, [[eventsList[Std.int(Math.max(eventDropDown.selectedIndex, 0))][0], value1InputText.text, value2InputText.text]]]);
@@ -2475,6 +1584,13 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				FlxG.sound.play(Paths.sound('Metronome_Tick'), metronomeStepper.value);
 	
 			lastBeatHit = curBeat;
+
+			if (curBeat % lilPlayer.danceEveryNumBeats == 0 && !lilPlayer.getAnimationName().startsWith('sing')) {
+				lilPlayer.dance();
+			}
+			if (curBeat % lilOpponent.danceEveryNumBeats == 0 && !lilOpponent.getAnimationName().startsWith('sing')) {
+				lilOpponent.dance();
+			}
 		}
 
 		if(selectedNotes.length > 0)
@@ -2528,6 +1644,14 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	var hitSoundOpp:Bool = (hitsoundOpponentStepper.value > 0);
 	var data:Int = note.noteData % 4;
 	note.alpha = (note.strumTime >= Conductor.songPosition) ? 1 : 0.6;
+	
+		if(note.mustPress) {
+			lilPlayer.playAnim(singAnimations[note.noteData], true); 
+			lilPlayer.holdTimer = 0;
+		} else if(!note.mustPress) {
+			lilOpponent.playAnim(singAnimations[note.noteData], true); 
+			lilOpponent.holdTimer = 0;
+		}
 
 		if(canPlayHitSound)
 		{
@@ -2546,16 +1670,18 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		if(lilBuddiesSing) // yesssss i'm cumming
 		{
 			data += 4;
-			if(note.mustPress && lilBuddiesOn)
-			{
-				lilBf.animation.play("" + (data % 4), true);
-				lilBf.color = note.rgbShader.r;
-			}
-			else if(!note.mustPress && lilBuddiesOn)
-			{
-				lilOpp.animation.play("" + (data % 4), true);
-				lilOpp.color = note.rgbShader.r;
-			}			
+			if (!note.noAnimation) {
+				if (note.mustPress)
+				{
+					lilBf.animation.play("" + (note.noteData % 4), true);
+					lilBfResetAnim = ((Conductor.stepCrochet * 3) + note.sustainLength) / 1000 / playbackRate; // for lil buddies to reset after hitting notes. It doesn't stop at sections anymore.
+				}
+				else
+				{
+					lilOpp.animation.play("" + (note.noteData % 4), true);
+					lilOppResetAnim = ((Conductor.stepCrochet * 3) + note.sustainLength) / 1000 / playbackRate;
+				}
+			}		
 		}
 
 		if(vortexPlaying)
@@ -3121,6 +2247,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			var lastSection = PlayState.SONG.notes[PlayState.SONG.notes.length-1];
 			var beat:Float = Conductor.calculateCrochet(bpm);
 			var sectionBeats:Float = lastSection != null ? lastSection.sectionBeats : 4;
+			var lengthInSteps:Int = 16; // legacy chart support
 			var rowRound:Int = Math.round(4 * sectionBeats);
 			var timeAdd:Float = beat * (rowRound / 4);
 			var mustHitSec:Bool = lastSection != null ? lastSection.mustHitSection : true;
@@ -3133,6 +2260,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				PlayState.SONG.notes.push({
 					sectionNotes: [],
 					sectionBeats: sectionBeats,
+					// lengthInSteps: lengthInSteps,
 					mustHitSection: mustHitSec,
 					bpm: bpm,
 					changeBPM: changeBpmSec,
@@ -3219,7 +2347,6 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		prevGridBg.vortexLineEnabled = gridBg.vortexLineEnabled = nextGridBg.vortexLineEnabled = vortexEnabled;
 		prevGridBg.vortexLineSpace = gridBg.vortexLineSpace = nextGridBg.vortexLineSpace = GRID_SIZE * 4 * curZoom;
 		updateWaveform();
-		resetBuddies(); // makes lil buddies stand up straight FUCGGGGGGGGGGGHKKKKKKED!!!!!!!!
 	}
 
 	function softReloadNotes(onlyCurrent:Bool = false)
@@ -3401,7 +2528,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	var opponentMuteCheckBox:PsychUICheckBox;
 	function addChartingTab()
 	{
-		var tab_group = mainBox.getTab('Charting').menu;
+		var tab_group = mainBox.getTab('Misc').menu;
 		var objX = 10;
 		var objY = 10;
 
@@ -3426,7 +2553,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		metronomeStepper = new PsychUINumericStepper(objX + 200, objY, 0.2, 0, 0, 1, 1);
 
 		objY += 50;
-		instVolumeStepper = new PsychUINumericStepper(objX, objY, 0.1, 0.6, 0, 1, 1);
+		instVolumeStepper = new PsychUINumericStepper(objX, objY, 0.1, 1, 0, 1, 1); // should always be max volume
 		instVolumeStepper.onValueChange = updateAudioVolume;
 		playerVolumeStepper = new PsychUINumericStepper(objX + 100, objY, 0.1, 1, 0, 1, 1);
 		playerVolumeStepper.onValueChange = updateAudioVolume;
@@ -3464,9 +2591,11 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	var gameOverSndInputText:PsychUIInputText;
 	var gameOverLoopInputText:PsychUIInputText;
 	var gameOverRetryInputText:PsychUIInputText;
-	var creditInputText:PsychUIInputText;
-	var creditPathInputText:PsychUIInputText;
-	var creditIconInputText:PsychUIInputText;
+	var songArtistInputText:PsychUIInputText; // credits
+	var artistsInputText:PsychUIInputText;
+	var chartersInputText:PsychUIInputText;
+	var vfxInputText:PsychUIInputText;
+	var scriptersInputText:PsychUIInputText;
 	var noRGBCheckBox:PsychUICheckBox;
 	var noteTextureInputText:PsychUIInputText;
 	var noteSplashesInputText:PsychUIInputText;
@@ -3565,11 +2694,59 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			PlayState.SONG.splashSkin = cur;
 			if(cur.trim().length < 1) PlayState.SONG.splashSkin = null;
 		}
+
+		objY += 40;
+		songArtistInputText = new PsychUIInputText(objX, objY, 120, '', 8);
+		songArtistInputText.onChange = function(old:String, cur:String)
+		{
+
+		}
+
+		objY += 40;
+		artistsInputText = new PsychUIInputText(objX, objY, 120, '', 8);
+		artistsInputText.onChange = function(old:String, cur:String)
+		{
+
+		}
+
+		objY += 40;
+		chartersInputText = new PsychUIInputText(objX, objY, 120, '', 8);
+		chartersInputText.onChange = function(old:String, cur:String)
+		{
+
+		}
+
+		objY += 40;
+		vfxInputText = new PsychUIInputText(objX, objY, 120, '', 8);
+		vfxInputText.onChange = function(old:String, cur:String)
+		{
+
+		}
+
+		objY += 40;
+		scriptersInputText = new PsychUIInputText(objX, objY, 120, '', 8);
+		scriptersInputText.onChange = function(old:String, cur:String)
+		{
+			
+		}
+
 	
 		tab_group.add(new FlxText(gameOverCharDropDown.x, gameOverCharDropDown.y - 15, 120, 'Game Over Character:'));
 		tab_group.add(new FlxText(gameOverSndInputText.x, gameOverSndInputText.y - 15, 180, 'Game Over Death Sound (sounds/):'));
 		tab_group.add(new FlxText(gameOverLoopInputText.x, gameOverLoopInputText.y - 15, 180, 'Game Over Loop Music (music/):'));
 		tab_group.add(new FlxText(gameOverRetryInputText.x, gameOverRetryInputText.y - 15, 180, 'Game Over Retry Music (music/):'));
+
+		tab_group.add(new FlxText(songArtistInputText.x, songArtistInputText.y - 15, 180, 'Music Artist:'));
+		tab_group.add(new FlxText(artistsInputText.x, artistsInputText.y - 15, 180, 'Artists:'));
+		tab_group.add(new FlxText(chartersInputText.x, chartersInputText.y - 15, 180, 'Charters:'));
+		tab_group.add(new FlxText(vfxInputText.x, vfxInputText.y - 15, 180, 'VFX:'));
+		tab_group.add(new FlxText(scriptersInputText.x, scriptersInputText.y - 15, 180, 'Scripters:'));
+		tab_group.add(songArtistInputText);
+		tab_group.add(artistsInputText);
+		tab_group.add(chartersInputText);
+		tab_group.add(vfxInputText);
+		tab_group.add(scriptersInputText);
+
 		tab_group.add(gameOverSndInputText);
 		tab_group.add(gameOverLoopInputText);
 		tab_group.add(gameOverRetryInputText);
@@ -3845,7 +3022,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			var curSectionTime:Null<Float> = cachedSectionTimes[curSec - secOff];
 			if(curSectionTime == null)
 			{
-				//showOutput('ERROR: Unknown section??', true);
+				showOutput('ERROR: Unknown section??', true);
 				return;
 			}
 
@@ -3983,6 +3160,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				selectedNotes.remove(note);
 			}
 			softReloadNotes(true);
+			FlxG.sound.play(Paths.sound('tried'), 0.5);
 		});
 		clearButton.normalStyle.bgColor = FlxColor.RED;
 		clearButton.normalStyle.textColor = FlxColor.WHITE;
@@ -4073,6 +3251,46 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				positionNoteXByData(note);
 			}
 			softReloadNotes(true);
+
+			objY += 52;
+			/*var clearLeftSectionButton:FlxButton = new FlxButton(duetButton.x, duetButton.y + 30, "Clear Left Side", function()
+			{
+				if (_song.notes[curSection] == null || _song.notes[curSection] != null && _song.notes[curSection].sectionNotes == null) return;
+				saveUndo(_song); //this is really weird so im saving it as an undoable action just in case it does the wrong section
+				var removeThese = [];
+				for (noteIndex in 0..._song.notes[curSection].sectionNotes.length) {
+						if (_song.notes[curSection].sectionNotes[noteIndex][1] < 4) {
+							removeThese.push(_song.notes[curSection].sectionNotes[noteIndex]);
+						}
+				}
+				if (removeThese != []) {
+					for (x in removeThese) {
+						_song.notes[curSection].sectionNotes.remove(x);
+					}
+				}
+	
+				updateGrid(false);
+				updateNoteUI();
+			});
+			var clearRightSectionButton:FlxButton = new FlxButton(clearLeftSectionButton.x + 100, clearLeftSectionButton.y, "Clear Right Side", function()
+			{
+				if (_song.notes[curSection] == null || _song.notes[curSection] != null && _song.notes[curSection].sectionNotes == null) return;
+				saveUndo(_song); //this is really weird so im saving it as an undoable action just in case it does the wrong section
+				var removeThese = [];
+				for (noteIndex in 0..._song.notes[curSection].sectionNotes.length) {
+						if (_song.notes[curSection].sectionNotes[noteIndex][1] >= 4) {
+							removeThese.push(_song.notes[curSection].sectionNotes[noteIndex]);
+						}
+				}
+				if (removeThese != []) {
+					for (x in removeThese) {
+						_song.notes[curSection].sectionNotes.remove(x);
+					}
+				}
+	
+				updateGrid(false);
+				updateNoteUI();
+			});*/
 		});
 
 		tab_group.add(mustHitCheckBox);
@@ -4282,7 +3500,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			}
 			if(loadedChart == null || !Reflect.hasField(loadedChart, 'song')) //Check if chart is ACTUALLY a chart and valid
 			{
-				showOutput('Error: File loaded is not a Psych Engine/FNF 0.2.x.x chart.', true);
+				showOutput('Error: File loaded is not a Psych(SkyDecay) Engine/FNF 0.2.x.x chart.', true);
 				return;
 			}
 
@@ -4477,7 +3695,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 					var loadedChart:SwagSong = Song.parseJSON(fileDialog.data, filePath.substr(filePath.lastIndexOf('/')));
 					if(loadedChart == null || !Reflect.hasField(loadedChart, 'song')) //Check if chart is ACTUALLY a chart and valid
 					{
-						showOutput('Error: File loaded is not a Psych Engine/FNF 0.2.x.x chart.', true);
+						showOutput('Error: File loaded is not a Psych(SkyDecay) Engine/FNF 0.2.x.x chart.', true);
 						return;
 					}
 
@@ -4691,6 +3909,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			if(!fileDialog.completed) return;
 			upperBox.isMinimized = true;
 			upperBox.bg.visible = false;
+			FlxG.sound.play(Paths.sound('noteComboSound'), 0.5);
 
 			saveChart();
 		}, btnWid);
@@ -4703,6 +3922,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			if(!fileDialog.completed) return;
 			upperBox.isMinimized = true;
 			upperBox.bg.visible = false;
+			FlxG.sound.play(Paths.sound('loading_open_alpha'), 0.5);
 
 			saveChart(false);
 		},btnWid);
@@ -4718,9 +3938,14 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				upperBox.isMinimized = true;
 	
 				updateChartData();
-				fileDialog.save('events.json', PsychJsonPrinter.print({events: PlayState.SONG.events, format: 'psych_v1'}, ['events']),
-					function() showOutput('Events saved successfully to: ${fileDialog.path}'), null,
-					function() showOutput('Error on saving events!', true));
+				FlxG.sound.play(Paths.sound('Limu/heal'), 0.5);
+				fileDialog.save('events.json', PsychJsonPrinter.print({events: PlayState.SONG.events, format: 'skydecay_engine'}, ['events']),
+					function()
+						showOutput('Events saved successfully to: ${fileDialog.path}'), null,
+					function() 
+						showOutput('Error on saving events!', true));
+						FlxG.sound.play(Paths.sound('boowomp'), 0.5);
+
 			}, btnWid);
 			btn.text.alignment = LEFT;
 			tab_group.add(btn);
@@ -5398,12 +4623,12 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			lilBuddiesOn = !lilBuddiesOn;
 			chartEditorSave.data.lilBuddiesBox = lilBuddiesOn;
 			lilStage.visible = lilBf.visible = lilOpp.visible = lilStage.active = lilBf.active = lilOpp.active = lilBuddiesOn;
-			lilBuddiesBoxButton.text.text = lilBuddiesOn ? '	Lil Buddies ON' : '  Lil Buddies OFF';
+			lilBuddiesBoxButton.text.text = lilBuddiesOn ? '  Lil Buddies ON' : '  Lil Buddies OFF';
 		}, btnWid);
 		lilBuddiesBoxButton.text.alignment = LEFT;
 		tab_group.add(lilBuddiesBoxButton);
 
-		btnY++;
+		/* btnY++;
 		btnY += 20;
 		downscrollEditorButton = new PsychUIButton(btnX, btnY, downscrollEnabled ? '  Reverse Scroll ON' : ' Reverse Scroll OFF', function()
 		{
@@ -5413,7 +4638,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			downscrollEditorButton.text.text = downscrollEnabled ? '  Reverse Scroll ON' : ' Reverse Scroll OFF';
 		}, btnWid);
 		downscrollEditorButton.text.alignment = LEFT;
-		tab_group.add(downscrollEditorButton);
+		tab_group.add(downscrollEditorButton); */
 		
 		btnY++;
 		btnY += 20;
@@ -6241,6 +5466,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			try
 			{
 				var path:String = Paths.getPath('characters/' + char + '.json', TEXT);
+				trace(path);
 				#if MODS_ALLOWED
 				var unparsedJson = File.getContent(path);
 				#else

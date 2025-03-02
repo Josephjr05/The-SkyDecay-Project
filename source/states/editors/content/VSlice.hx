@@ -247,6 +247,11 @@ class VSlice
 			}
 
 			var swagSong:SwagSong = {
+				songArtists: metadata.artist,
+				artists: metadata.artist,
+				charters: metadata.charter,
+				vfx: metadata.artist,
+				scripters: metadata.charter, // i'll wait till V-Slice updates - Joseph
 				song: metadata.songName,
 				notes: sectionData,
 				events: [],
@@ -259,7 +264,7 @@ class VSlice
 				player2: metadata.playData.characters.opponent,
 				gfVersion: metadata.playData.characters.girlfriend,
 				stage: stage,
-				format: 'psych_v1_convert'
+				format: 'skydecay_beta'
 			}
 
 			Reflect.setField(swagSong, 'artist', metadata.artist);

@@ -20,6 +20,9 @@ import haxe.Json;
 import haxe.Exception;
 import haxe.io.Bytes;
 
+import tjson.TJSON;
+import sys.io.File;
+
 import states.editors.content.MetaNote;
 import states.editors.content.VSlice;
 import states.editors.content.Prompt;
@@ -274,6 +277,8 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	var downscroll:Bool = true;
 	var downscrollEnabled:Bool = false;
 
+	var currentPlayer1Chosen = null;
+
 	override function create()
 	{
 		if(Difficulty.list.length < 1) Difficulty.resetList();
@@ -346,28 +351,6 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		lilOpp.visible = false;
 		lilOpp.antialiasing = lilBuddiesOn;
 		add(lilOpp);
-
-		//shows actual characters (From Moon's Modded Psych Engine)
-		lilPlayer = new Character(100, 405, 'bf', false);
-		lilPlayer.scrollFactor.set();
-		lilPlayer.setGraphicSize(Std.int(lilPlayer.width * 0.4));
-        add(lilPlayer);
-
-		lilPlayer.flipX = !lilPlayer.flipX;
-
-		lilOpponent = new Character(-50, 405, 'bf-opponent', false); // for now, i'll find out how to make it so when you select a character, it changes it as well.
-		lilOpponent.scrollFactor.set();
-		lilOpponent.setGraphicSize(Std.int(lilPlayer.width * 0.45));
-        add(lilOpponent);
-		
-		for (key in lilPlayer.animOffsets.keys()) {
-            lilPlayer.animOffsets[key][0] *= lilPlayer.scale.x;
-            lilPlayer.animOffsets[key][1] *= lilPlayer.scale.y;
-        }
-        for (keyt in lilOpponent.animOffsets.keys()) {
-            lilOpponent.animOffsets[keyt][0] *= lilOpponent.scale.x;
-            lilOpponent.animOffsets[keyt][1] *= lilOpponent.scale.y;
-        }
 
 		if(chartEditorSave.data.autoSave != null) autoSaveCap = chartEditorSave.data.autoSave;
 		if(chartEditorSave.data.backupLimit != null) backupLimit = chartEditorSave.data.backupLimit;
@@ -848,6 +831,23 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		{
 			lastFocus = PsychUIInputText.focusOn;
 			return;
+		}
+
+		if (currentPlayer1Chosen == null)
+		{
+			currentPlayer1Chosen = "RexDXPX";
+		}
+		
+		var player1CurrentcharacterPath:String = 'characters/$currentPlayer1Chosen.json';
+		var player1CurrentPath:String = Paths.getPath(player1CurrentcharacterPath, TEXT, null, true);
+		if (FileSystem.exists(player1CurrentPath))
+		{	
+			var player1CurrentFile = sys.io.File.getContent(player1CurrentPath);
+			var player1CurrentJsonData = TJSON.parse(player1CurrentFile+".json");
+			var player1Data:Dynamic = player1CurrentJsonData;
+
+			//trace('player1 = ' + player1CurrentJsonData);
+			trace('player1Image = ' + player1Data.image);
 		}
 
 		var charterFocus:Bool = PsychUIInputText.focusOn == null && lastFocus == null;
@@ -3559,6 +3559,21 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			updateHeads(true);
 			loadMusic();
 			trace('selected $character');
+
+			//shows actual characters (From Moon's Modded Psych Engine)
+			lilPlayer = new Character(100, 405, '$character', false);
+			lilPlayer.scrollFactor.set();
+			lilPlayer.setGraphicSize(Std.int(lilPlayer.width * 0.4));
+        	add(lilPlayer);
+
+			lilPlayer.flipX = !lilPlayer.flipX;
+			
+			for (key in lilPlayer.animOffsets.keys()) {
+        	    lilPlayer.animOffsets[key][0] *= lilPlayer.scale.x;
+        	    lilPlayer.animOffsets[key][1] *= lilPlayer.scale.y;
+        	}
+
+			//currentPlayer1Chosen = character;
 		});
 		stageDropDown = new PsychUIDropDownMenu(objX + 140, objY, [''], function(id:Int, stage:String)
 		{
@@ -3574,6 +3589,16 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			updateHeads(true);
 			loadMusic();
 			trace('selected $character');
+			
+			lilOpponent = new Character(-50, 405, '$character', false); // for now, i'll find out how to make it so when you select a character, it changes it as well.
+			lilOpponent.scrollFactor.set();
+			lilOpponent.setGraphicSize(Std.int(lilPlayer.width * 0.45));
+			add(lilOpponent);
+
+			for (keyt in lilOpponent.animOffsets.keys()) {
+				lilOpponent.animOffsets[keyt][0] *= lilOpponent.scale.x;
+				lilOpponent.animOffsets[keyt][1] *= lilOpponent.scale.y;
+			}
 		});
 		
 		girlfriendDropDown = new PsychUIDropDownMenu(objX, objY + 80, [''], function(id:Int, character:String)

@@ -279,32 +279,6 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 
 	var currentPlayer1Chosen = null;
 
-	function createLilBuddies(CreateP1:Bool = true, CreateP2:Bool = true, P1Name:String = 'bf', P2Name:String = 'bf-opponent')
-	{
-		//customFunctions
-		//shows actual characters (From Moon's Modded Psych Engine)
-		if(CreateP1 == true)
-			lilPlayer = new Character(100, 405, P1Name, false);
-			lilPlayer.scrollFactor.set();
-			lilPlayer.setGraphicSize(Std.int(lilPlayer.width * 0.4));
-        	add(lilPlayer);
-			lilPlayer.flipX = !lilPlayer.flipX;
-			for (key in lilPlayer.animOffsets.keys()) {
-        	    lilPlayer.animOffsets[key][0] *= lilPlayer.scale.x;
-        	    lilPlayer.animOffsets[key][1] *= lilPlayer.scale.y;
-        	}
-
-		if(CreateP2 == true)
-			lilOpponent = new Character(-50, 405, P2Name, false); // for now, i'll find out how to make it so when you select a character, it changes it as well.
-			lilOpponent.scrollFactor.set();
-			lilOpponent.setGraphicSize(Std.int(lilPlayer.width * 0.45));
-        	add(lilOpponent);
-        	for (keyt in lilOpponent.animOffsets.keys()) {
-        	    lilOpponent.animOffsets[keyt][0] *= lilOpponent.scale.x;
-        	    lilOpponent.animOffsets[keyt][1] *= lilOpponent.scale.y;
-        	}
-	}
-
 	override function create()
 	{
 		if(Difficulty.list.length < 1) Difficulty.resetList();
@@ -755,6 +729,36 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		}
 	}
 
+	function createLilBuddies(createP1:Bool = true, createP2:Bool = true, p1Name:String = 'bf', p2Name:String = 'bf-opponent')
+	{
+		//customFunctions
+		//shows actual characters (From Moon's Modded Psych Engine)
+		if(createP1 == true)
+			lilPlayer = new Character(100, 405, p1Name, false);
+			lilPlayer.scrollFactor.set();
+			lilPlayer.setGraphicSize(Std.int(lilPlayer.width * 0.4));
+			add(lilPlayer);
+			lilPlayer.flipX = !lilPlayer.flipX;
+			for (key in lilPlayer.animOffsets.keys()) {
+				lilPlayer.animOffsets[key][0] *= lilPlayer.scale.x;
+				lilPlayer.animOffsets[key][1] *= lilPlayer.scale.y;
+			}
+			if (lilPlayer = null){
+				
+			}
+
+
+		if(createP2 == true)
+			lilOpponent = new Character(-50, 405, p2Name, false);
+			lilOpponent.scrollFactor.set();
+			lilOpponent.setGraphicSize(Std.int(lilOpponent.width * 0.4));
+			add(lilOpponent);
+			for (keyt in lilOpponent.animOffsets.keys()) {
+				lilOpponent.animOffsets[keyt][0] *= lilOpponent.scale.x;
+				lilOpponent.animOffsets[keyt][1] *= lilOpponent.scale.y;
+			}
+	}
+
 	function openNewChart()
 	{
 		var song:SwagSong = {
@@ -863,7 +867,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			return;
 		}
 
-		if (currentPlayer1Chosen == null)
+		/* if (currentPlayer1Chosen == null)
 		{
 			currentPlayer1Chosen = 'bf';
 		}
@@ -878,7 +882,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 
 			//trace('player1 = ' + player1CurrentJsonData);
 			trace('player1Image = ' + player1Data.image);
-		}
+		}*/
 
 		var charterFocus:Bool = PsychUIInputText.focusOn == null && lastFocus == null;
 
@@ -3585,14 +3589,12 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		playerDropDown = new PsychUIDropDownMenu(objX, objY, [''], function(id:Int, character:String)
 		{
 			PlayState.SONG.player1 = character;
+			remove(lilPlayer);
+			createLilBuddies(true, false, character, null);
 			updateJsonData();
 			updateHeads(true);
 			loadMusic();
 			trace('selected $character');
-			remove(lilPlayer);
-			createLilBuddies(true, false, character, null);
-			
-			
 		});
 		stageDropDown = new PsychUIDropDownMenu(objX + 140, objY, [''], function(id:Int, stage:String)
 			{
@@ -3602,14 +3604,14 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		});
 		
 		opponentDropDown = new PsychUIDropDownMenu(objX, objY + 40, [''], function(id:Int, character:String)
-			{
-				PlayState.SONG.player2 = character;
+		{
+			PlayState.SONG.player2 = character;
+			remove(lilOpponent);
+			createLilBuddies(false, true, null, character);
 			updateJsonData();
 			updateHeads(true);
 			loadMusic();
 			trace('selected $character');
-			remove(lilOpponent);
-			createLilBuddies(false, true, null, character);
 		});
 		
 		girlfriendDropDown = new PsychUIDropDownMenu(objX, objY + 80, [''], function(id:Int, character:String)

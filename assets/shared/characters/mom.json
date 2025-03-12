@@ -62,6 +62,7 @@
 		0,
 		0
 	],
+	"chartPosition": [0, 70],
 	"healthicon": "mom",
 	"flip_x": false,
 	"healthbar_colors": [

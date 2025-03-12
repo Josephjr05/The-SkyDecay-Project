@@ -53,6 +53,7 @@
 	"no_antialiasing": false,
 	"image": "characters/ERECT/BF_ERECT",
 	"position": [0, 350],
+	"chartPosition": [-30, 320],
 	"healthicon": "bf-erect",
 	"flip_x": true,
 	"healthbar_colors": [108, 198, 245],

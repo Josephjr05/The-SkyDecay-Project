@@ -93,6 +93,7 @@
 	"no_antialiasing": false,
 	"image": "characters/SDPJ/Joseph",
 	"position": [0, 350],
+	"chartPosition": [20, 360],
 	"healthicon": "joseph",
 	"flip_x": true,
 	"healthbar_colors": [25, 25, 25],

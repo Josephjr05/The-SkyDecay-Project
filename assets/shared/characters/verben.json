@@ -62,6 +62,7 @@
 		250,
 		440
 	],
+	"chartPosition": [80, 340],
 	"healthicon": "asex",
 	"flip_x": false,
 	"healthbar_colors": [

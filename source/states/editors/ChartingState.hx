@@ -270,6 +270,8 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	
 	var lilPlayer:Character;
 	var lilOpponent:Character;
+	//var playerGhost:Character;
+	//var opponentGhost:Character;
 	var singAnimations:Array<String> = ['singLEFT', 'singDOWN', 'singUP', 'singRIGHT'];
 
 	public static var idleMusicAllow:Bool = false;
@@ -353,7 +355,10 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		add(lilOpp);
 
 		//remember to add the new function
-		createLilBuddies(true, true, 'bf', 'bf-opponent');
+		createLilPlayer();
+		createLilOpponent();
+		//createPlayerGhost();
+		//createOpponentGhost();
 			
 		if(chartEditorSave.data.autoSave != null) autoSaveCap = chartEditorSave.data.autoSave;
 		if(chartEditorSave.data.backupLimit != null) backupLimit = chartEditorSave.data.backupLimit;
@@ -729,13 +734,14 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		}
 	}
 
-	function createLilBuddies(createP1:Bool = true, createP2:Bool = true, p1Name:String = 'bf', p2Name:String = 'bf-opponent')
-	{
-		//customFunctions
-		//shows actual characters (From Moon's Modded Psych Engine)
-		if(createP1 == true)
-			lilPlayer = new Character(100, 405, p1Name, false);
+	function createLilPlayer(Name:String = 'bf')
+		{
+			//customFunctions
+			//shows actual characters (From Moon's Modded Psych Engine)
+			if(Name != null)
+			lilPlayer = new Character(0, 0, Name, false);
 			lilPlayer.scrollFactor.set();
+			lilPlayer.screenCenter();
 			lilPlayer.setGraphicSize(Std.int(lilPlayer.width * 0.4));
 			add(lilPlayer);
 			lilPlayer.flipX = !lilPlayer.flipX;
@@ -743,22 +749,67 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				lilPlayer.animOffsets[key][0] *= lilPlayer.scale.x;
 				lilPlayer.animOffsets[key][1] *= lilPlayer.scale.y;
 			}
-			if (lilPlayer = null){
-				
-			}
+		}
 
-
-		if(createP2 == true)
-			lilOpponent = new Character(-50, 405, p2Name, false);
+	function createLilOpponent(Name:String = 'bf-opponent')
+		{
+			if(Name != null)
+			lilOpponent = new Character(0, 0, Name, false);
 			lilOpponent.scrollFactor.set();
+			lilOpponent.screenCenter();
 			lilOpponent.setGraphicSize(Std.int(lilOpponent.width * 0.4));
 			add(lilOpponent);
 			for (keyt in lilOpponent.animOffsets.keys()) {
 				lilOpponent.animOffsets[keyt][0] *= lilOpponent.scale.x;
 				lilOpponent.animOffsets[keyt][1] *= lilOpponent.scale.y;
 			}
-	}
+		}
+		/*
+		function createPlayerGhost(Name:String = 'bf')
+			{
+				//customFunctions
+				//shows actual characters (From Moon's Modded Psych Engine)
+				if(Name != null)
+				playerGhost = new Character(0, 0, Name, false);
+				playerGhost.scrollFactor.set();
+				playerGhost.screenCenter();
+				playerGhost.setGraphicSize(Std.int(playerGhost.width * 0.4));
+				playerGhost.alpha = 0.5;
+				add(playerGhost);
+				playerGhost.flipX = !playerGhost.flipX;
+				for (key in playerGhost.animOffsets.keys()) {
+					playerGhost.animOffsets[key][0] *= playerGhost.scale.x;
+					playerGhost.animOffsets[key][1] *= playerGhost.scale.y;
+				}
+			}
+	
+		function createOpponentGhost(Name:String = 'bf-opponent')
+			{
+				if(Name != null)
+				opponentGhost = new Character(0, 0, Name, false);
+				opponentGhost.scrollFactor.set();
+				opponentGhost.screenCenter();
+				opponentGhost.setGraphicSize(Std.int(opponentGhost.width * 0.4));
+				opponentGhost.alpha = 0.5;
+				add(opponentGhost);
+				for (keyt in opponentGhost.animOffsets.keys()) {
+					opponentGhost.animOffsets[keyt][0] *= opponentGhost.scale.x;
+					opponentGhost.animOffsets[keyt][1] *= opponentGhost.scale.y;
+				}
+			}
+	*/
+	function reloadLilBuddies(id:Int = 3) //id 1 is for the player, id 2 is for the opponent, id 3 is for both
+		{
+			var character1 = PlayState.SONG.player1;
+			var character2 = PlayState.SONG.player2;
 
+			if(id == 1 || id == 3)//Reload The Player
+				remove(lilPlayer);
+				createLilPlayer(character1);
+			if(id == 2 || id == 3)//Reload The Opponent
+				remove(lilOpponent);
+				createLilOpponent(character2);
+		}
 	function openNewChart()
 	{
 		var song:SwagSong = {
@@ -775,11 +826,11 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			stage: 'stage',
 			format: 'skydecay_beta',
 			needsVoices: true,
-
+			
 			speed: 2.8, // recommended scroll speeds is 2.6-3.4
 			bpm: 0,
 			offset: 0,
-
+			
 			events: [],
 			
 			notes: [],
@@ -839,6 +890,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 
 		noteTextureInputText.text = PlayState.SONG.arrowSkin;
 		noteSplashesInputText.text = PlayState.SONG.splashSkin;
+		reloadLilBuddies();
 	}
 	
 	var noteSelectionSine:Float = 0;
@@ -856,6 +908,9 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 
 	var lilBfResetAnim:Float = 0;
 	var lilOppResetAnim:Float = 0;
+	
+	var lilPlayerDP:Array<Float> = [750, 5];
+	var lilOpponentDP:Array<Float> = [100, 40];
 
 	var lastBeatHit:Int = 0;
 	override function update(elapsed:Float)
@@ -867,7 +922,20 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			return;
 		}
 
-		/* if (currentPlayer1Chosen == null)
+		if(lilPlayer.chartArray != null)
+			lilPlayer.setPosition(lilPlayerDP[0] + lilPlayer.chartArray[0], lilPlayerDP[1] + lilPlayer.chartArray[1]);
+		else
+			lilPlayer.setPosition(lilPlayerDP[0] + lilPlayer.positionArray[0], lilPlayerDP[1] + lilPlayer.positionArray[1]);
+
+		if(lilOpponent.chartArray != null)
+			lilOpponent.setPosition(lilOpponentDP[0] + lilOpponent.chartArray[0], lilOpponentDP[1] + lilOpponent.chartArray[1]);
+		else
+			lilOpponent.setPosition(lilOpponentDP[0] + lilOpponent.positionArray[0], lilOpponentDP[1] + lilOpponent.positionArray[1]);
+
+		/*
+		playerGhost.setPosition(lilPlayerDP[0] + playerGhost.positionArray[0], lilPlayerDP[1] + playerGhost.positionArray[1]);
+		opponentGhost.setPosition(lilOpponentDP[0] + opponentGhost.positionArray[0], lilOpponentDP[1] + opponentGhost.positionArray[1]);
+		 if (currentPlayer1Chosen == null)
 		{
 			currentPlayer1Chosen = 'bf';
 		}
@@ -1625,6 +1693,14 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			if (curBeat % lilOpponent.danceEveryNumBeats == 0 && !lilOpponent.getAnimationName().startsWith('sing')) {
 				lilOpponent.dance();
 			}
+			/*
+			if (curBeat % playerGhost.danceEveryNumBeats == 0) {
+				playerGhost.dance();
+			}
+			if (curBeat % opponentGhost.danceEveryNumBeats == 0) {
+				opponentGhost.dance();
+			}
+				*/
 		}
 
 		if(selectedNotes.length > 0)
@@ -3590,14 +3666,16 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		{
 			PlayState.SONG.player1 = character;
 			remove(lilPlayer);
-			createLilBuddies(true, false, character, null);
+			createLilPlayer(character);
+			//createPlayerGhost();
+			//remove(playerGhost);
 			updateJsonData();
 			updateHeads(true);
 			loadMusic();
 			trace('selected $character');
 		});
 		stageDropDown = new PsychUIDropDownMenu(objX + 140, objY, [''], function(id:Int, stage:String)
-			{
+		{
 			PlayState.SONG.stage = stage;
 			StageData.loadDirectory(PlayState.SONG);
 			trace('selected $stage');
@@ -3607,7 +3685,9 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		{
 			PlayState.SONG.player2 = character;
 			remove(lilOpponent);
-			createLilBuddies(false, true, null, character);
+			createLilOpponent(character);
+			//createOpponentGhost();
+			//remove(opponentGhost);
 			updateJsonData();
 			updateHeads(true);
 			loadMusic();

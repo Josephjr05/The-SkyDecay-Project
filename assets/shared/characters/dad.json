@@ -126,6 +126,10 @@
 		0,
 		0
 	],
+	"chartPosition": [
+		-10,
+		65
+	],
 	"healthicon": "dad",
 	"flip_x": false,
 	"healthbar_colors": [

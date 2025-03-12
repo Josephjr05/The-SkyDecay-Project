@@ -172,6 +172,10 @@
 		0,
 		350
 	],
+	"chartPosition": [
+		0,
+		325
+	],
 	"healthicon": "bf2",
 	"flip_x": true,
 	"healthbar_colors": [

@@ -53,6 +53,7 @@
 	"no_antialiasing": false,
 	"image": "characters/SonicLegacy/Sonic_FakerForm",
 	"position": [0, 30],
+	"chartPosition": [-10, 150],
 	"healthicon": "sonicexebruh",
 	"flip_x": false,
 	"healthbar_colors": [0, 88, 183],

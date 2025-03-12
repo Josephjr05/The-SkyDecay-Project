@@ -45,6 +45,7 @@
 	"no_antialiasing": false,
 	"image": "characters/Traped/RedRem",
 	"position": [-240, 100],
+	"chartPosition": [-240, 130],
 	"healthicon": "red",
 	"flip_x": false,
 	"healthbar_colors": [231, 27, 28],

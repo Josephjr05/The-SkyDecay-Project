@@ -77,6 +77,7 @@
 	"no_antialiasing": false,
 	"image": "characters/camellia/Camellia_Mod_SING",
 	"position": [-195, -8],
+	"chartPosition": [-275, -8],
 	"healthicon": "camellia",
 	"flip_x": false,
 	"healthbar_colors": [213, 95, 86],

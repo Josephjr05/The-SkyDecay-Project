@@ -53,6 +53,7 @@
 	"no_antialiasing": false,
 	"image": "characters/Traped/mogusbruh",
 	"position": [-140, 260],
+	"chartPosition": [-150, 335],
 	"healthicon": "orange",
 	"flip_x": false,
 	"healthbar_colors": [255, 85, 0],

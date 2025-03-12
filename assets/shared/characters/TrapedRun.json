@@ -45,6 +45,7 @@
 	"no_antialiasing": false,
 	"image": "characters/Traped/TrapedDanger",
 	"position": [-240, 180],
+	"chartPosition": [-200, 220],
 	"healthicon": "traped",
 	"flip_x": false,
 	"healthbar_colors": [121, 57, 186],

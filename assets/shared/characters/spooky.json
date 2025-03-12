@@ -82,6 +82,7 @@
 		0,
 		200
 	],
+	"chartPosition": [-80, 210],
 	"healthicon": "spooky",
 	"flip_x": false,
 	"healthbar_colors": [

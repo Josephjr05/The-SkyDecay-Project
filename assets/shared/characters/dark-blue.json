@@ -19,7 +19,7 @@
 		{
 			"loop": false,
 			"offsets": [197, 86],
-			"anim": "singRIGHT",
+			"anim": "singLEFT",
 			"fps": 40,
 			"name": "Right",
 			"indices": []
@@ -27,7 +27,7 @@
 		{
 			"loop": false,
 			"offsets": [139, -81],
-			"anim": "singLEFT",
+			"anim": "singRIGHT",
 			"fps": 40,
 			"name": "Left",
 			"indices": []
@@ -45,6 +45,7 @@
 	"no_antialiasing": true,
 	"image": "characters/Traped/Dark-blue",
 	"position": [-150, 200],
+	"chartPosition": [-100, 250],
 	"healthicon": "bluedark",
 	"flip_x": true,
 	"healthbar_colors": [136, 201, 255],

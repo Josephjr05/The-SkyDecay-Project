@@ -53,6 +53,7 @@
 	"no_antialiasing": false,
 	"image": "characters/Traped/Trapedcrazy",
 	"position": [-120, 260],
+	"chartPosition": [-120, 260],
 	"healthicon": "traped",
 	"flip_x": false,
 	"healthbar_colors": [147, 79, 186],

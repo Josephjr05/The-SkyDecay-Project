@@ -165,6 +165,7 @@
 	"no_antialiasing": false,
 	"image": "characters/RixBF",
 	"position": [60, 380],
+	"chartPosition": [40, 380],
 	"healthicon": "bf",
 	"flip_x": true,
 	"healthbar_colors": [49, 176, 209],

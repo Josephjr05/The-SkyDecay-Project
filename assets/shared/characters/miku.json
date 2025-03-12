@@ -85,6 +85,7 @@
 	"no_antialiasing": false,
 	"image": "characters/camellia/ev_miku_assets",
 	"position": [0, 0],
+	"chartPosition": [0, 0],
 	"healthicon": "miku",
 	"flip_x": false,
 	"healthbar_colors": [50, 205, 204],

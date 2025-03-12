@@ -77,6 +77,7 @@
 	"no_antialiasing": false,
 	"image": "characters/SonicLegacy/EncoreSD-BF",
 	"position": [-280, 300],
+	"chartPosition": [-170, 270],
 	"healthicon": "encore-SD-BF",
 	"flip_x": true,
 	"healthbar_colors": [49, 176, 209],

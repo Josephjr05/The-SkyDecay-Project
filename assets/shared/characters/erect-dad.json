@@ -93,6 +93,7 @@
 	"no_antialiasing": false,
 	"image": "characters/ERECT/DADDY_ERECTER",
 	"position": [60, -100],
+	"chartPosition": [0, 30],
 	"healthicon": "daddy-erect",
 	"flip_x": false,
 	"healthbar_colors": [171, 58, 106],

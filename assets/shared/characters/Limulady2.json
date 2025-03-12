@@ -45,6 +45,7 @@
 	"no_antialiasing": false,
 	"image": "characters/Limu/Limulady2",
 	"position": [-110, 50],
+	"chartPosition": [-200, 130],
 	"healthicon": "Limulady",
 	"flip_x": false,
 	"healthbar_colors": [75, 20, 40],

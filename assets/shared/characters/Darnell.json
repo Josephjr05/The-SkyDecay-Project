@@ -117,6 +117,7 @@
 	"no_antialiasing": false,
 	"image": "characters/darnell",
 	"position": [0, 200],
+	"chartPosition": [-80, 190],
 	"healthicon": "darnell",
 	"flip_x": false,
 	"healthbar_colors": [115, 94, 176],

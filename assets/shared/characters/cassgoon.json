@@ -62,6 +62,7 @@
 		-20,
 		300
 	],
+	"chartPosition": [-100, 235],
 	"healthicon": "cassgoon",
 	"flip_x": false,
 	"healthbar_colors": [

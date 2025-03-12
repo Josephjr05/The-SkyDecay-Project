@@ -172,6 +172,10 @@
 		690,
 		570
 	],
+	"chartPosition": [
+		0,
+		350
+	],
 	"healthicon": "bf",
 	"flip_x": true,
 	"healthbar_colors": [

@@ -73,6 +73,7 @@
 		200,
 		730
 	],
+	"chartPosition": [200, 510],
 	"healthicon": "RexDXPix",
 	"flip_x": false,
 	"healthbar_colors": [

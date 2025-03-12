@@ -84,6 +84,7 @@
 		140,
 		190
 	],
+	"chartPosition": [-20, 250],
 	"healthicon": "cg",
 	"flip_x": false,
 	"healthbar_colors": [

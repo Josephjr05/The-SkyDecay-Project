@@ -53,6 +53,7 @@
 	"no_antialiasing": false,
 	"image": "characters/Limu/Limulady_angry",
 	"position": [-250, 20],
+	"chartPosition": [-210, 90],
 	"healthicon": "limuladyAngry",
 	"flip_x": false,
 	"healthbar_colors": [75, 22, 47],

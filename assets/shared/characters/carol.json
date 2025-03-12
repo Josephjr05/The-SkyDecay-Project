@@ -45,6 +45,7 @@
 	"no_antialiasing": false,
 	"image": "characters/Carol/Carol",
 	"position": [0, 0],
+	"chartPosition": [-190, -30],
 	"healthicon": "carol",
 	"flip_x": false,
 	"healthbar_colors": [102, 102, 153],

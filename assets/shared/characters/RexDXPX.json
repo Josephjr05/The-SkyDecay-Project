@@ -6,9 +6,14 @@
 				0
 			],
 			"loop": false,
-			"fps": 10,
+			"fps": 12,
 			"anim": "idle",
-			"indices": [1,2,3,0],
+			"indices": [
+				1,
+				2,
+				3,
+				0
+			],
 			"name": "Idle"
 		},
 		{
@@ -20,7 +25,7 @@
 			"fps": 12,
 			"anim": "singLEFT",
 			"indices": [],
-			"name": "singLEFT"
+			"name": "SLeft"
 		},
 		{
 			"offsets": [
@@ -31,7 +36,7 @@
 			"fps": 12,
 			"anim": "singDOWN",
 			"indices": [],
-			"name": "singDOWN"
+			"name": "SDown"
 		},
 		{
 			"offsets": [
@@ -42,7 +47,7 @@
 			"fps": 12,
 			"anim": "singUP",
 			"indices": [],
-			"name": "singUP"
+			"name": "SUp"
 		},
 		{
 			"offsets": [
@@ -53,62 +58,7 @@
 			"fps": 12,
 			"anim": "singRIGHT",
 			"indices": [],
-			"name": "singRIGHT"
-		},
-		{
-			"offsets": [
-				-5,
-				0
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singRIGHTmiss",
-			"indices": [0,1,0,1,0,1,0,1,0,1,0,1],
-			"name": "RightMiss"
-		},
-		{
-			"offsets": [
-				-5,
-				0
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singDOWNmiss",
-			"indices": [0,1,0,1,0,1,0,1,0,1,0,1],
-			"name": "DownMiss"
-		},
-		{
-			"offsets": [
-				-5,
-				0
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singUPmiss",
-			"indices": [0,1,0,1,0,1,0,1,0,1,0,1],
-			"name": "UpMiss"
-		},
-		{
-			"offsets": [
-				-5,
-				0
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singLEFTmiss",
-			"indices": [0,1,0,1,0,1,0,1,0,1,0,1],
-			"name": "LeftMiss"
-		},
-		{
-			"offsets": [
-				-5,
-				0
-			],
-			"loop": false,
-			"fps": 10,
-			"anim": "idle-alt",
-			"indices": [1,2,3,0],
-			"name": "idleAlt"
+			"name": "SRight"
 		},
 		{
 			"offsets": [
@@ -117,13 +67,126 @@
 			],
 			"loop": false,
 			"fps": 12,
-			"anim": "singRIGHT-alt",
-			"indices": [],
-			"name": "RightAlt"
+			"anim": "singRIGHTmiss",
+			"indices": [
+				0,
+				1,
+				0,
+				1,
+				0,
+				1,
+				0,
+				1,
+				0,
+				1,
+				0,
+				1
+			],
+			"name": "RightMiss"
 		},
 		{
 			"offsets": [
 				-5,
+				0
+			],
+			"loop": false,
+			"fps": 12,
+			"anim": "singDOWNmiss",
+			"indices": [
+				0,
+				1,
+				0,
+				1,
+				0,
+				1,
+				0,
+				1,
+				0,
+				1,
+				0,
+				1
+			],
+			"name": "DownMiss"
+		},
+		{
+			"offsets": [
+				-5,
+				0
+			],
+			"loop": false,
+			"fps": 12,
+			"anim": "singUPmiss",
+			"indices": [
+				0,
+				1,
+				0,
+				1,
+				0,
+				1,
+				0,
+				1,
+				0,
+				1,
+				0,
+				1
+			],
+			"name": "UpMiss"
+		},
+		{
+			"offsets": [
+				-5,
+				0
+			],
+			"loop": false,
+			"fps": 12,
+			"anim": "singLEFTmiss",
+			"indices": [
+				0,
+				1,
+				0,
+				1,
+				0,
+				1,
+				0,
+				1,
+				0,
+				1,
+				0,
+				1
+			],
+			"name": "LeftMiss"
+		},
+		{
+			"offsets": [
+				25,
+				0
+			],
+			"loop": false,
+			"fps": 12,
+			"anim": "idle-alt",
+			"indices": [
+				0,
+				1,
+				2,
+				3,
+				0
+			],
+			"name": "IdleAlt"
+		},
+		{
+			"offsets": [
+				25,
+				0
+			],
+			"loop": false,
+			"fps": 12,
+			"anim": "singRIGHT-alt",
+			"indices": [],
+			"name": "RIghtAlt"
+		},
+		{
+			"offsets": [
+				25,
 				0
 			],
 			"loop": false,
@@ -134,7 +197,7 @@
 		},
 		{
 			"offsets": [
-				-5,
+				25,
 				0
 			],
 			"loop": false,
@@ -145,7 +208,7 @@
 		},
 		{
 			"offsets": [
-				-5,
+				25,
 				0
 			],
 			"loop": false,
@@ -159,29 +222,301 @@
 				-5,
 				0
 			],
-			"indices": [],
-			"fps": 24,
-			"anim": "hey",
 			"loop": false,
-			"name": "Hey"
+			"fps": 12,
+			"anim": "hey",
+			"indices": [],
+			"name": "ThumbsUp"
+		},
+		{
+			"offsets": [
+				-5,
+				0
+			],
+			"loop": false,
+			"fps": 12,
+			"anim": "singRIGHTmiss-alt",
+			"indices": [
+				0,
+				1,
+				0,
+				1,
+				0,
+				1,
+				0,
+				1,
+				0,
+				1,
+				0,
+				1
+			],
+			"name": "RightMiss"
+		},
+		{
+			"offsets": [
+				-5,
+				0
+			],
+			"loop": false,
+			"fps": 12,
+			"anim": "singDOWNmiss-alt",
+			"indices": [
+				0,
+				1,
+				0,
+				1,
+				0,
+				1,
+				0,
+				1,
+				0,
+				1,
+				0,
+				1
+			],
+			"name": "DownMiss"
+		},
+		{
+			"offsets": [
+				-5,
+				0
+			],
+			"loop": false,
+			"fps": 12,
+			"anim": "singUPmiss-alt",
+			"indices": [
+				0,
+				1,
+				0,
+				1,
+				0,
+				1,
+				0,
+				1,
+				0,
+				1,
+				0,
+				1
+			],
+			"name": "UpMiss"
+		},
+		{
+			"offsets": [
+				-5,
+				0
+			],
+			"loop": false,
+			"fps": 12,
+			"anim": "singLEFTmiss-alt",
+			"indices": [
+				0,
+				1,
+				0,
+				1,
+				0,
+				1,
+				0,
+				1,
+				0,
+				1,
+				0,
+				1
+			],
+			"name": "LeftMiss"
+		},
+		{
+			"offsets": [
+				40,
+				0
+			],
+			"loop": false,
+			"fps": 18,
+			"anim": "dodge",
+			"indices": [
+				2,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				1,
+				2,
+				3
+			],
+			"name": "Dodge"
+		},
+		{
+			"offsets": [
+				40,
+				0
+			],
+			"loop": false,
+			"fps": 18,
+			"anim": "dodgealt",
+			"indices": [
+				2,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				1,
+				2,
+				3
+			],
+			"name": "Dodge"
+		},
+		{
+			"offsets": [
+				-65,
+				0
+			],
+			"loop": false,
+			"fps": 12,
+			"anim": "attack",
+			"indices": [],
+			"name": "Attack"
+		},
+		{
+			"offsets": [
+				25,
+				0
+			],
+			"loop": false,
+			"fps": 18,
+			"anim": "scared",
+			"indices": [],
+			"name": "Scared"
+		},
+		{
+			"offsets": [
+				-5,
+				0
+			],
+			"loop": false,
+			"fps": 18,
+			"anim": "hurt",
+			"indices": [],
+			"name": "Hurt"
+		},
+		{
+			"offsets": [
+				-5,
+				0
+			],
+			"loop": false,
+			"fps": 12,
+			"anim": "taunt-alt",
+			"indices": [2, 1, 0],
+			"name": "Wink"
+		},
+		{
+			"offsets": [
+				-65,
+				0
+			],
+			"loop": false,
+			"fps": 12,
+			"anim": "shoot",
+			"indices": [
+				0,
+				1,
+				2,
+				3,
+				4
+			],
+			"name": "Attack"
+		},
+		{
+			"offsets": [
+				-65,
+				0
+			],
+			"loop": false,
+			"fps": 12,
+			"anim": "RELOAD",
+			"indices": [
+				0,
+				1,
+				1,
+				1,
+				0
+			],
+			"name": "Attack"
+		},
+		{
+			"offsets": [
+				-65,
+				0
+			],
+			"loop": false,
+			"fps": 12,
+			"anim": "reload",
+			"indices": [
+				0,
+				1,
+				1,
+				1,
+				0
+			],
+			"name": "Attack"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 12,
+			"anim": "firstDeath",
+			"indices": [0,1,2,3,4,5,6,7,8],
+			"name": "RexDX Dies"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": true,
+			"fps": 8,
+			"anim": "deathLoop",
+			"indices": [0,0,1,1,1,2,2,2,2,3,3],
+			"name": "DeathLoop0"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "deathConfirm",
+			"indices": [0,1,1,2,2,3,3,4],
+			"name": "DeathConfirm0"
 		}
 	],
 	"no_antialiasing": true,
-	"image": "characters/RexDX-Reworked",
+	"image": "characters/RexDX-Reworked,characters/RexDX-Death",
 	"position": [
-		170,
-		550
+		230,
+		560
+	],
+	"chartPosition": [
+		160,
+		530
 	],
 	"healthicon": "RexDXPix",
 	"flip_x": false,
 	"healthbar_colors": [
-		195,
-		0,
-		0
+		151,
+		2,
+		2
 	],
 	"camera_position": [
-		-140,
-		-200
+		-200,
+		-250
 	],
 	"sing_duration": 4,
 	"scale": 15

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Rex-Death.png">
+	<!-- Made using Maru Aseprite JSON to XML converter -->
+	<SubTexture name="Rex Dies00000" x="0" y="0" width="32" height="32"/>
+	<SubTexture name="Rex Dies00001" x="32" y="0" width="32" height="32"/>
+	<SubTexture name="Rex Dies00002" x="64" y="0" width="32" height="32"/>
+	<SubTexture name="Rex Dies00003" x="96" y="0" width="32" height="32"/>
+	<SubTexture name="Rex Dies00004" x="128" y="0" width="32" height="32"/>
+	<SubTexture name="Rex Dies00005" x="0" y="32" width="32" height="32"/>
+	<SubTexture name="Rex Dies00006" x="32" y="32" width="32" height="32"/>
+	<SubTexture name="Rex Dies00007" x="64" y="32" width="32" height="32"/>
+	<SubTexture name="Rex Dies00008" x="96" y="32" width="32" height="32"/>
+	<SubTexture name="RDeathLoop00000" x="128" y="32" width="32" height="32"/>
+	<SubTexture name="RDeathLoop00001" x="0" y="64" width="32" height="32"/>
+	<SubTexture name="RDeathLoop00002" x="32" y="64" width="32" height="32"/>
+	<SubTexture name="RDeathLoop00003" x="0" y="64" width="32" height="32"/>
+	<SubTexture name="RDeathConfirm00000" x="64" y="64" width="32" height="32"/>
+	<SubTexture name="RDeathConfirm00001" x="96" y="64" width="32" height="32"/>
+	<SubTexture name="RDeathConfirm00002" x="128" y="64" width="32" height="32"/>
+	<SubTexture name="RDeathConfirm00003" x="0" y="96" width="32" height="32"/>
+	<SubTexture name="RDeathConfirm00004" x="32" y="96" width="32" height="32"/>
+</TextureAtlas>

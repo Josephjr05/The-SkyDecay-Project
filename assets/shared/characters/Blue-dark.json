@@ -53,6 +53,7 @@
 	"no_antialiasing": true,
 	"image": "characters/Traped/Blue-dark",
 	"position": [-100, 230],
+	"chartPosition": [-300, 210],
 	"healthicon": "bluedark",
 	"flip_x": false,
 	"healthbar_colors": [80, 147, 247],

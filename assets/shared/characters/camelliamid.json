@@ -45,6 +45,7 @@
 	"no_antialiasing": false,
 	"image": "characters/camellia/middle_camellia_assets",
 	"position": [-130, -90],
+	"chartPosition": [-250, 50],
 	"healthicon": "camellia",
 	"flip_x": false,
 	"healthbar_colors": [213, 95, 86],

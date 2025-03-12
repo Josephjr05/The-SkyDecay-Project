@@ -67,6 +67,7 @@ class Character extends FlxSprite
 
 	public var positionArray:Array<Float> = [0, 0];
 	public var cameraPosition:Array<Float> = [0, 0];
+	public var chartArray:Array<Float> = [0, 0];
 	public var healthColorArray:Array<Int> = [255, 0, 0];
 
 	public var missingCharacter:Bool = false;
@@ -220,6 +221,7 @@ class Character extends FlxSprite
 			// positioning
 			positionArray = json.position;
 			cameraPosition = json.camera_position;
+			chartArray = json.chartPosition;
 
 			// data
 			healthIcon = json.healthicon;
@@ -253,6 +255,9 @@ class Character extends FlxSprite
 				positionArray = json.offsets;
 			if(json.cameraOffsets != null)
 				cameraPosition = json.cameraOffsets;
+			
+			if(json.chartPosition == null)
+                chartArray = positionArray;
 
 			// data
 			if(json.healthIcon != null)

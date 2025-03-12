@@ -106,6 +106,10 @@
 		80,
 		480
 	],
+	"chartPosition": [
+		170,
+		480
+	],
 	"healthicon": "bf-pixel",
 	"flip_x": true,
 	"healthbar_colors": [

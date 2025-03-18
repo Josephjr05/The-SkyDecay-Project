@@ -24,8 +24,15 @@ _____________________________________
 # Features (SkyDecay Engine)
 
 ## Ver:
-* Psych Engine mixed with Codename, and Restructure Engine features.
+* Psych Engine mixed with VSlice, Codename, and Restructure Engine features.
 (To have Osu Mania, Etterna, Quaver, and NotITG features in FNF!)
+
+## UNIVERSAL CHARTS SUPPORT!
+* Convert universally using the chart editor as you can now convert from Osu, Qua, SM, or Guitar Hero charts to Psych engine!
+* Thanks to Moonchart and how simple it is to actually use, this engine is the first to support universal chart files!
+* This is included in The SkyDecay Project FNF mod FOR Mania difficulty.
+
+* Do expect bugs with BPM changing!
   
 ## Optimization:
 * No matter how many notes there are in a chart (or on Botplay), it won't ever lagspike or drain some fps! But do make sure it's working well for your device.
@@ -34,9 +41,9 @@ _____________________________________
 ## New languages:
 * A load of new languages come out of the box with this engine by different people! (Contributors of SkyDecay Project)
 
-## New Accuracy system:
+## New OD and HP system:
 
-* Hit Windows and Health Drain can simply be customized specifically within a chart! 
+* Hit Windows and Health Drain can simply be customized specifically within a chart's file data! 
 * You can edit values to determine the hit windows specifically on that song's difficulty to ensure a very fair playthrough.
 * Health Drain multipliers won't be a player option anymore.
 
@@ -61,6 +68,7 @@ _____________________________________
 ## Modchart Editor (WIP):
 * Make modcharts with a built in editor ofcourse! 
 * It takes json files of the modchart and simply brings it to life.
+* This uses the modchart editor from Sick Coders engine.
 
 ## More lua, more freedom!:
 * You love lua? Well you'll love the extensive freedom of Lua scripting with a whole lot of new variables and more!
@@ -69,11 +77,11 @@ _____________________________________
 * When you get blueballed now, you die right where you stand! No more black screen.
 * Don't embarrass yourself infront of your girlfriend now.
 
-## Playfield (SWIP):
-* The playfield strums are now in it's own cam, go crazy on Lua!
-* CamHUD doesn't bop anymore (for many reasons why it shouldn't).
+## PlayState Changes (WIP)
+* The playfield strums are now in it's own cam, go crazy in Lua!
+* CamHUD doesn't bop anymore. Events now trigger only CamHUD camera events if yes to value 3 on some camera events. (To make it very cool)
 * The playfield strums have also been repositioned (and on downscroll) to help read notes easier.
-* A Playfield editor can help reposition the area to your liking! (Middlescroll only)
+* A Playfield editor can help reposition the area to your liking!
 * Multi Key up to 18 keys is supported!
 
 ## EVENTS!
@@ -81,17 +89,19 @@ _____________________________________
 * Instead of using Lua for most of your events, you have them in the palm of your hands. Mess around with them with more than 10 event text fields for each function that event does dependent on it.
 * Ofcourse if you don't see an event you want, make it yourself in Lua OR request it!
 
+* This engine will also include other mod events from Voiid Chronicles shader events with ease of power, VS QT dodge mechanics, Sonic.exe notetypes, poison, health drain/gain notetypes. Camera manipulation events, Split Screen control, play on opponent side and back with events, Flip hud or strums, and a whole lot more!
+
 ## Other Stuff:
 * Disabled unnecessary options (Like score txt zoom and combo stacking)
 * Disabled Base Game code (for optimization)
-* A new game.
+* A brand new game you've never experienced before EVER.
 
 # Extras:
 * Improved camera movement
-* Improved asset loading
-* Improved options with more customization
+* Improved asset loading (with possibly no Loading Screen softlock)
+* Improved options with more customization (Including Note Quantization colors)
 * Improved note spawning and lag-free
-* Improved chart editor
-* Improved systems
-* Improved engine music
-* Improved general aspects of fnf mixed with other rhythm games.
+* Improved Psych 1.0 chart editor (With references from MMPE, and VSlice)
+* Improved systems (Accuracy, judgements, consistency of fps)
+* Improved general aspects of fnf that mixes with other rhythm games.
+* Will always update Psych Engine.

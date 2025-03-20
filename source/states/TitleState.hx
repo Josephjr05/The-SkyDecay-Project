@@ -2,6 +2,9 @@ package states;
 
 import backend.WeekData;
 
+import flash.system.System;
+import backend.ColorBlindness;
+
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.graphics.frames.FlxFrame;
@@ -74,6 +77,7 @@ class TitleState extends MusicBeatState
 		{
 			ClientPrefs.loadPrefs();
 			Language.reloadPhrases();
+			ColorBlindness.setFilter();
 		}
 
 		curWacky = FlxG.random.getObject(getIntroTextShit());
@@ -92,15 +96,6 @@ class TitleState extends MusicBeatState
 		if (FlxG.save.data.weekCompleted != null)
 		{
 			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
-		}
-
-		if (FlxG.keys.justPressed.ESCAPE && !FlxG.keys.justPressed.ENTER) // so stfu
-		{
-			FlxG.sound.music.fadeOut(0.3);
-			FlxG.camera.fade(FlxColor.BLACK, 0.5, false, function()
-			{
-				Sys.exit(0);
-			}, false);
 		}
 
 		FlxG.mouse.visible = false;
@@ -369,6 +364,7 @@ class TitleState extends MusicBeatState
 		// FlxG.watch.addQuick('amp', FlxG.sound.music.amplitude);
 
 		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER || controls.ACCEPT;
+		var pressedEscape:Bool = FlxG.keys.justPressed.BACKSPACE || controls.BACK;
 
 		#if mobile
 		for (touch in FlxG.touches.list)
@@ -433,6 +429,14 @@ class TitleState extends MusicBeatState
 					closedState = true;
 				});
 				// FlxG.sound.play(Paths.music('titleShoot'), 0.7);
+			}
+			if(pressedEscape)
+			{
+				FlxG.sound.music.fadeOut(0.3);
+				FlxG.camera.fade(FlxColor.BLACK, 0.5, false, function()
+				{
+				System.exit(0);
+				}, false);
 			}
 			#if TITLE_SCREEN_EASTER_EGG
 			else if (FlxG.keys.firstJustPressed() != FlxKey.NONE)

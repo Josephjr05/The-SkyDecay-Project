@@ -420,6 +420,7 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 				sing_duration: 4,
 				scale: 1,
 				healthbar_colors: [161, 161, 161],
+				chartPosition: [0, 0], // chart positioning for editor
 				camera_position: [0, 0],
 				position: [0, 0],
 				vocals_file: null
@@ -611,6 +612,8 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 	var scaleStepper:PsychUINumericStepper;
 	var positionXStepper:PsychUINumericStepper;
 	var positionYStepper:PsychUINumericStepper;
+	var chartPositionX:PsychUINumericStepper;
+	var chartPositionY:PsychUINumericStepper;
 	var positionCameraXStepper:PsychUINumericStepper;
 	var positionCameraYStepper:PsychUINumericStepper;
 
@@ -646,6 +649,9 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 
 		healthIconInputText = new PsychUIInputText(15, imageInputText.y + 35, 75, healthIcon.getCharacter(), 8);
 
+		// 0, 0 pls
+		// chartPositionInputText = new PsychUIInputText(15, chartPositionInputText.y + 35, 75, character.chartArray, 8);
+
 		vocalsInputText = new PsychUIInputText(15, healthIconInputText.y + 35, 75, character.vocalsFile != null ? character.vocalsFile : '', 8);
 
 		singDurationStepper = new PsychUINumericStepper(15, vocalsInputText.y + 45, 0.1, 4, 0, 999, 1);
@@ -673,6 +679,9 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 		positionXStepper = new PsychUINumericStepper(flipXCheckBox.x + 110, flipXCheckBox.y, 10, character.positionArray[0], -9000, 9000, 0);
 		positionYStepper = new PsychUINumericStepper(positionXStepper.x + 70, positionXStepper.y, 10, character.positionArray[1], -9000, 9000, 0);
 
+		// chartPositionX = new PsychUINumericStepper(chartPosition.x, chartPosition.x + 40, 10, character.chartArray[0], -9000, 9000, 0);
+		// chartPositionX = new PsychUINumericStepper(chartPosition.x, chartPosition.y + 40, 10, character.chartArray[1], -9000, 9000, 0);
+
 		positionCameraXStepper = new PsychUINumericStepper(positionXStepper.x, positionXStepper.y + 40, 10, character.cameraPosition[0], -9000, 9000, 0);
 		positionCameraYStepper = new PsychUINumericStepper(positionYStepper.x, positionYStepper.y + 40, 10, character.cameraPosition[1], -9000, 9000, 0);
 
@@ -686,6 +695,8 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 
 		tab_group.add(new FlxText(15, imageInputText.y - 18, 100, 'Image file name:'));
 		tab_group.add(new FlxText(15, healthIconInputText.y - 18, 100, 'Health icon name:'));
+		// tab_group.add(new FlxText(15, chartPositionInputText.y -18, 100, 'Chart Position Coordinates:')); // 0, 0
+		// tab_group.add(new FlxText(15, chartPositionX.x, chartPositonY.y - 18, 100, 'Chart Editor Position:'));
 		tab_group.add(new FlxText(15, vocalsInputText.y - 18, 100, 'Vocals File Postfix:'));
 		tab_group.add(new FlxText(15, singDurationStepper.y - 18, 120, 'Sing Animation length:'));
 		tab_group.add(new FlxText(15, scaleStepper.y - 18, 100, 'Scale:'));
@@ -696,6 +707,8 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 		tab_group.add(reloadImage);
 		tab_group.add(decideIconColor);
 		tab_group.add(healthIconInputText);
+		// tab_group.add(chartPositionX);
+		// tab_group.add(chartPositionY);
 		tab_group.add(vocalsInputText);
 		tab_group.add(singDurationStepper);
 		tab_group.add(scaleStepper);
@@ -725,6 +738,11 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 				if(lastIcon != healthIcon.getCharacter()) updatePresence();
 				unsavedProgress = true;
 			}
+			/* else if (sender == chartPositionInputText)
+			{
+				character.chartArray = chartPositionInputText;
+				unsavedProgress = true;
+			}*/
 			else if(sender == vocalsInputText)
 			{
 				character.vocalsFile = vocalsInputText.text;
@@ -747,6 +765,16 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 				updatePointerPos(false);
 				unsavedProgress = true;
 			}
+			/* else if(sender == chartPositionX)
+			{
+				character.chartArray[0] = chartPositionX.value;
+				unsavedProgress = true;
+			}
+			else if(sender == chartPositionY)
+			{
+				character.chartArray[1] = charatPositionY.value;
+				unsavedProgress = true;
+			} */
 			else if(sender == positionXStepper)
 			{
 				character.positionArray[0] = positionXStepper.value;
@@ -847,6 +875,7 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 
 		check_player.checked = character.isPlayer;
 		imageInputText.text = character.imageFile;
+		// chartPositionInputText.text = character.chartArray;
 		healthIconInputText.text = character.healthIcon;
 		vocalsInputText.text = character.vocalsFile != null ? character.vocalsFile : '';
 		singDurationStepper.value = character.singDuration;
@@ -857,6 +886,8 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 		positionYStepper.value = character.positionArray[1];
 		positionCameraXStepper.value = character.cameraPosition[0];
 		positionCameraYStepper.value = character.cameraPosition[1];
+		// chartPositionX.value = character.chartArray[0];
+		// chartPositionY.value = character.chartArray[1];
 		reloadAnimationDropDown();
 		updateHealthBar();
 	}
@@ -867,6 +898,7 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 	var holdingFrameElapsed:Float = 0;
 	var undoOffsets:Array<Float> = null;
 	var cameraPosition:Array<Float> = [0, 0];
+	var chartArray:Array<Float> = [0, 0];
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
@@ -1307,6 +1339,7 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 
 			"position":	character.positionArray,
 			"camera_position": character.cameraPosition,
+			"chartPosition": character.chartArray,
 
 			"flip_x": character.originalFlipX,
 			"no_antialiasing": character.noAntialiasing,

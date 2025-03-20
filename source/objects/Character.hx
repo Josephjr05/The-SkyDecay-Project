@@ -25,6 +25,7 @@ typedef CharacterFile = {
 	var flip_x:Bool;
 	var no_antialiasing:Bool;
 	var healthbar_colors:Array<Int>;
+	var chartPosition:Array<Float>;
 	var vocals_file:String;
 	@:optional var _editor_isPlayer:Null<Bool>;
 }
@@ -258,7 +259,6 @@ class Character extends FlxSprite
 			
 			if(json.chartPosition == null)
                 chartArray = positionArray;
-
 			// data
 			if(json.healthIcon != null)
 				healthIcon = json.healthIcon.id != null ? json.healthIcon.id : curCharacter;

@@ -41,6 +41,12 @@ import objects.StrumNote;
 
 import openfl.net.FileReference; // for Base Game
 
+import moonchart.formats.OsuMania;
+import moonchart.formats.StepMania;
+import moonchart.formats.fnf.legacy.FNFLegacy;
+import moonchart.formats.fnf.FNFVSlice;
+import moonchart.formats.BasicFormat;
+
 using DateTools;
 
 typedef UndoStruct = {
@@ -79,6 +85,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	public static final defaultEvents:Array<Array<String>> =
 	[
 		['', "Nothing. Yep, that's right."], //Always leave this one empty pls
+		['Dodge Mechanic', "just place it and it'll do the work!\nTHIS ALSO WORKS WITH PLAYBACKRATE AND SUCH!"],
 		['Change Stage', "Value 1: Stage Name\nValue 2: Lua or Hx file."],
 		['Dadbattle Spotlight', "Used in Dad Battle,\nValue 1: 0/1 = ON/OFF,\n2 = Target Dad\n3 = Target BF"],
 		['Hey!', "Plays the \"Hey!\" animation from Bopeebo,\nValue 1: BF = Only Boyfriend, GF = Only Girlfriend,\nSomething else = Both.\nValue 2: Custom animation duration,\nleave it blank for 0.6s"],
@@ -272,11 +279,13 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	var lilOpponent:Character;
 	//var playerGhost:Character;
 	//var opponentGhost:Character;
+	var lilgf:Character;
+	var gfSpeed:Int = 1;
 	var singAnimations:Array<String> = ['singLEFT', 'singDOWN', 'singUP', 'singRIGHT'];
 
 	public static var idleMusicAllow:Bool = false;
 
-	var downscroll:Bool = true;
+	var downscroll:Bool = true; // WIP
 	var downscrollEnabled:Bool = false;
 
 	var currentPlayer1Chosen = null;
@@ -350,13 +359,14 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			lilOpp.animation.play(name, true, false, lilOpp.animation.getByName(name).numFrames - 2);
 		}
 		lilOpp.scrollFactor.set();
-		lilOpp.visible = false;
-		lilOpp.antialiasing = lilBuddiesOn;
+		lilOpp.visible = lilBuddiesOn;
+		lilOpp.antialiasing = true;
 		add(lilOpp);
 
 		//remember to add the new function
 		createLilPlayer();
 		createLilOpponent();
+		createLilGirlfriend();
 		//createPlayerGhost();
 		//createOpponentGhost();
 			
@@ -609,7 +619,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		tipBg.alpha = 0.6;
 		add(tipBg);
 		
-		fullTipText = new FlxText(0, 0, FlxG.width - 200);
+		fullTipText = new FlxText(0, 0, FlxG.width - 100, FlxG.height - 100);
 		fullTipText.setFormat(Paths.font('vcr.ttf'), 24, FlxColor.WHITE, CENTER);
 		fullTipText.cameras = [camUI];
 		fullTipText.scrollFactor.set();
@@ -734,82 +744,100 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		}
 	}
 
-	function createLilPlayer(Name:String = 'bf')
+	function createLilPlayer(name:String = 'bf')
+	{
+		//customFunctions
+		//shows actual characters (From Moon's Modded Psych Engine)
+		if(name != null)
+		lilPlayer = new Character(0, 0, name, false);
+		lilPlayer.scrollFactor.set();
+		lilPlayer.screenCenter();
+		lilPlayer.setGraphicSize(Std.int(lilPlayer.width * 0.4));
+		add(lilPlayer);
+		lilPlayer.flipX = !lilPlayer.flipX;
+		for (key in lilPlayer.animOffsets.keys()) {
+			lilPlayer.animOffsets[key][0] *= lilPlayer.scale.x;
+			lilPlayer.animOffsets[key][1] *= lilPlayer.scale.y;
+		}
+	}
+
+	function createLilOpponent(name:String = 'bf-opponent')
+	{
+		if(name != null)
+		lilOpponent = new Character(0, 0, name, false);
+		lilOpponent.scrollFactor.set();
+		lilOpponent.screenCenter();
+		lilOpponent.setGraphicSize(Std.int(lilOpponent.width * 0.4));
+		add(lilOpponent);
+		for (keyt in lilOpponent.animOffsets.keys()) {
+			lilOpponent.animOffsets[keyt][0] *= lilOpponent.scale.x;
+			lilOpponent.animOffsets[keyt][1] *= lilOpponent.scale.y;
+		}
+	}
+
+	function createLilGirlfriend(name:String = 'gf')
+	{
+		lilgf = new Character(0, 0, name, false); //50, 335
+		lilgf.scrollFactor.set();
+		lilgf.screenCenter();
+		lilgf.setGraphicSize(Std.int(lilgf.width * 0.4));
+		add(lilgf);
+		for (keyt in lilgf.animOffsets.keys()) {
+			lilgf.animOffsets[keyt][0] *= lilgf.scale.x;
+			lilgf.animOffsets[keyt][1] *= lilgf.scale.y;
+		}
+	}
+	/*
+	function createPlayerGhost(Name:String = 'bf')
 		{
 			//customFunctions
 			//shows actual characters (From Moon's Modded Psych Engine)
 			if(Name != null)
-			lilPlayer = new Character(0, 0, Name, false);
-			lilPlayer.scrollFactor.set();
-			lilPlayer.screenCenter();
-			lilPlayer.setGraphicSize(Std.int(lilPlayer.width * 0.4));
-			add(lilPlayer);
-			lilPlayer.flipX = !lilPlayer.flipX;
-			for (key in lilPlayer.animOffsets.keys()) {
-				lilPlayer.animOffsets[key][0] *= lilPlayer.scale.x;
-				lilPlayer.animOffsets[key][1] *= lilPlayer.scale.y;
+			playerGhost = new Character(0, 0, Name, false);
+			playerGhost.scrollFactor.set();
+			playerGhost.screenCenter();
+			playerGhost.setGraphicSize(Std.int(playerGhost.width * 0.4));
+			playerGhost.alpha = 0.5;
+			add(playerGhost);
+			playerGhost.flipX = !playerGhost.flipX;
+			for (key in playerGhost.animOffsets.keys()) {
+				playerGhost.animOffsets[key][0] *= playerGhost.scale.x;
+				playerGhost.animOffsets[key][1] *= playerGhost.scale.y;
 			}
 		}
 
-	function createLilOpponent(Name:String = 'bf-opponent')
+	function createOpponentGhost(Name:String = 'bf-opponent')
 		{
 			if(Name != null)
-			lilOpponent = new Character(0, 0, Name, false);
-			lilOpponent.scrollFactor.set();
-			lilOpponent.screenCenter();
-			lilOpponent.setGraphicSize(Std.int(lilOpponent.width * 0.4));
-			add(lilOpponent);
-			for (keyt in lilOpponent.animOffsets.keys()) {
-				lilOpponent.animOffsets[keyt][0] *= lilOpponent.scale.x;
-				lilOpponent.animOffsets[keyt][1] *= lilOpponent.scale.y;
+			opponentGhost = new Character(0, 0, Name, false);
+			opponentGhost.scrollFactor.set();
+			opponentGhost.screenCenter();
+			opponentGhost.setGraphicSize(Std.int(opponentGhost.width * 0.4));
+			opponentGhost.alpha = 0.5;
+			add(opponentGhost);
+			for (keyt in opponentGhost.animOffsets.keys()) {
+				opponentGhost.animOffsets[keyt][0] *= opponentGhost.scale.x;
+				opponentGhost.animOffsets[keyt][1] *= opponentGhost.scale.y;
 			}
 		}
-		/*
-		function createPlayerGhost(Name:String = 'bf')
-			{
-				//customFunctions
-				//shows actual characters (From Moon's Modded Psych Engine)
-				if(Name != null)
-				playerGhost = new Character(0, 0, Name, false);
-				playerGhost.scrollFactor.set();
-				playerGhost.screenCenter();
-				playerGhost.setGraphicSize(Std.int(playerGhost.width * 0.4));
-				playerGhost.alpha = 0.5;
-				add(playerGhost);
-				playerGhost.flipX = !playerGhost.flipX;
-				for (key in playerGhost.animOffsets.keys()) {
-					playerGhost.animOffsets[key][0] *= playerGhost.scale.x;
-					playerGhost.animOffsets[key][1] *= playerGhost.scale.y;
-				}
-			}
-	
-		function createOpponentGhost(Name:String = 'bf-opponent')
-			{
-				if(Name != null)
-				opponentGhost = new Character(0, 0, Name, false);
-				opponentGhost.scrollFactor.set();
-				opponentGhost.screenCenter();
-				opponentGhost.setGraphicSize(Std.int(opponentGhost.width * 0.4));
-				opponentGhost.alpha = 0.5;
-				add(opponentGhost);
-				for (keyt in opponentGhost.animOffsets.keys()) {
-					opponentGhost.animOffsets[keyt][0] *= opponentGhost.scale.x;
-					opponentGhost.animOffsets[keyt][1] *= opponentGhost.scale.y;
-				}
-			}
 	*/
-	function reloadLilBuddies(id:Int = 3) //id 1 is for the player, id 2 is for the opponent, id 3 is for both
-		{
-			var character1 = PlayState.SONG.player1;
-			var character2 = PlayState.SONG.player2;
+	function reloadLilBuddies(id:Int = 4) //id 1 is for the player, id 2 is for the opponent, id 3 is for Girlfriend (or middle), id 4 is for all
+	{
+		var character1 = PlayState.SONG.player1;
+		var character2 = PlayState.SONG.player2;
+		var character3 = PlayState.SONG.gfVersion;
 
-			if(id == 1 || id == 3)//Reload The Player
-				remove(lilPlayer);
-				createLilPlayer(character1);
-			if(id == 2 || id == 3)//Reload The Opponent
-				remove(lilOpponent);
-				createLilOpponent(character2);
-		}
+		if(id == 1 || id == 4)//Reload The Player
+			remove(lilPlayer);
+			createLilPlayer(character1);
+		if(id == 2 || id == 4)//Reload The Opponent
+			remove(lilOpponent);
+			createLilOpponent(character2);
+		if(id == 3 || id == 4)
+			remove(lilgf);
+			createLilGirlfriend(character3);
+	}
+	
 	function openNewChart()
 	{
 		var song:SwagSong = {
@@ -911,6 +939,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	
 	var lilPlayerDP:Array<Float> = [750, 5];
 	var lilOpponentDP:Array<Float> = [100, 40];
+	var lilgfDP:Array<Float> = [700, 10];
 
 	var lastBeatHit:Int = 0;
 	override function update(elapsed:Float)
@@ -931,6 +960,11 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			lilOpponent.setPosition(lilOpponentDP[0] + lilOpponent.chartArray[0], lilOpponentDP[1] + lilOpponent.chartArray[1]);
 		else
 			lilOpponent.setPosition(lilOpponentDP[0] + lilOpponent.positionArray[0], lilOpponentDP[1] + lilOpponent.positionArray[1]);
+
+		if(lilgf.chartArray != null)
+			lilgf.setPosition(lilgfDP[0] + lilgf.chartArray[0], lilgfDP[1] + lilgf.chartArray[1]);
+		else
+			lilgf.setPosition(lilgfDP[0] + lilgf.positionArray[0], lilgfDP[1] + lilgf.positionArray[1]);
 
 		/*
 		playerGhost.setPosition(lilPlayerDP[0] + playerGhost.positionArray[0], lilPlayerDP[1] + playerGhost.positionArray[1]);
@@ -1051,6 +1085,11 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				{
 					var vis:Bool = !fullTipText.visible;
 					tipBg.visible = tipBg.active = fullTipText.visible = fullTipText.active = vis;
+				}
+
+				if(FlxG.keys.justPressed.ESCAPE)
+				{
+					goToMasterMenu();
 				}
 
 				var goingBack:Bool = false;
@@ -1682,25 +1721,12 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			forceDataUpdate = false;
 		
 			// moved from beatHit()
-			if(metronomeStepper.value > 0 && lastBeatHit != curBeat)
-				FlxG.sound.play(Paths.sound('Metronome_Tick'), metronomeStepper.value);
+			if(lastBeatHit != curBeat) {
+				if(metronomeStepper.value > 0 && lastBeatHit != curBeat) FlxG.sound.play(Paths.sound('Metronome_Tick'), metronomeStepper.value);
+				callBeatHit(curBeat); // for lil players
+			}
 	
 			lastBeatHit = curBeat;
-
-			if (curBeat % lilPlayer.danceEveryNumBeats == 0 && !lilPlayer.getAnimationName().startsWith('sing')) {
-				lilPlayer.dance();
-			}
-			if (curBeat % lilOpponent.danceEveryNumBeats == 0 && !lilOpponent.getAnimationName().startsWith('sing')) {
-				lilOpponent.dance();
-			}
-			/*
-			if (curBeat % playerGhost.danceEveryNumBeats == 0) {
-				playerGhost.dance();
-			}
-			if (curBeat % opponentGhost.danceEveryNumBeats == 0) {
-				opponentGhost.dance();
-			}
-				*/
 		}
 
 		if(selectedNotes.length > 0)
@@ -1746,6 +1772,28 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		lastFocus = PsychUIInputText.focusOn;
 	}
 
+	function callBeatHit(curBeat) 
+	{
+		if (curBeat % lilPlayer.danceEveryNumBeats == 0 && !lilPlayer.getAnimationName().startsWith('sing')) {
+			lilPlayer.dance();
+		}
+ 
+		if (curBeat % lilOpponent.danceEveryNumBeats == 0 && !lilOpponent.getAnimationName().startsWith('sing')) {
+			lilOpponent.dance();
+		}
+ 
+		if (curBeat % Math.round(gfSpeed * lilgf.danceEveryNumBeats) == 0 && !lilgf.getAnimationName().startsWith('sing')) {
+			lilgf.dance();
+		}
+
+		/* if (curBeat % playerGhost.danceEveryNumBeats == 0) {
+			playerGhost.dance();
+		}
+		if (curBeat % opponentGhost.danceEveryNumBeats == 0) {
+			opponentGhost.dance();
+		}*/
+	}
+
 	function hitNote(note:MetaNote) {
 	var vortexPlaying:Bool = (vortexEnabled && FlxG.sound.music != null && FlxG.sound.music.playing);
 	var lilBuddiesSing:Bool = (lilBuddiesOn && FlxG.sound.music != null && FlxG.sound.music.playing);
@@ -1753,15 +1801,23 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	var hitSoundPlayer:Bool = (hitsoundPlayerStepper.value > 0);
 	var hitSoundOpp:Bool = (hitsoundOpponentStepper.value > 0);
 	var data:Int = note.noteData % 4;
+	// var gfNotes:note.gfNote = (section.gfSection && gottaHitNote == section.mustHitSection);
 	note.alpha = (note.strumTime >= Conductor.songPosition) ? 1 : 0.6;
 	
 		if(note.mustPress) {
 			lilPlayer.playAnim(singAnimations[note.noteData], true); 
+			// lilPlayer.singDuration = note.sustainLength / 1000 / playbackRate;
 			lilPlayer.holdTimer = 0;
 		} else if(!note.mustPress) {
 			lilOpponent.playAnim(singAnimations[note.noteData], true); 
+			// lilOpponent.singDuration = note.sustainLength / 1000 / playbackRate;
 			lilOpponent.holdTimer = 0;
 		}
+		/* else if(section.gfSection && gottaHitNote == section.mustHitSection) {
+			lilgf.playAnim(singAnimations[note.noteData], true);
+			lilgf.singDuration = note.sustainLength / 1000 / playbackRate;
+			lilgf.holdTimer = 0;
+		}*/ //  how in the actual fuck do i get this to work :broken heart:
 
 		if(canPlayHitSound)
 		{
@@ -1805,7 +1861,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		}
 	}
 
-	function resetBuddies() 
+	function resetBuddies() // lil buddies
 	{
 		lilBf.animation.play("idle");
 		lilOpp.animation.play("idle");
@@ -3237,7 +3293,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			}
 		};
 
-		beatsPerSecStepper = new PsychUINumericStepper(objX + 150, objY, 1, 4, 1, 16, 2);
+		beatsPerSecStepper = new PsychUINumericStepper(objX + 150, objY, 1, 4, 0, 16, 2);
 		beatsPerSecStepper.onValueChange = function()
 		{
 			beatsPerSecStepper.value = Math.round(beatsPerSecStepper.value * 4) / 4;
@@ -3697,6 +3753,8 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		girlfriendDropDown = new PsychUIDropDownMenu(objX, objY + 80, [''], function(id:Int, character:String)
 		{
 			PlayState.SONG.gfVersion = character;
+			remove(lilgf);
+			createLilGirlfriend(character);
 			trace('selected $character');
 		});
 		
@@ -4483,6 +4541,362 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		btn.text.alignment = LEFT;
 		tab_group.add(btn);
 
+		//Only reason why i'm using VSlice because i WANT to use VSlice for its BPM and placement. Which i could just use Osu to Psych but it will NEVER work. Unless a song has no bpm changes. So VSlice, Codename, or Kade are the choices.
+		btnY++;
+		btnY += 20;
+		var btn:PsychUIButton = new PsychUIButton(btnX, btnY, '  Osu!Mania to Psych...', function()
+			{
+				if(!fileDialog.completed) return;
+				upperBox.isMinimized = true;
+				upperBox.bg.visible = false;
+			
+				fileDialog.open('chart.osu', 'Open an Osu!Mania chart file', function()
+				{
+					try
+					{
+						// Step 1: Parse the OSU file
+						var osuChart = new OsuMania().fromOsu(fileDialog.data);
+						
+						if(osuChart == null)
+						{
+							showOutput('Error: Invalid Osu!Mania chart format.', true);
+							return;
+						}
+						
+						// Get difficulty name
+						var diffName = osuChart.diffs[0];
+						showOutput('Converting difficulty: ${diffName}...');
+						
+						// Step 2: Extract chart metadata
+						var chartMeta = osuChart.getChartMeta();
+						var osuNotes = osuChart.getNotes(diffName);
+						
+						// Get the lane count
+						var laneCount = chartMeta.extraData.get(LANES_LENGTH) ?? 4;
+						showOutput('Detected ${laneCount}K chart');
+						
+						// Create notes array with proper lane mapping (minimal processing)
+						var notesArray = [];
+						for (note in osuNotes) {
+							// Map lanes based on key count
+							var lane = note.lane;
+							
+							if (laneCount == 4) {
+								// Direct mapping for 4K
+								lane = note.lane;
+							} else if (laneCount == 6) {
+								// 6K mapping to 4K
+								if (note.lane < 2) lane = 0;
+								else if (note.lane >= 4) lane = 3;
+								else lane = note.lane - 1;
+							} else if (laneCount == 8) {
+								// 8K mapping to 4K
+								lane = Math.floor(note.lane / 2);
+							} else {
+								// For other key counts, map proportionally
+								lane = Math.floor(note.lane * 4 / laneCount);
+							}
+							
+							// Add note with original timing
+							notesArray.push({
+								t: note.time,
+								d: lane,
+								l: note.length,
+								k: note.type == "" ? "normal" : note.type
+							});
+						}
+						
+						showOutput('Processed ${notesArray.length} notes');
+						
+						// Process BPM changes
+						var bpmChanges = chartMeta.bpmChanges.copy();
+						bpmChanges.sort((a, b) -> Std.int(a.time - b.time));
+						
+						// Ensure there's a BPM change at time 0
+						if (bpmChanges.length == 0 || bpmChanges[0].time > 0) {
+							bpmChanges.unshift({
+								time: 0,
+								bpm: bpmChanges.length > 0 ? bpmChanges[0].bpm : 100,
+								beatsPerMeasure: 4,
+								stepsPerBeat: 4
+							});
+						}
+						
+						showOutput('Found ${bpmChanges.length} BPM changes (including initial BPM)');
+						
+						// Create timeChanges for VSlice
+						var timeChanges = [];
+						for (change in bpmChanges) {
+							timeChanges.push({
+								t: change.time,
+								bpm: change.bpm,
+								n: change.stepsPerBeat ?? 4, 
+								d: change.beatsPerMeasure ?? 4
+							});
+						}
+						
+						// Build the VSlice chart format with minimal processing
+						var chartJson = '{
+							"version": "${FNFVSlice.VSLICE_CHART_VERSION}",
+							"generatedBy": "OsuConverterTool",
+							"scrollSpeed": {
+								"${diffName}": ${chartMeta.scrollSpeeds.get(diffName) ?? 1.0}
+							},
+							"notes": {
+								"${diffName}": ${haxe.Json.stringify(notesArray)}
+							},
+							"events": []
+						}';
+						
+						// Build the VSlice metadata format
+						var metadataJson = '{
+							"version": "${FNFVSlice.VSLICE_META_VERSION}",
+							"timeFormat": "ms",
+							"artist": "${StringTools.replace(chartMeta.extraData.get(SONG_ARTIST) ?? "Unknown Artist", '"', '\\"')}",
+							"charter": "${StringTools.replace(chartMeta.extraData.get(SONG_CHARTER) ?? "Unknown Charter", '"', '\\"')}",
+							"generatedBy": "OsuConverterTool",
+							"playData": {
+								"characters": {
+									"player": "${chartMeta.extraData.get(PLAYER_1) ?? "bf"}",
+									"opponent": "${chartMeta.extraData.get(PLAYER_2) ?? "dad"}",
+									"girlfriend": "${chartMeta.extraData.get(PLAYER_3) ?? "gf"}"
+								},
+								"difficulties": ["${diffName}"],
+								"songVariations": [],
+								"noteStyle": "funkin",
+								"stage": "${chartMeta.extraData.get(STAGE) ?? "stage"}"
+							},
+							"songName": "${StringTools.replace(chartMeta.title, '"', '\\"')}",
+							"offsets": {
+								"vocals": {},
+								"instrumental": ${chartMeta.offset},
+								"altInstrumentals": {},
+								"altVocals": {}
+							},
+							"timeChanges": ${haxe.Json.stringify(timeChanges)}
+						}';
+						
+						// Parse the JSON strings
+						var chart:VSliceChart = cast Json.parse(chartJson);
+						var metadata:VSliceMetadata = cast Json.parse(metadataJson);
+						
+						// Let VSlice handle the conversion
+						var pack:PsychPackage = VSlice.convertToPsych(chart, metadata);
+						
+						if(pack == null || pack.difficulties == null || !pack.difficulties.keys().hasNext())
+						{
+							showOutput('Error: Conversion failed - no difficulties created.', true);
+							return;
+						}
+						
+						// Process each difficulty (minimal modifications)
+						for (diffKey in pack.difficulties.keys()) {
+							var psychChart = pack.difficulties.get(diffKey);
+							
+							// Update to Psych Engine 1.0 format
+							psychChart.format = "skydecay_beta";
+							
+							// Set base BPM from the first BPM in the chart
+							psychChart.bpm = bpmChanges[0].bpm;
+							
+							// Initialize events array if needed
+							if (psychChart.events == null) {
+								psychChart.events = [];
+							}
+							
+							// Add BPM changes as events for Psych Engine 1.0
+							for (i in 1...bpmChanges.length) { // Skip first BPM (base BPM)
+								var bpmChange = bpmChanges[i];
+								
+								// Use exact BPM value
+								psychChart.events.push([
+									bpmChange.time, 
+									[["BPM Change", Std.string(bpmChange.bpm)]]
+								]);
+							}
+							
+							// Set basic chart properties
+							psychChart.song = chartMeta.title;
+							psychChart.player1 = chartMeta.extraData.get(PLAYER_1) ?? "bf";
+							psychChart.player2 = chartMeta.extraData.get(PLAYER_2) ?? "dad";
+							psychChart.gfVersion = chartMeta.extraData.get(PLAYER_3) ?? "gf";
+							psychChart.stage = chartMeta.extraData.get(STAGE) ?? "stage";
+							psychChart.speed = chartMeta.scrollSpeeds.get(diffName) ?? 2.5;
+							psychChart.offset = chartMeta.offset;
+							psychChart.needsVoices = true;
+							
+							// Add artist/charter info as events
+							if (chartMeta.extraData.exists(SONG_ARTIST)) {
+								psychChart.events.push([
+									0, [["Song Credit", "Artist: " + chartMeta.extraData.get(SONG_ARTIST)]]
+								]);
+							}
+							
+							if (chartMeta.extraData.exists(SONG_CHARTER)) {
+								psychChart.events.push([
+									0, [["Song Credit", "Charter: " + chartMeta.extraData.get(SONG_CHARTER)]]
+								]);
+							}
+						}
+						
+						// Save the converted charts
+						fileDialog.openDirectory('Save Converted Psych JSONs', function()
+						{
+							var path:String = fileDialog.path.replace('\\', '/');
+							if(!path.endsWith('/')) path += '/';
+							
+							var diffs:Array<String> = metadata.playData.difficulties.copy();
+							var defaultDiff:String = Paths.formatToSongPath(Difficulty.getDefault());
+							
+							function nextChart()
+							{
+								while(diffs.length > 0)
+								{
+									var diffName:String = diffs[0];
+									diffs.remove(diffName);
+									if(!pack.difficulties.exists(diffName)) continue;
+									
+									var chartData:SwagSong = pack.difficulties.get(diffName);
+									var diffPostfix:String = (diffName != defaultDiff) ? '-$diffName' : '';
+									var chartName:String = Paths.formatToSongPath(chartData.song) + diffPostfix + '.json';
+									
+									// Create the song directory if it doesn't exist
+									var songDir = path + Paths.formatToSongPath(chartData.song) + '/';
+									if(!FileSystem.exists(songDir))
+										FileSystem.createDirectory(songDir);
+									
+									showOutput('Saving chart: ${chartName}');
+									overwriteCheck(songDir + chartName, chartName, PsychJsonPrinter.print(chartData, ['sectionNotes', 'events']), nextChart, true);
+									return;
+								}
+								
+								if(overwriteSavedSomething)
+									showOutput('Files saved successfully to: ${fileDialog.path}!');
+							}
+							
+							overwriteSavedSomething = false;
+							nextChart();
+						});
+					}
+					catch(e:Exception)
+					{
+						showOutput('Error during conversion: ${e.message}', true);
+						trace(e.stack);
+					}
+				});					
+		},btnWid);
+		btn.text.alignment = LEFT;
+		tab_group.add(btn);
+
+	// StepMania (.sm) to Psych Button
+	// btnY += 20;
+	/* var btnSM:PsychUIButton = new PsychUIButton(btnX, btnY, '  SM to Psych...', function()
+	{
+	    if(!fileDialog.completed) return;
+	    upperBox.isMinimized = true;
+	    upperBox.bg.visible = false;
+
+	    fileDialog.open('chart.sm', 'Open a StepMania chart file', function()
+	    {
+	        try
+	        {
+	            var fnf:FNFVSlice = new FNFVSlice();
+	            var smChart = new StepMania().fromStepMania(fileDialog.data);
+			
+	            if(smChart == null)
+	            {
+	                showOutput('Error: Invalid StepMania chart format.', true);
+	                return;
+	            }
+			
+	            var convertedChart = fnf.fromFormat(smChart);
+			
+	            if(convertedChart == null || convertedChart.data == null || convertedChart.data.song == null)
+	            {
+	                showOutput('Error: Failed to convert StepMania chart.', true);
+	                return;
+	            }
+			
+	            // StepMania files often contain multiple difficulties
+	            var difficulties:Map<String, SwagSong> = new Map();
+	            var songName:String = "";
+			
+	            // Try to extract multiple difficulties
+	            var psychChart:SwagSong = cast convertedChart.data.song;
+	            psychChart.format = 'skydecay_beta';
+	            Song.convert(psychChart);
+	            songName = Paths.formatToSongPath(psychChart.song);
+			
+	            // Check if we have multiple difficulties in the NOTES map
+	            if(smChart.data != null && smChart.data.NOTES != null)
+	            {
+	                for(diffName in smChart.data.NOTES.keys())
+	                {
+	                    // Try to get a specific difficulty by creating a new conversion
+	                    var diffChart = new StepMania().fromStepMania(fileDialog.data, diffName);
+	                    var diffConverted = fnf.fromFormat(diffChart);
+					
+	                    if(diffConverted != null && diffConverted.data != null && diffConverted.data.song != null)
+	                    {
+	                        var diffSong:SwagSong = cast diffConverted.data.song;
+	                        diffSong.format = 'skydecay_beta';
+	                        Song.convert(diffSong);
+	                        difficulties.set(diffName, diffSong);
+	                    }
+	                }
+	            }
+			
+	            // Default to using the first conversion if no specific difficulties were found
+	            if(difficulties.keys().hasNext() == false)
+	            {
+	                difficulties.set("normal", psychChart);
+	            }
+			
+	            fileDialog.openDirectory('Save Converted Psych JSONs', function()
+	            {
+	                var path:String = fileDialog.path.replace('\\', '/');
+	                if(!path.endsWith('/')) path += '/';
+				
+	                // Make sure the directory exists
+	                var songDir = path + songName + '/';
+	                if(!FileSystem.exists(songDir))
+	                    FileSystem.createDirectory(songDir);
+				
+	                var diffArray:Array<String> = [for(k in difficulties.keys()) k];
+	                function nextChart()
+	                {
+	                    while(diffArray.length > 0)
+	                    {
+	                        var diffName:String = diffArray[0];
+	                        diffArray.remove(diffName);
+	                        if(!difficulties.exists(diffName)) continue;
+
+	                        var diffPostfix:String = (diffName != "normal") ? '-$diffName' : '';
+	                        var chartData:SwagSong = difficulties.get(diffName);
+	                        var chartName:String = songName + diffPostfix + '.json';
+	                        overwriteCheck(songDir + chartName, chartName, PsychJsonPrinter.print(chartData, ['sectionNotes', 'events']), nextChart, true);
+	                        return;
+	                    }
+
+	                    if(overwriteSavedSomething)
+	                        showOutput('Files saved successfully to: $songDir!');
+	                }
+				
+	                overwriteSavedSomething = false;
+	                nextChart();
+	            });
+	        }
+	        catch(e:Exception)
+	        {
+	            showOutput('Error: ${e.message}', true);
+	            trace(e.stack);
+	        }
+	    });
+	},btnWid);
+	btnSM.text.alignment = LEFT;
+	tab_group.add(btnSM); */
+
+
 		btnY++;
 		btnY += 20;
 		var btn:PsychUIButton = new PsychUIButton(btnX, btnY, '  Preview (F11)', openEditorPlayState, btnWid);
@@ -4490,19 +4904,13 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		tab_group.add(btn);
 		
 		btnY += 20;
-		var btn:PsychUIButton = new PsychUIButton(btnX, btnY, '  Playtest (Enter)', goToPlayState, btnWid);
+		var btn:PsychUIButton = new PsychUIButton(btnX, btnY, '  Playtest (ENT/RET)', goToPlayState, btnWid); // enter or return key
 		btn.text.alignment = LEFT;
 		tab_group.add(btn);
 
 		btnY++;
 		btnY += 20;
-		var btn:PsychUIButton = new PsychUIButton(btnX, btnY, '  Exit', function()
-		{
-			PlayState.chartingMode = false;
-			MusicBeatState.switchState(new states.editors.MasterEditorMenu());
-			FlxG.sound.playMusic(Paths.music('freakyMenu'));
-			FlxG.mouse.visible = false;
-		}, btnWid);
+		var btn:PsychUIButton = new PsychUIButton(btnX, btnY, '  Exit (ESC)', goToMasterMenu, btnWid);
 		btn.text.alignment = LEFT;
 		tab_group.add(btn);
 	}
@@ -5325,6 +5733,14 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		StageData.loadDirectory(PlayState.SONG);
 		LoadingState.loadAndSwitchState(new PlayState());
 		ClientPrefs.toggleVolumeKeys(true);
+	}
+
+	function goToMasterMenu() // cause i hate using File and then Exit. Just use the mf keybind.
+	{
+		PlayState.chartingMode = false;
+		MusicBeatState.switchState(new states.editors.MasterEditorMenu());
+		FlxG.sound.playMusic(Paths.music('freakyMenu'));
+		FlxG.mouse.visible = false;
 	}
 	
 	override function openSubState(SubState:FlxSubState)

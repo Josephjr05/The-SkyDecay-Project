@@ -269,7 +269,7 @@ class VSlice
 
 			Reflect.setField(swagSong, 'artist', metadata.artist);
 			Reflect.setField(swagSong, 'charter', metadata.charter);
-			Reflect.setField(swagSong, 'generatedBy', 'SkyDecay Engine v${MainMenuState.psychEngineVersion} - Chart Editor V-Slice Importer');
+			Reflect.setField(swagSong, 'generatedBy', 'SkyDecay_Beta');
 			songDifficulties.set(diff, swagSong);
 		}
 		var pack:PsychPackage = {difficulties: songDifficulties, events: null};
@@ -334,7 +334,7 @@ class VSlice
 		}
 
 		var notes:Array<VSliceNote> = [];
-		var generatedBy:String = 'SkyDecay Engine v${MainMenuState.psychEngineVersion} - Chart Editor V-Slice Exporter';
+		var generatedBy:String = 'SkyDecay_Beta';
 		var timeChanges:Array<VSliceTimeChange> = [];
 		
 		var time:Float = 0;

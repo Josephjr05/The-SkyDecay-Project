@@ -11,6 +11,12 @@ class Difficulty
 	private static final defaultDifficulty:String = 'Normal'; //The chart that has no postfix and starting difficulty on Freeplay/Story Mode
 
 	public static var list:Array<String> = [];
+	public static var current:String = defaultDifficulty;
+
+	// just a `Util.format` wrapper for `Difficulty.current`
+	inline public static function format(?name:String):String {
+		return CoolUtil.format(name ?? current);
+	}
 
 	inline public static function getFilePath(num:Null<Int> = null)
 	{

@@ -51,6 +51,12 @@ class Note extends FlxSprite
   //add these 2 variables for the renderer
   // public var mesh:modcharting.SustainStrip = null;
   public var z:Float = 0;
+
+  // SDY engine
+	public var isSustainRelease:Bool = false;
+	public var releaseMS:Float = 0;
+	public var isSustainEnd:Bool = false;
+
   
 	//This is needed for the hardcoded note types to appear on the Chart Editor,
 	//It's also used for backwards compatibility with 0.1 - 0.3.2 charts.
@@ -167,6 +173,20 @@ class Note extends FlxSprite
 	}
 	public var hitsound:String = 'hitsound';
 
+	private function createGhostNote(timing:Float, noteData:Int):Note {
+		var ghostNote:Note = new Note(Conductor.songPosition, noteData);
+		
+		ghostNote.wasGoodHit = true;
+		ghostNote.canBeHit = true;
+		ghostNote.mustPress = true;
+		ghostNote.noAnimation = true;
+		ghostNote.isSustainRelease = true; // Mark as a sustain release
+		
+		ghostNote.strumTime = Conductor.songPosition - timing;
+		
+		return ghostNote;
+	}
+	
 	private function set_multSpeed(value:Float):Float {
 		resizeByRatio(value / multSpeed);
 		multSpeed = value;
@@ -488,6 +508,9 @@ class Note extends FlxSprite
 
 	override function update(elapsed:Float)
 	{
+		// This would typically be in the set/update function of Note
+		isSustainEnd = isSustainNote && (animation.curAnim.name.endsWith('end') || prevNote == null);
+
 		super.update(elapsed);
 
 		if (mustPress)

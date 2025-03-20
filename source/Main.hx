@@ -25,7 +25,7 @@ import crowplexus.iris.Iris;
 import psychlua.HScript.HScriptInfos;
 #end
 
-#if linux
+#if (linux || mac)
 import lime.graphics.Image;
 #end
 
@@ -41,33 +41,21 @@ import haxe.io.Path;
 #end
 
 import backend.Highscore;
-import backend.cppFiles.CppAPI;
+// import backend.cppFiles.CppAPI;
 
 import gamejolt.GameJoltGroup.GJToastManager;
 import gamejolt.*;
+
+import backend.ColorBlindness;
 
 #if linux
 @:cppInclude('./external/gamemode_client.h')
 @:cppFileCode('#define GAMEMODE_AUTO')
 #end
-#if windows
-@:buildXml('
-<target id="haxe">
-	<lib name="wininet.lib" if="windows" />
-	<lib name="dwmapi.lib" if="windows" />
-</target>
-')
-@:cppFileCode('
-#include <windows.h>
-#include <winuser.h>
-#pragma comment(lib, "Shell32.lib")
-extern "C" HRESULT WINAPI SetCurrentProcessExplicitAppUserModelID(PCWSTR AppID);
-')
-#end
 
 class Main extends Sprite
 {
-	var game = {
+	private static final game = {
 		width: 1280, // WINDOW width
 		height: 720, // WINDOW height
 		initialState: TitleState, // initial game state
@@ -78,6 +66,8 @@ class Main extends Sprite
 	};
 
 	public static var fpsVar:FPSCounter;
+
+	public static var colorFilter:ColorBlindness;
 
 	public static var gjToastManager:GJToastManager;
 
@@ -97,11 +87,9 @@ class Main extends Sprite
 	{
 		super();
 
-		#if windows
-		// DPI Scaling fix for windows 
-		// this shouldn't be needed for other systems
-		// Credit to YoshiCrafter29 for finding this function
-		untyped __cpp__("SetProcessDPIAware();");
+		#if (cpp && windows)
+		backend.Native.fixScaling();
+		backend.Native.setWindowDarkMode(true, true);
 		#end
 
 		// Credits to MAJigsaw77 (he's the og author for this code)
@@ -249,10 +237,12 @@ class Main extends Sprite
 		FlxG.plugins.addIfUniqueType(new ScreenShotPlugin());
 		#end
 
-		#if linux
+		#if (linux || mac) // fix the app icon not showing up on the Linux Panel / Mac Dock
 		var icon = Image.fromFile("icon.png");
 		Lib.current.stage.window.setIcon(icon);
 		#end
+
+		// FlxG.mouse.load(Paths.image('sdymouse').bitmap);
 
 		#if html5
 		FlxG.autoPause = false;
@@ -284,10 +274,10 @@ class Main extends Sprite
 			resetSpriteCache(FlxG.game);
 		});
 
-		#if cpp
+		/* #if cpp
 		CppAPI.darkMode();
 		CppAPI.allowHighDPI();
-		#end
+		#end */
 	}
 
 	static function resetSpriteCache(sprite:Sprite):Void {

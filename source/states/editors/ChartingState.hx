@@ -939,7 +939,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	
 	var lilPlayerDP:Array<Float> = [750, 5];
 	var lilOpponentDP:Array<Float> = [100, 40];
-	var lilgfDP:Array<Float> = [700, 10];
+	var lilgfDP:Array<Float> = [700, 10]; //Feels offensive that you didn't capitalize the word gf
 
 	var lastBeatHit:Int = 0;
 	override function update(elapsed:Float)
@@ -1801,6 +1801,26 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	var hitSoundPlayer:Bool = (hitsoundPlayerStepper.value > 0);
 	var hitSoundOpp:Bool = (hitsoundOpponentStepper.value > 0);
 	var data:Int = note.noteData % 4;
+	var gfShouldSing:Bool = false; // this will only define if gf has to sing, if you want to avoid the other characters singing you should make another variable replicating this one
+
+	var sec = getCurChartSection(); //this is to detect the sections
+/*
+	var secNum:Int = 0;
+	var curSec:Int = 0;
+	if(secNum == 0) secNum = curSec;
+	var section = PlayState.SONG.notes[secNum];
+*/ //unuseful stuff that might be useful for something, if not just delete it
+
+	if(sec.gfSection || note.gfNote) {
+		gfShouldSing = true;
+		//trace("gf Should Sing");
+	}
+	else{
+		gfShouldSing = false;
+		//trace("gf Shouldn't Sing");
+
+	} //  how in the actual fuck do i get this to work :broken heart: | lemme try nigga	
+	
 	// var gfNotes:note.gfNote = (section.gfSection && gottaHitNote == section.mustHitSection);
 	note.alpha = (note.strumTime >= Conductor.songPosition) ? 1 : 0.6;
 	
@@ -1813,11 +1833,12 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			// lilOpponent.singDuration = note.sustainLength / 1000 / playbackRate;
 			lilOpponent.holdTimer = 0;
 		}
-		/* else if(section.gfSection && gottaHitNote == section.mustHitSection) {
+		
+		if(gfShouldSing){
 			lilgf.playAnim(singAnimations[note.noteData], true);
-			lilgf.singDuration = note.sustainLength / 1000 / playbackRate;
+			//lilgf.singDuration = note.sustainLength / 1000 / playbackRate;
 			lilgf.holdTimer = 0;
-		}*/ //  how in the actual fuck do i get this to work :broken heart:
+		}
 
 		if(canPlayHitSound)
 		{

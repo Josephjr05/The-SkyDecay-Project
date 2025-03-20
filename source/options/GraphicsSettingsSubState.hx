@@ -2,6 +2,8 @@ package options;
 
 import objects.Character;
 
+import backend.ColorBlindness;
+
 class GraphicsSettingsSubState extends BaseOptionsMenu
 {
 	var antialiasingOption:Int;
@@ -17,6 +19,14 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		boyfriend.dance();
 		boyfriend.animation.finishCallback = function (name:String) boyfriend.dance();
 		boyfriend.visible = false;
+
+		var option:Option = new Option('Color Filter: ', 
+		'Choose your color blindness filter of your choice.', 
+		'colorFilter', 
+		STRING,
+		['NONE', "DEUTERANOPIA", "PROTANOPIA", "TRITANOPIA"]);
+		option.onChange = onChangeColorFilter;
+		addOption(option);
 
 		//I'd suggest using "Low Quality" as an example for making your own option since it is the simplest here
 		var option:Option = new Option('Low Quality', //Name
@@ -88,6 +98,11 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 				sprite.antialiasing = ClientPrefs.data.antialiasing;
 			}
 		}
+	}
+
+	function onChangeColorFilter()
+	{
+		ColorBlindness.setFilter();
 	}
 
 	function onChangeFramerate()

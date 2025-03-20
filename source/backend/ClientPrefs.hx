@@ -97,9 +97,11 @@ import states.TitleState;
 		public var comboBurst:Bool = true; // take my cheer GF PLEASE!!
 		public var resultsScreen:Bool = true;
 		public var resultsGroovin:Bool = false;
-		public var BaseGame:Bool = true;
+		public var BaseGame:Bool = false;
 
 		public var heyIntro:Bool = true;
+
+		public var colorFilter:String = 'NONE';
 
 		// screenshot shit
 		public var ah:Bool = false;
@@ -120,6 +122,8 @@ import states.TitleState;
 
 		//voiid chronicles additions
 		public var breakTimer:Bool = false;
+
+		public var osuSustainInput:Bool = true;
 }
 
 class ClientPrefs {

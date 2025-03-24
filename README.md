@@ -68,7 +68,6 @@ _____________________________________
 ## Modchart Editor (WIP):
 * Make modcharts with a built in editor ofcourse! 
 * It takes json files of the modchart and simply brings it to life.
-* This uses the modchart editor from Sick Coders engine.
 
 ## More lua, more freedom!:
 * You love lua? Well you'll love the extensive freedom of Lua scripting with a whole lot of new variables and more!
@@ -105,3 +104,12 @@ _____________________________________
 * Improved systems (Accuracy, judgements, consistency of fps)
 * Improved general aspects of fnf that mixes with other rhythm games.
 * Will always update Psych Engine.
+
+## Other Credits:
+* P-Slice: For giving us some references to use/put into this engine (no code was taken besides imports that are left behind)
+* OS Engine: For underlay transparency code under notes playfield.
+* Sick Coders + Slushi Engine: For NotITG(Modchart editor), Gamejolt, and Voiid Chronicles additions code/features.
+* Moon's Modded Psych Engine: For characters showing in the chart editor.
+* Fps Plus: For lil buddies in the chart editor. (We made them work with sustain notes!)
+* Js Engine (sadly): For extra options in chart editor like clearing player or opponent sides (but for Psych 1.0).
+* Psych Engine: For the amazing Pull Requests that ShadowMario ignores or doesn't want to add that is missing on Psych Engine itself!

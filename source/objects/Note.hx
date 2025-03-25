@@ -33,6 +33,7 @@ typedef NoteSplashData = {
 	texture:String,
 	useGlobalShader:Bool, //breaks r/g/b but makes it copy default colors for your custom note
 	useRGBShader:Bool,
+	useNoteRGB:Bool,
 	antialiasing:Bool,
 	r:FlxColor,
 	g:FlxColor,
@@ -129,6 +130,7 @@ class Note extends FlxSprite
 		antialiasing: !PlayState.isPixelStage,
 		useGlobalShader: false,
 		useRGBShader: (PlayState.SONG != null) ? !(PlayState.SONG.disableNoteRGB == true) : true,
+		useNoteRGB: true,
 		r: -1,
 		g: -1,
 		b: -1,

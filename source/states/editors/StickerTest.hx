@@ -29,7 +29,6 @@ class StickerTest extends MusicBeatState {
         FlxG.sound.music.pause();
         FlxG.mouse.visible = true;
         Paths.clearUnusedMemory();
-        music = new EditingMusic();
         if (stickerSubState != null)
 			{
               ModsHelper.clearStoredWithoutStickers();
@@ -80,7 +79,6 @@ class StickerTest extends MusicBeatState {
 	}
     override function update(elapsed:Float) {
         super.update(elapsed);
-        music.update(elapsed);
         if(PsychUIInputText.focusOn == null)
             {
                 ClientPrefs.toggleVolumeKeys(true);

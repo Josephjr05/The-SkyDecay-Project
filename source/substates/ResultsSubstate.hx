@@ -3,6 +3,7 @@ package substates;
 import flixel.addons.transition.FlxTransitionableState;
 import states.StoryMenuState;
 import states.FreeplayState;
+import states.OsuFreeplayState;
 import states.PlayState;
 import backend.Highscore;
 import backend.WeekData;

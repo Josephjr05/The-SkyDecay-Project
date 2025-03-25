@@ -91,6 +91,7 @@ class DifficultySelectorSubState extends MusicBeatSubstate
                     super.update(elapsed);
                     return;
                 }
+                LoadingState.prepareToSong();
                 LoadingState.loadAndSwitchState(new PlayState());
             }
             if (FlxG.keys.firstJustPressed() != FlxKey.NONE && missingText.visible)

@@ -4,6 +4,7 @@ import flixel.addons.transition.FlxTransitionableState;
 
 import states.PlayState;
 import states.FreeplayState;
+import states.OsuFreeplayState;
 import states.MainMenuState;
 
 import backend.Conductor;

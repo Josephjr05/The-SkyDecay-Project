@@ -1,5 +1,9 @@
-# SkyDecay Engine
-A very heavy fork and heavily overhaul of FNF - Psych Engine. Aiming to actually, and LITERALLY have everything an engine should have/need. That uses other rhythm games's systems and settings to make FNF a completely different, and original ideal game! As of now, SkyDecay Engine is only used for The SkyDecay Project (https://gamebanana.com/wips/68022) by Josephjr05 (Creator of the engine).
+### Welcome to YOUR ultimate Friday Night Funkin' engine. Yes, seriously. Because no other engine does/has these so some noobie has to do it instead. (With some help that has experience :D)
+
+# SkyDecay Engine 
+![1000036631](https://github.com/user-attachments/assets/bcd2da72-1bb8-419c-b68f-321fa9ee0f5b)
+
+A very heavy fork and overhaul of FNF - Psych Engine. Aiming to actually, and LITERALLY have everything an engine should have/need. That uses other rhythm games's systems and settings to make FNF a completely different, and original ideal game! As of now, SkyDecay Engine is only used for The SkyDecay Project (https://gamebanana.com/wips/68022) by Josephjr05 (Creator of the engine).
 
 ## Psych Engine LUA API:
 
@@ -33,6 +37,8 @@ _____________________________________
 * This is included in The SkyDecay Project FNF mod FOR Mania difficulty.
 
 * Do expect bugs with BPM changing!
+
+* Reverse Scroll is finally here. Mania mappers can now enjoy charting on FNF. I love y'all :D
   
 ## Optimization:
 * No matter how many notes there are in a chart (or on Botplay), it won't ever lagspike or drain some fps! But do make sure it's working well for your device.

@@ -39,7 +39,6 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 	var camGame:FlxCamera;
 	public var camHUD:FlxCamera;
 
-	var music:EditingMusic;
 	
 	var UI_stagebox:PsychUIBox;
 	var UI_box:PsychUIBox;
@@ -69,7 +68,6 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
-		music = new EditingMusic();
 		camGame = initPsychCamera();
 		camHUD = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
@@ -1356,7 +1354,6 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 			basic.update(curFilters, elapsed);
 
 		super.update(elapsed);
-		music.update(elapsed);
 		
 		outputTime = Math.max(0, outputTime - elapsed);
 		outputTxt.alpha = outputTime;

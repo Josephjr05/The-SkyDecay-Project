@@ -19,7 +19,6 @@ import states.editors.content.Prompt;
 
 class WeekEditorState extends MusicBeatState implements PsychUIEventHandler.PsychUIEvent
 {
-	var music:EditingMusic;
 	var txtWeekTitle:FlxText;
 	var bgSprite:FlxSprite;
 	var lock:FlxSprite;
@@ -40,7 +39,6 @@ class WeekEditorState extends MusicBeatState implements PsychUIEventHandler.Psyc
 	}
 
 	override function create() {
-		music = new EditingMusic();
 		txtWeekTitle = new FlxText(FlxG.width * 0.7, 10, 0, "", 32);
 		txtWeekTitle.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
 		txtWeekTitle.alpha = 0.7;
@@ -413,7 +411,6 @@ class WeekEditorState extends MusicBeatState implements PsychUIEventHandler.Psyc
 		else ClientPrefs.toggleVolumeKeys(false);
 
 		super.update(elapsed);
-		music.update(elapsed);
 
 		lock.y = weekThing.y;
 		missingFileText.y = weekThing.y + 36;
@@ -545,7 +542,6 @@ class WeekEditorState extends MusicBeatState implements PsychUIEventHandler.Psyc
 
 class WeekEditorFreeplayState extends MusicBeatState implements PsychUIEventHandler.PsychUIEvent
 {
-	var music:EditingMusic;
 	var weekFile:WeekFile = null;
 	public function new(weekFile:WeekFile = null)
 	{
@@ -561,7 +557,6 @@ class WeekEditorFreeplayState extends MusicBeatState implements PsychUIEventHand
 	var curSelected = 0;
 
 	override function create() {
-		music = new EditingMusic();
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		bg.color = FlxColor.WHITE;

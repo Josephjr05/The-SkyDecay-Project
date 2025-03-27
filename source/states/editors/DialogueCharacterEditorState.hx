@@ -46,7 +46,6 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 	var mainGroup:FlxSpriteGroup;
 	var hudGroup:FlxSpriteGroup;
 
-	var music:EditingMusic;
 	var character:DialogueCharacter;
 	var ghostLoop:DialogueCharacter;
 	var ghostIdle:DialogueCharacter;
@@ -55,7 +54,6 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 	var unsavedProgress:Bool = false;
 
 	override function create() {
-		music = new EditingMusic();
 		persistentUpdate = persistentDraw = true;
 		camGame = initPsychCamera();
 		camGame.bgColor = FlxColor.fromHSL(0, 0, 0.5);
@@ -442,7 +440,6 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 	var transitioning:Bool = false;
 	override function update(elapsed:Float) {
 		super.update(elapsed);
-		music.update(elapsed);
 		if(transitioning)
 			return;
 

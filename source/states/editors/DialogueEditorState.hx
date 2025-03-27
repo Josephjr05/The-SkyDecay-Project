@@ -18,7 +18,6 @@ class DialogueEditorState extends MusicBeatState implements PsychUIEventHandler.
 	var box:FlxSprite;
 	var daText:TypedAlphabet;
 
-	var music:EditingMusic;
 	var selectedText:FlxText;
 	var animText:FlxText;
 
@@ -30,7 +29,6 @@ class DialogueEditorState extends MusicBeatState implements PsychUIEventHandler.
 		persistentUpdate = persistentDraw = true;
 		FlxG.camera.bgColor = FlxColor.fromHSL(0, 0, 0.5);
 
-		music = new EditingMusic();
 
 		defaultLine = {
 			portrait: DialogueCharacter.DEFAULT_CHARACTER,
@@ -361,7 +359,6 @@ class DialogueEditorState extends MusicBeatState implements PsychUIEventHandler.
 		}
 		else ClientPrefs.toggleVolumeKeys(false);
 		super.update(elapsed);
-		music.update(elapsed);
 	}
 
 	function changeText(add:Int = 0) {

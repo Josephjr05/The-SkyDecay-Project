@@ -5,6 +5,9 @@
 
 A very heavy fork and overhaul of FNF - Psych Engine. Aiming to actually, and LITERALLY have everything an engine should have/need. That uses other rhythm games's systems and settings to make FNF a completely different, and original ideal game! As of now, SkyDecay Engine is only used for The SkyDecay Project (https://gamebanana.com/wips/68022) by Josephjr05 (Creator of the engine).
 
+## Funkin Modchart Documents:
+[here](https://github.com/TheoDevelops/FunkinModchart/blob/main/DOC.md)
+
 ## Psych Engine LUA API:
 
 Refer to [the Lua API Documentation](https://shadowmario.github.io/psychengine.lua/) IF you're gonna mod on this engine!
@@ -47,7 +50,7 @@ _____________________________________
 ## New languages:
 * A load of new languages come out of the box with this engine by different people! (Contributors of SkyDecay Project)
 
-## New OD and HP system:
+## New OD and HP system (WIP):
 
 * Hit Windows and Health Drain can simply be customized specifically within a chart's file data! 
 * You can edit values to determine the hit windows specifically on that song's difficulty to ensure a very fair playthrough.

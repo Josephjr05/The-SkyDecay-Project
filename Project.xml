@@ -144,14 +144,9 @@
     <!--Uncomment if you want to use moonchart, which allows usage of chart formats from other rhythm games and fnf engines-->
     <haxelib name="moonchart" version="git" if="native"/>
 
-	<!-- Defines the engine you're using! -->
-	<define name="PSYCH"/>
-
-	<!-- Defines what version of the engine. -->
-	<define name="PSYCHVERSION" value="0.7.3" />
-
-	<haxelib name="fnf-modcharting-tools"/>
-	<!-- <define name="SCEModchartingTools" if="fnf-modcharting-tools"/> -->
+	<haxedef name="FM_ENGINE" value="PSYCH"/>
+	<haxedef name="FM_ENGINE_VERSION" value="1.0"/>
+	<haxelib name="FunkinModchart" />
 
 	<haxelib name="hxgamejolt-api"/>
 	

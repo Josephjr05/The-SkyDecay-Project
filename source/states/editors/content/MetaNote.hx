@@ -122,7 +122,7 @@ class MetaNote extends Note
 		return (_noteTypeText = txt);
 	}
 
-	// function draw, i put sustainSprite.reverseScroll.reverseScroll; and then flip the sustainSprite.y for reverseScroll with - sustainHeight like this:
+	// function draw, i put sustainSprite.reverseScroll; and then flip the sustainSprite.y for reverseScroll with - sustainHeight like this:
 		// sustainSprite.y = this.y + this.height/2 - sustainSprite.sustainHeight;
 	// sometimes using - could work on this.height or the numbers but it still breaks.
 	override function draw()

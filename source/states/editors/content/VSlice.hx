@@ -314,7 +314,7 @@ class VSlice
 				fileEvents.push([event.t, [fields]]);
 			}
 			fileEvents.sort(sortByTime);
-			pack.events = {events: fileEvents, format: 'psych_v1_convert'};
+			pack.events = {events: fileEvents, format: 'sdyPSYCH_V1_convert'};
 		}
 		return pack;
 	}

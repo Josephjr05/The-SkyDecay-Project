@@ -10,6 +10,7 @@ import flixel.util.FlxStringUtil;
 
 import states.StoryMenuState;
 import states.FreeplayState;
+import states.OsuFreeplayState;
 import options.OptionsState;
 
 import substates.StickerSubState;
@@ -33,6 +34,12 @@ class PauseSubState extends MusicBeatSubstate
 
 	var missingTextBG:FlxSprite;
 	var missingText:FlxText;
+
+	var songArtistTxt:FlxText;
+	var artistTxt:FlxText;
+	var charterTxt:FlxText;
+	var vfxTxt:FlxText;
+	var scripterText:FlxText;
 
 	public static var songName:String = null;
 
@@ -90,6 +97,12 @@ class PauseSubState extends MusicBeatSubstate
 		levelInfo.setFormat(Paths.font("vcr.ttf"), 32);
 		levelInfo.updateHitbox();
 		add(levelInfo);
+		
+		songArtistTxt = new FlxText(20, 15 + 32, 0, Language.getPhrase("songArtists", "Composer: {1}", [PlayState.SONG.songArtists]), 32);
+		songArtistTxt.scrollFactor.set();
+		songArtistTxt.setFormat(Paths.font('vcr.ttf'), 32);
+		songArtistTxt.updateHitbox();
+		add(songArtistTxt);
 
 		var levelDifficulty:FlxText = new FlxText(20, 15 + 32, 0, Difficulty.getString().toUpperCase(), 32);
 		levelDifficulty.scrollFactor.set();

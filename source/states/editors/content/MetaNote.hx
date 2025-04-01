@@ -3,6 +3,7 @@ package states.editors.content;
 import objects.Note;
 import shaders.RGBPalette;
 import flixel.util.FlxDestroyUtil;
+import flixel.math.FlxPoint;
 
 class MetaNote extends Note
 {
@@ -12,6 +13,10 @@ class MetaNote extends Note
 	public var sustainSprite:EditorSustain;
 	public var chartY:Float = 0;
 	public var chartNoteData:Int = 0;
+	public var sustainHeight:Float = 0;
+	public var reverseScroll:Bool;
+	// or idk what's the difference, public var reverseScroll = ChartingState.instance.reverseScroll;
+	// all solutions i found will be commented  (that still break on Upscroll)
 
 	public function new(time:Float, data:Int, songData:Array<Dynamic>)
 	{
@@ -61,7 +66,7 @@ class MetaNote extends Note
 	}
 
 	var _lastZoom:Float = -1;
-	public function setSustainLength(v:Float, stepCrochet:Float, zoom:Float = 1)
+	public function setSustainLength(v:Float, stepCrochet:Float, zoom:Float = 1, reverseScroll:Bool)
 	{
 		_lastZoom = zoom;
 		v = Math.round(v / (stepCrochet / 2)) * (stepCrochet / 2);
@@ -74,6 +79,7 @@ class MetaNote extends Note
 				sustainSprite = new EditorSustain(noteData); //new FlxSprite().makeGraphic(1, 1, FlxColor.WHITE);
 				sustainSprite.scrollFactor.x = 0;
 			}
+			// sustainSprite.reverseScroll = this.reverseScroll; 
 			sustainSprite.sustainHeight = Math.max(ChartingState.GRID_SIZE/4, (Math.round((v * ChartingState.GRID_SIZE + ChartingState.GRID_SIZE) / stepCrochet) * zoom) - ChartingState.GRID_SIZE/2);
 			sustainSprite.updateHitbox();
 		}
@@ -85,13 +91,13 @@ class MetaNote extends Note
 	public function updateSustainToZoom(stepCrochet:Float, zoom:Float = 1)
 	{
 		if(_lastZoom == zoom) return;
-		setSustainLength(sustainLength, stepCrochet, zoom);
+		setSustainLength(sustainLength, stepCrochet, zoom, reverseScroll);
 	}
 
 	public function updateSustainToStepCrochet(stepCrochet:Float)
 	{
 		if(_lastZoom < 0) return;
-		setSustainLength(sustainLength, stepCrochet, _lastZoom);
+		setSustainLength(sustainLength, stepCrochet, _lastZoom, reverseScroll);
 	}
 	
 	var _noteTypeText:FlxText;
@@ -116,6 +122,9 @@ class MetaNote extends Note
 		return (_noteTypeText = txt);
 	}
 
+	// function draw, i put sustainSprite.reverseScroll.reverseScroll; and then flip the sustainSprite.y for reverseScroll with - sustainHeight like this:
+		// sustainSprite.y = this.y + this.height/2 - sustainSprite.sustainHeight;
+	// sometimes using - could work on this.height or the numbers but it still breaks.
 	override function draw()
 	{
 		if(sustainSprite != null && sustainSprite.exists && sustainSprite.visible && sustainLength > 0)
@@ -151,6 +160,7 @@ class MetaNote extends Note
 class EditorSustain extends Note {
 	var sustainTile:FlxSprite;
 	public var sustainHeight:Float = 0;
+	public var reverseScroll:Bool;
 
 	public function new(data:Int) {
 		sustainTile = new FlxSprite();
@@ -167,6 +177,15 @@ class EditorSustain extends Note {
 		sustainTile.update(elapsed);
 		super.update(elapsed);
 	}
+	// this is what pisses me off.
+	// so y += sustainHeight and y -= sustainHeight are actually what flips the sustainTile downwards.
+	// If you were to take out those lines, they'd flip upwards on reverseScroll. But sadly breaks it for upscroll.
+	// i've done flipY on sustainTile, doesn't really make a difference.
+	// I've made functions to separate the logic for drawing the sustain tile, but it still breaks on reverseScroll.
+	// I've also tried separate classes for upscroll and downscroll, but it still breaks on reverseScroll.
+	// So it's something to do with super.draw and how it handles the y position of the note itself in relation to the sustain tile.
+	// If we can figure out a way to make it so super.draw can draw separately without breaking on reverseScroll, that would be great.
+	// OH also, i have tried making a another sustainTile sprite under a different name. Did NOT work.
 	override function draw() {
 		if (!visible) return;
 
@@ -239,7 +258,7 @@ class EventMetaNote extends MetaNote
 		super.draw();
 	}
 
-	override function setSustainLength(v:Float, stepCrochet:Float, zoom:Float = 1) {}
+	override function setSustainLength(v:Float, stepCrochet:Float, zoom:Float = 1, reverseScroll:Bool) {}
 
 	public var events:Array<Array<String>>;
 	public function updateEventText()

@@ -9,7 +9,7 @@ import objects.Note;
 typedef SwagSong =
 {
 	var song:String;
-	var	songArtists:String;
+	var songArtists:String;
 	var artists:String;
 	var charters:String;
 	var vfx:String;
@@ -56,10 +56,19 @@ typedef SwagSection =
 class Song
 {
 	public var song:String;
-	public var notes:Array<SwagSection>;
-	public var events:Array<Dynamic>;
-	public var bpm:Float;
+	public var songArtists:String;
+	public var artists:String;
+	public var charters:String;
+	public var vfx:String;
+	public var scripters:String;
+	public var player1:String = 'bf';
+	public var player2:String = 'bf-opponent';
+	public var gfVersion:String = 'gf';
+	public var stage:String;
+	public var format:String = 'skydecay_beta';
 	public var needsVoices:Bool = true;
+	public var speed:Float = 2.8;
+	public var bpm:Float;
 	public var arrowSkin:String;
 	public var splashSkin:String;
 	public var gameOverChar:String;
@@ -67,14 +76,10 @@ class Song
 	public var gameOverLoop:String;
 	public var gameOverEnd:String;
 	public var disableNoteRGB:Bool = false;
-	public var speed:Float = 2.6;
-	public var stage:String;
-	public var player1:String = 'bf';
-	public var player2:String = 'bf-opponent';
-	public var gfVersion:String = 'gf';
-	public var format:String = 'skydecay_beta';
+	public var events:Array<Dynamic>;
+	public var notes:Array<SwagSection>;
 
-	public static function convert(songJson:Dynamic) // Convert old charts to psych_v1 format
+	public static function convert(songJson:Dynamic) // Convert old charts to skydecay_beta (0.1) format
 	{
 		if(songJson.gfVersion == null)
 		{
@@ -115,7 +120,7 @@ class Song
 			if (beats == null || Math.isNaN(beats))
 			{
 				section.sectionBeats = 4;
-				if(Reflect.hasField(section, 'lengthInSteps')) Reflect.deleteField(section, 'lengthInSteps');
+				if(Reflect.hasField(section, 'lengthInSteps')) Reflect.deleteField(section, 'lengthInSteps'); // for converting charts, it still keeps lengthInSteps so it'll get deleted if you save the chart again
 			}
 
 			for (note in section.sectionNotes)
@@ -183,7 +188,7 @@ class Song
 			switch(convertTo)
 			{
 				case 'psych_v1':
-					if(!fmt.startsWith('psych_v1')) //Convert to Psych 1.0 format
+					if(!fmt.startsWith('psych_v1')) //Convert to Psych 1.0 format and make it skydecay cause yes
 					{
 						trace('converting chart $nameForError with format $fmt to skydecay_beta format...');
 						songJson.format = 'psych_v1_convert';

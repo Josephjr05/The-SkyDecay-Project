@@ -113,8 +113,8 @@ class MasterEditorMenu extends MusicBeatState
 			switch(options[curSelected]) {
 				// case 'Modchart Editor':
 				// 	LoadingState.loadAndSwitchState(new ModchartEditorState(), false);
-				// case '3D Benchmark':
-				//	LoadingState.loadAndSwitchState(new BenchmarkState(), false);
+				//case '3D Benchmark':
+					//LoadingState.loadAndSwitchState(new BenchmarkState(), false);
 				case 'XML Editor':// finally?
 					LoadingState.loadAndSwitchState(new XMLEditorState(), false);
 				case 'Chart Editor'://felt it would be cool maybe

@@ -62,7 +62,7 @@ _____________________________________
 * This means Psych Engine's awful input system is gone.
 * It's better and heavily more accurate to your inputs and judgements.
 
-## Sustain Release (WIP):
+## Sustain Release:
 * You are now forced to let go of the sustains!
 * Let go at the end of the sustain tail to gain extra combo and extra score.
 

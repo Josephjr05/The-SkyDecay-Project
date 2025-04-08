@@ -16,9 +16,6 @@ import flixel.math.FlxRect;
 
 #if SCEModchartingTools
 // import modcharting.NotePositionData;
-// import modcharting.SustainStrip;
-#end
-
 using StringTools;
 
 typedef EventNote = {
@@ -51,14 +48,10 @@ class Note extends FlxSprite
 	// Joseph here, modcharting is possible! SCE will be my #1 reference to getting this to life on this engine. A modchart editor and all soon!!
   //add these 2 variables for the renderer
   // public var mesh:modcharting.SustainStrip = null;
-  public var z:Float = 0;
+	// sdy engine var 
+  	public var z:Float = 0;
+	public var isSustainReleaseNote:Bool = false;
 
-  // SDY engine
-	public var isSustainRelease:Bool = false;
-	public var releaseMS:Float = 0;
-	public var isSustainEnd:Bool = false;
-
-  
 	//This is needed for the hardcoded note types to appear on the Chart Editor,
 	//It's also used for backwards compatibility with 0.1 - 0.3.2 charts.
 	public static final defaultNoteTypes:Array<String> = [
@@ -72,7 +65,6 @@ class Note extends FlxSprite
 	#if SCEModchartingTools
 	// public var mesh:SustainStrip;
 	// public var notePositionData:NotePositionData = NotePositionData.get();
-	#end
 	public var extraData:Map<String, Dynamic> = new Map<String, Dynamic>();
 
 	public var strumTime:Float = 0;

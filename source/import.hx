@@ -22,8 +22,8 @@ import js.html.*;
 #end
 
 //gamejolt
-import gamejolt.GJKeys;
-import gamejolt.GameJoltAPI;
+// import gamejolt.GJKeys;
+// import gamejolt.GameJoltAPI;
 
 import backend.Paths;
 import backend.Controls;

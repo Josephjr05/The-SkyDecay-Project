@@ -290,7 +290,7 @@ class GameJoltLogin extends MusicBeatState implements PsychUIEventHandler.PsychU
 
   function openLink(url:String)
   {
-    return utils.WindowUtil.openURL(url);
+    return uh.WindowUtil.openURL(url); // i realized the utils folder is actually from sick coders or slushi engine :skull:
   }
 }
 

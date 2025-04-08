@@ -19,7 +19,6 @@ import lime.app.Application;
 import states.TitleState;
 import backend.SSPlugin as ScreenShotPlugin;
 
-import backend.AudioSwitchFix;
 #if HSCRIPT_ALLOWED
 import crowplexus.iris.Iris;
 import psychlua.HScript.HScriptInfos;
@@ -135,8 +134,6 @@ class Main extends Sprite
 			game.width = Math.ceil(stageWidth / game.zoom);
 			game.height = Math.ceil(stageHeight / game.zoom);
 		}
-
-		AudioSwitchFix.init();
 		
 		#if LUA_ALLOWED
 		Mods.pushGlobalMods();

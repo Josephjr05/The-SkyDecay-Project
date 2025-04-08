@@ -21,29 +21,9 @@ import sys.io.*;
 import js.html.*;
 #end
 
-// Modcharting Tools
-#if SCEModchartingTools
-// something code shit
-#end
 //gamejolt
 import gamejolt.GJKeys;
 import gamejolt.GameJoltAPI;
-
-// Use own Debug class
-//import backend.Debug.*;
-//import backend.Debug;
-
-#if SCEModchartingTools
-import substates.MusicBeatSubstate;
-#else
-import backend.MusicBeatSubstate;
-#end
-import objects.Note;
-#if SCEModchartingTools
-import objects.StrumArrow;
-#else
-import objects.StrumNote;
-#end
 
 import backend.Paths;
 import backend.Controls;

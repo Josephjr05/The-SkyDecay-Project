@@ -1,6 +1,5 @@
 package objects;
 
-//Import FlxSkewedSprite at the top
 import flixel.addons.effects.FlxSkewedSprite;
 
 import backend.animation.PsychAnimationController;
@@ -14,8 +13,6 @@ import objects.SustainSplash;
 
 import flixel.math.FlxRect;
 
-#if SCEModchartingTools
-// import modcharting.NotePositionData;
 using StringTools;
 
 typedef EventNote = {
@@ -45,9 +42,6 @@ typedef NoteSplashData = {
 **/
 class Note extends FlxSprite
 {
-	// Joseph here, modcharting is possible! SCE will be my #1 reference to getting this to life on this engine. A modchart editor and all soon!!
-  //add these 2 variables for the renderer
-  // public var mesh:modcharting.SustainStrip = null;
 	// sdy engine var 
   	public var z:Float = 0;
 	public var isSustainReleaseNote:Bool = false;
@@ -62,9 +56,6 @@ class Note extends FlxSprite
 		'GF Sing',
 		'No Animation'
 	];
-	#if SCEModchartingTools
-	// public var mesh:SustainStrip;
-	// public var notePositionData:NotePositionData = NotePositionData.get();
 	public var extraData:Map<String, Dynamic> = new Map<String, Dynamic>();
 
 	public var strumTime:Float = 0;
@@ -166,20 +157,6 @@ class Note extends FlxSprite
 		return hitsoundForce ? hitsoundVolume : 0.0;
 	}
 	public var hitsound:String = 'hitsound';
-
-	private function createGhostNote(timing:Float, noteData:Int):Note {
-		var ghostNote:Note = new Note(Conductor.songPosition, noteData);
-		
-		ghostNote.wasGoodHit = true;
-		ghostNote.canBeHit = true;
-		ghostNote.mustPress = true;
-		ghostNote.noAnimation = true;
-		ghostNote.isSustainRelease = true; // Mark as a sustain release
-		
-		ghostNote.strumTime = Conductor.songPosition - timing;
-		
-		return ghostNote;
-	}
 	
 	private function set_multSpeed(value:Float):Float {
 		resizeByRatio(value / multSpeed);
@@ -502,9 +479,6 @@ class Note extends FlxSprite
 
 	override function update(elapsed:Float)
 	{
-		// This would typically be in the set/update function of Note
-		isSustainEnd = isSustainNote && (animation.curAnim.name.endsWith('end') || prevNote == null);
-
 		super.update(elapsed);
 
 		if (mustPress)

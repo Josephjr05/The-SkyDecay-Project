@@ -30,8 +30,6 @@ import states.editors.CharacterEditorState;
 
 import substates.PauseSubState;
 import substates.GameOverSubstate;
-import substates.ResultsScreen;
-import substates.ResultsSubstate; // graffiti groovin
 #if !flash
 import flixel.addons.display.FlxRuntimeShader;
 import openfl.filters.ShaderFilter;
@@ -58,22 +56,14 @@ import crowplexus.hscript.Expr.Error as IrisError;
 import crowplexus.hscript.Printer;
 #end
 
-// sd engine imports
+// sdy engine imports
 import objects.Note;
 import objects.SustainSplash;
 import flixel.util.FlxAxes; // for label
 import backend.PsychCamera;
-
-// for VSlice start of SDPJ. OG credits to mikolka for psych-Vslice support on Psych Source
-/* import substates.StickerSubState;
-import mikolka.JoinedLuaVariables;
-import mikolka.vslice.freeplay.FreeplayStateBase;
-import mikolka.stages.erect.*;
-import mikolka.funkin.Scoring;
-import mikolka.funkin.custom.FunkinTools;
-import mikolka.vslice.results.Tallies;
-import mikolka.vslice.results.ResultState;
-import lime.math.Matrix3; */
+import states.OsuFreeplayState;
+import substates.ResultsScreen; // actuall results screen
+import substates.ResultsSubstate; // graffiti groovin results screen NOT USED IN ACTUAL ENGINE JUST FOR MY LIKING
 
 /**
  * This is where all the Gameplay stuff happens and is managed
@@ -185,7 +175,7 @@ class PlayState extends MusicBeatState
 	public var strumLineNotes:FlxTypedGroup<StrumNote>;
 	public var opponentStrums:FlxTypedGroup<StrumNote>;
 	public var playerStrums:FlxTypedGroup<StrumNote>;
-	public var grpHoldSplashes:FlxTypedGroup<SustainSplash>; // sustain splash SkyDecay Engine
+	public var grpHoldSplashes:FlxTypedGroup<SustainSplash>; // sustain splash SkyDecay Engine 
 	public var grpNoteSplashes:FlxTypedGroup<NoteSplash>;
 
 	public var camZooming:Bool = false;
@@ -206,7 +196,7 @@ class PlayState extends MusicBeatState
 	public var timeBar:Bar;
 	var songPercent:Float = 0;
 
-	public var ratingsData:Array<Rating> = Rating.loadDefault();
+	public var ratingsData:Array<Rating>;
 
 	private var generatedMusic:Bool = false;
 	public var endingSong:Bool = false;
@@ -335,7 +325,7 @@ class PlayState extends MusicBeatState
 		var kmMode:Bool = false;
 		var maxMisses:Int = 10;
 
-		// For groovin results (not actually gonna be in the mod)
+		// For groovin results (not actually gonna be in the mod/engine)
 		public var perfects:Int = 0;
 		public var greats:Int = 0;
 		public var goods:Int = 0;
@@ -656,14 +646,8 @@ class PlayState extends MusicBeatState
 		opponentStrums = new FlxTypedGroup<StrumNote>();
 		playerStrums = new FlxTypedGroup<StrumNote>();
 
-		//Add this before generateSong(); (For Psych 0.7.1+)
-		// backupGpu = ClientPrefs.data.cacheOnGPU;
-		// ClientPrefs.data.cacheOnGPU = false;
 		generateSong();
 
-		// playfieldRenderer = new PlayfieldRenderer(strumLineNotes, notes, this);
-		// playfieldRenderer.cameras = [camHUD];
-		// add(playfieldRenderer);
 		noteGroup.add(grpHoldSplashes);
 		noteGroup.add(grpNoteSplashes);
 
@@ -685,22 +669,8 @@ class PlayState extends MusicBeatState
 		if (ClientPrefs.data.breakTimer)
 		{
 		  var noteTimer:backend.NoteTimer = new backend.NoteTimer(this);
-		  noteTimer.cameras = [camHUD]; // useSLEHUD ? camSLEHUD : camStuff;
 		  add(noteTimer);
 		}
-
-		// SlushiEngineHUD.setOthersParamOfTheHUD();
-
-		/* if (useSLEHUD)
-		  playerHoldCovers.cameras = opponentHoldCovers.cameras = strumLineNotes.cameras = grpNoteSplashes.cameras = grpNoteSplashesCPU.cameras = notes.cameras = [camNoteStuff];
-		else
-		  playerHoldCovers.cameras = opponentHoldCovers.cameras = strumLineNotes.cameras = grpNoteSplashes.cameras = grpNoteSplashesCPU.cameras = notes.cameras = [usesHUD ? camHUD : camNoteStuff];
-		for (i in [
-		  timeBar, timeBarNew, timeTxt, healthBar, healthBarNew, healthBarHit, healthBarHitNew, kadeEngineWatermark, judgementCounter, scoreTxtSprite, scoreTxt,
-		  botplayTxt, iconP1, iconP2, timeBarBG, healthBarBG, healthBarHitBG, healthBarOverlay
-		])
-		  i.camera = useSLEHUD ? camSLEHUD : camHUD;
-		comboGroupOP.cameras = comboGroup.cameras = [ClientPrefs.data.gameCombo ? camGame : camHUD]; */
 
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
 		moveCameraSection();
@@ -1260,7 +1230,7 @@ class PlayState extends MusicBeatState
 				{
 					case 0:
 						FlxG.sound.play(Paths.sound('intro3' + introSoundsSuffix), 0.6);
-						tick = THREE;
+						tick = THREE; // if i add a sprite, pretty sure it'll be a longer countdown.
 					case 1:
 						countdownReady = createCountdownSprite(introAlts[0], antialias);
 						FlxG.sound.play(Paths.sound('intro2' + introSoundsSuffix), 0.6);
@@ -2277,7 +2247,7 @@ class PlayState extends MusicBeatState
 			opponentVocals.pause();
 
 		#if DISCORD_ALLOWED
-		DiscordClient.changePresence("In Psych 1.0 (SD) Chart Editor", null, null, true); // possibly gonna add 0.7.3 chart editor as an option
+		DiscordClient.changePresence("In Psych 1.0 (SDY) Chart Editor", null, null, true);
 		DiscordClient.resetClientID();
 		#end
 
@@ -4329,19 +4299,20 @@ class PlayState extends MusicBeatState
 	public function runSongSyncThread()
 	{
 		Thread.create(function() {
-			while (!endingSong && !paused && !shutdownThread)
-			{
-				if (requiresSyncing) continue;
-	
-				if (gameFroze)
-				{
+			while (!endingSong && !paused && !shutdownThread) {
+				if (requiresSyncing) {
+					Sys.sleep(0.01);
+					continue;
+				}
+				
+				if (gameFroze) {
 					lastCorrectSongPos = Conductor.songPosition;
 					requiresSyncing = true;
 					continue;
 				}
 				gameFroze = true;
-	
-				Sys.sleep(0.25);
+				
+				Sys.sleep(0.5);
 			}
 		});
 	

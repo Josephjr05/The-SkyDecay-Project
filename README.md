@@ -6,7 +6,7 @@
 A very heavy fork and overhaul of FNF - Psych Engine. Aiming to actually, and LITERALLY have everything an engine should have/need. That uses other rhythm games's systems and settings to make FNF a completely different, and original ideal game! As of now, SkyDecay Engine is only used for The SkyDecay Project (https://gamebanana.com/wips/68022) by Josephjr05 (Creator of the engine).
 
 ## Funkin Modchart Documents:
-[here](https://github.com/TheoDevelops/FunkinModchart/blob/main/DOC.md)
+[Funkin Modchart](https://github.com/TheoDevelops/FunkinModchart/blob/main/DOC.md)
 
 ## Psych Engine LUA API:
 
@@ -31,52 +31,63 @@ _____________________________________
 # Features (SkyDecay Engine)
 
 ## Ver:
-* Psych Engine mixed with VSlice, Codename, and Restructure Engine features.
+* Psych Engine mixed with VSlice, Codename, and Restructure Engine FEATURES!! NOT CODE!!
 (To have Osu Mania, Etterna, Quaver, and NotITG features in FNF!)
 
 ## UNIVERSAL CHARTS SUPPORT!
 * Convert universally using the chart editor as you can now convert from Osu, Qua, SM, or Guitar Hero charts to Psych engine!
 * Thanks to Moonchart and how simple it is to actually use, this engine is the first to support universal chart files!
 * This is included in The SkyDecay Project FNF mod FOR Mania difficulty.
+* Current charts supported: Osu Mania.
 
 * Do expect bugs with BPM changing!
 
+## Chart Editor Edits/Additions:
 * Reverse Scroll is finally here. Mania mappers can now enjoy charting on FNF. I love y'all :D
-  
-## Optimization:
-* No matter how many notes there are in a chart (or on Botplay), it won't ever lagspike or drain some fps! But do make sure it's working well for your device.
-* Notes are easier to read and faster computing.
+* Adds vortex implementation from this [PR](https://github.com/ShadowMario/FNF-PsychEngine/pull/15931)
+* Fixes bpm changing when curStep isn't consistent (from Psych Ward problem)
+* Adds toggable options to show Lil buddies or show actual characters.
+* Fixed text size going out of the window + added more for the engine.
+* Adds Credits tab and OD + HD systems
+* You don't need more than 1 speed so playback speed is 0.5-1.
+* On default, Inst volume is always 1.
+* Adds more key shortcuts for easy of use.
+* Adds controller/gamepad support.
+* Adds custom default Ms option for OD implementation on specific songs (if you want to make hit windows more awful for fun).
+* Adds visual options to show scroll speed changes, camera events, and simple changes in the chart editor.q
 
 ## New languages:
 * A load of new languages come out of the box with this engine by different people! (Contributors of SkyDecay Project)
 
-## New OD and HP system (WIP):
+## OD and HP system NEW!:
+* Ms windows and Health Drain can now be customized specifically within a chart's file data! 
+* You can edit values from 0-10 to determine the hit windows specifically on that song's difficulty to ensure the song feels like that difficulty by a bunch!
+* This also means the hit windows feel exactly like the hit windows that FNF in general didn't properly have. It feels like Osu Mania, Etterna or Quaver depending on what you think of it.
+* OD 5 (on default) uses base Psych Engine ms (includes new Perfect rating with 16 ms)
+* They are no longer player settings.
 
-* Hit Windows and Health Drain can simply be customized specifically within a chart's file data! 
-* You can edit values to determine the hit windows specifically on that song's difficulty to ensure a very fair playthrough.
-* Health Drain multipliers won't be a player option anymore.
+## Sustain Release NEW:
+* Now as a toggable option, you're forced to let go at the end of a sustain/long note!
+* It comes with the OD system which also makes it stricter to let go of the sustain. 
+* Let go at the end of the sustain tail to gain extra combo and bonus score!
 
 ## Results Screen:
 ![](https://github.com/user-attachments/assets/fce40633-e095-4f6b-a96a-d95bdb86e3fd)
-* Along with the new Accuracy system, a Results Screen (toggable) can show your real and accurate stats!
-* This means Psych Engine's awful input system is gone.
+* Along with the OD and HP addition, a Results Screen (toggable) can show your real and accurate stats!
+* This means Psych Engine's awful input and accuracy system is gone.
 * It's better and heavily more accurate to your inputs and judgements.
 
-## Sustain Release:
-* You are now forced to let go of the sustains!
-* Let go at the end of the sustain tail to gain extra combo and extra score.
-
-## Screenshot function:
+## Screenshot function NEW:
 * A new Screenshot Function is available! Simply press F12 key and take a screenshot of your game.
 * It's meant for ease of use.
+
+## Rendering Support NEW:
+* You can basically record yourself (in real time) playing any song and have it as replays.
+* They are automatically exported as a mp4 after the song is completed.
 
 ## XML Editor (WIP):
 * Simply, help adjust xml files with this editor.
 * Shows the sprites and you can edit nodes + more!
-
-## Modchart Editor (WIP):
-* Make modcharts with a built in editor ofcourse! 
-* It takes json files of the modchart and simply brings it to life.
 
 ## More lua, more freedom!:
 * You love lua? Well you'll love the extensive freedom of Lua scripting with a whole lot of new variables and more!
@@ -85,7 +96,11 @@ _____________________________________
 * When you get blueballed now, you die right where you stand! No more black screen.
 * Don't embarrass yourself infront of your girlfriend now.
 
-## PlayState Changes (WIP)
+## PlayState Changes (WIP):
+* No matter how many notes there are in a chart (or on Botplay), it won't ever lagspike or drain some fps!
+* Notes are easier to read and are faster computing.
+* Ofcourse OD and HP system implemented.
+* Ghost Tapping is very much nerfed.
 * The playfield strums are now in it's own cam, go crazy in Lua!
 * CamHUD doesn't bop anymore. Events now trigger only CamHUD camera events if yes to value 3 on some camera events. (To make it very cool)
 * The playfield strums have also been repositioned (and on downscroll) to help read notes easier.
@@ -112,13 +127,12 @@ _____________________________________
 * Improved Psych 1.0 chart editor (With references from MMPE, and VSlice)
 * Improved systems (Accuracy, judgements, consistency of fps)
 * Improved general aspects of fnf that mixes with other rhythm games.
-* Will always update Psych Engine.
+* Fixes many problems with base Psych Engine.
 
 ## Other Credits:
-* P-Slice: For giving us some references to use/put into this engine (no code was taken besides imports that are left behind)
 * OS Engine: For underlay transparency code under notes playfield.
-* Sick Coders + Slushi Engine: For NotITG(Modchart editor), Gamejolt, and Voiid Chronicles additions code/features.
+* Sick Coders + Slushi Engine: Gamejolt, and Voiid Chronicles additions code/features.
 * Moon's Modded Psych Engine: For characters showing in the chart editor.
 * Fps Plus: For lil buddies in the chart editor. (We made them work with sustain notes!)
-* Js Engine (sadly): For extra options in chart editor like clearing player or opponent sides (but for Psych 1.0).
+* Js Engine (sadly): For extra options in chart editor like clearing player or opponent sides (but for Psych 1.0), Rendering Additions (ffmpeg stuff).
 * Psych Engine: For the amazing Pull Requests that ShadowMario ignores or doesn't want to add that is missing on Psych Engine itself!

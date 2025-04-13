@@ -144,6 +144,7 @@
 	<haxedef name="FM_ENGINE" value="PSYCH"/>
 	<haxedef name="FM_ENGINE_VERSION" value="1.0"/>
 	<haxelib name="FunkinModchart" />
+	<haxeflag name="--macro" value="modchart.core.macros.Macro.includeFiles()"/>
 
 	<haxelib name="hxgamejolt-api"/>
 	

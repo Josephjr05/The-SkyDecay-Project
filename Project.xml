@@ -74,6 +74,8 @@
 	<assets path="assets/shared/songs"         exclude="*.mp3" unless="web"/>
 	<assets path="assets/week_assets"   rename="assets" exclude="*.ogg" if="web"/>
 	<assets path="assets/week_assets"   rename="assets" exclude="*.mp3" unless="web"/>
+	<assets path="renders" exclude="*.ogg" if="web"/>
+	<assets path="renders" exclude="*.mp3" unless="web"/>
 	<assets path="assets/shared/images/models"        library="models"        exclude="*.mtl" if="web"/> 
 	<assets path="assets/shared/images/models"        library="models"        exclude="*.obj" if="web"/>
 	<section if="TITLE_SCREEN_EASTER_EGG">
@@ -111,7 +113,7 @@
 	<!-- _______________________________ Libraries ______________________________ -->
 
 	<haxelib name="flixel" version="5.8.0"/>
-	<haxelib name="flixel-addons" version="3.2.3"/>
+	<haxelib name="flixel-addons" version="3.3.2"/>
 	<haxelib name="tjson" version="1.4.0"/>
 
 	<!-- why doesn't this work? idk but fuck u-->
@@ -144,7 +146,7 @@
 	<haxedef name="FM_ENGINE" value="PSYCH"/>
 	<haxedef name="FM_ENGINE_VERSION" value="1.0"/>
 	<haxelib name="FunkinModchart" />
-	<haxeflag name="--macro" value="modchart.core.macros.Macro.includeFiles()"/>
+	<haxeflag name="--macro" value="modchart.backend.macros.Macro.includeFiles()"/>
 
 	<haxelib name="hxgamejolt-api"/>
 	

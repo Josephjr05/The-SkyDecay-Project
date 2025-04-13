@@ -1,7 +1,7 @@
 package uh;
 
 import openfl.filters.BitmapFilter;
-import flixel.system.FlxSound;
+import flixel.sound.FlxSound;
 import flixel.util.FlxSort;
 import flixel.graphics.FlxGraphic;
 import openfl.display.BitmapData;

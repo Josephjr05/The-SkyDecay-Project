@@ -4,6 +4,7 @@
 ![1000036631](https://github.com/user-attachments/assets/bcd2da72-1bb8-419c-b68f-321fa9ee0f5b)
 
 A very heavy fork and overhaul of FNF - Psych Engine. Aiming to actually, and LITERALLY have everything an engine should have/need. That uses other rhythm games's systems and settings to make FNF a completely different, and original ideal game! As of now, SkyDecay Engine is only used for The SkyDecay Project (https://gamebanana.com/wips/68022) by Josephjr05 (Creator of the engine).
+THIS ENGINE WILL ONLY UPDATE WHEN SDYPJ UPDATES THE ENGINE SO EVERYTHING IS CARRIED OVER ON BOTH ENDS PROPERLY!
 
 ## Funkin Modchart Documents:
 [Funkin Modchart](https://github.com/TheoDevelops/FunkinModchart/blob/main/DOC.md) 

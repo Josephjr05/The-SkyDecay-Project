@@ -196,7 +196,7 @@ class PlayState extends MusicBeatState
 	public var timeBar:Bar;
 	var songPercent:Float = 0;
 
-	public var ratingsData:Array<Rating>;
+	public var ratingsData:Array<Rating> = Rating.loadDefault();
 
 	private var generatedMusic:Bool = false;
 	public var endingSong:Bool = false;

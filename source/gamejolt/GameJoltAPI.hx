@@ -19,8 +19,8 @@ class GameJoltAPI // Connects to hxgamejolt.GameJolt
    * Tells you if the GameJolt info about your game is available or not.
    * @return Is it available?
    */
-  public static function hasGameInfo():Bool
-    return GJKeys.id != 0 && GJKeys.key.length > 0;
+  // public static function hasGameInfo():Bool
+    // return GJKeys.id != 0 && GJKeys.key.length > 0;
 
   /**
    * Inline variable to see if the user has logged in.
@@ -54,7 +54,7 @@ class GameJoltAPI // Connects to hxgamejolt.GameJolt
    */
   public inline static function connect()
   {
-    GJApi.init(Std.string(GJKeys.id), Std.string(GJKeys.key));
+    // GJApi.init(Std.string(GJKeys.id), Std.string(GJKeys.key));
   }
 
   /**

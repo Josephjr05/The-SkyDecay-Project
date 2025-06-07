@@ -1,5 +1,6 @@
 package backend;
 
+import backend.window.CppAPI;
 import flixel.FlxState;
 import backend.PsychCamera;
 
@@ -14,6 +15,9 @@ class MusicBeatState extends FlxState
 	private var curDecStep:Float = 0;
 	private var curDecBeat:Float = 0;
 	public var controls(get, never):Controls;
+
+	public static var firstRun:Bool = true;
+	public static var emergencyOpacityFix:Bool = false;
 	private function get_controls()
 	{
 		return Controls.instance;
@@ -31,7 +35,27 @@ class MusicBeatState extends FlxState
 
 		if(!_psychCameraInitialized) initPsychCamera();
 
-		// super.create();
+		super.create();
+
+		// if (backend.window.CppAPI.getWindowOpacity()!=1)
+		#if windows
+
+		if (firstRun) {
+			FlxTween.num(0, 1, 0.5, {
+				ease: FlxEase.sineInOut,
+				onComplete: function(tween:FlxTween)
+				{
+					#if cpp
+					backend.window.CppAPI.setWindowOpacity(1);
+					#end
+					firstRun = false;
+				}
+			}, function(num)
+			{
+				CppAPI.setWindowOpacity(num);
+			});
+		}
+		#end
 
 		if(!skip) {
 			openSubState(new CustomFadeTransition(0.5, true));
@@ -53,6 +77,11 @@ class MusicBeatState extends FlxState
 	public static var timePassedOnState:Float = 0;
 	override function update(elapsed:Float)
 	{
+		if (emergencyOpacityFix) {
+			CppAPI.setWindowOppacity(1);
+			emergencyOpacityFix = false;
+		}
+		
 		//everyStep();
 		var oldStep:Int = curStep;
 		timePassedOnState += elapsed;

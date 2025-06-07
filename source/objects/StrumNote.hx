@@ -20,12 +20,13 @@ class StrumNote extends FlxSprite
 
 	private var _dirSin:Float;
 	private var _dirCos:Float;
+	var mathPi:Float = 0.01745329251;
 
 	private function set_direction(_fDir:Float):Float
 	{
-		// 0.01745329251 = Math.PI / 180
-		_dirSin = Math.sin(_fDir * 0.01745329251);
-		_dirCos = Math.cos(_fDir * 0.01745329251);
+		var mathPiYes = mathPi + Math.PI / 180; // uses mathPi cause numbers originally didn't assign so it's a var
+		_dirSin = Math.sin(_fDir * mathPi);
+		_dirCos = Math.cos(_fDir * mathPi);
 
 		return direction = _fDir;
 	}
@@ -166,6 +167,8 @@ class StrumNote extends FlxSprite
 	}
 
 	override function update(elapsed:Float) {
+		if (ClientPrefs.data.ffmpegMode) elapsed = 1 / ClientPrefs.data.targetFPS;
+
 		if(resetAnim > 0) {
 			resetAnim -= elapsed;
 			if(resetAnim <= 0) {

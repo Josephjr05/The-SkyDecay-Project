@@ -35,6 +35,43 @@ class CoolUtil
 		return version;
 	}
 
+	public static function formatTime(musicTime:Float, precision:Int = 0):String
+	{
+		var secs:String = '' + Math.floor(musicTime / 1000) % 60;
+		var mins:String = "" + Math.floor(musicTime / 1000 / 60) % 60;
+		var hour:String = '' + Math.floor((musicTime / 1000 / 3600)) % 24;
+		var days:String = '' + Math.floor((musicTime / 1000 / 86400)) % 7;
+		var weeks:String = '' + Math.floor((musicTime / 1000 / (86400 * 7)));
+
+		if (secs.length < 2)
+			secs = '0' + secs;
+
+		var shit:String = mins + ":" + secs;
+		if (hour != "0" && days == '0'){
+			if (mins.length < 2) mins = "0"+ mins;
+			shit = hour+":"+mins + ":" + secs;
+		}
+		if (days != "0" && weeks == '0'){
+			shit = days + 'd ' + hour + 'h ' + mins + "m " + secs + 's';
+		}
+		if (weeks != "0"){
+			shit = weeks + 'w ' + days + 'd ' + hour + 'h ' + mins + "m " + secs + 's';
+		}
+		if (precision > 0)
+		{
+			var secondsForMS:Float = (musicTime / 1000) % 60;
+			var seconds:Int = Std.int((secondsForMS - Std.int(secondsForMS)) * Math.pow(10, precision));
+			shit += ".";
+			if (precision > 1 && Std.string(seconds).length < precision)
+			{
+				var zerosToAdd:Int = precision - Std.string(seconds).length;
+				for (i in 0...zerosToAdd) shit += '0';
+			}
+			shit += seconds;
+		}
+		return shit;
+	}
+
 	inline public static function boundTo(value:Float, min:Float, max:Float):Float { // screw you Lycranoc i had to add this so many times!!
 		var newValue:Float = value;
 		if(newValue < min) newValue = min;

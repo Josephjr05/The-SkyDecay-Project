@@ -287,6 +287,9 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 
 	var currentPlayer1Chosen = null;
 
+	var odStepper:PsychUINumericStepper;
+	var hpStepper:PsychUINumericStepper;
+
 	public static var instance:ChartingState;
 
 	override function create()
@@ -419,7 +422,6 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		timeLine = new FlxSprite(gridBg.x, 0).makeGraphic(1, 1, FlxColor.WHITE);
 		timeLine.setGraphicSize(Std.int(gridBg.width), 4);
 		timeLine.updateHitbox();
-		timeLine.screenCenter(Y);
 		timeLine.scrollFactor.set();
 		add(timeLine);
 		
@@ -679,7 +681,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, keyUp);
 	}
 
-	function setReverseScroll(enabled:Bool) {
+	function setReverseScroll(enabled:Bool) { // this sets the neccessary things for ReverseScroll. That also includes the button cause it doesn't update when you normally update it.
 		reverseScroll = enabled;
 		reverseScrollEnabled = enabled;
 
@@ -699,9 +701,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			
 			positionNoteYOnTime(note, secNum);
 
-			if(note.hasSustain) {
-				note.updateSustainToZoom(cachedSectionCrochets[secNum] / 4, curZoom);
-			}
+			note.updateSustainToZoom(cachedSectionCrochets[secNum] / 4, curZoom, reverseScroll);
 		}
 		
 		for(event in events) {
@@ -726,28 +726,23 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			updateWaveform();
 		}
 
-		loadSection(curSec);
+		if (timeLine != null) {
+			var centerTimelineY = (FlxG.height / 2) - (timeLine.height / 2); // equivalent to timeLine.screenCenter(Y) that was originally used for Base/Upscroll chart editor.
+			var verticalOffset:Float = 0;
+	
+			if (reverseScroll) { // i was hoping to maybe flip the grids so this isn't needed but it doesn't work that way so here it is.
+				verticalOffset = 40;
+			} else { // no offset for UpScroll ofc
+				verticalOffset = 0;
+			}
+			timeLine.y = centerTimelineY + verticalOffset;
+		}
 
-		sustainsReverseScroll();
+		loadSection(curSec);
 
 		softReloadNotes();
 		
 		updateScrollY();
-	}
-	
-	function sustainsReverseScroll() 
-	{
-		for (note in notes) {
-			if (note == null || !note.hasSustain) continue;
-			
-			var secNum = 0;
-			for (i in 1...cachedSectionTimes.length) {
-				if (cachedSectionTimes[i] > note.strumTime) break;
-				secNum++;
-			}
-			
-			note.updateSustainToZoom(cachedSectionCrochets[secNum] / 4, curZoom);
-		}
 	}
 	
 	var gridColors:Array<FlxColor>;
@@ -940,6 +935,8 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			format: 'skydecay_beta',
 			needsVoices: true,
 			
+			overallDifficulty: 5, // default overall difficulty
+			hpDrainRate: 5, // default hp drain rate
 			speed: 2.8, // recommended scroll speeds is 2.6-3.4
 			bpm: 0,
 			offset: 0,
@@ -977,6 +974,8 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		allowVocalsCheckBox.checked = (PlayState.SONG.needsVoices != false); //If the song for some reason does not have this value, it will be set to true
 
 		bpmStepper.value = PlayState.SONG.bpm;
+		odStepper.value = PlayState.SONG.overallDifficulty != null ? PlayState.SONG.overallDifficulty : 5; // default overall difficulty
+		hpStepper.value = PlayState.SONG.hpDrainRate != null ? PlayState.SONG.hpDrainRate : 5; // default hp drain rate	
 		scrollSpeedStepper.value = PlayState.SONG.speed;
 		audioOffsetStepper.value = Reflect.hasField(PlayState.SONG, 'offset') ? PlayState.SONG.offset : 0;
 		Conductor.offset = audioOffsetStepper.value;
@@ -1033,6 +1032,8 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	var lastBeatHit:Int = 0;
 	override function update(elapsed:Float)
 	{
+		if (ClientPrefs.data.ffmpegMode) elapsed = 1 / ClientPrefs.data.targetFPS;
+
 		vortexInput = false;
 		if(!fileDialog.completed)
 		{
@@ -1526,7 +1527,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 							curSectionTime = cachedSectionTimes[noteSec];
 						}
 						positionNoteYOnTime(note, noteSec);
-						note.updateSustainToZoom(cachedSectionCrochets[noteSec] / 4, curZoom);
+						note.updateSustainToZoom(cachedSectionCrochets[noteSec] / 4, curZoom, reverseScroll);
 					}
 	
 					for (event in events)
@@ -1695,7 +1696,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 						
 						note.setStrumTime(Math.max(-5000, note.strumTime + timeChange));
 						positionNoteYOnTime(note, curSecRow);
-						note.updateSustainToZoom(cachedSectionCrochets[curSecRow] / 4, curZoom);
+						note.updateSustainToZoom(cachedSectionCrochets[curSecRow] / 4, curZoom, reverseScroll);
 						if(note.isEvent) cast (note, EventMetaNote).updateEventText();
 					}
 					movingNotesLastY = dummyArrow.y;
@@ -2805,7 +2806,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				var secNum:Int = curSec;
 				positionNoteYOnTime(note, secNum);
 				
-				if(note.hasSustain) note.updateSustainToZoom(cachedSectionCrochets[curSec] / 4, curZoom);
+				if(note.hasSustain) note.updateSustainToZoom(cachedSectionCrochets[curSec] / 4, curZoom, reverseScroll);
 				firstNote = true;
 			}
 		}
@@ -2853,7 +2854,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 							positionNoteYOnTime(note, curSec-1);
 						}
 						
-						if(note.hasSustain) note.updateSustainToZoom(cachedSectionCrochets[curSec-1] / 4, curZoom);
+						if(note.hasSustain) note.updateSustainToZoom(cachedSectionCrochets[curSec-1] / 4, curZoom, reverseScroll);
 					}
 				}
 	
@@ -2911,7 +2912,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 							positionNoteYOnTime(note, curSec+1);
 						}
 						
-						if(note.hasSustain) note.updateSustainToZoom(cachedSectionCrochets[curSec+1] / 4, curZoom);
+						if(note.hasSustain) note.updateSustainToZoom(cachedSectionCrochets[curSec+1] / 4, curZoom, reverseScroll);
 					}
 				}
 	
@@ -3063,7 +3064,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		var objX = 10;
 		var objY = 10;
 
-		var txt = new FlxText(objX, objY, 280, "SDPJ Mania charts are converted. They're meant to not be snapped and have improper BPM placements!"); // Osu to FNF is fucking horrible but wtv it feels good
+		var txt = new FlxText(objX, objY, 280, "SDYPJ Mania charts are converted. They're meant to not be snapped and have improper BPM placements!"); // Osu to FNF is fucking horrible but wtv it feels good
 		txt.alignment = CENTER;
 		tab_group.add(txt);
 
@@ -4016,6 +4017,22 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			Conductor.offset = audioOffsetStepper.value;
 			updateWaveform();
 		};
+
+		objY += 40;
+		odStepper = new PsychUINumericStepper(objX, objY, 0.1, 5, 0, 10, 1); // OD 0-10, default 5
+		odStepper.onValueChange = function() {
+			if (PlayState.SONG != null) PlayState.SONG.overallDifficulty = odStepper.value;
+		};
+	
+		hpStepper = new PsychUINumericStepper(objX + 150, objY, 0.1, 5, 0, 10, 1); // HP 0-10, default 5
+		hpStepper.onValueChange = function() {
+			if (PlayState.SONG != null) PlayState.SONG.hpDrainRate = hpStepper.value;
+		};
+
+		tab_group.add(new FlxText(odStepper.x, odStepper.y - 15, 100, 'Overall Difficulty:'));
+		tab_group.add(new FlxText(hpStepper.x, hpStepper.y - 15, 100, 'HP Drain Rate:'));
+		tab_group.add(odStepper);
+		tab_group.add(hpStepper);
 
 		tab_group.add(new FlxText(songNameInputText.x, songNameInputText.y - 15, 80, 'Song Name:'));
 		tab_group.add(songNameInputText);
@@ -5931,7 +5948,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				note.setStrumTime(FlxMath.bound(note.strumTime, curSectionTime, nextSectionTime));
 
 			positionNoteYOnTime(note, noteSec);
-			note.updateSustainToStepCrochet(cachedSectionCrochets[noteSec] / 4);
+			note.updateSustainToStepCrochet(cachedSectionCrochets[noteSec] / 4, reverseScroll);
 		}
 		
 		for (event in events)

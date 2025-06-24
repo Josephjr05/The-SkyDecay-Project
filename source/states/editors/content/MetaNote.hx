@@ -3,7 +3,6 @@ package states.editors.content;
 import objects.Note;
 import shaders.RGBPalette;
 import flixel.util.FlxDestroyUtil;
-import flixel.math.FlxPoint;
 
 class MetaNote extends Note
 {
@@ -15,8 +14,6 @@ class MetaNote extends Note
 	public var chartNoteData:Int = 0;
 	public var sustainHeight:Float = 0;
 	public var reverseScroll:Bool;
-	// or idk what's the difference, public var reverseScroll = ChartingState.instance.reverseScroll;
-	// all solutions i found will be commented  (that still break on Upscroll)
 
 	public function new(time:Float, data:Int, songData:Array<Dynamic>)
 	{
@@ -79,7 +76,6 @@ class MetaNote extends Note
 				sustainSprite = new EditorSustain(noteData); //new FlxSprite().makeGraphic(1, 1, FlxColor.WHITE);
 				sustainSprite.scrollFactor.x = 0;
 			}
-			// sustainSprite.reverseScroll = this.reverseScroll; 
 			sustainSprite.sustainHeight = Math.max(ChartingState.GRID_SIZE/4, (Math.round((v * ChartingState.GRID_SIZE + ChartingState.GRID_SIZE) / stepCrochet) * zoom) - ChartingState.GRID_SIZE/2);
 			sustainSprite.updateHitbox();
 		}
@@ -88,13 +84,13 @@ class MetaNote extends Note
 	public var hasSustain(get, never):Bool;
 	function get_hasSustain() return (!isEvent && sustainLength > 0);
 
-	public function updateSustainToZoom(stepCrochet:Float, zoom:Float = 1)
+	public function updateSustainToZoom(stepCrochet:Float, zoom:Float = 1, reverseScroll:Bool)
 	{
-		if(_lastZoom == zoom) return;
+		if(_lastZoom == zoom && this.reverseScroll == reverseScroll) return;
 		setSustainLength(sustainLength, stepCrochet, zoom, reverseScroll);
 	}
 
-	public function updateSustainToStepCrochet(stepCrochet:Float)
+	public function updateSustainToStepCrochet(stepCrochet:Float, reverseScroll:Bool)
 	{
 		if(_lastZoom < 0) return;
 		setSustainLength(sustainLength, stepCrochet, _lastZoom, reverseScroll);
@@ -122,9 +118,6 @@ class MetaNote extends Note
 		return (_noteTypeText = txt);
 	}
 
-	// function draw, i put sustainSprite.reverseScroll = this.reverseScroll ; and then flip the sustainSprite.y for reverseScroll with - sustainHeight like this:
-		// sustainSprite.y = this.y + this.height/2 - sustainSprite.sustainHeight;
-	// sometimes using - could work on this.height or the numbers but it still breaks.
 	override function draw()
 	{
 		if(sustainSprite != null && sustainSprite.exists && sustainSprite.visible && sustainLength > 0)
@@ -134,7 +127,15 @@ class MetaNote extends Note
 			sustainSprite.scale.copyFrom(this.scale);
 			sustainSprite.updateHitbox();
 			sustainSprite.x = this.x + (this.width - sustainSprite.width)/2;
-			sustainSprite.y = this.y + this.height/2;
+		
+			if (this.reverseScroll) {
+				sustainSprite.y = (this.y + this.height/2 - sustainSprite.sustainHeight) - sustainSprite.sustainHeight;
+			} else {
+				sustainSprite.y = this.y + this.height/2;
+			}
+		
+			sustainSprite.reverseScroll = this.reverseScroll;
+	
 			sustainSprite.alpha = this.alpha;
 			sustainSprite.draw();
 		}
@@ -171,21 +172,11 @@ class EditorSustain extends Note {
 		animation.play(Note.colArray[noteData] + 'holdend');
 		scale.set(scale.x, scale.x);
 		updateHitbox();
-		flipY = false;
 	}
 	override function update(elapsed:Float) {
 		sustainTile.update(elapsed);
 		super.update(elapsed);
 	}
-	// this is what pisses me off.
-	// so y += sustainHeight and y -= sustainHeight are actually what flips the sustainTile downwards.
-	// If you were to take out those lines, they'd flip upwards on reverseScroll. But sadly breaks it for upscroll.
-	// i've done flipY on sustainTile, doesn't really make a difference.
-	// I've made functions to separate the logic for drawing the sustain tile, but it still breaks on reverseScroll.
-	// I've also tried separate classes for upscroll and downscroll, but it still breaks on reverseScroll.
-	// So it's something to do with super.draw and how it handles the y position of the note itself in relation to the sustain tile.
-	// If we can figure out a way to make it so super.draw can draw separately without breaking on reverseScroll, that would be great.
-	// OH also, i have tried making a another sustainTile sprite under a different name. Did NOT work.
 	override function draw() {
 		if (!visible) return;
 
@@ -195,12 +186,22 @@ class EditorSustain extends Note {
 		sustainTile.scale.y = sustainHeight;
 		sustainTile.updateHitbox();
 		sustainTile.alpha = this.alpha;
-		sustainTile.setPosition(this.x, this.y - sustainHeight);
-		sustainTile.draw();
 
-		y += sustainHeight;
-		super.draw();
-		y -= sustainHeight;
+		if (this.reverseScroll) {
+			sustainTile.setPosition(this.x, this.y - 2); // nothing will work if you use sustainHeight BECAUSE sustainHeight is used at MetaNote class for Upscroll, so just offset it.
+			sustainTile.draw();
+			this.flipY = true; // flips holdend
+			this.y += sustainHeight - 18; // since we can't properly get the holdend to go at the end of the sustainTile, just offset it simply.
+			super.draw();
+			this.y -= sustainHeight; // there is a cutoff at the end of the holdend just SLIGHTLY on "+=18". Idk how to fix it but just keep this code for now.
+		} else {
+			sustainTile.setPosition(this.x, this.y - sustainHeight); // leave on default for Upscroll ofcourse
+			sustainTile.draw();
+			this.flipY = false;
+			y += sustainHeight;
+			super.draw();
+			y -= sustainHeight;
+		}
 	}
 
 	public function reloadSustainTile() {

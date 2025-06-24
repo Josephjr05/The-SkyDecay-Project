@@ -22,6 +22,8 @@ typedef SwagSong =
 	var format:String;
 	var needsVoices:Bool;
 
+	@:optional var overallDifficulty:Float; // Added OD
+    @:optional var hpDrainRate:Float; // Added HP
 	var speed:Float;
 	var bpm:Float;
 	var offset:Float;
@@ -69,6 +71,8 @@ class Song
 	public var needsVoices:Bool = true;
 	public var speed:Float = 2.8;
 	public var bpm:Float;
+	public var overallDifficulty:Float; // Added OD
+    public var hpDrainRate:Float; // Added HP
 	public var arrowSkin:String;
 	public var splashSkin:String;
 	public var gameOverChar:String;

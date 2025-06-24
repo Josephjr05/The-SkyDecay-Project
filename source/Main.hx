@@ -86,11 +86,13 @@ class Main extends Sprite
 	{
 		super();
 
-		#if (cpp && windows)
-		backend.Native.fixScaling();
-		backend.Native.setWindowDarkMode(true, true);
+		#if windows
+		backend.window.CppAPI._setWindowLayered();
+		backend.window.CppAPI.darkMode();
+		backend.window.CppAPI.allowHighDPI();
+		backend.window.CppAPI.setOld();
 		#end
-
+		
 		// Credits to MAJigsaw77 (he's the og author for this code)
 		#if android
 		Sys.setCwd(Path.addTrailingSlash(Context.getExternalFilesDir()));
@@ -270,11 +272,6 @@ class Main extends Sprite
 			if (FlxG.game != null)
 			resetSpriteCache(FlxG.game);
 		});
-
-		/* #if cpp
-		CppAPI.darkMode();
-		CppAPI.allowHighDPI();
-		#end */
 	}
 
 	static function resetSpriteCache(sprite:Sprite):Void {

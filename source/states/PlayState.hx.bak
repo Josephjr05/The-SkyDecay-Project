@@ -59,7 +59,7 @@ import crowplexus.hscript.Printer;
 
 // sdy engine imports
 import objects.Note;
-import objects.SustainSplash;
+// import objects.SustainSplash;
 import flixel.util.FlxAxes; // for label
 import backend.PsychCamera;
 import states.OsuFreeplayState;
@@ -176,7 +176,7 @@ class PlayState extends MusicBeatState
 	public var strumLineNotes:FlxTypedGroup<StrumNote> = new FlxTypedGroup<StrumNote>();
 	public var opponentStrums:FlxTypedGroup<StrumNote> = new FlxTypedGroup<StrumNote>();
 	public var playerStrums:FlxTypedGroup<StrumNote> = new FlxTypedGroup<StrumNote>();
-	public var grpHoldSplashes:FlxTypedGroup<SustainSplash>; // sustain splash SkyDecay Engine 
+	// public var grpHoldSplashes:FlxTypedGroup<SustainSplash> = new FlxTypedGroup<SustainSplash>(); // sustain splash SkyDecay Engine 
 	public var grpNoteSplashes:FlxTypedGroup<NoteSplash> = new FlxTypedGroup<NoteSplash>();
 
 	public var camZooming:Bool = false;
@@ -279,9 +279,6 @@ class PlayState extends MusicBeatState
 	private static var _lastLoadedModDirectory:String = '';
 	public static var nextReloadAll:Bool = false;
 
-	//Add this before function create() (For Psych 0.7.1+)
-		var backupGpu:Bool;
-
 	// SkyDecay Engine variables
 
 		// nps shows on score txt and results screen
@@ -291,10 +288,6 @@ class PlayState extends MusicBeatState
 
 		// for tweens
 		var varTween:FlxTween;
-
-		//erm
-		static var capture:Screenshot = new Screenshot();
-		public var frameCaptured:Int = 0;
 	
 		// every 100 combo shits
 		private var lastCombo:Int = 0; // To track when GF cheered last
@@ -433,7 +426,7 @@ class PlayState extends MusicBeatState
 
 		FlxG.cameras.add(camHUD, false);
 		FlxG.cameras.add(camOther, false);
-		grpHoldSplashes = new FlxTypedGroup<SustainSplash>(); // For somereason Js engine lets the player set a max limit. I really hate you js. I'm watching you..
+		// grpHoldSplashes = new FlxTypedGroup<SustainSplash>(); // For somereason Js engine lets the player set a max limit. I really hate you js. I'm watching you..
 		grpNoteSplashes = new FlxTypedGroup<NoteSplash>();
 
 		persistentUpdate = true;
@@ -679,7 +672,6 @@ class PlayState extends MusicBeatState
 		uiGroup.add(timeBar);
 		uiGroup.add(timeTxt);
 
-		strumLineNotes = new FlxTypedGroup<StrumNote>();
 		noteGroup.add(strumLineNotes);
 
 		if(ClientPrefs.data.timeBarType == 'Song Name')
@@ -692,13 +684,13 @@ class PlayState extends MusicBeatState
 		grpNoteSplashes.add(splash);
 		splash.alpha = 0.0001; //cant make it invisible or it won't allow precaching
 
-		SustainSplash.startCrochet = Conductor.stepCrochet;
-		SustainSplash.frameRate = Math.floor(24 / 100 * SONG.bpm);
-		SustainSplash.isPixelStage = isPixelStage;
-		var splash:SustainSplash = new SustainSplash();
-		grpHoldSplashes.add(splash);
-		initNoteSplashPool(30); // 30 is the default pool size for note splashes, can be changed in settings
-		splash.alpha = 0.0001;
+		// SustainSplash.startCrochet = Conductor.stepCrochet;
+		// SustainSplash.frameRate = Math.floor(24 / 100 * SONG.bpm);
+		// SustainSplash.isPixelStage = isPixelStage;
+		// var splash:SustainSplash = new SustainSplash();
+		// grpHoldSplashes.add(splash);
+		// initNoteSplashPool(30); // 30 is the default pool size for note splashes, can be changed in settings
+		// splash.alpha = 0.0001;
 
 		opponentStrums = new FlxTypedGroup<StrumNote>();
 		playerStrums = new FlxTypedGroup<StrumNote>();
@@ -760,7 +752,7 @@ class PlayState extends MusicBeatState
 		var scaledOkWin = Math.max(scaledGoodWin + 1, baseOkWin - (okScaleFactor * odDifference));
 		var scaledMehWin = Math.max(scaledOkWin + 1, baseMissWin - (mehScaleFactor * odDifference));
 		var scaledMissWin = Math.max(scaledMehWin + 1, baseMissWin - (missScaleFactor * odDifference));
-		
+	
         var ratingPerfect = new Rating('perfect');
         ratingPerfect.ratingMod = 1.0;
         ratingPerfect.score = 320;
@@ -803,7 +795,7 @@ class PlayState extends MusicBeatState
         trace('Judgement windows ( +/- ms) set by OD ${chartOD}: Perfect/Crazy=${scaledPerfectWin}, Great/Sick=${scaledGreatWin}, Good/Good=${scaledGoodWin}, Ok/Bad=${scaledOkWin}, Meh/Shit=${scaledMehWin}');
         trace('Safe Zone Offset set to: ${Conductor.safeZoneOffset}ms (based on scaled miss window: ${scaledMissWin}ms)'); // reminder that this is for hitting too early that gives you a shit. This is accurate.
 		
-		noteGroup.add(grpHoldSplashes);
+		//noteGroup.add(grpHoldSplashes);
 		noteGroup.add(grpNoteSplashes);
 
 		camFollow = new FlxObject();
@@ -978,7 +970,7 @@ class PlayState extends MusicBeatState
 	}
 
 	private var gcCounter:Float = 0;
-	private static inline final GC_FREQUENCY:Float = 35;
+	private static inline final GC_FREQUENCY:Float = 70.0; // 70 seconds between garbage collections
 	private function manageGarbageCollection(elapsed:Float):Void {
 	    gcCounter += elapsed;
 	    if (gcCounter >= GC_FREQUENCY) {
@@ -991,22 +983,22 @@ class PlayState extends MusicBeatState
     	strumMidpointY = getStrumMidpoint(Y);
 	}
 
-	private function initNoteSplashPool(size:Int = 30):Void {
+	/* private function initNoteSplashPool(size:Int = 30):Void {
 		for (i in 0...size) {
 			var splash = new NoteSplash();
 			splash.alpha = 0.0001;
 			grpNoteSplashes.add(splash);
 		}
-	}
+	} */
 
-	function initNumScorePool(size:Int = 20):Void {
+	/* function initNumScorePool(size:Int = 20):Void {
     	for (i in 0...size) {
     	    var spr = new FlxSprite();
     	    spr.alpha = 0.0001;
     	    comboGroup.add(spr);
     	    numScorePool.push(spr);
     	}
- 	}
+ 	} */
 
 	function boxTween()
 	{
@@ -1534,7 +1526,7 @@ class PlayState extends MusicBeatState
 		notePool.push(note);
 
 		// If it's a sustain head, recycle its tails
-		if (note.isSustainNote && note.parent == null)
+		/* if (note.isSustainNote && note.parent == null)
 		{
 			for (tail in note.tail)
 			{
@@ -1544,7 +1536,7 @@ class PlayState extends MusicBeatState
 				tail.kill();
 				notePool.push(tail);
 			}
-		}
+		} */
 	}
 
 	function recycleStrum(strum:StrumNote):Void
@@ -2228,6 +2220,8 @@ class PlayState extends MusicBeatState
 
 		super.update(elapsed);
 
+		var songPos:Float = Conductor.songPosition;
+		if (songPos < 0) songPos = 0; // Prevents negative
 		for (note in notes) {
 			if (!note.alive) continue;
 		
@@ -2495,8 +2489,6 @@ class PlayState extends MusicBeatState
 				npsCheck = nps;			  
 			}
 		}
-
-		clearNotesBefore(Conductor.songPosition - 2000);
 
 		setOnScripts('cameraX', camFollow.x);
 		setOnScripts('cameraY', camFollow.y);
@@ -3405,7 +3397,6 @@ class PlayState extends MusicBeatState
 					canResync = false;
 					MusicBeatState.switchState(new StoryMenuState());
 
-					// if ()
 					if(!ClientPrefs.getGameplaySetting('practice') && !ClientPrefs.getGameplaySetting('botplay')) {
 						StoryMenuState.weekCompleted.set(WeekData.weeksList[storyWeek], true);
 						Highscore.saveWeekScore(WeekData.getWeekFileName(), campaignScore, storyDifficulty);
@@ -3489,9 +3480,9 @@ class PlayState extends MusicBeatState
 		if (ratingsData == null || ratingsData.length == 0) {
 			trace("Error: cachePopUpScore called before ratingsData was ready!");
 			// Optionally, try loading default ratings as a fallback?
-			ratingsData = Rating.loadDefault();
+			// ratingsData = Rating.loadDefault();
 			if (ratingsData == null || ratingsData.length == 0) return;
-			return; // Exit if not ready
+			return;
 		}
 
 		var uiFolder:String = "setUI/"; // organizes the combo and ready set go files PLEASE LOAD GOD DAMN
@@ -3879,10 +3870,10 @@ class PlayState extends MusicBeatState
 				invalidateNote(note);
 		});
 
-		final end:Note = daNote.isSustainNote ? daNote.parent.tail[daNote.parent.tail.length - 1] : daNote.tail[daNote.tail.length - 1];
+		/* final end:Note = daNote.isSustainNote ? daNote.parent.tail[daNote.parent.tail.length - 1] : daNote.tail[daNote.tail.length - 1];
 		if (end != null && end.extraData['holdSplash'] != null) {
 			end.extraData['holdSplash'].visible = false;
-		}
+		} */
 
 		if (health > 0.2 && !practiceMode && !cpuControlled) // Only trigger if health is sufficient and not in practice/botplay
 		{
@@ -4037,7 +4028,7 @@ class PlayState extends MusicBeatState
 		strumPlayAnim(true, Std.int(Math.abs(note.noteData)), Conductor.stepCrochet * 1.25 / 1000 / playbackRate);
 		note.hitByOpponent = true;
 
-		spawnHoldSplashOnNote(note);
+		// spawnHoldSplashOnNote(note);
 		
 		stagesFunc(function(stage:BaseStage) stage.opponentNoteHit(note));
 		var result:Dynamic = callOnLuas('opponentNoteHit', [notes.members.indexOf(note), Math.abs(note.noteData), note.noteType, note.isSustainNote]);
@@ -4155,7 +4146,7 @@ class PlayState extends MusicBeatState
 			else strumPlayAnim(false, Std.int(Math.abs(note.noteData)), Conductor.stepCrochet * 1.25 / 1000 / playbackRate);
 			vocals.volume = 1;
 
-			spawnHoldSplashOnNote(note);
+			// spawnHoldSplashOnNote(note);
 			recycleNote(note);
 			if (!note.isSustainNote)
 			{
@@ -4207,7 +4198,7 @@ class PlayState extends MusicBeatState
 		notePool.push(note);
 	}
 
-	public function spawnHoldSplashOnNote(note:Note) {
+	/* public function spawnHoldSplashOnNote(note:Note) {
 		if (!note.isSustainNote && note.tail.length != 0 && note.tail[note.tail.length - 1].extraData['holdSplash'] == null) {
 			spawnHoldSplash(note);
 		} else if (note.isSustainNote) {
@@ -4228,7 +4219,7 @@ class PlayState extends MusicBeatState
 		var splash:SustainSplash = grpHoldSplashes.recycle(SustainSplash);
 		splash.setupSusSplash(strumLineNotes.members[end.noteData + (end.mustPress ? 4 : 0)], end, playbackRate);
 		grpHoldSplashes.add(splash);
-	}
+	} */
 
 	public function spawnNoteSplashOnNote(note:Note) {
 		if(note != null) {
@@ -4238,7 +4229,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	public function spawnNoteSplash(note:Note, strum:StrumNote) {
+	public function spawnNoteSplash(x:Float = 0, y:Float = 0, ?data:Int = 0, ?note:Note, ?strum:StrumNote) {
 		var splash:NoteSplash;
 		if (noteSplashPool.length > 0)
 		{
@@ -4250,10 +4241,10 @@ class PlayState extends MusicBeatState
 			splash = new NoteSplash();
 		}
 
-		splash.setupSplash(note.noteData, note.noteSplashData); // Optional setup method if you have one
+		splash.setupSplash(note.noteData, note.noteSplashData);
 
 		splash.babyArrow = strum;
-		splash.spawnSplashNote(note);
+		splash.spawnSplashNote(x, y, data, note);
 		grpNoteSplashes.add(splash);
 	}
 
@@ -4776,8 +4767,6 @@ class PlayState extends MusicBeatState
 		#end
 		return false;
 	}
-
-	public static var process:Process;
 
 	function checkForResync() {
 		if (endingSong || paused || shutdownThread) return;

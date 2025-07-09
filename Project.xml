@@ -15,6 +15,11 @@
 	<!-- <app preloader="Preloader" resizable="true" /> -->
 	<app preloader="flixel.system.FlxPreloader" />
 
+	<!--Minimum without FLX_NO_GAMEPAD: 11.8, without FLX_NO_NATIVE_CURSOR: 11.2-->
+	<set name="SWF_VERSION" value="11.8" />
+	
+	<!-- ______________________ PSYCH ENGINE CUSTOMIZATION ______________________ -->
+
 	<define name="MODS_ALLOWED" if="desktop" />
 	<define name="HSCRIPT_ALLOWED" if="desktop" />
 	<define name="LUA_ALLOWED" if="desktop" />
@@ -65,22 +70,22 @@
 
 	<!-- Assets -->
 	<assets path="assets/fonts" />
-	<assets path="assets/shared"        exclude="*.ogg" if="web"/>
-	<assets path="assets/shared"        exclude="*.mp3" unless="web"/>
+	<assets path="assets"        exclude="*.ogg" if="web"/>
+	<assets path="assets"        exclude="*.mp3" unless="web"/>
 	<assets path="assets/embed"         exclude="*.ogg" if="web" embed="true"/>
 	<assets path="assets/embed"         exclude="*.mp3" unless="web" embed="true"/>
 	<assets path="assets/videos"        if="VIDEOS_ALLOWED"/>
-	<assets path="assets/shared/songs"         exclude="*.ogg" if="web"/>
-	<assets path="assets/shared/songs"         exclude="*.mp3" unless="web"/>
+	<assets path="assets/songs"         exclude="*.ogg" if="web"/>
+	<assets path="assets/songs"         exclude="*.mp3" unless="web"/>
 	<assets path="assets/week_assets"   rename="assets" exclude="*.ogg" if="web"/>
 	<assets path="assets/week_assets"   rename="assets" exclude="*.mp3" unless="web"/>
 	<assets path="renders" exclude="*.ogg" if="web"/>
 	<assets path="renders" exclude="*.mp3" unless="web"/>
-	<assets path="assets/shared/images/models"        library="models"        exclude="*.mtl" if="web"/> 
-	<assets path="assets/shared/images/models"        library="models"        exclude="*.obj" if="web"/>
+	<assets path="assets/images/models"        library="models"        exclude="*.mtl" if="web"/> 
+	<assets path="assets/images/models"        library="models"        exclude="*.obj" if="web"/>
 	<section if="TITLE_SCREEN_EASTER_EGG">
-		<assets path="assets/secrets" rename="assets/shared" exclude="*.ogg" if="web"/>
-		<assets path="assets/secrets" rename="assets/shared" exclude="*.mp3"  unless="web"/>
+		<assets path="assets/secrets" rename="assets/" exclude="*.ogg" if="web"/>
+		<assets path="assets/secrets" rename="assets/" exclude="*.mp3"  unless="web"/>
 	</section>
 
 	<section if="TRANSLATIONS_ALLOWED">
@@ -96,8 +101,8 @@
 	<define name="CHECK_FOR_UPDATES" if="desktop officialBuild"/>
 
 	<section if="MODS_ALLOWED">
-		<assets path='example_mods' rename='mods' embed='true' type='template' unless='mac'/>
-		<assets path='example_mods' rename='mods' embed='true' if="mac"/>
+		<assets path='example_mods' rename='mods' embed='false' type='template' unless="mac"/>
+		<assets path='example_mods' rename='mods' embed='false' if="mac"/>
 		<assets path='list.txt' rename='modsList.txt' />
 	</section>
 	<assets path='art/readme.txt' rename='do NOT readme.txt' />
@@ -112,14 +117,12 @@
 
 	<!-- _______________________________ Libraries ______________________________ -->
 
-	<haxelib name="flixel" version="5.8.0"/>
+	<haxelib name="flixel" version="5.6.1"/>
 	<haxelib name="flixel-addons" version="3.3.2"/>
 	<haxelib name="tjson" version="1.4.0"/>
 
 	<!-- why doesn't this work? idk but fuck u-->
 	<haxelib name="away3d" />
-
-	<haxedef name="message.reporting" value="pretty" />
 
 	<!--Psych stuff needed-->
 	<haxelib name="linc_luajit" if="LUA_ALLOWED"/>

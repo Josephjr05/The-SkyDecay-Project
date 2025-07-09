@@ -221,7 +221,7 @@ class Paths
 		//trace('songKey test: $songKey');
 		return returnSound(songKey, 'songs', modsAllowed, false);
 	}
-q
+
 	inline static public function soundRandom(key:String, min:Int, max:Int, ?modsAllowed:Bool = true)
 		return sound(key + FlxG.random.int(min, max), modsAllowed);
 

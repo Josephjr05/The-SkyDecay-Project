@@ -614,6 +614,9 @@ class PlayState extends MusicBeatState
 			timeTxt.y += 3;
 		}
 
+		notes = new FlxTypedGroup<Note>();
+		noteGroup.add(notes);
+
 		generateSong();
 
 		noteGroup.add(grpNoteSplashes);
@@ -703,7 +706,7 @@ class PlayState extends MusicBeatState
 
 		// SONG SPECIFIC SCRIPTS
 		#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
-		for (folder in Mods.directoriesWithFile(Paths.getSharedPath(), 'data/$songName/'))
+		for (folder in Mods.directoriesWithFile(Paths.getSharedPath(), 'songs/$songName/'))
 			for (file in FileSystem.readDirectory(folder))
 			{
 				#if LUA_ALLOWED
@@ -1435,9 +1438,6 @@ class PlayState extends MusicBeatState
 		}
 		catch (e:Dynamic) {}
 		FlxG.sound.list.add(inst);
-
-		notes = new FlxTypedGroup<Note>();
-		noteGroup.add(notes);
 
 		try
 		{

@@ -100,6 +100,7 @@ class Template extends BaseStage
 				//precacheImage('myImage') //preloads images/myImage.png
 				//precacheSound('mySound') //preloads sounds/mySound.ogg
 				//precacheMusic('myMusic') //preloads music/myMusic.ogg
+				//precacheVideo('myVideo') //preloads videos/myVideo.mp4
 		}
 	}
 	override function eventPushedUnique(event:objects.Note.EventNote)
@@ -115,18 +116,21 @@ class Template extends BaseStage
 						//precacheImage('myImageOne') //preloads images/myImageOne.png
 						//precacheSound('mySoundOne') //preloads sounds/mySoundOne.ogg
 						//precacheMusic('myMusicOne') //preloads music/myMusicOne.ogg
+						//precacheVideo('myVideoOne') //preloads videos/myVideoOne.mp4
 
 					// If value 1 is "coolswag", it will preload these assets:
 					case 'coolswag':
 						//precacheImage('myImageTwo') //preloads images/myImageTwo.png
 						//precacheSound('mySoundTwo') //preloads sounds/mySoundTwo.ogg
 						//precacheMusic('myMusicTwo') //preloads music/myMusicTwo.ogg
+						//precacheVideo('myVideoTwo') //preloads videos/myVideoTwo.mp4
 					
 					// If value 1 is not "blah blah" or "coolswag", it will preload these assets:
 					default:
 						//precacheImage('myImageThree') //preloads images/myImageThree.png
 						//precacheSound('mySoundThree') //preloads sounds/mySoundThree.ogg
 						//precacheMusic('myMusicThree') //preloads music/myMusicThree.ogg
+						//precacheVideo('myVideoThree') //preloads videos/myVideoThree.mp4
 				}
 		}
 	}
@@ -162,7 +166,7 @@ class Template extends BaseStage
 		// Called whenever a dialogue character needs to move
 		// reason: The reason of the movement (enter or exit)
 		// character: Name of the character being moved
-		// startingPos: Starting position of the character (from DialogueCharacter.hx(OR .hxs)/DialogueCharacterFile.position) 
+		// startingPos: Starting position of the character (from DialogueCharacter.hx/DialogueCharacterFile.position) 
 		// offsetPos: ??? (default to -600)
 		// returns: Should the character move according to the default system? 
 	}

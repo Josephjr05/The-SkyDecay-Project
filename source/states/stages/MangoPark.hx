@@ -6,7 +6,7 @@ import states.stages.objects.*;
 
 class MangoPark extends BaseStage
 {
-    var mangoPark:FlxSprite; // mango park mango park mango park mango park police being racist!!11! IVY X SDPJ COLLAB
+    var mangoPark:FlxSprite; // mango park mango park mango park mango park police being racist!!11! IVY X SDYPJ COLLAB
 
     override function create()
     {

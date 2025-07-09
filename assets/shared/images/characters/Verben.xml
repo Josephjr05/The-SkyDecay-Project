@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<TextureAtlas imagePath="Verben.png"><SubTexture name="Verben idle0000" x="0" y="0" width="236" height="225" frameX="0" frameY="0" frameWidth="236" frameHeight="225" />
-<SubTexture name="Verben left0000" x="0" y="225" width="236" height="225" frameX="0" frameY="0" frameWidth="236" frameHeight="225" />
-<SubTexture name="Verben down0000" x="236" y="225" width="236" height="225" frameX="0" frameY="0" frameWidth="236" frameHeight="225" />
-<SubTexture name="Verben up0000" x="236" y="0" width="236" height="225" frameX="0" frameY="0" frameWidth="236" frameHeight="225" />
-<SubTexture name="Verben right0000" x="0" y="0" width="236" height="225" frameX="0" frameY="0" frameWidth="236" frameHeight="225" />
-</TextureAtlas>

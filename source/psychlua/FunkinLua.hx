@@ -32,7 +32,9 @@ import substates.GameOverSubstate;
 
 import psychlua.LuaUtils;
 import psychlua.LuaUtils.LuaTweenOptions;
+#if HSCRIPT_ALLOWED
 import psychlua.HScript;
+#end
 import psychlua.DebugLuaText;
 import psychlua.ModchartSprite;
 
@@ -205,7 +207,7 @@ class FunkinLua {
 		// Other settings
 		set('downscroll', ClientPrefs.data.downScroll);
 		set('middlescroll', ClientPrefs.data.middleScroll);
-		set('framerate', ClientPrefs.data.framerate);
+		set('framerate', ClientPrefs.data.framerateSetting);
 		set('ghostTapping', ClientPrefs.data.ghostTapping);
 		set('hideHud', ClientPrefs.data.hideHud);
 		set('timeBarType', ClientPrefs.data.timeBarType);
@@ -444,10 +446,22 @@ class FunkinLua {
 				LuaUtils.loadFrames(spr, image, spriteType);
 			}
 		});
+		Lua_helper.add_callback(lua, "loadMultipleFrames", function(variable:String, images:Array<String>) {
+			var split:Array<String> = variable.split('.');
+			var spr:FlxSprite = LuaUtils.getObjectDirectly(split[0]);
+			if(split.length > 1) {
+				spr = LuaUtils.getVarInArray(LuaUtils.getPropertyLoop(split), split[split.length-1]);
+			}
+
+			if(spr != null && images != null && images.length > 0)
+			{
+				spr.frames = Paths.getMultiAtlas(images);
+			}
+		});
 
 		//shitass stuff for epic coders like me B)  *image of obama giving himself a medal*
 		Lua_helper.add_callback(lua, "getObjectOrder", function(obj:String, ?group:String = null) {
-			var leObj:FlxSprite = LuaUtils.getObjectDirectly(obj);
+			var leObj:FlxBasic = LuaUtils.getObjectDirectly(obj);
 			if(leObj != null)
 			{
 				if(group != null)
@@ -469,13 +483,14 @@ class FunkinLua {
 						return -1;
 					}
 				}
-				return LuaUtils.getTargetInstance().members.indexOf(leObj);
+				var groupOrArray:Dynamic = CustomSubstate.instance != null ? CustomSubstate.instance : LuaUtils.getTargetInstance();
+				return groupOrArray.members.indexOf(leObj);
 			}
 			luaTrace('getObjectOrder: Object $obj doesn\'t exist!', false, false, FlxColor.RED);
 			return -1;
 		});
 		Lua_helper.add_callback(lua, "setObjectOrder", function(obj:String, position:Int, ?group:String = null) {
-			var leObj:FlxSprite = LuaUtils.getObjectDirectly(obj);
+			var leObj:FlxBasic = LuaUtils.getObjectDirectly(obj);
 			if(leObj != null)
 			{
 				if(group != null)
@@ -497,7 +512,7 @@ class FunkinLua {
 				}
 				else
 				{
-					var groupOrArray:FlxState = LuaUtils.getTargetInstance();
+					var groupOrArray:Dynamic = CustomSubstate.instance != null ? CustomSubstate.instance : LuaUtils.getTargetInstance();
 					groupOrArray.remove(leObj, true);
 					groupOrArray.insert(position, leObj);
 				}
@@ -737,6 +752,10 @@ class FunkinLua {
 		Lua_helper.add_callback(lua, "precacheMusic", function(name:String) {
 			Paths.music(name);
 		});
+		// this is if i decide to add precaching support for videos. Psych Engine basically has this but used kinda weirdly.
+		/* Lua_helper.add_callback(lua, "precacheVideo", function(name:String) {
+			Paths.video(name);
+		}); */
 
 		// others
 		Lua_helper.add_callback(lua, "triggerEvent", function(name:String, ?value1:String = '', ?value2:String = '') {
@@ -969,7 +988,10 @@ class FunkinLua {
 			LuaUtils.destroyObject(tag);
 			var leSprite:ModchartSprite = new ModchartSprite(x, y);
 
-			LuaUtils.loadFrames(leSprite, image, spriteType);
+			if(image != null && image.length > 0)
+			{
+				LuaUtils.loadFrames(leSprite, image, spriteType);
+			}
 			MusicBeatState.getVariables().set(tag, leSprite);
 		});
 
@@ -1295,7 +1317,7 @@ class FunkinLua {
 			}
 			return false;
 		});
-		Lua_helper.add_callback(lua, "startVideo", function(videoFile:String, ?canSkip:Bool = true) {
+		Lua_helper.add_callback(lua, "startVideo", function(videoFile:String, ?canSkip:Bool = true, ?forMidSong:Bool = false, ?shouldLoop:Bool = false, ?playOnLoad:Bool = true) {
 			#if VIDEOS_ALLOWED
 			if(FileSystem.exists(Paths.video(videoFile)))
 			{
@@ -1304,7 +1326,7 @@ class FunkinLua {
 					game.remove(game.videoCutscene);
 					game.videoCutscene.destroy();
 				}
-				game.videoCutscene = game.startVideo(videoFile, false, canSkip);
+				game.videoCutscene = game.startVideo(videoFile, forMidSong, canSkip, shouldLoop, playOnLoad);
 				return true;
 			}
 			else
@@ -1573,10 +1595,10 @@ class FunkinLua {
 			return closed;
 		});
 
-		HScript.implement(this);
 		#if DISCORD_ALLOWED DiscordClient.addLuaCallbacks(lua); #end
 		#if ACHIEVEMENTS_ALLOWED Achievements.addLuaCallbacks(lua); #end
 		#if TRANSLATIONS_ALLOWED Language.addLuaCallbacks(lua); #end
+		HScript.implement(this);
 		#if flxanimate FlxAnimateFunctions.implement(this); #end
 		ReflectionFunctions.implement(this);
 		TextFunctions.implement(this);
@@ -1601,7 +1623,12 @@ class FunkinLua {
 
 			var resultStr:String = Lua.tostring(lua, result);
 			if(resultStr != null && result != 0) {
-				luaTrace('ERROR ON LOADING ($scriptName): $resultStr', true, false, 0xffb30000);
+				trace(resultStr);
+				#if windows
+				lime.app.Application.current.window.alert(resultStr, 'Error on lua script!');
+				#else
+				luaTrace('$scriptName\n$resultStr', true, false, FlxColor.RED);
+				#end
 				lua = null;
 				return;
 			}
@@ -1814,7 +1841,7 @@ class FunkinLua {
 		Lua_helper.add_callback(lua, name, null); //just so that it gets called
 	}
 
-	#if (MODS_ALLOWED && !flash && sys)
+	#if (!flash && sys)
 	public var runtimeShaders:Map<String, Array<String>> = new Map<String, Array<String>>();
 	#end
 
@@ -1822,7 +1849,7 @@ class FunkinLua {
 	{
 		if(!ClientPrefs.data.shaders) return false;
 
-		#if (MODS_ALLOWED && !flash && sys)
+		#if (!flash && sys)
 		if(runtimeShaders.exists(name))
 		{
 			var shaderData:Array<String> = runtimeShaders.get(name);
@@ -1833,12 +1860,15 @@ class FunkinLua {
 			}
 		}
 
-		var foldersToCheck:Array<String> = [Paths.mods('shaders/')];
+		var foldersToCheck:Array<String> = [Paths.getSharedPath('shaders/')];
+		#if MODS_ALLOWED
+		foldersToCheck.push(Paths.mods('shaders/'));
 		if(Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0)
 			foldersToCheck.insert(0, Paths.mods(Mods.currentModDirectory + '/shaders/'));
 
 		for(mod in Mods.getGlobalMods())
 			foldersToCheck.insert(0, Paths.mods(mod + '/shaders/'));
+		#end
 
 		for (folder in foldersToCheck)
 		{

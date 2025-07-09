@@ -179,10 +179,10 @@ class Paths
 		return 'assets/$file';
 
 	inline static public function txt(key:String, ?folder:String)
-		return getPath('$key.txt', TEXT, folder, true);
+		return getPath('songs/$key.txt', TEXT, folder, true);
 
 	inline static public function xml(key:String, ?folder:String)
-		return getPath('$key.xml', TEXT, folder, true);
+		return getPath('songs/$key.xml', TEXT, folder, true);
 
 	inline static public function json(key:String, ?folder:String)
 		return getPath('songs/$key.json', TEXT, folder, true);
@@ -221,7 +221,7 @@ class Paths
 		//trace('songKey test: $songKey');
 		return returnSound(songKey, 'songs', modsAllowed, false);
 	}
-
+q
 	inline static public function soundRandom(key:String, min:Int, max:Int, ?modsAllowed:Bool = true)
 		return sound(key + FlxG.random.int(min, max), modsAllowed);
 

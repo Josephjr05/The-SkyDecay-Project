@@ -49,35 +49,13 @@ class FunkinLua {
 	public var scriptName:String = '';
 	public var modFolder:String = null;
 	public var closed:Bool = false;
-	public var divideVal:Float = 0;
-	
-	public var callbacks:Map<String, Dynamic> = new Map<String, Dynamic>();
-	public static var customFunctions:Map<String, Dynamic> = new Map<String, Dynamic>();
-	
-	#if LUA_ALLOWED
-	public var parentLua:FunkinLua;
-	#end
-	
+
 	#if HSCRIPT_ALLOWED
 	public var hscript:HScript = null;
-	public function initHaxeModule(code:String = '', ?varsToBring:Dynamic) {
-		@:privateAccess {
-		if (hscript == null) {
-			trace('initializing haxe interp for: $scriptName');
-			hscript = new HScript(this);
-		}
-		try {
-			if (hscript.scriptCode != code) {
-				hscript.scriptCode = code;
-				hscript.parse(true);
-			}
-		} catch (e) {
-			throw e;
-		}
-		hscript.varsToBring = varsToBring;
-		}
-	}
 	#end
+
+	public var callbacks:Map<String, Dynamic> = new Map<String, Dynamic>();
+	public static var customFunctions:Map<String, Dynamic> = new Map<String, Dynamic>();
 
 	public function new(scriptName:String) {
 		lua = LuaL.newstate();
@@ -524,7 +502,6 @@ class FunkinLua {
 		// gay ass tweens
 		Lua_helper.add_callback(lua, "startTween", function(tag:String, vars:String, values:Any = null, duration:Float, ?options:Any = null) {
 			var penisExam:Dynamic = LuaUtils.tweenPrepare(tag, vars);
-			duration = duration/divideVal;
 			if(penisExam != null)
 			{
 				if(values != null)
@@ -627,23 +604,18 @@ class FunkinLua {
 
 		//Tween shit, but for strums
 		Lua_helper.add_callback(lua, "noteTweenX", function(tag:String, note:Int, value:Dynamic, duration:Float, ?ease:String = 'linear') {
-			duration = duration/divideVal;
 			return noteTweenFunction(tag, note, {x: value}, duration, ease);
 		});
 		Lua_helper.add_callback(lua, "noteTweenY", function(tag:String, note:Int, value:Dynamic, duration:Float, ?ease:String = 'linear') {
-			duration = duration/divideVal;
 			return noteTweenFunction(tag, note, {y: value}, duration, ease);
 		});
 		Lua_helper.add_callback(lua, "noteTweenAngle", function(tag:String, note:Int, value:Dynamic, duration:Float, ?ease:String = 'linear') {
-			duration = duration/divideVal;
 			return noteTweenFunction(tag, note, {angle: value}, duration, ease);
 		});
 		Lua_helper.add_callback(lua, "noteTweenAlpha", function(tag:String, note:Int, value:Dynamic, duration:Float, ?ease:String = 'linear') {
-			duration = duration/divideVal;
 			return noteTweenFunction(tag, note, {alpha: value}, duration, ease);
 		});
 		Lua_helper.add_callback(lua, "noteTweenDirection", function(tag:String, note:Int, value:Dynamic, duration:Float, ?ease:String = 'linear') {
-			duration = duration/divideVal;
 			return noteTweenFunction(tag, note, {direction: value}, duration, ease);
 		});
 		Lua_helper.add_callback(lua, "mouseClicked", function(?button:String = 'left') {
@@ -688,7 +660,6 @@ class FunkinLua {
 			
 			var originalTag:String = tag;
 			tag = LuaUtils.formatVariable('timer_$tag');
-			time = time/divideVal;
 			variables.set(tag, new FlxTimer().start(time, function(tmr:FlxTimer)
 			{
 				if(tmr.finished) variables.remove(tag);
@@ -752,10 +723,6 @@ class FunkinLua {
 		Lua_helper.add_callback(lua, "precacheMusic", function(name:String) {
 			Paths.music(name);
 		});
-		// this is if i decide to add precaching support for videos. Psych Engine basically has this but used kinda weirdly.
-		/* Lua_helper.add_callback(lua, "precacheVideo", function(name:String) {
-			Paths.video(name);
-		}); */
 
 		// others
 		Lua_helper.add_callback(lua, "triggerEvent", function(name:String, ?value1:String = '', ?value2:String = '') {
@@ -870,16 +837,13 @@ class FunkinLua {
 		Lua_helper.add_callback(lua, "getCameraFollowY", () -> game.camFollow.y);
 
 		Lua_helper.add_callback(lua, "cameraShake", function(camera:String, intensity:Float, duration:Float) {
-			duration = duration/divideVal;
 			LuaUtils.cameraFromString(camera).shake(intensity, duration);
 		});
 
 		Lua_helper.add_callback(lua, "cameraFlash", function(camera:String, color:String, duration:Float,forced:Bool) {
-			duration = duration/divideVal;
 			LuaUtils.cameraFromString(camera).flash(CoolUtil.colorFromString(color), duration, null, forced);
 		});
 		Lua_helper.add_callback(lua, "cameraFade", function(camera:String, color:String, duration:Float, forced:Bool, ?fadeOut:Bool = false) {
-			duration = duration/divideVal;
 			LuaUtils.cameraFromString(camera).fade(CoolUtil.colorFromString(color), duration, fadeOut, null, forced);
 		});
 		Lua_helper.add_callback(lua, "setRatingPercent", function(value:Float) {
@@ -1420,7 +1384,6 @@ class FunkinLua {
 			}
 		});
 		Lua_helper.add_callback(lua, "soundFadeIn", function(tag:String, duration:Float, fromValue:Float = 0, toValue:Float = 1) {
-			duration = duration/divideVal;
 			if(tag == null || tag.length < 1)
 			{
 				if(FlxG.sound.music != null)
@@ -1435,7 +1398,6 @@ class FunkinLua {
 			}
 		});
 		Lua_helper.add_callback(lua, "soundFadeOut", function(tag:String, duration:Float, toValue:Float = 0) {
-			duration = duration/divideVal;
 			if(tag == null || tag.length < 1)
 			{
 				if(FlxG.sound.music != null)
@@ -1745,8 +1707,6 @@ class FunkinLua {
 
 		var strumNote:StrumNote = PlayState.instance.strumLineNotes.members[note % PlayState.instance.strumLineNotes.length];
 		if(strumNote == null) return null;
-
-		duration = duration/divideVal;
 
 		if(tag != null)
 		{

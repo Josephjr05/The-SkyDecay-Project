@@ -176,7 +176,7 @@ class PlayState extends MusicBeatState
 	public var strumLineNotes:FlxTypedGroup<StrumNote> = new FlxTypedGroup<StrumNote>();
 	public var opponentStrums:FlxTypedGroup<StrumNote> = new FlxTypedGroup<StrumNote>();
 	public var playerStrums:FlxTypedGroup<StrumNote> = new FlxTypedGroup<StrumNote>();
-	public var grpHoldSplashes:FlxTypedGroup<SustainSplash>; // sustain splash SkyDecay Engine 
+	// public var grpHoldSplashes:FlxTypedGroup<SustainSplash>; // sustain splash SkyDecay Engine 
 	public var grpNoteSplashes:FlxTypedGroup<NoteSplash> = new FlxTypedGroup<NoteSplash>();
 
 	public var camZooming:Bool = false;
@@ -291,10 +291,6 @@ class PlayState extends MusicBeatState
 
 		// for tweens
 		var varTween:FlxTween;
-
-		//erm
-		static var capture:Screenshot = new Screenshot();
-		public var frameCaptured:Int = 0;
 	
 		// every 100 combo shits
 		private var lastCombo:Int = 0; // To track when GF cheered last
@@ -433,7 +429,7 @@ class PlayState extends MusicBeatState
 
 		FlxG.cameras.add(camHUD, false);
 		FlxG.cameras.add(camOther, false);
-		grpHoldSplashes = new FlxTypedGroup<SustainSplash>(); // For somereason Js engine lets the player set a max limit. I really hate you js. I'm watching you..
+		// grpHoldSplashes = new FlxTypedGroup<SustainSplash>(); // For somereason Js engine lets the player set a max limit. I really hate you js. I'm watching you..
 		grpNoteSplashes = new FlxTypedGroup<NoteSplash>();
 
 		persistentUpdate = true;
@@ -692,13 +688,13 @@ class PlayState extends MusicBeatState
 		grpNoteSplashes.add(splash);
 		splash.alpha = 0.0001; //cant make it invisible or it won't allow precaching
 
-		SustainSplash.startCrochet = Conductor.stepCrochet;
+		/* SustainSplash.startCrochet = Conductor.stepCrochet;
 		SustainSplash.frameRate = Math.floor(24 / 100 * SONG.bpm);
 		SustainSplash.isPixelStage = isPixelStage;
 		var splash:SustainSplash = new SustainSplash();
 		grpHoldSplashes.add(splash);
 		initNoteSplashPool(30); // 30 is the default pool size for note splashes, can be changed in settings
-		splash.alpha = 0.0001;
+		splash.alpha = 0.0001; */
 
 		opponentStrums = new FlxTypedGroup<StrumNote>();
 		playerStrums = new FlxTypedGroup<StrumNote>();
@@ -803,7 +799,7 @@ class PlayState extends MusicBeatState
         trace('Judgement windows ( +/- ms) set by OD ${chartOD}: Perfect/Crazy=${scaledPerfectWin}, Great/Sick=${scaledGreatWin}, Good/Good=${scaledGoodWin}, Ok/Bad=${scaledOkWin}, Meh/Shit=${scaledMehWin}');
         trace('Safe Zone Offset set to: ${Conductor.safeZoneOffset}ms (based on scaled miss window: ${scaledMissWin}ms)'); // reminder that this is for hitting too early that gives you a shit. This is accurate.
 		
-		noteGroup.add(grpHoldSplashes);
+		// noteGroup.add(grpHoldSplashes);
 		noteGroup.add(grpNoteSplashes);
 
 		camFollow = new FlxObject();
@@ -991,7 +987,7 @@ class PlayState extends MusicBeatState
     	strumMidpointY = getStrumMidpoint(Y);
 	}
 
-	private function initNoteSplashPool(size:Int = 30):Void {
+	/*private function initNoteSplashPool(size:Int = 30):Void {
 		for (i in 0...size) {
 			var splash = new NoteSplash();
 			splash.alpha = 0.0001;
@@ -1006,7 +1002,7 @@ class PlayState extends MusicBeatState
     	    comboGroup.add(spr);
     	    numScorePool.push(spr);
     	}
- 	}
+ 	}*/
 
 	function boxTween()
 	{
@@ -1523,7 +1519,7 @@ class PlayState extends MusicBeatState
 		insert(members.indexOf(dadGroup), obj);
 	}
 
-	function recycleNote(note:Note):Void
+	/*function recycleNote(note:Note):Void
 	{
 		// Remove from on-screen notes group
 		if (notes.members.contains(note))
@@ -1581,7 +1577,7 @@ class PlayState extends MusicBeatState
 			splash.kill();
 			noteSplashPool.push(splash);
 		}
-	}
+	} */
 
 	public function clearNotesBefore(time:Float)
 	{
@@ -1594,8 +1590,10 @@ class PlayState extends MusicBeatState
 				daNote.visible = false;
 				daNote.ignoreNote = true;
 
+				daNote.kill();
 				unspawnNotes.remove(daNote);
-				recycleNote(daNote);
+				daNote.destroy(); // to prevent double-recycling
+				// recycleNote(daNote);
 			}
 			--i;
 		}
@@ -1884,8 +1882,8 @@ class PlayState extends MusicBeatState
 				}
 
 							
-				var swagNote:Note;
-				if (notePool.length > 0)
+				var swagNote:Note = new Note(spawnTime, noteColumn, oldNote, false);
+				/* if (notePool.length > 0)
 				{
 					swagNote = notePool.pop();
 					swagNote.setupNoteData(spawnTime, noteColumn, oldNote, false);
@@ -1893,7 +1891,7 @@ class PlayState extends MusicBeatState
 				else
 				{
 					swagNote = new Note(spawnTime, noteColumn, oldNote, false);
-				}
+				} */
 				var isAlt: Bool = section.altAnim && !gottaHitNote;
 				swagNote.gfNote = (section.gfSection && gottaHitNote == section.mustHitSection);
 				swagNote.animSuffix = isAlt ? "-alt" : "";
@@ -1912,13 +1910,13 @@ class PlayState extends MusicBeatState
 					{
 						oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
 
-        				var sustainNote:Note;
-						if (notePool.length > 0) {
+        				var sustainNote:Note = new Note(spawnTime + (curStepCrochet * susNote), noteColumn, oldNote, true);
+						/* if (notePool.length > 0) {
         				    sustainNote = notePool.pop();
         				    sustainNote.setupNoteData(spawnTime + (curStepCrochet * susNote), noteColumn, oldNote, true); // 'true' for sustain
         				} else {
         				    sustainNote = new Note(spawnTime + (curStepCrochet * susNote), noteColumn, oldNote, true); // 'true' for sustain
-        				}
+        				} */
 						sustainNote.animSuffix = swagNote.animSuffix;
 						sustainNote.mustPress = swagNote.mustPress;
 						sustainNote.gfNote = swagNote.gfNote;
@@ -2228,6 +2226,7 @@ class PlayState extends MusicBeatState
 
 		super.update(elapsed);
 
+		var songPos = Conductor.songPosition;
 		for (note in notes) {
 			if (!note.alive) continue;
 		
@@ -2495,8 +2494,6 @@ class PlayState extends MusicBeatState
 				npsCheck = nps;			  
 			}
 		}
-
-		clearNotesBefore(Conductor.songPosition - 2000);
 
 		setOnScripts('cameraX', camFollow.x);
 		setOnScripts('cameraY', camFollow.y);
@@ -3489,7 +3486,7 @@ class PlayState extends MusicBeatState
 		if (ratingsData == null || ratingsData.length == 0) {
 			trace("Error: cachePopUpScore called before ratingsData was ready!");
 			// Optionally, try loading default ratings as a fallback?
-			ratingsData = Rating.loadDefault();
+			// ratingsData = Rating.loadDefault();
 			if (ratingsData == null || ratingsData.length == 0) return;
 			return; // Exit if not ready
 		}
@@ -3892,7 +3889,7 @@ class PlayState extends MusicBeatState
 
 		noteMissCommon(daNote.noteData, daNote);
 		stagesFunc(function(stage:BaseStage) stage.noteMiss(daNote));
-		recycleNote(daNote);
+		// recycleNote(daNote);
 		var result:Dynamic = callOnLuas('noteMiss', [notes.members.indexOf(daNote), daNote.noteData, daNote.noteType, daNote.isSustainNote]);
 		if(result != LuaUtils.Function_Stop && result != LuaUtils.Function_StopHScript && result != LuaUtils.Function_StopAll) callOnHScript('noteMiss', [daNote]);
 	}
@@ -4037,7 +4034,7 @@ class PlayState extends MusicBeatState
 		strumPlayAnim(true, Std.int(Math.abs(note.noteData)), Conductor.stepCrochet * 1.25 / 1000 / playbackRate);
 		note.hitByOpponent = true;
 
-		spawnHoldSplashOnNote(note);
+		// spawnHoldSplashOnNote(note);
 		
 		stagesFunc(function(stage:BaseStage) stage.opponentNoteHit(note));
 		var result:Dynamic = callOnLuas('opponentNoteHit', [notes.members.indexOf(note), Math.abs(note.noteData), note.noteType, note.isSustainNote]);
@@ -4155,8 +4152,8 @@ class PlayState extends MusicBeatState
 			else strumPlayAnim(false, Std.int(Math.abs(note.noteData)), Conductor.stepCrochet * 1.25 / 1000 / playbackRate);
 			vocals.volume = 1;
 
-			spawnHoldSplashOnNote(note);
-			recycleNote(note);
+			// spawnHoldSplashOnNote(note);
+			// recycleNote(note);
 			if (!note.isSustainNote)
 			{
 				combo++;
@@ -4204,10 +4201,11 @@ class PlayState extends MusicBeatState
 	public function invalidateNote(note:Note):Void {
 		note.kill();
 		notes.remove(note, true);
-		notePool.push(note);
+		note.destroy();
+		// notePool.push(note);
 	}
 
-	public function spawnHoldSplashOnNote(note:Note) {
+	/* public function spawnHoldSplashOnNote(note:Note) {
 		if (!note.isSustainNote && note.tail.length != 0 && note.tail[note.tail.length - 1].extraData['holdSplash'] == null) {
 			spawnHoldSplash(note);
 		} else if (note.isSustainNote) {
@@ -4228,7 +4226,7 @@ class PlayState extends MusicBeatState
 		var splash:SustainSplash = grpHoldSplashes.recycle(SustainSplash);
 		splash.setupSusSplash(strumLineNotes.members[end.noteData + (end.mustPress ? 4 : 0)], end, playbackRate);
 		grpHoldSplashes.add(splash);
-	}
+	} */
 
 	public function spawnNoteSplashOnNote(note:Note) {
 		if(note != null) {
@@ -4239,8 +4237,8 @@ class PlayState extends MusicBeatState
 	}
 
 	public function spawnNoteSplash(note:Note, strum:StrumNote) {
-		var splash:NoteSplash;
-		if (noteSplashPool.length > 0)
+		var splash:NoteSplash = new NoteSplash();
+		/* if (noteSplashPool.length > 0)
 		{
 			splash = noteSplashPool.pop();
 			splash.revive();
@@ -4248,9 +4246,9 @@ class PlayState extends MusicBeatState
 		else
 		{
 			splash = new NoteSplash();
-		}
+		} */
 
-		splash.setupSplash(note.noteData, note.noteSplashData); // Optional setup method if you have one
+		// splash.setupSplash(note.noteData, note.noteSplashData);
 
 		splash.babyArrow = strum;
 		splash.spawnSplashNote(note);

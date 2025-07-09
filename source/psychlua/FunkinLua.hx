@@ -76,8 +76,6 @@ class FunkinLua {
 			this.modFolder = myFolder[1];
 		#end
 
-		divideVal = game.playbackRate;
-
 		// Lua shit
 		set('Function_StopLua', LuaUtils.Function_StopLua);
 		set('Function_StopHScript', LuaUtils.Function_StopHScript);

@@ -1,7 +1,7 @@
 package objects;
 
-class SustainSplash extends FlxSprite {
-
+class SustainSplash extends FlxSprite 
+{
   public static var startCrochet:Float;
   public static var frameRate:Int;
   public static var isPixelStage:Bool;
@@ -67,7 +67,7 @@ class SustainSplash extends FlxSprite {
     super.kill();
 
     if (FlxG.state is PlayState) {
-      PlayState.instance.grpHoldSplashes.remove(this);
+      // PlayState.instance.grpHoldSplashes.remove(this);
     }
 
     destroy();
@@ -78,5 +78,4 @@ class SustainSplash extends FlxSprite {
     }
 
   }
-
 }

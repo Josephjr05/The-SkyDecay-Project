@@ -17,7 +17,7 @@ class Screenshot {
 	var height:Int;
 	var window:Window = null;
 	var image:Image;
-	var target:String = #if !linux "screenshots\\" #else "screenshots/" #end;
+	var target:String = #if !linux "renders\\" #else "renders/" #end;
 	public static var slash:String = #if !linux "\\" #else "/" #end;
 
 	public function new(x:Int = -1, y:Int = -1, w:Int = -1, h:Int = -1) {

@@ -34,7 +34,7 @@ class Paths
 			dumpExclusions.push(key);
 	}
 
-	public static var dumpExclusions:Array<String> = ['assets/shared/music/freakyMenu.$SOUND_EXT'];
+	public static var dumpExclusions:Array<String> = ['assets/music/freakyMenu.$SOUND_EXT'];
 	// haya I love you for the base cache dump I took to the max
 	public static function clearUnusedMemory()
 	{
@@ -172,11 +172,11 @@ class Paths
 		return getSharedPath(file);
 	}
 
-	inline static public function getFolderPath(file:String, folder = "shared")
+	inline static public function getFolderPath(file:String, folder = '') // use nothing because songs folder
 		return 'assets/$folder/$file';
 
 	inline public static function getSharedPath(file:String = '')
-		return 'assets/shared/$file';
+		return 'assets/$file';
 
 	inline static public function txt(key:String, ?folder:String)
 		return getPath('$key.txt', TEXT, folder, true);
@@ -196,11 +196,6 @@ class Paths
 	inline static public function lua(key:String, ?folder:String)
 		return getPath('$key.lua', TEXT, folder, true);
 
-	static public function module(key:String, ?folder:String)
-	{
-		return getPath('$key.hxs', TEXT, folder, true);
-	}
-
 	static public function video(key:String)
 	{
 		#if MODS_ALLOWED
@@ -217,14 +212,14 @@ class Paths
 		return returnSound('music/$key', modsAllowed);
 
 	inline static public function inst(song:String, ?modsAllowed:Bool = true):Sound
-		return returnSound('${formatToSongPath(song)}/Inst', 'shared/songs', modsAllowed);
+		return returnSound('${formatToSongPath(song)}/Inst', 'songs', modsAllowed);
 
 	inline static public function voices(song:String, postfix:String = null, ?modsAllowed:Bool = true):Sound
 	{
 		var songKey:String = '${formatToSongPath(song)}/Voices';
 		if(postfix != null) songKey += '-' + postfix;
 		//trace('songKey test: $songKey');
-		return returnSound(songKey, 'shared/songs', modsAllowed, false);
+		return returnSound(songKey, 'songs', modsAllowed, false);
 	}
 
 	inline static public function soundRandom(key:String, min:Int, max:Int, ?modsAllowed:Bool = true)
@@ -256,7 +251,7 @@ class Paths
 
 			if (bitmap == null)
 			{
-				trace('oh no its returning null NOOOO ($file)');
+				trace('Bitmap not found: $file | key: $key');
 				return null;
 			}
 		}

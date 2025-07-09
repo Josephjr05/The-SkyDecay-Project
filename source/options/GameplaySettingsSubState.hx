@@ -20,6 +20,12 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			BOOL);
 		addOption(option);
 
+		var option:Option = new Option('Sustain Release',
+			'If checked, you can release the sustain at the end of the tail to gain extra combo and score.',
+			'sustainRelease',
+			BOOL);
+		addOption(option);
+
 		var option:Option = new Option('Opponent Notes',
 			'If unchecked, opponent notes get hidden.',
 			'opponentStrums',
@@ -103,7 +109,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.decimals = 1;
 		option.onChange = onChangeHitsoundVolume;
 
-		var option:Option = new Option('Rating Offset',
+		/* var option:Option = new Option('Rating Offset',
 			'Changes how late/early you have to hit for a "Sick!"\nHigher values mean you have to hit later.',
 			'ratingOffset',
 			INT);
@@ -111,7 +117,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.scrollSpeed = 20;
 		option.minValue = -30;
 		option.maxValue = 30;
-		// addOption(option);
+		addOption(option);
 
 		var option:Option = new Option('PERFECT Hit Window',
 			'(This is LOCKED for SDPJ) -\nPERFECT',
@@ -169,13 +175,13 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.minValue = 10;
 		option.maxValue = 10;
 		option.changeValue = 0.1;
-		// addOption(option); // why exactly?
+		addOption(option); // why exactly?
 
 		var option:Option = new Option('Sustains as One Note',
 			"If checked, Hold Notes can't be pressed if you miss,\nand count as a single Hit/Miss.\nUncheck this if you prefer the old Input System.",
 			'guitarHeroSustains',
 			BOOL);
-		// addOption(option);
+		addOption(option); */
 
 		super();
 	}

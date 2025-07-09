@@ -55,19 +55,19 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 			BOOL);
 		addOption(option);
 
-		#if MULTITHREADED_LOADING
-		var option:Option = new Option('Multithreaded Loading',
-			"If checked, allows the game to use your CPU's threads for the loading screen\ndisable this if you experience stutters.",
-			'multiThreading',
+		var option:Option = new Option('Batched Draws',
+			"If checked, allows the game to batch draw sprites, decreasing CPU usage.\nDon't turn this on if you have a shitty Graphics Card.",
+			'batchedDraws',
 			BOOL);
 		addOption(option);
-		#end
 
-		#if !html5 //Apparently other framerates isn't correctly supported on Browser? Probably it has some V-Sync shit enabled by default, idk
 		var option:Option = new Option('Framerate',
-			"Pretty self explanatory, isn't it?",
-			'framerate',
-			INT);
+		"Set your desired FPS cap. Default matches your monitor refresh rate.",
+		'framerateSetting',
+		STRING,
+		['Default', 'FPS60', 'FPS120', 'FPS144', 'FPS165', 'FPS240', 'UNLIMITED']);
+		option.displayFormat = '%v FPS';
+		option.onChange = onChangeFramerate;
 		addOption(option);
 
 		var option:Option = new Option('Light Cycle:',
@@ -76,14 +76,6 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		STRING,
 		['Auto Lights', 'Slow Lights', 'Player Lights', 'Disabled']);
 		addOption(option);
-
-		final refreshRate:Int = FlxG.stage.application.window.displayMode.refreshRate;
-		option.minValue = 60;
-		option.maxValue = 240;
-		option.defaultValue = Std.int(FlxMath.bound(refreshRate, option.minValue, option.maxValue));
-		option.displayFormat = '%v FPS';
-		option.onChange = onChangeFramerate;
-		#end
 
 		super();
 		insert(1, boyfriend);
@@ -105,18 +97,26 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		ColorBlindness.setFilter();
 	}
 
-	function onChangeFramerate()
-	{
-		if(ClientPrefs.data.framerate > FlxG.drawFramerate)
+	function onChangeFramerate() {
+		var setting:String = Std.string(ClientPrefs.data.framerateSetting);
+		trace("Selected FPS setting: " + setting);
+
+		var fps:Int = switch (setting)
 		{
-			FlxG.updateFramerate = ClientPrefs.data.framerate;
-			FlxG.drawFramerate = ClientPrefs.data.framerate;
-		}
-		else
-		{
-			FlxG.drawFramerate = ClientPrefs.data.framerate;
-			FlxG.updateFramerate = ClientPrefs.data.framerate;
-		}
+			case "FPS60": 60;
+			case "FPS120": 120;
+			case "FPS144": 144;
+			case "FPS165": 165;
+			case "FPS240": 240;
+			case "UNLIMITED": 999;
+			case "DEFAULT": FlxG.stage.application.window.displayMode.refreshRate;
+			default:
+				trace("Invalid setting! Using default refresh rate.");
+				FlxG.stage.application.window.displayMode.refreshRate;
+		};
+
+		FlxG.updateFramerate = fps;
+		FlxG.drawFramerate = fps;
 	}
 
 	override function changeSelection(change:Int = 0)

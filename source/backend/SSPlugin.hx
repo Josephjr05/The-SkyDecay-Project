@@ -167,9 +167,9 @@ class SSPlugin extends flixel.FlxBasic
 				#if mobile
 				if (!FileSystem.exists('./screenshots/'))
 					FileSystem.createDirectory('./screenshots/');
-				var path = 'screenshots/SDPJM ' + Date.now().toString().replace(' ', '-').replace(':', "'") + saveFormat;
+				var path = 'screenshots/SDYPJM ' + Date.now().toString().replace(' ', '-').replace(':', "'") + saveFormat;
 				#else
-				var path = "screenshots/SDPJ " + Date.now().toString().split(":").join("-") + saveFormat;
+				var path = "screenshots/SDYPJ " + Date.now().toString().split(":").join("-") + saveFormat;
 				if (!FileSystem.exists("./screenshots/"))
 					FileSystem.createDirectory("./screenshots/");
 				#end

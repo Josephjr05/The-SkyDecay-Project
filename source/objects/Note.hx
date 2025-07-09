@@ -1,7 +1,5 @@
 package objects;
 
-import flixel.addons.effects.FlxSkewedSprite;
-
 import backend.animation.PsychAnimationController;
 import backend.NoteTypesConfig;
 
@@ -10,8 +8,10 @@ import shaders.RGBPalette.RGBShaderReference;
 
 import objects.StrumNote;
 import objects.SustainSplash;
+// import objects.NoteSplashData; // this is for future note looping. Currently not available yet.
 
 import flixel.math.FlxRect;
+import flixel.util.FlxColor; // Make sure FlxColor is imported if used directly
 
 using StringTools;
 
@@ -42,7 +42,7 @@ typedef NoteSplashData = {
 **/
 class Note extends FlxSprite
 {
-	// sdy engine var 
+	// sdy engine var
   	public var z:Float = 0;
 	public var isSustainReleaseNote:Bool = false;
 
@@ -336,6 +336,75 @@ class Note extends FlxSprite
 		x += offsetX;
 	}
 
+	public function setupNoteData(strumTime:Float, noteData:Int, ?prevNote:Note = null, ?isSustain:Bool = false):Void {
+		this.strumTime = strumTime;
+		this.noteData = noteData;
+		this.prevNote = prevNote;
+		this.isSustainNote = isSustain;
+
+		// Reset gameplay state
+		this.active = true;
+		this.visible = true;
+		this.alpha = 1;
+		this.wasGoodHit = false;
+		this.ignoreNote = false;
+		this.tooLate = false;
+		this.blockHit = false;
+		this.hitByOpponent = false;
+		this.hitCausesMiss = false;
+		this.rating = null;
+		this.ratingMod = 0;
+		this.hitsound = null;
+		this.hitsoundVolume = 0;
+		this.hitsoundDisabled = false;
+		this.noAnimation = false;
+		this.noMissAnimation = false;
+		this.lowPriority = false;
+
+		// Reset positioning
+		this.x = 0;
+		this.y = 0;
+		this.scale.set(1, 1);
+		this.scrollFactor.set(1, 1);
+
+		// Reset sustain structure
+		this.tail = [];
+		this.parent = null;
+
+		// Reset note-specific metadata
+		this.animSuffix = "";
+		this.mustPress = false;
+		this.gfNote = false;
+		this.sustainLength = 0;
+		this.noteType = ''; // or set to -1 if your system uses custom noteTypes
+		this.correctionOffset = 0;
+
+		// Reset visual data
+		this.noteSplashData = {
+			disabled: false,
+			useRGBShader: false,
+			useNoteRGB: false,
+			useGlobalShader: false,
+			texture: null,
+			r: FlxColor.RED,
+			g: FlxColor.GREEN,
+			b: FlxColor.BLUE,
+			a: 1.0,
+			antialiasing: ClientPrefs.data.antialiasing
+		};
+
+		// Reactivate FlxSprite if it was pooled
+		if (!this.exists) this.revive();
+
+		// Reset animation/frame
+		if (isSustainNote)
+			animation.play(colArray[prevNote.noteData % colArray.length] + 'hold');
+			animation.play(colArray[prevNote.noteData % colArray.length] + 'holdend');
+
+		updateHitbox();
+	}
+
+
 	public static function initializeGlobalRGBShader(noteData:Int)
 	{
 		if(globalRgbShaders[noteData] == null)
@@ -524,6 +593,7 @@ class Note extends FlxSprite
 		distance = (0.45 * (Conductor.songPosition - strumTime) * songSpeed * multSpeed);
 		if (!myStrum.downScroll) distance *= -1;
 
+		var angleDir = strumDirection * Math.PI / 180;
 		if (copyAngle)
 			angle = strumDirection - 90 + strumAngle + offsetAngle;
 
@@ -531,15 +601,11 @@ class Note extends FlxSprite
 			alpha = strumAlpha * multAlpha;
 
 		if(copyX)
-		{
-			@:privateAccess
-			x = strumX + offsetX + myStrum._dirCos * distance;
-		}
+			x = strumX + offsetX + Math.cos(angleDir) * distance;
 
 		if(copyY)
 		{
-			@:privateAccess
-			y = strumY + offsetY + correctionOffset + myStrum._dirSin * distance;
+			y = strumY + offsetY + correctionOffset + Math.sin(angleDir) * distance;
 			if(myStrum.downScroll && isSustainNote)
 			{
 				if(PlayState.isPixelStage)

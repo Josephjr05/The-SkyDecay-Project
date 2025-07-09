@@ -1,8 +1,5 @@
 package objects;
 
-//Import FlxSkewedSprite at the top
-import flixel.addons.effects.FlxSkewedSprite;
-
 import backend.animation.PsychAnimationController;
 
 import shaders.RGBPalette;
@@ -29,6 +26,15 @@ class StrumNote extends FlxSprite
 		_dirCos = Math.cos(_fDir * mathPi);
 
 		return direction = _fDir;
+	}
+
+	public function setupStrumData(noteData:Int):Void
+	{
+		this.noteData = noteData;
+		this.visible = true;
+		this.active = true;
+		this.alpha = 1;
+		this.scale.set(1, 1);
 	}
 	
 	public var texture(default, set):String = null;
@@ -167,8 +173,6 @@ class StrumNote extends FlxSprite
 	}
 
 	override function update(elapsed:Float) {
-		if (ClientPrefs.data.ffmpegMode) elapsed = 1 / ClientPrefs.data.targetFPS;
-
 		if(resetAnim > 0) {
 			resetAnim -= elapsed;
 			if(resetAnim <= 0) {

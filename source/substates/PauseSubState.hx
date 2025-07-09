@@ -286,6 +286,7 @@ class PauseSubState extends MusicBeatSubstate
 					return;
 				}
 
+
 				menuItems = menuItemsOG;
 				regenMenu();
 			}
@@ -293,8 +294,6 @@ class PauseSubState extends MusicBeatSubstate
 			if (menuItems == optionChoices) {
 				switch(daSelected)
 				{
-					case 'Screenshot Settings':
-						openSubState(new options.ScreenshotTest());
 					case 'Note Colors':
 						openSubState(new options.NotesColorSubState());
 					case 'Controls':
@@ -337,15 +336,15 @@ class PauseSubState extends MusicBeatSubstate
 				case 'Skip Time':
 					if(curTime < Conductor.songPosition)
 					{
-						PlayState.startOnTime = curTime * PlayState.instance.playbackRate;
+						PlayState.startOnTime = curTime;
 						restartSong(true);
 					}
 					else
 					{
 						if (curTime != Conductor.songPosition)
 						{
-							PlayState.instance.clearNotesBefore(curTime * PlayState.instance.playbackRate);
-							PlayState.instance.setSongTime(curTime * PlayState.instance.playbackRate);
+							PlayState.instance.clearNotesBefore(curTime);
+							PlayState.instance.setSongTime(curTime);
 						}
 						close();
 					}
@@ -487,5 +486,5 @@ class PauseSubState extends MusicBeatSubstate
 	}
 
 	function updateSkipTimeText()
-		skipTimeText.text = FlxStringUtil.formatTime(Math.max(0, Math.floor((curTime / 1000) / PlayState.instance.playbackRate)), false) + ' / ' + FlxStringUtil.formatTime(Math.max(0, Math.floor((FlxG.sound.music.length / 1000) / PlayState.instance.playbackRate)), false);
+		skipTimeText.text = FlxStringUtil.formatTime(Math.max(0, Math.floor(curTime / 1000)), false) + ' / ' + FlxStringUtil.formatTime(Math.max(0, Math.floor(FlxG.sound.music.length / 1000)), false);
 }

@@ -201,7 +201,8 @@ class ReflectionFunctions
 			var parent:Dynamic = PlayState.instance;
 			var split:Array<String> = funcToRun.split('.');
 			var varParent:Dynamic = MusicBeatState.getVariables().get(split[0].trim());
-			if (varParent != null) {
+			if (!Std.isOfType(args, Array)) args = [];
+			if(varParent != null) {
 				split.shift();
 				funcToRun = split.join('.').trim();
 				parent = varParent;
@@ -213,6 +214,7 @@ class ReflectionFunctions
 			return Reflect.callMethod(null, parent, parseInstances(args));
 		});
 		Lua_helper.add_callback(lua, "callMethodFromClass", function(className:String, funcToRun:String, ?args:Array<Dynamic>) {
+			if (!Std.isOfType(args, Array)) args = [];
 			return callMethodFromObject(Type.resolveClass(className), funcToRun, parseInstances(args));
 		});
 
@@ -272,8 +274,6 @@ class ReflectionFunctions
 		return newArray;
 	}
 	public static function parseInstances(arg:Dynamic):Dynamic {
-		if (arg == null) return null;
-		
 		if (Std.isOfType(arg, Array)) {
 			return parseInstanceArray(arg);
 		} else {

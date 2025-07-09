@@ -132,7 +132,7 @@ class FunkinSoundTray extends FlxSoundTray
 			#if MODS_ALLOWED
 			sound = Paths.returnSound('sounds/soundtray/${up ? volumeUpSound : volumeDownSound}');
 			#else 
-			final path = 'assets/shared/sounds/soundtray/';
+			final path = 'assets/sounds/soundtray/';
 			sound = FlxAssets.getSound(path + (up ? volumeUpSound : volumeDownSound));
 			#end
 			
@@ -140,7 +140,7 @@ class FunkinSoundTray extends FlxSoundTray
 				#if MODS_ALLOWED
 				sound = Paths.returnSound('sounds/soundtray/$volumeMaxSound');
 				#else
-				sound = FlxAssets.getSound('assets/shared/sounds/soundtray/$volumeMaxSound');
+				sound = FlxAssets.getSound('assets/sounds/soundtray/$volumeMaxSound');
 				#end
 
 			if (sound != null)

@@ -111,7 +111,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		['Cinema Bars', "Toggles cinematic bars\n\nPlace event to use"],
 		['UI Fade', "Value 1: Alpha\nValue 2: Tween Time"],
 		['Flash Camera', "Value 1: Flash Timer"],
-		['Black Camera Fades', "Place for black fade out."],
+		// ['Black Camera Fades', "Place for black fade out."],
 		['Hide Health', "Value 1: 1 = appear, 0 = dissapear\nValue 2: Tween Time"],
 		['KM Toggle', "Toggles Kill Miss Mode\n\nValue 1: Max amount of misses"],
 		['RotScreenCam', "Value 1: Angle\nValue 2 Tween Time"],
@@ -365,9 +365,10 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		add(lilOpp);
 
 		//remember to add the new function
+		// also used to layer them
+		createLilGirlfriend(); // gf is behind BF
 		createLilPlayer();
 		createLilOpponent();
-		createLilGirlfriend();
 		//createPlayerGhost();
 		//createOpponentGhost();
 			
@@ -632,8 +633,8 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			"Q/E/CTRL + Mouse Wheel Decrease/Increase Long Note",
 			"Hold Shift / Alt to Increase / Decrease move by 4x",
 			"",
-			"F11 - Preview Chart", // changed it because screenshot bind
-			"Enter - Playtest Chart",
+			"F5 - Preview Chart", // changed it because screenshot bind is F12
+			"Enter/Return - Playtest Chart",
 			"Space - Stop/Resume song",
 			"",
 			"Alt + Click - Select Note(s)",
@@ -845,8 +846,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		if(name != null)
 		lilOpponent = new Character(0, 0, name, false);
 		lilOpponent.scrollFactor.set();
-		lilOpponent.screenCenter();
-		lilOpponent.setGraphicSize(Std.int(lilOpponent.width * 0.4));
+		lilOpponent.screenCenter();		lilOpponent.setGraphicSize(Std.int(lilOpponent.width * 0.4));
 		add(lilOpponent);
 		for (keyt in lilOpponent.animOffsets.keys()) {
 			lilOpponent.animOffsets[keyt][0] *= lilOpponent.scale.x;
@@ -907,15 +907,30 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		var character2 = PlayState.SONG.player2;
 		var character3 = PlayState.SONG.gfVersion;
 
-		if(id == 1 || id == 4)//Reload The Player
-			remove(lilPlayer);
-			createLilPlayer(character1);
-		if(id == 2 || id == 4)//Reload The Opponent
-			remove(lilOpponent);
-			createLilOpponent(character2);
-		if(id == 3 || id == 4) //Reload The Girlfriend
-			remove(lilGf);
-			createLilGirlfriend(character3);
+    	if(id == 1 || id == 4) { //Reload The Player
+    	    if (lilPlayer != null) {
+    	        remove(lilPlayer); // Remove from display list
+    	        lilPlayer.destroy(); // Destroy the object
+    	        lilPlayer = null; // Nullify reference
+    	    }
+    	    createLilPlayer(character1);
+    	}
+    	if(id == 2 || id == 4) { //Reload The Opponent
+    	    if (lilOpponent != null) {
+    	        remove(lilOpponent);
+    	        lilOpponent.destroy();
+    	        lilOpponent = null;
+    	    }
+    	    createLilOpponent(character2);
+    	}
+    	if(id == 3 || id == 4) { //Reload The Girlfriend
+    	    if (lilGf != null) {
+    	        remove(lilGf);
+    	        lilGf.destroy();
+    	        lilGf = null;
+    	    }
+    	    createLilGirlfriend(character3);
+    	}
 	}
 	
 	function openNewChart()
@@ -1023,7 +1038,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	
 	var lilPlayerDP:Array<Float> = [750, 5];
 	var lilOpponentDP:Array<Float> = [100, 40];
-	var lilGfDP:Array<Float> = [750, -10]; //Feels offensive that you didn't capitalize the word gf || did it just for you Rexy poo (kill me)
+	var lilGfDP:Array<Float> = [700, 100]; //Feels offensive that you didn't capitalize the word gf || did it just for you Rexy poo (kill me)
 
 	private var playerHoldTime:Float = 0;
 	private var opponentHoldTime:Float = 0;
@@ -1032,7 +1047,6 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	var lastBeatHit:Int = 0;
 	override function update(elapsed:Float)
 	{
-		if (ClientPrefs.data.ffmpegMode) elapsed = 1 / ClientPrefs.data.targetFPS;
 
 		vortexInput = false;
 		if(!fileDialog.completed)
@@ -1164,7 +1178,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		{
 			if(charterFocus) //If not typing anything
 			{
-				if(FlxG.keys.justPressed.F11)
+				if(FlxG.keys.justPressed.F5)
 				{
 					super.update(elapsed);
 					openEditorPlayState();
@@ -1177,9 +1191,27 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 					tipBg.visible = tipBg.active = fullTipText.visible = fullTipText.active = vis;
 				}
 
-				if(FlxG.keys.justPressed.ESCAPE)
+				if(FlxG.keys.justPressed.ESCAPE) // why isn't this a keybind to begin with?
 				{
 					goToMasterMenu();
+				}
+
+				// when holding control, you can do Control + O to open a chart file, or use up and down keys to change scroll direction.
+				// you can also use this for adding more shortcuts without having to interfere with the chart editor grids (doesn't have to be just control).
+				if(FlxG.keys.pressed.CONTROL && (FlxG.keys.justPressed.O || FlxG.keys.justPressed.UP || FlxG.keys.justPressed.DOWN))
+				{
+					if(FlxG.keys.justPressed.O)
+					{
+						openChartFile();
+					}
+					else if (FlxG.keys.justPressed.DOWN) {
+						setReverseScroll(reverseScrollEnabled = true);
+						showOutput("Reverse Scroll Enabled (Downscroll)");
+					}
+					else if (FlxG.keys.justPressed.UP) {
+						setReverseScroll(reverseScrollEnabled = false);
+						showOutput("Reverse Scroll Disabled (Upscroll)");
+					}
 				}
 
 				var goingBack:Bool = false;
@@ -1360,7 +1392,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				return;
 			}
 			else if(FlxG.keys.pressed.CONTROL && !isMovingNotes && (FlxG.keys.justPressed.Z || FlxG.keys.justPressed.Y || FlxG.keys.justPressed.X ||
-				FlxG.keys.justPressed.C || FlxG.keys.justPressed.V || FlxG.keys.justPressed.A || FlxG.keys.justPressed.S || FlxG.keys.justPressed.DOWN || FlxG.keys.justPressed.UP))
+				FlxG.keys.justPressed.C || FlxG.keys.justPressed.V || FlxG.keys.justPressed.A || FlxG.keys.justPressed.S))
 			{
 				canContinue = false;
 				if(FlxG.keys.justPressed.Z)
@@ -1442,14 +1474,6 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				{
 					FlxG.sound.play(Paths.sound('noteComboSound'), 0.5);
 					saveChart();
-				}
-				else if (FlxG.keys.justPressed.DOWN) {
-					setReverseScroll(reverseScrollEnabled = true);
-					showOutput("Reverse Scroll Enabled (Downscroll)");
-				}
-				else if (FlxG.keys.justPressed.UP) {
-					setReverseScroll(reverseScrollEnabled = false);
-					showOutput("Reverse Scroll Disabled (Upscroll)");
 				}
 			}
 
@@ -1704,10 +1728,14 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			}
 			else if(FlxG.mouse.justPressed && !ignoreClickForThisFrame)
 			{
-				if(FlxG.keys.pressed.CONTROL && FlxG.mouse.justPressed)
+				if(FlxG.keys.pressed.CONTROL && FlxG.mouse.justPressed && !holdingAlt) // basically Shift + Click but Psych Engine is stupid so i fixed it :)
 				{
 					if(selectedNotes.length > 0)
+					{
+						var sel = selectedNotes.copy();
 						moveSelectedNotes(noteData, dummyArrow.y);
+						addUndoAction(SELECT_NOTE, {old: sel, current: selectedNotes.copy()});
+					}
 					else
 						showOutput('You must select notes to move them!', true);
 				}
@@ -3731,47 +3759,22 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 				positionNoteXByData(note);
 			}
 			softReloadNotes(true);
-
-			objY += 52;
-			/*var clearLeftSectionButton:FlxButton = new FlxButton(duetButton.x, duetButton.y + 30, "Clear Left Side", function()
-			{
-				if (_song.notes[curSection] == null || _song.notes[curSection] != null && _song.notes[curSection].sectionNotes == null) return;
-				saveUndo(_song); //this is really weird so im saving it as an undoable action just in case it does the wrong section
-				var removeThese = [];
-				for (noteIndex in 0..._song.notes[curSection].sectionNotes.length) {
-						if (_song.notes[curSection].sectionNotes[noteIndex][1] < 4) {
-							removeThese.push(_song.notes[curSection].sectionNotes[noteIndex]);
-						}
-				}
-				if (removeThese != []) {
-					for (x in removeThese) {
-						_song.notes[curSection].sectionNotes.remove(x);
-					}
-				}
-	
-				updateGrid(false);
-				updateNoteUI();
-			});
-			var clearRightSectionButton:FlxButton = new FlxButton(clearLeftSectionButton.x + 100, clearLeftSectionButton.y, "Clear Right Side", function()
-			{
-				if (_song.notes[curSection] == null || _song.notes[curSection] != null && _song.notes[curSection].sectionNotes == null) return;
-				saveUndo(_song); //this is really weird so im saving it as an undoable action just in case it does the wrong section
-				var removeThese = [];
-				for (noteIndex in 0..._song.notes[curSection].sectionNotes.length) {
-						if (_song.notes[curSection].sectionNotes[noteIndex][1] >= 4) {
-							removeThese.push(_song.notes[curSection].sectionNotes[noteIndex]);
-						}
-				}
-				if (removeThese != []) {
-					for (x in removeThese) {
-						_song.notes[curSection].sectionNotes.remove(x);
-					}
-				}
-	
-				updateGrid(false);
-				updateNoteUI();
-			});*/
 		});
+
+		objY += 52;
+		var clearLeftSectionButton:PsychUIButton = new PsychUIButton(objX, objY, 'Clear Left Side', function() {
+			clearNotesBySide(true);
+		});
+		clearLeftSectionButton.normalStyle.bgColor = FlxColor.RED;
+		clearLeftSectionButton.normalStyle.textColor = FlxColor.WHITE;
+		clearLeftSectionButton.text.alignment = CENTER;
+
+		var clearRightSectionButton:PsychUIButton = new PsychUIButton(objX + 100, objY, 'Clear Right Side', function() {
+			clearNotesBySide(false);
+		});
+		clearRightSectionButton.normalStyle.bgColor = FlxColor.RED;
+		clearRightSectionButton.normalStyle.textColor = FlxColor.WHITE;
+		clearRightSectionButton.text.alignment = CENTER;
 
 		tab_group.add(mustHitCheckBox);
 		tab_group.add(gfSectionCheckBox);
@@ -3794,6 +3797,58 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		tab_group.add(swapSectionButton);
 		tab_group.add(duetSectionButton);
 		tab_group.add(mirrorNotesButton);
+		tab_group.add(clearLeftSectionButton);
+		tab_group.add(clearRightSectionButton);
+	}
+
+	private function clearNotesBySide(isLeftSide:Bool) {
+		if (PlayState.SONG.notes[curSec] == null) {
+			showOutput("ERROR: Current section data is missing.", true);
+			return;
+		}
+
+		var removedNotes:Array<MetaNote> = [];
+		// Iterate over notes currently rendered in the editor (which belong to the current section)
+		for (note in curRenderedNotes) {
+			if (note == null || note.isEvent) continue; // Skip nulls and events
+
+			// Use note.songData[1] which holds the original global note index (0-7)
+			var globalNoteIndex:Int = Std.int(note.songData[1]);
+
+			if (isLeftSide) {
+				// Check if the note belongs to the left side (player 1's notes, typically 0-3)
+				if (globalNoteIndex < GRID_COLUMNS_PER_PLAYER) { // GRID_COLUMNS_PER_PLAYER is 4
+					removedNotes.push(note);
+				}
+			} else {
+				// Check if the note belongs to the right side (player 2's notes, typically 4-7)
+				if (globalNoteIndex >= GRID_COLUMNS_PER_PLAYER) { // GRID_COLUMNS_PER_PLAYER is 4
+					removedNotes.push(note);
+				}
+			}
+		}
+
+		if (removedNotes.length > 0) {
+			// Save the action for undo/redo. We pass a copy of removedNotes.
+			addUndoAction(DELETE_NOTE, {notes: removedNotes.copy(), events: []});
+
+			// Remove the notes from the main 'notes' array
+			for (noteToRemove in removedNotes) {
+				notes.remove(noteToRemove);
+				// Also remove from selectedNotes if it was selected
+				selectedNotes.remove(noteToRemove);
+			}
+			
+			// Refresh the displayed notes in the current section
+			softReloadNotes(true);
+			// Update the UI elements that depend on note selection (e.g., selected count)
+			onSelectNote();
+			// Play a sound effect
+			FlxG.sound.play(Paths.sound('tried'), 0.5);
+			showOutput("Cleared " + removedNotes.length + " notes from " + (isLeftSide ? "left" : "right") + " side.");
+		} else {
+			showOutput("No notes found on the " + (isLeftSide ? "left" : "right") + " side to clear in this section.", true);
+		}
 	}
 
 	function reloadNotesDropdowns()
@@ -3833,8 +3888,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			var exts:Array<String> = ['.txt'];
 			#if LUA_ALLOWED exts.push('.lua'); #end
 			#if HSCRIPT_ALLOWED 
-			exts.push('.hx'); 
-			exts.push('.hxs');
+			exts.push('.hx');
 			#end
 			noteTypes = loadFileList('custom_notetypes/', exts);
 			for (id => noteType in Note.defaultNoteTypes)
@@ -4147,6 +4201,47 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		tab_group.add(vfxInputText);
 		tab_group.add(scriptersInputText);
 	}
+	/**
+	 * Converts the current chart data to a legacy Psych Engine format (0.2.x.x)
+	 * and separates events into a distinct object.
+	 * @return A dynamic object containing 'chart' and 'events' data for saving.
+	 */
+	private function convertToLegacyFormat():{chart:Dynamic, events:Dynamic} {
+		var convertedSong:SwagSong = cast haxe.Json.parse(haxe.Json.stringify(PlayState.SONG));
+		for (section in convertedSong.notes) {
+			if (section.sectionNotes != null && section.sectionNotes.length != 0) {
+				for (noteDataArr in section.sectionNotes) { // noteDataArr is like [strumTime, noteData, sustainLength, ?noteType]
+					// If it's an opponent section (!mustHitSection)
+					if (!section.mustHitSection) {
+						// If the note is originally for the opponent (global index 4-7)
+						// In modern Psych, opponent notes are 4-7. In legacy, they are 0-3 in opponent sections.
+						if (noteDataArr[1] >= GRID_COLUMNS_PER_PLAYER) { // GRID_COLUMNS_PER_PLAYER is 4
+							noteDataArr[1] = noteDataArr[1] % GRID_COLUMNS_PER_PLAYER; // Convert 4-7 to 0-3
+						}
+						// If the note is originally for the player (global index 0-3)
+						// In modern Psych, player notes are 0-3. In legacy, they are 4-7 in opponent sections.
+						else {
+							noteDataArr[1] += GRID_COLUMNS_PER_PLAYER; // Convert 0-3 to 4-7
+						}
+					}
+				}
+			}
+		}
+
+		convertedSong.format = 'psych_legacy_convert';
+
+		var legacyEvents:Dynamic = {
+			events: convertedSong.events,
+			format: 'psych_legacy_convert' // Events also need a format property in legacy
+		};
+		convertedSong.events = [];
+
+		var finalChartData:Dynamic = {
+			song: convertedSong
+		};
+
+		return {chart: finalChartData, events: legacyEvents};
+	}
 
 	function addFileTab()
 	{
@@ -4173,43 +4268,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 
 		btnY++;
 		btnY += 20;
-		var btn:PsychUIButton = new PsychUIButton(btnX, btnY, '  Open Chart...', function()
-		{
-			if(!fileDialog.completed) return;
-			upperBox.isMinimized = true;
-			upperBox.bg.visible = false;
-
-			fileDialog.open(function()
-			{
-				try
-				{
-					var filePath:String = fileDialog.path.replace('\\', '/');
-					var loadedChart:SwagSong = Song.parseJSON(fileDialog.data, filePath.substr(filePath.lastIndexOf('/')));
-					if(loadedChart == null || !Reflect.hasField(loadedChart, 'song')) //Check if chart is ACTUALLY a chart and valid
-					{
-						showOutput('Error: File loaded is not a Psych(SkyDecay) Engine/FNF 0.2.x.x chart.', true);
-						return;
-					}
-
-					var func:Void->Void = function()
-					{
-						loadChart(loadedChart);
-						Song.chartPath = fileDialog.path;
-						reloadNotesDropdowns();
-						prepareReload();
-						showOutput('Opened chart "${Song.chartPath}" successfully!');
-					}
-					
-					if(!ignoreProgressCheckBox.checked) openSubState(new Prompt('Warning: Any unsaved progress\nwill be lost.', func));
-					else func();
-				}
-				catch(e:Exception)
-				{
-					showOutput('Error: ${e.message}', true);
-					trace(e.stack);
-				}
-			});
-		}, btnWid);
+		var btn:PsychUIButton = new PsychUIButton(btnX, btnY, '  Open Chart...', openChartFile, btnWid); // why not
 		btn.text.alignment = LEFT;
 		tab_group.add(btn);
 
@@ -4442,6 +4501,43 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			btn.text.alignment = LEFT;
 			tab_group.add(btn);
 		}
+
+		btnY += 20;
+		var btn:PsychUIButton = new PsychUIButton(btnX, btnY, '  Save as Legacy...', function()
+		{
+			if(!fileDialog.completed) return;
+			upperBox.isMinimized = true;
+			upperBox.bg.visible = false;
+			FlxG.sound.play(Paths.sound('loading_open_alpha'), 0.5);
+
+			updateChartData();
+			var legacyData = convertToLegacyFormat();
+
+			var chartNameBase:String = Paths.formatToSongPath(PlayState.SONG.song);
+			var chartFileName:String = chartNameBase + '.json';
+			var eventsFileName:String = chartNameBase + '-events.json';
+
+			fileDialog.openDirectory('Save Legacy Chart/Events JSONs', function()
+			{
+				var path:String = fileDialog.path.replace('\\', '/');
+				if(!path.endsWith('/')) path += '/';
+
+				overwriteSavedSomething = false;
+
+				overwriteCheck(path + chartFileName, chartFileName, PsychJsonPrinter.print(legacyData.chart, ['song']), function()
+				{
+					overwriteCheck(path + eventsFileName, eventsFileName, PsychJsonPrinter.print(legacyData.events, ['events']), function()
+					{
+						if(overwriteSavedSomething)
+							showOutput('Legacy chart and events saved successfully to: $path!');
+						else
+							showOutput('Legacy chart and events save cancelled or no changes made.', true);
+					});
+				});
+			});
+		}, btnWid);
+		btn.text.alignment = LEFT;
+		tab_group.add(btn);
 
 		btnY++;
 		btnY += 20;
@@ -5203,7 +5299,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 
 		btnY++;
 		btnY += 20;
-		var btn:PsychUIButton = new PsychUIButton(btnX, btnY, '  Preview (F11)', openEditorPlayState, btnWid);
+		var btn:PsychUIButton = new PsychUIButton(btnX, btnY, '  Preview (F5)', openEditorPlayState, btnWid);
 		btn.text.alignment = LEFT;
 		tab_group.add(btn);
 		
@@ -6046,6 +6142,44 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		FlxG.sound.playMusic(Paths.music('freakyMenu'));
 		FlxG.mouse.visible = false;
 	}
+
+	function openChartFile() // So basically this is easier to use a shortcut rather than clicking on it just incase anyone wants to open a chart faster
+	{
+		if(!fileDialog.completed) return;
+		upperBox.isMinimized = true;
+		upperBox.bg.visible = false;
+
+		fileDialog.open(function()
+		{
+			try
+			{
+				var filePath:String = fileDialog.path.replace('\\', '/');
+				var loadedChart:SwagSong = Song.parseJSON(fileDialog.data, filePath.substr(filePath.lastIndexOf('/')));
+				if(loadedChart == null || !Reflect.hasField(loadedChart, 'song')) //Check if chart is ACTUALLY a chart and valid
+				{
+					showOutput('Error: File loaded is not a Psych(SkyDecay) Engine/FNF 0.2.x.x chart.', true);
+					return;
+				}
+
+				var func:Void->Void = function()
+				{
+					loadChart(loadedChart);
+					Song.chartPath = fileDialog.path;
+					reloadNotesDropdowns();
+					prepareReload();
+					showOutput('Opened chart "${Song.chartPath}" successfully!');
+				}
+				
+				if(!ignoreProgressCheckBox.checked) openSubState(new Prompt('Warning: Any unsaved progress\nwill be lost.', func));
+				else func();
+			}
+			catch(e:Exception)
+			{
+				showOutput('Error: ${e.message}', true);
+				trace(e.stack);
+			}
+		});
+	}
 	
 	override function openSubState(SubState:FlxSubState)
 	{
@@ -6077,6 +6211,81 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 
 		FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN, keyDown);
 		FlxG.stage.removeEventListener(KeyboardEvent.KEY_UP, keyUp);
+
+    	if (vocals != null) {
+    	    vocals.stop();
+    	    vocals.destroy();
+    	    FlxG.sound.list.remove(vocals);
+    	    vocals = null;
+    	}
+    	if (opponentVocals != null) {
+    	    opponentVocals.stop();
+    	    opponentVocals.destroy();
+    	    FlxG.sound.list.remove(opponentVocals);
+    	    opponentVocals = null;
+    	}
+    	// Stop global music if it's still playing
+    	if (FlxG.sound.music != null) {
+    	    FlxG.sound.music.stop();
+    	}
+
+    	// Close and nullify FlxSave
+    	if (chartEditorSave != null) {
+    	    chartEditorSave.close();
+    	    chartEditorSave = null;
+    	}
+
+    	// Remove and destroy custom FlxCamera
+    	if (camUI != null) {
+    	    FlxG.cameras.remove(camUI);
+    	    camUI.destroy();
+    	    camUI = null;
+    	}
+
+    	// Destroy all FlxSprite and FlxText members
+    	FlxDestroyUtil.destroy(bg);
+    	FlxDestroyUtil.destroy(sd);
+    	FlxDestroyUtil.destroy(lilStage);
+    	FlxDestroyUtil.destroy(lilBf);
+    	FlxDestroyUtil.destroy(lilOpp);
+    	FlxDestroyUtil.destroy(lilGf); // Character extends FlxSprite
+    	FlxDestroyUtil.destroy(timeLine);
+    	FlxDestroyUtil.destroy(infoText);
+    	FlxDestroyUtil.destroy(autoSaveIcon);
+    	FlxDestroyUtil.destroy(outputTxt);
+    	FlxDestroyUtil.destroy(selectionBox);
+    	FlxDestroyUtil.destroy(mustHitIndicator);
+    	FlxDestroyUtil.destroy(eventIcon);
+    	FlxDestroyUtil.destroy(eventLockOverlay);
+    	FlxDestroyUtil.destroy(vortexIndicator);
+    	FlxDestroyUtil.destroy(dummyArrow);
+    	FlxDestroyUtil.destroy(tipBg);
+    	FlxDestroyUtil.destroy(fullTipText);
+    	FlxDestroyUtil.destroy(waveformSprite);
+
+    	// Destroy FlxTypedGroups and their contents (if not already destroyed)
+    	FlxDestroyUtil.destroy(behindRenderedNotes);
+    	FlxDestroyUtil.destroy(curRenderedNotes);
+    	FlxDestroyUtil.destroy(movingNotes);
+    	FlxDestroyUtil.destroy(strumLineNotes);
+
+    	// Destroy grid sprites (already handled in createGrids, but ensure nulling)
+    	FlxDestroyUtil.destroy(prevGridBg);
+    	FlxDestroyUtil.destroy(gridBg);
+    	FlxDestroyUtil.destroy(nextGridBg);
+
+    	// Destroy UI Boxes (assuming PsychUIBox handles its children's destruction)
+    	FlxDestroyUtil.destroy(mainBox);
+    	FlxDestroyUtil.destroy(infoBox);
+    	FlxDestroyUtil.destroy(upperBox);
+
+    	for (icon in icons) FlxDestroyUtil.destroy(icon);
+    	icons.resize(0);
+
+    	for (note in notes) if(note != null) note.destroy();
+    	notes.resize(0);
+    	for (event in events) if(event != null) event.destroy();
+    	events.resize(0);
 	}
 
 	function keyDown(event:KeyboardEvent) {
@@ -6180,7 +6389,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 
 		// quant scrolling
 		var page:Bool = (eventKey == FlxKey.PAGEUP || eventKey == FlxKey.PAGEDOWN);
-		if (eventKey == FlxKey.UP || eventKey == FlxKey.DOWN || page) {
+		if ((eventKey == FlxKey.UP || eventKey == FlxKey.DOWN || page) && !FlxG.keys.pressed.CONTROL){
 			var up:Bool = (eventKey == FlxKey.UP || eventKey == FlxKey.PAGEUP);
 			if (FlxG.sound.music.playing) setSongPlaying(false);
 
@@ -6367,7 +6576,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		if(currentUndo > 0) undoActions = undoActions.slice(currentUndo);
 		currentUndo = 0;
 		undoActions.insert(0, {action: action, data: data});
-		while(undoActions.length > 99999999) // again, ShadowMario i swear to fucking god. Rhythm Games support more than this!! Fuck FNF at this point. I really fucking hate this. I'm struggling to fuckin select ALL notes when it only selects "all" in a section. Literally ShadowMario, WTF! Kade, Codename, Restructure Engines support Selecting every single note. Fuck you. Literally i fucking hate you.
+		while(undoActions.length > 200) // again, ShadowMario i swear to fucking god. Rhythm Games support more than this!! Fuck FNF at this point. I really fucking hate this. I'm struggling to fuckin select ALL notes when it only selects "all" in a section. Literally ShadowMario, WTF! Kade, Codename, Restructure Engines support Selecting every single note. Fuck you. Literally i fucking hate you.
 		{
 			var lastAction:UndoStruct = undoActions.pop();
 			if(lastAction != null)
@@ -6463,7 +6672,6 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 					notes.push(note);
 					selectedNotes.push(note);
 					note.songData[0] = note.strumTime;
-					note.songData[1] = note.chartNoteData;
 				}
 			}
 			notes.sort(PlayState.sortByTime);

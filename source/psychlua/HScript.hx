@@ -439,15 +439,26 @@ class HScript extends Iris
 		catch(e:IrisError) {
 			var pos:HScriptInfos = cast this.interp.posInfos();
 			pos.funcName = funcToRun;
+			#if LUA_ALLOWED
 			if (parentLua != null)
 			{
 				pos.isLua = true;
 				if (parentLua.lastCalledFunction != '') pos.funcName = parentLua.lastCalledFunction;
 			}
+			#end
 			Iris.error(Printer.errorToString(e, false), pos);
 		}
-		catch (e:ValueException) { // this is thrown for invalid field access and stuff
-			Iris.error('$funcToRun: $e');
+		catch (e:ValueException) {
+			var pos:HScriptInfos = cast this.interp.posInfos();
+			pos.funcName = funcToRun;
+			#if LUA_ALLOWED
+			if (parentLua != null)
+			{
+				pos.isLua = true;
+				if (parentLua.lastCalledFunction != '') pos.funcName = parentLua.lastCalledFunction;
+			}
+			#end
+			Iris.error('$e', pos);
 		}
 		return null;
 	}
@@ -533,6 +544,7 @@ class CustomInterp extends crowplexus.hscript.Interp
 		_instanceFields = Type.getInstanceFields(Type.getClass(inst));
 		return inst;
 	}
+
 	public function new()
 	{
 		super();
@@ -554,8 +566,6 @@ class CustomInterp extends crowplexus.hscript.Interp
 
 		return Reflect.callMethod(o, f, args);
 	}
-
-
 
 	override function resolve(id: String): Dynamic {
 		if (locals.exists(id)) {

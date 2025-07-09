@@ -71,7 +71,6 @@ class FPSCounter extends TextField
 			textColor = 0xFF036EFA;
 	}
 
-	inline function get_memoryMegas():Float {
+	inline function get_memoryMegas():Float
 		return cpp.vm.Gc.memInfo64(cpp.vm.Gc.MEM_INFO_USAGE);
-	}
 }

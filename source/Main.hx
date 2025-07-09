@@ -47,28 +47,29 @@ import backend.Highscore;
 
 import backend.ColorBlindness;
 
-#if linux
+#if (linux && !debug)
 @:cppInclude('./external/gamemode_client.h')
 @:cppFileCode('#define GAMEMODE_AUTO')
 #end
 
 class Main extends Sprite
 {
-	private static final game = {
+	public static final game = {
 		width: 1280, // WINDOW width
 		height: 720, // WINDOW height
 		initialState: TitleState, // initial game state
 		zoom: -1.0, // game state bounds
 		framerate: 60, // default framerate
 		skipSplash: true, // if the default flixel splash screen should be skipped
-		startFullscreen: false // if the game should start at fullscreen mode
+		startFullscreen: false, // if the game should start at fullscreen mode
+		fixedTimestep: true, // make sure the game is stable no matter what
+		stepMS: 1000 / 60, // Update logic at 60 FPS
+		maxAccumulation: 0.1 // Optional but recommended
 	};
 
 	public static var fpsVar:FPSCounter;
 
 	public static var colorFilter:ColorBlindness;
-
-	// public static var gjToastManager:GJToastManager;
 
 	public static var noTerminalColor:Bool = false;
 	@:dox(hide)
@@ -212,13 +213,6 @@ class Main extends Sprite
 		@:privateAccess
 		game._customSoundTray = backend.FunkinSoundTray;
 		addChild(game);
-		// addChild(gjToastManager = new GJToastManager());
-
-		// if (Main.checkGJKeysAndId())
-		// {
-			// GameJoltAPI.connect();
-			// GameJoltAPI.authDaUser(ClientPrefs.data.gjUser, ClientPrefs.data.gjToken, true);
-		// }
 
 		#if !mobile
 		fpsVar = new FPSCounter(10, 3, 0xFFFFFF);
@@ -280,12 +274,6 @@ class Main extends Sprite
 			sprite.__cacheBitmapData = null;
 		}
 	}
-
-	// public static function checkGJKeysAndId():Bool
-	// {
-		// var result:Bool = (GJKeys.key != '' && GJKeys.id != 0);
-		// return result;
-	// }
 
 	// Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!
 	// very cool person for real they don't get enough credit for their work

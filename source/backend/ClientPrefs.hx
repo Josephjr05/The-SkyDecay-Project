@@ -6,6 +6,28 @@ import flixel.input.gamepad.FlxGamepadInputID;
 
 import states.TitleState;
 
+@:enum abstract FramerateSetting(String) from String to String {
+	public var FPS60 = "FPS60";
+	public var FPS120 = "FPS120";
+	public var FPS144 = "FPS144";
+	public var FPS165 = "FPS165";
+	public var FPS240 = "FPS240";
+	public var Unlimited = "UNLIMITED";
+	public var Default = "DEFAULT";
+
+	public static function fromString(value:String):FramerateSetting {
+		return switch (value) {
+			case "FPS60": FPS60;
+			case "FPS120": FPS120;
+			case "FPS144": FPS144;
+			case "FPS165": FPS165;
+			case "FPS240": FPS240;
+			case "UNLIMITED": Unlimited;
+			default: Default;
+		};
+	}
+}
+
 // Add a variable here and it will get automatically saved
 @:structInit class SaveVariables {
 	public var downScroll:Bool = false;
@@ -22,7 +44,7 @@ import states.TitleState;
 	public var shaders:Bool = true;
 	public var cacheOnGPU:Bool = #if !switch false #else true #end; // GPU Caching made by Raltyro
 	public var multiThreading:Bool = true;
-	public var framerate:Int = 60;
+	public var framerateSetting:FramerateSetting = FramerateSetting.Default;
 	public var camZooms:Bool = true;
 	public var hideHud:Bool = false;
 	public var noteOffset:Int = 0;
@@ -62,25 +84,23 @@ import states.TitleState;
 		// oh yeah when you calculate the bps divide it by the songSpeed or rate because it wont scroll correctly when speeds exist.
 		// -kade
 		'songspeed' => 1.0,
-		'healthgain' => 1.0,
-		'healthloss' => 1.0,
+		// 'healthgain' => 1.0,
+		// 'healthloss' => 1.0,
 		'instakill' => false,
 		'practice' => false,
 		'botplay' => false,
 		'opponentplay' => false,
-		//modcharts (sce ported)
-		'modchart' => true,
 	];
 
 	public var comboOffset:Array<Int> = [0, 0, 0, 0];
 	public var ratingOffset:Int = 0;
 	public var perfectRating:Bool = true;	
 	public var perfectSprite:Bool = true;
-	public var perfectWindow:Float = 16.0; // decimal adds precise value to hit window (similar to Osu Mania)
-	public var greatWindow:Float = 43.0;
-	public var goodWindow:Float = 76.0;
-	public var okWindow:Float = 106.0;
-	public var safeFrames:Float = 10.0; // safe frames takes your input instantly!!
+	public var perfectWindow:Float = 16.0; // these are attached to PlayState, otherwise they are attached to SaveVariables (aka null)
+	public var greatWindow:Float = 45.0;
+	public var goodWindow:Float = 90.0;
+	public var okWindow:Float = 135.0;
+	public var safeFrames:Float = 10.0;
 	public var guitarHeroSustains:Bool = false; // fuck u
 	public var discordRPC:Bool = true;
 	public var loadingScreen:Bool = true;
@@ -103,13 +123,9 @@ import states.TitleState;
 
 		public var colorFilter:String = 'NONE';
 
-		// screenshot shit
-		public var ah:Bool = false;
+		// renders/screenshot shit from JS engine
 		public var lossless:Bool = false;
 		public var quality:Int = 100;
-		public var renderSS:Float = 5.0;
-		public var targetFPS:Float = 60;
-		public var screenShotMode:Bool = false;
 
 		// lane underlay
 		public var underlaneVisibility:Float = 0;
@@ -123,7 +139,10 @@ import states.TitleState;
 		//voiid chronicles additions
 		public var breakTimer:Bool = false;
 
-		public var osuSustainInput:Bool = true;
+		public var sustainRelease:Bool = true; // keep it true because yes fnf players need this
+
+		// optimizations
+		public var batchedDraws:Bool = false; // if you have a potato pc, turn this off
 }
 
 class ClientPrefs {
@@ -204,6 +223,7 @@ class ClientPrefs {
 	public static function saveSettings() {
 		for (key in Reflect.fields(data))
 			Reflect.setField(FlxG.save.data, key, Reflect.field(data, key));
+			Reflect.setField(FlxG.save.data, 'framerateSetting', Std.string(data.framerateSetting));
 
 		#if ACHIEVEMENTS_ALLOWED Achievements.save(); #end
 		FlxG.save.flush();
@@ -223,29 +243,48 @@ class ClientPrefs {
 		for (key in Reflect.fields(data))
 			if (key != 'gameplaySettings' && Reflect.hasField(FlxG.save.data, key))
 				Reflect.setField(data, key, Reflect.field(FlxG.save.data, key));
+			if (Reflect.hasField(FlxG.save.data, 'framerateSetting')) {
+				final str = Std.string(Reflect.field(FlxG.save.data, 'framerateSetting'));
+				data.framerateSetting = FramerateSetting.fromString(str);
+			}
+			if (Reflect.hasField(FlxG.save.data, 'unlockFPS')) {
+ 				Reflect.deleteField(FlxG.save.data, 'unlockFPS');
+    			trace('Old unlockFPS removed from save!');
+			}
 		
 		if(Main.fpsVar != null)
 			Main.fpsVar.visible = data.showFPS;
 
 		#if (!html5 && !switch)
 		FlxG.autoPause = ClientPrefs.data.autoPause;
-
-		if(FlxG.save.data.framerate == null) {
-			final refreshRate:Int = FlxG.stage.application.window.displayMode.refreshRate;
-			data.framerate = Std.int(FlxMath.bound(refreshRate, 60, 240));
-		}
 		#end
 
-		if(data.framerate > FlxG.drawFramerate)
-		{
-			FlxG.updateFramerate = data.framerate;
-			FlxG.drawFramerate = data.framerate;
+		if (Std.isOfType(FlxG.save.data.framerateSetting, String)) {
+			final str:String = FlxG.save.data.framerateSetting;
+			switch(str.toLowerCase()) {
+				case 'fps60':         data.framerateSetting = FramerateSetting.FPS60;
+				case 'fps120':        data.framerateSetting = FramerateSetting.FPS120;
+				case 'fps144':        data.framerateSetting = FramerateSetting.FPS144;
+				case 'fps165':        data.framerateSetting = FramerateSetting.FPS165;
+				case 'fps240':        data.framerateSetting = FramerateSetting.FPS240;
+				case 'unlimited':     data.framerateSetting = FramerateSetting.Unlimited;
+				default:              data.framerateSetting = FramerateSetting.Default;
+			}
 		}
-		else
-		{
-			FlxG.drawFramerate = data.framerate;
-			FlxG.updateFramerate = data.framerate;
-		}
+
+		var fps:Int = switch (data.framerateSetting) {
+			case FPS60: 60;
+			case FPS120: 120;
+			case FPS144: 144;
+			case FPS165: 165;
+			case FPS240: 240;
+			case Unlimited: 999;
+			case Default:
+				FlxG.stage.application.window.displayMode.refreshRate;
+		};
+
+		FlxG.updateFramerate = fps;
+		FlxG.drawFramerate = fps;
 
 		if(FlxG.save.data.gameplaySettings != null)
 		{

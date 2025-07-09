@@ -22,13 +22,13 @@ class EditorPlayState extends MusicBeatSubstate
 	var startingSong:Bool = true;
 
 	var playbackRate:Float = 1;
+	var inst:FlxSound = new FlxSound();
 	var vocals:FlxSound;
 	var opponentVocals:FlxSound;
-	var inst:FlxSound;
 	
 	var notes:FlxTypedGroup<Note>;
 	var unspawnNotes:Array<Note> = [];
-	var ratingsData:Array<Rating> = Rating.loadDefault();
+	var ratingsData:Array<Rating>;
 	
 	var comboGroup:FlxSpriteGroup;
 	var strumLineNotes:FlxTypedGroup<StrumNote>;
@@ -77,7 +77,9 @@ class EditorPlayState extends MusicBeatSubstate
 		this.startPos = Conductor.songPosition;
 		Conductor.songPosition = startPos;
 
+		#if FLX_PITCH
 		playbackRate = FlxG.sound.music.pitch;
+		#end
 	}
 
 	override function create()
@@ -176,8 +178,8 @@ class EditorPlayState extends MusicBeatSubstate
 			Conductor.songPosition += elapsed * 1000 * playbackRate;
 			if (Conductor.songPosition >= 0)
 			{
-				var timeDiff:Float = Math.abs((FlxG.sound.music.time + Conductor.offset) - Conductor.songPosition);
-				Conductor.songPosition = FlxMath.lerp(FlxG.sound.music.time + Conductor.offset, Conductor.songPosition, Math.exp(-elapsed * 2.5));
+				var timeDiff:Float = Math.abs((inst.time + Conductor.offset) - Conductor.songPosition);
+				Conductor.songPosition = FlxMath.lerp(inst.time + Conductor.offset, Conductor.songPosition, Math.exp(-elapsed * 2.5));
 				if (timeDiff > 1000 * playbackRate)
 					Conductor.songPosition = Conductor.songPosition + 1000 * FlxMath.signOf(timeDiff);
 			}
@@ -267,22 +269,28 @@ class EditorPlayState extends MusicBeatSubstate
 		FlxG.stage.removeEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
 		FlxG.mouse.visible = true;
 		NoteSplash.configs.clear();
+		FlxG.sound.list.remove(inst);
+		flixel.util.FlxDestroyUtil.destroy(inst);
 		super.destroy();
 	}
 	
 	function startSong():Void
 	{
 		startingSong = false;
-		FlxG.sound.music.onComplete = finishSong;
-		FlxG.sound.music.volume = vocals.volume = opponentVocals.volume = 1;
+		@:privateAccess inst.loadEmbedded(FlxG.sound.music._sound);
+		inst.looped = false;
+		inst.onComplete = finishSong;
+		inst.volume = vocals.volume = opponentVocals.volume = 1;
+		FlxG.sound.list.add(inst);
 
-		FlxG.sound.music.play();
+		FlxG.sound.music.pause();
+		inst.play();
 		vocals.play();
 		opponentVocals.play();
-		FlxG.sound.music.time = vocals.time = opponentVocals.time = startPos - Conductor.offset;
+		inst.time = vocals.time = opponentVocals.time = startPos - Conductor.offset;
 
 		// Song duration in a float, useful for the time left feature
-		songLength = FlxG.sound.music.length;
+		songLength = inst.length;
 	}
 
 	// Borrowed from PlayState
@@ -303,7 +311,7 @@ class EditorPlayState extends MusicBeatSubstate
 		var songData = PlayState.SONG;
 		Conductor.bpm = songData.bpm;
 
-		FlxG.sound.music.volume = vocals.volume = opponentVocals.volume = 0;
+		inst.volume = vocals.volume = opponentVocals.volume = 0;
 
 		notes = new FlxTypedGroup<Note>();
 		add(notes);
@@ -486,7 +494,7 @@ class EditorPlayState extends MusicBeatSubstate
 		for (note in unspawnNotes)
 			if(note != null) invalidateNote(note);
 
-		FlxG.sound.music.pause();
+		inst.pause();
 		vocals.pause();
 		opponentVocals.pause();
 
@@ -499,18 +507,14 @@ class EditorPlayState extends MusicBeatSubstate
 	
 	private function cachePopUpScore()
 	{
-		var uiPrefix:String = '';
-		var uiPostfix:String = '';
+		var uiFolder:String = "";
 		if (PlayState.stageUI != "normal")
-		{
-			uiPrefix = '${PlayState.stageUI}UI/';
-			if (PlayState.isPixelStage) uiPostfix = '-pixel';
-		}
+			uiFolder = PlayState.uiPrefix + "UI/";
 
 		for (rating in ratingsData)
-			Paths.image(uiPrefix + rating.image + uiPostfix);
+			Paths.image(uiFolder + rating.image + PlayState.uiPostfix);
 		for (i in 0...10)
-			Paths.image(uiPrefix + 'num' + i + uiPostfix);
+			Paths.image(uiFolder + 'num' + i + PlayState.uiPostfix);
 	}
 
 	private function popUpScore(note:Note = null):Void
@@ -547,18 +551,15 @@ class EditorPlayState extends MusicBeatSubstate
 		if(!note.ratingDisabled)
 			songHits++;
 
-		var uiPrefix:String = "";
-		var uiPostfix:String = '';
+		var uiFolder:String = "";
 		var antialias:Bool = ClientPrefs.data.antialiasing;
-
 		if (PlayState.stageUI != "normal")
 		{
-			uiPrefix = '${PlayState.stageUI}UI/';
-			if (PlayState.isPixelStage) uiPostfix = '-pixel';
+			uiFolder = PlayState.uiPrefix + "UI/";
 			antialias = !PlayState.isPixelStage;
 		}
 
-		rating.loadGraphic(Paths.image(uiPrefix + daRating.image + uiPostfix));
+		rating.loadGraphic(Paths.image(uiFolder + daRating.image + PlayState.uiPostfix));
 		rating.screenCenter();
 		rating.x = placement - 40;
 		rating.y -= 60;
@@ -570,7 +571,7 @@ class EditorPlayState extends MusicBeatSubstate
 		rating.y -= ClientPrefs.data.comboOffset[1];
 		rating.antialiasing = antialias;
 
-		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(uiPrefix + 'combo' + uiPostfix));
+		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(uiFolder + 'combo' + PlayState.uiPostfix));
 		comboSpr.screenCenter();
 		comboSpr.x = placement;
 		comboSpr.acceleration.y = FlxG.random.int(200, 300) * playbackRate * playbackRate;
@@ -605,7 +606,7 @@ class EditorPlayState extends MusicBeatSubstate
 		var separatedScore:String = Std.string(combo).lpad('0', 3);
 		for (i in 0...separatedScore.length)
 		{
-			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(uiPrefix + 'num' + Std.parseInt(separatedScore.charAt(i)) + uiPostfix));
+			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(uiFolder + 'num' + Std.parseInt(separatedScore.charAt(i)) + PlayState.uiPostfix));
 			numScore.screenCenter();
 			numScore.x = placement + (43 * daLoop) - 90 + ClientPrefs.data.comboOffset[2];
 			numScore.y += 80 - ClientPrefs.data.comboOffset[3];
@@ -673,7 +674,7 @@ class EditorPlayState extends MusicBeatSubstate
 
 		// more accurate hit time for the ratings?
 		var lastTime:Float = Conductor.songPosition;
-		if(Conductor.songPosition >= 0) Conductor.songPosition = FlxG.sound.music.time + Conductor.offset;
+		if(Conductor.songPosition >= 0) Conductor.songPosition = inst.time + Conductor.offset;
 
 		// obtain notes that the player can hit
 		var plrInputNotes:Array<Note> = notes.members.filter(function(n:Note)

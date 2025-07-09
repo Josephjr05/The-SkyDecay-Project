@@ -54,7 +54,7 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		optionsArray.push(option);
 		#end
 
-		var option:GameplayOption = new GameplayOption('Health Gain Multiplier', 'healthgain', FLOAT, 1); // should depend on difficulty in SDPJ
+		/* var option:GameplayOption = new GameplayOption('Health Gain Multiplier', 'healthgain', FLOAT, 1); // Now depends on difficulty in SDYPJ :D
 		option.scrollSpeed = 2.5;
 		option.minValue = 1.24; //this is locked to 7.7 OD now
 		option.maxValue = 1.24;
@@ -62,13 +62,13 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		option.displayFormat = '%vX';
 		optionsArray.push(option);
 
-		var option:GameplayOption = new GameplayOption('Health Loss Multiplier', 'healthloss', FLOAT, 1); // should depend on difficulty in SDPJ
+		var option:GameplayOption = new GameplayOption('Health Loss Multiplier', 'healthloss', FLOAT, 1); // Now depends on difficulty in SDYPJ :D
 		option.scrollSpeed = 2.5;
 		option.minValue = 1.5; //this is locked to 7.7 OD now
 		option.maxValue = 1.5;
 		option.changeValue = 0.1;
 		option.displayFormat = '%vX';
-		optionsArray.push(option);
+		optionsArray.push(option);*/
 
 		optionsArray.push(new GameplayOption('Instakill on Miss', 'instakill', BOOL, false));
 		optionsArray.push(new GameplayOption('Practice Mode', 'practice', BOOL, false));

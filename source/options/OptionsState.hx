@@ -6,7 +6,6 @@ import backend.StageData;
 class OptionsState extends MusicBeatState
 {
 	public static final options:Array<String> = [
-		'Screenshot Settings',
 		'Note Colors',
 		'Controls',
 		'Adjust Delay and Combo',
@@ -23,8 +22,6 @@ class OptionsState extends MusicBeatState
 	function openSelectedSubstate(label:String) {
 		switch(label)
 		{
-			case 'Screenshot Settings':
-				openSubState(new options.ScreenshotTest());
 			case 'Note Colors':
 				openSubState(new options.NotesColorSubState());
 			case 'Controls':

@@ -57,12 +57,12 @@ class StickerSubState extends MusicBeatSubstate
     var assetsInList = openfl.utils.Assets.list();
 
     var soundFilterFunc = function(a:String) {
-      return a.startsWith('assets/shared/sounds/stickersounds/');
+      return a.startsWith('assets/sounds/stickersounds/');
     };
 
     soundSelections = assetsInList.filter(soundFilterFunc);
     soundSelections = soundSelections.map(function(a:String) {
-      return a.replace('assets/shared/sounds/stickersounds/', '').split('/')[0];
+      return a.replace('assets/sounds/stickersounds/', '').split('/')[0];
     });
 
     // cracked cleanup... yuchh...
@@ -80,13 +80,13 @@ class StickerSubState extends MusicBeatSubstate
     soundSelection = FlxG.random.getObject(soundSelections);
 
     var filterFunc = function(a:String) {
-      return a.startsWith('assets/shared/sounds/stickersounds/' + soundSelection + '/');
+      return a.startsWith('assets/sounds/stickersounds/' + soundSelection + '/');
     };
     var assetsInList3 = openfl.utils.Assets.list();
     sounds = assetsInList3.filter(filterFunc);
     for (i in 0...sounds.length)
     {
-      sounds[i] = sounds[i].replace('assets/shared/sounds/', '');
+      sounds[i] = sounds[i].replace('assets/sounds/', '');
       sounds[i] = sounds[i].substring(0, sounds[i].lastIndexOf('.'));
     }
 

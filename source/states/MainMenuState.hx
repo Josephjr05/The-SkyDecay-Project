@@ -6,6 +6,8 @@ import lime.app.Application;
 import states.editors.MasterEditorMenu;
 import options.OptionsState;
 
+import states.TetrisState;
+
 enum MainMenuColumn {
 	LEFT;
 	CENTER;
@@ -14,7 +16,7 @@ enum MainMenuColumn {
 
 class MainMenuState extends MusicBeatState
 {
-	public static var psychEngineVersion:String = '1.0-prerelease'; // This is also used for Discord RPC
+	public static var psychEngineVersion:String = '1.0.4 (Source code since 0.6.1)'; // This is also used for Discord RPC
 	public static var sdEngineVersion:String = '0.2';
 	public static var curSelected:Int = 0;
 	public static var curColumn:MainMenuColumn = CENTER;
@@ -26,11 +28,16 @@ class MainMenuState extends MusicBeatState
 
 	var gameJoltButton:FlxSprite;
 
+	var lastTKeyPressTime:Float = 0.0;
+    static final DOUBLE_TAP_WINDOW:Float = 0.3;
+
 	//Centered/Text options
 	var optionShit:Array<String> = [
 		// 'story_mode',
 		'freeplay',
 		// #if MODS_ALLOWED 'mods', #end
+		'gallery',
+		'discord',
 		'credits'
 	];
 
@@ -266,6 +273,23 @@ class MainMenuState extends MusicBeatState
 				MusicBeatState.switchState(new TitleState());
 			}
 
+        	if (FlxG.keys.justPressed.T) // open Tetris state with double tap T key
+        	{
+        	    var currentTime = FlxG.game.ticks / 1000.0;
+        	    if (currentTime - lastTKeyPressTime <= DOUBLE_TAP_WINDOW)
+        	    {
+        	        selectedSomethin = true;
+        	        FlxG.mouse.visible = false;
+        	        FlxG.sound.music.stop();
+        	        FlxG.switchState(new TetrisState());
+        	        lastTKeyPressTime = 0.0;
+        	    }
+        	    else
+        	    {
+        	        lastTKeyPressTime = currentTime;
+        	    }
+        	}
+
 			/*if (FlxG.mouse.overlaps(gameJoltButton))
         	{
         	  if (gameJoltButton.color != 0xB8F500) gameJoltButton.color = 0xB8F500;
@@ -326,6 +350,8 @@ class MainMenuState extends MusicBeatState
 
 						case 'credits':
 							MusicBeatState.switchState(new CreditsState());
+						case 'gallery':
+							MusicBeatState.switchState(new GalleryState());
 						case 'options':
 							MusicBeatState.switchState(new OptionsState());
 							OptionsState.onPlayState = false;
@@ -337,6 +363,10 @@ class MainMenuState extends MusicBeatState
 							}
 						case 'donate':
 							CoolUtil.browserLoad('https://ninja-muffin24.itch.io/funkin');
+							selectedSomethin = false;
+							item.visible = true;
+						case 'discord':
+							CoolUtil.browserLoad('https://discord.gg/axFvmhxpgg');
 							selectedSomethin = false;
 							item.visible = true;
 						default:

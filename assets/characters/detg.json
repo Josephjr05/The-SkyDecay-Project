@@ -1,0 +1,55 @@
+{
+	"animations": [
+		{
+			"loop": true,
+			"offsets": [0, 0],
+			"anim": "idle",
+			"fps": 24,
+			"name": "D-Idle",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [260, 70],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "D-Left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [383, 440],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "D-Up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [50, -100],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "D-Right",
+			"indices": []
+		},
+		{
+			"offsets": [110, -151],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "D-Down"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/Shucks/doesEVILthingsguyRTX",
+	"position": [0, 0],
+	"healthicon": "icon-dbtg",
+	"flip_x": false,
+	"healthbar_colors": [161, 161, 161],
+	"camera_position": [-90, 70],
+	"sing_duration": 6.1,
+	"scale": 1,
+	"_editor_isPlayer": false
+}

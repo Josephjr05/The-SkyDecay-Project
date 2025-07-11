@@ -1,0 +1,56 @@
+{
+	"animations": [
+		{
+			"offsets": [30, -130],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "Melodi MelodiIdle"
+		},
+		{
+			"offsets": [23, -130],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "Melodi MelodiLeft"
+		},
+		{
+			"offsets": [1, -130],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "Melodi MelodiDown"
+		},
+		{
+			"offsets": [40, -130],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "Melodi MelodiUp"
+		},
+		{
+			"offsets": [30, -130],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "Melodi MelodiRight"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/ScratchinMelodii/Melodi",
+	"position": [0, 0],
+	"chartPosition": [-30, 70],
+	"healthicon": "melodii",
+	"flip_x": false,
+	"healthbar_colors": [255, 140, 255],
+	"camera_position": [-20, 280],
+	"sing_duration": 6.1,
+	"scale": 1,
+	"_editor_isPlayer": false
+}

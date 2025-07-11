@@ -1,0 +1,63 @@
+{
+	"position": [
+		160,
+		60
+	],
+	"dialogue_pos": "left",
+	"scale": 1.25,
+	"image": "bluedark",
+	"animations": [
+		{
+			"idle_offsets": [
+				-1,
+				1
+			],
+			"loop_offsets": [
+				0,
+				0
+			],
+			"anim": "talk",
+			"idle_name": "Bluedark",
+			"loop_name": "Bluedark"
+		},
+		{
+			"loop_offsets": [
+				0,
+				0
+			],
+			"anim": "what?",
+			"idle_offsets": [
+				0,
+				-12
+			],
+			"loop_name": "what",
+			"idle_name": "what"
+		},
+		{
+			"loop_offsets": [
+				0,
+				0
+			],
+			"anim": "angry",
+			"idle_offsets": [
+				0,
+				-49
+			],
+			"loop_name": "angry",
+			"idle_name": "angry"
+		},
+		{
+			"loop_offsets": [
+				0,
+				0
+			],
+			"anim": "bruh",
+			"idle_offsets": [
+				0,
+				-50
+			],
+			"loop_name": "bruh",
+			"idle_name": "Bruh"
+		}
+	]
+}

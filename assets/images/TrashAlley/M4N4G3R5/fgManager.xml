@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.1.3 https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="fgManager.png" width="8091" height="482">
+	<SubTexture name="tvFront-Blue" x="1" y="1" width="2020" height="480" frameX="-1" frameY="-1" frameWidth="2026" frameHeight="485"/>
+	<SubTexture name="tvFront-Killer" x="2024" y="1" width="2020" height="480" frameX="-1" frameY="-1" frameWidth="2026" frameHeight="485"/>
+	<SubTexture name="tvFront-Normal" x="4047" y="1" width="2020" height="480" frameX="-1" frameY="-1" frameWidth="2026" frameHeight="485"/>
+	<SubTexture name="tvFront-Red" x="6070" y="1" width="2020" height="480" frameX="-1" frameY="-1" frameWidth="2026" frameHeight="485"/>
+</TextureAtlas>

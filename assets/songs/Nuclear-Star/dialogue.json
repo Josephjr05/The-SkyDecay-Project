@@ -1,0 +1,76 @@
+{
+	"dialogue": [
+		{
+			"expression": "talk",
+			"text": "Hey man, good to see you again!",
+			"boxState": "normal",
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "camellia"
+		},
+		{
+			"expression": "confused",
+			"text": "Yeah...",
+			"boxState": "normal",
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "bf"
+		},
+		{
+			"expression": "talk2",
+			"text": "You did wonderfully at the concert last week!",
+			"boxState": "normal",
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "camellia"
+		},
+		{
+			"expression": "talk4",
+			"text": "If you want to perform more though, practice is important.",
+			"boxState": "normal",
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "camellia"
+		},
+		{
+			"expression": "confused",
+			"text": "Last week? I just got here.",
+			"boxState": "normal",
+			"sound": "",
+			"speed": 0.06,
+			"portrait": "bf"
+		},
+		{
+			"expression": "talk3",
+			"text": "No worries though, I bet you can handle this one just fine!",
+			"boxState": "normal",
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "camellia"
+		},
+		{
+			"expression": "confused",
+			"text": "Camellia, are you okay??",
+			"boxState": "normal",
+			"sound": "",
+			"speed": 0.06,
+			"portrait": "bf"
+		},
+		{
+			"sound": "",
+			"speed": 0.055,
+			"portrait": "camellia",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Ofcourse! Now lets get started!"
+		},
+		{
+			"sound": "",
+			"speed": 0.055,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "excited",
+			"text": "I am very confused but lets do this!"
+		}
+	]
+}

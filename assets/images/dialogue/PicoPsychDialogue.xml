@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="PicoPsychDialogue.png">
+	<!-- Created with Adobe Animate version 21.0.1.37179 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="PicoGun0000" x="0" y="0" width="464" height="475" pivotX="52.45" pivotY="0"/>
+	<SubTexture name="PicoAimLoop0000" x="464" y="0" width="497" height="476" pivotX="54.75" pivotY="0.05"/>
+	<SubTexture name="PicoAimLoop0001" x="464" y="0" width="497" height="476"/>
+	<SubTexture name="PicoAimLoop0002" x="961" y="0" width="497" height="476"/>
+	<SubTexture name="PicoAimLoop0003" x="961" y="0" width="497" height="476"/>
+	<SubTexture name="PicoAimLoop0004" x="1458" y="0" width="497" height="476"/>
+	<SubTexture name="PicoAimLoop0005" x="1458" y="0" width="497" height="476"/>
+	<SubTexture name="PicoWhat0000" x="1955" y="0" width="443" height="475" pivotX="0" pivotY="0"/>
+	<SubTexture name="PicoConfusedLoop0000" x="2398" y="0" width="450" height="476" pivotX="7.4" pivotY="0.05"/>
+	<SubTexture name="PicoConfusedLoop0001" x="2398" y="0" width="450" height="476"/>
+	<SubTexture name="PicoConfusedLoop0002" x="2848" y="0" width="450" height="476"/>
+	<SubTexture name="PicoConfusedLoop0003" x="2848" y="0" width="450" height="476"/>
+	<SubTexture name="PicoConfusedLoop0004" x="3298" y="0" width="450" height="476"/>
+	<SubTexture name="PicoConfusedLoop0005" x="3298" y="0" width="450" height="476"/>
+	<SubTexture name="PicoHappy0000" x="0" y="476" width="464" height="489" pivotX="34.8" pivotY="19.2"/>
+	<SubTexture name="PicoJoyLoop0000" x="464" y="476" width="478" height="496" pivotX="40.7" pivotY="26.55"/>
+	<SubTexture name="PicoJoyLoop0001" x="464" y="476" width="478" height="496"/>
+	<SubTexture name="PicoJoyLoop0002" x="942" y="476" width="478" height="496"/>
+	<SubTexture name="PicoJoyLoop0003" x="942" y="476" width="478" height="496"/>
+	<SubTexture name="PicoJoyLoop0004" x="1420" y="476" width="478" height="496"/>
+	<SubTexture name="PicoJoyLoop0005" x="1420" y="476" width="478" height="496"/>
+	<SubTexture name="PicoMad0000" x="1898" y="476" width="443" height="475" pivotX="0" pivotY="0"/>
+	<SubTexture name="PicoPissedLoop0000" x="2341" y="476" width="450" height="476" pivotX="7.4" pivotY="0.05"/>
+	<SubTexture name="PicoPissedLoop0001" x="2341" y="476" width="450" height="476"/>
+	<SubTexture name="PicoPissedLoop0002" x="2791" y="476" width="450" height="476"/>
+	<SubTexture name="PicoPissedLoop0003" x="2791" y="476" width="450" height="476"/>
+	<SubTexture name="PicoPissedLoop0004" x="3241" y="476" width="450" height="476"/>
+	<SubTexture name="PicoPissedLoop0005" x="3241" y="476" width="450" height="476"/>
+	<SubTexture name="PicoIdle0000" x="0" y="972" width="443" height="475" pivotX="0" pivotY="0"/>
+	<SubTexture name="PicoTalkLoop0000" x="443" y="972" width="450" height="476" pivotX="7.4" pivotY="0.05"/>
+	<SubTexture name="PicoTalkLoop0001" x="443" y="972" width="450" height="476"/>
+	<SubTexture name="PicoTalkLoop0002" x="893" y="972" width="450" height="476"/>
+	<SubTexture name="PicoTalkLoop0003" x="893" y="972" width="450" height="476"/>
+	<SubTexture name="PicoTalkLoop0004" x="1343" y="972" width="450" height="476"/>
+	<SubTexture name="PicoTalkLoop0005" x="1343" y="972" width="450" height="476"/>
+</TextureAtlas>

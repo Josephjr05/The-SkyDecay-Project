@@ -1,0 +1,77 @@
+{
+	"dialogue_pos": "left",
+	"position": [
+		120,
+		50
+	],
+	"no_antialiasing": false,
+	"scale": 1.25,
+	"animations": [
+		{
+			"anim": "talk",
+			"loop_offsets": [
+				0,
+				-13
+			],
+			"idle_offsets": [
+				0,
+				-13
+			],
+			"loop_name": "PicoTalkLoop",
+			"idle_name": "PicoIdle"
+		},
+		{
+			"loop_offsets": [
+				1,
+				-13
+			],
+			"anim": "pissed",
+			"idle_offsets": [
+				1,
+				-13
+			],
+			"loop_name": "PicoPissedLoop",
+			"idle_name": "PicoMad"
+		},
+		{
+			"idle_offsets": [
+				0,
+				-13
+			],
+			"anim": "confused",
+			"loop_offsets": [
+				0,
+				-13
+			],
+			"idle_name": "PicoWhat",
+			"loop_name": "PicoConfusedLoop"
+		},
+		{
+			"loop_offsets": [
+				0,
+				0
+			],
+			"anim": "excited",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"loop_name": "PicoJoyLoop",
+			"idle_name": "PicoHappy"
+		},
+		{
+			"loop_offsets": [
+				0,
+				-13
+			],
+			"anim": "gun",
+			"idle_offsets": [
+				0,
+				-13
+			],
+			"loop_name": "PicoAimLoop",
+			"idle_name": "PicoGun"
+		}
+	],
+	"image": "PicoPsychDialogueFlipped"
+}

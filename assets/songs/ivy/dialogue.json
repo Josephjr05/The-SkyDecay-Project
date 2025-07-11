@@ -1,0 +1,60 @@
+{
+	"dialogue": [
+		{
+			"expression": "ask",
+			"text": "Hello, do you two need anything? \r\n",
+			"boxState": "normal",
+			"portrait": "ivy",
+			"speed": 0.05,
+			"sound": ""
+		},
+		{
+			"expression": "excited",
+			"text": "We just came by to ask you for a rap battle.",
+			"boxState": "normal",
+			"portrait": "gf",
+			"speed": 0.05,
+			"sound": ""
+		},
+		{
+			"expression": "confused",
+			"text": "Oh, well that's odd-",
+			"boxState": "normal",
+			"portrait": "ivy",
+			"speed": 0.05,
+			"sound": ""
+		},
+		{
+			"expression": "why not",
+			"text": "but I won't question it.",
+			"boxState": "normal",
+			"portrait": "ivy",
+			"speed": 0.05,
+			"sound": ""
+		},
+		{
+			"expression": "pissed",
+			"text": "So is that a yes?",
+			"boxState": "normal",
+			"portrait": "bf",
+			"speed": 0.05,
+			"sound": ""
+		},
+		{
+			"expression": "agree",
+			"text": "Eh why not.",
+			"boxState": "normal",
+			"portrait": "ivy",
+			"speed": 0.05,
+			"sound": ""
+		},
+		{
+			"expression": "excited",
+			"text": "Baap! ",
+			"boxState": "normal",
+			"portrait": "bf",
+			"speed": 0.05,
+			"sound": ""
+		}
+	]
+}

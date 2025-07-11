@@ -1,0 +1,91 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				-30,
+				6
+			],
+			"anim": "idle",
+			"fps": 14,
+			"name": "new marvin idle",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-28,
+				-4
+			],
+			"anim": "singLEFT",
+			"fps": 14,
+			"name": "new marvin left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-8,
+				-5
+			],
+			"anim": "singDOWN",
+			"fps": 14,
+			"name": "new marvin down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-17,
+				12
+			],
+			"anim": "singRIGHT",
+			"fps": 14,
+			"name": "new marvin r",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-24,
+				1
+			],
+			"anim": "singUP",
+			"fps": 14,
+			"name": "new marvin up",
+			"indices": []
+		},
+		{
+			"offsets": [
+				-31,
+				7
+			],
+			"indices": [],
+			"fps": 8,
+			"anim": "idle-alt",
+			"loop": false,
+			"name": "marvinn idle"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/Shucks/new marvin",
+	"position": [
+		-470,
+		170
+	],
+	"healthicon": "marvin",
+	"flip_x": true,
+	"healthbar_colors": [
+		211,
+		25,
+		25
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 6.1,
+	"scale": 0.8,
+	"_editor_isPlayer": true
+}

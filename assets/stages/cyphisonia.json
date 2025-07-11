@@ -1,0 +1,336 @@
+{
+	"_editorMeta": {
+		"boyfriend": "bf",
+		"gf": "gf",
+		"dad": "camellia"
+	},
+	"girlfriend": [
+		100,
+		70
+	],
+	"boyfriend": [
+		600,
+		450
+	],
+	"isPixelStage": false,
+	"has_reflections": false,
+	"objects": [
+		{
+			"x": -2050,
+			"blend": "normal",
+			"y": -800,
+			"scale": [
+				2,
+				2
+			],
+			"image": "stages/camellia/cyphisonia/bg",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "background",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"x": -2050,
+			"blend": "normal",
+			"y": -160,
+			"scale": [
+				2,
+				2
+			],
+			"image": "stages/camellia/cyphisonia/mountain_c",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "mountain_c_bg",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"x": -1550,
+			"blend": "normal",
+			"y": 200,
+			"scale": [
+				2.5,
+				2.5
+			],
+			"image": "stages/camellia/cyphisonia/mountain_r",
+			"flipX": true,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "mountain_r_bg",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"x": -1980,
+			"blend": "normal",
+			"y": -500,
+			"scale": [
+				2,
+				2
+			],
+			"image": "stages/camellia/cyphisonia/fog_1",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "fog_1",
+			"antialiasing": true,
+			"flipY": true,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"x": -2050,
+			"blend": "normal",
+			"y": -800,
+			"scale": [
+				2,
+				2
+			],
+			"image": "stages/camellia/cyphisonia/light",
+			"flipX": false,
+			"filters": 2,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "light",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"x": 960,
+			"blend": "normal",
+			"y": -300,
+			"scale": [
+				2,
+				2
+			],
+			"image": "stages/camellia/cyphisonia/back_mountain_r",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "back_background_r",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"x": 0,
+			"blend": "normal",
+			"y": -450,
+			"scale": [
+				2,
+				2
+			],
+			"image": "stages/camellia/cyphisonia/fog_2",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "fog_2",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"x": -104,
+			"blend": "normal",
+			"y": -657,
+			"scale": [
+				2,
+				2
+			],
+			"image": "stages/camellia/cyphisonia/monolith",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "monolith",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"x": -1650,
+			"blend": "normal",
+			"y": -350,
+			"scale": [
+				2,
+				2
+			],
+			"image": "stages/camellia/cyphisonia/flame_l",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "flame_l",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"x": 950,
+			"blend": "normal",
+			"y": 200,
+			"scale": [
+				2,
+				2
+			],
+			"image": "stages/camellia/cyphisonia/flame_r",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "flame_r",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"x": -2050,
+			"blend": "normal",
+			"y": 0,
+			"scale": [
+				2,
+				2
+			],
+			"image": "stages/camellia/cyphisonia/mountain_c",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "mountain_c",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"type": "gf"
+		},
+		{
+			"type": "dad"
+		},
+		{
+			"type": "boyfriend"
+		},
+		{
+			"x": -2050,
+			"blend": "normal",
+			"y": 930,
+			"scale": [
+				2,
+				2
+			],
+			"image": "stages/camellia/cyphisonia/mountain_l",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "mountain_l",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"x": 690,
+			"blend": "normal",
+			"y": 1070,
+			"scale": [
+				2,
+				2
+			],
+			"image": "stages/camellia/cyphisonia/mountain_r",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "mountain_r",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		}
+	],
+	"defaultZoom": 0.3,
+	"fixedCam_x": 0,
+	"directory": "camellia",
+	"fixedCam_y": 410,
+	"opponent": [
+		-1000,
+		400
+	],
+	"hide_girlfriend": true
+}

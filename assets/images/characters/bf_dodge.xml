@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.1.3 https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="bf_dodge.png" width="4068" height="384">
+	<SubTexture name="bf dodge alt0000" x="2439" y="1" width="401" height="382" frameX="-10" frameY="-1" frameWidth="411" frameHeight="384"/>
+	<SubTexture name="bf dodge alt0001" x="817" y="1" width="401" height="381" frameX="-10" frameY="-2" frameWidth="411" frameHeight="384"/>
+	<SubTexture name="bf dodge alt0002" x="2843" y="1" width="406" height="382" frameX="-0" frameY="-0" frameWidth="411" frameHeight="384"/>
+	<SubTexture name="bf dodge alt0003" x="3252" y="1" width="406" height="382" frameX="-0" frameY="-0" frameWidth="411" frameHeight="384"/>
+	<SubTexture name="bf dodge alt0004" x="3661" y="1" width="406" height="382" frameX="-0" frameY="-0" frameWidth="411" frameHeight="384"/>
+	<SubTexture name="bf dodge alt0005" x="2843" y="1" width="406" height="382" frameX="-0" frameY="-0" frameWidth="411" frameHeight="384"/>
+	<SubTexture name="bf dodge alt0006" x="3252" y="1" width="406" height="382" frameX="-0" frameY="-0" frameWidth="411" frameHeight="384"/>
+	<SubTexture name="bf dodge alt0007" x="3661" y="1" width="406" height="382" frameX="-0" frameY="-0" frameWidth="411" frameHeight="384"/>
+	<SubTexture name="bf dodge alt0008" x="2843" y="1" width="406" height="382" frameX="-0" frameY="-0" frameWidth="411" frameHeight="384"/>
+	<SubTexture name="bf dodge alt0009" x="3252" y="1" width="406" height="382" frameX="-0" frameY="-0" frameWidth="411" frameHeight="384"/>
+	<SubTexture name="bf dodge alt0010" x="3661" y="1" width="406" height="382" frameX="-0" frameY="-0" frameWidth="411" frameHeight="384"/>
+	<SubTexture name="bf dodge alt0011" x="2843" y="1" width="406" height="382" frameX="-0" frameY="-0" frameWidth="411" frameHeight="384"/>
+	<SubTexture name="bf dodge alt0012" x="3252" y="1" width="406" height="382" frameX="-0" frameY="-0" frameWidth="411" frameHeight="384"/>
+	<SubTexture name="bf dodge alt0013" x="3661" y="1" width="406" height="382" frameX="-0" frameY="-0" frameWidth="411" frameHeight="384"/>
+	<SubTexture name="boyfriend dodge0000" x="1" y="1" width="405" height="376" rotated="true" frameX="-3" frameY="-0" frameWidth="381" frameHeight="405"/>
+	<SubTexture name="boyfriend dodge0001" x="409" y="1" width="405" height="376" rotated="true" frameX="-3" frameY="-0" frameWidth="381" frameHeight="405"/>
+	<SubTexture name="boyfriend dodge0002" x="1221" y="1" width="403" height="381" rotated="true" frameX="-0" frameY="-2" frameWidth="381" frameHeight="405"/>
+	<SubTexture name="boyfriend dodge0003" x="1627" y="1" width="403" height="381" rotated="true" frameX="-0" frameY="-2" frameWidth="381" frameHeight="405"/>
+	<SubTexture name="boyfriend dodge0004" x="2033" y="1" width="403" height="381" rotated="true" frameX="-0" frameY="-2" frameWidth="381" frameHeight="405"/>
+	<SubTexture name="boyfriend dodge0005" x="1221" y="1" width="403" height="381" rotated="true" frameX="-0" frameY="-2" frameWidth="381" frameHeight="405"/>
+	<SubTexture name="boyfriend dodge0006" x="1627" y="1" width="403" height="381" rotated="true" frameX="-0" frameY="-2" frameWidth="381" frameHeight="405"/>
+	<SubTexture name="boyfriend dodge0007" x="2033" y="1" width="403" height="381" rotated="true" frameX="-0" frameY="-2" frameWidth="381" frameHeight="405"/>
+	<SubTexture name="boyfriend dodge0008" x="1221" y="1" width="403" height="381" rotated="true" frameX="-0" frameY="-2" frameWidth="381" frameHeight="405"/>
+	<SubTexture name="boyfriend dodge0009" x="1627" y="1" width="403" height="381" rotated="true" frameX="-0" frameY="-2" frameWidth="381" frameHeight="405"/>
+	<SubTexture name="boyfriend dodge0010" x="2033" y="1" width="403" height="381" rotated="true" frameX="-0" frameY="-2" frameWidth="381" frameHeight="405"/>
+	<SubTexture name="boyfriend dodge0011" x="1221" y="1" width="403" height="381" rotated="true" frameX="-0" frameY="-2" frameWidth="381" frameHeight="405"/>
+	<SubTexture name="boyfriend dodge0012" x="1627" y="1" width="403" height="381" rotated="true" frameX="-0" frameY="-2" frameWidth="381" frameHeight="405"/>
+	<SubTexture name="boyfriend dodge0013" x="2033" y="1" width="403" height="381" rotated="true" frameX="-0" frameY="-2" frameWidth="381" frameHeight="405"/>
+	<SubTexture name="boyfriend dodge0014" x="1221" y="1" width="403" height="381" rotated="true" frameX="-0" frameY="-2" frameWidth="381" frameHeight="405"/>
+</TextureAtlas>

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="Ivy_Dialogue.png">
+<SubTexture name="Ivy_Dialogue Ivy Agrees0000" x="0" y="0" width="693" height="813" frameX="-303" frameY="-278" frameWidth="1280" frameHeight="1280" />
+<SubTexture name="Ivy_Dialogue Ivy Asks0000" x="693" y="0" width="693" height="813" frameX="-303" frameY="-278" frameWidth="1280" frameHeight="1280" />
+<SubTexture name="Ivy_Dialogue Ivy Confused0000" x="1386" y="0" width="693" height="813" frameX="-303" frameY="-278" frameWidth="1280" frameHeight="1280" />
+<SubTexture name="Ivy_Dialogue Ivy Why Not0000" x="0" y="813" width="693" height="813" frameX="-303" frameY="-278" frameWidth="1280" frameHeight="1280" />
+</TextureAtlas>

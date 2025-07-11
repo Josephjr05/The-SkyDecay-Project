@@ -1,0 +1,5 @@
+Randoms:
+
+0 = KweLOADINGTPV2
+1 = kB
+2 = SDKwellRadar

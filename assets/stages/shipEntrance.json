@@ -1,0 +1,91 @@
+{
+	"camera_boyfriend": [
+		-200,
+		0
+	],
+	"_editorMeta": {
+		"boyfriend": "bf",
+		"gf": "pico-playable",
+		"dad": "bf-opponent"
+	},
+	"girlfriend": [
+		1480,
+		40
+	],
+	"isPixelStage": false,
+	"boyfriend": [
+		1172,
+		17
+	],
+	"objects": [
+		{
+			"x": -300,
+			"blend": "normal",
+			"y": -205,
+			"scale": [
+				1,
+				1
+			],
+			"image": "stages/shipEntrance/stage",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "stage",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"x": -300,
+			"blend": "normal",
+			"y": -205,
+			"scale": [
+				1,
+				1
+			],
+			"image": "stages/shipEntrance/kwell",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "kwell",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"type": "gf"
+		},
+		{
+			"type": "dad"
+		},
+		{
+			"type": "boyfriend"
+		}
+	],
+	"defaultZoom": 0.55,
+	"camera_girlfriend": [
+		-950,
+		-100
+	],
+	"directory": "",
+	"opponent": [
+		207,
+		70
+	],
+	"camera_opponent": [
+		350,
+		-100
+	]
+}

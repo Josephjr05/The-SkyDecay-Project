@@ -1,0 +1,76 @@
+{
+	"position": [
+		-120,
+		-80
+	],
+	"dialogue_pos": "right",
+	"scale": 0.95,
+	"image": "camellia",
+	"animations": [
+		{
+			"loop_offsets": [
+				0,
+				0
+			],
+			"anim": "normal",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"loop_name": "Camellia normal",
+			"idle_name": "Camellia normal0000"
+		},
+		{
+			"loop_offsets": [
+				0,
+				0
+			],
+			"anim": "excited",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"loop_name": "Camellia excited",
+			"idle_name": "Camellia excited"
+		},
+		{
+			"loop_offsets": [
+				0,
+				0
+			],
+			"anim": "shocked",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"loop_name": "Camellia shocked",
+			"idle_name": "Camellia shocked"
+		},
+		{
+			"loop_offsets": [
+				0,
+				0
+			],
+			"anim": "thankful",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"loop_name": "Camellia thankful",
+			"idle_name": "Camellia thankful"
+		},
+		{
+			"loop_offsets": [
+				0,
+				0
+			],
+			"anim": "pensive",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"loop_name": "Camellia pensive",
+			"idle_name": "Camellia pensive"
+		}
+	]
+}

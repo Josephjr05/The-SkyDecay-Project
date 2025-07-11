@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<TextureAtlas imagePath="runjohn.png">
+	<!-- Created with Adobe Flash CS6 version 12.0.0.481 -->
+	<!-- http://www.adobe.com/products/flash.html -->
+	<SubTexture name="JOHNDIE0000" x="0" y="0" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0001" x="1338" y="0" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0002" x="2676" y="0" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0003" x="0" y="797" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0004" x="1338" y="797" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0005" x="2676" y="797" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0006" x="0" y="1594" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0007" x="1338" y="1594" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0008" x="2676" y="1594" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0009" x="0" y="2391" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0010" x="0" y="2391" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0011" x="0" y="2391" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0012" x="1338" y="2391" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0013" x="0" y="2391" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0014" x="1338" y="2391" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0015" x="0" y="2391" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0016" x="1338" y="2391" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0017" x="0" y="2391" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0018" x="1338" y="2391" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0019" x="1338" y="2391" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0020" x="1338" y="2391" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0021" x="1338" y="2391" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0022" x="1338" y="2391" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0023" x="1338" y="2391" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0024" x="1338" y="2391" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0025" x="1338" y="2391" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0026" x="1338" y="2391" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0027" x="1338" y="2391" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0028" x="1338" y="2391" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0029" x="1338" y="2391" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0030" x="1338" y="2391" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0031" x="1338" y="2391" width="1338" height="797"/>
+	<SubTexture name="JOHNDIE0032" x="1338" y="2391" width="1338" height="797"/>
+	<SubTexture name="JOHNRUN0000" x="2676" y="2391" width="1338" height="796"/>
+	<SubTexture name="JOHNRUN0001" x="2676" y="2391" width="1338" height="796"/>
+	<SubTexture name="JOHNRUN0002" x="2676" y="2391" width="1338" height="796"/>
+	<SubTexture name="JOHNRUN0003" x="0" y="3188" width="1338" height="796"/>
+	<SubTexture name="JOHNRUN0004" x="0" y="3188" width="1338" height="796"/>
+	<SubTexture name="JOHNRUN0005" x="1338" y="3188" width="1338" height="796"/>
+	<SubTexture name="JOHNRUN0006" x="1338" y="3188" width="1338" height="796"/>
+	<SubTexture name="JOHNRUN0007" x="2676" y="3188" width="1338" height="796"/>
+	<SubTexture name="JOHNRUN0008" x="2676" y="3188" width="1338" height="796"/>
+	<SubTexture name="JOHNRUN0009" x="2676" y="3188" width="1338" height="796"/>
+	<SubTexture name="JOHNRUN0010" x="0" y="3984" width="1338" height="796"/>
+	<SubTexture name="JOHNRUN0011" x="0" y="3984" width="1338" height="796"/>
+	<SubTexture name="JOHNRUN0012" x="1338" y="3984" width="1338" height="796"/>
+	<SubTexture name="JOHNRUN0013" x="1338" y="3984" width="1338" height="796"/>
+</TextureAtlas>

@@ -1,0 +1,88 @@
+{
+	"timeFormat": "ms",
+	"artist": "Sydosys",
+	"charter": "ERA Imperial",
+	"offsets": {
+		"altInstrumentals": {},
+		"instrumental": 0,
+		"vocals": {}
+	},
+	"playData": {
+		"stage": "mainStage",
+		"songVariations": [],
+		"noteStyle": "funkin",
+		"difficulties": [
+			"mania"
+		],
+		"characters": {
+			"girlfriend": "gf",
+			"opponent": "dad",
+			"player": "bf"
+		}
+	},
+	"songName": "ArchangeL",
+	"timeChanges": [
+		{
+			"d": 4,
+			"n": 4,
+			"t": 0,
+			"bpm": 180
+		},
+		{
+			"d": 4,
+			"n": 4,
+			"t": 90646,
+			"bpm": 190
+		},
+		{
+			"d": 4,
+			"n": 4,
+			"t": 95699,
+			"bpm": 200
+		},
+		{
+			"d": 4,
+			"n": 4,
+			"t": 100500,
+			"bpm": 210
+		},
+		{
+			"d": 4,
+			"n": 4,
+			"t": 132501,
+			"bpm": 220
+		},
+		{
+			"d": 4,
+			"n": 4,
+			"t": 171775,
+			"bpm": 230
+		},
+		{
+			"d": 4,
+			"n": 4,
+			"t": 259427,
+			"bpm": 235
+		},
+		{
+			"d": 4,
+			"n": 4,
+			"t": 263517,
+			"bpm": 240
+		},
+		{
+			"d": 4,
+			"n": 4,
+			"t": 267517,
+			"bpm": 245
+		},
+		{
+			"d": 4,
+			"n": 4,
+			"t": 271430,
+			"bpm": 250
+		}
+	],
+	"generatedBy": "Moonchart 0.4.0",
+	"version": "2.2.2"
+}

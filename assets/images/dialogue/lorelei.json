@@ -1,0 +1,63 @@
+{
+	"position": [
+		90,
+		-50
+	],
+	"dialogue_pos": "left",
+	"scale": 0.899999999999999,
+	"image": "lorelei",
+	"animations": [
+		{
+			"loop_offsets": [
+				0,
+				0
+			],
+			"anim": "normal",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"loop_name": "Lorelei normal",
+			"idle_name": "Lorelei normal0000"
+		},
+		{
+			"loop_offsets": [
+				0,
+				0
+			],
+			"anim": "embarrassed",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"loop_name": "Lorelei embarrassed",
+			"idle_name": "Lorelei embarrassed"
+		},
+		{
+			"loop_offsets": [
+				0,
+				0
+			],
+			"anim": "happy",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"loop_name": "Lorelei happy",
+			"idle_name": "Lorelei happy"
+		},
+		{
+			"loop_offsets": [
+				0,
+				0
+			],
+			"anim": "furious",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"loop_name": "Lorelei furious",
+			"idle_name": "Lorelei furious"
+		}
+	]
+}

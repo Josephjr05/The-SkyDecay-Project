@@ -13,7 +13,7 @@ import states.editors.ChartingState;
 
 import substates.GameplayChangersSubstate;
 import substates.ResetScoreSubState;
-import substates.DifficultySelectorSubState;
+import states.freeplay.DifficultySelectorSubState;
 
 import states.freeplay.SongBox;
 

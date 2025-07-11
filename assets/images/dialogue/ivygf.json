@@ -1,0 +1,24 @@
+{
+	"dialogue_pos": "center",
+	"position": [
+		-210,
+		-330
+	],
+	"scale": 0.899999999999999,
+	"animations": [
+		{
+			"loop_offsets": [
+				0,
+				0
+			],
+			"anim": "hi",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"loop_name": "gf hi",
+			"idle_name": "gf hi"
+		}
+	],
+	"image": "gf"
+}

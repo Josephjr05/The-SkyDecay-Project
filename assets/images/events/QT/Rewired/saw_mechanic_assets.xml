@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<TextureAtlas imagePath="saw_mechanic_assets.png">
+	<!-- Created with Adobe Flash CS6 version 12.0.0.481 -->
+	<!-- http://www.adobe.com/products/flash.html -->
+	<SubTexture name="alert 10000" x="0" y="0" width="282" height="321"/>
+	<SubTexture name="alert 10001" x="292" y="0" width="281" height="321" frameX="0" frameY="0" frameWidth="282" frameHeight="321"/>
+	<SubTexture name="alert 10002" x="583" y="0" width="266" height="309" frameX="-5" frameY="-7" frameWidth="282" frameHeight="321"/>
+	<SubTexture name="alert 10003" x="859" y="0" width="263" height="308" frameX="-5" frameY="-8" frameWidth="282" frameHeight="321"/>
+	<SubTexture name="alert 10004" x="1132" y="0" width="259" height="306" frameX="-5" frameY="-10" frameWidth="282" frameHeight="321"/>
+	<SubTexture name="alert 10005" x="1401" y="0" width="255" height="303" frameX="-5" frameY="-13" frameWidth="282" frameHeight="321"/>
+	<SubTexture name="alert 10006" x="1666" y="0" width="249" height="300" frameX="-5" frameY="-16" frameWidth="282" frameHeight="321"/>
+	<SubTexture name="alert 10007" x="1666" y="0" width="249" height="300" frameX="-5" frameY="-16" frameWidth="282" frameHeight="321"/>
+	<SubTexture name="alert 10008" x="1666" y="0" width="249" height="300" frameX="-5" frameY="-16" frameWidth="282" frameHeight="321"/>
+	<SubTexture name="alert 10009" x="1666" y="0" width="249" height="300" frameX="-5" frameY="-16" frameWidth="282" frameHeight="321"/>
+	<SubTexture name="alert 10010" x="1666" y="0" width="249" height="300" frameX="-5" frameY="-16" frameWidth="282" frameHeight="321"/>
+	<SubTexture name="alert 10011" x="1666" y="0" width="249" height="300" frameX="-5" frameY="-16" frameWidth="282" frameHeight="321"/>
+	<SubTexture name="alert 20000" x="0" y="331" width="292" height="330"/>
+	<SubTexture name="alert 20001" x="302" y="331" width="291" height="330" frameX="-1" frameY="0" frameWidth="292" frameHeight="330"/>
+	<SubTexture name="alert 20002" x="603" y="331" width="274" height="317" frameX="-8" frameY="-8" frameWidth="292" frameHeight="330"/>
+	<SubTexture name="alert 20003" x="887" y="331" width="270" height="315" frameX="-11" frameY="-10" frameWidth="292" frameHeight="330"/>
+	<SubTexture name="alert 20004" x="1167" y="331" width="263" height="313" frameX="-16" frameY="-12" frameWidth="292" frameHeight="330"/>
+	<SubTexture name="alert 20005" x="1440" y="331" width="256" height="309" frameX="-21" frameY="-16" frameWidth="292" frameHeight="330"/>
+	<SubTexture name="alert 20006" x="1706" y="331" width="253" height="305" frameX="-21" frameY="-20" frameWidth="292" frameHeight="330"/>
+	<SubTexture name="alert 20007" x="0" y="671" width="249" height="300" frameX="-21" frameY="-25" frameWidth="292" frameHeight="330"/>
+	<SubTexture name="alert 20008" x="0" y="671" width="249" height="300" frameX="-21" frameY="-25" frameWidth="292" frameHeight="330"/>
+	<SubTexture name="alert 20009" x="0" y="671" width="249" height="300" frameX="-21" frameY="-25" frameWidth="292" frameHeight="330"/>
+	<SubTexture name="alert 20010" x="0" y="671" width="249" height="300" frameX="-21" frameY="-25" frameWidth="292" frameHeight="330"/>
+	<SubTexture name="alert 20011" x="0" y="671" width="249" height="300" frameX="-21" frameY="-25" frameWidth="292" frameHeight="330"/>
+	<SubTexture name="attack0000" x="259" y="671" width="358" height="359"/>
+	<SubTexture name="attack0001" x="627" y="671" width="356" height="358" frameX="-1" frameY="-1" frameWidth="358" frameHeight="359"/>
+	<SubTexture name="attack0002" x="993" y="671" width="334" height="344" frameX="-10" frameY="-10" frameWidth="358" frameHeight="359"/>
+	<SubTexture name="attack0003" x="1337" y="671" width="330" height="342" frameX="-12" frameY="-12" frameWidth="358" frameHeight="359"/>
+	<SubTexture name="attack0004" x="1677" y="671" width="323" height="339" frameX="-16" frameY="-15" frameWidth="358" frameHeight="359"/>
+	<SubTexture name="attack0005" x="0" y="1040" width="314" height="335" frameX="-20" frameY="-19" frameWidth="358" frameHeight="359"/>
+	<SubTexture name="attack0006" x="324" y="1040" width="304" height="330" frameX="-25" frameY="-24" frameWidth="358" frameHeight="359"/>
+	<SubTexture name="attack0007" x="638" y="1040" width="291" height="325" frameX="-32" frameY="-29" frameWidth="358" frameHeight="359"/>
+	<SubTexture name="attack0008" x="939" y="1040" width="276" height="318" frameX="-39" frameY="-36" frameWidth="358" frameHeight="359"/>
+	<SubTexture name="attack0009" x="1225" y="1040" width="261" height="311" frameX="-46" frameY="-43" frameWidth="358" frameHeight="359"/>
+	<SubTexture name="attack0010" x="1496" y="1040" width="252" height="303" frameX="-46" frameY="-51" frameWidth="358" frameHeight="359"/>
+	<SubTexture name="attack0011" x="1758" y="1040" width="249" height="299" frameX="-46" frameY="-55" frameWidth="358" frameHeight="359"/>
+</TextureAtlas>

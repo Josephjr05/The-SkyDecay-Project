@@ -1,0 +1,63 @@
+{
+	"dialogue_pos": "left",
+	"position": [
+		200,
+		90
+	],
+	"scale": 1.25,
+	"animations": [
+		{
+			"idle_offsets": [
+				0,
+				0
+			],
+			"anim": "what?",
+			"loop_offsets": [
+				0,
+				0
+			],
+			"idle_name": "what",
+			"loop_name": "what"
+		},
+		{
+			"idle_offsets": [
+				0,
+				0
+			],
+			"anim": "uh",
+			"loop_offsets": [
+				0,
+				0
+			],
+			"idle_name": "uh",
+			"loop_name": "uh"
+		},
+		{
+			"idle_offsets": [
+				0,
+				10
+			],
+			"anim": "wtf",
+			"loop_offsets": [
+				0,
+				0
+			],
+			"idle_name": "wtf",
+			"loop_name": "wtf"
+		},
+		{
+			"loop_offsets": [
+				0,
+				0
+			],
+			"anim": "Traped",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"loop_name": "Traped",
+			"idle_name": "Traped"
+		}
+	],
+	"image": "traped"
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.1.3 https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="gradientManager.png" width="2689" height="2364">
+	<SubTexture name="overlay-Blue" x="3" y="3" width="2683" height="1175" frameX="-0" frameY="-0" frameWidth="2686" frameHeight="1198"/>
+	<SubTexture name="overlay-Killer" x="3" y="3" width="2683" height="1175" frameX="-0" frameY="-0" frameWidth="2686" frameHeight="1198"/>
+	<SubTexture name="overlay-Normal" x="3" y="1186" width="2683" height="1175" frameX="-0" frameY="-0" frameWidth="2686" frameHeight="1190"/>
+</TextureAtlas>

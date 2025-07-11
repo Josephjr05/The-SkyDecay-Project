@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="new marvin.png">
+<SubTexture name="new marvin down0000" x="0" y="2462" width="464" height="378" frameX="-430" frameY="-298" frameWidth="1280" frameHeight="720" />
+<SubTexture name="new marvin down0001" x="2842" y="0" width="452" height="390" frameX="-436" frameY="-286" frameWidth="1280" frameHeight="720" />
+<SubTexture name="new marvin down0002" x="1806" y="1335" width="442" height="396" frameX="-441" frameY="-280" frameWidth="1280" frameHeight="720" />
+<SubTexture name="new marvin down0003" x="1806" y="1335" width="442" height="396" frameX="-439" frameY="-278" frameWidth="1280" frameHeight="720" />
+<SubTexture name="new marvin down0004" x="1806" y="1335" width="442" height="396" frameX="-439" frameY="-278" frameWidth="1280" frameHeight="720" />
+<SubTexture name="new marvin idle0000" x="1358" y="1335" width="448" height="598" frameX="-424" frameY="-86" frameWidth="1280" frameHeight="720" />
+<SubTexture name="new marvin idle0001" x="1358" y="1335" width="448" height="598" frameX="-422" frameY="-84" frameWidth="1280" frameHeight="720" />
+<SubTexture name="new marvin idle0002" x="455" y="1335" width="455" height="602" frameX="-425" frameY="-82" frameWidth="1280" frameHeight="720" />
+<SubTexture name="new marvin idle0003" x="1864" y="603" width="458" height="603" frameX="-425" frameY="-81" frameWidth="1280" frameHeight="720" />
+<SubTexture name="new marvin idle0004" x="1403" y="613" width="461" height="613" frameX="-424" frameY="-71" frameWidth="1280" frameHeight="720" />
+<SubTexture name="new marvin idle0005" x="934" y="678" width="458" height="615" frameX="-425" frameY="-69" frameWidth="1280" frameHeight="720" />
+<SubTexture name="new marvin left0000" x="0" y="1937" width="528" height="525" frameX="-337" frameY="-165" frameWidth="1280" frameHeight="720" />
+<SubTexture name="new marvin left0001" x="2322" y="526" width="518" height="524" frameX="-352" frameY="-166" frameWidth="1280" frameHeight="720" />
+<SubTexture name="new marvin left0002" x="2322" y="1050" width="517" height="524" frameX="-356" frameY="-166" frameWidth="1280" frameHeight="720" />
+<SubTexture name="new marvin left0003" x="2322" y="0" width="520" height="526" frameX="-354" frameY="-164" frameWidth="1280" frameHeight="720" />
+<SubTexture name="new marvin r0000" x="2097" y="1937" width="557" height="511" frameX="-434" frameY="-152" frameWidth="1280" frameHeight="720" />
+<SubTexture name="new marvin r0001" x="1577" y="1937" width="520" height="512" frameX="-428" frameY="-151" frameWidth="1280" frameHeight="720" />
+<SubTexture name="new marvin r0002" x="1052" y="1937" width="525" height="514" frameX="-424" frameY="-149" frameWidth="1280" frameHeight="720" />
+<SubTexture name="new marvin r0003" x="528" y="1937" width="524" height="518" frameX="-425" frameY="-145" frameWidth="1280" frameHeight="720" />
+<SubTexture name="new marvin up0000" x="0" y="0" width="461" height="678" frameX="-445" frameY="0" frameWidth="1280" frameHeight="720" />
+<SubTexture name="new marvin up0001" x="461" y="0" width="467" height="670" frameX="-439" frameY="-8" frameWidth="1280" frameHeight="720" />
+<SubTexture name="new marvin up0002" x="0" y="678" width="476" height="657" frameX="-430" frameY="-21" frameWidth="1280" frameHeight="720" />
+<SubTexture name="new marvin up0003" x="928" y="0" width="475" height="660" frameX="-431" frameY="-18" frameWidth="1280" frameHeight="720" />
+<SubTexture name="marvinn idle alt0000" x="910" y="1335" width="448" height="598" frameX="-424" frameY="-86" frameWidth="1280" frameHeight="720" />
+<SubTexture name="marvinn idle alt0001" x="910" y="1335" width="448" height="598" frameX="-422" frameY="-84" frameWidth="1280" frameHeight="720" />
+<SubTexture name="marvinn idle alt0002" x="0" y="1335" width="455" height="602" frameX="-425" frameY="-82" frameWidth="1280" frameHeight="720" />
+<SubTexture name="marvinn idle alt0003" x="1864" y="0" width="458" height="603" frameX="-425" frameY="-81" frameWidth="1280" frameHeight="720" />
+<SubTexture name="marvinn idle alt0004" x="1403" y="0" width="461" height="613" frameX="-424" frameY="-71" frameWidth="1280" frameHeight="720" />
+<SubTexture name="marvinn idle alt0005" x="476" y="678" width="458" height="616" frameX="-425" frameY="-68" frameWidth="1280" frameHeight="720" />
+</TextureAtlas>

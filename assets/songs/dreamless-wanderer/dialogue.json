@@ -1,0 +1,68 @@
+{
+	"dialogue": [
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "camellia",
+			"boxState": "camellia",
+			"expression": "shocked",
+			"text": "We have something important coming up"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "camellia",
+			"boxState": "camellia",
+			"expression": "thankful",
+			"text": "another anomaly to deal with."
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "camellia",
+			"expression": "shocked",
+			"text": "What??"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "camellia",
+			"boxState": "camellia",
+			"expression": "excited",
+			"text": "The stars will rise once again, and they'll become agitated. We'll have some warning,"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "camellia",
+			"boxState": "camellia",
+			"expression": "pensive",
+			"text": "unlike last week, and have to take on this unknown entity."
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "camellia",
+			"expression": "confused",
+			"text": "Ah shit "
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "camellia",
+			"boxState": "camellia",
+			"expression": "excited",
+			"text": "Be at the venue next week, same time as last month. I'll be waiting."
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "camellia",
+			"expression": "excited",
+			"text": "Okay!"
+		}
+	]
+}

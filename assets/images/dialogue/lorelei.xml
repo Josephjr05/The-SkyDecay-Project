@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.0.2 https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="texture.png" width="2404" height="588">
+	<SubTexture name="Lorelei normal0000" x="1213" y="3" width="392" height="582" frameX="-62" frameY="-30" frameWidth="500" frameHeight="612"/>
+	<SubTexture name="Lorelei embarrassed0000" x="3" y="3" width="408" height="582" frameX="-62" frameY="-30" frameWidth="500" frameHeight="612"/>
+	<SubTexture name="Lorelei furious0000" x="417" y="3" width="392" height="582" frameX="-62" frameY="-30" frameWidth="500" frameHeight="612"/>
+	<SubTexture name="Lorelei happy0000" x="815" y="3" width="392" height="582" frameX="-62" frameY="-30" frameWidth="500" frameHeight="612"/>
+	<SubTexture name="Lorelei normal0000" x="1611" y="3" width="392" height="582" frameX="-62" frameY="-30" frameWidth="500" frameHeight="612"/>
+	<SubTexture name="Lorelei half0000" x="2009" y="3" width="392" height="582" frameX="-62" frameY="-30" frameWidth="500" frameHeight="612"/>
+	<SubTexture name="Lorelei closed0000" x="1213" y="3" width="392" height="582" frameX="-62" frameY="-30" frameWidth="500" frameHeight="612"/>
+	<SubTexture name="Lorelei normal0002" x="1213" y="3" width="392" height="582" frameX="-62" frameY="-30" frameWidth="500" frameHeight="612"/>
+	<SubTexture name="Lorelei normal0003" x="1213" y="3" width="392" height="582" frameX="-62" frameY="-30" frameWidth="500" frameHeight="612"/>
+	<SubTexture name="Lorelei normal0004" x="1213" y="3" width="392" height="582" frameX="-62" frameY="-30" frameWidth="500" frameHeight="612"/>
+	<SubTexture name="Lorelei normal0005" x="1213" y="3" width="392" height="582" frameX="-62" frameY="-30" frameWidth="500" frameHeight="612"/>
+	<SubTexture name="Lorelei normal0007" x="1611" y="3" width="392" height="582" frameX="-62" frameY="-30" frameWidth="500" frameHeight="612"/>
+	<SubTexture name="Lorelei normal0010" x="1611" y="3" width="392" height="582" frameX="-62" frameY="-30" frameWidth="500" frameHeight="612"/>
+	<SubTexture name="Lorelei normal0011" x="1611" y="3" width="392" height="582" frameX="-62" frameY="-30" frameWidth="500" frameHeight="612"/>
+	<SubTexture name="Lorelei normal0009" x="2009" y="3" width="392" height="582" frameX="-62" frameY="-30" frameWidth="500" frameHeight="612"/>
+</TextureAtlas>

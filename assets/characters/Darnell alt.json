@@ -1,0 +1,64 @@
+{
+	"animations": [
+		{
+			"offsets": [20, 20],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "idle"
+		},
+		{
+			"offsets": [8, 25],
+			"loop": false,
+			"fps": 24,
+			"anim": "Alt",
+			"indices": [],
+			"name": "HEY!"
+		},
+		{
+			"offsets": [0, -50],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "right"
+		},
+		{
+			"offsets": [30, 0],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "left"
+		},
+		{
+			"offsets": [0, -70],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "down"
+		},
+		{
+			"offsets": [-10, 50],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "up"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/darnell alt",
+	"position": [0, 270],
+	"chartPosition": [-50, 270],
+	"healthicon": "darnell",
+	"flip_x": false,
+	"healthbar_colors": [114, 94, 176],
+	"camera_position": [-150, 100],
+	"sing_duration": 6.1,
+	"scale": 1,
+	"_editor_isPlayer": false
+}

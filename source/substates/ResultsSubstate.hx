@@ -427,7 +427,7 @@ class ResultsSubstate extends MusicBeatSubstate
 		}
         }
 
-        if(showPerfect) // perfect ratings on sdpj
+        if(showPerfect) // perfect ratings on sdypj
         {
         lerpPerfect = Math.floor(FlxMath.lerp(intendedPerfect, lerpPerfect, Math.exp(-elapsed * 16)));
 

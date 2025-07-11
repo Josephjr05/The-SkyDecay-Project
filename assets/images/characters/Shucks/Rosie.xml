@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="Rosie.png">
+<SubTexture name="Rosie idle0000" x="1587" y="448" width="557" height="443" frameX="-362" frameY="-136" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie idle0001" x="1587" y="448" width="557" height="443" frameX="-362" frameY="-136" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie idle0002" x="1587" y="448" width="557" height="443" frameX="-362" frameY="-136" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie idle0003" x="1587" y="448" width="557" height="443" frameX="-362" frameY="-136" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie idle0004" x="1587" y="891" width="557" height="443" frameX="-362" frameY="-136" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie idle0005" x="1587" y="891" width="557" height="443" frameX="-362" frameY="-136" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie idle0006" x="2709" y="443" width="557" height="442" frameX="-362" frameY="-137" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie idle0007" x="2709" y="443" width="557" height="442" frameX="-362" frameY="-137" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie idle0008" x="562" y="2311" width="558" height="440" frameX="-362" frameY="-139" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie idle0009" x="1120" y="2311" width="558" height="440" frameX="-362" frameY="-139" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie idle0010" x="2709" y="0" width="557" height="443" frameX="-362" frameY="-136" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie idle0011" x="2709" y="0" width="557" height="443" frameX="-362" frameY="-136" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie idle0012" x="1587" y="448" width="557" height="443" frameX="-362" frameY="-136" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie idle0013" x="1587" y="448" width="557" height="443" frameX="-362" frameY="-136" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie left0000" x="1587" y="0" width="559" height="448" frameX="-361" frameY="-134" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie left0001" x="560" y="968" width="560" height="449" frameX="-361" frameY="-133" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie left0002" x="0" y="1419" width="560" height="447" frameX="-361" frameY="-134" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie left0003" x="2146" y="1338" width="560" height="445" frameX="-361" frameY="-136" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie left0004" x="0" y="1866" width="560" height="445" frameX="-361" frameY="-136" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie right0000" x="560" y="1419" width="564" height="447" frameX="-360" frameY="-135" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie right0001" x="2146" y="0" width="563" height="446" frameX="-361" frameY="-135" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie right0002" x="2146" y="446" width="562" height="446" frameX="-360" frameY="-135" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie right0003" x="2146" y="892" width="560" height="446" frameX="-361" frameY="-135" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie right0004" x="1124" y="1419" width="560" height="447" frameX="-361" frameY="-134" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie up0000" x="480" y="0" width="553" height="483" frameX="-365" frameY="-100" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie up0001" x="0" y="492" width="554" height="476" frameX="-363" frameY="-105" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie up0002" x="1033" y="0" width="554" height="472" frameX="-363" frameY="-110" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie up0003" x="0" y="968" width="560" height="451" frameX="-361" frameY="-131" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie up0004" x="560" y="1866" width="560" height="445" frameX="-361" frameY="-136" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie down0000" x="2239" y="2311" width="565" height="433" frameX="-359" frameY="-148" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie down0001" x="1678" y="2311" width="561" height="437" frameX="-361" frameY="-144" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie down0002" x="0" y="2311" width="562" height="442" frameX="-360" frameY="-139" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie down0003" x="1680" y="1866" width="560" height="444" frameX="-361" frameY="-137" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie down0004" x="1120" y="1866" width="560" height="445" frameX="-361" frameY="-136" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Rosie dead0000" x="0" y="0" width="480" height="492" frameX="-372" frameY="-130" frameWidth="1280" frameHeight="720" />
+</TextureAtlas>

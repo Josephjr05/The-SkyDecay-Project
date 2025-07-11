@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<TextureAtlas imagePath="smoke.png">
+	<!-- Created with Adobe Flash CS6 version 12.0.0.481 -->
+	<!-- http://www.adobe.com/products/flash.html -->
+	<SubTexture name="SMOKE V20000" x="0" y="0" width="640" height="834"/>
+	<SubTexture name="SMOKE V20001" x="0" y="0" width="640" height="834"/>
+	<SubTexture name="SMOKE V20002" x="0" y="0" width="640" height="834"/>
+	<SubTexture name="SMOKE V20003" x="640" y="0" width="640" height="834"/>
+	<SubTexture name="SMOKE V20004" x="640" y="0" width="640" height="834"/>
+	<SubTexture name="SMOKE V20005" x="640" y="0" width="640" height="834"/>
+	<SubTexture name="SMOKE V20006" x="1280" y="0" width="640" height="834"/>
+	<SubTexture name="SMOKE V20007" x="1280" y="0" width="640" height="834"/>
+	<SubTexture name="SMOKE V20008" x="1280" y="0" width="640" height="834"/>
+	<SubTexture name="SMOKE V20009" x="1920" y="0" width="640" height="834"/>
+	<SubTexture name="SMOKE V20010" x="1920" y="0" width="640" height="834"/>
+	<SubTexture name="SMOKE V20011" x="1920" y="0" width="640" height="834"/>
+	<SubTexture name="SMOKE V20012" x="2560" y="0" width="640" height="834"/>
+	<SubTexture name="SMOKE V20013" x="2560" y="0" width="640" height="834"/>
+	<SubTexture name="SMOKE V20014" x="2560" y="0" width="640" height="834"/>
+	<SubTexture name="SMOKE V20015" x="3200" y="0" width="640" height="834"/>
+	<SubTexture name="SMOKE V20016" x="3200" y="0" width="640" height="834"/>
+	<SubTexture name="SMOKE V20017" x="3200" y="0" width="640" height="834"/>
+	<SubTexture name="SMOKE V20018" x="0" y="834" width="640" height="834"/>
+	<SubTexture name="SMOKE V20019" x="0" y="834" width="640" height="834"/>
+	<SubTexture name="SMOKE V20020" x="0" y="834" width="640" height="834"/>
+	<SubTexture name="SMOKE V20021" x="640" y="834" width="640" height="834"/>
+	<SubTexture name="SMOKE V20022" x="640" y="834" width="640" height="834"/>
+	<SubTexture name="SMOKE V20023" x="640" y="834" width="640" height="834"/>
+	<SubTexture name="SMOKE V20024" x="1280" y="834" width="640" height="834"/>
+	<SubTexture name="SMOKE V20025" x="1280" y="834" width="640" height="834"/>
+	<SubTexture name="SMOKE V20026" x="1280" y="834" width="640" height="834"/>
+	<SubTexture name="SMOKE V20027" x="1920" y="834" width="640" height="834"/>
+	<SubTexture name="SMOKE V20028" x="1920" y="834" width="640" height="834"/>
+	<SubTexture name="SMOKE V20029" x="1920" y="834" width="640" height="834"/>
+	<SubTexture name="SMOKE V20030" x="2560" y="834" width="640" height="834"/>
+	<SubTexture name="SMOKE V20031" x="2560" y="834" width="640" height="834"/>
+	<SubTexture name="SMOKE V20032" x="2560" y="834" width="640" height="834"/>
+	<SubTexture name="SMOKE V20033" x="3200" y="834" width="640" height="834"/>
+	<SubTexture name="SMOKE V20034" x="3200" y="834" width="640" height="834"/>
+	<SubTexture name="SMOKE V20035" x="3200" y="834" width="640" height="834"/>
+	<SubTexture name="SMOKE V20036" x="0" y="1668" width="640" height="834"/>
+	<SubTexture name="SMOKE V20037" x="0" y="1668" width="640" height="834"/>
+	<SubTexture name="SMOKE V20038" x="0" y="1668" width="640" height="834"/>
+	<SubTexture name="SMOKE V20039" x="640" y="1668" width="640" height="834"/>
+	<SubTexture name="SMOKE V20040" x="640" y="1668" width="640" height="834"/>
+	<SubTexture name="SMOKE V20041" x="640" y="1668" width="640" height="834"/>
+	<SubTexture name="SMOKE V20042" x="1280" y="1668" width="640" height="834"/>
+	<SubTexture name="SMOKE V20043" x="1280" y="1668" width="640" height="834"/>
+	<SubTexture name="SMOKE V20044" x="1280" y="1668" width="640" height="834"/>
+	<SubTexture name="SMOKE V20045" x="1920" y="1668" width="640" height="834"/>
+	<SubTexture name="SMOKE V20046" x="1920" y="1668" width="640" height="834"/>
+	<SubTexture name="SMOKE V20047" x="1920" y="1668" width="640" height="834"/>
+</TextureAtlas>

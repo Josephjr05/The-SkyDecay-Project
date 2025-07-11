@@ -1,0 +1,52 @@
+[
+	{
+		"save": "showPopup",
+		"name": "Show Popup",
+		"type": "bool",
+		"description": "Show thank you popup in the start of a song or not",
+		"value": true
+	},
+	{
+		"save": "adjustX",
+		"name": "Popup Offset",
+		"type": "int",
+		"description": "The offset of popup on X axis",
+		"value": 0,
+		"min": -99999,
+		"max": 99999,
+		"step": 1
+	},
+	{
+		"save": "hideTimer",
+		"name": "Hide Timer",
+		"type": "bool",
+		"description": "Forces to hide left time",
+		"value": false
+	},
+	{
+		"save": "customFont",
+		"name": "Use Custom Font",
+		"type": "bool",
+		"description": "Use custom font (small caps) for rich presence in discord or not",
+		"value": false
+	},
+	{
+		"save": "popupTime",
+		"name": "Popup Show Time",
+		"type": "float",
+		"description": "For how long popup should stay",
+		"value": 2,
+		"min": 0,
+		"max": 99999,
+		"step": 0.01,
+		"decimals": 2,
+		"scroll": 1
+	},
+	{
+		"save": "showChartingMode",
+		"name": "Show Charting Mode",
+		"type": "bool",
+		"description": "should discord show whenever you are in charting mode or not",
+		"value": true
+	}
+]

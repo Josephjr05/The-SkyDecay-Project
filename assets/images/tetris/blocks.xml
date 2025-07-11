@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="blocks.png">
+	<SubTexture name="1" x="0" y="0" width="8" height="8"/>
+    <SubTexture name="2" x="8" y="0" width="8" height="8"/>
+    <SubTexture name="3" x="16" y="0" width="8" height="8"/>
+    <SubTexture name="4" x="24" y="0" width="8" height="8"/>
+    <SubTexture name="5" x="32" y="0" width="8" height="8"/>
+</TextureAtlas>

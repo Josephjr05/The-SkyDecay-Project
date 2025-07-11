@@ -143,6 +143,9 @@ import states.TitleState;
 
 		// optimizations
 		public var batchedDraws:Bool = false; // if you have a potato pc, turn this off
+
+		//camHUD option cause apprently people like it
+		public var camHUDOption:Bool = false;
 }
 
 class ClientPrefs {

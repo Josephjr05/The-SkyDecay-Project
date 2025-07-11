@@ -132,11 +132,17 @@ class VisualsSettingsSubState extends BaseOptionsMenu
 			BOOL);
 		addOption(option);
 
-		var option:Option = new Option('Score Text Grow on Hit',
+		var option:Option = new Option('HUD Bop',
+			"If checked, the HUD camera will zoom in on a beat hit.\nIf unchecked, the HUD camera will not zoom in on a beat hit.\n(Mostly recommended for Mania Players to have off)",
+			'camHUDOption',
+			BOOL);
+		addOption(option);
+
+		/* var option:Option = new Option('Score Text Grow on Hit',
 			"If unchecked, disables the Score text growing\neverytime you hit a note.",
 			'scoreZoom',
 			BOOL);
-		addOption(option);
+		addOption(option); */
 
 		var option:Option = new Option('Health Bar Opacity',
 			'How much transparent should the health bar and icons be.',
@@ -182,11 +188,11 @@ class VisualsSettingsSubState extends BaseOptionsMenu
 		addOption(option);
 		#end
 
-		var option:Option = new Option('Combo Stacking',
+		/* var option:Option = new Option('Combo Stacking',
 			"If unchecked, Ratings and Combo won't stack, saving on System Memory and making them easier to read",
 			'comboStacking',
 			BOOL);
-		addOption(option);
+		addOption(option);*/
 
 		super();
 		add(notes);

@@ -95,7 +95,7 @@ class ResultsScreen extends MusicBeatSubstate
     	    0x7FFF0000 //miss
     		];
     				
-    var safeZoneOffset:Float = (ClientPrefs.data.safeFrames / 60) * 1000;
+    // var safeZoneOffset:Float = (ClientPrefs.data.safeFrames / 60) * 1000;
     		
 	public function new(x:Float, y:Float)
 	{
@@ -191,8 +191,8 @@ class ResultsScreen extends MusicBeatSubstate
 		opTextNumber = new FlxTypedGroup<FlxText>();
 		add(opTextNumber);
 		
-		opTextAdd('HealthGain: X' + ClientPrefs.getGameplaySetting('healthgain'), 1);
-		opTextAdd('HealthLoss: X' + ClientPrefs.getGameplaySetting('healthloss'), 2);
+		opTextAdd('HealthGain: X' + CoolUtil.floorDecimal(game.healthGain, 2), 1); // Ensure healthGain is formatted correctly
+		opTextAdd('HealthLoss: X' + CoolUtil.floorDecimal(game.healthGain, 2), 2); // HealthLoss should be formatted too
 		
 		var speed:String = ClientPrefs.getGameplaySetting('scrollspeed');
 		if (ClientPrefs.getGameplaySetting('scrolltype') == 'multiplicative')
@@ -384,132 +384,182 @@ class ResultsScreen extends MusicBeatSubstate
 	    type.add(numberText);		
 	}
 	
-	function graphNoteDraw(){
-	
-	    FlxSpriteUtil.beginDraw(0xFFFFFFFF);
-	    
-	    var noteSize = 2.3;
-	    var MoveSize = 0.8;
-	    var color:FlxColor;
-	    
-	    for (i in 0...game.NoteTime.length - 1){
-		    if (Math.abs(game.NoteMs[i]) <= ClientPrefs.data.perfectWindow && ClientPrefs.data.perfectRating) color = ColorArray[0];
-		    else if (Math.abs(game.NoteMs[i]) <= ClientPrefs.data.greatWindow) color = ColorArray[1];
-		    else if (Math.abs(game.NoteMs[i]) <= ClientPrefs.data.goodWindow) color = ColorArray[2];
-		    else if (Math.abs(game.NoteMs[i]) <= ClientPrefs.data.okWindow) color = ColorArray[3];
-		    else if (Math.abs(game.NoteMs[i]) <= safeZoneOffset) color = ColorArray[4];
-		    else color = ColorArray[5];		    		    		    
-		    		    		    
-		    if (Math.abs(game.NoteMs[i]) <= safeZoneOffset){
-    		    FlxSpriteUtil.drawCircle(graphNote, graphNote.width * (game.NoteTime[i] / PlayState.instance.songLength), graphNote.height * 0.5 + graphNote.height * 0.5 * MoveSize * (game.NoteMs[i] / safeZoneOffset), noteSize, color);
-    		}else{
-    		    FlxSpriteUtil.drawCircle(graphNote, graphNote.width * (game.NoteTime[i] / PlayState.instance.songLength), graphNote.height * 0.5 + graphNote.height * 0.5 * 0.9, noteSize, color);		
-    		}    				    
-		}
-		
-		FlxSpriteUtil.drawRect(graphNote, 0, graphNote.height * 0.5 - 1, graphNote.width, 2, 0x7FFFFFFF);
-		
-		if (ClientPrefs.data.perfectRating){
-    		FlxSpriteUtil.drawRect(graphNote, 0, graphNote.height * 0.5 + graphNote.height * 0.5 * MoveSize * (ClientPrefs.data.perfectWindow / safeZoneOffset) - 1, graphNote.width, 2, ColorArrayAlpha[0]);
-    		FlxSpriteUtil.drawRect(graphNote, 0, graphNote.height * 0.5 - graphNote.height * 0.5 * MoveSize * (ClientPrefs.data.perfectWindow / safeZoneOffset) - 1, graphNote.width, 2, ColorArrayAlpha[0]);
-		} //perfect
-		
-		if (!(ClientPrefs.data.perfectWindow >= ClientPrefs.data.greatWindow && ClientPrefs.data.perfectRating)){
-		    FlxSpriteUtil.drawRect(graphNote, 0, graphNote.height * 0.5 + graphNote.height * 0.5 * MoveSize * (ClientPrefs.data.greatWindow / safeZoneOffset) - 1, graphNote.width, 2, ColorArrayAlpha[1]);
-    		FlxSpriteUtil.drawRect(graphNote, 0, graphNote.height * 0.5 - graphNote.height * 0.5 * MoveSize * (ClientPrefs.data.greatWindow / safeZoneOffset) - 1, graphNote.width, 2, ColorArrayAlpha[1]);		
-		} //great
-		
-		if ((ClientPrefs.data.perfectWindow <= ClientPrefs.data.goodWindow && ClientPrefs.data.perfectRating) || ClientPrefs.data.greatWindow <= ClientPrefs.data.goodWindow){
-		    FlxSpriteUtil.drawRect(graphNote, 0, graphNote.height * 0.5 + graphNote.height * 0.5 * MoveSize * (ClientPrefs.data.goodWindow / safeZoneOffset) - 1, graphNote.width, 2, ColorArrayAlpha[2]);
-    		FlxSpriteUtil.drawRect(graphNote, 0, graphNote.height * 0.5 - graphNote.height * 0.5 * MoveSize * (ClientPrefs.data.goodWindow / safeZoneOffset) - 1, graphNote.width, 2, ColorArrayAlpha[2]);		
-		} //good
-		
-		if ((ClientPrefs.data.perfectWindow <= ClientPrefs.data.okWindow && ClientPrefs.data.perfectRating) || ClientPrefs.data.greatWindow <= ClientPrefs.data.okWindow || ClientPrefs.data.goodWindow <= ClientPrefs.data.okWindow){
-		    FlxSpriteUtil.drawRect(graphNote, 0, graphNote.height * 0.5 + graphNote.height * 0.5 * MoveSize * (ClientPrefs.data.okWindow / safeZoneOffset) - 1, graphNote.width, 2, ColorArrayAlpha[3]);
-    		FlxSpriteUtil.drawRect(graphNote, 0, graphNote.height * 0.5 - graphNote.height * 0.5 * MoveSize * (ClientPrefs.data.okWindow / safeZoneOffset) - 1, graphNote.width, 2, ColorArrayAlpha[3]);				
-		} //ok
-		
-		FlxSpriteUtil.drawRect(graphNote, 0, graphNote.height * 0.5 + graphNote.height * 0.5 * MoveSize - 1, graphNote.width, 2, ColorArrayAlpha[4]); 
-    	FlxSpriteUtil.drawRect(graphNote, 0, graphNote.height * 0.5 - graphNote.height * 0.5 * MoveSize - 1, graphNote.width, 2, ColorArrayAlpha[4]); 
-    	//meh
-    	
-    	FlxSpriteUtil.drawRect(graphNote, 0, graphNote.height * 0.5 + graphNote.height * 0.5 * 0.9 - 1, graphNote.width, 2, ColorArrayAlpha[3]);
-    	//miss
-		
-		graphNote.updateHitbox();			
-	
+    function graphNoteDraw(){
+        // Use the dynamically calculated safeZoneOffset from Conductor
+        var currentSafeZoneOffset = Conductor.safeZoneOffset * game.playbackRate; // Apply playbackRate if needed, like in PlayState
+        if (currentSafeZoneOffset <= 0) currentSafeZoneOffset = 1; // Prevent division by zero
+
+        // Get the actual hit windows from PlayState's ratingsData
+        // Ensure ratingsData is not null and has enough elements
+        if (game == null || game.ratingsData == null || game.ratingsData.length < 4) {
+             trace("Error in graphNoteDraw: PlayState instance or ratingsData not ready.");
+             return; // Cannot draw graph without rating data
+        }
+        var perfectWin = game.ratingsData[0].hitWindow; // sick
+        var greatWin   = game.ratingsData[1].hitWindow; // good
+        var goodWin    = game.ratingsData[2].hitWindow; // bad
+        var okWin      = game.ratingsData[3].hitWindow; // shit
+
+        FlxSpriteUtil.beginDraw(0xFFFFFFFF);
+
+        var noteSize = 2.3;
+        var MoveSize = 0.8;
+        var color:FlxColor;
+
+        for (i in 0...game.NoteTime.length - 1){
+            var noteMs = game.NoteMs[i]; // Use the raw ms difference
+            var absNoteMs = Math.abs(noteMs);
+
+            // Determine color based on dynamic windows
+            if (absNoteMs <= perfectWin) color = ColorArray[0];       // Perfect/Sick
+            else if (absNoteMs <= greatWin) color = ColorArray[1];    // Great/Good
+            else if (absNoteMs <= goodWin) color = ColorArray[2];     // Good/Bad
+            else if (absNoteMs <= okWin) color = ColorArray[3];        // Ok/Shit
+            else if (absNoteMs <= currentSafeZoneOffset) color = ColorArray[4]; // Meh
+            else color = ColorArray[5];
+
+            // Plotting the note
+            if (absNoteMs <= currentSafeZoneOffset){
+                FlxSpriteUtil.drawCircle(graphNote, graphNote.width * (game.NoteTime[i] / PlayState.instance.songLength), graphNote.height * 0.5 + graphNote.height * 0.5 * MoveSize * (noteMs / currentSafeZoneOffset), noteSize, color);
+            }else{
+                var missPos = (noteMs > 0) ? 0.9 : -0.9;
+                FlxSpriteUtil.drawCircle(graphNote, graphNote.width * (game.NoteTime[i] / PlayState.instance.songLength), graphNote.height * 0.5 + graphNote.height * 0.5 * missPos, noteSize, color);
+            }
+        }
+
+        FlxSpriteUtil.drawRect(graphNote, 0, graphNote.height * 0.5 - 1, graphNote.width, 2, 0x7FFFFFFF);
+
+        // Perfect/Sick
+        FlxSpriteUtil.drawRect(graphNote, 0, graphNote.height * 0.5 + graphNote.height * 0.5 * MoveSize * (perfectWin / currentSafeZoneOffset) - 1, graphNote.width, 2, ColorArrayAlpha[0]);
+        FlxSpriteUtil.drawRect(graphNote, 0, graphNote.height * 0.5 - graphNote.height * 0.5 * MoveSize * (perfectWin / currentSafeZoneOffset) - 1, graphNote.width, 2, ColorArrayAlpha[0]);
+        // Great/Good
+        FlxSpriteUtil.drawRect(graphNote, 0, graphNote.height * 0.5 + graphNote.height * 0.5 * MoveSize * (greatWin / currentSafeZoneOffset) - 1, graphNote.width, 2, ColorArrayAlpha[1]);
+        FlxSpriteUtil.drawRect(graphNote, 0, graphNote.height * 0.5 - graphNote.height * 0.5 * MoveSize * (greatWin / currentSafeZoneOffset) - 1, graphNote.width, 2, ColorArrayAlpha[1]);
+        // Good/Bad
+        FlxSpriteUtil.drawRect(graphNote, 0, graphNote.height * 0.5 + graphNote.height * 0.5 * MoveSize * (goodWin / currentSafeZoneOffset) - 1, graphNote.width, 2, ColorArrayAlpha[2]);
+        FlxSpriteUtil.drawRect(graphNote, 0, graphNote.height * 0.5 - graphNote.height * 0.5 * MoveSize * (goodWin / currentSafeZoneOffset) - 1, graphNote.width, 2, ColorArrayAlpha[2]);
+        // Ok/Shit
+        FlxSpriteUtil.drawRect(graphNote, 0, graphNote.height * 0.5 + graphNote.height * 0.5 * MoveSize * (okWin / currentSafeZoneOffset) - 1, graphNote.width, 2, ColorArrayAlpha[3]);
+        FlxSpriteUtil.drawRect(graphNote, 0, graphNote.height * 0.5 - graphNote.height * 0.5 * MoveSize * (okWin / currentSafeZoneOffset) - 1, graphNote.width, 2, ColorArrayAlpha[3]);
+        // Miss
+        FlxSpriteUtil.drawRect(graphNote, 0, graphNote.height * 0.5 + graphNote.height * 0.5 * MoveSize - 1, graphNote.width, 2, ColorArrayAlpha[4]); // Using Meh's color slot for boundary
+        FlxSpriteUtil.drawRect(graphNote, 0, graphNote.height * 0.5 - graphNote.height * 0.5 * MoveSize - 1, graphNote.width, 2, ColorArrayAlpha[4]); // Using Meh's color slot for boundary
+
+        graphNote.updateHitbox();
 	}
 	
-	function percentRateAdd(){
+    function percentRateAdd()
+	{
+        // Use the dynamically calculated safeZoneOffset from Conductor
+        var currentSafeZoneOffset = Conductor.safeZoneOffset * game.playbackRate; // Apply playbackRate if needed
+        if (currentSafeZoneOffset <= 0) currentSafeZoneOffset = 1; // Prevent division by zero
+
+        // Get the actual hit windows from PlayState's ratingsData
+        if (game == null || game.ratingsData == null || game.ratingsData.length < 4) {
+             trace("Error in percentRateAdd: PlayState instance or ratingsData not ready.");
+             return; // Cannot process percentages without rating data
+        }
+        var perfectWin = game.ratingsData[0].hitWindow; // sick
+        var greatWin   = game.ratingsData[1].hitWindow; // good
+        var goodWin    = game.ratingsData[2].hitWindow; // bad
+        var okWin      = game.ratingsData[3].hitWindow; // shit
+		var mehWin 	= (game.ratingsData.length > 4) ? game.ratingsData[4].hitWindow : 0; // Only if you add a 5th rating back, otherwise 0
+
+        var numPerfects:Int = 0;
+        var numGreats:Int = 0;
+        var numGoods:Int = 0;
+        var numOks:Int = 0;
+        var numMehs:Int = 0; // Only if you add a 5th rating back
+
+        // Categorize hits based on dynamic windows
+        for (i in 0...game.NoteTime.length - 1){ // Iterate up to length - 1 if NoteTime includes misses
+             var absNoteMs = Math.abs(game.NoteMs[i]);
+             if (absNoteMs <= perfectWin) numPerfects++;
+             else if (absNoteMs <= greatWin) numGreats++;
+             else if (absNoteMs <= goodWin) numGoods++;
+             else if (absNoteMs <= okWin) numOks++;
+             else if (absNoteMs <= currentSafeZoneOffset) numMehs++; // Only if you add a 5th rating
+             // Misses are implicitly handled by not falling into these windows
+        }
+
+        // Calculate total hits recorded (excluding potential misses recorded in NoteMs)
+        var totalJudgedHits = numPerfects + numGreats + numGoods + numOks; // + numMehs;
+        // Calculate misses based on PlayState's count
+        var numMisses = game.songMisses;
+        // Calculate total attempts
+        var totalAttempts = totalJudgedHits + numMisses;
+        if (totalAttempts == 0) totalAttempts = 1; // Avoid division by zero
+
+        // Determine height based on number of ratings to display
+        var numRatingsToDisplay = 4 + (numMisses > 0 ? 1 : 0); // 4 base ratings + 1 for misses if any
+        var height:Int = Std.int(300 / numRatingsToDisplay);
+
+        // Add rates, passing the TOTAL window size (hitWindow * 2) for display
+        addRate(height, game.ratingsData[0].name, perfectWin * 2, numPerfects, ColorArray[0], totalAttempts); // Perfect/Sick
+        addRate(height, game.ratingsData[1].name, greatWin * 2,   numGreats,   ColorArray[1], totalAttempts); // Great/Good
+        addRate(height, game.ratingsData[2].name, goodWin * 2,    numGoods,    ColorArray[2], totalAttempts); // Good/Bad
+        addRate(height, game.ratingsData[3].name, okWin * 2,      numOks,      ColorArray[3], totalAttempts); // Ok/Shit
+        addRate(height, 'meh', mehWin * 2, numMehs, ColorArray[4], totalAttempts); // If you add Meh back
+
+        // Add Misses row if there were any
+        if (numMisses > 0) {
+            addRate(height, 'miss', currentSafeZoneOffset * 2, numMisses, ColorArray[5], totalAttempts); // Display miss threshold
+        }
+    }
 	
-	    var numPerfects:Int = 0;
-    	var numGreats:Int = 0;
-    	var numGoods:Int = 0;
-    	var numOks:Int = 0;
-    	var numMehs:Int = 0;
-	
-	    for (i in 0...game.NoteTime.length - 1){
-		    if (Math.abs(game.NoteMs[i]) <= ClientPrefs.data.perfectWindow && ClientPrefs.data.perfectRating) numPerfects++;
-		    else if (Math.abs(game.NoteMs[i]) <= ClientPrefs.data.greatWindow) numGreats++;
-		    else if (Math.abs(game.NoteMs[i]) <= ClientPrefs.data.goodWindow) numGoods++;
-		    else if (Math.abs(game.NoteMs[i]) <= ClientPrefs.data.okWindow) numOks++;
-		    else if (Math.abs(game.NoteMs[i]) <= safeZoneOffset) numMehs++;		    	    		    		 
-	    }
-	    
-	    var height:Int = ClientPrefs.data.perfectRating ? Std.int(300 / 5) : Std.int(300 / 4);	    
-	    if (ClientPrefs.data.perfectRating) addRate(height, 'perfect', Reflect.field(ClientPrefs.data, 'perfectWindow'), numPerfects, ColorArray[0]);
-	    addRate(height, 'great', Reflect.field(ClientPrefs.data, 'greatWindow'), numGreats, ColorArray[1]);
-	    addRate(height, 'Good', Reflect.field(ClientPrefs.data, 'goodWindow'), numGoods, ColorArray[2]);
-	    addRate(height, 'ok', Reflect.field(ClientPrefs.data, 'okWindow'), numOks, ColorArray[3]);
-	    addRate(height, 'meh', (ClientPrefs.data.safeFrames / 60) * 1000, numMehs, ColorArray[4]);		    	    	
-	}
-	
-	function addRate(height:Int, RateName:String, ms:Float, number:Int, color:FlxColor){
-	
-	    var numberBG:FlxSprite = new FlxSprite(percentBG.x + 5, percentBG.y + 5 + percentRectBGNumber.length * height).loadGraphic(createGraphic(Std.int(percentBG.width - 10), 30, 20, 20));
-	    numberBG.color = FlxColor.BLACK;
-		numberBG.alpha = 0;
-		numberBG.antialiasing = ClientPrefs.data.antialiasing;
-		percentRectBGNumber.add(numberBG);		
-		
-		var numberRect:FlxSprite = new FlxSprite(percentBG.x + 5, percentBG.y + 5 + percentRectNumber.length * height).loadGraphic(createGraphic(Std.int((percentBG.width - 10) * (number / (game.NoteTime.length - 1))), 30, 20, 20));
-		numberRect.color = color;
-		numberRect.alpha = 0;
-		numberRect.antialiasing = ClientPrefs.data.antialiasing;
-		percentRectNumber.add(numberRect);	
-	
-	    var numberText = new FlxText(percentBG.x + 5, numberBG.y + numberBG.height, 0, RateName, 16);		    
-		numberText.font = Paths.font('Prototype.ttf');
-		numberText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1, 1);
-		numberText.scrollFactor.set();
-		numberText.antialiasing = ClientPrefs.data.antialiasing;
-	    numberText.alignment = LEFT;			
-	    numberText.alpha = 0;    	
-	    numberText.color = color;    
-	    percentTextNumber.add(numberText);
-	    
-	    var numberText = new FlxText(percentBG.x + 5 + percentBG.width / 2, numberBG.y + numberBG.height, 0, number + '(' + Math.ceil(number / (game.NoteTime.length - 1) * 100 * 100) / 100 + '%)', 16);		    
-		numberText.font = Paths.font('Prototype.ttf');
-		numberText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1, 1);
-		numberText.scrollFactor.set();
-		numberText.antialiasing = ClientPrefs.data.antialiasing;
-	    numberText.alignment = LEFT;			
-	    numberText.alpha = 0;    	
-	    numberText.color = color;    
-	    numberText.x -= numberText.width * 0.5;
-	    percentTextNumber.add(numberText);
-	    
-	    var numberText = new FlxText(percentBG.x - 5 + percentBG.width, numberBG.y + numberBG.height, 0, Math.ceil(ms * 100) / 100 + 'MS', 16);		    
-		numberText.font = Paths.font('Prototype.ttf');
-		numberText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1, 1);
-		numberText.scrollFactor.set();
-		numberText.antialiasing = ClientPrefs.data.antialiasing;
-	    numberText.alignment = LEFT;			
-	    numberText.alpha = 0;    	
-	    numberText.color = color;    	
-	    numberText.x -= numberText.width;
-	    percentTextNumber.add(numberText);	
-	}
+    function addRate(height:Int, RateName:String, ms:Float, number:Int, color:FlxColor, totalAttempts:Int){
+
+        var numberBG:FlxSprite = new FlxSprite(percentBG.x + 5, percentBG.y + 5 + percentRectBGNumber.length * height).loadGraphic(createGraphic(Std.int(percentBG.width - 10), 30, 20, 20));
+        numberBG.color = FlxColor.BLACK;
+        numberBG.alpha = 0;
+        numberBG.antialiasing = ClientPrefs.data.antialiasing;
+        percentRectBGNumber.add(numberBG);
+
+        // Calculate percentage based on total attempts
+        var percentage = (totalAttempts > 0) ? (number / totalAttempts) : 0;
+
+        var numberRect:FlxSprite = new FlxSprite(percentBG.x + 5, percentBG.y + 5 + percentRectNumber.length * height).loadGraphic(createGraphic(Std.int((percentBG.width - 10) * percentage), 30, 20, 20));
+        numberRect.color = color;
+        numberRect.alpha = 0;
+        numberRect.antialiasing = ClientPrefs.data.antialiasing;
+        percentRectNumber.add(numberRect);
+
+        var numberText = new FlxText(percentBG.x + 5, numberBG.y + numberBG.height, 0, RateName, 16);
+        numberText.font = Paths.font('Prototype.ttf');
+        numberText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1, 1);
+        numberText.scrollFactor.set();
+        numberText.antialiasing = ClientPrefs.data.antialiasing;
+        numberText.alignment = LEFT;
+        numberText.alpha = 0;
+        numberText.color = color;
+        percentTextNumber.add(numberText);
+
+        // Display count and percentage
+        var percentDisplay = Math.ceil(percentage * 100 * 100) / 100;
+        var numberText = new FlxText(percentBG.x + 5 + percentBG.width / 2, numberBG.y + numberBG.height, 0, number + ' (' + percentDisplay + '%)', 16);
+        numberText.font = Paths.font('Prototype.ttf');
+        numberText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1, 1);
+        numberText.scrollFactor.set();
+        numberText.antialiasing = ClientPrefs.data.antialiasing;
+        numberText.alignment = LEFT;
+        numberText.alpha = 0;
+        numberText.color = color;
+        numberText.x -= numberText.width * 0.5;
+        percentTextNumber.add(numberText);
+
+        // Display the MS window (total width)
+        var msText = (RateName != 'miss') ? (Math.ceil(ms * 100) / 100 + 'MS') : ('>' + Math.ceil(ms / 2 * 100) / 100 + 'MS'); // Show miss threshold differently
+        var numberText = new FlxText(percentBG.x - 5 + percentBG.width, numberBG.y + numberBG.height, 0, msText, 16);
+        numberText.font = Paths.font('Prototype.ttf');
+        numberText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1, 1);
+        numberText.scrollFactor.set();
+        numberText.antialiasing = ClientPrefs.data.antialiasing;
+        numberText.alignment = LEFT;
+        numberText.alpha = 0;
+        numberText.color = color;
+        numberText.x -= numberText.width;
+        percentTextNumber.add(numberText);
+    }
 	
 	function createGraphic(Width:Int, Height:Int, ellipseWidth:Float, ellipseHeight:Float):BitmapData
 	{

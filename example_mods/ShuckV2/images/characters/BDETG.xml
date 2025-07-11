@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="DETG.png">
+<SubTexture name="Bruh What0000" x="3392" y="0" width="703" height="1167" frameX="-1" frameY="-6" frameWidth="1931" frameHeight="1173" />
+<SubTexture name="Bruh What0001" x="3392" y="0" width="703" height="1167" frameX="-1" frameY="-6" frameWidth="1931" frameHeight="1173" />
+<SubTexture name="Bruh What0002" x="3392" y="1167" width="703" height="1167" frameX="-1" frameY="-6" frameWidth="1931" frameHeight="1173" />
+<SubTexture name="Bruh What0003" x="0" y="2849" width="703" height="1162" frameX="-2" frameY="-11" frameWidth="1931" frameHeight="1173" />
+<SubTexture name="Bruh What0004" x="0" y="2849" width="703" height="1162" frameX="-2" frameY="-11" frameWidth="1931" frameHeight="1173" />
+<SubTexture name="Bruh What0005" x="703" y="2849" width="703" height="1162" frameX="-2" frameY="-11" frameWidth="1931" frameHeight="1173" />
+<SubTexture name="Bruh What0006" x="1406" y="2849" width="703" height="1161" frameX="-2" frameY="-12" frameWidth="1931" frameHeight="1173" />
+<SubTexture name="Bruh What0007" x="2109" y="2849" width="703" height="1161" frameX="-3" frameY="-12" frameWidth="1931" frameHeight="1173" />
+<SubTexture name="Bruh What0008" x="2109" y="2849" width="703" height="1161" frameX="-3" frameY="-12" frameWidth="1931" frameHeight="1173" />
+<SubTexture name="Bruh What0009" x="2812" y="2849" width="703" height="1161" frameX="-3" frameY="-12" frameWidth="1931" frameHeight="1173" />
+<SubTexture name="Bruh What0010" x="4095" y="0" width="703" height="1159" frameX="-3" frameY="-14" frameWidth="1931" frameHeight="1173" />
+<SubTexture name="Bruh What0011" x="4095" y="1159" width="703" height="1159" frameX="-3" frameY="-14" frameWidth="1931" frameHeight="1173" />
+<SubTexture name="Bruh What0012" x="4095" y="2318" width="703" height="1159" frameX="-3" frameY="-14" frameWidth="1931" frameHeight="1173" />
+<SubTexture name="Bruh What0013" x="4095" y="2318" width="703" height="1159" frameX="-3" frameY="-14" frameWidth="1931" frameHeight="1173" />
+<SubTexture name="Bruh What0014" x="4095" y="2318" width="703" height="1159" frameX="-3" frameY="-14" frameWidth="1931" frameHeight="1173" />
+<SubTexture name="Bruh What0015" x="4095" y="2318" width="703" height="1159" frameX="-3" frameY="-14" frameWidth="1931" frameHeight="1173" />
+<SubTexture name="Bruh What0016" x="4798" y="0" width="703" height="1159" frameX="-3" frameY="-14" frameWidth="1931" frameHeight="1173" />
+<SubTexture name="Bruh What0017" x="4798" y="0" width="703" height="1159" frameX="-3" frameY="-14" frameWidth="1931" frameHeight="1173" />
+<SubTexture name="Bruh What0018" x="4798" y="0" width="703" height="1159" frameX="-3" frameY="-14" frameWidth="1931" frameHeight="1173" />
+<SubTexture name="Bruh What0019" x="4798" y="0" width="703" height="1159" frameX="-3" frameY="-14" frameWidth="1931" frameHeight="1173" />
+<SubTexture name="Bruh What0020" x="4798" y="1159" width="703" height="1159" frameX="-3" frameY="-14" frameWidth="1931" frameHeight="1173" />
+<SubTexture name="Bruh What0021" x="4798" y="1159" width="703" height="1159" frameX="-3" frameY="-14" frameWidth="1931" frameHeight="1173" />
+<SubTexture name="Bruh What0022" x="4798" y="1159" width="703" height="1159" frameX="-3" frameY="-14" frameWidth="1931" frameHeight="1173" />
+<SubTexture name="Bruh What0023" x="4798" y="1159" width="703" height="1159" frameX="-3" frameY="-14" frameWidth="1931" frameHeight="1173" />
+<SubTexture name="Bruh What0024" x="4798" y="1159" width="703" height="1159" frameX="-3" frameY="-14" frameWidth="1931" frameHeight="1173" />
+</TextureAtlas>

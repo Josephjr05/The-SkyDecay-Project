@@ -1,0 +1,80 @@
+{
+	"_editorMeta": {
+		"boyfriend": "MARVINchair",
+		"gf": "gf",
+		"dad": "DETGchair"
+	},
+	"girlfriend": [
+		400,
+		-45
+	],
+	"isPixelStage": false,
+	"boyfriend": [
+		825,
+		50
+	],
+	"objects": [
+		{
+			"x": 35,
+			"blend": "normal",
+			"y": 0,
+			"scale": [
+				2,
+				1.8
+			],
+			"image": "shuckchairbg",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "sprite2",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"type": "gf"
+		},
+		{
+			"type": "dad"
+		},
+		{
+			"type": "boyfriend"
+		},
+		{
+			"x": -161,
+			"blend": "normal",
+			"y": -229,
+			"scale": [
+				1,
+				1
+			],
+			"image": "shuckchairfg",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "sprite1",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		}
+	],
+	"defaultZoom": 0.4,
+	"directory": "",
+	"opponent": [
+		50,
+		30
+	],
+	"hide_girlfriend": true
+}

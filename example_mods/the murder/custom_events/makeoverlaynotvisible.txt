@@ -1,0 +1,4 @@
+value 1 is image named
+value 2 should be image name.visible 
+ 
+ex: transition.visible

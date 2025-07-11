@@ -1,0 +1,1 @@
+-- This event script is empty because it is handled by Poison.lua in the scripts folder.

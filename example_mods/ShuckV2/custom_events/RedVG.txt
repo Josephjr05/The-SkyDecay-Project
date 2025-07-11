@@ -1,0 +1,3 @@
+Value1 : The appearance RedVG
+Value2 : The disappearance of RedVG
+Calculation by seconds

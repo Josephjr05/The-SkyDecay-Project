@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Rosie test.png">
+	<!-- Created using the Spritesheet and XML generator -->
+	<!-- https://uncertainprod.github.io/FNF-Spritesheet-XML-generator-Web -->
+	<SubTexture name="Anim0000" x="1682" y="0" width="1682" height="1290" frameX="-195" frameY="-336" frameWidth="2000" frameHeight="2000"/>
+	<SubTexture name="Anim0001" x="3364" y="0" width="1683" height="1284" frameX="-195" frameY="-342" frameWidth="2000" frameHeight="2000"/>
+	<SubTexture name="Anim0002" x="3364" y="1284" width="1682" height="1278" frameX="-194" frameY="-348" frameWidth="2000" frameHeight="2000"/>
+	<SubTexture name="Anim0003" x="1682" y="1290" width="1682" height="1286" frameX="-194" frameY="-340" frameWidth="2000" frameHeight="2000"/>
+	<SubTexture name="Anim0004" x="0" y="1290" width="1682" height="1287" frameX="-195" frameY="-339" frameWidth="2000" frameHeight="2000"/>
+	<SubTexture name="Anim0005" x="0" y="0" width="1682" height="1290" frameX="-195" frameY="-336" frameWidth="2000" frameHeight="2000"/>
+</TextureAtlas>

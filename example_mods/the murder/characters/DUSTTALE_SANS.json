@@ -1,0 +1,56 @@
+{
+	"animations": [
+		{
+			"offsets": [91, 14],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "Sans Left"
+		},
+		{
+			"offsets": [-3, 1],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "Sans Down"
+		},
+		{
+			"offsets": [-3, 72],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "Sans Up"
+		},
+		{
+			"offsets": [-58, 19],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "Sans Rigth"
+		},
+		{
+			"loop": true,
+			"offsets": [0, 10],
+			"anim": "idle",
+			"fps": 24,
+			"name": "Sans idle",
+			"indices": []
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/DUSTTALE_SANS",
+	"position": [0, 0],
+	"healthicon": "Dust_Sans",
+	"flip_x": false,
+	"healthbar_colors": [76, 74, 113],
+	"camera_position": [0, 0],
+	"chartPosition": null,
+	"sing_duration": 6.1,
+	"scale": 1,
+	"_editor_isPlayer": false
+}

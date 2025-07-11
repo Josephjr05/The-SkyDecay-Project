@@ -1,0 +1,56 @@
+{
+	"animations": [
+		{
+			"offsets": [0, 488],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "Almas L"
+		},
+		{
+			"offsets": [-163, 488],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "Almas R"
+		},
+		{
+			"offsets": [-163, 488],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "Almas Up"
+		},
+		{
+			"loop": false,
+			"offsets": [47, 488],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "Alma Down",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [-162, 489],
+			"anim": "idle",
+			"fps": 24,
+			"name": "Almas Idle",
+			"indices": []
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/DUSTTALE_SANS",
+	"position": [0, 0],
+	"healthicon": "Dust_Sans",
+	"flip_x": false,
+	"healthbar_colors": [76, 74, 113],
+	"camera_position": [0, 0],
+	"chartPosition": null,
+	"sing_duration": 6.1,
+	"scale": 1,
+	"_editor_isPlayer": false
+}

@@ -1,0 +1,87 @@
+{
+	"animations": [
+		{
+			"loop": true,
+			"offsets": [-10, 95],
+			"anim": "idle",
+			"fps": 24,
+			"name": "Idle",
+			"indices": []
+		},
+		{
+			"offsets": [281, 299],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFTmiss",
+			"indices": [],
+			"name": "leftmiss"
+		},
+		{
+			"offsets": [267, 299],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWNmiss",
+			"indices": [],
+			"name": "downmiss"
+		},
+		{
+			"offsets": [287, 312],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUPmiss",
+			"indices": [],
+			"name": "upmiss"
+		},
+		{
+			"offsets": [293, 310],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHTmiss",
+			"indices": [],
+			"name": "rightmiss"
+		},
+		{
+			"loop": false,
+			"offsets": [85, 24],
+			"anim": "singLEFT",
+			"fps": 30,
+			"name": "Left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [-7, -46],
+			"anim": "singDOWN",
+			"fps": 30,
+			"name": "Down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [4, 217],
+			"anim": "singUP",
+			"fps": 30,
+			"name": "Up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [-8, 83],
+			"anim": "singRIGHT",
+			"fps": 30,
+			"name": "Right",
+			"indices": []
+		}
+	],
+	"vocals_file": "marvin",
+	"no_antialiasing": false,
+	"image": "characters/Chained_Marvin, characters/marvin",
+	"position": [0, 350],
+	"healthicon": "marvin",
+	"flip_x": true,
+	"healthbar_colors": [255, 0, 0],
+	"camera_position": [0, 0],
+	"sing_duration": 4,
+	"scale": 1.2,
+	"_editor_isPlayer": true
+}

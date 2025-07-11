@@ -1,0 +1,92 @@
+{
+	"camera_boyfriend": [
+		-300,
+		-150
+	],
+	"_editorMeta": {
+		"boyfriend": "bf-dust",
+		"dad": "DUSTTALE_SANS",
+		"gf": "paps"
+	},
+	"girlfriend": [
+		899,
+		-221
+	],
+	"isPixelStage": false,
+	"boyfriend": [
+		1672,
+		189
+	],
+	"objects": [
+		{
+			"x": 215,
+			"blend": "normal",
+			"y": -362,
+			"scale": [
+				1.06,
+				1.15
+			],
+			"image": "arboles",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "sprite1",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"type": "gf"
+		},
+		{
+			"x": 377,
+			"blend": "normal",
+			"y": 449,
+			"scale": [
+				1,
+				0.95
+			],
+			"image": "fondo",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "sprite2",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"type": "dad"
+		},
+		{
+			"type": "boyfriend"
+		}
+	],
+	"camera_girlfriend": [
+		1450,
+		550
+	],
+	"defaultZoom": 0.8,
+	"opponent": [
+		485,
+		357
+	],
+	"directory": "",
+	"hide_girlfriend": false,
+	"camera_opponent": [
+		250,
+		-300
+	]
+}

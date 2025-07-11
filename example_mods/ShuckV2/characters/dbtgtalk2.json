@@ -1,0 +1,23 @@
+{
+	"animations": [
+		{
+			"offsets": [-522, -388],
+			"indices": [],
+			"fps": 27,
+			"anim": "talk",
+			"loop": false,
+			"name": ""
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/dbtgtalk",
+	"position": [-480, -870],
+	"healthicon": "face",
+	"flip_x": false,
+	"healthbar_colors": [161, 161, 161],
+	"camera_position": [0, 0],
+	"sing_duration": 4,
+	"scale": 2.05,
+	"_editor_isPlayer": false
+}

@@ -1,0 +1,23 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [136, 627],
+			"anim": "bruh",
+			"fps": 24,
+			"name": "Bruh What",
+			"indices": []
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/BDETG",
+	"position": [0, 0],
+	"healthicon": "detg",
+	"flip_x": false,
+	"healthbar_colors": [185, 93, 42],
+	"camera_position": [-820, -580],
+	"sing_duration": 4,
+	"scale": 1.2,
+	"_editor_isPlayer": false
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.1.3 https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="texture.png" width="750" height="812">
+	<SubTexture name="neru" x="1" y="1" width="748" height="810" frameX="-1" frameY="-8" frameWidth="750" frameHeight="818"/>
+</TextureAtlas>

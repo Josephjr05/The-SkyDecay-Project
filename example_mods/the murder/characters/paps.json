@@ -1,0 +1,56 @@
+{
+	"animations": [
+		{
+			"loop": true,
+			"offsets": [0, 0],
+			"anim": "alma",
+			"fps": 24,
+			"name": "PAPS ALMA",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [55, 64],
+			"anim": "death",
+			"fps": 24,
+			"name": "PAPS death",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [150, 0],
+			"anim": "absorb",
+			"fps": 24,
+			"name": "PAPS abs",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [0, 0],
+			"anim": "spawn",
+			"fps": 24,
+			"name": "PAPS SPAWN",
+			"indices": []
+		},
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 24,
+			"anim": "paps",
+			"loop": true,
+			"name": "paps"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "paps",
+	"position": [0, 350],
+	"healthicon": "",
+	"flip_x": false,
+	"healthbar_colors": [49, 176, 209],
+	"camera_position": [0, 0],
+	"chartPosition": null,
+	"sing_duration": 4,
+	"scale": 1,
+	"_editor_isPlayer": false
+}

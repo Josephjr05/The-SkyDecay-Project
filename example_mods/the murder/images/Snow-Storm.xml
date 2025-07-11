@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Snow-Storm.png">
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="tormenta0000" x="0" y="0" width="1921" height="1080"/>
+	<SubTexture name="tormenta0001" x="1921" y="0" width="1921" height="1080"/>
+	<SubTexture name="tormenta0002" x="0" y="1080" width="1921" height="1080"/>
+	<SubTexture name="tormenta0003" x="1921" y="1080" width="1921" height="1080"/>
+	<SubTexture name="tormenta0004" x="0" y="2160" width="1921" height="1080"/>
+	<SubTexture name="tormenta0005" x="1921" y="2160" width="1921" height="1080"/>
+</TextureAtlas>

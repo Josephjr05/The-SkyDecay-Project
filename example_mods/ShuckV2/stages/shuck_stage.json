@@ -1,0 +1,155 @@
+{
+	"camera_boyfriend": [
+		-50,
+		-150
+	],
+	"_editorMeta": {
+		"boyfriend": "marvin",
+		"dad": "detg",
+		"gf": "new rose"
+	},
+	"girlfriend": [
+		164,
+		-633
+	],
+	"isPixelStage": false,
+	"boyfriend": [
+		1154,
+		-184
+	],
+	"camera_girlfriend": [
+		-50,
+		100
+	],
+	"objects": [
+		{
+			"x": -2263,
+			"y": -1191,
+			"scale": [
+				1,
+				1
+			],
+			"image": "ShucksBG_NEW",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "sprite5",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"type": "gf"
+		},
+		{
+			"type": "boyfriend"
+		},
+		{
+			"type": "dad"
+		},
+		{
+			"x": -2148,
+			"y": -1106,
+			"scale": [
+				1,
+				1
+			],
+			"image": "ShucksHook",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "sprite4",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"x": -2096,
+			"y": -972,
+			"scale": [
+				1,
+				1
+			],
+			"image": "ShucksChains",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "sprite3",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"x": -1867,
+			"y": -1145,
+			"scale": [
+				0.95,
+				0.95
+			],
+			"image": "shuckfront",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "sprite2",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				0.9,
+				0.9
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"x": -2266,
+			"y": -1184,
+			"scale": [
+				1,
+				1
+			],
+			"image": "ShucksIlumination",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "sprite1",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		}
+	],
+	"defaultZoom": 0.5,
+	"opponent": [
+		-295,
+		200
+	],
+	"directory": "",
+	"camera_opponent": [
+		-250,
+		-200
+	]
+}

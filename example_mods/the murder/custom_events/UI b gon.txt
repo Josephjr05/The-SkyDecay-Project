@@ -1,0 +1,4 @@
+Fade the UI in or out, keeps opponent and player notes visible
+
+Value 1: Type ( 1 = Fade in  |  0 = Fade out )
+Value 2: Duration

@@ -1,0 +1,142 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				40,
+				40
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "idle",
+			"loop": true,
+			"name": "Idle"
+		},
+		{
+			"offsets": [
+				60,
+				40
+			],
+			"indices": [
+				10,
+				11,
+				12,
+				12
+			],
+			"fps": 24,
+			"anim": "idle-loop",
+			"loop": true,
+			"name": "Idle"
+		},
+		{
+			"offsets": [
+				114,
+				50
+			],
+			"indices": [
+				56,
+				57,
+				58,
+				59
+			],
+			"fps": 24,
+			"anim": "singUP-loop",
+			"loop": true,
+			"name": "Up"
+		},
+		{
+			"offsets": [
+				41,
+				40
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singLEFT",
+			"loop": false,
+			"name": "Left"
+		},
+		{
+			"offsets": [
+				0,
+				27
+			],
+			"indices": [
+				15,
+				16,
+				17,
+				18
+			],
+			"fps": 24,
+			"anim": "singRIGHT-loop",
+			"loop": true,
+			"name": "Right"
+		},
+		{
+			"offsets": [
+				-9,
+				10
+			],
+			"indices": [
+				12,
+				13,
+				14,
+				15
+			],
+			"fps": 24,
+			"anim": "singLEFT-loop",
+			"loop": true,
+			"name": "Left"
+		},
+		{
+			"offsets": [
+				40,
+				40
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singRIGHT",
+			"loop": false,
+			"name": "Right"
+		},
+		{
+			"offsets": [
+				40,
+				40
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singDOWN",
+			"loop": false,
+			"name": "Down"
+		},
+		{
+			"offsets": [
+				40,
+				50
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singUP",
+			"loop": false,
+			"name": "Up"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/shitno",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "bf",
+	"flip_x": false,
+	"healthbar_colors": [
+		255,
+		255,
+		255
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 6.1,
+	"scale": 1
+}

@@ -1,0 +1,24 @@
+{
+	"animations": [
+		{
+			"offsets": [78, -141],
+			"indices": [],
+			"fps": 24,
+			"anim": "idle",
+			"loop": false,
+			"name": "animation"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/Marvins",
+	"position": [0, 0],
+	"healthicon": "Marvin",
+	"flip_x": true,
+	"healthbar_colors": [255, 0, 0],
+	"camera_position": [339, 239],
+	"chartPosition": null,
+	"sing_duration": 6.1,
+	"scale": 1.25,
+	"_editor_isPlayer": true
+}

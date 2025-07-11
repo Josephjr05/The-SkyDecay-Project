@@ -1,0 +1,155 @@
+{
+	"camera_boyfriend": [
+		-50,
+		-150
+	],
+	"_editorMeta": {
+		"boyfriend": "marvin",
+		"gf": "new rose",
+		"dad": "detg"
+	},
+	"boyfriend": [
+		1154,
+		-184
+	],
+	"girlfriend": [
+		159,
+		-630
+	],
+	"isPixelStage": false,
+	"camera_girlfriend": [
+		-50,
+		100
+	],
+	"objects": [
+		{
+			"x": -2262,
+			"y": -1192,
+			"scale": [
+				1,
+				1
+			],
+			"image": "ShucksNoB",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "sprite6",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"type": "gf"
+		},
+		{
+			"type": "boyfriend"
+		},
+		{
+			"type": "dad"
+		},
+		{
+			"x": -1795,
+			"y": -1192,
+			"scale": [
+				3,
+				3
+			],
+			"image": "luz xdddd",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "sprite1",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"x": -2148,
+			"y": -1106,
+			"scale": [
+				1,
+				1
+			],
+			"image": "ShucksHook",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "sprite4",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"x": -2096,
+			"y": -972,
+			"scale": [
+				1,
+				1
+			],
+			"image": "ShucksChains",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "sprite3",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"x": -1867,
+			"y": -1145,
+			"scale": [
+				0.95,
+				0.95
+			],
+			"image": "shuckfront",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "sprite2",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				0.9,
+				0.9
+			],
+			"alpha": 1,
+			"type": "sprite"
+		}
+	],
+	"defaultZoom": 0.5,
+	"directory": "",
+	"opponent": [
+		-295,
+		200
+	],
+	"camera_opponent": [
+		-250,
+		-200
+	]
+}

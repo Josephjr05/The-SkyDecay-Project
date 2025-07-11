@@ -1,0 +1,23 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [-68, -264],
+			"anim": "talk",
+			"fps": 9,
+			"name": "marvincutscene animationthingidk",
+			"indices": []
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/marvincutscene",
+	"position": [20, 170],
+	"healthicon": "marvin",
+	"flip_x": true,
+	"healthbar_colors": [161, 161, 161],
+	"camera_position": [0, 0],
+	"sing_duration": 4,
+	"scale": 3.55,
+	"_editor_isPlayer": true
+}

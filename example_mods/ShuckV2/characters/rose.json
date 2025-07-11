@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				100,
+				60
+			],
+			"anim": "singLEFT",
+			"fps": 14,
+			"name": "rose roses left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				10,
+				58
+			],
+			"anim": "singDOWN",
+			"fps": 14,
+			"name": "rose roses down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				20,
+				54
+			],
+			"anim": "singUP",
+			"fps": 14,
+			"name": "rose roses up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				28
+			],
+			"anim": "singRIGHT",
+			"fps": 14,
+			"name": "rose roses right",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "idle",
+			"fps": 10,
+			"name": "rose roses idle",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/RoseRTX",
+	"position": [
+		-180,
+		190
+	],
+	"healthicon": "face",
+	"flip_x": false,
+	"healthbar_colors": [
+		161,
+		161,
+		161
+	],
+	"camera_position": [
+		110,
+		-40
+	],
+	"sing_duration": 6.1,
+	"scale": 1
+}

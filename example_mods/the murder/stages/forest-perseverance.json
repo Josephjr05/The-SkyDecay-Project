@@ -1,0 +1,15 @@
+{
+	"directory": "",
+	"defaultZoom": 0.75,
+	"isPixelStage": false,
+
+	"boyfriend": [1120, 250],
+	"girlfriend": [685, 250],
+	"opponent": [250, 250],
+	"hide_girlfriend": false,
+
+	"camera_boyfriend": [-100, -50],
+	"camera_opponent": [0, 0],
+	"camera_girlfriend": [0, 0],
+	"camera_speed": 1
+}

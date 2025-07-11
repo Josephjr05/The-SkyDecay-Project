@@ -1,0 +1,35 @@
+{
+	"camera_boyfriend": [
+		-300,
+		-150
+	],
+	"_editorMeta": {
+		"boyfriend": "bf-dust",
+		"dad": "DUSTTALE_SANS",
+		"gf": "paps"
+	},
+	"girlfriend": [
+		899,
+		-221
+	],
+	"isPixelStage": false,
+	"boyfriend": [
+		1672,
+		189
+	],
+	"camera_girlfriend": [
+		1450,
+		550
+	],
+	"defaultZoom": 0.8,
+	"opponent": [
+		485,
+		357
+	],
+	"directory": "",
+	"hide_girlfriend": false,
+	"camera_opponent": [
+		250,
+		-300
+	]
+}

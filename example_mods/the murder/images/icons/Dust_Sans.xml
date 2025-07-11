@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Dust Sans.png">
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Default0000" x="0" y="0" width="117" height="101" frameX="0" frameY="0" frameWidth="118" frameHeight="101"/>
+	<SubTexture name="Default0001" x="0" y="0" width="117" height="101" frameX="0" frameY="0" frameWidth="118" frameHeight="101"/>
+	<SubTexture name="Default0002" x="117" y="0" width="117" height="101" frameX="-1" frameY="0" frameWidth="118" frameHeight="101"/>
+	<SubTexture name="Default0003" x="117" y="0" width="117" height="101" frameX="-1" frameY="0" frameWidth="118" frameHeight="101"/>
+	<SubTexture name="Losing0000" x="0" y="101" width="117" height="102" frameX="0" frameY="0" frameWidth="118" frameHeight="102"/>
+	<SubTexture name="Losing0001" x="0" y="101" width="117" height="102" frameX="0" frameY="0" frameWidth="118" frameHeight="102"/>
+	<SubTexture name="Losing0002" x="117" y="101" width="117" height="101" frameX="-1" frameY="-1" frameWidth="118" frameHeight="102"/>
+	<SubTexture name="Losing0003" x="117" y="101" width="117" height="101" frameX="-1" frameY="-1" frameWidth="118" frameHeight="102"/>
+</TextureAtlas>

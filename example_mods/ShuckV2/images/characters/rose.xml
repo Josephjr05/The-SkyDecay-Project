@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="rose.png">
+<SubTexture name="rose roses idle0000" x="806" y="1756" width="588" height="447" frameX="-243" frameY="-72" frameWidth="1080" frameHeight="579" />
+<SubTexture name="rose roses idle0001" x="1394" y="1756" width="616" height="417" frameX="-234" frameY="-103" frameWidth="1080" frameHeight="579" />
+<SubTexture name="rose roses idle0002" x="0" y="2213" width="680" height="359" frameX="-209" frameY="-160" frameWidth="1080" frameHeight="579" />
+<SubTexture name="rose roses idle0003" x="2441" y="0" width="616" height="417" frameX="-234" frameY="-103" frameWidth="1080" frameHeight="570" />
+<SubTexture name="rose roses right0000" x="0" y="1212" width="637" height="544" frameX="-249" frameY="-15" frameWidth="1080" frameHeight="585" />
+<SubTexture name="rose roses right0001" x="637" y="1212" width="612" height="544" frameX="-249" frameY="-15" frameWidth="1080" frameHeight="595" />
+<SubTexture name="rose roses right0002" x="1249" y="1212" width="573" height="544" frameX="-249" frameY="-15" frameWidth="1080" frameHeight="598" />
+<SubTexture name="rose roses right0003" x="1822" y="1212" width="582" height="544" frameX="-249" frameY="-15" frameWidth="1080" frameHeight="589" />
+<SubTexture name="rose roses left0000" x="0" y="0" width="627" height="608" frameX="-169" frameY="0" frameWidth="1080" frameHeight="608" />
+<SubTexture name="rose roses left0001" x="0" y="608" width="548" height="604" frameX="-248" frameY="0" frameWidth="1080" frameHeight="604" />
+<SubTexture name="rose roses left0002" x="627" y="0" width="515" height="605" frameX="-281" frameY="0" frameWidth="1080" frameHeight="605" />
+<SubTexture name="rose roses left0003" x="548" y="608" width="513" height="603" frameX="-283" frameY="0" frameWidth="1080" frameHeight="603" />
+<SubTexture name="rose roses up0000" x="1142" y="0" width="517" height="605" frameX="-269" frameY="0" frameWidth="1080" frameHeight="605" />
+<SubTexture name="rose roses up0001" x="1061" y="608" width="517" height="582" frameX="-269" frameY="-19" frameWidth="1080" frameHeight="601" />
+<SubTexture name="rose roses up0002" x="1659" y="559" width="517" height="548" frameX="-269" frameY="-45" frameWidth="1080" frameHeight="593" />
+<SubTexture name="rose roses up0003" x="1659" y="0" width="782" height="559" frameX="-5" frameY="-39" frameWidth="1080" frameHeight="598" />
+<SubTexture name="rose roses down0000" x="2441" y="755" width="462" height="293" frameX="-291" frameY="-296" frameWidth="1080" frameHeight="589" />
+<SubTexture name="rose roses down0001" x="2441" y="417" width="425" height="338" frameX="-310" frameY="-253" frameWidth="1080" frameHeight="591" />
+<SubTexture name="rose roses down0002" x="0" y="1756" width="403" height="457" frameX="-321" frameY="-141" frameWidth="1080" frameHeight="598" />
+<SubTexture name="rose roses down0003" x="403" y="1756" width="403" height="451" frameX="-321" frameY="-150" frameWidth="1080" frameHeight="601" />
+</TextureAtlas>

@@ -1,0 +1,32 @@
+{
+	"animations": [
+		{
+			"loop": true,
+			"offsets": [-561, -385],
+			"anim": "idle2",
+			"fps": 25,
+			"name": "ds talk",
+			"indices": []
+		},
+		{
+			"offsets": [-561, -385],
+			"indices": [],
+			"fps": 25,
+			"anim": "idle",
+			"loop": false,
+			"name": "s talk"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/shut1, characters/shut2",
+	"position": [-520, -868],
+	"healthicon": "DETG",
+	"flip_x": false,
+	"healthbar_colors": [185, 93, 42],
+	"camera_position": [-470, -150],
+	"chartPosition": null,
+	"sing_duration": 4,
+	"scale": 2.05,
+	"_editor_isPlayer": false
+}

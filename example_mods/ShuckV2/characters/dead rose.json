@@ -1,0 +1,23 @@
+{
+	"animations": [
+		{
+			"loop": true,
+			"offsets": [370, 630],
+			"anim": "idle",
+			"fps": 12,
+			"name": "Anim",
+			"indices": []
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/dead girl",
+	"position": [0, 0],
+	"healthicon": "bf",
+	"flip_x": false,
+	"healthbar_colors": [49, 176, 209],
+	"camera_position": [0, 0],
+	"sing_duration": 4,
+	"scale": 0.4,
+	"_editor_isPlayer": false
+}

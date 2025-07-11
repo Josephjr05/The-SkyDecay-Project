@@ -1,0 +1,27 @@
+{
+	"songs": [
+		[
+			"Teto's-Last-Shuck",
+			"Teto",
+			[
+				255,
+				0,
+				53
+			]
+		]
+	],
+	"hiddenUntilUnlocked": false,
+	"hideFreeplay": false,
+	"weekBackground": "stage",
+	"difficulties": "",
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
+	"storyName": "Teto",
+	"weekName": "Teto",
+	"hideStoryMode": false,
+	"weekBefore": "tutorial",
+	"startUnlocked": true
+}

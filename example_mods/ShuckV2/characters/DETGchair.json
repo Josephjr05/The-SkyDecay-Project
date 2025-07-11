@@ -1,0 +1,56 @@
+{
+	"animations": [
+		{
+			"offsets": [376, 296],
+			"loop": false,
+			"fps": 12,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "right"
+		},
+		{
+			"offsets": [376, 296],
+			"loop": false,
+			"fps": 12,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "down"
+		},
+		{
+			"offsets": [376, 296],
+			"loop": false,
+			"fps": 12,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "left"
+		},
+		{
+			"offsets": [376, 296],
+			"loop": false,
+			"fps": 12,
+			"anim": "singUP",
+			"indices": [],
+			"name": "up"
+		},
+		{
+			"offsets": [376, 296],
+			"loop": true,
+			"fps": 12,
+			"anim": "idle",
+			"indices": [],
+			"name": "idle"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/debtg_final",
+	"position": [90, 0],
+	"healthicon": "DETG",
+	"flip_x": false,
+	"healthbar_colors": [232, 105, 34],
+	"camera_position": [-240, -30],
+	"chartPosition": null,
+	"sing_duration": 6.1,
+	"scale": 0.6,
+	"_editor_isPlayer": false
+}

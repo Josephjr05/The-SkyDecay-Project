@@ -1,0 +1,71 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [-20, 0],
+			"anim": "idle",
+			"fps": 24,
+			"name": "idle_miku",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [152, -85],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "down_miku",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [40, 76],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "up_miku",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [11, 22],
+			"anim": "scream",
+			"fps": 24,
+			"name": "scream",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [40, 2],
+			"anim": "cmon_bby",
+			"fps": 24,
+			"name": "come_on_baby_pose_miku",
+			"indices": []
+		},
+		{
+			"offsets": [60, 29],
+			"indices": [],
+			"fps": 24,
+			"anim": "singLEFT",
+			"loop": false,
+			"name": "right_miku"
+		},
+		{
+			"offsets": [-30, 26],
+			"indices": [],
+			"fps": 24,
+			"anim": "singRIGHT",
+			"loop": false,
+			"name": "left_miku"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/M1KU",
+	"position": [0, 0],
+	"healthicon": "M1KU",
+	"flip_x": false,
+	"healthbar_colors": [0, 255, 247],
+	"camera_position": [0, 0],
+	"sing_duration": 6.1,
+	"scale": 1,
+	"_editor_isPlayer": true
+}

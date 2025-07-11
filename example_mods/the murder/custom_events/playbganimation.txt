@@ -1,0 +1,2 @@
+value1 is image name
+value2 is animation name(find in xml file)

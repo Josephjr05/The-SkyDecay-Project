@@ -1,0 +1,6 @@
+Value 1: New Speed, Be multiplied and not set instead?
+Value 2: time (in steps), ease.
+
+* Notes *
+Value 1: true is the default/multiplied
+Value 2: if it's blank then it won't tween it'll set instead

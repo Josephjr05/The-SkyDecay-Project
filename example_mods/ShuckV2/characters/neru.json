@@ -1,0 +1,23 @@
+{
+	"animations": [
+		{
+			"offsets": [207, -22],
+			"loop": false,
+			"fps": 17,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "right"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/neru",
+	"position": [430, 10],
+	"healthicon": "teto",
+	"flip_x": false,
+	"healthbar_colors": [224, 51, 94],
+	"camera_position": [-340, 210],
+	"sing_duration": 6.1,
+	"scale": 0.8,
+	"_editor_isPlayer": false
+}

@@ -1,0 +1,8 @@
+{
+	"name": "Marios Madness Noteskin!",
+	"description": "Adds Marios Madness Noteskin to the game",
+	"restart":false,
+	"runsGlobally": true,
+	"color": [255, 50, 43],
+	"discordRPC": "863222024192262205"
+}

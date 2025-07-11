@@ -28,7 +28,7 @@ class EditorPlayState extends MusicBeatSubstate
 	
 	var notes:FlxTypedGroup<Note>;
 	var unspawnNotes:Array<Note> = [];
-	var ratingsData:Array<Rating>;
+	var ratingsData:Array<Rating>  = Rating.loadDefault(); // for now until i add OD and HP to this state
 	
 	var comboGroup:FlxSpriteGroup;
 	var strumLineNotes:FlxTypedGroup<StrumNote>;

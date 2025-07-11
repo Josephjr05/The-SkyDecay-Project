@@ -1,0 +1,13 @@
+<!DOCTYPE codename-engine-character>
+<character x="100" sprite="rico" scale="1.3" camy="-100" isPlayer="true" icon="face" holdTime="6.1">
+	<anim name="idle" anim="idle" x="0" y="0" fps="12" loop="false"/>
+	<anim name="singUP" anim="up" x="0" y="0" fps="12" loop="false"/>
+	<anim name="singRIGHT" anim="left" x="0" y="0" fps="12" loop="false"/>
+	<anim name="singLEFT" anim="right" x="0" y="0" fps="12" loop="false"/>
+	<anim name="singDOWN" anim="down" x="0" y="0" fps="12" loop="false"/>
+	<anim name="dialogue" anim="animation" x="0" y="0" fps="12" loop="false"/>
+	<anim name="singUPmiss" anim="miss" x="0" y="0" fps="12" loop="false"/>
+	<anim name="singDOWNmiss" anim="miss" x="0" y="0" fps="12" loop="false"/>
+	<anim name="singRIGHTmiss" anim="miss" x="0" y="0" fps="12" loop="false"/>
+	<anim name="singLEFTmiss" anim="miss" x="0" y="0" fps="12" loop="false"/>
+</character>

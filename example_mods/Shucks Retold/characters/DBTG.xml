@@ -1,0 +1,8 @@
+<!DOCTYPE codename-engine-character>
+<character y = "1400" x="600" sprite="DBTG" scale="0.8" flipX="false" camy="-100" camx="-1300" isPlayer="true" icon="marvin" holdTime="6.1">
+	<anim name="idle" anim="idle" x="0" y="0" fps="12" loop="false"/>
+	<anim name="singUP" anim="up" x="0" y="0" fps="12" loop="false"/>
+	<anim name="singRIGHT" anim="right" x="0" y="0" fps="12" loop="false"/>
+	<anim name="singLEFT" anim="left" x="0" y="0" fps="12" loop="false"/>
+	<anim name="singDOWN" anim="down" x="0" y="0" fps="12" loop="false"/>
+</character>

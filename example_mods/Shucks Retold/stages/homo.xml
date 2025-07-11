@@ -1,0 +1,6 @@
+<stage zoom="0.8" name="stage" folder="stages/homo/" startCamPosY="0" startCamPosX="900">
+	<sprite name="brookiesexual" x="350" y="200" sprite="brookiesexual" scroll="0" scale="4"/>
+    <girlfriend/>
+	<dad/>
+    <boyfriend/>
+</stage>

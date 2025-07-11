@@ -1,0 +1,8 @@
+<stage zoom="0.8" name="stage" folder="stages/introroom/" startCamPosY="0" startCamPosX="900">
+	<sprite name="secretroom" x="-900" y="800" sprite="secretroom_test" scroll="0.9" scale="0.7"/>
+	<sprite name="bg" x="-900" y="-800" sprite="place" scroll="0.9" scale="0.8"/>
+    <girlfriend/>
+	<dad/>
+    <boyfriend/>
+	<sprite name="secretroom" x="-900" y="800" sprite="secretroom_darken" scroll="0.9" scale="0.7"/>
+</stage>

@@ -1,0 +1,13 @@
+<!DOCTYPE codename-engine-character>
+<character y = "1600" x="-100" sprite="Marvin" scale="0.8" flipX="true" camy="-100" camx="-300" isPlayer="true" icon="marvin" holdTime="6.1">
+	<anim name="idle" anim="idle" x="0" y="0" fps="12" loop="false"/>
+	<anim name="singUP" anim="up" x="0" y="0" fps="12" loop="false"/>
+	<anim name="singRIGHT" anim="right" x="0" y="0" fps="12" loop="false"/>
+	<anim name="singLEFT" anim="left" x="0" y="0" fps="12" loop="false"/>
+	<anim name="singDOWN" anim="down" x="0" y="0" fps="12" loop="false"/>
+	<anim name="altidle" anim="altidle" x="0" y="0" fps="12" loop="false"/>
+	<anim name="altsingUP" anim="altup" x="0" y="0" fps="12" loop="false"/>
+	<anim name="altsingRIGHT" anim="altright" x="0" y="0" fps="12" loop="false"/>
+	<anim name="altsingLEFT" anim="altleft" x="0" y="0" fps="12" loop="false"/>
+	<anim name="altsingDOWN" anim="altdown" x="0" y="0" fps="12" loop="false"/>
+</character>

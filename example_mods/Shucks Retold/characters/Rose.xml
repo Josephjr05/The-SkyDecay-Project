@@ -1,0 +1,11 @@
+<!DOCTYPE codename-engine-character>
+<character y = "1400" x="300" sprite="Rose" scale="0.8" flipX="false" camy="150" camx="-700" isPlayer="true" icon="marvin" holdTime="6.1">
+	<anim name="idle" anim="idle" x="0" y="0" fps="12" loop="true"/>
+	<anim name="singUP" anim="up" x="0" y="0" fps="12" loop="false"/>
+	<anim name="singRIGHT" anim="right" x="0" y="0" fps="12" loop="false"/>
+	<anim name="singLEFT" anim="left" x="0" y="0" fps="12" loop="false"/>
+	<anim name="singDOWN" anim="down" x="0" y="0" fps="12" loop="false"/>
+	<anim name="altidle" anim="altidle" x="0" y="0" fps="12" loop="true"/>
+	<anim name="switchtoright" anim="switchtoright" x="0" y="0" fps="12" loop="false"/>
+	<anim name="switchtoleft" anim="switchtoleft" x="0" y="0" fps="12" loop="false"/>
+</character>

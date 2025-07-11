@@ -48,7 +48,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		'If checked, Results Screen from Graffiti Groovin will show after passing a song',
 		'resultsGroovin',
 		BOOL);
-		addOption(option);
+		// addOption(option);
 
 		var option:Option = new Option('Opponent Lane Underlay Visibility',
 		'Sets visibility of opponent\'s lane underlay.',

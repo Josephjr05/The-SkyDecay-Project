@@ -319,16 +319,6 @@ class NoteSplash extends FlxSprite
 
 		spawned = true;
 	}
-
-	public function setupSplash(noteData:Int, splashData:Dynamic)
-	{
-		visible = true;
-		active = true;
-		alpha = 1;
-		scale.set(1, 1);
-		antialiasing = splashData.antialiasing;
-		scrollFactor.set();
-	}
 	
 	public function playDefaultAnim()
 	{

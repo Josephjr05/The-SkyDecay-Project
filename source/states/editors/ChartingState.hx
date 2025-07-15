@@ -111,7 +111,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		['Cinema Bars', "Toggles cinematic bars\n\nPlace event to use"],
 		['UI Fade', "Value 1: Alpha\nValue 2: Tween Time"],
 		['Flash Camera', "Value 1: Flash Timer"],
-		['BLACKOUT', "Value 1: To Fade In, do 1. To Fade out do 2.\nValue 2: Fade in and out speed (Measured in seconds)"],
+		// ['Black Camera Fades', "Place for black fade out."],
 		['Hide Health', "Value 1: 1 = appear, 0 = dissapear\nValue 2: Tween Time"],
 		['KM Toggle', "Toggles Kill Miss Mode\n\nValue 1: Max amount of misses"],
 		['RotScreenCam', "Value 1: Angle\nValue 2 Tween Time"],

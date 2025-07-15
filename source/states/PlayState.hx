@@ -2683,11 +2683,24 @@ class PlayState extends MusicBeatState
 			case 'Flash Camera':
 				FlxG.camera.flash(FlxColor.WHITE, Std.parseFloat(value1));
 
-			/* case 'Black Camera Fades': // Joseph's first event W 
-				var blackSprite = new FlxSprite(0, 0).makeGraphic(1280, 720, FlxColor.BLACK);
+			case 'BLACKOUT': // Joseph's first event W // renewed 7/11/2025
+				var blackSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 				blackSprite.camera = camOther;
+				blackSprite.alpha = 0;
 				add(blackSprite);
-				FlxTween.tween(blackSprite, {alpha: Std.parseFloat(value1)}, Std.parseFloat(value2), {ease: FlxEase.sineInOut}); */
+
+				var startstop:Int = Std.parseInt(value1);
+				var speed:Float = Std.parseFloat(value2);
+
+				if (startstop == 1)
+				{
+					FlxTween.tween(blackSprite, {alpha: 1}, speed, {ease: FlxEase.linear});
+				}	
+			
+				if (startstop == 2)
+				{
+					FlxTween.tween(blackSprite, {alpha: 0}, speed, {ease: FlxEase.linear});
+				}
 
 			case 'Hide Health':
 				switch(Std.parseInt(value1))

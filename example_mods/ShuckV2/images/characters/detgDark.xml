@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="detgDark.png">
+	<!-- Created with Adobe Animate version 22.0.3.179 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="down0000" x="0" y="0" width="407" height="483" frameX="0" frameY="-23" frameWidth="407" frameHeight="506"/>
+	<SubTexture name="down0001" x="0" y="0" width="407" height="483" frameX="0" frameY="-23" frameWidth="407" frameHeight="506"/>
+	<SubTexture name="down0002" x="407" y="0" width="407" height="498" frameX="0" frameY="-8" frameWidth="407" frameHeight="506"/>
+	<SubTexture name="down0003" x="407" y="0" width="407" height="498" frameX="0" frameY="-8" frameWidth="407" frameHeight="506"/>
+	<SubTexture name="down0004" x="814" y="0" width="407" height="506"/>
+	<SubTexture name="idle0000" x="1221" y="0" width="407" height="509"/>
+	<SubTexture name="idle0001" x="1628" y="0" width="407" height="509"/>
+	<SubTexture name="idle0002" x="2035" y="0" width="407" height="507" frameX="0" frameY="-2" frameWidth="407" frameHeight="509"/>
+	<SubTexture name="idle0003" x="2442" y="0" width="407" height="504" frameX="0" frameY="-5" frameWidth="407" frameHeight="509"/>
+	<SubTexture name="idle0004" x="2849" y="0" width="407" height="503" frameX="0" frameY="-6" frameWidth="407" frameHeight="509"/>
+	<SubTexture name="idle0005" x="3256" y="0" width="407" height="506" frameX="0" frameY="-3" frameWidth="407" frameHeight="509"/>
+	<SubTexture name="idle0006" x="3663" y="0" width="407" height="509"/>
+	<SubTexture name="left0000" x="0" y="509" width="412" height="515" frameX="0" frameY="0" frameWidth="417" frameHeight="515"/>
+	<SubTexture name="left0001" x="0" y="509" width="412" height="515" frameX="0" frameY="0" frameWidth="417" frameHeight="515"/>
+	<SubTexture name="left0002" x="412" y="509" width="410" height="510" frameX="-4" frameY="-5" frameWidth="417" frameHeight="515"/>
+	<SubTexture name="left0003" x="412" y="509" width="410" height="510" frameX="-4" frameY="-5" frameWidth="417" frameHeight="515"/>
+	<SubTexture name="left0004" x="822" y="509" width="406" height="511" frameX="-11" frameY="-4" frameWidth="417" frameHeight="515"/>
+	<SubTexture name="right0000" x="1228" y="509" width="405" height="517" frameX="-7" frameY="-4" frameWidth="412" frameHeight="521"/>
+	<SubTexture name="right0001" x="1228" y="509" width="405" height="517" frameX="-7" frameY="-4" frameWidth="412" frameHeight="521"/>
+	<SubTexture name="right0002" x="1633" y="509" width="407" height="521" frameX="-3" frameY="0" frameWidth="412" frameHeight="521"/>
+	<SubTexture name="right0003" x="1633" y="509" width="407" height="521" frameX="-3" frameY="0" frameWidth="412" frameHeight="521"/>
+	<SubTexture name="right0004" x="2040" y="509" width="409" height="514" frameX="0" frameY="-7" frameWidth="412" frameHeight="521"/>
+	<SubTexture name="toldya0000" x="2449" y="509" width="407" height="506" frameX="-28" frameY="-49" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0001" x="2856" y="509" width="410" height="506" frameX="-24" frameY="-49" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0002" x="3266" y="509" width="412" height="508" frameX="-20" frameY="-47" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0003" x="3678" y="509" width="401" height="496" frameX="-41" frameY="-59" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0004" x="0" y="1030" width="406" height="490" frameX="-44" frameY="-65" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0005" x="406" y="1030" width="409" height="486" frameX="-45" frameY="-69" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0006" x="815" y="1030" width="428" height="482" frameX="-46" frameY="-73" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0007" x="815" y="1030" width="428" height="482" frameX="-46" frameY="-73" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0008" x="1243" y="1030" width="407" height="506" frameX="-44" frameY="-49" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0009" x="1650" y="1030" width="405" height="506" frameX="-44" frameY="-49" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0010" x="1650" y="1030" width="405" height="506" frameX="-44" frameY="-49" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0011" x="1650" y="1030" width="405" height="506" frameX="-44" frameY="-49" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0012" x="1650" y="1030" width="405" height="506" frameX="-44" frameY="-49" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0013" x="1650" y="1030" width="405" height="506" frameX="-44" frameY="-49" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0014" x="1650" y="1030" width="405" height="506" frameX="-44" frameY="-49" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0015" x="1650" y="1030" width="405" height="506" frameX="-44" frameY="-49" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0016" x="2055" y="1030" width="401" height="506" frameX="-42" frameY="-49" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0017" x="2456" y="1030" width="404" height="512" frameX="-43" frameY="-43" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0018" x="2860" y="1030" width="401" height="512" frameX="-42" frameY="-43" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0019" x="2860" y="1030" width="401" height="512" frameX="-42" frameY="-43" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0020" x="3261" y="1030" width="402" height="514" frameX="-39" frameY="-41" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0021" x="3663" y="1030" width="404" height="518" frameX="-35" frameY="-37" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0022" x="0" y="1548" width="405" height="521" frameX="-33" frameY="-34" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0023" x="0" y="1548" width="405" height="521" frameX="-33" frameY="-34" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0024" x="405" y="1548" width="405" height="524" frameX="-33" frameY="-31" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0025" x="810" y="1548" width="405" height="531" frameX="-33" frameY="-23" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0026" x="1215" y="1548" width="405" height="540" frameX="-33" frameY="-14" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0027" x="1620" y="1548" width="405" height="530" frameX="-33" frameY="-24" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0028" x="2025" y="1548" width="405" height="514" frameX="-33" frameY="-40" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0029" x="2430" y="1548" width="414" height="520" frameX="-16" frameY="-34" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0030" x="2844" y="1548" width="417" height="523" frameX="-9" frameY="-31" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0031" x="3261" y="1548" width="422" height="525" frameX="0" frameY="-29" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0032" x="0" y="2088" width="419" height="521" frameX="-7" frameY="-33" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0033" x="419" y="2088" width="413" height="516" frameX="-17" frameY="-38" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0034" x="832" y="2088" width="409" height="511" frameX="-25" frameY="-43" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0035" x="1241" y="2088" width="405" height="508" frameX="-33" frameY="-46" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0036" x="1241" y="2088" width="405" height="508" frameX="-33" frameY="-46" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0037" x="1241" y="2088" width="405" height="508" frameX="-33" frameY="-46" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0038" x="1241" y="2088" width="405" height="508" frameX="-33" frameY="-46" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0039" x="1241" y="2088" width="405" height="508" frameX="-33" frameY="-46" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0040" x="1646" y="2088" width="405" height="515" frameX="-33" frameY="-39" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0041" x="2051" y="2088" width="405" height="525" frameX="-33" frameY="-29" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0042" x="2456" y="2088" width="405" height="527" frameX="-33" frameY="-27" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0043" x="2456" y="2088" width="405" height="527" frameX="-33" frameY="-27" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0044" x="2861" y="2088" width="401" height="524" frameX="-41" frameY="-30" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0045" x="3262" y="2088" width="403" height="527" frameX="-42" frameY="-27" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0046" x="3665" y="2088" width="402" height="522" frameX="-39" frameY="-32" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0047" x="0" y="2615" width="405" height="517" frameX="-33" frameY="-37" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0048" x="0" y="2615" width="405" height="517" frameX="-33" frameY="-37" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0049" x="0" y="2615" width="405" height="517" frameX="-33" frameY="-37" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0050" x="405" y="2615" width="405" height="519" frameX="-33" frameY="-35" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0051" x="405" y="2615" width="405" height="519" frameX="-33" frameY="-35" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0052" x="810" y="2615" width="405" height="519" frameX="-33" frameY="-35" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0053" x="1215" y="2615" width="405" height="528" frameX="-33" frameY="-26" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0054" x="1620" y="2615" width="405" height="552" frameX="-33" frameY="-1" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0055" x="1620" y="2615" width="405" height="552" frameX="-33" frameY="-1" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0056" x="2025" y="2615" width="413" height="538" frameX="-13" frameY="-16" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0057" x="2438" y="2615" width="416" height="528" frameX="-7" frameY="-27" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0058" x="2438" y="2615" width="416" height="528" frameX="-7" frameY="-27" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0059" x="2854" y="2615" width="407" height="537" frameX="-25" frameY="-18" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0060" x="3261" y="2615" width="400" height="548" frameX="-42" frameY="-7" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0061" x="3661" y="2615" width="400" height="555" frameX="-42" frameY="0" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0062" x="0" y="3170" width="401" height="545" frameX="-37" frameY="-10" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0063" x="401" y="3170" width="403" height="534" frameX="-33" frameY="-21" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0064" x="401" y="3170" width="403" height="534" frameX="-33" frameY="-21" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0065" x="401" y="3170" width="403" height="534" frameX="-33" frameY="-21" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0066" x="401" y="3170" width="403" height="534" frameX="-33" frameY="-21" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0067" x="401" y="3170" width="403" height="534" frameX="-33" frameY="-21" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0068" x="401" y="3170" width="403" height="534" frameX="-33" frameY="-21" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="toldya0069" x="401" y="3170" width="403" height="534" frameX="-33" frameY="-21" frameWidth="474" frameHeight="555"/>
+	<SubTexture name="up0000" x="804" y="3170" width="407" height="520" frameX="-1" frameY="0" frameWidth="408" frameHeight="520"/>
+	<SubTexture name="up0001" x="804" y="3170" width="407" height="520" frameX="-1" frameY="0" frameWidth="408" frameHeight="520"/>
+	<SubTexture name="up0002" x="1211" y="3170" width="408" height="510" frameX="0" frameY="-10" frameWidth="408" frameHeight="520"/>
+	<SubTexture name="up0003" x="1211" y="3170" width="408" height="510" frameX="0" frameY="-10" frameWidth="408" frameHeight="520"/>
+	<SubTexture name="up0004" x="1619" y="3170" width="408" height="491" frameX="0" frameY="-29" frameWidth="408" frameHeight="520"/>
+</TextureAtlas>

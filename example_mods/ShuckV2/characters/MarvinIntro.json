@@ -1,0 +1,67 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [0, 0],
+			"anim": "idle",
+			"fps": 12,
+			"name": "idle0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [0, 0],
+			"anim": "singDOWN",
+			"fps": 12,
+			"name": "down0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [0, 0],
+			"anim": "singUP",
+			"fps": 12,
+			"name": "up0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [0, 0],
+			"anim": "singRIGHT",
+			"fps": 12,
+			"name": "right0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [0, 0],
+			"anim": "animation",
+			"fps": 12,
+			"name": "animation0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [0, 0],
+			"anim": "singLEFT",
+			"fps": 12,
+			"name": "left0",
+			"indices": []
+		}
+	],
+	"vocals_file": "marvin",
+	"no_antialiasing": false,
+	"image": "characters/MarvinIntro",
+	"position": [-400, 50],
+	"healthicon": "marvin",
+	"flip_x": false,
+	"healthbar_colors": [186, 50, 50],
+	"camera_position": [-100, -100],
+	"chartPosition": [
+		0,
+		0
+	],
+	"sing_duration": 4,
+	"scale": 1,
+	"_editor_isPlayer": false
+}

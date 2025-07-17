@@ -1,0 +1,69 @@
+{
+	"camera_boyfriend": [
+		-250,
+		0
+	],
+	"_editorMeta": {
+		"boyfriend": "MarvinIntro",
+		"dad": "RoseIntro",
+		"gf": "gf"
+	},
+	"boyfriend": [
+		872,
+		-60
+	],
+	"girlfriend": [
+		570,
+		-157
+	],
+	"isPixelStage": false,
+	"camera_girlfriend": [
+		0,
+		0
+	],
+	"objects": [
+		{
+			"x": -930,
+			"blend": "normal",
+			"y": -582,
+			"scale": [
+				0.8,
+				0.8
+			],
+			"image": "stages/introroom/place",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "sprite1",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"type": "gf"
+		},
+		{
+			"type": "dad"
+		},
+		{
+			"type": "boyfriend"
+		}
+	],
+	"defaultZoom": 0.9,
+	"opponent": [
+		269,
+		-84
+	],
+	"directory": "",
+	"hide_girlfriend": true,
+	"camera_opponent": [
+		0,
+		0
+	]
+}

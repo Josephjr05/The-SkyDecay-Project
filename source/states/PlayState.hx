@@ -310,6 +310,13 @@ class PlayState extends MusicBeatState
 	public var grpCombos:FlxTypedGroup<FlxSprite>;
 	public var grpComboNums:FlxTypedGroup<FlxSprite>;
 
+	public var noteManager:NoteManager;
+	private var fakeReleaseNotes:Array<Note>;
+
+	// EVENTS
+	public var blackSprite:FlxSprite;
+	public var stage:Array<FlxBasic> = [];
+
 	private static var _lastLoadedModDirectory:String = '';
 	public static var nextReloadAll:Bool = false;
 	override public function create()
@@ -466,6 +473,8 @@ class PlayState extends MusicBeatState
 			add(laneunderlayOp);
 		}
 	  	add(laneunderlay);
+
+		noteManager = new NoteManager();
 
 		Conductor.mapBPMChanges(SONG);
 		Conductor.bpm = SONG.bpm;
@@ -628,14 +637,6 @@ class PlayState extends MusicBeatState
 		add(uiGroup);
 		add(noteGroup);
 
-		grpRatings = new FlxTypedGroup<FlxSprite>();
-    	grpCombos = new FlxTypedGroup<FlxSprite>();
-    	grpComboNums = new FlxTypedGroup<FlxSprite>();
-
-		add(grpRatings);
-    	add(grpCombos);
-    	add(grpComboNums);
-
 		Conductor.songPosition = -Conductor.crochet * 5 + Conductor.offset;
 		var showTime:Bool = (ClientPrefs.data.timeBarType != 'Disabled');
 		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
@@ -668,6 +669,7 @@ class PlayState extends MusicBeatState
 
 		generateSong();
 
+		// primeNoteSystem();
 		noteGroup.add(grpNoteSplashes);
 
 		camFollow = new FlxObject();
@@ -735,10 +737,6 @@ class PlayState extends MusicBeatState
 		noteGroup.cameras = [camHUD];
 		comboGroup.cameras = [camHUD];
 
-		grpRatings.cameras = [camHUD];
-		grpCombos.cameras = [camHUD];
-    	grpComboNums.cameras = [camHUD];
-
 		startingSong = true;
 
 		#if LUA_ALLOWED
@@ -780,7 +778,6 @@ class PlayState extends MusicBeatState
 			eventNotes.sort(sortByTime);
 		}
 
-		primeNoteSystem();
 		startCallback();
 		RecalculateRating(false, false);
 
@@ -813,26 +810,6 @@ class PlayState extends MusicBeatState
 		cachePopUpScore();
 
 		if(eventNotes.length < 1) checkEventNote();
-	}
-
-	function primeNoteSystem():Void
-	{
-	    var dummyNote:Note = new Note(0, 0, null, false);
-	    dummyNote.x = -1000;
-	    dummyNote.y = -1000;
-	    dummyNote.alpha = 0.00001;
-	
-	    notes.add(dummyNote);
-	
-	    // Force animations/shaders to initialize
-	    // dummyNote.play('confirm', true); 
-	
-	    opponentNoteHit(dummyNote);
-	
-	    notes.remove(dummyNote, true);
-	    dummyNote.destroy();
-	
-	    trace("Note system primed");
 	}
 
 	function set_songSpeed(value:Float):Float
@@ -1564,9 +1541,8 @@ class PlayState extends MusicBeatState
 					}
 				}
 
-				var swagNote:Note = notes.recycle(Note);
-				swagNote = new Note(spawnTime, noteColumn, oldNote);
-				var isAlt: Bool = section.altAnim && !gottaHitNote;
+				var swagNote:Note = noteManager.getNote(spawnTime, noteColumn, oldNote, false);
+				var isAlt:Bool = section.altAnim && !gottaHitNote;
 				swagNote.gfNote = (section.gfSection && gottaHitNote == section.mustHitSection);
 				swagNote.animSuffix = isAlt ? "-alt" : "";
 				swagNote.mustPress = gottaHitNote;
@@ -1584,8 +1560,7 @@ class PlayState extends MusicBeatState
 					{
 						oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
 
-						var sustainNote:Note = notes.recycle(Note);
-                    	sustainNote = new Note(spawnTime + (curStepCrochet * susNote), noteColumn, oldNote, true);
+                    	var sustainNote = noteManager.getNote(spawnTime + (curStepCrochet * susNote), noteColumn, oldNote, true);
 						sustainNote.animSuffix = swagNote.animSuffix;
 						sustainNote.mustPress = swagNote.mustPress;
 						sustainNote.gfNote = swagNote.gfNote;
@@ -2061,38 +2036,6 @@ class PlayState extends MusicBeatState
 		#end
 
 		setOnScripts('botPlay', cpuControlled);
-
-		if (ClientPrefs.data.sustainRelease)
-		{
-    		for (i in 0...sustains.length) {
-    		    if (sustains[i] != null) {
-    		        if (controls.justReleased(keysArray[i])) {
-    		            var myStrum:StrumNote = playerStrums.members[i];
-    		            var strumAnim:String = (myStrum != null) ? myStrum.animation.curAnim.name : 'static';
-
-    		            var lastHitTime:Float = sustains[i];
-    		            var compareNote:Float = lastHitTime + (COYOTE_TIME / 60 * 1000) + Conductor.stepCrochet * STEP_TIME;
-    		            var compareStrum:Float = FlxMath.lerp(Conductor.songPosition, lastHitTime, STRETCH);
-    		            var imagineDiff:Float = Math.max(0, compareStrum - compareNote);
-
-    		            var fakeReleaseNote:Note = new Note(Conductor.songPosition + imagineDiff, i);
-    		            fakeReleaseNote.isSustainReleaseNote = true;
-    		            fakeReleaseNote.mustPress = true;
-    		            fakeReleaseNote.canBeHit = true;
-    		            fakeReleaseNote.noAnimation = true;
-
-    		            goodNoteHit(fakeReleaseNote);
-
-    		            if (myStrum != null && myStrum.animation.curAnim.name != strumAnim) {
-    		                myStrum.playAnim(strumAnim);
-    		                // myStrum.resetAnim = 0; If the 'confirm' anim persists
-    		            }
-
-    		        	sustains[i] = null; // Stop tracking the sustain for this lane
-					}
-				}
-			}
-		}
 		callOnScripts('onUpdatePost', [elapsed]);
 	}
 
@@ -2404,7 +2347,7 @@ class PlayState extends MusicBeatState
 				}
 
 			case 'Play Animation':
-				//trace('Anim to play: ' + value1);
+				trace('Anim to play: ' + value1);
 				var char:Character = dad;
 				switch(value2.toLowerCase().trim()) {
 					case 'bf' | 'boyfriend':
@@ -2684,22 +2627,30 @@ class PlayState extends MusicBeatState
 				FlxG.camera.flash(FlxColor.WHITE, Std.parseFloat(value1));
 
 			case 'BLACKOUT': // Joseph's first event W // renewed 7/11/2025
-				var blackSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-				blackSprite.camera = camOther;
-				blackSprite.alpha = 0;
-				add(blackSprite);
-
 				var startstop:Int = Std.parseInt(value1);
 				var speed:Float = Std.parseFloat(value2);
+				if (blackSprite == null)
+				{
+					blackSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+					blackSprite.camera = camOther;
+					blackSprite.alpha = 0;
+					add(blackSprite);
+				}
 
-				if (startstop == 1)
+				if (startstop == 1) // you NEED to fade in first to fade out!!
 				{
 					FlxTween.tween(blackSprite, {alpha: 1}, speed, {ease: FlxEase.linear});
 				}	
-			
-				if (startstop == 2)
+				else if (startstop == 2)
 				{
-					FlxTween.tween(blackSprite, {alpha: 0}, speed, {ease: FlxEase.linear});
+					FlxTween.tween(blackSprite, {alpha: 0}, speed, {
+						ease: FlxEase.linear,
+						onComplete: function(twn:FlxTween)
+						{
+							remove(blackSprite);
+							blackSprite = null;
+						}
+					});
 				}
 
 			case 'Hide Health':
@@ -3030,17 +2981,8 @@ class PlayState extends MusicBeatState
 	    var noteDiff:Float = Math.abs(note.strumTime - Conductor.songPosition + ClientPrefs.data.ratingOffset);
 	    vocals.volume = 1;
 
-	    // If comboStacking is false, kill all existing combo elements before adding new ones
-	    // This makes them available for recycling.
-	    if (!ClientPrefs.data.comboStacking)
-	    {
-	        grpRatings.forEachAlive(function(spr:FlxSprite) { spr.kill(); });
-	        grpCombos.forEachAlive(function(spr:FlxSprite) { spr.kill(); });
-	        grpComboNums.forEachAlive(function(spr:FlxSprite) { spr.kill(); });
-	    }
-
 	    var placement:Float = FlxG.width * 0.35;
-	    var score:Int = 350;
+	    var score:Int = 320;
 
 	    var daRating:Rating = Conductor.judgeNote(ratingsData, noteDiff / playbackRate);
 
@@ -3071,39 +3013,32 @@ class PlayState extends MusicBeatState
 	        antialias = !isPixelStage;
 	    }
 
-	    // Use pooling for rating sprite
-	    var rating:FlxSprite = grpRatings.recycle(FlxSprite);
+	    var rating:FlxSprite = comboGroup.recycle(FlxSprite);
 	    rating.loadGraphic(Paths.image(uiFolder + daRating.image + uiPostfix));
-	    rating.screenCenter();
-	    rating.x = placement - 40;
-	    rating.y = -60; // Set initial Y, not relative to current Y
-	    rating.acceleration.y = 550 * playbackRate * playbackRate;
-	    rating.velocity.y = -FlxG.random.int(140, 175) * playbackRate;
-	    rating.velocity.x = -FlxG.random.int(0, 10) * playbackRate;
-	    rating.visible = (!ClientPrefs.data.hideHud && showRating);
-	    rating.x += ClientPrefs.data.comboOffset[0];
-	    rating.y -= ClientPrefs.data.comboOffset[1];
-	    rating.antialiasing = antialias;
-	    rating.alpha = 1; // Reset alpha for recycled sprite
-	    rating.active = true; // Ensure it's active for update/draw
-	    grpRatings.add(rating); // Add the individual sprite to its group
+		rating.screenCenter();
+		rating.x = placement - 40;
+		rating.y -= 60;
+		rating.acceleration.y = 550 * playbackRate * playbackRate;
+		rating.velocity.y -= FlxG.random.int(140, 175) * playbackRate;
+		rating.velocity.x -= FlxG.random.int(0, 10) * playbackRate;
+		rating.visible = (!ClientPrefs.data.hideHud && showRating);
+		rating.x += ClientPrefs.data.comboOffset[0];
+		rating.y -= ClientPrefs.data.comboOffset[1];
+		rating.antialiasing = antialias;
 
-	    // Use pooling for combo sprite
-	    var comboSpr:FlxSprite = grpCombos.recycle(FlxSprite);
+	    var comboSpr:FlxSprite = comboGroup.recycle(FlxSprite);
 	    comboSpr.loadGraphic(Paths.image(uiFolder + 'combo' + uiPostfix));
-	    comboSpr.screenCenter();
-	    comboSpr.x = placement;
-	    comboSpr.acceleration.y = FlxG.random.int(200, 300) * playbackRate * playbackRate;
-	    comboSpr.velocity.y = -FlxG.random.int(140, 160) * playbackRate;
-	    comboSpr.visible = (!ClientPrefs.data.hideHud && showCombo);
-	    comboSpr.x += ClientPrefs.data.comboOffset[0];
-	    comboSpr.y -= ClientPrefs.data.comboOffset[1];
-	    comboSpr.antialiasing = antialias;
-	    comboSpr.y += 60;
-	    comboSpr.velocity.x = FlxG.random.int(1, 10) * playbackRate;
-	    comboSpr.alpha = 1; // Reset alpha for recycled sprite
-	    comboSpr.active = true; // Ensure it's active
-	    grpCombos.add(comboSpr); // Add the individual sprite to its group
+		comboSpr.screenCenter();
+		comboSpr.x = placement;
+		comboSpr.acceleration.y = FlxG.random.int(200, 300) * playbackRate * playbackRate;
+		comboSpr.velocity.y -= FlxG.random.int(140, 160) * playbackRate;
+		comboSpr.visible = (!ClientPrefs.data.hideHud && showCombo);
+		comboSpr.x += ClientPrefs.data.comboOffset[0];
+		comboSpr.y -= ClientPrefs.data.comboOffset[1];
+		comboSpr.antialiasing = antialias;
+		comboSpr.y += 60;
+		comboSpr.velocity.x += FlxG.random.int(1, 10) * playbackRate;
+		comboGroup.add(rating);
 
 	    if (!PlayState.isPixelStage)
 	    {
@@ -3126,26 +3061,24 @@ class PlayState extends MusicBeatState
 	    for (i in 0...separatedScore.length)
 	    {
 	        // Use pooling for number sprites
-	        var numScore:FlxSprite = grpComboNums.recycle(FlxSprite);
+	        var numScore:FlxSprite = comboGroup.recycle(FlxSprite);
 	        numScore.loadGraphic(Paths.image(uiFolder + 'num' + Std.parseInt(separatedScore.charAt(i)) + uiPostfix));
-	        numScore.screenCenter();
-	        numScore.x = placement + (43 * daLoop) - 90 + ClientPrefs.data.comboOffset[2];
-	        numScore.y = 80 - ClientPrefs.data.comboOffset[3]; // Set initial Y
-	        numScore.alpha = 1; // Reset alpha
-	        numScore.active = true; // Ensure active
+			numScore.screenCenter();
+			numScore.x = placement + (43 * daLoop) - 90 + ClientPrefs.data.comboOffset[2];
+			numScore.y += 80 - ClientPrefs.data.comboOffset[3];
 
-	        if (!PlayState.isPixelStage) numScore.setGraphicSize(Std.int(numScore.width * 0.5));
-	        else numScore.setGraphicSize(Std.int(numScore.width * daPixelZoom));
-	        numScore.updateHitbox();
+			if (!PlayState.isPixelStage) numScore.setGraphicSize(Std.int(numScore.width * 0.5));
+			else numScore.setGraphicSize(Std.int(numScore.width * daPixelZoom));
+			numScore.updateHitbox();
 
-	        numScore.acceleration.y = FlxG.random.int(200, 300) * playbackRate * playbackRate;
-	        numScore.velocity.y = -FlxG.random.int(140, 160) * playbackRate;
-	        numScore.velocity.x = FlxG.random.float(-5, 5) * playbackRate;
-	        numScore.visible = !ClientPrefs.data.hideHud;
-	        numScore.antialiasing = antialias;
+			numScore.acceleration.y = FlxG.random.int(200, 300) * playbackRate * playbackRate;
+			numScore.velocity.y -= FlxG.random.int(140, 160) * playbackRate;
+			numScore.velocity.x = FlxG.random.float(-5, 5) * playbackRate;
+			numScore.visible = !ClientPrefs.data.hideHud;
+			numScore.antialiasing = antialias;
 
 	        if(showComboNum)
-	            grpComboNums.add(numScore); // Add to its specific group
+	            comboGroup.add(numScore);
 
 	        FlxTween.tween(numScore, {alpha: 0}, 0.2 / playbackRate, {
 	            onComplete: function(tween:FlxTween)
@@ -3357,6 +3290,40 @@ class PlayState extends MusicBeatState
 				}
 			}
 
+		if (ClientPrefs.data.sustainRelease) // moved up here for organization. Not that it matters where it's at anyway i think
+		{
+    		for (i in 0...sustains.length) {
+    		    if (sustains[i] != null) {
+    		        if (controls.justReleased(keysArray[i])) {
+    		            var myStrum:StrumNote = playerStrums.members[i];
+    		            var strumAnim:String = (myStrum != null) ? myStrum.animation.curAnim.name : 'static';
+
+    		            var lastHitTime:Float = sustains[i];
+    		            var compareNote:Float = lastHitTime + (COYOTE_TIME / 60 * 1000) + Conductor.stepCrochet * STEP_TIME;
+    		            var compareStrum:Float = FlxMath.lerp(Conductor.songPosition, lastHitTime, STRETCH);
+    		            var imagineDiff:Float = Math.max(0, compareStrum - compareNote);
+
+    		            var fakeReleaseNote:Note = noteManager.getNote(Conductor.songPosition + imagineDiff, i);
+    		            fakeReleaseNote.isSustainReleaseNote = true;
+    		            fakeReleaseNote.mustPress = true;
+    		            fakeReleaseNote.canBeHit = true;
+    		            fakeReleaseNote.noAnimation = true;
+
+    		            goodNoteHit(fakeReleaseNote);
+
+						// noteManager.recycleNote(fakeReleaseNote); // crashes when killing notes everytime so nononono
+
+    		            if (myStrum != null && myStrum.animation.curAnim.name != strumAnim) {
+    		                myStrum.playAnim(strumAnim);
+    		                myStrum.resetAnim = 0; // good for less cpu usage
+    		            }
+
+    		        	sustains[i] = null; // Stop tracking the sustain for this lane
+					}
+				}
+			}
+		}
+
 			if (!holdArray.contains(true) || endingSong)
 				playerDance();
 
@@ -3558,6 +3525,7 @@ class PlayState extends MusicBeatState
 		if(result == LuaUtils.Function_Stop) return;
 
 		note.wasGoodHit = true;
+		// noteManager.recycleNote(note);
 		
 		if (ClientPrefs.data.sustainRelease) {
 			if (note.isSustainNote) {

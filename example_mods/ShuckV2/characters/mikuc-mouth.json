@@ -1,0 +1,59 @@
+{
+	"animations": [
+		{
+			"offsets": [1010, 1080],
+			"loop": true,
+			"fps": 10,
+			"anim": "idle",
+			"indices": [],
+			"name": "mikuc-mouth idle"
+		},
+		{
+			"offsets": [999, 1091],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "mikuc-mouth up"
+		},
+		{
+			"offsets": [1010, 1080],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "mikuc-mouth down"
+		},
+		{
+			"offsets": [1020, 1070],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "mikuc-mouth right"
+		},
+		{
+			"offsets": [990, 1090],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "mikuc-mouth left"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/mikuc-mouth",
+	"position": [0, 0],
+	"healthicon": "face",
+	"flip_x": true,
+	"healthbar_colors": [161, 161, 161],
+	"camera_position": [940, -780],
+	"chartPosition": [
+		0,
+		0
+	],
+	"sing_duration": 4,
+	"scale": 1,
+	"_editor_isPlayer": true
+}

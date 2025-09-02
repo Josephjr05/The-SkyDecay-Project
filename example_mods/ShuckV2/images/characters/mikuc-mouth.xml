@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="mikuc-mouth.png">
+<SubTexture name="mikuc-mouth down0000" x="0" y="168" width="81" height="107" frameX="-1192" frameY="-1578" frameWidth="2500" frameHeight="2500" />
+<SubTexture name="mikuc-mouth down0001" x="0" y="168" width="81" height="107" frameX="-1192" frameY="-1578" frameWidth="2500" frameHeight="2500" />
+<SubTexture name="mikuc-mouth left0000" x="81" y="168" width="172" height="92" frameX="-1111" frameY="-1546" frameWidth="2500" frameHeight="2500" />
+<SubTexture name="mikuc-mouth left0001" x="81" y="168" width="172" height="92" frameX="-1099" frameY="-1544" frameWidth="2500" frameHeight="2500" />
+<SubTexture name="mikuc-mouth idle0000" x="175" y="275" width="178" height="62" frameX="-1148" frameY="-1549" frameWidth="2500" frameHeight="2500" />
+<SubTexture name="mikuc-mouth idle0001" x="0" y="275" width="175" height="63" frameX="-1149" frameY="-1549" frameWidth="2500" frameHeight="2500" />
+<SubTexture name="mikuc-mouth idle0002" x="253" y="168" width="183" height="65" frameX="-1145" frameY="-1546" frameWidth="2500" frameHeight="2500" />
+<SubTexture name="mikuc-mouth right0000" x="154" y="0" width="344" height="124" frameX="-1155" frameY="-1496" frameWidth="2500" frameHeight="2500" />
+<SubTexture name="mikuc-mouth right0001" x="154" y="0" width="344" height="124" frameX="-1173" frameY="-1495" frameWidth="2500" frameHeight="2500" />
+<SubTexture name="mikuc-mouth up0000" x="0" y="0" width="154" height="168" frameX="-1152" frameY="-1531" frameWidth="2500" frameHeight="2500" />
+<SubTexture name="mikuc-mouth up0001" x="0" y="0" width="154" height="168" frameX="-1152" frameY="-1517" frameWidth="2500" frameHeight="2500" />
+</TextureAtlas>

@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="mikuc-sigh.png">
+<SubTexture name="mikuc-sigh sigh0000" x="0" y="419" width="723" height="385" frameX="-885" frameY="-1199" frameWidth="2500" frameHeight="2500" />
+<SubTexture name="mikuc-sigh sigh0001" x="0" y="0" width="723" height="419" frameX="-884" frameY="-1243" frameWidth="2500" frameHeight="2500" />
+<SubTexture name="mikuc-sigh sigh0002" x="723" y="0" width="723" height="411" frameX="-885" frameY="-1230" frameWidth="2500" frameHeight="2500" />
+<SubTexture name="mikuc-sigh sigh0003" x="723" y="0" width="723" height="411" frameX="-885" frameY="-1230" frameWidth="2500" frameHeight="2500" />
+<SubTexture name="mikuc-sigh sigh0004" x="723" y="0" width="723" height="411" frameX="-885" frameY="-1230" frameWidth="2500" frameHeight="2500" />
+<SubTexture name="mikuc-sigh sigh0005" x="723" y="0" width="723" height="411" frameX="-885" frameY="-1230" frameWidth="2500" frameHeight="2500" />
+<SubTexture name="mikuc-sigh sigh0006" x="723" y="0" width="723" height="411" frameX="-885" frameY="-1230" frameWidth="2500" frameHeight="2500" />
+<SubTexture name="mikuc-sigh sigh0007" x="723" y="0" width="723" height="411" frameX="-885" frameY="-1230" frameWidth="2500" frameHeight="2500" />
+<SubTexture name="mikuc-sigh sigh0008" x="723" y="0" width="723" height="411" frameX="-885" frameY="-1230" frameWidth="2500" frameHeight="2500" />
+<SubTexture name="mikuc-sigh sigh0009" x="723" y="0" width="723" height="411" frameX="-885" frameY="-1230" frameWidth="2500" frameHeight="2500" />
+</TextureAtlas>

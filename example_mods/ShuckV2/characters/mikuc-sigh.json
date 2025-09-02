@@ -1,0 +1,27 @@
+{
+	"animations": [
+		{
+			"offsets": [880, 900],
+			"indices": [],
+			"fps": 7,
+			"anim": "sigh",
+			"loop": false,
+			"name": "mikuc-sigh sigh"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/mikuc-sigh, characters/mikuc-noe",
+	"position": [0, 0],
+	"healthicon": "face",
+	"flip_x": false,
+	"healthbar_colors": [161, 161, 161],
+	"camera_position": [0, 0],
+	"chartPosition": [
+		0,
+		0
+	],
+	"sing_duration": 4,
+	"scale": 1,
+	"_editor_isPlayer": true
+}

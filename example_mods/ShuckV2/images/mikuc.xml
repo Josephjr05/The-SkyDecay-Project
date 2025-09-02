@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="mikuc.png">
+<SubTexture name="mikuc idle0000" x="1764" y="0" width="1728" height="2479" frameX="-386" frameY="-21" frameWidth="2500" frameHeight="2500" />
+<SubTexture name="mikuc idle0001" x="0" y="0" width="1764" height="2490" frameX="-352" frameY="-10" frameWidth="2500" frameHeight="2500" />
+<SubTexture name="mikuc idle0002" x="3492" y="0" width="1752" height="2463" frameX="-377" frameY="-37" frameWidth="2500" frameHeight="2500" />
+</TextureAtlas>

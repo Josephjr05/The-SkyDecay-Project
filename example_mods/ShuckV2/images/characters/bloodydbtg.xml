@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="bloodydbtg.png">
+	<!-- Created with Adobe Animate version 22.0.2.168 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Left_BLUD instance 10000" x="0" y="0" width="649" height="848"/>
+	<SubTexture name="Left_BLUD instance 10001" x="649" y="0" width="649" height="848"/>
+	<SubTexture name="Left_BLUD instance 10002" x="1298" y="0" width="649" height="848"/>
+	<SubTexture name="Left_BLUD instance 10003" x="1947" y="0" width="649" height="848"/>
+	<SubTexture name="Left_BLUD instance 10004" x="2596" y="0" width="649" height="848"/>
+	<SubTexture name="Left_BLUD instance 10005" x="2596" y="0" width="649" height="848"/>
+	<SubTexture name="Left_BLUD instance 10006" x="3245" y="0" width="649" height="848"/>
+	<SubTexture name="Left_BLUD instance 10007" x="3245" y="0" width="649" height="848"/>
+	<SubTexture name="Left_BLUD instance 10008" x="3894" y="0" width="649" height="848"/>
+	<SubTexture name="Left_BLUD instance 10009" x="4543" y="0" width="649" height="848"/>
+	<SubTexture name="Left_BLUD instance 10010" x="5192" y="0" width="649" height="848"/>
+	<SubTexture name="Left_BLUD instance 10011" x="5192" y="0" width="649" height="848"/>
+	<SubTexture name="Left_BLUD instance 10012" x="5841" y="0" width="649" height="848"/>
+	<SubTexture name="Left_BLUD instance 10013" x="5841" y="0" width="649" height="848"/>
+	<SubTexture name="Right_BLUD instance 10000" x="6490" y="0" width="1158" height="769"/>
+	<SubTexture name="Right_BLUD instance 10001" x="0" y="848" width="1158" height="769"/>
+	<SubTexture name="Right_BLUD instance 10002" x="1158" y="848" width="1158" height="769"/>
+	<SubTexture name="Right_BLUD instance 10003" x="1158" y="848" width="1158" height="769"/>
+	<SubTexture name="Right_BLUD instance 10004" x="2316" y="848" width="1158" height="769"/>
+	<SubTexture name="Right_BLUD instance 10005" x="2316" y="848" width="1158" height="769"/>
+	<SubTexture name="Right_BLUD instance 10006" x="3474" y="848" width="1158" height="769"/>
+	<SubTexture name="Right_BLUD instance 10007" x="3474" y="848" width="1158" height="769"/>
+	<SubTexture name="Right_BLUD instance 10008" x="3474" y="848" width="1158" height="769"/>
+	<SubTexture name="Right_BLUD instance 10009" x="4632" y="848" width="1158" height="769"/>
+	<SubTexture name="Right_BLUD instance 10010" x="4632" y="848" width="1158" height="769"/>
+	<SubTexture name="Right_BLUD instance 10011" x="4632" y="848" width="1158" height="769"/>
+	<SubTexture name="Right_BLUD instance 10012" x="5790" y="848" width="1158" height="769"/>
+	<SubTexture name="Right_BLUD instance 10013" x="5790" y="848" width="1158" height="769"/>
+	<SubTexture name="Up_BLUD instance 10000" x="6948" y="848" width="967" height="1052"/>
+	<SubTexture name="Up_BLUD instance 10001" x="0" y="1900" width="966" height="1052" frameX="-1" frameY="0" frameWidth="967" frameHeight="1052"/>
+	<SubTexture name="Up_BLUD instance 10002" x="966" y="1900" width="966" height="1052" frameX="-1" frameY="0" frameWidth="967" frameHeight="1052"/>
+	<SubTexture name="Up_BLUD instance 10003" x="1932" y="1900" width="966" height="1052" frameX="-1" frameY="0" frameWidth="967" frameHeight="1052"/>
+	<SubTexture name="Up_BLUD instance 10004" x="2898" y="1900" width="966" height="1052" frameX="-1" frameY="0" frameWidth="967" frameHeight="1052"/>
+	<SubTexture name="Up_BLUD instance 10005" x="2898" y="1900" width="966" height="1052" frameX="-1" frameY="0" frameWidth="967" frameHeight="1052"/>
+	<SubTexture name="Up_BLUD instance 10006" x="3864" y="1900" width="967" height="1052"/>
+	<SubTexture name="Up_BLUD instance 10007" x="4831" y="1900" width="967" height="1052"/>
+	<SubTexture name="Up_BLUD instance 10008" x="5798" y="1900" width="967" height="1052"/>
+	<SubTexture name="Up_BLUD instance 10009" x="6765" y="1900" width="966" height="1052" frameX="-1" frameY="0" frameWidth="967" frameHeight="1052"/>
+	<SubTexture name="Up_BLUD instance 10010" x="6765" y="1900" width="966" height="1052" frameX="-1" frameY="0" frameWidth="967" frameHeight="1052"/>
+	<SubTexture name="Up_BLUD instance 10011" x="6765" y="1900" width="966" height="1052" frameX="-1" frameY="0" frameWidth="967" frameHeight="1052"/>
+	<SubTexture name="Up_BLUD instance 10012" x="0" y="2952" width="966" height="1052" frameX="-1" frameY="0" frameWidth="967" frameHeight="1052"/>
+	<SubTexture name="Up_BLUD instance 10013" x="0" y="2952" width="966" height="1052" frameX="-1" frameY="0" frameWidth="967" frameHeight="1052"/>
+	<SubTexture name="down_BLUD instance 10000" x="966" y="2952" width="617" height="659"/>
+	<SubTexture name="down_BLUD instance 10001" x="1583" y="2952" width="617" height="659"/>
+	<SubTexture name="down_BLUD instance 10002" x="2200" y="2952" width="617" height="659"/>
+	<SubTexture name="down_BLUD instance 10003" x="2817" y="2952" width="617" height="659"/>
+	<SubTexture name="down_BLUD instance 10004" x="3434" y="2952" width="617" height="659"/>
+	<SubTexture name="down_BLUD instance 10005" x="3434" y="2952" width="617" height="659"/>
+	<SubTexture name="down_BLUD instance 10006" x="4051" y="2952" width="617" height="659"/>
+	<SubTexture name="down_BLUD instance 10007" x="4051" y="2952" width="617" height="659"/>
+	<SubTexture name="down_BLUD instance 10008" x="4668" y="2952" width="617" height="659"/>
+	<SubTexture name="down_BLUD instance 10009" x="5285" y="2952" width="617" height="659"/>
+	<SubTexture name="down_BLUD instance 10010" x="5902" y="2952" width="617" height="659"/>
+	<SubTexture name="down_BLUD instance 10011" x="5902" y="2952" width="617" height="659"/>
+	<SubTexture name="down_BLUD instance 10012" x="6519" y="2952" width="617" height="659"/>
+	<SubTexture name="down_BLUD instance 10013" x="6519" y="2952" width="617" height="659"/>
+	<SubTexture name="idle_BLUD instance 10000" x="7136" y="2952" width="473" height="758"/>
+	<SubTexture name="idle_BLUD instance 10001" x="7609" y="2952" width="473" height="758"/>
+	<SubTexture name="idle_BLUD instance 10002" x="0" y="4004" width="473" height="758"/>
+	<SubTexture name="idle_BLUD instance 10003" x="0" y="4004" width="473" height="758"/>
+	<SubTexture name="idle_BLUD instance 10004" x="473" y="4004" width="473" height="758"/>
+	<SubTexture name="idle_BLUD instance 10005" x="946" y="4004" width="473" height="758"/>
+	<SubTexture name="idle_BLUD instance 10006" x="1419" y="4004" width="473" height="758"/>
+	<SubTexture name="idle_BLUD instance 10007" x="1892" y="4004" width="473" height="758"/>
+	<SubTexture name="idle_BLUD instance 10008" x="2365" y="4004" width="473" height="758"/>
+	<SubTexture name="idle_BLUD instance 10009" x="2838" y="4004" width="473" height="758"/>
+	<SubTexture name="idle_BLUD instance 10010" x="3311" y="4004" width="473" height="758"/>
+	<SubTexture name="idle_BLUD instance 10011" x="3784" y="4004" width="473" height="758"/>
+	<SubTexture name="idle_BLUD instance 10012" x="4257" y="4004" width="473" height="758"/>
+	<SubTexture name="idle_BLUD instance 10013" x="4730" y="4004" width="473" height="758"/>
+	<SubTexture name="idle_BLUD instance 10014" x="5203" y="4004" width="473" height="758"/>
+	<SubTexture name="idle_BLUD instance 10015" x="5676" y="4004" width="473" height="758"/>
+	<SubTexture name="idle_BLUD instance 10016" x="6149" y="4004" width="473" height="758"/>
+	<SubTexture name="idle_BLUD instance 10017" x="6149" y="4004" width="473" height="758"/>
+	<SubTexture name="idle_BLUD instance 10018" x="6149" y="4004" width="473" height="758"/>
+	<SubTexture name="idle_BLUD instance 10019" x="6622" y="4004" width="473" height="758"/>
+	<SubTexture name="idle_BLUD instance 10020" x="6622" y="4004" width="473" height="758"/>
+	<SubTexture name="idle_BLUD instance 10021" x="6622" y="4004" width="473" height="758"/>
+	<SubTexture name="idle_BLUD instance 10022" x="7095" y="4004" width="473" height="758"/>
+	<SubTexture name="idle_BLUD instance 10023" x="7095" y="4004" width="473" height="758"/>
+	<SubTexture name="idle_BLUD instance 10024" x="7568" y="4004" width="473" height="758"/>
+	<SubTexture name="idle_BLUD instance 10025" x="7568" y="4004" width="473" height="758"/>
+	<SubTexture name="idle_BLUD instance 10026" x="0" y="4762" width="473" height="758"/>
+	<SubTexture name="idle_BLUD instance 10027" x="0" y="4762" width="473" height="758"/>
+</TextureAtlas>

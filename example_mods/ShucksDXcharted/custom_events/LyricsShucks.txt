@@ -1,0 +1,4 @@
+Lyrics
+
+value1 = Text to display
+value2 = Color (Defaults to blue)

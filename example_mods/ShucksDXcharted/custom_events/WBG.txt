@@ -1,0 +1,3 @@
+v1:Won = white bg and black characters
+v1:Bon = white characters and black characters
+v1:off

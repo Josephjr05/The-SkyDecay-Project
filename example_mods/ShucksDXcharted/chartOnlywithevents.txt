@@ -1,0 +1,3 @@
+Just the chart only with events + font ig, also it was done on 0.6.3, dunno if it works versions above it but if it doesn't, then figure somethin out
+
+I've set it all so that you can put it in CurtisDev's Shucks v2 playable port, place what I have and put em in their folders

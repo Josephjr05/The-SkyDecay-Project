@@ -243,12 +243,9 @@ class Note extends FlxSprite
 		return value;
 	}
 
-	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?inEditor:Bool = false, ?createdFrom:Dynamic = null)
+	public function _initializeNote(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?inEditor:Bool = false, ?createdFrom:Dynamic = null)
 	{
-		super();
-
 		animation = new PsychAnimationController(this);
-
 		antialiasing = ClientPrefs.data.antialiasing;
 		if(createdFrom == null) createdFrom = PlayState.instance;
 
@@ -334,6 +331,20 @@ class Note extends FlxSprite
 			centerOrigin();
 		}
 		x += offsetX;
+	}
+
+	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?inEditor:Bool = false, ?createdFrom:Dynamic = null)
+	{
+		super();
+
+		_initializeNote(strumTime, noteData, prevNote, sustainNote, inEditor, createdFrom);
+
+		//the rest is moved to the function above for recycling notes (Like any other rhythm game does!!)
+	}
+
+	public function die(strumTime:Float, noteData:Int, ?prevNote:Note, ?isSustain:Bool = false, ?inEditor:Bool = false, ?createdFrom:Dynamic = null):Void
+	{
+	    _initializeNote(strumTime, noteData, prevNote, isSustain, inEditor, createdFrom);
 	}
 
 	public static function initializeGlobalRGBShader(noteData:Int)

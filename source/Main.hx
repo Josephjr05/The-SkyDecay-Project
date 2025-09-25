@@ -18,6 +18,7 @@ import openfl.display.StageScaleMode;
 import lime.app.Application;
 import states.TitleState;
 import backend.SSPlugin as ScreenShotPlugin;
+import openfl.display.Stage;
 
 #if HSCRIPT_ALLOWED
 import crowplexus.iris.Iris;
@@ -86,7 +87,7 @@ class Main extends Sprite
 	public function new()
 	{
 		super();
-
+		
 		#if windows
 		backend.window.CppAPI._setWindowLayered();
 		backend.window.CppAPI.darkMode();

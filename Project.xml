@@ -41,9 +41,12 @@
 	<!-- ____________________________ Window Settings ___________________________ -->
 
 	<!--These window settings apply to all targets-->
-	<window width="1280" height="720" fps="60" background="#000000" hardware="true" vsync="false" allow-high-dpi="true"/>
+	<window width="1280" height="720" fps="60" background="#000000" vsync="false" allow-high-dpi="true"/>
 	<hardware allow-shaders="true" require-shaders="false" />
 	<window context="opengl" />
+	<haxedef name="openfl-power-of-two-textures" />
+	<haxedef name="openfl-disable-cpu-fallback" />
+	<window hardware="true" />
 
 	<!--HTML5-specific-->
 	<window if="html5" resizable="true" />

@@ -47,6 +47,8 @@ import moonchart.formats.fnf.legacy.FNFLegacy;
 import moonchart.formats.fnf.FNFVSlice;
 import moonchart.formats.BasicFormat;
 
+import events.*;
+
 using DateTools;
 
 typedef UndoStruct = {
@@ -3269,6 +3271,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	}
 
 	var eventDropDown:PsychUIDropDownMenu;
+
 	var value1InputText:PsychUIInputText;
 	var value2InputText:PsychUIInputText;
 	var selectedEventText:FlxText;
@@ -6478,7 +6481,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		}
 	}
 
-	function loadFileList(mainFolder:String, ?optionalList:String = null, ?fileTypes:Array<String> = null)
+	public static function loadFileList(mainFolder:String, ?optionalList:String = null, ?fileTypes:Array<String> = null)
 	{
 		if(fileTypes == null) fileTypes = ['.json'];
 

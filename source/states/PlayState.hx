@@ -58,6 +58,7 @@ import crowplexus.hscript.Printer;
 // SkyDecay Engine imports
 import backend.PsychCamera;
 import openfl.Lib;
+import events.*;
 
 /**
  * This is where all the Gameplay stuff happens and is managed
@@ -360,6 +361,8 @@ class PlayState extends MusicBeatState
 			Language.reloadPhrases();
 		}
 		nextReloadAll = false;
+
+		// EventRegistry.init();
 
 		startCallback = startCountdown;
 		endCallback = endSong;
@@ -1628,13 +1631,21 @@ class PlayState extends MusicBeatState
 
 	// called only once per different event (Used for precaching)
 	function eventPushed(event:EventNote) {
-		eventPushedUnique(event);
-		if(eventsPushed.contains(event.event)) {
-			return;
-		}
+	    eventPushedUnique(event);
 
-		stagesFunc(function(stage:BaseStage) stage.eventPushed(event));
-		eventsPushed.push(event.event);
+	    if(eventsPushed.contains(event.event)) {
+	        return;
+	    }
+
+	    // Stage-level handling (optional, keep if you want old behavior)
+	    stagesFunc(function(stage:BaseStage) stage.eventPushed(event));
+
+	    // --- EventManager integration ---
+	    var params:Array<String> = [event.value1, event.value2, Std.string(event.strumTime)];
+		EventManager.run(event.event, ["0", "1", "0.6"]);
+
+	    // Mark this event as pushed
+	    eventsPushed.push(event.event);
 	}
 
 	// called by every event with the same name
@@ -2234,6 +2245,8 @@ class PlayState extends MusicBeatState
 		if(Math.isNaN(flValue1)) flValue1 = null;
 		if(Math.isNaN(flValue2)) flValue2 = null;
 
+		EventManager.run(eventName, [value1, value2, Std.string(strumTime)]);
+
 		switch(eventName) {
 			case 'Change Stage': // from a hscript in Psych Ward will improve this 
 				if(value1 == null || value1 == "") {
@@ -2280,34 +2293,6 @@ class PlayState extends MusicBeatState
 		
 				PlayState.instance.girlfriendCameraOffset = newStageData.camera_girlfriend;
 				if(PlayState.instance.girlfriendCameraOffset == null) PlayState.instance.girlfriendCameraOffset = [0, 0];
-
-			case 'Hey!':
-				var value:Int = 2;
-				switch(value1.toLowerCase().trim()) {
-					case 'bf' | 'boyfriend' | '0':
-						value = 0;
-					case 'gf' | 'girlfriend' | '1':
-						value = 1;
-				}
-
-				if(flValue2 == null || flValue2 <= 0) flValue2 = 0.6;
-
-				if(value != 0) {
-					if(dad.curCharacter.startsWith('gf')) { //Tutorial GF is actually Dad! The GF is an imposter!! ding ding ding ding ding ding ding, dindinding, end my suffering
-						dad.playAnim('cheer', true);
-						dad.specialAnim = true;
-						dad.heyTimer = flValue2;
-					} else if (gf != null) {
-						gf.playAnim('cheer', true);
-						gf.specialAnim = true;
-						gf.heyTimer = flValue2;
-					}
-				}
-				if(value != 1) {
-					boyfriend.playAnim('hey', true);
-					boyfriend.specialAnim = true;
-					boyfriend.heyTimer = flValue2;
-				}
 
 			case 'Set GF Speed':
 				if(flValue1 == null || flValue1 < 1) flValue1 = 1;
@@ -2730,6 +2715,9 @@ class PlayState extends MusicBeatState
 				{
 					spr.x += 1000;
 				});
+
+			default:
+            	trace("Unknown event: " + eventName);
 			}
 		stagesFunc(function(stage:BaseStage) stage.eventCalled(eventName, value1, value2, flValue1, flValue2, strumTime));
 		callOnScripts('onEvent', [eventName, value1, value2, strumTime]);

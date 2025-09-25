@@ -14,36 +14,36 @@ class Stage extends BaseStage
 	var stageCurtains:FlxSprite;
 	override function create()
 	{
-		stageBack = new FlxSprite(-1000, -900).loadGraphic(Paths.image('stages/stage/stageback'));
-		stageBack.scale.set(1.3, 1.3);
+		stageBack = new FlxSprite(-1400, -900).loadGraphic(Paths.image('stages/stage/stageback'));
+		stageBack.scale.set(2, 2);
 		stageBack.updateHitbox();
 		stageBack.antialiasing = ClientPrefs.data.antialiasing;
 		add(stageBack);
 
 		stageFront = new FlxSprite(-1400, -900).loadGraphic(Paths.image('stages/stage/stagefront'));
-		stageFront.scale.set(1.6, 1.6);
+		stageFront.scale.set(2, 2);
 		stageFront.updateHitbox();
 		stageFront.antialiasing = ClientPrefs.data.antialiasing;
 		add(stageFront);
 
 		stageLight = new FlxSprite(-425, -800).loadGraphic(Paths.image('stages/stage/stage_light'));
-		stageLight.scrollFactor.set(1.9, 1.9);
-		stageLight.scale.set(1.9, 1.9);
+		// stageLight.scrollFactor.set(1.9, 1.9);
+		stageLight.scale.set(2, 2);
 		stageLight.updateHitbox();
 		stageLight.antialiasing = ClientPrefs.data.antialiasing;
 		add(stageLight);
 
 		stageLight = new FlxSprite(1525, -800).loadGraphic(Paths.image('stages/stage/stage_light'));
-		stageLight.scrollFactor.set(1.9, 1.9);
-		stageLight.scale.set(2.1, 2.1);
+		// stageLight.scrollFactor.set(1.9, 1.9);
+		stageLight.scale.set(2, 2);
 		stageLight.updateHitbox();
 		stageLight.flipX = true;
 		stageLight.antialiasing = ClientPrefs.data.antialiasing;
 		add(stageLight);
 
 		stageCurtains = new FlxSprite(-1400, -900).loadGraphic(Paths.image('stages/stage/stagecurtains'));
-		stageCurtains.scrollFactor.set(1.3, 1.3);
-		stageCurtains.scale.set(1.7, 1.7);
+		// stageCurtains.scrollFactor.set(1.3, 1.3);
+		stageCurtains.scale.set(2, 2);
 		stageCurtains.updateHitbox();
 		stageCurtains.antialiasing = ClientPrefs.data.antialiasing;
 		add(stageCurtains);

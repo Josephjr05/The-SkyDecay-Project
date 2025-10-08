@@ -65,4 +65,32 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.addons.transition.FlxTransitionableState;
 
 using StringTools;
+
+import moonchart.Moonchart;
+import moonchart.formats.*;
+import moonchart.formats.fnf.*;
+import moonchart.formats.fnf.legacy.*;
+import moonchart.parsers.*;
+
+//Thank you Yutamon for letting me use your utils!
+import cache.Cache;
+
+import backend.Cursor;
+
+using yutautil.CUMacroTools;
+using yutautil.CollectionUtils;
+using yutautil.FieldMap;
+using yutautil.GenericObject;
+using yutautil.HxTrace;
+using yutautil.KonamiTracker;
+using yutautil.MacroTypeUtils;
+using yutautil.MetaData;
+using yutautil.NamedArray;
+using yutautil.Num;
+using yutautil.PointerTools;
+using yutautil.PyScript;
+using yutautil.RuntimeTypedef;
+using yutautil.Tracked;
+using yutautil.TypeUtils;
+using yutautil.Valid;
 #end

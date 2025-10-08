@@ -146,7 +146,7 @@ class HScript extends Iris
 		set('Type', Type);
 		set('Reflect', Reflect);
 		#if sys
-		set('File', File);
+		set('File', sys.io.File);
 		set('FileSystem', FileSystem);
 		#end
 		set('FlxG', flixel.FlxG);

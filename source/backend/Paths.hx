@@ -26,6 +26,7 @@ import backend.Mods;
 @:access(openfl.display.BitmapData)
 class Paths
 {
+	inline public static var IMAGE_EXT = "png";
 	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
 	inline public static var VIDEO_EXT = "mp4";
 
@@ -133,6 +134,34 @@ class Paths
 				}
 			}
 		}
+	}
+
+	public static function getGraphic(path:String, cache:Bool = true, gpu:Bool = false):Null<FlxGraphic>
+	{
+		var newGraphic:FlxGraphic = cache ? currentTrackedAssets.get(path) : null;
+		if (newGraphic == null) {
+			var bitmap:BitmapData = getBitmapData(path);
+			if (bitmap == null) return null;
+
+			if (gpu) {
+				var texture = FlxG.stage.context3D.createRectangleTexture(bitmap.width, bitmap.height, BGRA, true);
+				texture.uploadFromBitmapData(bitmap);
+				bitmap.image.data = null;
+				bitmap.dispose();
+				bitmap = BitmapData.fromTexture(texture);
+			}
+
+			newGraphic = FlxGraphic.fromBitmapData(bitmap, false, path, cache);
+			newGraphic.persist = true;
+			newGraphic.destroyOnNoUse = false;
+
+			if (cache) {
+				localTrackedAssets.push(path);
+				currentTrackedAssets.set(path, newGraphic);
+			}
+		}
+
+		return newGraphic;
 	}
 
 	inline static function destroyGraphic(graphic:FlxGraphic)
@@ -289,6 +318,32 @@ class Paths
 		return (OpenFlAssets.exists(path, TEXT)) ? Assets.getText(path) : null;
 		#end
 	}
+	
+	public static function getBitmapData(path:String):Null<BitmapData> {
+		var bitmap:BitmapData = null;
+
+		#if sys
+		if (FileSystem.exists(path))
+			bitmap = BitmapData.fromFile(path);
+		#end
+
+		#if MODS_ALLOWED
+		if (FileSystem.exists(path) && bitmap == null)
+			bitmap = BitmapData.fromFile(path);
+		else #end if (OpenFlAssets.exists(path, IMAGE) && bitmap == null)
+			bitmap = OpenFlAssets.getBitmapData(path);
+
+		// Apply trash mode compression if enabled and in PlayState
+		// if (bitmap != null && (shouldApplyTrashMode() || ClientPrefs.data.ultratrashMode)) {
+		// 	var compressedBitmap = compressBitmapForTrashMode(bitmap);
+		// 	if (compressedBitmap != null && compressedBitmap != bitmap) {
+		// 		bitmap.dispose(); // Clean up original
+		// 		bitmap = compressedBitmap;
+		// 	}
+		// }
+
+		return bitmap;
+	}
 
 	inline static public function font(key:String)
 	{
@@ -444,6 +499,49 @@ class Paths
 		}
 		localTrackedAssets.push(file);
 		return currentTrackedSounds.get(file);
+	}
+
+	inline public static function soundPath(path:String, key:String, ?library:String)
+	{
+		return getPath('$path/$key.$SOUND_EXT');
+	}
+
+	public static function returnSoundCache(path:String, key:String, ?library:String)
+	{
+		var gottenPath:String = soundPath(path, key, library);
+
+		if (currentTrackedSounds.exists(gottenPath)) {
+			if (!localTrackedAssets.contains(gottenPath))
+				localTrackedAssets.push(gottenPath);
+
+			return currentTrackedSounds.get(gottenPath);
+		}
+
+		var sound = getSound(gottenPath);
+		if (sound != null) {
+			currentTrackedSounds.set(gottenPath, sound);
+
+			if (!localTrackedAssets.contains(gottenPath))
+				localTrackedAssets.push(gottenPath);
+
+			return sound;
+		}
+
+		trace('sound $path, $key => $gottenPath returned null');
+
+		return null;
+	}
+	
+	inline public static function getSound(path:String):Null<Sound> {
+		#if sys
+		if (FileSystem.exists(path))
+			return Sound.fromFile(path);
+		#else
+		if(OpenFlAssets.exists(path, SOUND))
+			OpenFlAssets.getSound(path);
+		#end
+
+		return null;
 	}
 
 	#if MODS_ALLOWED

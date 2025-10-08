@@ -18,7 +18,6 @@ haxelib install away3d
 haxelib install haxeui-core
 haxelib install haxeui-flixel
 haxelib install json2object
-haxelib install flxsoundfilters
 haxelib install hxgamejolt-api
 haxelib set lime 8.1.3
 haxelib set openfl 9.4.1
@@ -29,5 +28,6 @@ haxelib git grig.audio https://gitlab.com/haxe-grig/grig.audio.git cbf91e2180fd2
 haxelib git linc_dialogs https://github.com/snowkit/linc_dialogs.git
 haxelib git moonchart https://github.com/MaybeMaru/moonchart
 haxelib git FunkinModchart https://github.com/theoo-h/FunkinModchart dev
+haxelib git flxsoundfilters https://github.com/TheZoroForce240/FlxSoundFilters
 echo Finished!
 pause

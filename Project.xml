@@ -131,6 +131,7 @@
 
 	<!-- why doesn't this work? idk but fuck u-->
 	<haxelib name="away3d" />
+	<haxedef name="away3d_no_cpp_names" />
 
 	<!--SkyDecay stuff needed-->
 	<haxelib name="linc_luajit" if="LUA_ALLOWED"/>
@@ -141,7 +142,8 @@
 	<haxelib name="hxdiscord_rpc" version="1.2.4" if="DISCORD_ALLOWED"/>
 	<haxelib name="flxanimate"/>
 	<haxelib name="hxWindowColorMode" version="0.2.0" if="windows"/>
-	<haxelib name="flxsoundfilters" />
+	<haxelib name="flxsoundfilters"/>
+	<haxelib name="flixel-ui" />
 
 	<!-- Disable Discord IO Thread -->
 	<haxedef name="DISCORD_DISABLE_IO_THREAD" if="hxdiscord_rpc" />
@@ -165,6 +167,14 @@
 	<haxeflag name="--macro" value="modchart.backend.macros.Macro.includeFiles()"/>
 
 	<haxelib name="hxgamejolt-api"/>
+
+	<section if="HSCRIPT_ALLOWED">
+		<haxedef name="hscriptPos" if="HSCRIPT_ALLOWED" />
+		<haxelib name="hscript"/>
+		<define name="hscriptPos"/>
+		
+		<haxeflag name="--macro" value="include('funkin')" />
+	</section>
 	
 	<!-- ______________________________ Haxedefines _____________________________ -->
 

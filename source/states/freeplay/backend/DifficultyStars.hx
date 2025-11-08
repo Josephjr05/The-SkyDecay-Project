@@ -1,4 +1,4 @@
-package states.freeplay;
+package states.freeplay.backend;
 
 import flixel.sound.FlxSound;
 import flixel.tweens.FlxEase;
@@ -23,7 +23,7 @@ class DifficultyStars extends FlxSpriteGroup
 		var prevRandomFpsStart = 0;
 		var prevRandomFpsLoop = 0;
 		for(i in 0...10){
-			var star = new FlxSprite(starPositionOffset.x * i, starPositionOffset.y).loadGraphic(Paths.image("freeplay/difficultyStar"), true, 56, 56);
+			var star = new FlxSprite(starPositionOffset.x * i, starPositionOffset.y).loadGraphic(Paths.image("OSUState/difficultySystem/difficultyStar"), true, 56, 56);
 			star.animation.add("on", [0], 0, false);
 			star.animation.add("blue", [1], 0, false);
 			star.animation.add("off", [2], 0, false);
@@ -37,7 +37,7 @@ class DifficultyStars extends FlxSpriteGroup
 			prevRandomFpsLoop = randomFpsLoop;
 			
 			var flame = new FlxSprite((starPositionOffset.x * i) + flamePositionOffset.x, (starPositionOffset.y) + flamePositionOffset.y);
-			flame.frames = Paths.getSparrowAtlas("freeplay/freeplayFlame");
+			flame.frames = Paths.getSparrowAtlas("OSUState/difficultySystem/freeplayFlame");
 			flame.animation.addByIndices("start", "fire loop full instance 1", [0, 1], "", randomFpsStart, false);
 			flame.animation.addByIndices("loop", "fire loop full instance 1", [2, 3, 4, 5, 6, 7, 8, 9], "", randomFpsLoop, true);
 			flame.animation.play("loop");
@@ -102,7 +102,7 @@ class DifficultyStars extends FlxSpriteGroup
 				if(animName == "blue"){
 					flames[i].animation.play("start");
 					flames[i].visible = true;
-					if(i == 0){ FlxG.sound.play(Paths.sound("freeplay/starIgnite"), 0.8); }
+					if(i == 0){ FlxG.sound.play(Paths.sound("OSUState/difficultySystem/starIgnite"), 0.8); }
 				}
 			}});
 		}

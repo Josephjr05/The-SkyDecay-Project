@@ -3,32 +3,35 @@ package states.editors.content;
 import objects.Note;
 import shaders.RGBPalette;
 import flixel.util.FlxDestroyUtil;
+import states.editors.ChartingState;
 
+@:access(states.editors.ChartingState)
 class MetaNote extends Note
 {
 	public static var noteTypeTexts:Map<Int, FlxText> = [];
 	public var isEvent:Bool = false;
 	public var songData:Array<Dynamic>;
+	public var downScroll:Bool = false;
 	public var sustainSprite:EditorSustain;
 	public var chartY:Float = 0;
 	public var chartNoteData:Int = 0;
-	public var sustainHeight:Float = 0;
-	public var reverseScroll:Bool;
+	public var chartingState:ChartingState;
+	public var useBlandSustains(default, set):Bool = false;
 
-	public function new(time:Float, data:Int, songData:Array<Dynamic>)
+	public function new(time:Float, data:Int, songData:Array<Dynamic>, state:ChartingState)
 	{
 		super(time, data, null, false, true);
+		this.chartingState = state;
 		this.songData = songData;
 		this.strumTime = time;
 		this.chartNoteData = data;
 	}
-
+	
 	public override function reloadNote(tex:String = '', postfix:String = '') {
 		super.reloadNote(tex, postfix);
 		if (sustainSprite != null)
 			sustainSprite.reloadNote(tex, postfix);
 	}
-
 	public function changeNoteData(v:Int)
 	{
 		this.chartNoteData = v; //despite being so arbitrary its sadly needed to fix a bug on moving notes
@@ -55,6 +58,25 @@ class MetaNote extends Note
 		if (sustainSprite != null)
 			sustainSprite.changeNoteData(this.noteData);
 	}
+	
+	override function set_noteType(value:String):String {
+		if (noteType == value) return value;
+		
+		songData[3] = value;
+		hitsoundChartEditor = true;
+		gfNote = ignoreNote = false;
+		
+		super.set_noteType(value);
+		
+		if (noteType == null || noteType == '') {
+			if (_noteTypeText != null) _noteTypeText.visible = false;
+		} else {
+			var txt:FlxText = findNoteTypeText(value != null ? chartingState.noteTypes.indexOf(value) : 0);
+			if (txt != null) txt.visible = chartingState.showNoteTypeLabels;
+		}
+		
+		return noteType = value;
+	}
 
 	public function setStrumTime(v:Float)
 	{
@@ -63,20 +85,20 @@ class MetaNote extends Note
 	}
 
 	var _lastZoom:Float = -1;
-	public function setSustainLength(v:Float, stepCrochet:Float, zoom:Float = 1, reverseScroll:Bool)
+	public function setSustainLength(newLength:Float, zoom:Float = 1)
 	{
 		_lastZoom = zoom;
-		v = Math.round(v / (stepCrochet / 2)) * (stepCrochet / 2);
-		songData[2] = sustainLength = Math.max(Math.min(v, stepCrochet * 128), 0);
+		songData[2] = sustainLength = Math.max(newLength, 0);
 
 		if(sustainLength > 0)
 		{
 			if(sustainSprite == null)
 			{
-				sustainSprite = new EditorSustain(noteData); //new FlxSprite().makeGraphic(1, 1, FlxColor.WHITE);
+				sustainSprite = new EditorSustain(noteData);//new FlxSprite().makeGraphic(1, 1, FlxColor.WHITE);
 				sustainSprite.scrollFactor.x = 0;
 			}
-			sustainSprite.sustainHeight = Math.max(ChartingState.GRID_SIZE/4, (Math.round((v * ChartingState.GRID_SIZE + ChartingState.GRID_SIZE) / stepCrochet) * zoom) - ChartingState.GRID_SIZE/2);
+			sustainSprite.sustainHeight = Math.max((Conductor.getStep(strumTime + newLength) - Conductor.getStep(strumTime)) * ChartingState.GRID_SIZE * zoom - ChartingState.GRID_SIZE * .5, 0);
+			sustainSprite.useBlandSustains = useBlandSustains;
 			sustainSprite.updateHitbox();
 		}
 	}
@@ -84,16 +106,10 @@ class MetaNote extends Note
 	public var hasSustain(get, never):Bool;
 	function get_hasSustain() return (!isEvent && sustainLength > 0);
 
-	public function updateSustainToZoom(stepCrochet:Float, zoom:Float = 1, reverseScroll:Bool)
+	public function updateSustainToZoom(zoom:Float = 1)
 	{
-		if(_lastZoom == zoom && this.reverseScroll == reverseScroll) return;
-		setSustainLength(sustainLength, stepCrochet, zoom, reverseScroll);
-	}
-
-	public function updateSustainToStepCrochet(stepCrochet:Float, reverseScroll:Bool)
-	{
-		if(_lastZoom < 0) return;
-		setSustainLength(sustainLength, stepCrochet, _lastZoom, reverseScroll);
+		if(_lastZoom == zoom) return;
+		setSustainLength(sustainLength, zoom);
 	}
 	
 	var _noteTypeText:FlxText;
@@ -107,9 +123,9 @@ class MetaNote extends Note
 				txt = new FlxText(0, 0, ChartingState.GRID_SIZE, (num > 0) ? Std.string(num) : '?', 16);
 				txt.autoSize = false;
 				txt.alignment = CENTER;
-				txt.borderStyle = SHADOW;
-				txt.shadowOffset.set(2, 2);
 				txt.borderColor = FlxColor.BLACK;
+				txt.borderStyle = FlxTextBorderStyle.SHADOW;
+				txt.borderSize = 2; // Controls shadow distance
 				txt.scrollFactor.x = 0;
 				noteTypeTexts.set(num, txt);
 			}
@@ -126,16 +142,9 @@ class MetaNote extends Note
 			sustainSprite.setColorTransform(colorTransform.redMultiplier, sustainSprite.colorTransform.blueMultiplier, colorTransform.redMultiplier);
 			sustainSprite.scale.copyFrom(this.scale);
 			sustainSprite.updateHitbox();
-			sustainSprite.x = this.x + (this.width - sustainSprite.width)/2;
-		
-			if (this.reverseScroll) {
-				sustainSprite.y = (this.y + this.height/2 - sustainSprite.sustainHeight) - sustainSprite.sustainHeight;
-			} else {
-				sustainSprite.y = this.y + this.height/2;
-			}
-		
-			sustainSprite.reverseScroll = this.reverseScroll;
-	
+			sustainSprite.y = this.y + this.height / 2 - (downScroll ? sustainSprite.sustainHeight : 0);
+			sustainSprite.x = this.x + (this.width - sustainSprite.width) / 2;
+			sustainSprite.downScroll = downScroll;
 			sustainSprite.alpha = this.alpha;
 			sustainSprite.draw();
 		}
@@ -149,6 +158,12 @@ class MetaNote extends Note
 			_noteTypeText.draw();
 		}
 	}
+	
+	function set_useBlandSustains(value:Bool):Bool {
+		if (sustainSprite != null)
+			sustainSprite.useBlandSustains = value;
+		return useBlandSustains = value;
+	}
 
 	override function destroy()
 	{
@@ -157,21 +172,26 @@ class MetaNote extends Note
 	}
 }
 
-
 class EditorSustain extends Note {
 	var sustainTile:FlxSprite;
+	var basicSustainTile:FlxSprite;
+	public var downScroll:Bool = false;
 	public var sustainHeight:Float = 0;
-	public var reverseScroll:Bool;
-
+	public var useBlandSustains:Bool = false;
+	
 	public function new(data:Int) {
+		basicSustainTile = new FlxSprite().makeGraphic(1, 1, FlxColor.WHITE);
 		sustainTile = new FlxSprite();
 		sustainTile.scrollFactor.x = 0;
-
+		clipRect = new flixel.math.FlxRect(0, 0);
+		sustainTile.clipRect = new flixel.math.FlxRect();
+		
 		super(0, data, null, true, true);
-
+		
 		animation.play(Note.colArray[noteData] + 'holdend');
 		scale.set(scale.x, scale.x);
 		updateHitbox();
+		flipY = false;
 	}
 	override function update(elapsed:Float) {
 		sustainTile.update(elapsed);
@@ -179,31 +199,84 @@ class EditorSustain extends Note {
 	}
 	override function draw() {
 		if (!visible) return;
-
-		if (sustainTile.shader != shader) sustainTile.shader = shader;
-		sustainTile.setColorTransform(colorTransform.redMultiplier, colorTransform.blueMultiplier, colorTransform.redMultiplier);
-		sustainTile.scale.x = this.scale.x;
-		sustainTile.scale.y = sustainHeight;
-		sustainTile.updateHitbox();
-		sustainTile.alpha = this.alpha;
-
-		if (this.reverseScroll) {
-			sustainTile.setPosition(this.x, this.y - 2); // nothing will work if you use sustainHeight BECAUSE sustainHeight is used at MetaNote class for Upscroll, so just offset it.
-			sustainTile.draw();
-			this.flipY = true; // flips holdend
-			this.y += sustainHeight - 18; // since we can't properly get the holdend to go at the end of the sustainTile, just offset it simply.
-			super.draw();
-			this.y -= sustainHeight; // there is a cutoff at the end of the holdend just SLIGHTLY on "+=18". Idk how to fix it but just keep this code for now.
+		
+		if (useBlandSustains) {
+			basicSustainTile.scale.set(8, sustainHeight);
+			basicSustainTile.updateHitbox();
+			basicSustainTile.alpha = alpha;
+			basicSustainTile.setPosition(x + (width - basicSustainTile.width) * .5, y);
+			basicSustainTile.draw();
 		} else {
-			sustainTile.setPosition(this.x, this.y - sustainHeight); // leave on default for Upscroll ofcourse
-			sustainTile.draw();
-			this.flipY = false;
-			y += sustainHeight;
-			super.draw();
-			y -= sustainHeight;
+			var tileY:Float = (downScroll ? 0 : sustainHeight - height);
+			flipY = sustainTile.flipY = downScroll;
+			
+			if (sustainTile.shader != shader) sustainTile.shader = shader;
+			sustainTile.setColorTransform(colorTransform.redMultiplier, colorTransform.blueMultiplier, colorTransform.redMultiplier);
+			sustainTile.scale.copyFrom(scale);
+			sustainTile.updateHitbox();
+			sustainTile.alpha = alpha;
+			
+			if (scale.y <= 0) return;
+			
+			sustainTile.clipRect.set(0, 1, sustainTile.frameWidth, sustainTile.frameHeight - 2);
+			sustainTile.clipRect = sustainTile.clipRect;
+			clipRect.set(0, 0, frameWidth, frameHeight);
+			clipRect = clipRect;
+			var stop:Bool = false;
+			
+			if (downScroll) {
+				function clipTile(tile:FlxSprite, y:Float) {
+					if (tileY + tile.height >= sustainHeight) {
+						var clip:Float = (tileY + tile.height - sustainHeight) / tile.scale.y + 1;
+						tile.clipRect.set(0, clip, tile.frameWidth, tile.frameHeight - clip);
+						tile.clipRect = tile.clipRect;
+						stop = true;
+					}
+				}
+				
+				clipTile(this, 0);
+				super.draw();
+				tileY += height - scale.y;
+				
+				while (tileY < sustainHeight) {
+					clipTile(sustainTile, tileY);
+					
+					sustainTile.setPosition(this.x, y + tileY);
+					sustainTile.draw();
+					
+					if (stop) break;
+					
+					tileY += sustainTile.clipRect.height * sustainTile.scale.y;
+				}
+			} else {
+				function clipTile(tile:FlxSprite, y:Float) {
+					if (tileY <= 0) {
+						var clip:Float = -tileY / tile.scale.y + 1;
+						tile.clipRect.set(0, clip, tile.frameWidth, tile.frameHeight - clip);
+						tile.clipRect = tile.clipRect;
+						stop = true;
+					}
+				}
+				
+				y += tileY;
+				clipTile(this, sustainHeight);
+				super.draw();
+				y -= tileY;
+				tileY -= scale.y;
+				
+				while (tileY > 0) {
+					tileY -= sustainTile.clipRect.height * sustainTile.scale.y;
+					clipTile(sustainTile, tileY);
+					
+					sustainTile.setPosition(this.x, y + tileY);
+					sustainTile.draw();
+					
+					if (stop) break;
+				}
+			}
 		}
 	}
-
+	
 	public function reloadSustainTile() {
 		sustainTile.frames = frames;
 		sustainTile.antialiasing = antialiasing;
@@ -213,12 +286,12 @@ class EditorSustain extends Note {
 	}
 	public function changeNoteData(v:Int) {
 		this.noteData = v;
-
+		
 		if (!PlayState.isPixelStage)
 			loadNoteAnims();
 		else
 			loadPixelNoteAnims();
-
+		
 		reloadSustainTile();
 		animation.play(Note.colArray[this.noteData % Note.colArray.length] + 'holdend');
 	}
@@ -230,57 +303,139 @@ class EditorSustain extends Note {
 
 class EventMetaNote extends MetaNote
 {
+	public var events:Array<Array<String>>;
 	public var eventText:FlxText;
-	public function new(time:Float, eventData:Dynamic)
+	public var gui:EventNoteGui;
+	
+	public function new(time:Float, eventData:Dynamic, state:ChartingState)
 	{
-		super(time, -1, eventData);
+		super(time, -1, eventData, state);
 		this.isEvent = true;
 		events = eventData[1];
-		//trace('events: $events');
 		
-		loadGraphic(Paths.image('editors/eventIcon'));
+		loadGraphic(Paths.image('editors/events/icons/default'));
 		setGraphicSize(ChartingState.GRID_SIZE);
 		updateHitbox();
-
-		eventText = new FlxText(0, 0, 400, '', 12);
-		eventText.setFormat(Paths.font('vcr.ttf'), 12, FlxColor.WHITE, RIGHT);
+		
+		eventText = new FlxText(0, 0, width, '', 12);
+		eventText.setFormat(eventText.font, 12, FlxColor.WHITE, CENTER, FlxTextBorderStyle.SHADOW, FlxColor.BLACK);
+		eventText.borderSize = 2; // Add this line after to control offset
 		eventText.scrollFactor.x = 0;
-		updateEventText();
+		
+		gui = new EventNoteGui();
+		updateEventInfo();
+	}
+	public override function update(elapsed:Float):Void {
+		super.update(elapsed);
+		gui.update(elapsed);
+	}
+	public override function draw():Void {
+		super.draw();
+		
+		gui.setPosition(x - gui.rect.width, y);
+		gui.alpha = alpha;
+		gui.draw();
+		
+		eventText.setPosition(x, y + (height - eventText.height) * .5);
+		eventText.alpha = alpha;
+		eventText.draw();
+	}
+	public override function destroy() {
+		super.destroy();
+		gui = FlxDestroyUtil.destroy(gui);
+		eventText = FlxDestroyUtil.destroy(eventText);
 	}
 	
-	override function draw()
-	{
-		if(eventText != null && eventText.exists && eventText.visible)
-		{
-			eventText.y = this.y + this.height/2 - eventText.height/2;
-			eventText.alpha = this.alpha;
-			eventText.draw();
-		}
-		super.draw();
+	public function updateEventInfo() {
+		gui.events = events;
+		gui.updateDisplay();
+		
+		eventText.text = Std.string(events.length);
 	}
+	
+	public override function setSustainLength(newLength:Float, zoom:Float = 1) {}
+	public override function updateSustainToZoom(zoom:Float = 1) {}
+}
 
-	override function setSustainLength(v:Float, stepCrochet:Float, zoom:Float = 1, reverseScroll:Bool) {}
-
+class EventNoteGui extends FlxSpriteGroup {
+	public static var maxWidth:Float = (ChartingState.GRID_SIZE * 5);
 	public var events:Array<Array<String>>;
-	public function updateEventText()
-	{
-		var myTime:Float = Math.floor(this.strumTime);
-		if(events.length == 1)
-		{
-			var event = events[0];
-			eventText.text = 'Event: ${event[0]} ($myTime ms)\nValue 1: ${event[1]}\nValue 2: ${event[2]}';
-		}
-		else if(events.length > 1)
-		{
-			var eventNames:Array<String> = [for (event in events) event[0]];
-			eventText.text = '${events.length} Events ($myTime ms):\n${eventNames.join(', ')}';
-		}
-		else eventText.text = 'ERROR FAILSAFE';
+	
+	public var eventContainer:FlxSpriteGroup;
+	public var hovering:Bool = false;
+	public var rect:FlxSprite;
+	
+	public function new() {
+		super();
+		
+		rect = new FlxSprite().makeGraphic(1, 1, FlxColor.WHITE);
+		rect.color = 0xff100010;
+		add(rect);
+		
+		eventContainer = new FlxSpriteGroup();
+		add(eventContainer);
 	}
-
-	override function destroy()
-	{
-		eventText = FlxDestroyUtil.destroy(eventText);
-		super.destroy();
+	
+	public function updateDisplay():Void {
+		var size:Int = ChartingState.GRID_SIZE;
+		
+		rect.setGraphicSize(Std.int(Math.min(Math.max(size * events.length, size), maxWidth)), size);
+		rect.updateHitbox();
+		
+		eventContainer.group.killMembers();
+		
+		for (i => event in events) {
+			var sprite:FlxSprite = eventContainer.recycle(FlxSprite, function() {
+				var sprite:FlxSprite = new FlxSprite();
+				sprite.antialiasing = ClientPrefs.data.antialiasing;
+				
+				return sprite;
+			});
+			
+			eventContainer.remove(sprite, true);
+			
+			sprite.loadGraphic(Paths.image('editors/events/icons/${event[0].length == 0 ? 'default' : event[0]}') ?? Paths.image('editors/events/icons/default'));
+			sprite.setGraphicSize(size);
+			sprite.updateHitbox();
+			sprite.revive();
+			sprite.setPosition(FlxMath.lerp(0, rect.width - sprite.width, (events.length <= 1 ? 0 : i / (events.length - 1))), 0);
+			
+			eventContainer.add(sprite);
+		}
+	}
+	
+	public override function update(elapsed:Float):Void {
+		super.update(elapsed);
+		
+		hovering = FlxG.mouse.overlaps(rect);
+		
+		var near:Null<Float> = null;
+		var closest:FlxSprite = null;
+		
+		for (event in eventContainer) {
+			if (!event.alive) continue;
+			
+			event.setColorTransform(1, 1, 1, alpha);
+			
+			if (hovering && FlxG.mouse.overlaps(event)) {
+				var dist:Float = Math.sqrt(Math.pow(FlxG.mouse.x - event.x - event.width * .5, 2) + Math.pow(FlxG.mouse.y - event.y - event.height * .5, 2));
+				if (closest == null) {
+					closest = event;
+					near = dist;
+				} else if (dist < near) {
+					near = dist;
+					closest = event;
+				}
+			}
+		}
+		
+		if (closest != null) {
+			var m:Int = (FlxG.mouse.pressed ? -64 : 128);
+			closest.setColorTransform(1, 1, 1, alpha, m, m, m);
+		}
+	}
+	
+	public override function draw():Void {
+		super.draw();
 	}
 }

@@ -1,4 +1,4 @@
-package states.freeplay;
+package states.freeplay.osu;
 
 class SongBox extends FlxSprite
 {

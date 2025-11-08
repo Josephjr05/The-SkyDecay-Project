@@ -143,9 +143,18 @@ import states.TitleState;
 
 		// optimizations
 		public var batchedDraws:Bool = false; // if you have a potato pc, turn this off
+		public var trashMode:Bool = false;
+		public var ultratrashMode:Bool = false;
 
 		//camHUD option cause apprently people like it
 		public var camHUDOption:Bool = false;
+
+		//AudioDisplay
+		public var audioDisplayQuality:Int = 1;
+		public var audioDisplayUpdate:Int = 50;
+		public var allowVis:Bool = true;
+		public var healthVis:Bool = true;
+		public var visOpacity:Float = 0.7;
 }
 
 class ClientPrefs {

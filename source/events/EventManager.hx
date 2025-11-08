@@ -22,6 +22,6 @@ class EventManager {
     public static function run(eventName:String, params:Array<String>):Void {
         var e:BaseEvent = getEvent(eventName);
         if (e != null) e.run(params);
-        else trace("EventManager: Unknown event '" + eventName + "'");
+        else trace("Legacy or Unknown Event:'" + eventName + "'");
     }
 }

@@ -79,6 +79,24 @@ class CoolUtil
 		return newValue;
 	}
 
+	public static function precacheSound(sound:String, ?library:String = null):Void {
+		Paths.sound(sound);
+	}
+
+	public static function precacheMusic(sound:String, ?library:String = null):Void {
+		Paths.music(sound);
+	}
+
+	inline public static function clamp(n:Float, l:Float, h:Float)
+	{
+		if (n > h)
+			n = h;
+		if (n < l)
+			n = l;
+
+		return n;
+	}
+
 	public static inline function format(string:String):String return string.toLowerCase().replace(' ', '-');
 
 	inline public static function quantize(f:Float, snap:Float){

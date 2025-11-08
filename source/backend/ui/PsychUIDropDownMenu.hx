@@ -4,6 +4,7 @@ import backend.ui.PsychUIBox.UIStyleData;
 
 class PsychUIDropDownMenu extends PsychUIInputText
 {
+	public static final REVEAL_EVENT = "dropdown_reveal";
 	public static final CLICK_EVENT = "dropdown_click";
 
 	public var list(default, set):Array<String> = [];

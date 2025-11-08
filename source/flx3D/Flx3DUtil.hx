@@ -2,12 +2,11 @@ package flx3D;
 
 import away3d.core.managers.Stage3DManager;
 import away3d.library.assets.IAsset;
-import flixel.FlxG;
 
 /**
  * @author lunarclient
  * @see https://twitter.com/lunarcleint
- * 
+ *
  * Help from Ne_Eo
  * @see https://twitter.com/Ne_Eo_Twitch
  */
@@ -38,7 +37,7 @@ class Flx3DUtil
 
 	/**
 	 * Calls dispose() (destroy) on a Away3D asset
-	 * @param obj 
+	 * @param obj
 	 * @return null
 	 */
 	public static inline function dispose<T:IAsset>(obj:Null<T>):T

@@ -3,6 +3,8 @@ package backend;
 import flixel.FlxState;
 import backend.PsychCamera;
 
+import flixel.util.FlxGradient; // backwards compatibility
+
 class MusicBeatState extends FlxState
 {
 	private var curSection:Int = 0;

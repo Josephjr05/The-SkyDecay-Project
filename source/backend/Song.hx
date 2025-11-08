@@ -8,6 +8,8 @@ import objects.Note;
 //a full change of organization to match Osu's map files
 typedef SwagSong =
 {
+	var luaType:Bool; // true = legacyfunkinlua, false = funkinlua
+
 	var song:String;
 	var songArtists:String;
 	var artists:String;
@@ -82,6 +84,7 @@ class Song
 	public var disableNoteRGB:Bool = false;
 	public var events:Array<Dynamic>;
 	public var notes:Array<SwagSection>;
+	public var luaType:Bool; // true = legacyfunkinlua, false = funkinlua
 
 	public static function convert(songJson:Dynamic) // Convert old charts to skydecay_beta (0.1) format
 	{

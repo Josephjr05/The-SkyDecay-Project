@@ -51,7 +51,7 @@ function onCreate()
     setObjectOrder('john' .. RNGG, 15);
 
     RNGGG = RNGGG + 1;
-    makeAnimatedLuaSprite('runjohn' .. RNGGG,'runjohn',-1000,200);
+    makeAnimatedLuaSprite('runjohn' .. RNGGG,'stages/battlefield/runjohn',-1000,200);
     addLuaSprite('runjohn', false);
     setObjectOrder('runjohn', 1)   
     addAnimationByPrefix('runjohn' .. RNGGG,'JOHNRUN','JOHNRUN',24,true);
@@ -86,7 +86,7 @@ ONCE = ONCE + 1;
     end
     if ONCE == 1 then
     	RNGGG = RNGGG + 1;
-    	makeAnimatedLuaSprite('runjohn' .. RNGGG,'runjohn',10000,200 + math.random(-10 ,10 ));
+    	makeAnimatedLuaSprite('runjohn' .. RNGGG,'stages/battlefield/runjohn',10000,200 + math.random(-10 ,10 ));
     	addAnimationByPrefix('runjohn' .. RNGGG,'JOHNRUN','JOHNRUN',24,true);
     	addAnimationByPrefix('runjohn' .. RNGGG,'JOHNDIE','JOHNDIE',24,false);
     	addLuaSprite('runjohn' .. RNGGG);
@@ -95,7 +95,7 @@ ONCE = ONCE + 1;
 
     end
     if ONCE == 1 then
-    	makeAnimatedLuaSprite('lasershoot','lasershoot',-1000,10000);
+    	makeAnimatedLuaSprite('lasershoot','stages/battlefield/lasershoot',-1000,10000);
     	addAnimationByPrefix('lasershoot','laser shoot','laser shoot',24,false);
     	setProperty('lasershoot.angle', math.random(-10 ,10));
     	addLuaSprite('lasershoot');
@@ -142,7 +142,7 @@ end
 
 if math.random(minN ,maxN * 0.5 ) == 10 then
     if getProperty('health') > 0 then
-    	makeAnimatedLuaSprite('lasershoot','lasershoot',-1000,200+math.random(0 ,1000));
+    	makeAnimatedLuaSprite('lasershoot','stages/battlefield/lasershoot',-1000,200+math.random(0 ,1000));
     	addAnimationByPrefix('lasershoot','laser shoot','laser shoot',24,false);
     	setProperty('lasershoot.angle', math.random(-10 ,10));
     	addLuaSprite('lasershoot');
@@ -155,7 +155,7 @@ end
 
 
 if curStep == 320 then
-    makeAnimatedLuaSprite('bullethole1','bullethole',0,200);
+    makeAnimatedLuaSprite('bullethole1','stages/battlefield/bullethole',0,200);
     addAnimationByPrefix('bullethole1','gunshot','gunshot',24,false);
     addLuaSprite('bullethole1');
     setScrollFactor('bullethole1',1 ,1 );
@@ -163,7 +163,7 @@ if curStep == 320 then
 
 end
 if curStep == 383 then
-    makeAnimatedLuaSprite('bullethole2','bullethole',-150,160);
+    makeAnimatedLuaSprite('bullethole2','stages/battlefield/bullethole',-150,160);
     addAnimationByPrefix('bullethole2','gunshot','gunshot',24,false);
     addLuaSprite('bullethole2');
     setScrollFactor('bullethole2',1 ,1 );
@@ -171,7 +171,7 @@ if curStep == 383 then
 
 end
 if curStep == 703 then
-    makeAnimatedLuaSprite('bullethole3','bullethole',-300,150);
+    makeAnimatedLuaSprite('bullethole3','stages/battlefield/bullethole',-300,150);
     addAnimationByPrefix('bullethole3','gunshot','gunshot',24,false);
     addLuaSprite('bullethole3');
     setScrollFactor('bullethole3',1 ,1 );
@@ -179,7 +179,7 @@ if curStep == 703 then
 
 end
 if curStep == 767 then
-    makeAnimatedLuaSprite('bullethole4','bullethole',-200,300);
+    makeAnimatedLuaSprite('bullethole4','stages/battlefield/bullethole',-200,300);
     addAnimationByPrefix('bullethole4','gunshot','gunshot',24,false);
     addLuaSprite('bullethole4');
     setScrollFactor('bullethole4',1 ,1 );

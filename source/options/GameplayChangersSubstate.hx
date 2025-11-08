@@ -73,6 +73,10 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		optionsArray.push(new GameplayOption('Instakill on Miss', 'instakill', BOOL, false));
 		optionsArray.push(new GameplayOption('Practice Mode', 'practice', BOOL, false));
 		optionsArray.push(new GameplayOption('Botplay', 'botplay', BOOL, false));
+
+		// Unsure why we need this but we need it!
+		optionsArray.push(new GameplayOption('Legacy Psych Mode', 'legacyMode', BOOL, false));
+		optionsArray.push(new GameplayOption('Legacy Emulated Version', 'legacyType', STRING, '0.6.3', psychlua.LegacyFunkinLua.emulatableVersions.concat(["None"])));
 	}
 
 	public function getOptionByName(name:String)

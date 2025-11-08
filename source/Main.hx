@@ -69,6 +69,7 @@ class Main extends Sprite
 	};
 
 	public static var fpsVar:FPSCounter;
+	public static var flxSignalCrash:Bool = false;
 
 	public static var colorFilter:ColorBlindness;
 
@@ -81,6 +82,17 @@ class Main extends Sprite
 
 	public static function main():Void
 	{
+		flxSignalCrash = false;
+		try
+		{
+			trace(3.forceCast(Type.ValueType.TFloat));
+		}
+		catch (e:Dynamic)
+		{
+			trace("Error: " + e);
+		}
+		trace("Finished testing forceCast.");
+
 		Lib.current.addChild(new Main());
 	}
 
@@ -147,6 +159,8 @@ class Main extends Sprite
 		FlxG.save.bind('funkin', CoolUtil.getSavePath());
 
 		Highscore.load();
+
+		WindowUtils.init();
 
 		#if HSCRIPT_ALLOWED
 		Iris.warn = function(x, ?pos:haxe.PosInfos) {
@@ -276,20 +290,74 @@ class Main extends Sprite
 		}
 	}
 
+	private static var gameClosing:Bool = false;
+
+	public static inline function closeGame():Void
+	{
+		if (gameClosing) return;
+		gameClosing = true;
+
+		// Track command exit through CrashReporter
+		#if !debug
+		try {
+			yutautil.CrashReporter.logActivity("Main", "closeGame", "Game is closing...");
+		} catch (trackError:Dynamic) {
+			trace("Failed to track game exit: " + trackError);
+		}
+		#end
+
+		// if (Main.commandPrompt != null)
+		// 	commandPrompt.remove();
+
+		WindowUtils.preventClosing = false;
+		Lib.application.window.close();
+
+		closeGame();
+	}
+
+	public static function dummy():Void
+	{
+		// basically don't do anything
+	}
+
 	// Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!
 	// very cool person for real they don't get enough credit for their work
 	#if CRASH_HANDLER
-	function onCrash(e:UncaughtErrorEvent):Void
+	public static function onCrash(e:UncaughtErrorEvent):Void
 	{
+		"Crash Handler Code for SkyDecay Engine.".NativeComment();
+		// Prevent further propagation of the error to avoid crashing the application
+		e.preventDefault();
 		var errMsg:String = "";
+		var errType:String = e.error;
 		var path:String;
 		var callStack:Array<StackItem> = CallStack.exceptionStack(true);
 		var dateNow:String = Date.now().toString();
+		var crashState:String = Std.string(FlxG.state);
 
 		dateNow = dateNow.replace(" ", "_");
 		dateNow = dateNow.replace(":", "'");
 
 		path = "./crash/" + "SkyDecayEngine_" + dateNow + ".txt";
+
+		// Check if this is our custom UnexpectedCrashException
+		var isUnexpectedCrash = false;
+		var unexpectedCrashData:Dynamic = null;
+
+		#if !debug
+		try {
+			var errorString = Std.string(e.error);
+			if (errorString.indexOf("UnexpectedCrashException") != -1) {
+				isUnexpectedCrash = true;
+				// Try to extract crash data if available
+				if (Reflect.hasField(e.error, "previousCrashData")) {
+					unexpectedCrashData = Reflect.field(e.error, "previousCrashData");
+				}
+			}
+		} catch (extractError:Dynamic) {
+			trace("Could not extract unexpected crash data: " + extractError);
+		}
+		#end
 
 		for (stackItem in callStack)
 		{
@@ -303,14 +371,33 @@ class Main extends Sprite
 		}
 
 		errMsg += "\nUncaught Error: " + e.error;
-		/*
-		 * remove if you're modding and want the crash log message to contain the link
-		 * please remember to actually modify the link for the github page to report the issues to.
-		*/
-		// 
-		#if officialBuild
-		errMsg += "\nPlease report this error to the GitHub page:https://github.com/Josephjr05/The-SkyDecay-Project\n\n> Crash Handler originally written by: sqirra-rng\nFrom Psych Engine";
+		errMsg += "\nError Code: " + new DetailedException(e).errorCode;
+
+		// Add special handling for unexpected crashes
+		if (isUnexpectedCrash) {
+			errMsg += "\n\n*** UNEXPECTED CRASH DETECTED ***";
+			errMsg += "\nThis crash was detected from a previous session.";
+			if (unexpectedCrashData != null) {
+				errMsg += "\nPrevious session info: " + haxe.Json.stringify(unexpectedCrashData, "  ");
+			}
+			errMsg += "\nCheck the logger folder for detailed crash tracking reports.";
+		}
+
+		#if !debug
+		// Generate enhanced crash report with tracking data
+		try {
+			yutautil.CrashReporter.generateEnhancedCrashReport("Uncaught exception: " + e.error);
+		} catch (reportError:Dynamic) {
+			trace("Failed to generate enhanced crash report: " + reportError);
+		}
 		#end
+
+		// remove if you're modding and want the crash log message to contain the link
+		// please remember to actually modify the link for the github page to report the issues to.
+		errMsg += "\nPlease report this error to the GitHub page: https://github.com/Josephjr05/The-SkyDecay-Project/issues";
+		errMsg += "\n\n> Crash Handler written by: sqirra-rng";
+		errMsg += "\n\n> Modified by: Yutamon The Goat";
+		errMsg += "\n\n> Enhanced Crash Tracking: Enabled";
 
 		if (!FileSystem.exists("./crash/"))
 			FileSystem.createDirectory("./crash/");
@@ -320,11 +407,186 @@ class Main extends Sprite
 		Sys.println(errMsg);
 		Sys.println("Crash dump saved in " + Path.normalize(path));
 
-		Application.current.window.alert(errMsg, "Error!");
-		#if DISCORD_ALLOWED
-		DiscordClient.shutdown();
+		#if !debug
+		Sys.println("Enhanced crash report with tracking data saved in ./logger/ folder");
 		#end
-		Sys.exit(1);
+
+		for (stackItem in callStack)
+			{
+				switch (stackItem)
+				{
+					case FilePos(s, file, line, column):
+						if (file.contains("FlxTween.hx"))
+						{
+							FlxTween.globalManager.clear();
+							trace("Tween Error occurred. Clearing all tweens.");
+							// if (ClientPrefs.data.ignoreTweenErrors)
+								return;
+						}
+					default:
+						trace("Unhandled stack item: " + stackItem);
+						dummy();
+				}
+				}
+
+			var alertMsg = errMsg;
+			if (isUnexpectedCrash) {
+				alertMsg = "UNEXPECTED CRASH DETECTED!\n\nThe engine crashed unexpectedly in a previous session.\nDetailed crash tracking reports are available in the logger folder.\n\n" + alertMsg;
+			}
+			Application.current.window.alert(alertMsg, isUnexpectedCrash ? "Unexpected Crash!" : "Error!");
+
+		if (flxSignalCrash) FlxG.resetGame(); // Don't even bother to try and fix it just restart
+
+		// backend.MusicBeatState.playErrorSound = true;
+		trace("Crash caused in: " + Type.getClassName(Type.getClass(FlxG.state)));
+		// Handle different states (NOT YET CURRENTLY USED)
+
+				var stateClassName = Type.getClassName(Type.getClass(FlxG.state)).split(".")[Lambda.count(Type.getClassName(Type.getClass(FlxG.state)).split(".")) - 1];
+				var stateClass:Class<Dynamic> = Type.getClass(FlxG.state);
+				var handled = false;
+
+		// 		if (stateClass == null) {
+		// 			trace("State class is null. Either signals broke, or the game is bricked.");
+		// 			try {
+		// 				var exitStuff:Array<Dynamic> = [];
+		// 				exitStuff = exitStuff.concat(states.ExitState.cleanupFunctions).concat(states.ExitState.returnFunctions);
+		// 				for (callbacks in exitStuff)
+		// 				{ try { callbacks(); } catch (e:Dynamic) { trace("Error in exit callback: " + e); } }
+		// 				// do restart process
+		// 				var restartProcess = new Process("Mixtape.exe", ["GameBricked", "restart"]);
+		// 				Main.closeGame();
+		// 			} catch (e:Dynamic) {
+		// 				trace("Error occurred while executing exit callbacks: " + e);
+		// 				// do restart process
+		// 				var restartProcess = new Process("Mixtape.exe", ["GameBricked", "restart"]);
+		// 				Main.closeGame();
+		// 			}
+		// 		}
+
+		 		while (stateClass != null && !handled) {
+		 			switch (stateClassName) {
+		// 				case "PlayState":
+		// 					PlayState.Crashed = true;
+		// 					if (errType.contains("Null Object Reference")) {
+		// 						FlxG.sound.music != null ? FlxG.sound.music.stop() : null;
+		// 						FlxG.sound.play(Paths.sound("metal_pipe"));
+		// 						if (PlayState.isStoryMode) {
+		// 							FlxG.switchState(new states.StoryMenuState());
+		// 						} else {
+		// 							FreeplayManager.openFreeplay();
+		// 						}
+		// 						PlayState.Crashed = false;
+		// 					}
+		// 					handled = true;
+
+		// 				case "ChartingState":
+		// 					if (e.error.toLowerCase().contains("null object reference")) {
+		// 						Application.current.window.alert("You tried to load a Chart that doesn't exist!", "Chart Error");
+		// 					}
+		// 					handled = true;
+
+		// 				case "FreeplayState", "StoryModeState":
+		// 					FlxG.switchState(new states.CategoryState());
+		// 					handled = true;
+
+		// 				case "MainMenuState":
+		// 					FlxG.switchState(new states.TitleState());
+		// 					handled = true;
+
+		// 				case "TitleState":
+		// 					Application.current.window.alert("Something went extremely wrong... You may want to check some things in the files!\nFailed to load TitleState!",
+		// 						"Fatal Error");
+		// 					trace("Unable to recover...");
+		// 					FlxG.switchState(new states.ExitState());
+		// 					handled = true;
+
+		// 				case "CacheState":
+		// 					Application.current.window.alert("Major Error occurred while caching data.\nSkipping Cache Operation.", "Fatal Error");
+		// 					FlxG.switchState(new states.What());
+		// 					handled = true;
+
+		// 				case "What":
+		// 					trace("Restarting Game...");
+		// 					FlxG.switchState(new states.TitleState());
+		// 					handled = true;
+
+		// 				case "OptionsState", "GameJoltState":
+		// 					if (Sys.args().indexOf("-livereload") != -1) {
+		// 						Sys.println("Cannot restart from compiled build.");
+		// 						Application.current.window.alert("The game encountered a critical error.", "Game Bricked");
+		// 						Application.current.window.alert("Unable to restart due to running a Compiled build.", "Error");
+		// 					} else {
+		// 						Application.current.window.alert("The game encountered a critical error and will now restart.", "Game Bricked");
+		// 						trace("The game was bricked. Restarting...");
+		// 						var mainGame = Main.game;
+		// 						var initialState = Type.getClass(mainGame.initialState);
+		// 						var restartProcess = new Process("Mixtape.exe", ["GameJoltBug", "restart"]);
+		// 						FlxG.switchState(new states.ExitState());
+		// 					}
+		// 					trace("Recommended to recompile the game to fix the issue.");
+		// 					handled = true;
+
+		// 				case "APDisconnectSubstate":
+		// 					Application.current.window.alert("The game encountered a critical error and will now restart.", "AP Disconnect Error");
+		// 					trace("AP Disconnect Error. Restarting...");
+		// 					var mainGame = Main.game;
+		// 					var initialState = Type.getClass(mainGame.initialState);
+		// 					var restartProcess = new Process("Mixtape.exe", ["APDisconnectError", "restart"]);
+		// 					// FlxG.switchState(new states.ExitState());
+		// 					Main.closeGame();
+		// 					handled = true;
+		// 				case "ExitState":
+		// 					Application.current.window.alert("Somehow, a crash occurred during the exiting process. Forcing exit.", "???");
+		// 					trace("Performing Emergency Exit.");
+		// 					Main.closeGame();
+		// 					handled = true;
+
+		 				case "null", null:
+		 					// This is a null state, which means signals failed, and the game is bricked.
+		 					// We need to restart the game.
+		 					// Kill the game process and restart it.
+		 					    var exe = Sys.programPath(); // instead of hardcoding "Mixtape.exe", we get the current executable path which is 100x better for source code modders.
+    							var restartProcess = new Process(exe, ["GameBricked", "restart"]);
+		 					Main.closeGame(); // We can't switch to a new state if the game is bricked, so just close it.
+
+		 				default:
+		 					stateClass = Type.getSuperClass(stateClass);
+		 					stateClassName = stateClass != null ? Type.getClassName(stateClass).split(".")[Lambda.count(Type.getClassName(stateClass).split(".")) - 1] : null;
+		 			}
+		 		}
+
+		 		if (!handled) {
+		 			var mainGame = Main.game;
+		 			FlxG.switchState(Type.createInstance(states.TitleState, []));
+		 			trace("Unhandled state: " + (Type.getClassName(Type.getClass(FlxG.state))));
+		 			trace("Restarting Game...");
+		 		}
+
+		//Additional error handling or recovery mechanisms can be added here
+
+		 for (stackItem in callStack)
+		 {
+		 	switch (stackItem)
+		 	{
+		 		case FilePos(s, file, line, column):
+		 			if (file.contains("FlxSound.hx"))
+		 			{
+		 				FlxG.sound.music != null ? FlxG.sound.music.stop() : null;
+		 				trace("Music Error occurred. Stopping music.");
+		 			}
+		 			if (file.contains("flixel/FlxG.hx"))
+		 			{
+		 				trace("Critical FLXG Error occurred. Restarting game...");
+						var exe = Sys.programPath();
+		 				new Process(exe, ["CriticalError", "restart"]);
+		 				Main.closeGame();
+		 			}
+
+				default:
+					dummy();
+			}
+		}
+		// FlxG.switchState(TransitionState.requiredTransition.targetState);
 	}
 	#end
 }

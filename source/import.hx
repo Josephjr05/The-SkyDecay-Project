@@ -49,20 +49,27 @@ import flxanimate.PsychFlxAnimate as FlxAnimate;
 #end
 
 //Flixel
-import flixel.sound.FlxSound;
-import flixel.FlxG;
-import flixel.FlxSprite;
+import flixel.FlxBasic;
 import flixel.FlxCamera;
+import flixel.FlxG;
+import flixel.FlxObject;
+import flixel.FlxSprite;
+import flixel.addons.transition.FlxTransitionableState;
+import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
-import flixel.util.FlxColor;
-import flixel.util.FlxTimer;
+import flixel.sound.FlxSound;
+import flixel.sound.filters.*;
+import flixel.sound.filters.effects.*;
 import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
-import flixel.group.FlxSpriteGroup;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.addons.transition.FlxTransitionableState;
+import flixel.util.FlxColor;
+import flixel.util.FlxTimer;
+
+import openfl.utils.Assets;
+import flixel.util.FlxDestroyUtil;
 
 using StringTools;
 
@@ -72,8 +79,14 @@ import moonchart.formats.fnf.*;
 import moonchart.formats.fnf.legacy.*;
 import moonchart.parsers.*;
 
+import backend.window.Window;
+import backend.window.WindowUtil;
+import backend.window.WindowUtils;
+
+import objects.AudioDisplay;
+
 //Thank you Yutamon for letting me use your utils!
-import cache.Cache;
+import cache.old.*;
 
 import backend.Cursor;
 

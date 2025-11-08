@@ -40,6 +40,27 @@ class LuaUtils
 		} : null;
 	}
 
+	// Legacy shit.
+
+	inline public static function getTextObject(name:String):FlxText
+	{
+		return #if LUA_ALLOWED PlayState.instance.modchartTexts.exists(name) ? PlayState.instance.modchartTexts.get(name) : #end Reflect.getProperty(PlayState.instance, name);
+	}
+
+	public static function resetTextTag(tag:String) {
+		#if LUA_ALLOWED
+		if(!PlayState.instance.modchartTexts.exists(tag)) {
+			return;
+		}
+
+		var target:FlxText = PlayState.instance.modchartTexts.get(tag);
+		target.kill();
+		PlayState.instance.remove(target, true);
+		target.destroy();
+		PlayState.instance.modchartTexts.remove(tag);
+		#end
+	}
+
 	public static function setVarInArray(instance:Dynamic, variable:String, value:Dynamic, allowMaps:Bool = false):Any
 	{
 		var splitProps:Array<String> = variable.split('[');
@@ -76,6 +97,13 @@ class LuaUtils
 		{
 			MusicBeatState.getVariables().set(variable, value);
 			return value;
+		}
+
+		// 0.6.3 COLORTRANSFORM RESET BEHAVIOR (nil, null, etc resets colorTransform to default)
+		if (instance != null && Reflect.hasField(instance, 'colorTransform') && value == null)
+		{
+		 	instance.colorTransform = new openfl.geom.ColorTransform();
+		 	return value;
 		}
 		Reflect.setProperty(instance, variable, value);
 		return value;
@@ -115,6 +143,12 @@ class LuaUtils
 			if(retVal != null)
 				return retVal;
 		}
+
+		// 0.6.3 COMPAT: reading a nil colorTransform returns default transform, NOT null
+    	if (instance == null && variable == 'colorTransform' && Reflect.hasField(instance, 'colorTransform'))
+    	{
+    	    return new openfl.geom.ColorTransform();
+    	}
 		return Reflect.getProperty(instance, variable);
 	}
 
@@ -523,5 +557,23 @@ class LuaUtils
 		var camera:FlxCamera = MusicBeatState.getVariables().get(cam);
 		if (camera == null || !Std.isOfType(camera, FlxCamera)) camera = PlayState.instance.camGame;
 		return camera;
+	}
+
+	public static function interpCurseMode(mode:String):backend.Cursor.CursorMode {
+		switch(mode.toLowerCase()) {
+			case 'default': return Default;
+			case 'cross': return Cross;
+			case 'eraser': return Eraser;
+			case 'grabbing': return Grabbing;
+			case 'hourglass': return Hourglass;
+			case 'pointer': return Pointer;
+			case 'text': return Text;
+			case 'zoomin': return ZoomIn;
+			case 'zoomout': return ZoomOut;
+			case 'crosshair': return Crosshair;
+			case 'cell': return Cell;
+			case 'scroll': return Scroll;
+		}
+		return Default;
 	}
 }

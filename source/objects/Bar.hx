@@ -1,6 +1,8 @@
 package objects;
 
 import flixel.math.FlxRect;
+import flixel.util.FlxGradient;
+import flixel.util.FlxSpriteUtil;
 
 class Bar extends FlxSpriteGroup
 {
@@ -73,6 +75,58 @@ class Bar extends FlxSpriteGroup
 			leftBar.color = left;
 		if (right != null)
 			rightBar.color = right;
+	}
+
+	public function createGradientBar(
+		empty:Array<FlxColor>,
+		fill:Array<FlxColor>,
+		chunkSize:Int = 1,
+		rotation:Int = 180,
+		showBorder:Bool = false,
+		border:FlxColor = FlxColor.TRANSPARENT
+	)
+	{
+		var innerWidth:Int = Std.int(barWidth);
+		var innerHeight:Int = Std.int(barHeight);
+
+		var emptyGradient:FlxSprite = FlxGradient.createGradientFlxSprite(
+			innerWidth, innerHeight, empty, chunkSize, rotation
+		);
+		var fillGradient:FlxSprite = FlxGradient.createGradientFlxSprite(
+			innerWidth, innerHeight, fill, chunkSize, rotation
+		);
+
+		if (showBorder)
+		{
+			FlxSpriteUtil.drawRect(
+				emptyGradient, 0, 0, innerWidth, innerHeight,
+				FlxColor.TRANSPARENT, { color: border, thickness: 1 }
+			);
+			FlxSpriteUtil.drawRect(
+				fillGradient, 0, 0, innerWidth, innerHeight,
+				FlxColor.TRANSPARENT, { color: border, thickness: 1 }
+			);
+		}
+
+		if (leftBar != null)
+		{
+			leftBar.color = FlxColor.WHITE;
+			leftBar.loadGraphic(fillGradient.graphic, false, innerWidth, innerHeight);
+			if (leftBar.graphic != null) leftBar.graphic.persist = true;
+		}
+
+		if (rightBar != null)
+		{
+			rightBar.color = FlxColor.WHITE;
+			rightBar.loadGraphic(emptyGradient.graphic, false, innerWidth, innerHeight);
+			if (rightBar.graphic != null) rightBar.graphic.persist = true;
+		}
+
+		emptyGradient.destroy();
+		fillGradient.destroy();
+
+		regenerateClips();
+		return this;
 	}
 
 	public function updateBar()

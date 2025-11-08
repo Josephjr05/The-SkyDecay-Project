@@ -11,7 +11,6 @@ import away3d.materials.TextureMaterial;
 import away3d.materials.lightpickers.StaticLightPicker;
 import away3d.utils.Cast;
 import flx3D.FlxView3D;
-import openfl.utils.Assets;
 
 class Flixel extends FlxView3D
 {

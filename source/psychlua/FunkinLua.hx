@@ -2,46 +2,42 @@
 package psychlua;
 
 import backend.WeekData;
+
 import backend.Highscore;
 import backend.Song;
-
-import openfl.Lib;
-import openfl.utils.Assets;
-import openfl.display.BitmapData;
+import backend.WeekData;
+import cutscenes.DialogueBoxPsych;
 import flixel.FlxBasic;
 import flixel.FlxObject;
 import flixel.FlxState;
-
+import haxe.Json;
+import objects.Character;
+import objects.Note;
+import objects.NoteSplash;
+import objects.StrumNote;
+import openfl.Lib;
+import openfl.display.BitmapData;
+import openfl.utils.Assets;
+import psychlua.DebugLuaText;
+import psychlua.LuaUtils.LuaTweenOptions;
+import psychlua.LuaUtils;
+import psychlua.ModchartSprite;
+import states.MainMenuState;
+import states.StoryMenuState;
+import states.FreeplayState;
+import substates.GameOverSubstate;
+import substates.PauseSubState;
 #if (!flash && sys)
 import flixel.addons.display.FlxRuntimeShader;
 #end
 
-import cutscenes.DialogueBoxPsych;
-
-import objects.StrumNote;
-import objects.Note;
-import objects.NoteSplash;
-import objects.Character;
-
-import states.MainMenuState;
-import states.StoryMenuState;
-import states.FreeplayState;
-
-import substates.PauseSubState;
-import substates.GameOverSubstate;
-
-import psychlua.LuaUtils;
-import psychlua.LuaUtils.LuaTweenOptions;
 #if HSCRIPT_ALLOWED
 import psychlua.HScript;
 #end
-import psychlua.DebugLuaText;
-import psychlua.ModchartSprite;
 
 import flixel.input.keyboard.FlxKey;
 import flixel.input.gamepad.FlxGamepadInputID;
 
-import haxe.Json;
 
 class FunkinLua {
 	public var lua:State = null;
@@ -54,8 +50,24 @@ class FunkinLua {
 	public var hscript:HScript = null;
 	#end
 
+	public var legacyHScript:LegacyFunkinLua.HScriptLegacy = null;
+
 	public var callbacks:Map<String, Dynamic> = new Map<String, Dynamic>();
 	public static var customFunctions:Map<String, Dynamic> = new Map<String, Dynamic>();
+
+	public function onCreatePost():Void {
+		// 0.6.3 compat: expose PlayState characters/groups
+    	if (PlayState.instance != null) {
+    	    if (PlayState.instance.boyfriendGroup != null) set("boyfriend", PlayState.instance.boyfriend);
+    	    if (PlayState.instance.dadGroup != null) set("dad", PlayState.instance.dad);
+    	    if (PlayState.instance.gfGroup != null) set("gf", PlayState.instance.gf);
+
+    	    // Expose groups (old scripts sometimes access gfGroup/boyfriendGroup directly)
+    	    if (PlayState.instance.boyfriendGroup != null) set("boyfriendGroup", PlayState.instance.boyfriendGroup);
+    	    if (PlayState.instance.dadGroup != null) set("dadGroup", PlayState.instance.dadGroup);
+    	    if (PlayState.instance.gfGroup != null) set("gfGroup", PlayState.instance.gfGroup);
+    	}
+	}
 
 	public function new(scriptName:String) {
 		lua = LuaL.newstate();
@@ -68,7 +80,11 @@ class FunkinLua {
 
 		this.scriptName = scriptName.trim();
 		var game:PlayState = PlayState.instance;
-		if(game != null) game.luaArray.push(this);
+		if(game != null) {
+			game.luaArray.push(this);
+			@:privateAccess
+			game.updateScriptFlags();
+		}
 
 		var myFolder:Array<String> = this.scriptName.split('/');
 		#if MODS_ALLOWED
@@ -113,6 +129,10 @@ class FunkinLua {
 		set('seenCutscene', PlayState.seenCutscene);
 		set('hasVocals', PlayState.SONG.needsVoices);
 
+		// Camera poo
+		set('cameraX', 0);
+		set('cameraY', 0);
+
 		// Screen stuff
 		set('screenWidth', FlxG.width);
 		set('screenHeight', FlxG.height);
@@ -141,6 +161,11 @@ class FunkinLua {
 			set('totalPlayed', game.totalPlayed);
 			set('totalNotesHit', game.totalNotesHit);
 
+			//Backwards compat
+			set('songScore', game.songScore);
+			set('songMisses', game.songMisses);
+			set('ratingPercent', game.ratingPercent);
+
 			set('inGameOver', GameOverSubstate.instance != null);
 			set('mustHitSection', curSection != null ? (curSection.mustHitSection == true) : false);
 			set('altAnim', curSection != null ? (curSection.altAnim == true) : false);
@@ -168,12 +193,12 @@ class FunkinLua {
 			}
 	
 			// Default character data
-			set('defaultBoyfriendX', game.BF_X);
-			set('defaultBoyfriendY', game.BF_Y);
-			set('defaultOpponentX', game.DAD_X);
-			set('defaultOpponentY', game.DAD_Y);
-			set('defaultGirlfriendX', game.GF_X);
-			set('defaultGirlfriendY', game.GF_Y);
+			set('defaultBoyfriendX', PlayState.instance.BF_X); // changed to instance because apparently it was detecting it as a state (which didn't do anything funny enough)
+			set('defaultBoyfriendY', PlayState.instance.BF_Y);
+			set('defaultOpponentX', PlayState.instance.DAD_X);
+			set('defaultOpponentY', PlayState.instance.DAD_Y);
+			set('defaultGirlfriendX', PlayState.instance.GF_X);
+			set('defaultGirlfriendY', PlayState.instance.GF_Y);
 
 			set('boyfriendName', game.boyfriend != null ? game.boyfriend.curCharacter : PlayState.SONG.player1);
 			set('dadName', game.dad != null ? game.dad.curCharacter : PlayState.SONG.player2);
@@ -195,6 +220,7 @@ class FunkinLua {
 		set('noResetButton', ClientPrefs.data.noReset);
 		set('lowQuality', ClientPrefs.data.lowQuality);
 		set('shadersEnabled', ClientPrefs.data.shaders);
+		// set('modcharts', ClientPrefs.data.modcharts);
 		set('scriptName', scriptName);
 		set('currentModDirectory', Mods.currentModDirectory);
 
@@ -207,6 +233,311 @@ class FunkinLua {
 
 		// build target (windows, mac, linux, etc.)
 		set('buildTarget', LuaUtils.getBuildTarget());
+
+		if (PlayState.instance != null && PlayState.instance.noteCache != null) {
+    		var nc = PlayState.instance.noteCache;
+			set("noteCache", nc);
+    		set("noteCacher_respawnNote", nc.respawnNote);
+    		set("noteCacher_respawnNoteAtTime", nc.respawnNoteAtTime);
+    		set("noteCacher_respawnNotesInRange", nc.respawnNotesInRange);
+    		set("noteCacher_clearNotesInRange", nc.clearNotesInRange);
+    		set("noteCacher_getTotalNoteCount", nc.getTotalNoteCount);
+    		set("noteCacher_getNoteAtTime", nc.getNoteAtTime);
+    		set("noteCacher_getNotesInRange", nc.getNotesInRange);
+    		set("noteCacher_getNotesByColumn", nc.getNotesByColumn);
+    		set("noteCacher_getNotesByType", nc.getNotesByType);
+    		set("noteCacher_getCachedNoteData", nc.getCachedNoteData);
+    		set("noteCacher_findNoteDataByTime", nc.findNoteDataByTime);
+    		set("noteCacher_printNoteInfo", nc.dbg);
+		}
+
+		// set('mania', PlayState.mania);
+		// set('trueMania', Note.ammo[PlayState.mania]);
+
+		Lua_helper.add_callback(lua, "runInLegacyMode", function() {
+			this.closed = true;
+			PlayState.instance.luaArray.remove(this);
+			new LegacyFunkinLua(scriptName);
+			trace('A script has been converted to Legacy mode: ' + scriptName);
+		});
+
+		Lua_helper.add_callback(lua, "runLegacyHScript", function(code:String) {
+			var retVal:Dynamic = null;
+
+			#if HScriptLegacy
+			if (this.legacyHScript == null) {
+				this.legacyHScript = new LegacyFunkinLua.HScriptLegacy();
+			}
+
+			var hscript:LegacyFunkinLua.HScriptLegacy = this.legacyHScript;
+			var codeToRun:String = code;
+			try {
+				retVal = hscript.execute(codeToRun);
+			}
+			catch (e:Dynamic) {
+				luaTrace("Legacy HScript Error: " + scriptName + ":" + lastCalledFunction + " - " + e, false, false, FlxColor.RED);
+			}
+			#else
+			luaTrace("RunLegacyHScript: Legacy HScript isn't supported on this platform!", false, false, FlxColor.RED);
+			#end
+
+			if(retVal != null && !LegacyFunkinLua.isOfTypes(retVal, [Bool, Int, Float, String, Array])) retVal = null;
+			if(retVal == null) Lua.pushnil(lua);
+			return retVal;
+		});
+
+		Lua_helper.add_callback(lua, "getStageData", function(stage:String) {
+		    #if (!MODS_ALLOWED)
+		    return null;
+		    #else
+		    try {
+		        return backend.StageData.getStageFile(stage);
+		    } catch (e) {
+		        trace('StageData not supported in this version.');
+		        return null;
+		    }
+		    #end
+		});
+
+		// Original legacy stuff that actually still damn works lmfao why are these deprecated?
+		Lua_helper.add_callback(lua, "addAnimationByIndicesLoop", function(obj:String, name:String, prefix:String, indices:String, framerate:Int = 24) {
+			FunkinLua.luaTrace("addAnimationByIndicesLoop is deprecated! Use addAnimationByIndices instead", false, true);
+			return LuaUtils.addAnimByIndices(obj, name, prefix, indices, framerate, true);
+		});
+
+		Lua_helper.add_callback(lua, "objectPlayAnimation", function(obj:String, name:String, forced:Bool = false, ?startFrame:Int = 0) {
+			FunkinLua.luaTrace("objectPlayAnimation is deprecated! Use playAnim instead", false, true);
+			if(PlayState.instance.getLuaObject(obj) != null) {
+				PlayState.instance.getLuaObject(obj).animation.play(name, forced, false, startFrame);
+				return true;
+			}
+
+			var spr:FlxSprite = Reflect.getProperty(LuaUtils.getTargetInstance(), obj);
+			if(spr != null) {
+				spr.animation.play(name, forced, false, startFrame);
+				return true;
+			}
+			return false;
+		});
+		Lua_helper.add_callback(lua, "characterPlayAnim", function(character:String, anim:String, ?forced:Bool = false) {
+			FunkinLua.luaTrace("characterPlayAnim is deprecated! Use playAnim instead", false, true);
+			switch(character.toLowerCase()) {
+				case 'dad':
+					if(PlayState.instance.dad.hasAnimation(anim))
+						PlayState.instance.dad.playAnim(anim, forced);
+				case 'gf' | 'girlfriend':
+					if(PlayState.instance.gf != null && PlayState.instance.gf.hasAnimation(anim))
+						PlayState.instance.gf.playAnim(anim, forced);
+				default:
+					if(PlayState.instance.boyfriend.hasAnimation(anim))
+						PlayState.instance.boyfriend.playAnim(anim, forced);
+			}
+		});
+		Lua_helper.add_callback(lua, "luaSpriteMakeGraphic", function(tag:String, width:Int, height:Int, color:String) {
+			FunkinLua.luaTrace("luaSpriteMakeGraphic is deprecated! Use makeGraphic instead", false, true);
+			if(MusicBeatState.getVariables().exists(tag))
+				MusicBeatState.getVariables().get(tag).makeGraphic(width, height, CoolUtil.colorFromString(color));
+		});
+		Lua_helper.add_callback(lua, "luaSpriteAddAnimationByPrefix", function(tag:String, name:String, prefix:String, framerate:Int = 24, loop:Bool = true) {
+			FunkinLua.luaTrace("luaSpriteAddAnimationByPrefix is deprecated! Use addAnimationByPrefix instead", false, true);
+			if(MusicBeatState.getVariables().exists(tag)) {
+				var cock:ModchartSprite = MusicBeatState.getVariables().get(tag);
+				cock.animation.addByPrefix(name, prefix, framerate, loop);
+				if(cock.animation.curAnim == null) {
+					cock.animation.play(name, true);
+				}
+			}
+		});
+		Lua_helper.add_callback(lua, "luaSpriteAddAnimationByIndices", function(tag:String, name:String, prefix:String, indices:String, framerate:Int = 24) {
+			FunkinLua.luaTrace("luaSpriteAddAnimationByIndices is deprecated! Use addAnimationByIndices instead", false, true);
+			if(MusicBeatState.getVariables().exists(tag)) {
+				var strIndices:Array<String> = indices.trim().split(',');
+				var die:Array<Int> = [];
+				for (i in 0...strIndices.length) {
+					die.push(Std.parseInt(strIndices[i]));
+				}
+				var pussy:ModchartSprite = MusicBeatState.getVariables().get(tag);
+				pussy.animation.addByIndices(name, prefix, die, '', framerate, false);
+				if(pussy.animation.curAnim == null) {
+					pussy.animation.play(name, true);
+				}
+			}
+		});
+		Lua_helper.add_callback(lua, "luaSpritePlayAnimation", function(tag:String, name:String, forced:Bool = false) {
+			FunkinLua.luaTrace("luaSpritePlayAnimation is deprecated! Use playAnim instead", false, true);
+			if(MusicBeatState.getVariables().exists(tag)) {
+				MusicBeatState.getVariables().get(tag).animation.play(name, forced);
+			}
+		});
+		Lua_helper.add_callback(lua, "setLuaSpriteCamera", function(tag:String, camera:String = '') {
+			FunkinLua.luaTrace("setLuaSpriteCamera is deprecated! Use setObjectCamera instead", false, true);
+			if(MusicBeatState.getVariables().exists(tag)) {
+				MusicBeatState.getVariables().get(tag).cameras = [LuaUtils.cameraFromString(camera)];
+				return true;
+			}
+			FunkinLua.luaTrace("Lua sprite with tag: " + tag + " doesn't exist!");
+			return false;
+		});
+		Lua_helper.add_callback(lua, "setLuaSpriteScrollFactor", function(tag:String, scrollX:Float, scrollY:Float) {
+			FunkinLua.luaTrace("setLuaSpriteScrollFactor is deprecated! Use setScrollFactor instead", false, true);
+			if(MusicBeatState.getVariables().exists(tag)) {
+				MusicBeatState.getVariables().get(tag).scrollFactor.set(scrollX, scrollY);
+				return true;
+			}
+			return false;
+		});
+		Lua_helper.add_callback(lua, "scaleLuaSprite", function(tag:String, x:Float, y:Float) {
+			FunkinLua.luaTrace("scaleLuaSprite is deprecated! Use scaleObject instead", false, true);
+			if(MusicBeatState.getVariables().exists(tag)) {
+				var shit:ModchartSprite = MusicBeatState.getVariables().get(tag);
+				shit.scale.set(x, y);
+				shit.updateHitbox();
+				return true;
+			}
+			return false;
+		});
+		Lua_helper.add_callback(lua, "getPropertyLuaSprite", function(tag:String, variable:String) {
+			FunkinLua.luaTrace("getPropertyLuaSprite is deprecated! Use getProperty instead", false, true);
+			if(MusicBeatState.getVariables().exists(tag)) {
+				var killMe:Array<String> = variable.split('.');
+				if(killMe.length > 1) {
+					var coverMeInPiss:Dynamic = Reflect.getProperty(MusicBeatState.getVariables().get(tag), killMe[0]);
+					for (i in 1...killMe.length-1) {
+						coverMeInPiss = Reflect.getProperty(coverMeInPiss, killMe[i]);
+					}
+					return Reflect.getProperty(coverMeInPiss, killMe[killMe.length-1]);
+				}
+				return Reflect.getProperty(MusicBeatState.getVariables().get(tag), variable);
+			}
+			return null;
+		});
+		Lua_helper.add_callback(lua, "setPropertyLuaSprite", function(tag:String, variable:String, value:Dynamic) {
+			FunkinLua.luaTrace("setPropertyLuaSprite is deprecated! Use setProperty instead", false, true);
+			if(MusicBeatState.getVariables().exists(tag)) {
+				var killMe:Array<String> = variable.split('.');
+				if(killMe.length > 1) {
+					var coverMeInPiss:Dynamic = Reflect.getProperty(MusicBeatState.getVariables().get(tag), killMe[0]);
+					for (i in 1...killMe.length-1) {
+						coverMeInPiss = Reflect.getProperty(coverMeInPiss, killMe[i]);
+					}
+					Reflect.setProperty(coverMeInPiss, killMe[killMe.length-1], value);
+					return true;
+				}
+				Reflect.setProperty(MusicBeatState.getVariables().get(tag), variable, value);
+				return true;
+			}
+			FunkinLua.luaTrace("setPropertyLuaSprite: Lua sprite with tag: " + tag + " doesn't exist!");
+			return false;
+		});
+		Lua_helper.add_callback(lua, "musicFadeIn", function(duration:Float, fromValue:Float = 0, toValue:Float = 1) {
+			FlxG.sound.music.fadeIn(duration, fromValue, toValue);
+			FunkinLua.luaTrace('musicFadeIn is deprecated! Use soundFadeIn instead.', false, true);
+
+		});
+		Lua_helper.add_callback(lua, "musicFadeOut", function(duration:Float, toValue:Float = 0) {
+			FlxG.sound.music.fadeOut(duration, toValue);
+			FunkinLua.luaTrace('musicFadeOut is deprecated! Use soundFadeOut instead.', false, true);
+		});
+		Lua_helper.add_callback(lua, "updateHitboxFromGroup", function(group:String, index:Int) {
+			if(Std.isOfType(Reflect.getProperty(LuaUtils.getTargetInstance(), group), FlxTypedGroup)) {
+				Reflect.getProperty(LuaUtils.getTargetInstance(), group).members[index].updateHitbox();
+				return;
+			}
+			Reflect.getProperty(LuaUtils.getTargetInstance(), group)[index].updateHitbox();
+			FunkinLua.luaTrace('updateHitboxFromGroup is deprecated! Use updateHitbox instead.', false, true);
+		});
+
+		// Keyboard & Gamepads
+		Lua_helper.add_callback(lua, "keyboardJustPressed", function(name:String) return Reflect.getProperty(FlxG.keys.justPressed, name));
+		Lua_helper.add_callback(lua, "keyboardPressed", function(name:String) return Reflect.getProperty(FlxG.keys.pressed, name));
+		Lua_helper.add_callback(lua, "keyboardReleased", function(name:String) return Reflect.getProperty(FlxG.keys.justReleased, name));
+
+		Lua_helper.add_callback(lua, "anyGamepadJustPressed", function(name:String) return FlxG.gamepads.anyJustPressed(name));
+		Lua_helper.add_callback(lua, "anyGamepadPressed", function(name:String) FlxG.gamepads.anyPressed(name));
+		Lua_helper.add_callback(lua, "anyGamepadReleased", function(name:String) return FlxG.gamepads.anyJustReleased(name));
+
+		Lua_helper.add_callback(lua, "gamepadAnalogX", function(id:Int, ?leftStick:Bool = true)
+		{
+			var controller = FlxG.gamepads.getByID(id);
+			if (controller == null) return 0.0;
+
+			return controller.getXAxis(leftStick ? LEFT_ANALOG_STICK : RIGHT_ANALOG_STICK);
+		});
+		Lua_helper.add_callback(lua, "gamepadAnalogY", function(id:Int, ?leftStick:Bool = true)
+		{
+			var controller = FlxG.gamepads.getByID(id);
+			if (controller == null) return 0.0;
+
+			return controller.getYAxis(leftStick ? LEFT_ANALOG_STICK : RIGHT_ANALOG_STICK);
+		});
+		Lua_helper.add_callback(lua, "gamepadJustPressed", function(id:Int, name:String)
+		{
+			var controller = FlxG.gamepads.getByID(id);
+			if (controller == null) return false;
+
+			return Reflect.getProperty(controller.justPressed, name) == true;
+		});
+		Lua_helper.add_callback(lua, "gamepadPressed", function(id:Int, name:String)
+		{
+			var controller = FlxG.gamepads.getByID(id);
+			if (controller == null) return false;
+
+			return Reflect.getProperty(controller.pressed, name) == true;
+		});
+		Lua_helper.add_callback(lua, "gamepadReleased", function(id:Int, name:String)
+		{
+			var controller = FlxG.gamepads.getByID(id);
+			if (controller == null) return false;
+
+			return Reflect.getProperty(controller.justReleased, name) == true;
+		});
+
+		Lua_helper.add_callback(lua, "keyJustPressed", function(name:String = '') {
+			name = name.toLowerCase().trim();
+			var key:Bool = false;
+			switch(name) {
+				case 'left': key = PlayState.instance.controls.NOTE_LEFT_P;
+				case 'down': key = PlayState.instance.controls.NOTE_DOWN_P;
+				case 'up': key = PlayState.instance.controls.NOTE_UP_P;
+				case 'right': key = PlayState.instance.controls.NOTE_RIGHT_P;
+				// legacy keys
+				case 'accept': key = PlayState.instance.getControl('ACCEPT');
+				case 'back': key = PlayState.instance.getControl('BACK');
+				case 'pause': key = PlayState.instance.getControl('PAUSE');
+				case 'reset': key = PlayState.instance.getControl('RESET');
+				case 'space': key = FlxG.keys.justPressed.SPACE;//an extra key for convinience
+				default: return PlayState.instance.controls.justPressed(name);
+			}
+			return key;
+		});
+		Lua_helper.add_callback(lua, "keyPressed", function(name:String = '') {
+			name = name.toLowerCase().trim();
+			var key:Bool = false;
+			switch(name) {
+				case 'left': key = PlayState.instance.controls.NOTE_LEFT;
+				case 'down': key = PlayState.instance.controls.NOTE_DOWN;
+				case 'up': key = PlayState.instance.controls.NOTE_UP;
+				case 'right': key = PlayState.instance.controls.NOTE_RIGHT;
+				// legacy keys
+				case 'space': key = FlxG.keys.pressed.SPACE;//an extra key for convinience
+				default: return PlayState.instance.controls.pressed(name);
+			}
+			return key;
+		});
+		Lua_helper.add_callback(lua, "keyReleased", function(name:String = '') {
+			name = name.toLowerCase().trim();
+			var key:Bool = false;
+			switch(name) {
+				case 'left': key = PlayState.instance.controls.NOTE_LEFT_R;
+				case 'down': key = PlayState.instance.controls.NOTE_DOWN_R;
+				case 'up': key = PlayState.instance.controls.NOTE_UP_R;
+				case 'right': key = PlayState.instance.controls.NOTE_RIGHT_R;
+				// legacy keys
+				case 'space': key = FlxG.keys.pressed.SPACE;//an extra key for convinience
+				default: return PlayState.instance.controls.justReleased(name);
+			}
+			return key;
+		});
 
 		//
 		Lua_helper.add_callback(lua, "getRunningScripts", function() {
@@ -696,6 +1027,16 @@ class FunkinLua {
 		Lua_helper.add_callback(lua, "setHealth", function(value:Float = 1) game.health = value);
 		Lua_helper.add_callback(lua, "addHealth", function(value:Float = 0) game.health += value);
 		Lua_helper.add_callback(lua, "getHealth", function() return game.health);
+
+		Lua_helper.add_callback(lua, "getScore", function() {
+			return game.songScore;
+		});
+		Lua_helper.add_callback(lua, "getMisses", function() {
+			return game.songMisses;
+		});
+		Lua_helper.add_callback(lua, "getHits", function() {
+			return game.songHits;
+		});
 
 		//Identical functions
 		Lua_helper.add_callback(lua, "FlxColor", function(color:String) return FlxColor.fromString(color));
@@ -1251,6 +1592,12 @@ class FunkinLua {
 			#end
 			#end
 				path = Paths.getPath('songs/$songPath/$dialogueFile.json', TEXT);
+				//Is it that hard? Why are we trying to make it harder when THIS SINGLE FUCKING LINE FIXES EVERYTHING??
+				//Anyways for backwards compatibility the path line under here fixes it. Unless you wanna go modern, do the one above this line as it depends on the script.
+				//I believe it's harder because of translations which is understandable. But again this was a simple fix.
+				//Basically ShadowMario made it so you use startDialogue under startCountdown which is 100x easier. But with older mods it was different maybe..? Idk but do wtv
+				//Oh and btw, this won't put 2 dialogues. It'll always spawn 1 dialogue file only. So no worries about that.
+				path = Paths.json(Paths.formatToSongPath(PlayState.SONG.song) + '/' + dialogueFile);
 
 			luaTrace('startDialogue: Trying to load dialogue: ' + path);
 
@@ -1555,17 +1902,23 @@ class FunkinLua {
 			return closed;
 		});
 
+		// Turns out, there IS a reason this block of code exists
 		#if DISCORD_ALLOWED DiscordClient.addLuaCallbacks(lua); #end
 		#if ACHIEVEMENTS_ALLOWED Achievements.addLuaCallbacks(lua); #end
 		#if TRANSLATIONS_ALLOWED Language.addLuaCallbacks(lua); #end
-		HScript.implement(this);
 		#if flxanimate FlxAnimateFunctions.implement(this); #end
+		yutautil.ExtendedDate.addLuaCallbacks(lua);
+		HScript.implement(this);
 		ReflectionFunctions.implement(this);
 		TextFunctions.implement(this);
-		ExtraFunctions.implement(this);
+		// ExtraFunctions.implement(this);
 		CustomSubstate.implement(this);
 		ShaderFunctions.implement(this);
-		DeprecatedFunctions.implement(this);
+		// DeprecatedFunctions.implement(this);
+		// CursorFunctions.implement(this);
+		// VideoFunctions.implement(this);
+		// stages.VSliceLoader.implement(this);
+		// WindowFunctions.implement(this);
 
 		for (name => func in customFunctions)
 		{

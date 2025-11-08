@@ -33,7 +33,7 @@ enum FuncAndReturnItem<T>
 	TransformedItem(func:T->Dynamic, ?extraArgs:Array<Dynamic>);
 }
 
-typedef LuaScript = psychlua.FunkinLua;// flixel.util.typeLimit.OneOfTwo<psychlua.FunkinLua, psychlua.LegacyFunkinLua>
+typedef LuaScript = flixel.util.typeLimit.OneOfTwo<psychlua.FunkinLua, psychlua.LegacyFunkinLua>;
 
 // abstract Collection<T>(Dynamic) from Array<T> to Array<T> {
 //     @:from public static inline function fromList<T>(list:List<T>):Collection<T> {
@@ -617,7 +617,7 @@ class DynamicMap<K, V>
 
 enum Size
 {
-	Bytes;
+	B;
 	KB;
 	MB;
 	Auto;
@@ -667,6 +667,47 @@ class CollectionUtils
 	{
 		return Type.getClass(input) != null ? Type.getClass(input) : throw "Input has no class (null)";
 	}
+
+	public static inline function open<State:flixel.FlxState>(state:State):State
+	{
+		if (state is flixel.FlxSubState)
+			FlxG.state.openSubState(cast state);
+		else
+			FlxG.switchState(cast state);
+		return state;
+	}
+
+	public static inline function objectIterator(input:Dynamic):Iterator<{key:String, value:Dynamic}>
+	{
+		var result = [];
+		if (Std.is(input, Array))
+		{
+			for (i in 0...(input : Array<Dynamic>).length)
+			{
+				result.push({key: Std.string(i), value: input[i]});
+			}
+		}
+		else if (Std.is(input, IMap))
+		{
+			for (key in (input : Map<Dynamic, Dynamic>).keys())
+			{
+				result.push({key: key, value: input.get(key)});
+			}
+		}
+		else
+		{
+			for (key in Reflect.fields(input))
+			{
+				result.push({key: key, value: Reflect.field(input, key)});
+			}
+		}
+		return result.iterator();
+	}
+
+	// public static inline function objectKeyPairIterator(input:Dynamic):Iterator<{key:String, value:Dynamic}>
+	// {
+	// 	return new Temp<Map<String, Dynamic>>().iterator();
+	// }
 
 
 	public static inline function objectDynamic<T>(input:Dynamic):Dynamic
@@ -998,7 +1039,7 @@ class CollectionUtils
 
 		return switch (accuracy)
 		{
-			case Size.Bytes: size;
+			case Size.B: size;
 			case Size.KB: Math.round(size / 1024 * 100) / 100; // Round to 2 decimal places
 			case Size.MB: Math.round(size / (1024 * 1024) * 100) / 100; // Round to 2 decimal places
 			case Size.Auto:
@@ -1214,6 +1255,54 @@ class CollectionUtils
 	private static function list<T>(l:List<T>):List<T>
 	{
 		return l;
+	}
+
+	/**
+	 * Empties the given container (Array, List, Map, IMap, etc).
+	 * For objects with a 'clear' method, it will call that.
+	 * For arrays, sets length to 0.
+	 * For maps, removes all keys.
+	 * For lists, calls clear().
+	 * For objects with 'length', sets length to 0 if possible.
+	 * Returns true if the container was emptied, false if not supported.
+	 */
+	public static inline function emptyContainer<T>(input:Dynamic):Bool
+	{
+		if (input == null) return false;
+		// Array
+		if (Std.is(input, Array)) {
+			(input : Array<Dynamic>).splice(0, (input : Array<Dynamic>).length);
+			return true;
+		}
+		// List
+		if (Std.is(input, List)) {
+			(input : List<Dynamic>).clear();
+			return true;
+		}
+		// Map/IMap
+		if (Std.is(input, IMap)) {
+			var keys = [];
+			for (key in (input : IMap<Dynamic, Dynamic>).keys()) keys.push(key);
+			for (key in keys) input.remove(key);
+			return true;
+		}
+		// Has clear() method
+		if (Reflect.hasField(input, "clear") && Reflect.isFunction(Reflect.field(input, "clear"))) {
+			Reflect.callMethod(input, Reflect.field(input, "clear"), []);
+			return true;
+		}
+		// Is iterable/iterator
+		if (Reflect.hasField(input, "iterator") || (Reflect.hasField(input, "hasNext") && Reflect.hasField(input, "next"))) {
+			try {
+				for (item in input.toIterable()) {
+					item = null;
+				}
+				return true;
+			} catch (e:Dynamic) {
+				return false;
+			}
+		}
+		return false;
 	}
 
 	// public static inline function valTween<T>(value:T, start:T, finish:T, duration:Float, onUpdate:T->Void, onComplete:Void->Void):Void
@@ -2888,8 +2977,8 @@ class CollectionUtils
 		return switch (Type.getClass(s)) {
 		case psychlua.FunkinLua:
 			(s : psychlua.FunkinLua).scriptName;
-		// case psychlua.LegacyFunkinLua:
-		// 	(s : psychlua.LegacyFunkinLua).scriptName;
+		case psychlua.LegacyFunkinLua:
+			(s : psychlua.LegacyFunkinLua).scriptName;
 		default:
 			throw "Unsupported LuaScript type";
 		}
@@ -2900,8 +2989,8 @@ class CollectionUtils
 		return switch (Type.getClass(s)) {
 		case psychlua.FunkinLua:
 			(s : psychlua.FunkinLua).call(funcName, args);
-		// case psychlua.LegacyFunkinLua:
-		// 	(s : psychlua.LegacyFunkinLua).call(funcName, args);
+		case psychlua.LegacyFunkinLua:
+			(s : psychlua.LegacyFunkinLua).call(funcName, args);
 		default:
 			throw "Unsupported LuaScript type";
 		}
@@ -2912,8 +3001,8 @@ class CollectionUtils
 		return switch (Type.getClass(s)) {
 		case psychlua.FunkinLua:
 			(s : psychlua.FunkinLua);
-		// case psychlua.LegacyFunkinLua:
-		// 	(s : psychlua.LegacyFunkinLua);
+		case psychlua.LegacyFunkinLua:
+			(s : psychlua.LegacyFunkinLua);
 		default:
 			throw "Unsupported LuaScript type";
 		}

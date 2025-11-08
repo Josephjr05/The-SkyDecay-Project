@@ -10,12 +10,12 @@ class OutdatedState extends MusicBeatState
 		super.create();
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-		add(bg);
+		add(bg);// TitleState.updateVersion
 
 		warnText = new FlxText(0, 0, FlxG.width,
 			"Sup bro, looks like you're running an   \n
 			outdated version of Psych Engine (" + MainMenuState.psychEngineVersion + "),\n
-			please update to " + TitleState.updateVersion + "!\n
+			please update to " + "!\n
 			Press ESCAPE to proceed anyway.\n
 			\n
 			Thank you for using the Engine!",

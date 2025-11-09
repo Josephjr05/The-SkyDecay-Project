@@ -1,78 +1,83 @@
 {
 	"animations": [
 		{
-			"loop": false,
-			"offsets": [
-				100,
-				60
-			],
-			"anim": "singLEFT",
-			"fps": 14,
-			"name": "rose roses left",
-			"indices": []
-		},
-		{
-			"loop": false,
-			"offsets": [
-				10,
-				58
-			],
-			"anim": "singDOWN",
-			"fps": 14,
-			"name": "rose roses down",
-			"indices": []
-		},
-		{
-			"loop": false,
-			"offsets": [
-				20,
-				54
-			],
-			"anim": "singUP",
-			"fps": 14,
-			"name": "rose roses up",
-			"indices": []
-		},
-		{
-			"loop": false,
-			"offsets": [
-				0,
-				28
-			],
-			"anim": "singRIGHT",
-			"fps": 14,
-			"name": "rose roses right",
+			"loop": true,
+			"offsets": [0, 0],
+			"anim": "idle-left",
+			"fps": 12,
+			"name": "idleleft",
 			"indices": []
 		},
 		{
 			"loop": true,
-			"offsets": [
-				0,
-				0
-			],
-			"anim": "idle",
-			"fps": 10,
-			"name": "rose roses idle",
+			"offsets": [0, 0],
+			"anim": "idle-right",
+			"fps": 12,
+			"name": "idleright",
 			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [0, 0],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [0, 0],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [0, 0],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [0, 0],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "right",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [-47, -384],
+			"anim": "voiceline",
+			"fps": 24,
+			"name": "voiceline",
+			"indices": []
+		},
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 12,
+			"anim": "idle",
+			"loop": true,
+			"name": "idleleft"
 		}
 	],
+	"vocals_file": "",
 	"no_antialiasing": false,
-	"image": "characters/RoseRTX",
-	"position": [
-		-180,
-		190
-	],
+	"image": "characters/rose-shucks",
+	"position": [0, 0],
 	"healthicon": "face",
 	"flip_x": false,
-	"healthbar_colors": [
-		161,
-		161,
-		161
+	"healthbar_colors": [161, 161, 161],
+	"camera_position": [110, 210],
+	"chartPosition": [
+		0,
+		0
 	],
-	"camera_position": [
-		110,
-		-40
-	],
-	"sing_duration": 6.1,
-	"scale": 1
+	"sing_duration": 4,
+	"scale": 1,
+	"_editor_isPlayer": false
 }

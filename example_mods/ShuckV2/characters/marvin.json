@@ -1,88 +1,179 @@
 {
 	"animations": [
 		{
-			"offsets": [-10, 95],
+			"loop": false,
+			"offsets": [398, 26],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "u",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [-13, -9],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "l",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [1, -265],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "d",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [0, 0],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "r",
+			"indices": []
+		},
+		{
 			"loop": true,
-			"fps": 24,
+			"offsets": [0, 0],
 			"anim": "idle",
-			"indices": [],
-			"name": "Idle"
-		},
-		{
-			"loop": false,
-			"offsets": [281, 299],
-			"anim": "singLEFTmiss",
 			"fps": 24,
-			"name": "leftmiss",
+			"name": "i",
 			"indices": []
 		},
 		{
 			"loop": false,
-			"offsets": [267, 299],
-			"anim": "singDOWNmiss",
-			"fps": 24,
-			"name": "downmiss",
-			"indices": []
-		},
-		{
-			"loop": false,
-			"offsets": [287, 312],
+			"offsets": [390, 30],
 			"anim": "singUPmiss",
 			"fps": 24,
-			"name": "upmiss",
+			"name": "mu",
 			"indices": []
 		},
 		{
 			"loop": false,
-			"offsets": [293, 310],
+			"offsets": [0, 0],
+			"anim": "singLEFTmiss",
+			"fps": 24,
+			"name": "ml",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [0, -271],
+			"anim": "singDOWNmiss",
+			"fps": 24,
+			"name": "md",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [0, 0],
 			"anim": "singRIGHTmiss",
 			"fps": 24,
-			"name": "rightmiss",
+			"name": "mr",
 			"indices": []
 		},
 		{
-			"offsets": [85, 24],
 			"loop": false,
-			"fps": 30,
-			"anim": "singLEFT",
-			"indices": [],
-			"name": "Left"
+			"offsets": [0, -136],
+			"anim": "intro",
+			"fps": 24,
+			"name": "hellohottie",
+			"indices": []
 		},
 		{
-			"offsets": [-7, -46],
 			"loop": false,
-			"fps": 30,
-			"anim": "singDOWN",
-			"indices": [],
-			"name": "Down"
+			"offsets": [64, -26],
+			"anim": "voiceline",
+			"fps": 24,
+			"name": "voiceline",
+			"indices": []
 		},
 		{
-			"offsets": [4, 217],
-			"loop": false,
-			"fps": 30,
-			"anim": "singUP",
-			"indices": [],
-			"name": "Up"
+			"loop": true,
+			"offsets": [0, 0],
+			"anim": "idle-alt",
+			"fps": 24,
+			"name": "alti",
+			"indices": []
 		},
 		{
-			"offsets": [-8, 83],
 			"loop": false,
-			"fps": 30,
-			"anim": "singRIGHT",
-			"indices": [],
-			"name": "Right"
+			"offsets": [396, 26],
+			"anim": "singUP-alt",
+			"fps": 24,
+			"name": "altu",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [-16, -10],
+			"anim": "singLEFT-alt",
+			"fps": 24,
+			"name": "altl",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [3, -263],
+			"anim": "singDOWN-alt",
+			"fps": 24,
+			"name": "altd",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [3, 2],
+			"anim": "singRIGHT-alt",
+			"fps": 24,
+			"name": "altr",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [394, 27],
+			"anim": "singUPmiss-alt",
+			"fps": 24,
+			"name": "altmu",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [-12, -7],
+			"anim": "singLEFTmiss-alt",
+			"fps": 24,
+			"name": "altml",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [4, -264],
+			"anim": "singDOWNmiss-alt",
+			"fps": 24,
+			"name": "altmd",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [-2, 1],
+			"anim": "singRIGHTmiss-alt",
+			"fps": 24,
+			"name": "altmr",
+			"indices": []
 		}
 	],
-	"vocals_file": "marvin",
+	"vocals_file": "",
 	"no_antialiasing": false,
-	"image": "characters/Chained_Marvin, characters/marvin",
-	"position": [0, 350],
+	"image": "characters/marvin-shucks",
+	"position": [0, 0],
 	"healthicon": "marvin",
 	"flip_x": true,
 	"healthbar_colors": [255, 0, 0],
-	"camera_position": [0, 0],
-	"chartPosition": null,
-	"sing_duration": 9,
-	"scale": 1.2,
+	"camera_position": [-180, 370],
+	"chartPosition": [
+		0,
+		0
+	],
+	"sing_duration": 7,
+	"scale": 1,
 	"_editor_isPlayer": true
 }

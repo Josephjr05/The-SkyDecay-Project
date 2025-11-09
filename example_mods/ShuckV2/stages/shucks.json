@@ -1,0 +1,70 @@
+{
+	"camera_boyfriend": [
+		-450,
+		-400
+	],
+	"_editorMeta": {
+		"boyfriend": "marvin",
+		"dad": "detg",
+		"gf": "rose"
+	},
+	"stageUI": "normal",
+	"boyfriend": [
+		1420,
+		559
+	],
+	"girlfriend": [
+		764,
+		184
+	],
+	"defaultZoom": 0.55,
+	"objects": [
+		{
+			"x": -1801,
+			"blend": "normal",
+			"y": -920,
+			"scale": [
+				1,
+				1
+			],
+			"image": "stages/shucks/bg",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "sprite1",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"type": "gf"
+		},
+		{
+			"type": "dad"
+		},
+		{
+			"type": "boyfriend"
+		}
+	],
+	"camera_girlfriend": [
+		-350,
+		-100
+	],
+	"camera_speed": 1.3,
+	"directory": "",
+	"opponent": [
+		-207,
+		118
+	],
+	"camera_opponent": [
+		350,
+		-200
+	],
+	"hide_girlfriend": false
+}

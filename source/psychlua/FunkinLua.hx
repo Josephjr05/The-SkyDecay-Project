@@ -38,6 +38,7 @@ import psychlua.HScript;
 import flixel.input.keyboard.FlxKey;
 import flixel.input.gamepad.FlxGamepadInputID;
 
+import flixel.util.FlxSave;
 
 class FunkinLua {
 	public var lua:State = null;
@@ -537,6 +538,161 @@ class FunkinLua {
 				default: return PlayState.instance.controls.justReleased(name);
 			}
 			return key;
+		});
+
+		// Save data management
+		Lua_helper.add_callback(lua, "initSaveData", function(name:String, ?folder:String = 'psychenginemods') {
+			var variables = MusicBeatState.getVariables();
+			if(!variables.exists('save_$name'))
+			{
+				var save:FlxSave = new FlxSave();
+				// folder goes unused for flixel 5 users. @BeastlyGhost
+				save.bind(name, CoolUtil.getSavePath() + '/' + folder);
+				variables.set('save_$name', save);
+				return;
+			}
+			FunkinLua.luaTrace('initSaveData: Save file already initialized: ' + name);
+		});
+		Lua_helper.add_callback(lua, "flushSaveData", function(name:String) {
+			var variables = MusicBeatState.getVariables();
+			if(variables.exists('save_$name'))
+			{
+				variables.get('save_$name').flush();
+				return;
+			}
+			FunkinLua.luaTrace('flushSaveData: Save file not initialized: ' + name, false, false, FlxColor.RED);
+		});
+		Lua_helper.add_callback(lua, "getDataFromSave", function(name:String, field:String, ?defaultValue:Dynamic = null) {
+			var variables = MusicBeatState.getVariables();
+			if(variables.exists('save_$name'))
+			{
+				var saveData = variables.get('save_$name').data;
+				if(Reflect.hasField(saveData, field))
+					return Reflect.field(saveData, field);
+				else
+					return defaultValue;
+			}
+			FunkinLua.luaTrace('getDataFromSave: Save file not initialized: ' + name, false, false, FlxColor.RED);
+			return defaultValue;
+		});
+		Lua_helper.add_callback(lua, "setDataFromSave", function(name:String, field:String, value:Dynamic) {
+			var variables = MusicBeatState.getVariables();
+			if(variables.exists('save_$name'))
+			{
+				Reflect.setField(variables.get('save_$name').data, field, value);
+				return;
+			}
+			FunkinLua.luaTrace('setDataFromSave: Save file not initialized: ' + name, false, false, FlxColor.RED);
+		});
+		Lua_helper.add_callback(lua, "eraseSaveData", function(name:String)
+		{
+			var variables = MusicBeatState.getVariables();
+			if (variables.exists('save_$name'))
+			{
+				variables.get('save_$name').erase();
+				return;
+			}
+			FunkinLua.luaTrace('eraseSaveData: Save file not initialized: ' + name, false, false, FlxColor.RED);
+		});
+
+		// File management
+		Lua_helper.add_callback(lua, "checkFileExists", function(filename:String, ?absolute:Bool = false) {
+			#if MODS_ALLOWED
+			if(absolute) return FileSystem.exists(filename);
+
+			return FileSystem.exists(Paths.getPath(filename, TEXT));
+
+			#else
+			if(absolute) return Assets.exists(filename, TEXT);
+
+			return Assets.exists(Paths.getPath(filename, TEXT));
+			#end
+		});
+		Lua_helper.add_callback(lua, "saveFile", function(path:String, content:String, ?absolute:Bool = false)
+		{
+			try {
+				#if MODS_ALLOWED
+				if(!absolute)
+					File.saveContent(Paths.mods(path), content);
+				else
+				#end
+					File.saveContent(path, content);
+
+				return true;
+			} catch (e:Dynamic) {
+				FunkinLua.luaTrace("saveFile: Error trying to save " + path + ": " + e, false, false, FlxColor.RED);
+			}
+			return false;
+		});
+		Lua_helper.add_callback(lua, "deleteFile", function(path:String, ?ignoreModFolders:Bool = false, ?absolute:Bool = false)
+		{
+			try {
+				var lePath:String = path;
+				if(!absolute) lePath = Paths.getPath(path, TEXT, !ignoreModFolders);
+				if(FileSystem.exists(lePath))
+				{
+					FileSystem.deleteFile(lePath);
+					return true;
+				}
+			} catch (e:Dynamic) {
+				FunkinLua.luaTrace("deleteFile: Error trying to delete " + path + ": " + e, false, false, FlxColor.RED);
+			}
+			return false;
+		});
+		Lua_helper.add_callback(lua, "getTextFromFile", function(path:String, ?ignoreModFolders:Bool = false) {
+			return Paths.getTextFromFile(path, ignoreModFolders);
+		});
+		Lua_helper.add_callback(lua, "directoryFileList", function(folder:String) {
+			var list:Array<String> = [];
+			#if sys
+			if(FileSystem.exists(folder)) {
+				for (folder in FileSystem.readDirectory(folder)) {
+					if (!list.contains(folder)) {
+						list.push(folder);
+					}
+				}
+			}
+			#end
+			return list;
+		});
+
+		// String tools
+		Lua_helper.add_callback(lua, "stringStartsWith", function(str:String, start:String) {
+			return str.startsWith(start);
+		});
+		Lua_helper.add_callback(lua, "stringEndsWith", function(str:String, end:String) {
+			return str.endsWith(end);
+		});
+		Lua_helper.add_callback(lua, "stringSplit", function(str:String, split:String) {
+			return str.split(split);
+		});
+		Lua_helper.add_callback(lua, "stringTrim", function(str:String) {
+			return str.trim();
+		});
+
+		// Randomization
+		Lua_helper.add_callback(lua, "getRandomInt", function(min:Int, max:Int = FlxMath.MAX_VALUE_INT, exclude:String = '') {
+			var excludeArray:Array<String> = exclude.split(',');
+			var toExclude:Array<Int> = [];
+			for (i in 0...excludeArray.length)
+			{
+				if (exclude == '') break;
+				toExclude.push(Std.parseInt(excludeArray[i].trim()));
+			}
+			return FlxG.random.int(min, max, toExclude);
+		});
+		Lua_helper.add_callback(lua, "getRandomFloat", function(min:Float, max:Float = 1, exclude:String = '') {
+			var excludeArray:Array<String> = exclude.split(',');
+			var toExclude:Array<Float> = [];
+			for (i in 0...excludeArray.length)
+			{
+				if (exclude == '') break;
+				toExclude.push(Std.parseFloat(excludeArray[i].trim()));
+			}
+			return FlxG.random.float(min, max, toExclude);
+		});
+		Lua_helper.add_callback(lua, "getRandomBool", function(chance:Float = 50) {
+			return FlxG.random.bool(chance);
 		});
 
 		//

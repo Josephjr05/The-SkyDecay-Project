@@ -5,6 +5,7 @@ function onCreatePost()
     initLuaShader("rain")
     initLuaShader("bloom")
     initLuaShader("saturation")
+    initLuaShader("altbloom")
     
     makeLuaSprite("chromatic")
     makeGraphic("chromatic", screenWidth, screenHeight)
@@ -27,9 +28,13 @@ function onCreatePost()
 	
 	makeLuaSprite("bloom")
     makeGraphic("bloom", screenWidth, screenHeight)
+
+    makeLuaSprite("altbloom")
+    makeGraphic("altbloom", screenWidth, screenHeight)
    
         setSpriteShader("chromatic", "VCR")
     setSpriteShader("bloom", "bloom")
+    setSpriteShader("altbloom", "altbloom")
     addHaxeLibrary("ShaderFilter", "openfl.filters")
     checkChrom();
 end
@@ -46,10 +51,6 @@ end
 
 function onStepHit()
     if curStep == 768 then
-        setShaderFloat("bloom", "Intensity", 1.0); 
-        runHaxeCode([[
-        game.camGame.setFilters([new ShaderFilter(game.getLuaObject("bloom").shader)]);
-    ]])
 	end
 
     if curStep == 904 then

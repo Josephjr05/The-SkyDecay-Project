@@ -7,8 +7,23 @@ precacheImage('bg');
             precacheImage('red');
                precacheImage('Bhud');
 end
+local flashMin = 0    -- normal brightness (alpha)
+local flashMax = 1     -- how bright it flashes
+local flashInTime = 0.05 -- how quickly it brightens
+local flashOutTime = 2 -- how slowly it fades back
 
+function onTweenCompleted(tag)
+    if tag == 'glowFlashUp' then
+        -- Then fade slowly back to normal
+        doTweenAlpha('glowFlashDown', 'flash', flashMin, flashOutTime, 'quadOut')
+    end
+end
 function onCreate()
+    makeLuaSprite('flash', 'flash', -1945, -878)
+    setLuaSpriteScrollFactor('flash', 1, 1)
+    setProperty('flash.alpha', 0)
+    addLuaSprite('flash')
+
     makeLuaSprite('bg', 'Sawbg', 290, 50); -- Rowan make sure you change the path to the image
     setLuaSpriteScrollFactor('bg', 1, 1);
 	scaleObject('bg', 0.18, 0.18);
@@ -52,6 +67,8 @@ function onStepHit()
                 doTweenAlpha('saw', 'bg', 1, 0.50);
 		doTweenAlpha('Portada', 'Imagen', 1, 0.50);
 		doTweenAlpha('Titulo', 'Texto', 1, 0.50);
+        doTweenAlpha('flash', 'flash', 1, 0.05, 'linear')
+
 	end
 
     if curStep == 811 then

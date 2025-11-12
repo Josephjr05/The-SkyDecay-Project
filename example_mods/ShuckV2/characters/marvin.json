@@ -1,164 +1,164 @@
 {
 	"animations": [
 		{
-			"loop": false,
 			"offsets": [398, 26],
+			"loop": false,
+			"fps": 24,
 			"anim": "singUP",
-			"fps": 24,
-			"name": "u",
-			"indices": []
+			"indices": [],
+			"name": "u"
 		},
 		{
-			"loop": false,
 			"offsets": [-13, -9],
+			"loop": false,
+			"fps": 24,
 			"anim": "singLEFT",
-			"fps": 24,
-			"name": "l",
-			"indices": []
+			"indices": [],
+			"name": "l"
 		},
 		{
-			"loop": false,
 			"offsets": [1, -265],
+			"loop": false,
+			"fps": 24,
 			"anim": "singDOWN",
-			"fps": 24,
-			"name": "d",
-			"indices": []
+			"indices": [],
+			"name": "d"
 		},
 		{
-			"loop": false,
 			"offsets": [0, 0],
+			"loop": false,
+			"fps": 24,
 			"anim": "singRIGHT",
-			"fps": 24,
-			"name": "r",
-			"indices": []
+			"indices": [],
+			"name": "r"
 		},
 		{
-			"loop": true,
 			"offsets": [0, 0],
+			"loop": true,
+			"fps": 24,
 			"anim": "idle",
-			"fps": 24,
-			"name": "i",
-			"indices": []
+			"indices": [],
+			"name": "i"
 		},
 		{
-			"loop": false,
 			"offsets": [390, 30],
+			"loop": false,
+			"fps": 24,
 			"anim": "singUPmiss",
-			"fps": 24,
-			"name": "mu",
-			"indices": []
+			"indices": [],
+			"name": "mu"
 		},
 		{
-			"loop": false,
 			"offsets": [0, 0],
+			"loop": false,
+			"fps": 24,
 			"anim": "singLEFTmiss",
-			"fps": 24,
-			"name": "ml",
-			"indices": []
+			"indices": [],
+			"name": "ml"
 		},
 		{
-			"loop": false,
 			"offsets": [0, -271],
+			"loop": false,
+			"fps": 24,
 			"anim": "singDOWNmiss",
-			"fps": 24,
-			"name": "md",
-			"indices": []
+			"indices": [],
+			"name": "md"
 		},
 		{
-			"loop": false,
 			"offsets": [0, 0],
+			"loop": false,
+			"fps": 24,
 			"anim": "singRIGHTmiss",
-			"fps": 24,
-			"name": "mr",
-			"indices": []
+			"indices": [],
+			"name": "mr"
 		},
 		{
-			"loop": false,
 			"offsets": [0, -136],
+			"loop": false,
+			"fps": 24,
 			"anim": "intro",
-			"fps": 24,
-			"name": "hellohottie",
-			"indices": []
+			"indices": [],
+			"name": "hellohottie"
 		},
 		{
-			"loop": false,
 			"offsets": [64, -26],
+			"loop": false,
+			"fps": 24,
 			"anim": "voiceline",
-			"fps": 24,
-			"name": "voiceline",
-			"indices": []
+			"indices": [],
+			"name": "voiceline"
 		},
 		{
-			"loop": true,
 			"offsets": [0, 0],
+			"loop": true,
+			"fps": 24,
 			"anim": "idle-alt",
-			"fps": 24,
-			"name": "alti",
-			"indices": []
+			"indices": [],
+			"name": "alti"
 		},
 		{
-			"loop": false,
 			"offsets": [396, 26],
+			"loop": false,
+			"fps": 24,
 			"anim": "singUP-alt",
-			"fps": 24,
-			"name": "altu",
-			"indices": []
+			"indices": [],
+			"name": "altu"
 		},
 		{
-			"loop": false,
 			"offsets": [-16, -10],
+			"loop": false,
+			"fps": 24,
 			"anim": "singLEFT-alt",
-			"fps": 24,
-			"name": "altl",
-			"indices": []
+			"indices": [],
+			"name": "altl"
 		},
 		{
-			"loop": false,
 			"offsets": [3, -263],
+			"loop": false,
+			"fps": 24,
 			"anim": "singDOWN-alt",
-			"fps": 24,
-			"name": "altd",
-			"indices": []
+			"indices": [],
+			"name": "altd"
 		},
 		{
-			"loop": false,
 			"offsets": [3, 2],
+			"loop": false,
+			"fps": 24,
 			"anim": "singRIGHT-alt",
-			"fps": 24,
-			"name": "altr",
-			"indices": []
+			"indices": [],
+			"name": "altr"
 		},
 		{
-			"loop": false,
 			"offsets": [394, 27],
+			"loop": false,
+			"fps": 24,
 			"anim": "singUPmiss-alt",
-			"fps": 24,
-			"name": "altmu",
-			"indices": []
+			"indices": [],
+			"name": "altmu"
 		},
 		{
-			"loop": false,
 			"offsets": [-12, -7],
+			"loop": false,
+			"fps": 24,
 			"anim": "singLEFTmiss-alt",
-			"fps": 24,
-			"name": "altml",
-			"indices": []
+			"indices": [],
+			"name": "altml"
 		},
 		{
-			"loop": false,
 			"offsets": [4, -264],
-			"anim": "singDOWNmiss-alt",
+			"loop": false,
 			"fps": 24,
-			"name": "altmd",
-			"indices": []
+			"anim": "singDOWNmiss-alt",
+			"indices": [],
+			"name": "altmd"
 		},
 		{
-			"loop": false,
 			"offsets": [-2, 1],
-			"anim": "singRIGHTmiss-alt",
+			"loop": false,
 			"fps": 24,
-			"name": "altmr",
-			"indices": []
+			"anim": "singRIGHTmiss-alt",
+			"indices": [],
+			"name": "altmr"
 		}
 	],
 	"vocals_file": "",
@@ -168,7 +168,7 @@
 	"healthicon": "marvin",
 	"flip_x": true,
 	"healthbar_colors": [255, 0, 0],
-	"camera_position": [-180, 370],
+	"camera_position": [0, 0],
 	"chartPosition": [
 		0,
 		0

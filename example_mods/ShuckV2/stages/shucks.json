@@ -98,6 +98,29 @@
 			"type": "sprite"
 		},
 		{
+			"x": -1945,
+			"blend": "add",
+			"y": -878,
+			"scale": [
+				1,
+				1
+			],
+			"image": "stages/shucks/flash",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "fah",
+			"antialiasing": true,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 0,
+			"type": "sprite"
+		},
+		{
 			"x": -1938,
 			"blend": "add",
 			"y": -872,

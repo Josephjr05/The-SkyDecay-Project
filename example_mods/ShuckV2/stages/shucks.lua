@@ -11,7 +11,10 @@ function onCreatePost()
     local glowWidth = getProperty('glow.width')
     setProperty('glow.origin.x', glowWidth / 2)
     setProperty('glow.origin.y', 0) 
-    
+    local fahWidth = getProperty('fah.width')
+    setProperty('fah.origin.x', fahWidth / 2)
+    setProperty('fah.origin.y', 0) 
+
 end
 function onSectionHit()
     local isLeft = false
@@ -39,5 +42,6 @@ function onUpdate(elapsed)
     -- Apply the angle to the light object
     setProperty('light.angle', swayAngle)
     setProperty('glow.angle', swayAngle)
+    setProperty('fah.angle', swayAngle)
 end
 

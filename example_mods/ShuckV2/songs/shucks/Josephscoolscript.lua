@@ -7,22 +7,33 @@ precacheImage('bg');
             precacheImage('red');
                precacheImage('Bhud');
 end
-local flashMin = 0    -- normal brightness (alpha)
+local flashMin = 0.2    -- normal brightness (alpha)
 local flashMax = 1     -- how bright it flashes
-local flashInTime = 0.05 -- how quickly it brightens
+local flashInTime = 0.3 -- how quickly it brightens
 local flashOutTime = 2 -- how slowly it fades back
+local normalScale = 1.1   -- base size
+local flashScale = 1.2    -- how large it gets at peak
+
+function flashGlow()
+    -- Brighten quickly
+    doTweenAlpha('glowFlashUp', 'fah', flashMax, flashInTime, 'linear')
+    doTweenX('fahScaleUpX', 'fah.scale', flashScale, flashInTime, 'linear')
+    doTweenY('fahScaleUpY', 'fah.scale', flashScale, flashInTime, 'linear')
+end
 
 function onTweenCompleted(tag)
     if tag == 'glowFlashUp' then
         -- Then fade slowly back to normal
-        doTweenAlpha('glowFlashDown', 'flash', flashMin, flashOutTime, 'quadOut')
+        doTweenAlpha('glowFlashDown', 'fah', flashMin, flashOutTime, 'quadOut')
+    elseif tag == 'fahScaleUpX' then
+        -- Return scale smoothly
+        doTweenX('fahScaleDownX', 'fah.scale', normalScale, flashOutTime, 'quadOut')
+    elseif tag == 'fahScaleUpY' then
+        doTweenY('fahScaleDownY', 'fah.scale', normalScale, flashOutTime, 'quadOut')
     end
 end
+
 function onCreate()
-    makeLuaSprite('flash', 'flash', -1945, -878)
-    setLuaSpriteScrollFactor('flash', 1, 1)
-    setProperty('flash.alpha', 0)
-    addLuaSprite('flash')
 
     makeLuaSprite('bg', 'Sawbg', 290, 50); -- Rowan make sure you change the path to the image
     setLuaSpriteScrollFactor('bg', 1, 1);
@@ -36,7 +47,7 @@ function onCreate()
 	setObjectCamera('Imagen', 'camHUD');
 	setProperty('Imagen.alpha', 0);
 
-	makeLuaSprite('Texto', 'title name', 500, 375); -- same here faggot, KILL YOURSELFR #LFFL F RLF L
+	makeLuaSprite('Texto', 'title name', 500, 375); -- 
 	setLuaSpriteScrollFactor('Texto', 1, 1);
 	scaleObject('Texto', 0.5, 0.5);
 	setObjectCamera('Texto', 'camHUD');
@@ -60,14 +71,15 @@ function onCreate()
     addLuaSprite('Texto', false);
     addLuaSprite('red', false); 
     addLuaSprite('Bhud', false);
+    
 end
 
 function onStepHit()
-        if curStep == 768 then -- also step nigger, FUCK YOU
+        if curStep == 768 then -- 
                 doTweenAlpha('saw', 'bg', 1, 0.50);
 		doTweenAlpha('Portada', 'Imagen', 1, 0.50);
 		doTweenAlpha('Titulo', 'Texto', 1, 0.50);
-        doTweenAlpha('flash', 'flash', 1, 0.05, 'linear')
+        flashGlow()
 
 	end
 
@@ -76,11 +88,26 @@ function onStepHit()
 		doTweenAlpha('Portada', 'Imagen', 0, 0.50);
 		doTweenAlpha('Titulo', 'Texto', 0, 0.50);
 	end
-    if curStep == 2815 then -- also step nigger, FUCK YOU
+    if curStep == 1280 then
+         flashGlow()
+    end
+    if curStep == 1552 then
+        flashGlow()
+   end
+   if curStep == 2352 then
+    setProperty('dad.idleSuffix', '-NOIDLE');
+end
+if curStep == 2552 then
+    playAnimReverse('dad', 'over', 0.04)
+end
+   if curStep == 2560 then
+    flashGlow()
+end
+    if curStep == 2815 then -- 
                 doTweenAlpha('red', 'red', 1, 0.10);
                 doTweenAlpha('hud', 'Bhud', 0.8, .50);
         end
-    if curStep == 3196 then -- also step nigger, FUCK YOU
+    if curStep == 3196 then -- 
                 doTweenAlpha('red', 'red', 0, 0.10);
                 doTweenAlpha('hud', 'Bhud', 0, 0.10);
         end

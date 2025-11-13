@@ -3,7 +3,7 @@ function onCreatePost()
 end
 
 function onStepHit()
-    if curStep == 3189 then
+    if curStep == 3171 then
         callMethod('videoCutscene.play')
     end
 end 

@@ -1,0 +1,5 @@
+Sets the Noteskin for Boyfriend side to a png and xml found in mods/images 
+value 1: the Noteskin's name
+value 2: the Noteskin's Splashes (Optional)
+if blank will do nothing
+WILL NOT CHANGE THE CUSTOM NOTES OR THIER SPLASHES 

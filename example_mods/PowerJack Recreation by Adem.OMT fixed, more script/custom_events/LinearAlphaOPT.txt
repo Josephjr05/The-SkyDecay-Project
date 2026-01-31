@@ -1,0 +1,4 @@
+Makes the Receptors fade in and out supposidly I can't get it to do it man
+BOTH VALUES ARE REQUIRED FOR THE EFFECT
+Value 1: How long to tween for (in seconds)
+Value 2: Target Transparency

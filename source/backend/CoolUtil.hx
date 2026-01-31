@@ -106,6 +106,18 @@ class CoolUtil
 		return (m / snap);
 	}
 
+	public static  function removeDupe(arr:Array<String>):Array<String> {
+		var result:Array<String> = [];
+		for (item in arr) {
+			if (!result.contains(item)) {
+				result.push(item);
+			} else {
+				trace('heh. just removed a dupe of ${item}. no need to thank me');
+			}
+		}
+		return result;
+	}
+
 	public static function coolLerp(base:Float, target:Float, ratio:Float):Float
 		return base + cameraLerp(ratio) * (target - base);
 

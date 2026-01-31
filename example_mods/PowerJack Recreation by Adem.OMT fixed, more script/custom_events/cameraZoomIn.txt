@@ -1,0 +1,4 @@
+Value 1: the zoom of the camera (find the default
+camera zoom in the stages json!)
+Value 2: the duration of the zoom (always uses "circOut"
+camera tweening)

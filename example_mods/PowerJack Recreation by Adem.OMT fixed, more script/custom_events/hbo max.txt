@@ -1,0 +1,5 @@
+Cinematic mode
+
+value 1 = on off
+
+value 2 = hud or other

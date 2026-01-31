@@ -1,0 +1,2 @@
+Value1: How many spins you want
+Value2: duration of the event

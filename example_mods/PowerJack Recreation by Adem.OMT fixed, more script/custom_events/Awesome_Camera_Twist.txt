@@ -1,0 +1,10 @@
+Value 1: Type of twist to do (0 to disable)
+Value 2: The angle it will twist at (should be positive)
+1 - Twists every beat
+2 - Twists every second beat
+3 - Twists every third beat
+4 - Twists every fourth beat
+5 - Twists on first and second beat, second half of third beat, and fourth beat
+6 - Twists on third beat of each section only
+7 - same as 5 but twice as slow
+8 - Twists on second and fourth beat

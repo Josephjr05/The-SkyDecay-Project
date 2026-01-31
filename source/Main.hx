@@ -230,7 +230,7 @@ class Main extends Sprite
 		addChild(game);
 
 		#if !mobile
-		fpsVar = new FPSCounter(10, 3, 0xFFFFFF);
+		fpsVar = new FPSCounter(12, 4, 0xffffff);
 		addChild(fpsVar);
 		Lib.current.stage.align = "tl";
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
@@ -270,7 +270,7 @@ class Main extends Sprite
 		#end
 
 		// shader coords fix
-		FlxG.signals.gameResized.add(function (w, h) {
+		FlxG.signals.gameResized.add((w:Int, h:Int) -> {
 		     if (FlxG.cameras != null) {
 			   for (cam in FlxG.cameras.list) {
 				if (cam != null && cam.filters != null)
@@ -280,6 +280,11 @@ class Main extends Sprite
 
 			if (FlxG.game != null)
 			resetSpriteCache(FlxG.game);
+		});
+		
+		FlxG.signals.postGameStart.add(function() {
+			#if (!html5 && !switch) FlxG.autoPause = ClientPrefs.data.autoPause; #end
+			FlxG.fixedTimestep = false;
 		});
 	}
 

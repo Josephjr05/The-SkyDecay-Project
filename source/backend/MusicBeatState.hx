@@ -5,6 +5,12 @@ import backend.PsychCamera;
 
 import flixel.util.FlxGradient; // backwards compatibility
 
+import shaders.ErrorHandledShader;
+
+#if GLOBAL_SCRIPTS
+import psychlua.GlobalScriptHandler;
+#end
+
 class MusicBeatState extends FlxState
 {
 	private var curSection:Int = 0;
@@ -15,7 +21,13 @@ class MusicBeatState extends FlxState
 
 	private var curDecStep:Float = 0;
 	private var curDecBeat:Float = 0;
+	public var curDecSection:Float = 0;
 	public var controls(get, never):Controls;
+
+	public var delay:Float = ClientPrefs.data.noteOffset;
+
+	public var keepUp:Bool = false;
+
 	private function get_controls()
 	{
 		return Controls.instance;
@@ -53,75 +65,108 @@ class MusicBeatState extends FlxState
 	}
 
 	public static var timePassedOnState:Float = 0;
-	override function update(elapsed:Float)
-	{
-		//everyStep();
+	public override function update(elapsed:Float) {
+		if (subState == null) {
+			MusicBeatState.timePassedOnState += elapsed;
+			
+			if (FlxG.keys.justPressed.F5 #if GLOBAL_SCRIPTS && !GlobalScriptHandler.resetting #end) { // add keybind?
+				reset();
+			} #if GLOBAL_SCRIPTS else {
+				GlobalScriptHandler.resetting = false;
+			} #end
+		}
+		
 		var oldStep:Int = curStep;
-		timePassedOnState += elapsed;
-
-		updateCurStep();
+		updateStep();
 		updateBeat();
+		updateSection();
+		
+		if (oldStep != curStep) {
+			if (keepUp) {
+				while (++ oldStep < curStep)
+					stepHit();
+			}
+			stepHit();
 
-		if (oldStep != curStep)
-		{
-			if(curStep > 0)
-				stepHit();
-
-			if(PlayState.SONG != null)
-			{
-				if (oldStep < curStep)
-					updateSection();
-				else
+			if (PlayState.SONG != null) {
+				if (oldStep < curStep) {
+					forwardSection();
+				} else {
 					rollbackSection();
+				}
 			}
 		}
-
-		if(FlxG.save.data != null) FlxG.save.data.fullscreen = FlxG.fullscreen;
 		
-		stagesFunc(function(stage:BaseStage) {
-			stage.update(elapsed);
-		});
-
+		if (FlxG.save.data != null)
+			FlxG.save.data.fullscreen = FlxG.fullscreen;
+			
+		stagesFunc((stage:BaseStage) -> stage.update(elapsed));
 		super.update(elapsed);
 	}
 
-	private function updateSection():Void
-	{
-		if(stepsToDo < 1) stepsToDo = Math.round(getBeatsOnSection() * 4);
-		while(curStep >= stepsToDo)
-		{
-			curSection++;
-			var beats:Float = getBeatsOnSection();
-			stepsToDo += Math.round(beats * 4);
+	public function reset():Void {
+		#if GLOBAL_SCRIPTS GlobalScriptHandler.refreshScripts(FlxG.keys.pressed.SHIFT); #end
+		MusicBeatState.switchState(FlxG.state);
+	}
+
+	function updateSection():Void {
+		if (PlayState.SONG == null) return;
+		
+		var lastSectionTime:Float = 0;
+		var curCrochet:Float = Conductor.crochet;
+		
+		for (i => section in PlayState.SONG.notes) {
+			curCrochet = Conductor.getBPMFromSeconds(lastSectionTime).stepCrochet * 4;
+			var nextSectionTime = lastSectionTime + getBeatsOnSection(i) * curCrochet;
+			
+			if (nextSectionTime >= Conductor.songPosition - delay)
+				break;
+			
+			lastSectionTime = nextSectionTime;
+		}
+		
+		curDecSection = curSection + (Conductor.songPosition - delay - lastSectionTime) / curCrochet / getBeatsOnSection(curSection);
+	}
+
+	function forwardSection():Void {
+		if (stepsToDo < 1) stepsToDo = Math.round(getBeatsOnSection() * 4);
+		
+		if (curStep == 0) sectionHit(); // idgaf
+		
+		while (curStep >= stepsToDo) {
+			curSection ++;
+			updateSection();
 			sectionHit();
+			
+			stepsToDo += Math.round(getBeatsOnSection() * 4);
 		}
 	}
 
-	private function rollbackSection():Void
-	{
-		if(curStep < 0) return;
+	function rollbackSection():Void {
+		if (curStep < 0) return;
 
 		var lastSection:Int = curSection;
 		curSection = 0;
 		stepsToDo = 0;
-		for (i in 0...PlayState.SONG.notes.length)
-		{
-			if (PlayState.SONG.notes[i] != null)
-			{
+		for (section in PlayState.SONG.notes) {
+			if (section != null) {
 				stepsToDo += Math.round(getBeatsOnSection() * 4);
-				if(stepsToDo > curStep) break;
+				if (stepsToDo > curStep)
+					break;
 				
-				curSection++;
+				curSection ++;
 			}
 		}
-
-		if(curSection > lastSection) sectionHit();
+		
+		if (curSection > lastSection) {
+			updateSection();
+			sectionHit();
+		}
 	}
 
-	private function updateBeat():Void
-	{
-		curBeat = Math.floor(curStep / 4);
-		curDecBeat = curDecStep/4;
+	function updateBeat():Void {
+		curDecBeat = curDecStep / 4;
+		curBeat = Math.floor(curDecBeat);
 	}
 
 	private function updateCurStep():Void
@@ -131,6 +176,15 @@ class MusicBeatState extends FlxState
 		var shit = ((Conductor.songPosition - ClientPrefs.data.noteOffset) - lastChange.songTime) / lastChange.stepCrochet;
 		curDecStep = lastChange.stepTime + shit;
 		curStep = lastChange.stepTime + Math.floor(shit);
+	}
+
+	// i have no idea why this is renamed but ima keep this for backward shits
+	function updateStep():Void {
+		var lastChange = Conductor.getBPMFromSeconds(Conductor.songPosition);
+
+		var shit = ((Conductor.songPosition - delay) - lastChange.songTime) / lastChange.stepCrochet;
+		curDecStep = lastChange.stepTime + shit;
+		curStep = Math.floor(curDecStep);
 	}
 
 	public static function switchState(nextState:FlxState = null) {
@@ -208,10 +262,13 @@ class MusicBeatState extends FlxState
 				func(stage);
 	}
 
-	function getBeatsOnSection()
-	{
+	public function getBeatsOnSection(?section:Int):Null<Float> {
 		var val:Null<Float> = 4;
-		if(PlayState.SONG != null && PlayState.SONG.notes[curSection] != null) val = PlayState.SONG.notes[curSection].sectionBeats;
-		return val == null ? 4 : val;
+		section ??= curSection;
+		
+		if (PlayState.SONG != null && PlayState.SONG.notes[section] != null)
+			val = PlayState.SONG.notes[section].sectionBeats;
+		
+		return (val == null ? 4 : val);
 	}
 }

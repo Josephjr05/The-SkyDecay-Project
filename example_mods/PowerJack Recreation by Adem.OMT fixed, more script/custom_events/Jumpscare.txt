@@ -1,0 +1,4 @@
+da jumpscare
+
+Value 1: Name of the image that you wanna use.
+Value 2: Duration of Jumpscare (Not really in Steps)

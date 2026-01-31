@@ -1,0 +1,3 @@
+Value1 = 0 for hide, 1 for show
+
+Value2 = time

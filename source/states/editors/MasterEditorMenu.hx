@@ -162,20 +162,16 @@ class MasterEditorMenu extends MusicBeatState
 	#if MODS_ALLOWED
 	function changeDirectory(change:Int = 0)
 	{
-		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
-
-		curDirectory += change;
-
-		if(curDirectory < 0)
-			curDirectory = directories.length - 1;
-		if(curDirectory >= directories.length)
-			curDirectory = 0;
-	
+		var next:Int = FlxMath.wrap(curDirectory + change, 0, directories.length - 1);
+		curDirectory = next;
+		
+		FlxG.sound.play(Paths.sound('scrollMenu'), .4);
+		
 		WeekData.setDirectoryFromWeek();
-		if(directories[curDirectory] == null || directories[curDirectory].length < 1)
+		if (directories[curDirectory] == null || directories[curDirectory].length < 1) {
+			Mods.currentModDirectory = '';
 			directoryTxt.text = '< No Mod Directory Loaded >';
-		else
-		{
+		} else {
 			Mods.currentModDirectory = directories[curDirectory];
 			directoryTxt.text = '< Loaded Mod Directory: ' + Mods.currentModDirectory + ' >';
 		}

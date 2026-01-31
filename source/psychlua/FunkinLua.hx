@@ -59,9 +59,9 @@ class FunkinLua {
 	public function onCreatePost():Void {
 		// 0.6.3 compat: expose PlayState characters/groups
     	if (PlayState.instance != null) {
-    	    if (PlayState.instance.boyfriendGroup != null) set("boyfriend", PlayState.instance.boyfriend);
-    	    if (PlayState.instance.dadGroup != null) set("dad", PlayState.instance.dad);
-    	    if (PlayState.instance.gfGroup != null) set("gf", PlayState.instance.gf);
+    	    if (PlayState.instance.boyfriendGroup != null) set('boyfriend', PlayState.instance.boyfriend);
+    	    if (PlayState.instance.dadGroup != null) set('dad', PlayState.instance.dad);
+    	    if (PlayState.instance.gfGroup != null) set('gf', PlayState.instance.gf);
 
     	    // Expose groups (old scripts sometimes access gfGroup/boyfriendGroup directly)
     	    if (PlayState.instance.boyfriendGroup != null) set("boyfriendGroup", PlayState.instance.boyfriendGroup);
@@ -2059,7 +2059,7 @@ class FunkinLua {
 		});
 
 		// Turns out, there IS a reason this block of code exists
-		#if DISCORD_ALLOWED DiscordClient.addLuaCallbacks(lua); #end
+		#if DISCORD_ALLOWED DiscordClient.implement(lua); #end
 		#if ACHIEVEMENTS_ALLOWED Achievements.addLuaCallbacks(lua); #end
 		#if TRANSLATIONS_ALLOWED Language.addLuaCallbacks(lua); #end
 		#if flxanimate FlxAnimateFunctions.implement(this); #end

@@ -1,0 +1,8 @@
+Value 1: Modo de Uso (flash, shake, fade, zoom y target)
+
+Value 2(instrucciones para cada Modo):
+Flash: Camara, Duracion
+Shake: Camara, Intensidad, Duracion
+Fade: Camara, Alpha, Duracion
+Zoom: Zoom, Duracion
+Target: (bf/dad/gf/off)

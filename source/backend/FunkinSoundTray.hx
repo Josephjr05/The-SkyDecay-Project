@@ -1,158 +1,159 @@
 package backend;
 
-import haxe.io.Bytes;
 import openfl.utils.AssetType;
-import flixel.tweens.FlxTween;
-import flixel.system.FlxAssets;
-import flixel.tweens.FlxEase;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
 import openfl.utils.Assets;
+import flixel.FlxG;
+import flixel.system.ui.FlxSoundTray;
+import haxe.Log;
 #if sys
 import sys.io.File;
 import sys.FileSystem;
 #end
-import flixel.system.ui.FlxSoundTray;
 
-/**
- *  V-Slice SoundTray
- *  Wouldnt say this is the best way of implemeting this, but it works.
- *  Also Supports The Mods Folders
- */
 class FunkinSoundTray extends FlxSoundTray
 {
-	var graphicScale:Float = 0.30;
-	var lerpYPos:Float = 0;
-	var alphaTarget:Float = 0;
+    var graphicScale:Float = 0.30;
+    var lerpYPos:Float = 0;
+    var alphaTarget:Float = 0;
 
-	var volumeMaxSound:String;
+    var volumeMaxSound:String;
 
-	public function new()
-	{
-		super();
+    public function new()
+    {
+        super();
 
-		removeChildren();
+        removeChildren();
 
-		var bg:Bitmap = new Bitmap(getPathImage("soundtray/volumebox"));
-		bg.scaleX = graphicScale;
-		bg.scaleY = graphicScale;
-		addChild(bg);
+        var bg:Bitmap = new Bitmap(getPathImage('soundtray/volumebox'));
+        bg.scaleX = graphicScale;
+        bg.scaleY = graphicScale;
+        addChild(bg);
 
-		y = -height;
-		visible = false;
+        y = -height;
+        screenCenter();
 
-		var backingBar:Bitmap = new Bitmap(getPathImage('soundtray/bars_10'));
-		backingBar.x = 9;
-		backingBar.y = 5;
-		backingBar.scaleX = graphicScale;
-		backingBar.scaleY = graphicScale;
-		addChild(backingBar);
-		backingBar.alpha = 0.4;
+        var backingBar:Bitmap = new Bitmap(getPathImage('soundtray/bars_10'));
+        backingBar.x = 9;
+        backingBar.y = 5;
+        backingBar.scaleX = graphicScale;
+        backingBar.scaleY = graphicScale;
+        backingBar.alpha = 0.4;
+        addChild(backingBar);
 
-		_bars = [];
+        _bars = [];
 
-		for (i in 1...11)
-		{
-			var bar:Bitmap = new Bitmap(getPathImage('soundtray/bars_$i'), false);
-			bar.x = 9;
-			bar.y = 5;
-			bar.scaleX = graphicScale;
-			bar.scaleY = graphicScale;
-			addChild(bar);
-			_bars.push(bar);
-		}
+        for (i in 1...11)
+        {
+            var bar:Bitmap = new Bitmap(getPathImage('soundtray/bars_$i'), false);
+            bar.x = 9;
+            bar.y = 5;
+            bar.scaleX = graphicScale;
+            bar.scaleY = graphicScale;
+            addChild(bar);
+            _bars.push(bar);
+        }
 
-		y = -height;
-		screenCenter();
+        y = -height;
+        screenCenter();
 
-		volumeUpSound = 'Volup';
-		volumeDownSound = 'Voldown';
-		volumeMaxSound = 'VolMAX';
-	}
+        volumeUpSound = 'Volup';
+        volumeDownSound = 'Voldown';
+        volumeMaxSound = 'VolMAX';
+    }
 
-	function getPathImage(path:String):Dynamic
-	{
-		final ext = 'png';
-		final file = Paths.getPath('images/$path.$ext');
+    function getPathImage(path:String):BitmapData
+    {
+        final filename = 'images/$path.png';
+        final assetPath = Paths.getPath(filename, AssetType.IMAGE);
 
-		#if MODS_ALLOWED
-		return BitmapData.fromFile(file);
-		#end
-		return Assets.getBitmapData(file);
-	}
+        #if MODS_ALLOWED
+        return BitmapData.fromFile(assetPath);
+        #end
+        return Assets.getBitmapData(assetPath);
+    }
 
-	override public function update(MS:Float):Void
-	{
-		y = CoolUtil.coolLerp(y, lerpYPos, 0.1);
-		alpha = CoolUtil.coolLerp(alpha, alphaTarget, 0.25);
+    function getTraySound(soundName:String):Dynamic
+    {
+        if (soundName == null || soundName == '') return null;
 
-		if (_timer > 0)
-		{
-			_timer -= (MS / 1000);
-			alphaTarget = 1;
-		}
-		else if (y >= -height)
-		{
-			lerpYPos = -height - 10;
-			alphaTarget = 0;
-		}
+        #if MODS_ALLOWED
+        return Paths.returnSound('sounds/soundtray/$soundName');
+        #else
+        final fullpath = 'sounds/soundtray/$soundName.mp3';
+        final assetPath = Paths.getPath(fullpath, AssetType.SOUND);
+        return Assets.getSound(assetPath);
+        #end
+    }
 
-		if (y <= -height)
-		{
-			visible = false;
-			active = false;
+    function playSoundByName(name:String):Void
+    {
+        var sound = getTraySound(name);
+        if (sound != null)
+            FlxG.sound.load(sound).play();
+    }
 
-			#if FLX_SAVE
-			if (FlxG.save.isBound)
-			{
-				FlxG.save.data.mute = FlxG.sound.muted;
-				FlxG.save.data.volume = FlxG.sound.volume;
-				FlxG.save.flush();
-			}
-			#end
-		}
-	}
+    override public function update(MS:Float):Void
+    {
+        y = CoolUtil.coolLerp(y, lerpYPos, 0.1);
+        alpha = CoolUtil.coolLerp(alpha, alphaTarget, 0.25);
 
-	override public function show(up:Bool = false):Void
-	{
-		_timer = 1;
-		lerpYPos = 10;
-		visible = true;
-		active = true;
-		var globalVolume:Int = Math.round(FlxG.sound.volume * 10);
+        if (_timer > 0)
+        {
+            _timer -= (MS / 1000);
+            alphaTarget = 1;
+        }
+        else if (y >= -height)
+        {
+            lerpYPos = -height - 10;
+            alphaTarget = 0;
+        }
 
-		if (FlxG.sound.muted)
-		{
-			globalVolume = 0;
-		}
+        if (y <= -height)
+        {
+            visible = false;
+            active = false;
 
-		if (!silent)
-		{
-			var sound = null;
-			#if MODS_ALLOWED
-			sound = Paths.returnSound('sounds/soundtray/${up ? volumeUpSound : volumeDownSound}');
-			#else 
-			final path = 'assets/sounds/soundtray/';
-			sound = FlxAssets.getSound(path + (up ? volumeUpSound : volumeDownSound));
-			#end
-			
-			if (globalVolume == 10)
-				#if MODS_ALLOWED
-				sound = Paths.returnSound('sounds/soundtray/$volumeMaxSound');
-				#else
-				sound = FlxAssets.getSound('assets/sounds/soundtray/$volumeMaxSound');
-				#end
+            #if FLX_SAVE
+            if (FlxG.save.isBound)
+            {
+                FlxG.save.data.mute = FlxG.sound.muted;
+                FlxG.save.data.volume = FlxG.sound.volume;
+                FlxG.save.flush();
+            }
+            #end
+        }
+    }
 
-			if (sound != null)
-				FlxG.sound.load(sound).play();
-		}
+    override public function showAnim(volume:Float, ?sound:Dynamic, duration:Float = 1.0, label:String = 'VOLUME'):Void
+    {
+        _timer = duration;
+        lerpYPos = 10;
+        alphaTarget = 1;
+        visible = true;
+        active = true;
+
+        var globalVolume:Int = Math.round(volume * 10);
+        if (globalVolume < 0) globalVolume = 0;
+        if (globalVolume > 10) globalVolume = 10;
+
+        if (!silent)
+        {
+            var requestedSound:String = sound != null ? Std.string(sound) : '';
+            if (globalVolume == 10)
+                playSoundByName(volumeMaxSound);
+            else if (requestedSound == volumeUpSound)
+                playSoundByName(volumeUpSound);
+            else if (requestedSound == volumeDownSound)
+                playSoundByName(volumeDownSound);
+            else if (requestedSound != '')
+                playSoundByName(requestedSound);
+        }
 
 		for (i in 0..._bars.length)
 		{
-			if (i < globalVolume)
-				_bars[i].visible = true;
-			else
-				_bars[i].visible = false;
+            _bars[i].visible = (i < globalVolume);
 		}
 	}
 }

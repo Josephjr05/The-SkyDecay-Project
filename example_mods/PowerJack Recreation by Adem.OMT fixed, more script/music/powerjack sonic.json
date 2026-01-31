@@ -1,0 +1,80 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				-267,
+				-173
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singLEFT",
+			"loop": false,
+			"name": "powerjack left"
+		},
+		{
+			"offsets": [
+				-293,
+				-174
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singDOWN",
+			"loop": false,
+			"name": "powerjack down"
+		},
+		{
+			"offsets": [
+				-291,
+				-174
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singUP",
+			"loop": false,
+			"name": "powerjack up"
+		},
+		{
+			"offsets": [
+				-296,
+				-173
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singRIGHT",
+			"loop": false,
+			"name": "powerjack right"
+		},
+		{
+			"offsets": [
+				-294,
+				-175
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "idle",
+			"loop": false,
+			"name": "powerjack idle"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/powerjack2",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "sonic",
+	"flip_x": false,
+	"healthbar_colors": [
+		0,
+		122,
+		255
+	],
+	"camera_position": [
+		110,
+		140
+	],
+	"sing_duration": 6.1,
+	"scale": 1.7,
+	"_editor_isPlayer": false
+}

@@ -1,0 +1,5 @@
+Quick way to made the arrows fade out
+
+Value 1: Dad notes or bf notes? (1: dad, 2: bf, 
+add a .5 to the end of either to fade them back in)
+Value 2: Transition Time (0 = Instant)

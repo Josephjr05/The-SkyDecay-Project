@@ -1,0 +1,3 @@
+value 1 = sound filename from the sounds folder
+
+value 2 = The sound volume

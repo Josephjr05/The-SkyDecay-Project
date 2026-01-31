@@ -1,0 +1,190 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				8,
+				-30
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "Pico fighting stance idle0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-74,
+				228
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "uppercut pico0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				482,
+				-65
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "Punch High 2 Pico 0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				389,
+				-11
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "fake out pico0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				476,
+				-74
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "punch low 2 pico 0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				27,
+				17
+			],
+			"anim": "dodge",
+			"fps": 24,
+			"name": "pico dodge snap0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				74,
+				-9
+			],
+			"anim": "singUP-hit",
+			"fps": 24,
+			"name": "uppercut hit pico0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-65,
+				32
+			],
+			"anim": "singDOWN-hit",
+			"fps": 24,
+			"name": "hit high pico0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-65,
+				32
+			],
+			"anim": "singRIGHT-hit",
+			"fps": 24,
+			"name": "hit high pico0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-65,
+				32
+			],
+			"anim": "singLEFT-hit",
+			"fps": 24,
+			"name": "hit high pico0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-222,
+				-14
+			],
+			"anim": "block",
+			"fps": 24,
+			"name": "Pico Block Hit0",
+			"indices": []
+		},
+		{
+			"offsets": [
+				-65,
+				32
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN-alt",
+			"indices": [],
+			"name": "hit high pico0"
+		},
+		{
+			"offsets": [
+				74,
+				-9
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singUP-alt",
+			"loop": false,
+			"name": "uppercut hit pico0"
+		},
+		{
+			"offsets": [
+				27,
+				17
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singRIGHT-alt",
+			"loop": false,
+			"name": "pico dodge snap0"
+		},
+		{
+			"offsets": [
+				-145,
+				3
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singLEFT-alt",
+			"loop": false,
+			"name": "Pico Block Hit0"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": true,
+	"image": "characters/sonic1",
+	"position": [
+		350,
+		600
+	],
+	"healthicon": "sonic",
+	"flip_x": true,
+	"healthbar_colors": [
+		0,
+		62,
+		215
+	],
+	"camera_position": [
+		640,
+		-410
+	],
+	"sing_duration": 6.1,
+	"scale": 2.9,
+	"_editor_isPlayer": true
+}

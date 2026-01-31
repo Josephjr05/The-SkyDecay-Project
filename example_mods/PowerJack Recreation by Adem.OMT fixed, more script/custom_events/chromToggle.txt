@@ -1,0 +1,3 @@
+value 1 = Amount
+value 2 = frequency
+to disable, put 0 in both

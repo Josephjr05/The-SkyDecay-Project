@@ -1,0 +1,87 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [5, -4],
+			"anim": "idle",
+			"fps": 24,
+			"name": "Idle",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [22, -1],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "pose left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [20, -62],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "Pose Down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [31, 63],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "pose up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [48, -23],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "pose right",
+			"indices": []
+		},
+		{
+			"offsets": [4, -3],
+			"loop": false,
+			"fps": 24,
+			"anim": "laughCutscene",
+			"indices": [0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5],
+			"name": "laugh"
+		},
+		{
+			"offsets": [8, -39],
+			"loop": false,
+			"fps": 24,
+			"anim": "lightCan",
+			"indices": [],
+			"name": "lighting can"
+		},
+		{
+			"offsets": [18, 19],
+			"loop": false,
+			"fps": 24,
+			"anim": "kickCan",
+			"indices": [],
+			"name": "can kick up"
+		},
+		{
+			"offsets": [6, -30],
+			"loop": false,
+			"fps": 24,
+			"anim": "kneeCan",
+			"indices": [],
+			"name": "knee action"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/2hotBF/Darnell2Hot",
+	"position": [50, 260],
+	"healthicon": "darnell",
+	"flip_x": false,
+	"healthbar_colors": [115, 94, 176],
+	"camera_position": [-75, 130],
+	"sing_duration": 6.1,
+	"scale": 1,
+	"_editor_isPlayer": false
+}

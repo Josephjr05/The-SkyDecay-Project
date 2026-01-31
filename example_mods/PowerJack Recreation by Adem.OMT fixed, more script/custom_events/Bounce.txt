@@ -1,0 +1,9 @@
+Literally the "Kaboom" Modchart 
+but with the option to toggle. 
+(Also pretty easy to use IMO)
+-------------------------------------------
+Value 1 = Toggle (1 = on, 0 = off)
+Value 2 = Angle, Intensity
+-------------------------------------------
+Example : 2, 10 
+(These are my reccomended settings btw)

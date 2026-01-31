@@ -1,0 +1,2 @@
+Value 1 Name of the image (put your custom images in mods/images
+Value 2 How many seconds is the image there for

@@ -1,0 +1,5 @@
+Value 1: Speed
+Value 2: Intensity
+
+Original by BBPanzu
+Fixed by Laztrix

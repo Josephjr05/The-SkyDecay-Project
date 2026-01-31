@@ -1,0 +1,9 @@
+Change stage layer. 
+Your stage layer must be in your song
+stage lua or it wont work.
+
+You can also make a pop up, just fill blank value 2
+and make a stagelayer gone by fill blank value 1
+
+Value 1: the tag name of the new stage
+Value 2: the tag name of the old stage

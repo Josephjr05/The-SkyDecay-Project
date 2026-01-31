@@ -1,0 +1,4 @@
+Value 1: x,y
+ex: 146,56
+
+Value 2: Zoom

@@ -1,0 +1,4 @@
+Changes the note skin
+
+Value 1: Note skin, side (bf, dad, both)
+Value 2: Pixelated (true/false)

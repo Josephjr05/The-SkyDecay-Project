@@ -2,6 +2,8 @@ package backend;
 
 import flixel.FlxSubState;
 
+import shaders.ErrorHandledShader;
+
 class MusicBeatSubstate extends FlxSubState
 {
 	public function new()

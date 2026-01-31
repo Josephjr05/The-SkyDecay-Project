@@ -1,0 +1,5 @@
+Flashes Camera
+
+Value 1: duration
+
+value 2: color of choice (has to be hex code)

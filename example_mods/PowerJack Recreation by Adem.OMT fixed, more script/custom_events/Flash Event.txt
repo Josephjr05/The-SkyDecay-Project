@@ -1,0 +1,4 @@
+Simple Camera Flash made in Psych Engine.
+
+Value 1: Duration of flash in seconds.
+Value 2: Color in hex (Example: 9DCFED)

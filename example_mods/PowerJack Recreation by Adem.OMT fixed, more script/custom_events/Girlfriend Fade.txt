@@ -1,0 +1,6 @@
+Smoothly sets your
+transparency value.
+
+Value 1: Duration (0 = Instant)
+Value 2: Target transparency value 
+(0 = all the way gone, 100 = don't disappear)

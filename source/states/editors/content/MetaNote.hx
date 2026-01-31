@@ -9,7 +9,7 @@ import states.editors.ChartingState;
 class MetaNote extends Note
 {
 	public static var noteTypeTexts:Map<Int, FlxText> = [];
-	public var isEvent:Bool = false;
+	public var isEvent(default, null):Bool = false;
 	public var songData:Array<Dynamic>;
 	public var downScroll:Bool = false;
 	public var sustainSprite:EditorSustain;
@@ -17,6 +17,8 @@ class MetaNote extends Note
 	public var chartNoteData:Int = 0;
 	public var chartingState:ChartingState;
 	public var useBlandSustains(default, set):Bool = false;
+	
+	public var dragging:Bool = false;
 
 	public function new(time:Float, data:Int, songData:Array<Dynamic>, state:ChartingState)
 	{
@@ -124,8 +126,7 @@ class MetaNote extends Note
 				txt.autoSize = false;
 				txt.alignment = CENTER;
 				txt.borderColor = FlxColor.BLACK;
-				txt.borderStyle = FlxTextBorderStyle.SHADOW;
-				txt.borderSize = 2; // Controls shadow distance
+				txt.borderStyle = SHADOW_XY(2, 2);
 				txt.scrollFactor.x = 0;
 				noteTypeTexts.set(num, txt);
 			}
@@ -139,7 +140,8 @@ class MetaNote extends Note
 		if(sustainSprite != null && sustainSprite.exists && sustainSprite.visible && sustainLength > 0)
 		{
 			if (sustainSprite.shader != shader) sustainSprite.shader = shader;
-			sustainSprite.setColorTransform(colorTransform.redMultiplier, sustainSprite.colorTransform.blueMultiplier, colorTransform.redMultiplier);
+			sustainSprite.setColorTransform();
+			sustainSprite.colorTransform.concat(colorTransform);
 			sustainSprite.scale.copyFrom(this.scale);
 			sustainSprite.updateHitbox();
 			sustainSprite.y = this.y + this.height / 2 - (downScroll ? sustainSprite.sustainHeight : 0);
@@ -201,6 +203,8 @@ class EditorSustain extends Note {
 		if (!visible) return;
 		
 		if (useBlandSustains) {
+			basicSustainTile.setColorTransform();
+			basicSustainTile.colorTransform.concat(colorTransform);
 			basicSustainTile.scale.set(8, sustainHeight);
 			basicSustainTile.updateHitbox();
 			basicSustainTile.alpha = alpha;
@@ -211,7 +215,8 @@ class EditorSustain extends Note {
 			flipY = sustainTile.flipY = downScroll;
 			
 			if (sustainTile.shader != shader) sustainTile.shader = shader;
-			sustainTile.setColorTransform(colorTransform.redMultiplier, colorTransform.blueMultiplier, colorTransform.redMultiplier);
+			sustainTile.setColorTransform();
+			sustainTile.colorTransform.concat(colorTransform);
 			sustainTile.scale.copyFrom(scale);
 			sustainTile.updateHitbox();
 			sustainTile.alpha = alpha;
@@ -318,11 +323,10 @@ class EventMetaNote extends MetaNote
 		updateHitbox();
 		
 		eventText = new FlxText(0, 0, width, '', 12);
-		eventText.setFormat(eventText.font, 12, FlxColor.WHITE, CENTER, FlxTextBorderStyle.SHADOW, FlxColor.BLACK);
-		eventText.borderSize = 2; // Add this line after to control offset
+		eventText.setFormat(eventText.font, 12, FlxColor.WHITE, CENTER, SHADOW_XY(2, 2), FlxColor.BLACK);
 		eventText.scrollFactor.x = 0;
 		
-		gui = new EventNoteGui();
+		gui = new EventNoteGui(this);
 		updateEventInfo();
 	}
 	public override function update(elapsed:Float):Void {
@@ -332,6 +336,8 @@ class EventMetaNote extends MetaNote
 	public override function draw():Void {
 		super.draw();
 		
+		gui.updateHover(EventNoteGui.closestGui == gui);
+		gui.alpha = (FlxG.mouse.overlaps(gui.rect) ? 1 : alpha);
 		gui.setPosition(x - gui.rect.width, y);
 		gui.alpha = alpha;
 		gui.draw();
@@ -349,6 +355,7 @@ class EventMetaNote extends MetaNote
 	public function updateEventInfo() {
 		gui.events = events;
 		gui.updateDisplay();
+		gui.updateHover(gui.hovering, true);
 		
 		eventText.text = Std.string(events.length);
 	}
@@ -357,23 +364,46 @@ class EventMetaNote extends MetaNote
 	public override function updateSustainToZoom(zoom:Float = 1) {}
 }
 
+@:access(states.editors.ChartingState)
 class EventNoteGui extends FlxSpriteGroup {
 	public static var maxWidth:Float = (ChartingState.GRID_SIZE * 5);
+	public var selectedEventSprite:FlxSprite;
 	public var events:Array<Array<String>>;
+	public var eventNote:EventMetaNote;
 	
 	public var eventContainer:FlxSpriteGroup;
 	public var hovering:Bool = false;
 	public var rect:FlxSprite;
 	
-	public function new() {
+	public var fields:FlxText;
+	public var desc:FlxText;
+	
+	var valuePair:FlxTextFormatMarkerPair;
+	var titlePair:FlxTextFormatMarkerPair;
+	
+	public static var closestGui:EventNoteGui = null;
+	
+	public function new(event:EventMetaNote) {
 		super();
 		
-		rect = new FlxSprite().makeGraphic(1, 1, FlxColor.WHITE);
-		rect.color = 0xff100010;
+		eventNote = event;
+		
+		rect = new FlxSprite().makeGraphic(1, 1, FlxColor.BLACK);
+		rect.alpha = .6;
 		add(rect);
+		
+		fields = new FlxText(-500 - 6, 1, 500, '', 12);
+		fields.setFormat(Paths.font('vcr.ttf'), 12, 0xffffff, RIGHT, FlxTextBorderStyle.OUTLINE, 0xff000000);
+		add(fields);
+		desc = new FlxText(-410 - 6, 1, 410, '', 12);
+		desc.setFormat(Paths.font('vcr.ttf'), 12, 0xa3a3a3, RIGHT, FlxTextBorderStyle.OUTLINE, 0x80000000);
+		add(desc);
 		
 		eventContainer = new FlxSpriteGroup();
 		add(eventContainer);
+		
+		valuePair = new FlxTextFormatMarkerPair(new FlxTextFormat(0x80ffc0), '\u0100');
+		titlePair = new FlxTextFormatMarkerPair(new FlxTextFormat(0xffffff), '\u0101');
 	}
 	
 	public function updateDisplay():Void {
@@ -394,6 +424,7 @@ class EventNoteGui extends FlxSpriteGroup {
 			
 			eventContainer.remove(sprite, true);
 			
+			sprite.ID = i;
 			sprite.loadGraphic(Paths.image('editors/events/icons/${event[0].length == 0 ? 'default' : event[0]}') ?? Paths.image('editors/events/icons/default'));
 			sprite.setGraphicSize(size);
 			sprite.updateHitbox();
@@ -407,15 +438,52 @@ class EventNoteGui extends FlxSpriteGroup {
 	public override function update(elapsed:Float):Void {
 		super.update(elapsed);
 		
-		hovering = FlxG.mouse.overlaps(rect);
+		if (FlxG.mouse.overlaps(rect)) {
+			if (closestGui == null || Math.abs(y + height * .5 - FlxG.mouse.y) < Math.abs(closestGui.y + closestGui.height * .5 - FlxG.mouse.y))
+				closestGui = this;
+		}
+	}
+	
+	public function select(bounds:flixel.math.FlxRect):Void {
+		var charter:ChartingState = ChartingState.instance;
+		var selected:Bool = false;
+		
+		for (event in eventContainer) {
+			var eventBounds = event.getScreenBounds(null, charter.camUI);
+			eventBounds.top -= charter.scrollY;
+			eventBounds.bottom -= charter.scrollY;
+
+			if (bounds.overlaps(eventBounds) && !Lambda.exists(charter.selectedEvents, (e) -> e.event == events[event.ID])) {
+				charter.selectedEvents.push({event: events[event.ID], note: eventNote});
+				selected = true;
+			}
+		}
+		
+		if (selected)
+			charter.onSelectNote();
+	}
+	
+	public function updateHover(hovering:Bool, force:Bool = false):Void {
+		var charter:ChartingState = ChartingState.instance;
+		
+		this.hovering = hovering;
+		
+		if (hovering)
+			closestGui = null;
 		
 		var near:Null<Float> = null;
 		var closest:FlxSprite = null;
 		
+		var sine:Float = (.75 + Math.cos(Math.PI * charter.noteSelectionSine * 2) / 4);
+		
 		for (event in eventContainer) {
 			if (!event.alive) continue;
 			
-			event.setColorTransform(1, 1, 1, alpha);
+			if (Lambda.exists(charter.selectedEvents, (e) -> e.event == events[event.ID])) {
+				event.setColorTransform(sine, sine, sine, alpha, -32, 64, 0);
+			} else {
+				event.setColorTransform(1, 1, 1, alpha);
+			}
 			
 			if (hovering && FlxG.mouse.overlaps(event)) {
 				var dist:Float = Math.sqrt(Math.pow(FlxG.mouse.x - event.x - event.width * .5, 2) + Math.pow(FlxG.mouse.y - event.y - event.height * .5, 2));
@@ -430,12 +498,85 @@ class EventNoteGui extends FlxSpriteGroup {
 		}
 		
 		if (closest != null) {
+			fields.visible = desc.visible = true;
+			
+			var selection = Lambda.find(charter.selectedEvents, (e) -> e.event == events[closest.ID]);
+			var redM:Int = (selection == null || FlxG.keys.pressed.SHIFT ? 0 : -153);
 			var m:Int = (FlxG.mouse.pressed ? -64 : 128);
-			closest.setColorTransform(1, 1, 1, alpha, m, m, m);
+			
+			if (selection != null && FlxG.keys.pressed.SHIFT) {
+				closest.setColorTransform(1, 1, 1, alpha, m - 32, m + redM + 64, m + redM);
+			} else {
+				closest.setColorTransform(1, 1, 1, alpha, m, m + redM, m + redM);
+			}
+			
+			if (FlxG.mouse.justReleased) {
+				if (selection != null) { // snipe
+					if (FlxG.keys.pressed.SHIFT) {
+						charter.selectedEvents.remove(selection);
+						
+						return;
+					}
+					
+					if (eventNote.events.length > 1) {
+						events.remove(events[closest.ID]);
+						eventNote.updateEventInfo();
+						
+						charter.curEventSelected = Std.int(Math.min(charter.curEventSelected, eventNote.events.length - 1));
+						
+						charter.selectedEvents.remove(selection);
+					} else {
+						charter.selectedNotes.remove(eventNote);
+						charter.events.remove(eventNote);
+						charter.curRenderedNotes.remove(eventNote, true);
+					}
+					
+					charter.addUndoAction(DELETE_EVENT, {events: [selection]});
+					
+					charter.updateSelectedEvents();
+					charter.resetSelectedNotes();
+					selectedEventSprite = null;
+					
+					return;
+				} else {
+					if (!FlxG.keys.pressed.SHIFT) charter.resetSelectedNotes();
+					
+					// if (!charter.selectedNotes.contains(eventNote)) charter.selectedNotes.push(eventNote);
+					charter.selectedEvents.push({event: events[closest.ID], note: eventNote});
+					charter.updateSelectedEventText();
+				}
+			}
+			
+			var info:Array<String> = events[closest.ID];
+			var fieldPadding:Int = Std.int(Math.max(Math.max( // umm yeah this is annoying actually
+				(info[0].length == 0 ? 4 : info[0].length),
+				(info[1].length == 0 ? 7 : info[1].length)
+				), (info[2].length == 0 ? 7 : info[2].length)
+			));
+			var fieldSpace:String = ('').rpad(' ', fieldPadding);
+			
+			fields.text = 'event  $fieldSpace\nvalue 1  $fieldSpace\nvalue 2  $fieldSpace';
+			desc.visible = true;
+			desc.applyMarkup(
+				(info[0].length == 0 ? 'None' : '\u0101' + info[0] + '\u0101') +
+				'\n' + (info[1].length == 0 ? '<empty>' : '\u0100' + info[1] + '\u0100') +
+				'\n' + (info[2].length == 0 ? '<empty>' : '\u0100' + info[2] + '\u0100')
+			, [
+				valuePair,
+				titlePair
+			]);
+		} else if (desc.visible || force) {
+			desc.visible = false;
+			fields.text = ('\n' + events.length + (events.length == 1 ? ' event' : ' events')); // Lol
 		}
+		
+		selectedEventSprite = closest;
 	}
 	
 	public override function draw():Void {
+		fields.alpha = .5;
+		desc.alpha = 1;
+		
 		super.draw();
 	}
 }

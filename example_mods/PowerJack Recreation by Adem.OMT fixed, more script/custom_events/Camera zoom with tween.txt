@@ -1,0 +1,4 @@
+Value 1: easetype
+Value 2: speed,zoom
+some cool eases:
+back,elastic,bounce,linear,quad,sine

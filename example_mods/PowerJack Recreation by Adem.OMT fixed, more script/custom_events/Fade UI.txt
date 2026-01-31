@@ -1,0 +1,4 @@
+Fade the UI either in or out
+
+Value 1: Type (0 = Fade in, 1 = Fade out)
+Value 2: How long it takes

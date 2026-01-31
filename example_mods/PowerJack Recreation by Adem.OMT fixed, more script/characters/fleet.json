@@ -1,0 +1,179 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				-57,
+				375
+			],
+			"anim": "singUP",
+			"fps": 12,
+			"name": "upunch0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				145,
+				186
+			],
+			"anim": "idle",
+			"fps": 12,
+			"name": "idle_",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-126,
+				-61
+			],
+			"anim": "singRIGHT",
+			"fps": 12,
+			"name": "rightpunch0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-120,
+				-42
+			],
+			"anim": "singLEFT",
+			"fps": 12,
+			"name": "leftpucnh0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				246,
+				78
+			],
+			"anim": "singUP-hit",
+			"fps": 12,
+			"name": "uppunched0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				38,
+				7
+			],
+			"anim": "singDOWN-hit",
+			"fps": 12,
+			"name": "downpunched0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-9,
+				-76
+			],
+			"anim": "singRIGHT-hit",
+			"fps": 12,
+			"name": "rightpunched0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				279,
+				-30
+			],
+			"anim": "singLEFT-hit",
+			"fps": 12,
+			"name": "leftpunched0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				35,
+				56
+			],
+			"anim": "block",
+			"fps": 12,
+			"name": "block0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				237,
+				100
+			],
+			"anim": "dodge",
+			"fps": 12,
+			"name": "dodge0",
+			"indices": []
+		},
+		{
+			"offsets": [
+				246,
+				78
+			],
+			"indices": [],
+			"fps": 12,
+			"anim": "singUP-alt",
+			"loop": false,
+			"name": "uppunched0"
+		},
+		{
+			"offsets": [
+				38,
+				7
+			],
+			"indices": [],
+			"fps": 12,
+			"anim": "singDOWN-alt",
+			"loop": false,
+			"name": "downpunched0"
+		},
+		{
+			"offsets": [
+				279,
+				-30
+			],
+			"indices": [],
+			"fps": 12,
+			"anim": "singLEFT-alt",
+			"loop": false,
+			"name": "leftpunched0"
+		},
+		{
+			"offsets": [
+				-9,
+				-79
+			],
+			"indices": [],
+			"fps": 12,
+			"anim": "singRIGHT-alt",
+			"loop": false,
+			"name": "rightpunched0"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": true,
+	"image": "characters/character_updated",
+	"position": [
+		170,
+		450
+	],
+	"healthicon": "fleetway",
+	"flip_x": false,
+	"healthbar_colors": [
+		239,
+		129,
+		68
+	],
+	"camera_position": [
+		6,
+		-296
+	],
+	"sing_duration": 6.1,
+	"scale": 1.9,
+	"_editor_isPlayer": false
+}

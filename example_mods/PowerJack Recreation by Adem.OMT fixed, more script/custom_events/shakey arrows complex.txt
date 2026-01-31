@@ -1,0 +1,6 @@
+Value1
+higher the number
+the more it moves left and right 0 
+Value2
+higher the number
+the more it moves up and down 0 is none

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Powerjackhealthbar.png">
+	<!-- Created using the Spritesheet and XML generator -->
+	<!-- https://uncertainprod.github.io/FNF-Spritesheet-XML-generator-Web -->
+	<SubTexture name="Powerjackhealthbar0000" x="864" y="0" width="864" height="352" frameX="-12" frameY="-138" frameWidth="964" frameHeight="525"/>
+	<SubTexture name="Powerjackhealthbar0001" x="864" y="704" width="864" height="352" frameX="-12" frameY="-138" frameWidth="964" frameHeight="525"/>
+	<SubTexture name="Powerjackhealthbar0002" x="0" y="1056" width="864" height="352" frameX="-12" frameY="-138" frameWidth="964" frameHeight="525"/>
+	<SubTexture name="Powerjackhealthbar0003" x="0" y="0" width="864" height="352" frameX="-12" frameY="-138" frameWidth="964" frameHeight="525"/>
+	<SubTexture name="Powerjackhealthbar0004" x="0" y="352" width="864" height="352" frameX="-12" frameY="-138" frameWidth="964" frameHeight="525"/>
+	<SubTexture name="Powerjackhealthbar0005" x="864" y="352" width="864" height="352" frameX="-12" frameY="-138" frameWidth="964" frameHeight="525"/>
+	<SubTexture name="Powerjackhealthbar0006" x="0" y="704" width="864" height="352" frameX="-12" frameY="-138" frameWidth="964" frameHeight="525"/>
+	<SubTexture name="Powerjackhealthbar0007" x="864" y="1056" width="864" height="352" frameX="-12" frameY="-138" frameWidth="964" frameHeight="525"/>
+</TextureAtlas>

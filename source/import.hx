@@ -86,7 +86,7 @@ import backend.window.WindowUtils;
 import objects.AudioDisplay;
 
 //Thank you Yutamon for letting me use your utils!
-import cache.old.*;
+import cache.Cache;
 
 import backend.Cursor;
 

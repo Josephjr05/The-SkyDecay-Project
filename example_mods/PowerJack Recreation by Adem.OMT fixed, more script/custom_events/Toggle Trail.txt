@@ -1,0 +1,6 @@
+Toggle Ghost Trail Event
+The color of the trail is used based off the health bar color.
+1 = on
+0/blank = off
+Value 1: Toggles Dad's trail
+Value 2: Toggles BF's trail

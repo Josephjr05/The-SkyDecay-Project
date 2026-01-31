@@ -1,0 +1,2 @@
+Flips the positions of the arrows, again.
+(Opponent notes goes back, BF notes go to back.)

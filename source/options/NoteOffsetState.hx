@@ -10,6 +10,7 @@ import states.stages.Stage as BackgroundStage;
 class NoteOffsetState extends MusicBeatState
 {
 	var stageDirectory:String = 'week1';
+	var createStage:Bool = true;
 	var boyfriend:Character;
 	var gf:Character;
 
@@ -23,8 +24,8 @@ class NoteOffsetState extends MusicBeatState
 	var dumbTexts:FlxTypedGroup<FlxText>;
 
 	var barPercent:Float = 0;
-	var delayMin:Int = -1000;
-	var delayMax:Int = 1000;
+	var delayMin:Int = -500;
+	var delayMax:Int = 500;
 	var timeBar:Bar;
 	var timeTxt:FlxText;
 	var beatText:Alphabet;
@@ -35,8 +36,9 @@ class NoteOffsetState extends MusicBeatState
 	var controllerPointer:FlxSprite;
 	var _lastControllerMode:Bool = false;
 
-	override public function create()
-	{
+	override public function create() {
+		// preCreate();
+		
 		#if DISCORD_ALLOWED
 		DiscordClient.changePresence("Delay/Combo Offset Menu", null);
 		#end
@@ -58,8 +60,12 @@ class NoteOffsetState extends MusicBeatState
 		FlxG.sound.pause();
 
 		// Stage
-		Paths.setCurrentLevel(stageDirectory);
-		new BackgroundStage();
+		if (createStage) {
+			Paths.setCurrentLevel(stageDirectory);
+			new BackgroundStage();
+		}
+
+		// preCreate();
 
 		// Characters
 		gf = new Character(400, 130, 'gf');
@@ -167,7 +173,8 @@ class NoteOffsetState extends MusicBeatState
 		updateMode();
 		_lastControllerMode = true;
 
-		Conductor.bpm = 128.0;
+		Conductor.bpm = 128;
+		Conductor.mapBPMChanges();
 		FlxG.sound.playMusic(Paths.music('offsetSong'), 1, true);
 
 		super.create();
@@ -182,6 +189,8 @@ class NoteOffsetState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
+		// preUpdate(elapsed);
+		
 		var addNum:Int = 1;
 		if(FlxG.keys.pressed.SHIFT || FlxG.gamepads.anyPressed(LEFT_SHOULDER))
 		{
@@ -203,7 +212,7 @@ class NoteOffsetState extends MusicBeatState
 			// changed to controller mid state
 			if(controls.controllerMode)
 			{
-				var mousePos = FlxG.mouse.getScreenPosition(camHUD);
+				var mousePos = FlxG.mouse.getViewPosition(camHUD);
 				controllerPointer.x = mousePos.x;
 				controllerPointer.y = mousePos.y;
 			}
@@ -303,7 +312,7 @@ class NoteOffsetState extends MusicBeatState
 			{
 				holdingObjectType = null;
 				if(!controls.controllerMode)
-					FlxG.mouse.getScreenPosition(camHUD, startMousePos);
+					FlxG.mouse.getViewPosition(camHUD, startMousePos);
 				else
 					controllerPointer.getScreenPosition(startMousePos, camHUD);
 
@@ -335,7 +344,7 @@ class NoteOffsetState extends MusicBeatState
 				{
 					var mousePos:FlxPoint = null;
 					if(!controls.controllerMode)
-						mousePos = FlxG.mouse.getScreenPosition(camHUD);
+						mousePos = FlxG.mouse.getViewPosition(camHUD);
 					else
 						mousePos = controllerPointer.getScreenPosition(camHUD);
 
@@ -419,6 +428,8 @@ class NoteOffsetState extends MusicBeatState
 
 		Conductor.songPosition = FlxG.sound.music.time;
 		super.update(elapsed);
+		
+		//postUpdate(elapsed);
 	}
 
 	var zoomTween:FlxTween;
@@ -441,23 +452,16 @@ class NoteOffsetState extends MusicBeatState
 		if(curBeat % 4 == 2)
 		{
 			FlxG.camera.zoom = 1.15;
-
-			if(zoomTween != null) zoomTween.cancel();
-			zoomTween = FlxTween.tween(FlxG.camera, {zoom: 1}, 1, {ease: FlxEase.circOut, onComplete: function(twn:FlxTween)
-				{
-					zoomTween = null;
-				}
-			});
-
+			
 			beatText.alpha = 1;
 			beatText.y = 320;
 			beatText.velocity.y = -150;
-			if(beatTween != null) beatTween.cancel();
-			beatTween = FlxTween.tween(beatText, {alpha: 0}, 1, {ease: FlxEase.sineIn, onComplete: function(twn:FlxTween)
-				{
-					beatTween = null;
-				}
-			});
+
+			if (zoomTween != null) zoomTween.cancel();
+			zoomTween = FlxTween.tween(FlxG.camera, {zoom: 1}, 1, {ease: FlxEase.circOut, onComplete: (_) -> zoomTween = null});
+			
+			if (beatTween != null) beatTween.cancel();
+			beatTween = FlxTween.tween(beatText, {alpha: 0}, 1, {ease: FlxEase.sineIn, onComplete: (_) -> beatTween = null});
 		}
 
 		lastBeatHit = curBeat;
@@ -509,8 +513,8 @@ class NoteOffsetState extends MusicBeatState
 
 	function updateNoteDelay()
 	{
-		ClientPrefs.data.noteOffset = Math.round(barPercent);
-		timeTxt.text = Language.getPhrase('delay_current_offset', 'Current offset: {1} ms', [Math.floor(barPercent)]);
+		delay = ClientPrefs.data.noteOffset = Math.round(barPercent);
+		timeTxt.text = Language.getPhrase('delay_current_offset', 'Current offset: {1} ms', [Std.string(Math.round(barPercent))]);
 	}
 
 	function updateMode()

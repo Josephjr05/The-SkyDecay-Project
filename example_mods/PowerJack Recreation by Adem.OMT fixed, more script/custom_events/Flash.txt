@@ -1,0 +1,6 @@
+Create a flash effect over the game.
+
+Value 1: Color (in Hexidecimal) 
+(ex: "000000" "FFFFFF" "30A0F0") 
+
+Value 2: Duration (in Seconds) 

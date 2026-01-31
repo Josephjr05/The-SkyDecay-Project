@@ -1,0 +1,4 @@
+Zooms in the camera and back out
+
+Value 1 controls the amount
+Value 2 controls the duration of the zoom

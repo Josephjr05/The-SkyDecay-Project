@@ -56,7 +56,6 @@ class Note extends FlxSprite
 		'GF Sing',
 		'No Animation'
 	];
-	public var extraData:Map<String, Dynamic> = new Map<String, Dynamic>();
 
 	public var strumTime:Float = 0;
 	public var noteData:Int = 0;
@@ -157,6 +156,8 @@ class Note extends FlxSprite
 		return hitsoundForce ? hitsoundVolume : 0.0;
 	}
 	public var hitsound:String = 'hitsound';
+	
+	public var section:Int = 0;
 	
 	private function set_multSpeed(value:Float):Float {
 		resizeByRatio(value / multSpeed);

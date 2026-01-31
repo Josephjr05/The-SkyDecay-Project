@@ -1,0 +1,4 @@
+Flashes Camera
+
+Value 1: opacity
+Value 2: speed

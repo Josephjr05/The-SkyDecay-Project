@@ -1,0 +1,6 @@
+Set value1 to normalfor no arrow shake
+Set value1 to little for little shake
+Set value1 to medium for medium shake
+Set value1 to large for alot of shake
+DONT CHANGE VALUE2
+thank you BL0KYBL0K on github for da script :O

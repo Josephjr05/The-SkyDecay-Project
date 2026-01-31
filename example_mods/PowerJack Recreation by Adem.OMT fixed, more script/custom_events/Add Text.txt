@@ -1,0 +1,5 @@
+put text on middle of screen
+idk.
+
+Value 1: Text
+Value 2: Duration

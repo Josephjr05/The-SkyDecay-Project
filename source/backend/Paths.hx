@@ -304,11 +304,11 @@ class Paths
 		return [Paths.getShadersPath('$dir/')];
 
 		#else
-		var foldersToCheck:Array<String> = [
-			Paths.mods(Mods.currentModDirectory + '/$dir/'),
-			Paths.mods('$dir/'),
-			Paths.modFolders('$dir/'),
-		];
+		var foldersToCheck:Array<String> = [];
+		if(Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0)
+			foldersToCheck.push(Paths.mods(Mods.currentModDirectory + '/$dir/'));
+		foldersToCheck.push(Paths.mods('$dir/'));
+		foldersToCheck.push(Paths.modFolders('$dir/'));
 
 		if(!modsOnly)
 			foldersToCheck.push(Paths.getSharedPath('$dir/'));
@@ -534,8 +534,12 @@ class Paths
 			var customFile:String = file;
 			if (parentfolder != null) customFile = '$parentfolder/$file';
 
-			var modded:String = modFolders(customFile);
-			if(FileSystem.exists(modded)) return modded;
+			try {
+				var modded:String = modFolders(customFile);
+				if(FileSystem.exists(modded)) return modded;
+			} catch(e:Dynamic) {
+				trace('Error in getPath modFolders: $e');
+			}
 		}
 		#end
 
@@ -724,115 +728,115 @@ class Paths
 	// Similar to all functions, but instead this returns if it can find a modded file, or an asset file, as an object.
 	// Example: Paths.assetLocation('images/character.png') will return the modded file if it exists, or the asset file if it doesn't.
 	// Will return: {location: 'assets/images/character.png', modded: false} if the asset file exists, or {location: 'mods/character.png', modded: true} if the modded file exists.
-	public static function assetLocation(key:String, ?parentFolder:String = null, ?pathType:PathType = IMAGES, ?allowNull:Bool = false, ?topModOnly:Bool = false):Null<{location:String, modded:Bool}>
-	{
-		var ext = switch (pathType) {
-			case IMAGES: IMAGE_EXT;
-			case SOUNDS: SOUND_EXT;
-			case MUSIC: SOUND_EXT;
-			case VIDEOS: VIDEO_EXT;
-			case SHADERS: "frag";
-			case DATA | TEXT: "txt";
-			case LUA: "lua";
-			case HSCRIPT: "hx";
-			default: IMAGE_EXT;
-		};
+	// public static function assetLocation(key:String, ?parentFolder:String = null, ?pathType:PathType = IMAGES, ?allowNull:Bool = false, ?topModOnly:Bool = false):Null<{location:String, modded:Bool}>
+	// {
+	// 	var ext = switch (pathType) {
+	// 		case IMAGES: IMAGE_EXT;
+	// 		case SOUNDS: SOUND_EXT;
+	// 		case MUSIC: SOUND_EXT;
+	// 		case VIDEOS: VIDEO_EXT;
+	// 		case SHADERS: "frag";
+	// 		case DATA | TEXT: "txt";
+	// 		case LUA: "lua";
+	// 		case HSCRIPT: "hx";
+	// 		default: IMAGE_EXT;
+	// 	};
 
-		var folder = switch (pathType) {
-			case IMAGES: "images";
-			case SOUNDS: "sounds";
-			case MUSIC: "music";
-			case VIDEOS: "videos";
-			case SHADERS: "shaders";
-			case DATA: "data";
-			case TEXT: "data";
-			case LUA: "scripts";
-			case HSCRIPT: "scripts";
-			default: "images";
-		};
+	// 	var folder = switch (pathType) {
+	// 		case IMAGES: "images";
+	// 		case SOUNDS: "sounds";
+	// 		case MUSIC: "music";
+	// 		case VIDEOS: "videos";
+	// 		case SHADERS: "shaders";
+	// 		case DATA: "data";
+	// 		case TEXT: "data";
+	// 		case LUA: "scripts";
+	// 		case HSCRIPT: "scripts";
+	// 		default: "images";
+	// 	};
 
-		var type = switch (pathType) {
-			case IMAGES: IMAGE;
-			case SOUNDS: SOUND;
-			case MUSIC: SOUND;
-			case VIDEOS: BINARY;
-			case SHADERS: AssetType.TEXT;
-			case DATA: AssetType.TEXT;
-			case TEXT: AssetType.TEXT;
-			case LUA: AssetType.TEXT;
-			case HSCRIPT: AssetType.TEXT;
-			default: IMAGE;
-		};
+	// 	var type = switch (pathType) {
+	// 		case IMAGES: IMAGE;
+	// 		case SOUNDS: SOUND;
+	// 		case MUSIC: SOUND;
+	// 		case VIDEOS: BINARY;
+	// 		case SHADERS: AssetType.TEXT;
+	// 		case DATA: AssetType.TEXT;
+	// 		case TEXT: AssetType.TEXT;
+	// 		case LUA: AssetType.TEXT;
+	// 		case HSCRIPT: AssetType.TEXT;
+	// 		default: IMAGE;
+	// 	};
 
-		var filePath = folder != "" ? '$folder/$key.$ext' : '$key.$ext';
+	// 	var filePath = folder != "" ? '$folder/$key.$ext' : '$key.$ext';
 
-		#if MODS_ALLOWED
-		// Check enabled mods first
-		if (Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0) {
-			var modPath = 'mods/${Mods.currentModDirectory}/$filePath';
-			if (FileSystem.exists(modPath)) {
-				return {location: modPath, modded: true};
-			}
-		}
-		if (!topModOnly) {
-			for (mod in Mods.parseList().enabled) {
-				var modPath = 'mods/$mod/$filePath';
-				if (FileSystem.exists(modPath)) {
-					return {location: modPath, modded: true};
-				}
-			}
-			for (mod in Mods.getGlobalMods()) {
-				var modPath = 'mods/$mod/$filePath';
-				if (FileSystem.exists(modPath)) {
-					return {location: modPath, modded: true};
-				}
-			}
-			// Check base mods folder (for loose files)
-			var looseModPath = 'mods/$filePath';
-			if (FileSystem.exists(looseModPath)) {
-				return {location: looseModPath, modded: true};
-			}
-		}
-		#end
+	// 	#if MODS_ALLOWED
+	// 	// Check enabled mods first
+	// 	if (Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0) {
+	// 		var modPath = 'mods/${Mods.currentModDirectory}/$filePath';
+	// 		if (FileSystem.exists(modPath)) {
+	// 			return {location: modPath, modded: true};
+	// 		}
+	// 	}
+	// 	if (!topModOnly) {
+	// 		for (mod in Mods.parseList().enabled) {
+	// 			var modPath = 'mods/$mod/$filePath';
+	// 			if (FileSystem.exists(modPath)) {
+	// 				return {location: modPath, modded: true};
+	// 			}
+	// 		}
+	// 		for (mod in Mods.getGlobalMods()) {
+	// 			var modPath = 'mods/$mod/$filePath';
+	// 			if (FileSystem.exists(modPath)) {
+	// 				return {location: modPath, modded: true};
+	// 			}
+	// 		}
+	// 		// Check base mods folder (for loose files)
+	// 		var looseModPath = 'mods/$filePath';
+	// 		if (FileSystem.exists(looseModPath)) {
+	// 			return {location: looseModPath, modded: true};
+	// 		}
+	// 	}
+	// 	#end
 
-		// Fallback to shared assets
-		var assetPath = getSharedPath(filePath);
-		if (FileSystem.exists(assetPath)) {
-			return {location: assetPath, modded: false};
-		}
+	// 	// Fallback to shared assets
+	// 	var assetPath = getSharedPath(filePath);
+	// 	if (FileSystem.exists(assetPath)) {
+	// 		return {location: assetPath, modded: false};
+	// 	}
 
-		return allowNull ? {location: null, modded: false} : null;
-	}
+	// 	return allowNull ? {location: null, modded: false} : null;
+	// }
 
-	public static inline function isAssetInCurrentMod(key:String)
-	{
-		var assetLoc = assetLocation(key, null, IMAGES, true, true);
-		#if MODS_ALLOWED
-		if (assetLoc != null && assetLoc.modded) {
-			var modDir = Mods.currentModDirectory;
-			if (modDir == null || modDir == "") return false;
-			// Check if the asset path contains the current mod directory as its direct folder
-			return assetLoc.location.indexOf('mods/' + modDir + '/') == 0;
-		}
-		#end
-		return false;
-	}
+	// public static inline function isAssetInCurrentMod(key:String)
+	// {
+	// 	var assetLoc = assetLocation(key, null, IMAGES, true, true);
+	// 	#if MODS_ALLOWED
+	// 	if (assetLoc != null && assetLoc.modded) {
+	// 		var modDir = Mods.currentModDirectory;
+	// 		if (modDir == null || modDir == "") return false;
+	// 		// Check if the asset path contains the current mod directory as its direct folder
+	// 		return assetLoc.location.indexOf('mods/' + modDir + '/') == 0;
+	// 	}
+	// 	#end
+	// 	return false;
+	// }
 
-	public static inline function isAssetInMod(key:String, mod:String)
-	{
-		var assetLoc = assetLocation(key, null, IMAGES, true, true);
-		if (assetLoc != null && assetLoc.modded) {
-			// Check if the asset path contains the specified mod directory as its direct folder
-			return assetLoc.location.indexOf('mods/' + mod + '/') == 0;
-		}
-		return false;
-	}
+	// public static inline function isAssetInMod(key:String, mod:String)
+	// {
+	// 	var assetLoc = assetLocation(key, null, IMAGES, true, true);
+	// 	if (assetLoc != null && assetLoc.modded) {
+	// 		// Check if the asset path contains the specified mod directory as its direct folder
+	// 		return assetLoc.location.indexOf('mods/' + mod + '/') == 0;
+	// 	}
+	// 	return false;
+	// }
 
-	public static inline function assetInTopMod(key:String, ?parentFolder:String = null, ?pathType:PathType = IMAGES):Bool
-	{
-		var assetLocation = assetLocation(key, parentFolder, pathType, true, true);
-		return assetLocation != null && assetLocation.modded;
-	}
+	// public static inline function assetInTopMod(key:String, ?parentFolder:String = null, ?pathType:PathType = IMAGES):Bool
+	// {
+	// 	var assetLocation = assetLocation(key, parentFolder, pathType, true, true);
+	// 	return assetLocation != null && assetLocation.modded;
+	// }
 
 	static public function image(key:String, ?parentFolder:String = null, ?allowGPU:Bool = true):FlxGraphic
 	{
@@ -991,7 +995,12 @@ class Paths
 				if (FileSystem.exists(mods('$mod/$modKey')))
 					return true;
 
-			if (FileSystem.exists(mods(Mods.currentModDirectory + '/' + modKey)) || FileSystem.exists(mods(modKey)))
+			if(Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0)
+			{
+				if (FileSystem.exists(mods(Mods.currentModDirectory + '/' + modKey)))
+					return true;
+			}
+			if (FileSystem.exists(mods(modKey)))
 				return true;
 		}
 		#end
@@ -1008,7 +1017,12 @@ class Paths
 			if (FileSystem.exists(mods('$mod/$modKey')))
 				return true;
 
-		if (FileSystem.exists(mods(Mods.currentModDirectory + '/' + modKey)) || FileSystem.exists(mods(modKey)))
+		if(Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0)
+		{
+			if (FileSystem.exists(mods(Mods.currentModDirectory + '/' + modKey)))
+				return true;
+		}
+		if (FileSystem.exists(mods(modKey)))
 			return true;
 		#end
 		return false;
@@ -1138,7 +1152,13 @@ class Paths
 			}
 		}
 		localTrackedAssets.push(file);
-		return currentTrackedSounds.get(file);
+		var sound = currentTrackedSounds.get(file);
+		if(sound == null && beepOnNull)
+		{
+			trace('SOUND NOT FOUND (null return): $key, PATH: $path');
+			return FlxAssets.getSound('flixel/sounds/beep');
+		}
+		return sound;
 	}
 
 	inline public static function soundPath(path:String, key:String, ?library:String)
@@ -1173,33 +1193,8 @@ class Paths
 	}
 
 	#if MODS_ALLOWED
-	inline static public function mods(key:String = ''):String {
-		var path = 'mods/' + key;
-		if (!FileSystem.exists('mods/')) {
-
-			trace('Creating mods folder...');
-			FileSystem.createDirectory('mods/');
-
-
-		for (folder in Mods.ignoreModFolders) {
-			var folderPath = 'mods/' + folder;
-			if (!FileSystem.exists(folderPath)) {
-				FileSystem.createDirectory(folderPath);
-			}
-		}
-
-		for (folder in Mods.ignoreModFolders) {
-			var folderPath = 'mods/' + folder;
-			if (FileSystem.exists(folderPath)) {
-				FileSystem.deleteDirectory(folderPath);
-			}
-		}
-
-			File.saveBytes('mods/modTemplate.zip', haxe.Resource.getBytes('modTemp'));
-		}
-
-		return path;
-	}
+	inline static public function mods(key:String = '')
+		return 'mods/' + key;
 
 	inline static public function modsJson(key:String)
 		return modFolders('songs/' + key + '.json');
@@ -1224,95 +1219,29 @@ class Paths
 
 	static public function modFolders(key:String)
 	{
-		#if ARCHIPELAGO_ALLOWED
-		// Check High Quality Trap temp folder first if actively in use
-		if (HighQualityTrapManager.isTrapInUse()) {
-			// Check current mod directory within the trap temp folder first
-			if (Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0) {
-				var siivaFile:String = HighQualityTrapManager.getTempPath() + '/' + Mods.currentModDirectory + '/' + key;
-				var result = checkForRandomFileInFolder(siivaFile);
-				if (result != null) {
-					return result;
-				}
-			}
-
-			// Then check other mod directories within the trap temp folder
-			for (mod in Mods.getGlobalMods()) {
-				var siivaFile:String = HighQualityTrapManager.getTempPath() + '/' + mod + '/' + key;
-				var result = checkForRandomFileInFolder(siivaFile);
-				if (result != null) {
-					return result;
-				}
-			}
-
-			// Finally check base game marker within trap temp folder
-			var siivaBaseFile:String = HighQualityTrapManager.getTempPath() + '/__mixtape__/' + key;
-			var result = checkForRandomFileInFolder(siivaBaseFile);
-			if (result != null) {
-				return result;
-			}
-		}
-		#end
-
 		if(Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0)
 		{
-			var fileToCheck:String = mods(Mods.currentModDirectory + '/' + key);
-			if(FileSystem.exists(fileToCheck))
-				return fileToCheck;
+			try {
+				var fileToCheck:String = mods(Mods.currentModDirectory + '/' + key);
+				if(FileSystem.exists(fileToCheck))
+					return fileToCheck;
+			} catch(e:Dynamic) {
+				trace('Error checking mod folder: $e');
+			}
 		}
 
 		for(mod in Mods.getGlobalMods())
 		{
-			var fileToCheck:String = mods(mod + '/' + key);
-			if(FileSystem.exists(fileToCheck))
-				return fileToCheck;
+			try {
+				var fileToCheck:String = mods(mod + '/' + key);
+				if(FileSystem.exists(fileToCheck))
+					return fileToCheck;
+			} catch(e:Dynamic) {
+				trace('Error checking global mod folder: $e');
+			}
 		}
 		return 'mods/' + key;
 	}
-
-	#if ARCHIPELAGO_ALLOWED
-	/**
-	 * Checks if a path exists as a file or folder from High Quality Trap temp path.
-	 * If it's a folder, randomly selects a file from it.
-	 * If it's a file, returns it directly.
-	 * Returns null if neither exists.
-	 */
-	static function checkForRandomFileInFolder(path:String):Null<String>
-	{
-		if (FileSystem.exists(path)) {
-			if (FileSystem.isDirectory(path)) {
-				// It's a folder - get a random file from it
-				try {
-					var files = FileSystem.readDirectory(path);
-					// Filter out directories and hidden files
-					files = files.filter(function(file) {
-						var fullPath = path + '/' + file;
-						return !FileSystem.isDirectory(fullPath) && !file.startsWith('.');
-					});
-
-					if (files.length > 0) {
-						// Randomly select a file
-						var randomFile = files[FlxG.random.int(0, files.length - 1)];
-						var selectedPath = path + '/' + randomFile;
-						trace('High Quality Trap: Found folder at $path, randomly selected: $randomFile');
-						return selectedPath;
-					} else {
-						trace('High Quality Trap: Folder at $path exists but contains no valid files');
-						return null;
-					}
-				} catch (e:Dynamic) {
-					trace('High Quality Trap: Error reading directory $path: $e');
-					return null;
-				}
-			} else {
-				// It's a file - return it directly
-				return path;
-			}
-		}
-
-		return null;
-	}
-	#end
 	#end
 
 	#if flxanimate

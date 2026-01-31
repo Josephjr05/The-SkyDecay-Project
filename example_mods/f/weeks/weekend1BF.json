@@ -1,0 +1,36 @@
+{
+	"songs": [
+		[
+			"2hot BF Mix",
+			"darnell",
+			[
+				65, 60, 174
+			]
+		],
+		[
+			"Blazin BF Mix",
+			"darnell",
+			[
+				65, 60, 174
+			]
+		]
+	],
+	"hideFreeplay": false,
+	"weekBackground": "phillystreets",
+	"weekCharacters": [
+		"darnell",
+		"bf",
+		"gf"
+	],
+	"storyName": "Due Debts (BF Mix)",
+	"weekName": "Weekend1",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"hideStoryMode": false,
+	"weekBefore": "",
+	"startUnlocked": true,
+	"difficulties": "hard"
+}

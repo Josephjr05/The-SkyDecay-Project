@@ -1,0 +1,3 @@
+does a zoom
+value 1: how far zoom in (leave blank to return to default)
+value 2: time it takes to zoom in steps (leave blank for instant)

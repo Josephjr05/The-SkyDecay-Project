@@ -5,6 +5,10 @@ import Sys.sleep;
 import sys.thread.Thread;
 import lime.app.Application;
 
+#if LUA_ALLOWED
+import psychlua.FunkinLua;
+#end
+
 import hxdiscord_rpc.Discord;
 import hxdiscord_rpc.Types;
 
@@ -68,11 +72,11 @@ class DiscordClient
 
 	public static function initialize()
 	{
-		var discordHandlers:DiscordEventHandlers = DiscordEventHandlers.create();
+		var discordHandlers:DiscordEventHandlers = new DiscordEventHandlers();
 		discordHandlers.ready = cpp.Function.fromStaticFunction(onReady);
-		discordHandlers.disconnected = cpp.Function.fromStaticFunction(onDisconnected);
 		discordHandlers.errored = cpp.Function.fromStaticFunction(onError);
-		Discord.Initialize(clientID, cpp.RawPointer.addressOf(discordHandlers), 1, null);
+		discordHandlers.disconnected = cpp.Function.fromStaticFunction(onDisconnected);
+		Discord.Initialize(clientID, cpp.RawPointer.addressOf(discordHandlers), true, null);
 
 		if(!isInitialized) trace("Discord Client initialized");
 
@@ -108,10 +112,11 @@ class DiscordClient
 		presence.details = details;
 		presence.smallImageKey = smallImageKey;
 		presence.largeImageKey = largeImageKey;
-		presence.largeImageText = "Engine Version: " + states.MainMenuState.psychEngineVersion;
+		presence.largeImageText = 'Version (${states.MainMenuState.psychEngineVersion})';
 		// Obtained times are in milliseconds so they are divided so Discord can use it
 		presence.startTimestamp = Std.int(startTimestamp / 1000);
 		presence.endTimestamp = Std.int(endTimestamp / 1000);
+		
 		updatePresence();
 
 		//trace('Discord RPC Updated. Arguments: $details, $state, $smallImageKey, $hasStartTimestamp, $endTimestamp, $largeImageKey');
@@ -154,7 +159,7 @@ class DiscordClient
 	#end
 
 	#if LUA_ALLOWED
-	public static function addLuaCallbacks(lua:State)
+	public static function implement(lua:State)
 	{
 		Lua_helper.add_callback(lua, "changeDiscordPresence", changePresence);
 		Lua_helper.add_callback(lua, "changeDiscordClientID", function(?newID:String) {
@@ -180,7 +185,7 @@ private final class DiscordPresence
 
 	function new()
 	{
-		__presence = DiscordRichPresence.create();
+		__presence = new DiscordRichPresence();
 	}
 
 	public function toString():String
@@ -191,8 +196,8 @@ private final class DiscordPresence
 			LabelValuePair.weak("smallImageKey", smallImageKey),
 			LabelValuePair.weak("largeImageKey", largeImageKey),
 			LabelValuePair.weak("largeImageText", largeImageText),
-			LabelValuePair.weak("startTimestamp", startTimestamp),
-			LabelValuePair.weak("endTimestamp", endTimestamp)
+			LabelValuePair.weak("startTimestamp", cast startTimestamp),
+			LabelValuePair.weak("endTimestamp", cast endTimestamp)
 		]);
 	}
 
@@ -248,22 +253,22 @@ private final class DiscordPresence
 
 	@:noCompletion inline function get_startTimestamp():Int
 	{
-		return __presence.startTimestamp;
+		return cast __presence.startTimestamp;
 	}
 
 	@:noCompletion inline function set_startTimestamp(value:Int):Int
 	{
-		return __presence.startTimestamp = value;
+		return cast (__presence.startTimestamp = value);
 	}
 
 	@:noCompletion inline function get_endTimestamp():Int
 	{
-		return __presence.endTimestamp;
+		return cast __presence.endTimestamp;
 	}
 
 	@:noCompletion inline function set_endTimestamp(value:Int):Int
 	{
-		return __presence.endTimestamp = value;
+		return cast (__presence.endTimestamp = value);
 	}
 }
 #end

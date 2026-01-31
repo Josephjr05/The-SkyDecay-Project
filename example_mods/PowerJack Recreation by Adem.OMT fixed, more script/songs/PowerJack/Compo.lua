@@ -1,0 +1,1 @@
+function onCreatePost() setProperty('showComboNum', false) setProperty('showRating', false) end

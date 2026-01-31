@@ -212,7 +212,7 @@ class EditorPlayState extends MusicBeatSubstate
 				if(!daNote.mustPress) strumGroup = opponentStrums;
 
 				var strum:StrumNote = strumGroup.members[daNote.noteData];
-				daNote.followStrumNote(strum, fakeCrochet, songSpeed / playbackRate);
+				daNote.followStrumNote(strum, songSpeed / playbackRate);
 
 				if(!daNote.mustPress && daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote)
 					opponentNoteHit(daNote);
@@ -393,25 +393,6 @@ class EditorPlayState extends MusicBeatSubstate
 					sustainNote.parent = swagNote;
 					unspawnNotes.push(sustainNote);
 					swagNote.tail.push(sustainNote);
-
-					sustainNote.correctionOffset = swagNote.height / 2;
-					if(!PlayState.isPixelStage)
-					{
-						if(oldNote.isSustainNote)
-						{
-							oldNote.scale.y *= Note.SUSTAIN_SIZE / oldNote.frameHeight;
-							oldNote.scale.y /= playbackRate;
-							oldNote.resizeByRatio(curStepCrochet / Conductor.stepCrochet);
-						}
-
-						if(ClientPrefs.data.downScroll)
-							sustainNote.correctionOffset = 0;
-					}
-					else if(oldNote.isSustainNote)
-					{
-						oldNote.scale.y /= playbackRate;
-						oldNote.resizeByRatio(curStepCrochet / Conductor.stepCrochet);
-					}
 
 					if (sustainNote.mustPress) sustainNote.x += FlxG.width / 2; // general offset
 					else if(ClientPrefs.data.middleScroll)

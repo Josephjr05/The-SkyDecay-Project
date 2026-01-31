@@ -1,0 +1,4 @@
+Value 1: Camera Speed
+Value 2: Camera Movement Offset
+Leave V1 blank for 3.5
+Leave V2 blank for 10

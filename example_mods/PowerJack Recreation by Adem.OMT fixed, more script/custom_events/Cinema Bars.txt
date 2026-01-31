@@ -1,0 +1,3 @@
+Cinema Bars Event
+    Value 1: 0 min - 360 max
+    Value 2: Tween Name

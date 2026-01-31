@@ -47,8 +47,12 @@ class BaseStage extends FlxBasic
 	public var defaultCamZoom(get, set):Float;
 	public var camFollow(get, never):FlxObject;
 
+	public var stageSprites:FlxTypedGroup<FlxSprite>;
+
 	public function new()
 	{
+		stageSprites = new FlxTypedGroup<FlxSprite>();
+
 		if(game == null)
 		{
 			FlxG.log.error('Invalid state for the stage added!');
@@ -177,4 +181,27 @@ class BaseStage extends FlxBasic
 		return game.defaultCamZoom;
 	}
 	inline private function get_camFollow():FlxObject return game.camFollow;
+
+	// Add a sprite to the stage safely
+	public function addStageSprite(s:FlxSprite):Void
+	{
+	    stageSprites.add(s); // keep track
+	    add(s);              // add to PlayState
+	}
+
+	// Remove all stage sprites safely
+	public function removeAllStageSprites():Void
+	{
+	    stageSprites.forEach(function(s:FlxSprite)
+	    {
+	        if(s != null) remove(s);
+	    });
+	    stageSprites.clear();
+	}
+
+	override public function destroy():Void
+	{
+	    removeAllStageSprites();
+	    super.destroy();
+	}
 }

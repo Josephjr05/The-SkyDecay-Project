@@ -1,0 +1,5 @@
+Intercala el zoom de la cámara del juego a un valor específico en una duración específica en una facilidad específica
+
+Valor1: TargetZoom, Duración (ejemplo: 0.69, 0.1) 
+
+Valor2: facilidad (ejemplo: quadOut)

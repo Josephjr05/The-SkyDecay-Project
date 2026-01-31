@@ -1,0 +1,6 @@
+add whatever zoom u want
+
+if u want the zoom to go back to normal
+then just make the value the same value as the zoom on the original bg
+
+NOTE: ONLY IN VALUE 1

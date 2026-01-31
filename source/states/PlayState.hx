@@ -15,7 +15,6 @@ import flixel.util.FlxSave;
 import flixel.util.FlxSort;
 import flixel.util.FlxStringUtil;
 import flixel.util.FlxSave;
-import flixel.input.keyboard.FlxKey;
 import flixel.animation.FlxAnimationController;
 import haxe.Json;
 import lime.media.openal.AL;
@@ -160,6 +159,7 @@ class PlayState extends MusicBeatState
 		return stageUI == "pixel" || stageUI.endsWith("-pixel");
 
 	public static var SONG:SwagSong = null;
+	public static var EVENTS:SwagSong = null;
 	public static var isStoryMode:Bool = false;
 	public static var storyWeek:Int = 0;
 	public static var storyPlaylist:Array<String> = [];
@@ -367,10 +367,15 @@ class PlayState extends MusicBeatState
 
 	// EVENTS
 	public var blackSprite:FlxSprite;
-	public var stage:Array<FlxBasic> = [];
+	public var stageData:StageFile; // actual stage changing yes
+	public var oldStage:String = null;
+
+	// Multi keys
+	private var keyCount:Int = 4;
 
 	private static var _lastLoadedModDirectory:String = '';
 	public static var nextReloadAll:Bool = false;
+
 	override public function create()
 	{
 		#if MULTITHREADED_LOADING
@@ -561,58 +566,13 @@ class PlayState extends MusicBeatState
 			SONG.stage = StageData.vanillaSongStage(Paths.formatToSongPath(Song.loadedSongName));
 
 		curStage = SONG.stage;
-
-		var stageData:StageFile = StageData.getStageFile(curStage);
-		defaultCamZoom = stageData.defaultZoom;
-
-		stageUI = "normal";
-		if (stageData.stageUI != null && stageData.stageUI.trim().length > 0)
-			stageUI = stageData.stageUI;
-		else if (stageData.isPixelStage == true) //Backward compatibility
-			stageUI = "pixel";
-
-		BF_X = stageData.boyfriend[0];
-		BF_Y = stageData.boyfriend[1];
-		GF_X = stageData.girlfriend[0];
-		GF_Y = stageData.girlfriend[1];
-		DAD_X = stageData.opponent[0];
-		DAD_Y = stageData.opponent[1];
-
-		if(stageData.camera_speed != null)
-			cameraSpeed = stageData.camera_speed;
-
-		boyfriendCameraOffset = stageData.camera_boyfriend;
-		if(boyfriendCameraOffset == null) //Fucks sake should have done it since the start :rolling_eyes:
-			boyfriendCameraOffset = [0, 0];
-
-		opponentCameraOffset = stageData.camera_opponent;
-		if(opponentCameraOffset == null)
-			opponentCameraOffset = [0, 0];
-
-		girlfriendCameraOffset = stageData.camera_girlfriend;
-		if(girlfriendCameraOffset == null)
-			girlfriendCameraOffset = [0, 0];
+		stageData = StageData.getStageFile(curStage);
+		setStageDetails(stageData);
 
 		boyfriendGroup = new FlxSpriteGroup(BF_X, BF_Y);
 		dadGroup = new FlxSpriteGroup(DAD_X, DAD_Y);
 		gfGroup = new FlxSpriteGroup(GF_X, GF_Y);
 
-		switch (curStage)
-		{
-			case 'stage': new Stage(); //Week 1
-			case 'philly': new Philly(); //Week 3
-			case 'limo': new Limo(); //Week 4
-			case 'camellia': new Camellia(); //camellia studio
-			case 'concert': new CamelliaConcert(); //camellia concert
-			case 'cyphisonia': new Cyphisonia(); // cyphisonia ghost camellia stage!
-			case 'planet': new Planet(); //camellia alt Planet
-			case 'limuCastle': new LimuCastle(); // Limu stage 1!
-			case 'cornMaze': new CornMaze(); // Bambi stage
-			case 'phillyStreets': new PhillyStreets(); // Philly Streets!!
-			case 'mangoPark': new MangoPark(); // police racist area!!
-			case 'shipEntrance': new ShipEntrance(); // SKYDECAY SHIP HELL YEAH BF U SUCK!!
-			case 'desktop': new Desktop(); // Desktop stage
-		}
 		if(isPixelStage) introSoundsSuffix = '-pixel';
 
 		#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
@@ -657,6 +617,8 @@ class PlayState extends MusicBeatState
 		boyfriend = new Character(0, 0, SONG.player1, true);
 		startCharacterPos(boyfriend);
 		boyfriendGroup.add(boyfriend);
+
+		addStage(true);
 		
 		if(stageData.objects != null && stageData.objects.length > 0)
 		{
@@ -703,10 +665,12 @@ class PlayState extends MusicBeatState
 				gf.visible = false;
 		}
 		
+	
 		#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
-		// STAGE SCRIPTS
+		/* // STAGE SCRIPTS
 		#if LUA_ALLOWED startLuasNamed('stages/' + curStage + '.lua'); #end
 		#if HSCRIPT_ALLOWED startHScriptsNamed('stages/' + curStage + '.hx'); #end
+		*/
 
 		// CHARACTER SCRIPTS
 		if(gf != null) startCharacterScripts(gf.curCharacter);
@@ -777,7 +741,7 @@ class PlayState extends MusicBeatState
 		healthBar = new Bar(0, FlxG.height * (!ClientPrefs.data.downScroll ? 0.89 : 0.11), 'healthBar', function() return health, 0, 2);
 		healthBar.screenCenter(X);
 		healthBar.leftToRight = false;
-		healthBar.scrollFactor.set();
+		healthBar.scrollFactor.set();    
 		healthBar.visible = !ClientPrefs.data.hideHud;
 		healthBar.alpha = ClientPrefs.data.healthBarAlpha;
 		reloadHealthBarColors();
@@ -906,7 +870,7 @@ class PlayState extends MusicBeatState
 		if(eventNotes.length < 1) checkEventNote();
 	}
 
-	function get_gf():Character {
+	function get_gf():Character { // btw this is to get gf if you're using older scripts, i don't think this matters much but eh
     	if (gfGroup != null && gfGroup.members != null) {
     	    for (char in gfGroup.members) {
     	        if (char != null) return cast char;
@@ -1602,7 +1566,7 @@ class PlayState extends MusicBeatState
 		vocals = new FlxSound();
 		opponentVocals = new FlxSound();
 		gfVocals = new FlxSound();
-		var usable = Paths.isAssetInMod;
+		// var usable = Paths.isAssetInMod;
 		try
 		{
 			if (songData.needsVoices)
@@ -1638,13 +1602,15 @@ class PlayState extends MusicBeatState
 
 		try
 		{
-			var eventsChart:SwagSong = Song.getChart('events', songName);
-			if(eventsChart != null)
-				for (event in eventsChart.events) //Event Notes
+			EVENTS = Song.getChart('events', songName);
+			
+			if (EVENTS != null)
+				for (event in EVENTS.events) //Event Notes
 					for (i in 0...event[1].length)
 						makeEvent(event, i);
+		} catch(e:Dynamic) {
+			EVENTS = null;
 		}
-		catch(e:Dynamic) {}
 
 		var oldNote:Note = null;
 		var sectionsData:Array<SwagSection> = PlayState.SONG.notes;
@@ -1778,6 +1744,17 @@ class PlayState extends MusicBeatState
 		generatedMusic = true;
 	}
 
+
+	public var stagesToLoad:Array<String> = [];
+	public function changeStage(daStage:String):Void
+	{
+		var ogStage:String = curStage;
+		removeStage();
+		curStage = ogStage;
+		stageData = StageData.getStageFile(curStage); 
+		addStage(true);
+	}
+
 	// called only once per different event (Used for precaching)
 	function eventPushed(event:EventNote) {
 	    eventPushedUnique(event);
@@ -1792,7 +1769,9 @@ class PlayState extends MusicBeatState
 	    // --- EventManager integration ---
 	    // var params:Array<String> = [event.value1, event.value2, Std.string(event.strumTime)];
 		// EventManager.run(event.event, ["0", "1", "0.6"]);
-
+			
+		changeStage(event.value1); // stage preloading
+				
 	    // Mark this event as pushed
 	    eventsPushed.push(event.event);
 	}
@@ -2434,7 +2413,7 @@ class PlayState extends MusicBeatState
 				persistentDraw = true; // yes bro, no more black screen on death!!
 				FlxTimer.globalManager.clear();
 				FlxTween.globalManager.clear();
-				FlxG.camera.setFilters([]);
+				FlxG.camera.filters = [];
 
 				if(GameOverSubstate.deathDelay > 0)
 				{
@@ -2511,51 +2490,25 @@ class PlayState extends MusicBeatState
 		// EventManager.run(eventName, [value1, value2, Std.string(strumTime)]);
 
 		switch(eventName) {
-			case 'Change Stage': // from a hscript in Psych Ward will improve this 
-				if(value1 == null || value1 == "") {
-					addTextToDebug("Change Stage.hx:Error - Value 1 must be the name of a stage file!", 0xFFFF0000);
-					return;
+			case 'Change Stage':
+				removeStage(); // Remove current stage
+			
+				curStage = value1; // Set new stage name
+				stageData = StageData.getStageFile(curStage); 
+
+				addStage();
+				setOnScripts('curStage', curStage);
+
+				if(camFollow != null && camGame != null) {
+					// Update camera zoom to the new stage's default
+					camGame.zoom = defaultCamZoom;
+					
+					// Move camera to the correct position based on current section
+					moveCameraSection();
+					
+					// Snap camera to target immediately
+					camGame.snapToTarget();
 				}
-				var newStageData = StageData.getStageFile(value1);
-		
-				// Camera's new zoom
-				PlayState.instance.defaultCamZoom = newStageData.defaultZoom;
-				FlxG.camera.zoom = PlayState.instance.defaultCamZoom;
-				//PlayState.instance.isPixelStage = newStageData.isPixelStage; //Cannot set this since isPixelStage is a read-only
-				
-				//This stuff is for the StageUI. It breaks the script with jsons without the variable. You can add it back if it doesn't affect your stage
-				/*
-				if (newStageData.stageUI != null && newStageData.stageUI.trim().length > 0) PlayState.instance.stageUI = newStageData.stageUI;
-				else if (newStageData.isPixelStage) PlayState.instance.stageUI = "pixel";
-				else PlayState.instance.stageUI = "normal";
-				game.addTextToDebug("New Stage: " + PlayState.instance.stageUI);
-				*/
-				
-				// Camera's new speed
-				if(newStageData.camera_speed != null) PlayState.instance.cameraSpeed = newStageData.camera_speed;
-				
-				//Setting the new positions of the characters (And hiding gf if set to true)
-				PlayState.instance.boyfriend.setPosition(newStageData.boyfriend[0], newStageData.boyfriend[1]);
-				PlayState.instance.gf.setPosition(newStageData.girlfriend[0], newStageData.girlfriend[1]);
-				PlayState.instance.dad.setPosition(newStageData.opponent[0], newStageData.opponent[1]);
-				PlayState.instance.gf.visible = !newStageData.hide_girlfriend;
-				
-				PlayState.instance.boyfriend.x = newStageData.boyfriend[0];
-				PlayState.instance.boyfriend.y = newStageData.boyfriend[1];
-				PlayState.instance.gf.x = newStageData.girlfriend[0];
-				PlayState.instance.gf.y = newStageData.girlfriend[1];
-				PlayState.instance.dad.x = newStageData.opponent[0];
-				PlayState.instance.dad.y = newStageData.opponent[1];
-				
-				//Camera offsets
-				PlayState.instance.boyfriendCameraOffset = newStageData.camera_boyfriend;
-				if(PlayState.instance.boyfriendCameraOffset == null) PlayState.instance.boyfriendCameraOffset = [0, 0];
-		
-				PlayState.instance.opponentCameraOffset = newStageData.camera_opponent;
-				if(PlayState.instance.opponentCameraOffset == null) PlayState.instance.opponentCameraOffset = [0, 0];
-		
-				PlayState.instance.girlfriendCameraOffset = newStageData.camera_girlfriend;
-				if(PlayState.instance.girlfriendCameraOffset == null) PlayState.instance.girlfriendCameraOffset = [0, 0];
 
 			case 'Set GF Speed':
 				if(flValue1 == null || flValue1 < 1) flValue1 = 1;
@@ -4095,7 +4048,7 @@ class PlayState extends MusicBeatState
 		FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
 		FlxG.stage.removeEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
 
-		FlxG.camera.setFilters([]);
+		FlxG.camera.filters = []; // with Joseph's flixel compatibility, you can use filters OR setFilters. So this clears filters anyway (like it did before while deprecated lolz!!)
 
 		#if FLX_PITCH if (FlxG.sound.music != null) FlxG.sound.music.pitch = 1; #end
 		FlxG.animationTimeScale = 1;
@@ -4138,8 +4091,8 @@ class PlayState extends MusicBeatState
 		if (generatedMusic)
 			notes.sort(FlxSort.byY, ClientPrefs.data.downScroll ? FlxSort.ASCENDING : FlxSort.DESCENDING);
 
-		iconP1.scale.set(1.2, 1.2);
-		iconP2.scale.set(1.2, 1.2);
+		if (iconP1 != null) iconP1.scale.set(1.2, 1.2);
+		if (iconP2 != null) iconP2.scale.set(1.2, 1.2);
 
 		iconP1.updateHitbox();
 		iconP2.updateHitbox();
@@ -4224,6 +4177,31 @@ class PlayState extends MusicBeatState
 		}
 		return false;
 	}
+
+	public function stopLuasNamed(luaFile:String)
+	{
+		#if MODS_ALLOWED
+		var luaToLoad:String = Paths.modFolders(luaFile);
+		if(!FileSystem.exists(luaToLoad))
+			luaToLoad = Paths.getSharedPath(luaFile);
+
+		if(FileSystem.exists(luaToLoad))
+		#elseif sys
+		var luaToLoad:String = Paths.getSharedPath(luaFile);
+		if(OpenFlAssets.exists(luaToLoad))
+		#end
+		{
+			for (script in luaArray) {
+				if (script.scriptName == luaToLoad) {
+					script.call("onDestroy", []);
+					
+					luaArray.remove(script);
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 	#end
 
 	#if HSCRIPT_ALLOWED
@@ -4243,6 +4221,29 @@ class PlayState extends MusicBeatState
 
 			initHScript(scriptToLoad);
 			return true;
+		}
+		return false;
+	}
+
+	public function stopHScriptsNamed(scriptFile:String)
+	{
+		#if MODS_ALLOWED
+		var scriptToLoad:String = Paths.modFolders(scriptFile);
+		if(!FileSystem.exists(scriptToLoad))
+			scriptToLoad = Paths.getSharedPath(scriptFile);
+		#else
+		var scriptToLoad:String = Paths.getSharedPath(scriptFile);
+		#end
+
+		if(FileSystem.exists(scriptToLoad))
+		{
+			if (Iris.instances.exists(scriptToLoad)){
+				var script:HScript = cast (Iris.instances.get(scriptToLoad), HScript);
+				if(script.exists('onDestroy')) script.call('onDestroy');
+				script.destroy();
+				hscriptArray.remove(script);
+				return true;
+			};
 		}
 		return false;
 	}
@@ -4592,6 +4593,208 @@ class PlayState extends MusicBeatState
 				trace('ERROR! fail on preloading $traceData: $e');
 			}
 		});
+	}
+
+	public function setStageDetails(stageData:StageFile){
+		defaultCamZoom = stageData.defaultZoom;
+
+		var dir:String = stageData.directory;
+		if (dir != null) {
+			Paths.setCurrentLevel(dir);
+			trace('Setting asset folder to ' + dir);
+		}
+
+		stageUI = "normal";
+		if (stageData.stageUI != null && stageData.stageUI.trim().length > 0)
+			stageUI = stageData.stageUI;
+		else if (stageData.isPixelStage == true) //Backward compatibility
+			stageUI = "pixel";
+
+		BF_X = stageData.boyfriend[0];
+		BF_Y = stageData.boyfriend[1];
+		GF_X = stageData.girlfriend[0];
+		GF_Y = stageData.girlfriend[1];
+		DAD_X = stageData.opponent[0];
+		DAD_Y = stageData.opponent[1];
+
+		if(stageData.camera_speed != null)
+			cameraSpeed = stageData.camera_speed;
+
+		boyfriendCameraOffset = stageData.camera_boyfriend;
+		if(boyfriendCameraOffset == null) //Fucks sake should have done it since the start :rolling_eyes:
+			boyfriendCameraOffset = [0, 0];
+
+		opponentCameraOffset = stageData.camera_opponent;
+		if(opponentCameraOffset == null)
+			opponentCameraOffset = [0, 0];
+
+		girlfriendCameraOffset = stageData.camera_girlfriend;
+		if(girlfriendCameraOffset == null)
+			girlfriendCameraOffset = [0, 0];
+
+		return stageData;
+	}
+
+	public function removeObjects(stageData:StageFile){
+		if(stageData.objects != null && stageData.objects.length > 0)
+		{
+			var list:Map<String, FlxSprite> = StageData.removeObjectsFromState(stageData.objects, !stageData.hide_girlfriend ? gfGroup : null, dadGroup, boyfriendGroup, this);
+			for (key => spr in list)
+			{
+				if(!StageData.reservedNames.contains(key))
+				{
+					variables.remove(key);
+					// Destroy the sprite to free memory
+					if(spr != null)
+					{
+						remove(spr);
+						spr.destroy();
+					}
+				}
+			}
+		}else{
+			if (gf != null) remove(gfGroup);
+			remove(dadGroup); 
+			remove(boyfriendGroup);
+		}
+	}
+
+
+	public function addObjects(stageData:StageFile){
+		if(stageData.objects != null && stageData.objects.length > 0)
+		{
+			var list:Map<String, FlxSprite> = StageData.addObjectsToState(stageData.objects, !stageData.hide_girlfriend ? gfGroup : null, dadGroup, boyfriendGroup, this);
+			for (key => spr in list)
+				if (!StageData.reservedNames.contains(key))
+					variables.set(key, spr);
+		}
+		else
+		{
+			if(!stageData.hide_girlfriend) add(gfGroup);
+			add(dadGroup);
+			add(boyfriendGroup);
+		}
+	}
+
+	public var hardCodedStage:BaseStage;
+	public var addedStages:Array<String> = [];
+
+	public function removeStage(?isDestroying:Bool = false)
+	{
+	    // Store old stage name before removing
+	    var oldStage:String = curStage;
+	
+	    removeObjects(stageData);
+
+	    // Destroy all BaseStage instances in the stages array
+	    // This will remove sprites tracked in stageSprites
+	    for (stage in stages) { 
+	        if (stage != null) {
+	            stage.destroy();
+	        }
+	    }
+	    stages = [];
+
+	    if (hardCodedStage != null) {
+	        hardCodedStage.destroy();
+	        hardCodedStage = null;
+	    }
+
+	    // Remove all stage-related FlxSprite objects from the state
+	    // This ensures sprites added by stages (hardcoded or otherwise) are properly cleaned up
+	    var membersToRemove:Array<FlxBasic> = [];
+	    for (member in members) {
+	        if (member != null && Std.isOfType(member, FlxSprite)) {
+	            var sprite:FlxSprite = cast member;
+			
+	            // Skip essential gameplay/UI sprites
+	            if (sprite == gfGroup || sprite == dadGroup || sprite == boyfriendGroup ||
+	                sprite == laneunderlay || sprite == laneunderlayOp ||
+	                Std.isOfType(sprite, Character) || Std.isOfType(sprite, FlxSpriteGroup) ||
+	                Std.isOfType(sprite, Note) || Std.isOfType(sprite, StrumNote)) {
+	                continue;
+	            }
+			
+	            // Remove all other FlxSprites (stage assets)
+	            membersToRemove.push(member);
+	        }
+	    }
+	
+	    // Remove and destroy the identified stage sprites
+	    for (sprite in membersToRemove) {
+	        if (sprite != null && sprite.exists) {
+	            remove(sprite);
+	            sprite.destroy();
+	        }
+	    }
+
+	    #if (LUA_ALLOWED || HSCRIPT_ALLOWED)
+	        // Stop the stage scripts - their onDestroy should clean up sprites
+	        // We don't manually clean up ModchartSprite instances here to avoid
+	        // conflicts with other scripts (like modchart scripts) that might still be running
+	        #if LUA_ALLOWED stopLuasNamed('stages/' + oldStage + '.lua'); #end
+	        #if HSCRIPT_ALLOWED stopHScriptsNamed('stages/' + oldStage + '.hx'); #end
+	    #end
+	}
+
+	public function addStage(?isCreate:Bool=false) {
+		if(!isCreate) setStageDetails(stageData); // for some reason they don't add the chars position on them.
+		switch (curStage.toLowerCase())
+		{
+			case 'stage': new Stage(); //Week 1
+			case 'philly': new Philly(); //Week 3
+			case 'limo': new Limo(); //Week 4
+			case 'camellia': new Camellia(); //camellia studio
+			case 'concert': new CamelliaConcert(); //camellia concert
+			case 'cyphisonia': new Cyphisonia(); // cyphisonia ghost camellia stage!
+			case 'planet': new Planet(); //camellia alt Planet
+			case 'limuCastle': new LimuCastle(); // Limu stage 1!
+			case 'cornMaze': new CornMaze(); // Bambi stage
+			case 'phillyStreets': new PhillyStreets(); // Philly Streets!!
+			case 'mangoPark': new MangoPark(); // police racist area!!
+			case 'shipEntrance': new ShipEntrance(); // SKYDECAY SHIP HELL YEAH BF U SUCK!!
+			case 'desktop': new Desktop(); // Desktop stage
+		}
+
+		addObjects(stageData);
+		boyfriendGroup.x = BF_X;
+		boyfriendGroup.y = BF_Y;
+		dadGroup.x = DAD_X;
+		dadGroup.y = DAD_Y;
+		if(!stageData.hide_girlfriend){
+			gfGroup.x = GF_X;
+			gfGroup.y = GF_Y;
+		}
+
+		#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
+			// STAGE SCRIPTS - Start after character positions are set
+			// This ensures scripts have access to correct stage data when creating sprites
+			#if LUA_ALLOWED 
+			startLuasNamed('stages/' + curStage + '.lua');
+			#end
+			#if HSCRIPT_ALLOWED 
+			startHScriptsNamed('stages/' + curStage + '.hx');
+			#end
+		#end
+
+		if(!isCreate) {
+			stagesFunc(function(stage:BaseStage) stage.createPost());
+			// Call onCreatePost on all scripts, including newly started stage scripts
+			callOnScripts('onCreatePost');
+			
+			// Also explicitly call onCreatePost on Lua scripts (they have a special method)
+			// This sets up character/group references that scripts might need
+			#if LUA_ALLOWED
+			for (script in luaArray) {
+				if (script != null && !script.closed && script.scriptName != null) {
+					// Check if this is a stage script
+					if (script.scriptName.contains('stages/') && script.scriptName.contains(curStage)) {
+						script.onCreatePost();
+					}
+				}
+			}
+			#end
+		}
 	}
 }
 typedef MechanicResults =

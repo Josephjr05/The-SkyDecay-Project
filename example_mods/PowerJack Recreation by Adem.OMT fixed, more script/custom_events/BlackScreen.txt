@@ -1,0 +1,7 @@
+Creates a black screen.
+
+Value 1: Adds or removes the black screen. 
+(Add or Remove)
+
+Value 2: The camera the black screen will be on. 
+(game, hud, or other)

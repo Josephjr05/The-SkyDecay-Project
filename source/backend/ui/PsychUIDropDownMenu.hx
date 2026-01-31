@@ -104,7 +104,10 @@ class PsychUIDropDownMenu extends PsychUIInputText
 
 		if(lastFocus != PsychUIInputText.focusOn)
 		{
-			showDropDown(PsychUIInputText.focusOn == this);
+			var isFocused:Bool = (PsychUIInputText.focusOn == this);
+			if (isFocused && broadcastDropDownEvent)
+				PsychUIEventHandler.event(REVEAL_EVENT, this);
+			showDropDown(isFocused);
 		}
 		else if(PsychUIInputText.focusOn == this)
 		{

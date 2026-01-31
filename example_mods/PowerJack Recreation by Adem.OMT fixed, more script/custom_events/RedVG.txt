@@ -1,0 +1,4 @@
+Value 1 = true or false
+
+if true, the RedVG will appear
+if false, will be destroy.

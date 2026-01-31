@@ -1,0 +1,4 @@
+Flash your in-game screen with the selected color.
+
+Value 1: Flash Color (Hex Codes, fe: FFFFFF)
+Value 2: Duration in seconds.

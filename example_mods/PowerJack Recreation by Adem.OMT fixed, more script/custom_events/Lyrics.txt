@@ -1,0 +1,9 @@
+value 1: TEXT - mark this with the text of the
+subtitles / lyrics.
+
+value 2: COLOR - mark this with the color of
+the text.
+
+[! VALUE 2 MUST BE IN HEX !]
+[(you can also leave value 2 blank
+to make the text white.)]

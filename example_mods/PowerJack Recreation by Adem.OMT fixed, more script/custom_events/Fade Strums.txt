@@ -1,0 +1,4 @@
+Sets the strumline's Alpha smoothly
+
+Value 1: Duration
+Value 2: Alpha

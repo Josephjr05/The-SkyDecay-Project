@@ -1,8 +1,6 @@
 package states.editors;
 
 import flixel.graphics.FlxGraphic;
-
-import flixel.system.debug.interaction.tools.Pointer.GraphicCursorCross;
 import flixel.util.FlxDestroyUtil;
 
 import openfl.net.FileReference;
@@ -17,13 +15,8 @@ import objects.Bar;
 import states.editors.content.Prompt;
 import states.editors.content.PsychJsonPrinter;
 
-// flixel 5.7.0+ fix
-#if (FLX_DEBUG || flixel < version("5.7.0"))
-typedef PointerGraphic = flixel.system.debug.interaction.tools.Pointer.GraphicCursorCross;
-#else
 @:bitmap("assets/images/debugger/cursorCross.png")
-class PointerGraphic extends openfl.display.BitmapData {}
-#end
+class GraphicCursorCross extends openfl.display.BitmapData {}
 
 class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler.PsychUIEvent
 {
@@ -68,7 +61,8 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 	{
 		this._char = char;
 		this._goToPlayState = goToPlayState;
-		if(this._char == null) this._char = Character.DEFAULT_CHARACTER;
+		if (PlayState.SONG == null) goToPlayState = false;
+		if (this._char == null) this._char = Character.DEFAULT_CHARACTER;
 
 		super();
 	}
@@ -86,6 +80,8 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 		FlxG.cameras.add(camHUD, false);
 
 		loadBG();
+		
+		// preCreate();
 
 		silhouettes = new FlxSpriteGroup();
 		add(silhouettes);
@@ -117,7 +113,7 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 
 		addCharacter();
 
-		cameraFollowPointer = new FlxSprite(FlxGraphic.fromClass(PointerGraphic));
+		cameraFollowPointer = new FlxSprite().loadGraphic(FlxGraphic.fromClass(GraphicCursorCross));
 		cameraFollowPointer.setGraphicSize(40, 40);
 		cameraFollowPointer.updateHitbox();
 
@@ -901,6 +897,8 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 	var chartArray:Array<Float> = [0, 0];
 	override function update(elapsed:Float)
 	{
+		// preUpdate(elapsed);
+		
 		super.update(elapsed);
 
 		if(PsychUIInputText.focusOn != null)
@@ -926,18 +924,6 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 		if (FlxG.keys.pressed.L) FlxG.camera.scroll.x += elapsed * 500 * shiftMult * ctrlMult;
 		if (FlxG.keys.pressed.I) FlxG.camera.scroll.y -= elapsed * 500 * shiftMult * ctrlMult;
 
-		var mouse = FlxG.mouse.getScreenPosition();
-		if (FlxG.mouse.justPressed && !FlxG.mouse.overlaps(UI_characterbox))
-		{
-			cameraPosition[0] = FlxG.camera.scroll.x + mouse.x;
-			cameraPosition[1] = FlxG.camera.scroll.y + mouse.y;
-		}
-		else if (FlxG.mouse.pressed && !FlxG.mouse.overlaps(UI_characterbox))
-		{
-			FlxG.camera.scroll.x = cameraPosition[0] - mouse.x;
-			FlxG.camera.scroll.y = cameraPosition[1] - mouse.y;
-		}
-
 		var lastZoom = FlxG.camera.zoom;
 		if(FlxG.keys.justPressed.R && !FlxG.keys.pressed.CONTROL) FlxG.camera.zoom = 1;
 		else if (FlxG.keys.pressed.E && FlxG.camera.zoom < 3) {
@@ -957,7 +943,16 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 		{
 			if(FlxG.keys.justPressed.W && (changedAnim = true)) curAnim--;
 			else if(FlxG.keys.justPressed.S && (changedAnim = true)) curAnim++;
-
+			
+			if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(animsTxt, camHUD)) {
+				var p:Float = FlxMath.remapToRange(FlxG.mouse.getWorldPosition(camHUD).y, animsTxt.y, animsTxt.y + animsTxt.textField.textHeight, 0, anims.length);
+				var animIndex:Int = Std.int(Math.min(p, anims.length - 1));
+				if (curAnim != animIndex) {
+					curAnim = animIndex;
+					changedAnim = true;
+				}
+			}
+			
 			if(changedAnim)
 			{
 				undoOffsets = null;
@@ -994,10 +989,10 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 		}
 		else holdingArrowsTime = 0;
 
-		if(FlxG.mouse.pressedRight && (FlxG.mouse.deltaScreenX != 0 || FlxG.mouse.deltaScreenY != 0))
+		if(FlxG.mouse.pressedRight && (FlxG.mouse.deltaViewX != 0 || FlxG.mouse.deltaViewY != 0))
 		{
-			character.offset.x -= FlxG.mouse.deltaScreenX;
-			character.offset.y -= FlxG.mouse.deltaScreenY;
+			character.offset.x -= FlxG.mouse.deltaViewX;
+			character.offset.y -= FlxG.mouse.deltaViewY;
 			changedOffset = true;
 		}
 
@@ -1119,6 +1114,8 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 			}
 			return;
 		}
+		
+		// postUpdate(elapsed);
 	}
 
 	final assetFolder = 'week1';  //load from assets/week1/
@@ -1177,7 +1174,7 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 		healthIcon.changeIcon(character.healthIcon, false);
 		updatePresence();
 	}
-
+	
 	inline function updatePresence() {
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence

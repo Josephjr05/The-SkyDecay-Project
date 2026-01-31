@@ -381,12 +381,14 @@ class PsychUIInputText extends FlxSpriteGroup
 	public var unfocus:Void->Void;
 	public static function set_focusOn(v:PsychUIInputText)
 	{
-		if(focusOn != null && focusOn != v && focusOn.exists)
-		{
-			if(focusOn.unfocus != null) focusOn.unfocus();
-			focusOn.resetCaret();
+		if (focusOn != v && focusOn != null && focusOn.exists) {
+			var prev = focusOn;
+			focusOn = v;
+			
+			if (prev.unfocus != null) prev.unfocus();
+			prev.resetCaret();
 		}
-		return (focusOn = v);
+		return focusOn = v;
 	}
 
 	override function update(elapsed:Float)
@@ -403,7 +405,7 @@ class PsychUIInputText extends FlxSpriteGroup
 				caretIndex = 0;
 				var lastBound:Float = 0;
 				var textObjX:Float = textObj.getScreenPosition(camera).x;
-				var mousePosX:Float = FlxG.mouse.getScreenPosition(camera).x;
+				var mousePosX:Float = FlxG.mouse.getViewPosition(camera).x;
 				var txtX:Float = textObjX - textObj.textField.scrollH;
 
 				for (i => bound in _boundaries)
@@ -472,13 +474,29 @@ class PsychUIInputText extends FlxSpriteGroup
 		if(textObj == null || !textObj.exists) return;
 
 		var textField = textObj.textField;
-		textField.setSelection(caretIndex, caretIndex);
+		try {
+			// Ensure caretIndex is within valid bounds for the text field
+			var textLength:Int = Std.int(textField.length);
+			var safeCaretIndex:Int = (caretIndex < 0) ? 0 : ((caretIndex > textLength) ? textLength : caretIndex);
+			textField.setSelection(safeCaretIndex, safeCaretIndex);
+		} catch(e:Dynamic) {
+			trace('Error updating caret selection: $e');
+			// If setSelection fails, try to reset to a safe state
+			caretIndex = 0;
+			try {
+				if(textField.length > 0) {
+					textField.setSelection(0, 0);
+				}
+			} catch(e2:Dynamic) {
+				// If even that fails, just continue without updating selection
+			}
+		}
 		_caretTime = 0;
 		if(caret != null && caret.exists)
 		{
 			caret.y = textObj.y + 2;
 			caret.x = textObj.x + 1 - textObj.textField.scrollH;
-			if(caretIndex > 0)
+			if(caretIndex > 0 && _boundaries.length > 0)
 				caret.x += _boundaries[Std.int(Math.max(0, Math.min(_boundaries.length-1, caretIndex-1)))];
 		}
 		
@@ -486,7 +504,7 @@ class PsychUIInputText extends FlxSpriteGroup
 		{
 			selection.y = textObj.y + 2;
 			selection.x = textObj.x + 1 - textObj.textField.scrollH;
-			if(selectIndex > 0)
+			if(selectIndex > 0 && _boundaries.length > 0)
 				selection.x += _boundaries[Std.int(Math.max(0, Math.min(_boundaries.length-1, selectIndex-1)))];
 
 			selection.scale.y = textField.textHeight;
@@ -628,9 +646,9 @@ class PsychUIInputText extends FlxSpriteGroup
 				_boundaries.push(textObj.textField.textWidth);
 			}
 		}
-		text = v;
+		text = (v ?? '');
 		updateCaret();
-		return v;
+		return text;
 	}
 
 	public static function getAccentCharCode(accent:AccentCode)

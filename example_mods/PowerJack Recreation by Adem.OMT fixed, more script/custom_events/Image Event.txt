@@ -1,0 +1,4 @@
+da jumpscare or the image lol idk
+
+Value 1: Name of the image that you wanna use.
+Value 2: Duration of Jumpscare/Image on Screen (Not really in Steps)

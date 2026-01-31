@@ -4,9 +4,10 @@ import openfl.net.FileReference;
 import openfl.events.Event;
 import openfl.events.IOErrorEvent;
 import flash.net.FileFilter;
+import haxe.io.Path;
 
+#if sys import sys.io.File; #end
 import haxe.Exception;
-import sys.io.File;
 import lime.ui.*;
 
 import flixel.FlxBasic;
@@ -63,8 +64,8 @@ class FileDialogHandler extends FlxBasic
 		#end
 
 		removeEvents();
-		_currentEvent = onLoadComplete;
-		_fileRef.addEventListener(#if desktop Event.SELECT #else Event.COMPLETE #end, _currentEvent);
+		_currentEvent = #if desktop onLoadComplete #else onFileSelect #end;
+		_fileRef.addEventListener(Event.SELECT, _currentEvent);
 		_fileRef.browseEx(OPEN, defaultName, title, filter);
 	}
 
@@ -98,12 +99,22 @@ class FileDialogHandler extends FlxBasic
 		this.completed = true;
 		if(onComplete != null) onComplete();
 	}
+	
+	function onFileSelect(_) {
+		_fileRef.addEventListener(Event.COMPLETE, onLoadComplete);
+		_fileRef.load();
+	}
 
 	function onLoadComplete(_)
 	{
 		@:privateAccess
 		this.path = _fileRef.__path;
-		this.data = File.getContent(this.path);
+		#if sys 
+		this.data = File.getContent(this.path); // keep this the same because Psych Mint does something else that i don't want to put over for code reasons (like ask for permission or wtv).
+		#else 
+		var byte = _fileRef.data;
+		this.data = byte.readUTFBytes(byte.bytesAvailable);
+		#end
 		this.completed = true;
 		trace('Loaded file from: $path');
 

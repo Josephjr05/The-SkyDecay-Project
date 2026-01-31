@@ -209,7 +209,6 @@ class ChartingStateOG extends MusicBeatState
 				songArtists: '',
 				scripters: '',
 				offset: 0,
-				luaType: false,
 				format: 'OG',
 				charters: '',
 				artists: ''
@@ -2534,6 +2533,7 @@ class ChartingStateOG extends MusicBeatState
 	function recalculateSteps(add:Float = 0):Int
 	{
 		var lastChange:BPMChangeEvent = {
+			sectionBeats: 0,
 			stepTime: 0,
 			songTime: 0,
 			bpm: 0

@@ -1,0 +1,4 @@
+Pixelates the Camera
+
+v1 = amount (in seconds)
+2 is recommended

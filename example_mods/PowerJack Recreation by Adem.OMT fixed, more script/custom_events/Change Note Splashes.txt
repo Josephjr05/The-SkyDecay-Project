@@ -1,0 +1,4 @@
+Changes the note splashes
+
+Value 1: Splash texture
+Value 2: offsets (x, y) [optional]

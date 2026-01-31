@@ -4,12 +4,18 @@ import haxe.Json;
 import lime.utils.Assets;
 
 import objects.Note;
+import haxe.io.Path;
+import sys.FileSystem;
+import sys.io.File;
+import moonchart.formats.BasicFormat.BasicNoteType;
+import moonchart.formats.OsuMania;
+import moonchart.formats.StepMania;
+import moonchart.formats.StepManiaShark;
+import moonchart.formats.fnf.legacy.FNFLegacy;
 
 //a full change of organization to match Osu's map files
 typedef SwagSong =
 {
-	var luaType:Bool; // true = legacyfunkinlua, false = funkinlua
-
 	var song:String;
 	var songArtists:String;
 	var artists:String;
@@ -57,6 +63,22 @@ typedef SwagSection =
 	@:optional var lengthInSteps:Int;
 }
 
+#if sys
+private class MoonchartFNFAdapter extends FNFLegacy
+{
+	public function new()
+	{
+		super();
+
+		indexedTypes = false;
+		bakedOffset = false;
+		offsetHolds = false;
+
+		noteTypeResolver.register('Hurt Note', BasicNoteType.MINE);
+	}
+}
+#end
+
 class Song
 {
 	public var song:String;
@@ -84,7 +106,9 @@ class Song
 	public var disableNoteRGB:Bool = false;
 	public var events:Array<Dynamic>;
 	public var notes:Array<SwagSection>;
-	public var luaType:Bool; // true = legacyfunkinlua, false = funkinlua
+	#if sys
+	static final MOONCHART_EXTENSIONS:Array<String> = ['sm', 'ssc', 'osu'];
+	#end
 
 	public static function convert(songJson:Dynamic) // Convert old charts to skydecay_beta (0.1) format
 	{
@@ -162,19 +186,46 @@ class Song
 	{
 		if(folder == null) folder = jsonInput;
 		var rawData:String = null;
+		var song:SwagSong = null;
 		
 		var formattedFolder:String = Paths.formatToSongPath(folder);
 		var formattedSong:String = Paths.formatToSongPath(jsonInput);
 		_lastPath = Paths.json('$formattedFolder/$formattedSong');
 
 		#if MODS_ALLOWED
-		if(FileSystem.exists(_lastPath))
-			rawData = File.getContent(_lastPath);
-		else
+		try {
+			if(FileSystem.exists(_lastPath))
+				rawData = File.getContent(_lastPath);
+		} catch(e:Dynamic) {
+			trace('Error checking/reading mod chart file: $e');
+		}
 		#end
-			rawData = Assets.getText(_lastPath);
+		
+		if(rawData == null)
+		{
+			try
+			{
+				rawData = Assets.getText(_lastPath);
+			}
+			catch(e:Dynamic)
+				rawData = null;
+		}
 
-		return rawData != null ? parseJSON(rawData, jsonInput) : null;
+		if(rawData != null)
+		{
+			song = parseJSON(rawData, jsonInput);
+		}
+		else
+		{
+			var moonPath:String = findMoonchartChart(formattedFolder, formattedSong);
+			if(moonPath != null)
+			{
+				_lastPath = moonPath;
+				song = loadMoonchartChart(moonPath, jsonInput);
+			}
+		}
+
+		return song;
 	}
 
 	public static function parseJSON(rawData:String, ?nameForError:String = null, ?convertTo:String = 'psych_v1'):SwagSong
@@ -187,6 +238,16 @@ class Song
 				songJson = subSong;
 		}
 
+		return finalizeSong(songJson, nameForError, convertTo);
+	}
+
+	static function finalizeSong(songJson:SwagSong, ?nameForError:String = null, ?convertTo:String = 'psych_v1'):SwagSong
+	{
+		if(songJson == null) return null;
+
+		if(songJson.events == null) songJson.events = [];
+		if(songJson.notes == null) songJson.notes = [];
+
 		if(convertTo != null && convertTo.length > 0)
 		{
 			var fmt:String = songJson.format;
@@ -195,7 +256,7 @@ class Song
 			switch(convertTo)
 			{
 				case 'psych_v1':
-					if(!fmt.startsWith('psych_v1')) //Convert to Psych 1.0 format and make it skydecay cause yes
+					if(!fmt.startsWith('psych_v1'))
 					{
 						trace('converting chart $nameForError with format $fmt to skydecay_beta format...');
 						songJson.format = 'psych_v1_convert';
@@ -204,5 +265,62 @@ class Song
 			}
 		}
 		return songJson;
+	}
+
+	static function findMoonchartChart(formattedFolder:String, formattedSong:String):String
+	{
+		var names:Array<String> = [formattedSong];
+		var dashIndex:Int = formattedSong.lastIndexOf('-');
+		if(dashIndex > -1 && dashIndex < formattedSong.length - 1)
+		{
+			names.push(formattedSong.substr(dashIndex + 1));
+		}
+
+		for(name in names)
+		{
+			for(ext in MOONCHART_EXTENSIONS)
+			{
+				var relative:String = 'songs/$formattedFolder/$name.$ext';
+
+				try {
+					var modPath:String = Paths.mods(relative);
+					if(modPath != null && modPath.length > 0 && FileSystem.exists(modPath)) return modPath;
+				} catch(e:Dynamic) {
+					trace('Error checking mod moonchart path: $e');
+				}
+
+				try {
+					var preloadPath:String = Paths.getSharedPath(relative);
+					if(preloadPath != null && preloadPath.length > 0 && FileSystem.exists(preloadPath)) return preloadPath;
+				} catch(e:Dynamic) {
+					trace('Error checking preload moonchart path: $e');
+				}
+			}
+		}
+		return null;
+	}
+
+	static function loadMoonchartChart(path:String, difficulty:String):SwagSong
+	{
+		var extension:String = Path.extension(path).toLowerCase();
+		var adapter:MoonchartFNFAdapter = new MoonchartFNFAdapter();
+
+		var source:Dynamic = switch(extension)
+		{
+			case 'sm': new StepMania().fromFile(path);
+			case 'ssc': new StepManiaShark().fromFile(path);
+			case 'osu': new OsuMania().fromFile(path);
+			default: null;
+		};
+
+		if(source == null) return null;
+
+		var result = adapter.fromFormat(source);
+		if(result == null || result.data == null || result.data.song == null) return null;
+
+		var swag:SwagSong = cast result.data.song;
+		if(swag.format == null) swag.format = 'moonchart_$extension';
+
+		return finalizeSong(swag, difficulty);
 	}
 }

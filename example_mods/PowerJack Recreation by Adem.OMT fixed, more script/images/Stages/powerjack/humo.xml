@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="humo.png">
+<SubTexture name="humo idle0000" x="0" y="0" width="3840" height="2160" frameX="0" frameY="0" frameWidth="3840" frameHeight="2160" />
+<SubTexture name="humo idle0001" x="3840" y="0" width="3840" height="2160" frameX="0" frameY="0" frameWidth="3840" frameHeight="2160" />
+<SubTexture name="humo idle0002" x="0" y="2160" width="3840" height="2160" frameX="0" frameY="0" frameWidth="3840" frameHeight="2160" />
+<SubTexture name="humo idle0003" x="3840" y="2160" width="3840" height="2160" frameX="0" frameY="0" frameWidth="3840" frameHeight="2160" />
+<SubTexture name="humo idle0004" x="0" y="4320" width="3840" height="2160" frameX="0" frameY="0" frameWidth="3840" frameHeight="2160" />
+<SubTexture name="humo idle0005" x="3840" y="4320" width="3840" height="2160" frameX="0" frameY="0" frameWidth="3840" frameHeight="2160" />
+<SubTexture name="humo idle0006" x="7680" y="0" width="3840" height="2160" frameX="0" frameY="0" frameWidth="3840" frameHeight="2160" />
+</TextureAtlas>

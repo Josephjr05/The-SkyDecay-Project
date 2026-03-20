@@ -93,6 +93,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	public static final defaultEvents:Array<Array<String>> =
 	[
 		['', "Nothing. Yep, that's right."], //Always leave this one empty pls
+		['BPM Change', "Place BPM Change anywhere and it'll automatically put Beats for you.\nValue 1: BPM Number\nValue 2: Leave it blank."],
 		['Dadbattle Spotlight', "Used in Dad Battle,\nValue 1: 0/1 = ON/OFF,\n2 = Target Dad\n3 = Target BF"],
 		['Hey!', "Plays the \"Hey!\" animation from Bopeebo,\nValue 1: BF = Only Boyfriend, GF = Only Girlfriend,\nSomething else = Both.\nValue 2: Custom animation duration,\nleave it blank for 0.6s"],
 		['Set GF Speed', "Sets GF head bopping speed,\nValue 1: 1 = Normal speed,\n2 = 1/2 speed, 4 = 1/4 speed etc.\nUsed on Fresh during the beatbox parts.\n\nWarning: Value must be integer!"],
@@ -4161,223 +4162,54 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	 * Converts the current chart data to a legacy Psych Engine format (0.2.x.x)
 	 * and separates events into a distinct object.
 	 * @return A dynamic object containing 'chart' and 'events' data for saving.
+	 * From and originally by LarryFrosty's PsychOldConverter.hx script and their help with the conversion.
 	 */
 	private function convertToLegacyFormat():{chart:Dynamic, events:Dynamic} {
-		// Work directly with PlayState.SONG data (updateChartData() is called before this function)
-		// Create a deep copy by serializing and parsing, matching the script's approach
-		// The script reads from a file and parses with TJSON, so we use TJSON.encode and TJSON.parse
-		// This ensures we use the same JSON library as the reference script
-		var songJsonString:String = TJSON.encode(PlayState.SONG, 'fancy');
-		var parsedJson:Dynamic = TJSON.parse(songJsonString);
-		
-		// Handle wrapped format like {song: {...}} similar to Song.parseJSON
-		var _song:SwagSong = parsedJson;
-		if (Reflect.hasField(parsedJson, 'song')) {
-			var subSong:Dynamic = Reflect.field(parsedJson, 'song');
-			if (subSong != null && Type.typeof(subSong) == TObject) {
-				_song = subSong;
-			}
-		}
-		
-		// Convert notes: swap opponent and player notes in opponent sections
-		// This matches the EXACT logic from PsychOldConverter.hx script
-		// Additionally, subtract 1 beat from sustain lengths to compensate for chart editor visual difference
-		var baseBPM:Float = _song.bpm != null && _song.bpm > 0 ? _song.bpm : 100;
-		
-		if (_song.notes == null) return {chart: '', events: ''};
-		
+		var _song:SwagSong = PlayState.SONG;
+		var curBpm:Float = _song.bpm;
 		for (section in _song.notes) {
-			// Get BPM for this section (section-specific BPM or fall back to song BPM)
-			// In 0.7.3, stepCrochet = calculateCrochet(bpm) / 4, where calculateCrochet(bpm) = (60/bpm)*1000
-			// So stepCrochet = (60/bpm)*1000 / 4 = (60/bpm)*250
-			var sectionBPMFloat:Float = baseBPM;
-			if (section.changeBPM == true && section.bpm != null && section.bpm > 0) {
-				sectionBPMFloat = section.bpm;
-			}
-			// Calculate 1 step/grid duration in milliseconds: (60 / bpm) * 250
-			// Matches the weird sustain length from 0.7.3: calculateCrochet(bpm) / 4
-			var oneStepMs:Float = (60 / sectionBPMFloat) * 250;
-			
-			if (section.sectionNotes != null && section.sectionNotes.length > 0) {
-				for (notes in section.sectionNotes) {
-					if (notes == null || (notes.length != null && notes.length < 3)) continue;
+			if (section.changeBPM == true && section.bpm != null && curBpm != section.bpm) curBpm = section.bpm;
+			var curStepCrochet:Float = 60 / curBpm * 1000 / 4;
 
+			if (section.sectionNotes != null && section.sectionNotes.length != 0) {
+				for (notes in section.sectionNotes) {
 					if (!section.mustHitSection) {
-						// If note index > 3 (opponent notes 4-7), convert to 0-3
 						if (notes[1] > 3) {
 							notes[1] = notes[1] % 4;
 						}
-						// If note index <= 3 (player notes 0-3), convert to 4-7
 						else {
 							notes[1] += 4;
 						}
 					}
-
-					if (notes[2] != null) {
-						notes[2] = Math.max(0, notes[2] - oneStepMs);
-					}
-				}
-			}
-		}
-
-		// Set format to psych_legacy_convert (matching the script's logic)
-		if (_song.format == null || _song.format != 'psych_legacy_convert') {
-			_song.format = 'psych_legacy_convert';
-		}
-
-		// Create legacy events object (separate from chart)
-		var legacyEvents:Dynamic = {
-			events: _song.events != null ? _song.events.copy() : [],
-			format: 'psych_legacy_convert'
-		};
-		
-		// Remove events from the chart data
-		_song.events = [];
-
-		// Wrap song in {song: ...} format like the script does
-		var chartData:Dynamic = {
-			song: _song
-		};
-
-		return {chart: chartData, events: legacyEvents};
-	}
-
-	private function convertToLegacyFormatModern():{chart:Dynamic, events:Dynamic} {
-		// Same as convertToLegacyFormat but without sustain length modification
-		// Work directly with PlayState.SONG data (updateChartData() is called before this function)
-		var songJsonString:String = TJSON.encode(PlayState.SONG, 'fancy');
-		var parsedJson:Dynamic = TJSON.parse(songJsonString);
-		
-		// Handle wrapped format like {song: {...}} similar to Song.parseJSON
-		var _song:SwagSong = parsedJson;
-		if (Reflect.hasField(parsedJson, 'song')) {
-			var subSong:Dynamic = Reflect.field(parsedJson, 'song');
-			if (subSong != null && Type.typeof(subSong) == TObject) {
-				_song = subSong;
-			}
-		}
-		
-		// Convert notes: swap opponent and player notes in opponent sections
-		// This matches the EXACT logic from PsychOldConverter.hx script
-		if (_song.notes == null) return {chart: '', events: ''};
-		
-		for (section in _song.notes) {
-			if (section.sectionNotes != null && section.sectionNotes.length > 0) {
-				for (notes in section.sectionNotes) {
-					// Ensure we have a valid note array
-					if (notes == null || (notes.length != null && notes.length < 3)) continue;
-					
-					// Only modify notes in opponent sections (!mustHitSection)
-					// Match the script's exact logic: if (!section.mustHitSection)
-					if (!section.mustHitSection) {
-						// If note index > 3 (opponent notes 4-7), convert to 0-3
-						if (notes[1] > 3) {
-							notes[1] = notes[1] % 4;
-						}
-						// If note index <= 3 (player notes 0-3), convert to 4-7
-						else {
-							notes[1] += 4;
-						}
-					}
-					// Note: No sustain length modification in modern version
-				}
-			}
-		}
-
-		// Set format to psych_legacy_convert (matching the script's logic)
-		if (_song.format == null || _song.format != 'psych_legacy_convert') {
-			_song.format = 'psych_legacy_convert';
-		}
-
-		// Create legacy events object (separate from chart)
-		var legacyEvents:Dynamic = {
-			events: _song.events != null ? _song.events.copy() : [],
-			format: 'psych_legacy_convert'
-		};
-		
-		// Remove events from the chart data
-		_song.events = [];
-
-		// Wrap song in {song: ...} format like the script does
-		var chartData:Dynamic = {
-			song: _song
-		};
-
-		return {chart: chartData, events: legacyEvents};
-	}
-
-	private function makeLongerSustainsLegacy():{chart:Dynamic, events:Dynamic} {
-		// Adds 1 step (oneStepMs) to all sustain lengths in legacy charts only
-		// This is the opposite of what convertToLegacyFormat does
-		// Only works on legacy format charts (psych_legacy_convert or formats that don't start with psych_v1)
-		var songJsonString:String = TJSON.encode(PlayState.SONG, 'fancy');
-		var parsedJson:Dynamic = TJSON.parse(songJsonString);
-		
-		// Handle wrapped format like {song: {...}} similar to Song.parseJSON
-		var _song:SwagSong = parsedJson;
-		if (Reflect.hasField(parsedJson, 'song')) {
-			var subSong:Dynamic = Reflect.field(parsedJson, 'song');
-			if (subSong != null && Type.typeof(subSong) == TObject) {
-				_song = subSong;
-			}
-		}
-		
-		// Check if this is a legacy chart - only proceed if it is
-		var formatStr:String = (_song.format != null) ? Std.string(_song.format) : '';
-		var isLegacyFormat:Bool = (formatStr == 'psych_legacy_convert' || (!formatStr.startsWith('psych_v1') && formatStr.length > 0));
-		
-		if (!isLegacyFormat) {
-			// Not a legacy chart, return empty
-			return {chart: '', events: ''};
-		}
-		
-		// Get base BPM for the song
-		var baseBPM:Float = (_song.bpm != null && _song.bpm > 0) ? _song.bpm : 100;
-		
-		if (_song.notes == null) return {chart: '', events: ''};
-		
-		for (section in _song.notes) {
-			// Get BPM for this section (section-specific BPM or fall back to song BPM)
-			var sectionBPMFloat:Float = baseBPM;
-			if (section.changeBPM == true && section.bpm != null && section.bpm > 0) {
-				sectionBPMFloat = section.bpm;
-			}
-			// Calculate 1 step/grid duration in milliseconds: (60 / bpm) * 250
-			var oneStepMs:Float = (60 / sectionBPMFloat) * 250;
-			
-			if (section.sectionNotes != null && section.sectionNotes.length > 0) {
-				for (notes in section.sectionNotes) {
-					// Ensure we have a valid note array
-					if (notes == null || (notes.length != null && notes.length < 3)) continue;
-					
-					// Add 1 step/grid to sustain length only if the note already has a sustain
 					if (notes[2] != null && notes[2] > 0) {
-						notes[2] = notes[2] + oneStepMs;
+						notes[2] -= curStepCrochet;
+						if (notes[2] < 0) notes[2] = 0;
 					}
 				}
 			}
 		}
 
-		// Keep the format as-is (don't change it to legacy)
-		if (_song.format == null) {
-			_song.format = formatStr;
+		// Set format to psych_legacy_convert (matching the script's logic)
+		if (_song.format == null || _song.format != 'psych_legacy_convert') {
+			_song.format = 'psych_legacy_convert';
 		}
 
-		// Create events object (separate from chart)
+		// Create legacy events object (separate from chart)
 		var legacyEvents:Dynamic = {
 			events: _song.events != null ? _song.events.copy() : [],
-			format: _song.format != null ? _song.format : formatStr
+			format: 'psych_legacy_convert'
 		};
 		
 		// Remove events from the chart data
 		_song.events = [];
 
-		// Wrap song in {song: ...} format
-		var chartData:Dynamic = {
-			song: _song
-		};
+		var chartData = {song: _song};
+		var eventData = {events: legacyEvents};
 
-		return {chart: chartData, events: legacyEvents};
+		return {
+			chart: TJSON.encode(chartData, 'fancy'),
+			events: TJSON.encode(eventData, 'fancy')
+		};
 	}
 
 	function addFileTab()
@@ -4710,36 +4542,6 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		btn.text.alignment = LEFT;
 		tab_group.add(btn);
 
-		btnY += 20;
-		var btn:PsychUIButton = new PsychUIButton(btnX, btnY, #if sys '  Save as Legacy (Modern)...' #else '  Download Legacy Chart (Modern)' #end, function()
-		{
-			if(!fileDialog.completed) return;
-			upperBox.isMinimized = true;
-			upperBox.bg.visible = false;
-			FlxG.sound.play(Paths.sound('loading_open_alpha'), 0.5);
-
-			updateChartData();
-			var legacyData = convertToLegacyFormatModern();
-
-			var chartNameBase:String = Paths.formatToSongPath(PlayState.SONG.song);
-			var chartFileName:String = chartNameBase + '.json';
-
-			fileDialog.save(chartFileName, legacyData.chart,
-				function()
-				{
-					#if sys
-					var newPath:String = fileDialog.path;
-					showOutput('Legacy (Modern) chart saved successfully to: $newPath!');
-					#else
-					showOutput('Legacy (Modern) chart downloaded successfully');
-					#end
-				},
-				null,
-				function() showOutput('Error on saving legacy (modern) chart!', true));
-		}, btnWid);
-		btn.text.alignment = LEFT;
-		tab_group.add(btn);
-
 		if(SHOW_EVENT_COLUMN)
 		{
 			btnY += 20;
@@ -4767,84 +4569,6 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			btn.text.alignment = LEFT;
 			tab_group.add(btn);
 		}
-
-		btnY += 20;
-		var btn:PsychUIButton = new PsychUIButton(btnX, btnY, #if sys '  Make Longer Sustains (Legacy)...' #else '  Make Longer Sustains (Legacy)' #end, function()
-		{
-			if(!fileDialog.completed) return;
-			
-			// Check if current chart is a legacy format
-			updateChartData();
-			var currentFormat:String = PlayState.SONG.format != null ? Std.string(PlayState.SONG.format) : '';
-			var isLegacyFormat:Bool = (currentFormat == 'psych_legacy_convert' || (!currentFormat.startsWith('psych_v1') && currentFormat.length > 0));
-			
-			if (!isLegacyFormat) {
-				showOutput('Error: This function only works on legacy format charts!', true);
-				return;
-			}
-			
-			upperBox.isMinimized = true;
-			upperBox.bg.visible = false;
-
-			var func:Void->Void = function()
-			{
-				updateChartData();
-				var longerSustainsData = makeLongerSustainsLegacy();
-				
-				if (longerSustainsData.chart == '') {
-					showOutput('Error: Chart is not in legacy format!', true);
-					return;
-				}
-
-				var chartNameBase:String = Paths.formatToSongPath(PlayState.SONG.song);
-				var chartFileName:String = chartNameBase + '.json';
-
-				fileDialog.save(chartFileName, longerSustainsData.chart,
-					function()
-					{
-						#if sys
-						var newPath:String = fileDialog.path;
-						showOutput('Chart with longer sustains saved successfully to: $newPath!');
-						#else
-						showOutput('Chart with longer sustains downloaded successfully');
-						#end
-					},
-					null,
-					function() showOutput('Error on saving chart!', true));
-			}
-
-			// If there's a chart path, offer to update it directly
-			#if sys
-			if(Song.chartPath != null)
-			{
-				openSubState(new Prompt('Update current chart with longer sustains?', function()
-				{
-					updateChartData();
-					var longerSustainsData = makeLongerSustainsLegacy();
-					if (longerSustainsData.chart == '') {
-						showOutput('Error: Chart is not in legacy format!', true);
-						return;
-					}
-					try
-					{
-						File.saveContent(Song.chartPath, longerSustainsData.chart);
-						showOutput('Chart updated with longer sustains successfully!');
-					}
-					catch(e:Exception)
-					{
-						showOutput('Error updating chart: ${e.message}', true);
-					}
-				}, func));
-			}
-			else
-			#end
-			{
-				FlxG.sound.play(Paths.sound('loading_open_alpha'), 0.5);
-				func();
-			}
-		}, btnWid);
-		btn.text.alignment = LEFT;
-		tab_group.add(btn);
 
 		btnY++;
 		btnY += 20;

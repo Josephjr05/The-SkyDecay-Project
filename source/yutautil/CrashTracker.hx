@@ -23,8 +23,8 @@ class CrashTracker {
     public static var ENABLE_FUNCTION_WRAPPING:Bool = true; // Re-enabled
     public static var ENABLE_COMMAND_EXIT_TRACKING:Bool = true; // Re-enabled
     public static var ENABLE_VARIABLE_ACCESS_TRACKING:Bool = true; // Re-enabled with safer variable handling
-    public static var ENABLE_COMPILATION_TRACING:Bool = true; // Re-enabled for debugging
-    public static var ENABLE_DETAILED_COMPILATION_TRACING:Bool = true; // Re-enabled for debugging
+    public static var ENABLE_COMPILATION_TRACING:Bool = #if verbose true #else false #end; // Re-enabled for debugging
+    public static var ENABLE_DETAILED_COMPILATION_TRACING:Bool = #if verbose true #else false #end; // Re-enabled for debugging
 
     /**
      * Macro to inject crash tracking into a class
@@ -59,9 +59,9 @@ class CrashTracker {
         var isBaseInfrastructureClass = (baseInfrastructureClass == null);
         if (isBaseInfrastructureClass) {
             baseInfrastructureClass = fullClassName;
-            trace('CrashTracker: Setting up base infrastructure in $fullClassName');
+            #if verbose trace('CrashTracker: Setting up base infrastructure in $fullClassName'); #end
         } else {
-            trace('CrashTracker: Instrumenting functions in $fullClassName');
+            #if verbose trace('CrashTracker: Instrumenting functions in $fullClassName'); #end
         }
 
         var fields = Context.getBuildFields();
@@ -247,7 +247,9 @@ class CrashTracker {
                 try {
                     if (defaultExpr != null && containsReturnStatement(defaultExpr)) return true;
                 } catch (e:Dynamic) {
+                    #if verbose
                     trace("For some reason, cannot read defaultExpr: " + defaultExpr);
+                    #end
                 }
             case ETry(tryExpr, catches):
                 if (containsReturnStatement(tryExpr)) return true;
@@ -619,7 +621,9 @@ class CrashTracker {
                 try {
                     processedDefault = defaultExpr != null ? processInternalFunctions(defaultExpr, className, parentFuncName) : null;
                 } catch (e:Dynamic) {
+                    #if verbose
                     trace("There was probably no default here...");
+                    #end
                     processedDefault = defaultExpr;
                 }
                 {expr: ESwitch(switchExpr, processedCases, processedDefault), pos: expr.pos};

@@ -1,10 +1,13 @@
 package yutautil;
 
+#if cpp
 import cpp.Float32;
 import cpp.abi.Abi;
+#end
 import haxe.Constraints.IMap;
 import haxe.ds.StringMap;
 // import states.PlayState.LuaScript;
+import thx.ReadonlyArray;
 import yutautil.Threader.MemLimitThreadQ;
 import yutautil.Threader;
 import yutautil.modules.SyncUtils;
@@ -33,7 +36,9 @@ enum FuncAndReturnItem<T>
 	TransformedItem(func:T->Dynamic, ?extraArgs:Array<Dynamic>);
 }
 
+#if LUA_ALLOWED
 typedef LuaScript = flixel.util.typeLimit.OneOfTwo<psychlua.FunkinLua, psychlua.LegacyFunkinLua>;
+#end
 
 // abstract Collection<T>(Dynamic) from Array<T> to Array<T> {
 //     @:from public static inline function fromList<T>(list:List<T>):Collection<T> {
@@ -623,12 +628,117 @@ enum Size
 	Auto;
 }
 
+abstract TypeInfo({o:Dynamic, t:Type.ValueType})
+{
+	// An abstract type representing either a Class or a Type.
+	public inline function new(value:Dynamic)
+	{
+		this = {o: value, t: Type.typeof(value)};
+	}
+
+	@:to public inline function toDynamic():Dynamic
+	{
+		return this;
+	}
+
+	@:from public inline static function fromClass(typing:Class<Dynamic>):TypeInfo
+	{
+		return cast {o: null, t: Type.ValueType.TClass(typing)};
+	}
+
+	@:from public inline static function fromType(cls:Type.ValueType):TypeInfo
+	{
+		return cast {o: null, t: cls};
+	}
+
+	@:to public inline function toClass():Null<Class<Dynamic>>
+	{
+		return Type.getClass(this.o);
+	}
+
+	@:to public inline function toType():Type.ValueType
+	{
+		return this.t;
+	}
+}
+
 /**
  * A utility class for working with collections, providing various methods
  * to check types, estimate sizes, and convert between different collection types.
  */
 class CollectionUtils
 {
+
+	public static inline extern overload function alterObject<T>(input:T, changes:Dynamic):Void
+	{
+		if (changes == null) return;
+
+		for (field in Reflect.fields(changes))
+		{
+			if (!Reflect.hasField(input, field))
+			{
+				throw 'Field "$field" does not exist on object of type ${Type.getClassName(Type.getClass(input))}';
+			}
+			Reflect.setField(input, field, Reflect.field(changes, field));
+		}
+	}
+
+	public static inline overload extern function alterObject<T>(input:T, changes:haxe.ds.StringMap<Dynamic>):Void
+	{
+		if (changes == null) return;
+
+		for (field in changes.keys())
+		{
+			if (!Reflect.hasField(input, field))
+			{
+				throw 'Field "$field" does not exist on object of type ${Type.getClassName(Type.getClass(input))}';
+			}
+			Reflect.setField(input, field, Reflect.field(changes, field));
+		}
+	}
+
+	public static inline extern overload function alterObject<T>(input:T, changes:Array<{key:String, value:Dynamic}>):Void
+	{
+		if (changes == null) return;
+
+		for (pair in changes)
+		{
+			var field = pair.key;
+			var value = pair.value;
+			if (!Reflect.hasField(input, field))
+			{
+				throw 'Field "$field" does not exist on object of type ${Type.getClassName(Type.getClass(input))}';
+			}
+			Reflect.setField(input, field, value);
+		}
+	}
+
+	public static inline extern overload function alterObject<T>(input:T, func:T->Dynamic):Void
+	{
+		if (func == null) return;
+		var changes = func(input);
+		if (changes == null) return;
+
+		for (field in Reflect.fields(changes))
+		{
+			if (!Reflect.hasField(input, field))
+			{
+				throw 'Field "$field" does not exist on object of type ${Type.getClassName(Type.getClass(input))}';
+			}
+			Reflect.setField(input, field, Reflect.field(changes, field));
+		}
+	}
+
+	public static inline function E(math:Class<Math>):Float
+	{
+		return 2.71828182845904523536;
+	}
+
+	public static inline function getObjectType<E>(input:Dynamic):TypeInfo
+	{
+		return Type.getClass(input) != null ? Type.getClass(input) : Type.typeof(input);
+	}
+
 	public static inline function isIterable<T>(input:Dynamic):Bool
 	{
 		return Std.is(input, Array)
@@ -648,6 +758,11 @@ class CollectionUtils
 			|| (Reflect.hasField(input, "iterator") || (Reflect.hasField(input, "hasNext") && Reflect.hasField(input, "next")))) && (function checkType(item:Dynamic):Bool {
 				return Std.is(item, type);
 			})(input);
+	}
+
+	public static inline function isClassOfType<T>(input:Dynamic, type:Class<T>):Bool
+	{
+		return Type.getClass(input) == type;
 	}
 
 	public static inline function attempt(f:haxe.Constraints.Function, attempts:Int, args:haxe.Rest<Dynamic>):Dynamic
@@ -1503,6 +1618,33 @@ class CollectionUtils
 		return item;
 	}
 
+	// /**
+	//  * Calls the provided function `func` (T->T) with `item` as its argument, then returns `item`.
+	//  *
+	//  * @param item The value to be passed to `func` and returned.
+	//  * @param func A function that takes and returns `item`.
+	//  * @return The original `item`.
+	//  */
+	// public static extern overload inline function funcAndReturn<T>(item:T, func:T->T):T
+	// {
+	// 	func(item);
+	// 	return item;
+	// }
+
+	// /**
+	//  * Calls the provided function `func` (T->Dynamic) with `item` as its argument, then returns `item`.
+	//  *
+	//  * @param item The value to be passed to `func` and returned.
+	//  * @param func A function that takes `item` and returns Dynamic.
+	//  * @return The original `item`.
+	//  */
+	// public static extern overload inline function funcAndReturn<T>(item:T, func:T->Dynamic):T
+	// {
+	// 	func(item);
+	// 	return item;
+	// }
+
+
 	/**
 	 * Calls the provided function `func` with arguments determined by `item`, `a`, and `itemIsArg`, then returns `item`.
 	 *
@@ -1676,6 +1818,13 @@ class CollectionUtils
 		return pattern.match(input);
 	}
 
+	public static inline function matchInputWithRegex(REG:EReg, input:String):Null<String> {
+		if (REG.match(input)) {
+			return REG.matched(0);
+		}
+		return null;
+	}
+
 
 
 	/**
@@ -1687,6 +1836,17 @@ class CollectionUtils
 
 	// Sums a list of numbers (OneOrMore<FlexibleNum>), Array<Float>, or Array<Int>
 	public static extern overload inline function sum(numbers:OneOrMore<FlexibleNum>):Float {
+		var sum:Float = 0;
+		var arr:Array<Float> = cast numbers;
+		for (num in arr) {
+			sum += num;
+		}
+		return sum;
+	}
+
+	// Num Version.
+
+	public static extern overload inline function sum(numbers:OneOrMore<Num>):Float {
 		var sum:Float = 0;
 		var arr:Array<Float> = cast numbers;
 		for (num in arr) {
@@ -1761,6 +1921,48 @@ class CollectionUtils
 		}
 	}
 
+	/**
+	 * Converts an input value to a nullable version of the same type.
+	 * For Float values, NaN is treated as null for safer null checking.
+	 *
+	 * @param input The value to convert to nullable
+	 * @return The nullable version of the input, or null if input is Float NaN
+	 */
+	public static inline function asNullable<T>(input:T):Null<T>
+	{
+		// Check if input is a Float and is NaN, treat as null
+		if (Std.is(input, Float) && Math.isNaN(cast input))
+		{
+			return null;
+		}
+		return cast input;
+	}
+
+	public static inline function makeSync(ASync:ASync<Dynamic>):Dynamic
+	{
+		return ASync.originalFunction;
+	}
+
+	public static inline function makeAsync<TFunc:haxe.Constraints.Function>(func:TFunc):ASync<TFunc>
+	{
+		return new ASync<TFunc>(func);
+	}
+
+	public static inline function makeArray<T>(...items:T):Array<T>
+	{
+		return items;
+	}
+
+	public static inline function arrayOfLength<T>(length:Int, ?defaultValue:T):Array<T>
+	{
+		var arr:Array<T> = new Array<T>();
+		for (i in 0...length)
+		{
+			arr.push(defaultValue);
+		}
+		return arr;
+	}
+
 
 
 
@@ -1783,6 +1985,62 @@ class CollectionUtils
 		{
 			arr = [];
 			for (item in (input : Iterable<T>))
+			{
+				arr.push(item);
+			}
+		}
+		else
+		{
+			arr = [input];
+		}
+		// If type is provided, cast to Array<type>
+		return type != null ? cast arr : arr;
+	}
+
+	public static inline function getSuperClasses(cls:Class<Dynamic>):Array<Class<Dynamic>>
+	{
+		var supers = [];
+		var current = cls;
+		while (current != null)
+		{
+			supers.push(current);
+			current = Type.getSuperClass(current);
+		}
+		return supers;
+	}
+
+	public static inline function upgrade<Object>(obj:Object, to:Class<Object>):Object
+	{
+		if (Std.is(obj, to) || (Type.getClass(obj) != null && getSuperClasses(Type.getClass(obj)).indexOf(to) != -1))
+		{
+			return cast obj;
+		}
+		else
+		{
+			throw "Cannot upgrade object of type " + Type.getClassName(Type.getClass(obj)) + " to " + Type.getClassName(to);
+		}
+	}
+
+	// Specifically for the mf addAnimationIfMissing
+	public static inline function keysToStringArray<T>(input:Dynamic, ?type):Array<String>
+	{
+		var arr:Array<String>;
+		if (Std.is(input, Array))
+		{
+			arr = input;
+		}
+		else if (Std.is(input, IMap))
+		{
+			arr = [];
+			for (key in (input : Map<Dynamic, T>).keys())
+			{
+				arr.push(key);
+			}
+		}
+		else if (Reflect.hasField(input, "iterator") || (Reflect.hasField(input, "hasNext") && Reflect.hasField(input, "next")))
+		{
+			arr = [];
+			for (item in (input : Array<String>))
 			{
 				arr.push(item);
 			}
@@ -1929,6 +2187,10 @@ class CollectionUtils
 	// 		}
 	// 	}
 	// }
+
+	public static inline function infinify(t:Dynamic, positive:Bool = true):Dynamic {
+		return getInfinity(t, positive);
+	}
 
 	public static function getInfinity(t:Dynamic, positive:Bool = true):Dynamic {
 		if (Std.isOfType(t, Float)) {
@@ -2971,7 +3233,7 @@ class CollectionUtils
 	}
 
 	// Only for Funkin Lua Legacy...
-
+	#if LUA_ALLOWED
 	public static inline function getScriptName(s:LuaScript):String
 	{
 		return switch (Type.getClass(s)) {
@@ -3007,6 +3269,7 @@ class CollectionUtils
 			throw "Unsupported LuaScript type";
 		}
 	}
+	#end
 
 	public static function mergeWithJson<T>(target:T,source:Dynamic,?ignoreFields:Array<String>):T{
 		if(ignoreFields == null) ignoreFields = [];
@@ -3024,6 +3287,113 @@ class CollectionUtils
 		return target;
 	}
 
+	public static inline function getField(R:Class<Reflect>, source:Dynamic, field:String):Dynamic
+	{
+		return Reflect.field(source, field);
+	}
+
+	public static function pushMany<T>(input:Array<T>, items:Array<T>):Array<T>
+	{
+		for(x in items){
+		input.push(x);
+		}
+		return input;
+	}
+
+	/**
+		It returns the index of the first element of the array that matches the predicate function.
+		If none is found it returns `-1`.
+	**/
+	public static function findIndex<T>(array:Array<T>, predicate:T->Bool):Int {
+		for (i in 0...array.length)
+			if (predicate(array[i]))
+				return i;
+		return -1;
+	}
+
+	/**
+   * Converts a string to title case. For example, "hello world" becomes "Hello World".
+     *
+   * @param value The string to convert.
+   * @return The converted string.
+   */
+  public static function toTitleCase(value:String):String
+  {
+    var words:Array<String> = value.split(' ');
+    var result:String = '';
+    for (i in 0...words.length)
+    {
+      var word:String = words[i];
+      result += word.charAt(0).toUpperCase() + word.substr(1).toLowerCase();
+      if (i < words.length - 1)
+      {
+        result += ' ';
+      }
+    }
+    return result;
+  }
+
+	public static function extractWeeks(text:String)
+	{
+		if (text == null)
+			return [];
+		var baseStr = text.trim();
+		if (baseStr == "")
+			return [];
+		var base_weeks = baseStr.split(",").map(s -> s.trim().toLowerCase());
+		return base_weeks;
+	}
+
+	/**
+	 * Sets whethever or not this sprite is visible (and pauses animations)
+	 */
+	public static function setVisibility(spr:FlxSprite,state:Bool) {
+		spr.visible = state;
+		spr.animation.paused = state;
+	}
+
+	/**
+		Same as `Array.map` but it adds a second argument to the `callback` function with the current index value.
+	**/
+	#if js
+	inline
+	#end
+	public static function mapi<TIn, TOut>(array:ReadonlyArray<TIn>, callback:TIn->Int->TOut):Array<TOut> {
+		var r = [];
+		for (i in 0...array.length)
+			r.push(callback(array[i], i));
+		return r;
+	}
+
+	/**
+   * Return true only if both arrays contain the same elements (possibly in a different order).
+   * @param a The first array to compare.
+   * @param b The second array to compare.
+   * @return Weather both arrays contain the same elements.
+   */
+  public static function isEqualUnordered<T>(a:Array<T>, b:Array<T>):Bool
+  {
+    if (a.length != b.length) return false;
+    for (element in a)
+    {
+      if (!b.contains(element)) return false;
+    }
+    for (element in b)
+    {
+      if (!a.contains(element)) return false;
+    }
+    return true;
+  }
+
+	/**
+   * Remove all elements from the array, without creating a new array.
+   * @param array The array to clear.
+   */
+  public inline static function clear<T>(array:Array<T>):Void
+  {
+    // This method is faster than array.splice(0, array.length)
+    array.resize(0);
+  }
 
 	public static function createTestData():Void
 	{
@@ -3096,6 +3466,87 @@ class CollectionUtils
 		// // Select a random number from numberMap
 		// var selectedNumberFromMap = ChanceSelector.selectOption(numberMapChances);
 		// trace("Selected number from map: " + selectedNumberFromMap);
+	}
+
+	/**
+	 * Pretty print an object with structural formatting (Python pprint style)
+	 * Shortcut for DisplayFormatter.prettyPrint()
+	 */
+	public static inline function prettyPrint(obj:Dynamic, ?depth:Int = 0):String
+	{
+		return DisplayFormatter.prettyPrint(obj, depth);
+	}
+
+	/**
+	 * Pretty print an object with structural formatting and trace it
+	 * Shortcut for trace(DisplayFormatter.prettyPrint())
+	 */
+	public static inline function tracePretty(obj:Dynamic, ?depth:Int = 0, ?pos:haxe.PosInfos = null):Void
+	{
+		trace(DisplayFormatter.prettyPrint(obj, depth), pos);
+	}
+
+	/**
+	 * Generate a natural language description of an object
+	 * Shortcut for DisplayFormatter.naturalPrint()
+	 */
+	public static inline function naturalPrint(obj:Dynamic, ?verbosity:yutautil.DisplayFormatter.Verbosity = DETAILED):String
+	{
+		return DisplayFormatter.naturalPrint(obj, verbosity);
+	}
+
+	/**
+	 * Generate a natural language description and trace it
+	 * Shortcut for trace(DisplayFormatter.naturalPrint())
+	 */
+	public static inline function traceNatural(obj:Dynamic, ?verbosity:yutautil.DisplayFormatter.Verbosity = DETAILED, ?pos:haxe.PosInfos = null):Void
+	{
+		trace(DisplayFormatter.naturalPrint(obj, verbosity), pos);
+	}
+
+	/**
+	 * Generate a minimal natural language description of an object
+	 * Shortcut for DisplayFormatter.naturalPrint(..., MINIMAL)
+	 */
+	public static inline function naturalPrintMinimal(obj:Dynamic):String
+	{
+		return DisplayFormatter.naturalPrint(obj, MINIMAL);
+	}
+
+	/**
+	 * Generate a compact natural language description of an object
+	 * Shortcut for DisplayFormatter.naturalPrint(..., COMPACT)
+	 */
+	public static inline function naturalPrintCompact(obj:Dynamic):String
+	{
+		return DisplayFormatter.naturalPrint(obj, COMPACT);
+	}
+
+	/**
+	 * Generate a detailed natural language description of an object
+	 * Shortcut for DisplayFormatter.naturalPrint(..., DETAILED)
+	 */
+	public static inline function naturalPrintDetailed(obj:Dynamic):String
+	{
+		return DisplayFormatter.naturalPrint(obj, DETAILED);
+	}
+
+	/**
+	 * Generate a verbose natural language description of an object
+	 * Shortcut for DisplayFormatter.naturalPrint(..., VERBOSE)
+	 */
+	public static inline function naturalPrintVerbose(obj:Dynamic):String
+	{
+		return DisplayFormatter.naturalPrint(obj, VERBOSE);
+	}
+
+	/**
+	 * Configure the DisplayFormatter settings
+	 * Shortcut for DisplayFormatter.configure()
+	 */
+	public static inline function configureFormatter(?indent:Int, ?lineWidth:Int, ?depth:Int):Void
+	{
+		DisplayFormatter.configure(indent, lineWidth, depth);
 	}
 }
 

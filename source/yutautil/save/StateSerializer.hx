@@ -3,8 +3,10 @@ package yutautil.save;
 import flixel.FlxG;
 import flixel.FlxState;
 import haxe.Json;
+#if sys
 import sys.FileSystem;
 import sys.io.File;
+#end
 
 /**
  * Structure to hold serialized class information with JSON support
@@ -72,6 +74,7 @@ class StateSerializer {
      */
     public static function createSerializableObject(instance:Dynamic):SerializedClass {
         if (instance == null) return null;
+        trace('Starting serialization of ${getTypePath(instance)}');
 
         // Reset state
         resetSerializationState();
@@ -112,6 +115,7 @@ class StateSerializer {
         // Update metadata
         updateSerializationMetadata(result);
 
+        trace('Serialization completed: ${result.METADATA.totalObjects} objects, max depth ${result.METADATA.maxDepth}, circular refs: ${result.METADATA.hasCircularRefs}');
         return result;
     }
 
@@ -333,7 +337,7 @@ class StateSerializer {
                     __info: "Function fields are not serializable"
                 };
             case TClass(Array):
-                var arr:Array<Dynamic> = cast value;
+                var arr:Array<Dynamic> = cast value.copy();
                 return arr.map(function(item) return convertValueToJSON(item, parentId, fieldName + "[]", depth + 1));
             case TObject:
                 // Handle anonymous structures/plain objects
@@ -398,11 +402,16 @@ class StateSerializer {
                     __isAnonymous: isAnonymous
                 };
             case TEnum(e):
-                // Handle enums by converting to string representation
+                // Handle enums by properly deconstructing them
+                var enumType = Type.getEnumName(e);
+                var enumConstructor = Type.enumConstructor(value);
+                var enumParams = Type.enumParameters(value);
+
                 return {
                     __type: "ENUM",
-                    __enumType: Type.getEnumName(e),
-                    __value: Std.string(value)
+                    __enumType: enumType,
+                    __constructor: enumConstructor,
+                    __parameters: enumParams != null ? enumParams.map(function(param) return convertValueToJSON(param, parentId, fieldName + "." + enumConstructor, depth + 1)) : []
                 };
             case TUnknown:
                 // Handle unknown types
@@ -459,6 +468,14 @@ class StateSerializer {
 
         var fieldNames = Reflect.fields(fields);
 
+        // remove [] from array fields
+        for (i in 0...fieldNames.length) {
+            var fieldName = fieldNames[i];
+            if (fieldName.endsWith("[]")) {
+                fieldNames[i] = fieldName.substr(0, fieldName.length - 2);
+            }
+        }
+
         for (field in fieldNames) {
             var value = Reflect.field(fields, field);
             try {
@@ -498,17 +515,29 @@ class StateSerializer {
                     // Functions were skipped during serialization, return null
                     return null;
                 case "ENUM":
-                    // Try to restore enum value
+                    // Properly restore enum value with parameters
                     var enumType = Reflect.field(value, "__enumType");
-                    var enumValue = Reflect.field(value, "__value");
+                    var enumConstructor = Reflect.field(value, "__constructor");
+                    var enumParams = Reflect.field(value, "__parameters");
+
                     try {
                         var enumClass = Type.resolveEnum(enumType);
-                        if (enumClass != null) {
-                            // Try to create enum from string representation
-                            return Type.createEnum(enumClass, enumValue);
+                        if (enumClass != null && enumConstructor != null) {
+                            var restoredParams:Array<Dynamic> = [];
+
+                            // Convert parameters back from JSON if they exist
+                            if (enumParams != null && Std.isOfType(enumParams, Array)) {
+                                var paramArray:Array<Dynamic> = cast enumParams;
+                                for (param in paramArray) {
+                                    restoredParams.push(convertValueFromJSON(param));
+                                }
+                            }
+
+                            // Create enum with proper constructor and parameters
+                            return Type.createEnum(enumClass, enumConstructor, restoredParams);
                         }
                     } catch (e:Dynamic) {
-                        trace('Could not restore enum ${enumType}: ${e}');
+                        trace('Could not restore enum ${enumType}.${enumConstructor}: ${e}');
                     }
                     return null;
                 case "UNKNOWN":
@@ -720,6 +749,8 @@ class StateSerializer {
     public static function saveState(state:FlxState, filename:String):Bool {
         try {
             var serializedState = createSerializableObject(state);
+            trace('Saving state with ${serializedState.METADATA.totalObjects} objects...');
+            trace("You may now continue running the game while the state is being saved.");
 
             // Ensure save directory exists
             if (!sys.FileSystem.exists(SAVE_DIRECTORY)) {
@@ -727,7 +758,7 @@ class StateSerializer {
             }
 
             var filePath = SAVE_DIRECTORY + filename + ".json";
-            var jsonString = Json.stringify(serializedState, null, "\t");
+            var jsonString = tjson.TJSON.encode(serializedState, "fancy");
 
             File.saveContent(filePath, jsonString);
             trace('State saved successfully to: ${filePath}');
@@ -774,7 +805,7 @@ class StateSerializer {
             }
 
             var jsonContent = File.getContent(filePath);
-            var serializedState:SerializedClass = Json.parse(jsonContent);
+            var serializedState:SerializedClass = tjson.TJSON.parse(jsonContent);
 
             trace('Loading state with ${serializedState.METADATA.totalObjects} objects...');
 
@@ -854,7 +885,7 @@ class StateSerializer {
             }
 
             var jsonContent = File.getContent(filePath);
-            var serializedState:SerializedClass = Json.parse(jsonContent);
+            var serializedState:SerializedClass = tjson.TJSON.parse(jsonContent);
 
             return serializedState.METADATA;
         } catch (e:Dynamic) {

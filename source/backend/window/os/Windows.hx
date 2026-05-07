@@ -62,6 +62,7 @@ enum abstract MessageBoxReturnValue(Int) from Int to Int {
 #include "combaseapi.h"
 #include <iostream>
 #include <Windows.h>
+#include <psapi.h>
 #include <cstdio>
 #include <tchar.h>
 #include <dwmapi.h>
@@ -155,6 +156,15 @@ class AudioFixClient : public IMMNotificationClient {
 };
 
 AudioFixClient *curAudioFix;
+
+// Console control handler that prevents console close from killing the process
+static BOOL WINAPI ConsoleCtrlHandler(DWORD dwCtrlType) {
+	if (dwCtrlType == CTRL_CLOSE_EVENT) {
+		// Return TRUE to indicate the signal was handled, preventing process termination
+		return TRUE;
+	}
+	return FALSE;
+}
 ')
 @:dox(hide)
 class Windows {
@@ -169,6 +179,12 @@ class Windows {
 	')
 	public static function registerAudio() {
 		Main.audioDisconnected = false;
+	}
+
+	@:functionCode('
+		SetConsoleCtrlHandler((PHANDLER_ROUTINE)ConsoleCtrlHandler, TRUE);
+	')
+	public static function ignoreConsoleClose() {
 	}
 
 	@:functionCode('
@@ -195,6 +211,37 @@ class Windows {
 	freopen("CONOUT$", "w", stderr);
 	')
 	public static function allocConsole() {
+	}
+
+	@:functionCode('
+		// Completely disconnect from console to prevent input blocking
+		// Close the stdin handle immediately to prevent console from waiting for input
+		HANDLE stdinHandle = GetStdHandle(STD_INPUT_HANDLE);
+		if (stdinHandle != INVALID_HANDLE_VALUE) {
+			CloseHandle(stdinHandle);
+		}
+
+		// Set stdin to invalid handle to prevent any further blocking
+		SetStdHandle(STD_INPUT_HANDLE, INVALID_HANDLE_VALUE);
+
+		// Close stdout and stderr handles
+		HANDLE stdoutHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+		if (stdoutHandle != INVALID_HANDLE_VALUE) {
+			CloseHandle(stdoutHandle);
+		}
+
+		HANDLE stderrHandle = GetStdHandle(STD_ERROR_HANDLE);
+		if (stderrHandle != INVALID_HANDLE_VALUE) {
+			CloseHandle(stderrHandle);
+		}
+
+		// Flush C runtime buffers (though handles are already closed)
+		fflush(NULL);
+
+		// Fully detach from the console
+		FreeConsole();
+	')
+	public static function freeConsole() {
 	}
 
 	@:functionCode('
@@ -235,7 +282,19 @@ class Windows {
 		MessageBox(GetActiveWindow(), message, caption, icon | MB_SETFOREGROUND);
 	')
 	public static function showMessageBox(caption:String, message:String, icon:MessageBoxIcon = MSG_WARNING) {
+	}
 
+
+	@:functionCode('
+		ULONGLONG totalRAM_MB;
+		GetPhysicallyInstalledSystemMemory(&totalRAM_MB);
+
+		double ram = mb ? (double)totalRAM_MB : (double)totalRAM_MB / 1024.0;
+		ram = round(ram * 100.0) / 100.0;
+		return ram;
+	')
+	public static function getPhysicallyInstalledSystemMemory(mb:Bool):Float {
+		return 0; // Not supported on other platforms... yet.
 	}
 
 	@:functionCode('

@@ -143,10 +143,10 @@ class FunkinSoundTray extends FlxSoundTray
             var requestedSound:String = sound != null ? Std.string(sound) : '';
             if (globalVolume == 10)
                 playSoundByName(volumeMaxSound);
-            else if (requestedSound == volumeUpSound)
-                playSoundByName(volumeUpSound);
-            else if (requestedSound == volumeDownSound)
-                playSoundByName(volumeDownSound);
+            else if (requestedSound == Std.string(volumeUpSound))
+                playSoundByName(Std.string(volumeUpSound));
+            else if (requestedSound == Std.string(volumeDownSound))
+                playSoundByName(Std.string(volumeDownSound));
             else if (requestedSound != '')
                 playSoundByName(requestedSound);
         }

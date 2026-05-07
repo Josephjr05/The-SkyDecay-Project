@@ -152,6 +152,8 @@
 	<haxelib name="hxWindowColorMode" version="0.2.0" if="windows"/>
 	<haxelib name="flxsoundfilters"/>
 	<haxelib name="flixel-ui" />
+	<haxelib name="thx.core" version="git"/>
+	<!-- <haxelib name="flixel-animate" /> -->
 
 	<!-- Disable Discord IO Thread -->
 	<haxedef name="DISCORD_DISABLE_IO_THREAD" if="hxdiscord_rpc" />
@@ -223,6 +225,13 @@
 	<haxedef name="HXCPP_CHECK_POINTER" if="CRASH_HANDLER" />
 	<haxedef name="HXCPP_STACK_LINE" if="CRASH_HANDLER" />
 	<haxedef name="HXCPP_STACK_TRACE" if="CRASH_HANDLER" />
+	<cppflag name="-D_WINSOCKAPI_" /> 
+
+	<header name="win_error_fix.h" if="windows">
+    	#ifdef ERROR
+    	#undef ERROR
+    	#endif
+	</header>
 	
 	<!--Disable deprecated warnings-->
 	<haxedef name='no-deprecation-warnings' />

@@ -70,12 +70,12 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		option.onChange = onChangeFramerate;
 		addOption(option);
 
-		var option:Option = new Option('Light Cycle:',
-		"What Light Cycle should Camellia songs use?",
-		'lightcycle',
-		STRING,
-		['Auto Lights', 'Slow Lights', 'Player Lights', 'Disabled']);
-		addOption(option);
+		// var option:Option = new Option('Light Cycle:',
+		// "What Light Cycle should Camellia songs use?",
+		// 'lightcycle',
+		// STRING,
+		// ['Auto Lights', 'Slow Lights', 'Player Lights', 'Disabled']);
+		// addOption(option);
 
 		super();
 		insert(1, boyfriend);

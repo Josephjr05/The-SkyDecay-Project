@@ -1,4 +1,7 @@
 ### Welcome to YOUR ultimate Friday Night Funkin' engine. Yes, seriously. Because no other engine does/has these so some noobie has to do it instead. (With some help that has experience :D)
+## EVERY CHANGE IN SKYDECAY ENGINE IS IN SKYDECAY PROJECT. RIGHT NOW, THIS IS THE BASE ENGINE WITH OLD SKYDECAY PROJECT ASSETS SO USE IT IF YOU'RE WILLING TO BREAK EVERYTHING. OTHERWISE, WAIT FOR A BASE ENGINE UPDATE!
+To look at all the changes in the engine including the mod, it will be in [here](https://github.com/Josephjr05/The-SkyDecay-Project/tree/sdypj)
+The mod repo will be privated at some point when the engine is near finished, so don't use or build until it is properly ready.
 
 # SkyDecay Engine 
 ![1000036631](https://github.com/user-attachments/assets/bcd2da72-1bb8-419c-b68f-321fa9ee0f5b)

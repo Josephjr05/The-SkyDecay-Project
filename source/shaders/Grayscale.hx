@@ -1,21 +1,22 @@
 package shaders;
 
-import flixel.addons.display.FlxRuntimeShader;
-import openfl.utils.Assets;
+import flixel.system.FlxAssets.FlxShader;
 
-class Grayscale extends FlxRuntimeShader
-{
-  public var amount:Float = 1;
+class Grayscale extends FlxShader{
+	@:glFragmentSource('
+	#pragma header
+    uniform float saturation;
 
-  public function new(amount:Float = 1)
-  {
-    super(Assets.getText(Paths.getPath('shaders/grayscale.frag', TEXT, null,false)));
-    setAmount(amount);
-  }
-
-  public function setAmount(value:Float):Void
-  {
-    amount = value;
-    this.setFloat("_amount", amount);
-  }
+    void main() {
+        vec4 color = texture2D(bitmap, openfl_TextureCoordv);
+        float gray = dot(color.rgb, vec3(0.299, 0.587, 0.114));
+        
+        vec3 finalColor = mix(vec3(gray), color.rgb, saturation);
+        
+        gl_FragColor = vec4(finalColor, color.a);
+    }')
+    public function new() 
+    {
+        super();    
+    }
 }

@@ -1,119 +1,119 @@
 {
 	"animations": [
 		{
-			"loop": false,
 			"offsets": [1029, -30],
+			"loop": false,
+			"fps": 24,
 			"anim": "singUP",
-			"fps": 24,
-			"name": "u",
-			"indices": []
+			"indices": [],
+			"name": "u"
 		},
 		{
-			"loop": false,
 			"offsets": [970, -10],
+			"loop": false,
+			"fps": 24,
 			"anim": "singLEFT",
-			"fps": 24,
-			"name": "l",
-			"indices": []
+			"indices": [],
+			"name": "l"
 		},
 		{
-			"loop": false,
 			"offsets": [820, 0],
+			"loop": false,
+			"fps": 24,
 			"anim": "singRIGHT",
-			"fps": 24,
-			"name": "r",
-			"indices": []
+			"indices": [],
+			"name": "r"
 		},
 		{
-			"loop": false,
 			"offsets": [248, -638],
+			"loop": false,
+			"fps": 24,
 			"anim": "singDOWN",
-			"fps": 24,
-			"name": "d",
-			"indices": []
+			"indices": [],
+			"name": "d"
 		},
 		{
-			"loop": true,
 			"offsets": [0, 0],
+			"loop": true,
+			"fps": 24,
 			"anim": "idle",
-			"fps": 24,
-			"name": "i",
-			"indices": []
+			"indices": [],
+			"name": "i"
 		},
 		{
+			"loop": false,
 			"offsets": [299, 1217],
-			"loop": false,
-			"fps": 30,
 			"anim": "hello",
-			"indices": [],
-			"name": "hellohottie"
+			"fps": 30,
+			"name": "hellohottie",
+			"indices": []
 		},
 		{
-			"offsets": [0, 0],
 			"loop": true,
-			"fps": 24,
+			"offsets": [0, 0],
 			"anim": "back",
-			"indices": [],
-			"name": "back"
+			"fps": 24,
+			"name": "back",
+			"indices": []
 		},
 		{
-			"offsets": [0, 0],
 			"loop": false,
-			"fps": 24,
+			"offsets": [0, 0],
 			"anim": "over",
-			"indices": [],
-			"name": "over"
+			"fps": 24,
+			"name": "over",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [183, 166],
-			"loop": false,
-			"fps": 24,
 			"anim": "voiceline",
-			"indices": [],
-			"name": "v"
+			"fps": 24,
+			"name": "v",
+			"indices": []
 		},
 		{
-			"loop": true,
 			"offsets": [0, 0],
+			"loop": true,
+			"fps": 24,
 			"anim": "idle-alt",
-			"fps": 24,
-			"name": "alti",
-			"indices": []
+			"indices": [],
+			"name": "alti"
 		},
 		{
-			"loop": false,
 			"offsets": [1030, -30],
+			"loop": false,
+			"fps": 24,
 			"anim": "singUP-alt",
-			"fps": 24,
-			"name": "altu",
-			"indices": []
+			"indices": [],
+			"name": "altu"
 		},
 		{
-			"loop": false,
 			"offsets": [971, -9],
+			"loop": false,
+			"fps": 24,
 			"anim": "singLEFT-alt",
-			"fps": 24,
-			"name": "altl",
-			"indices": []
+			"indices": [],
+			"name": "altl"
 		},
 		{
-			"loop": false,
 			"offsets": [819, 2],
-			"anim": "singRIGHT-alt",
+			"loop": false,
 			"fps": 24,
-			"name": "altr",
-			"indices": []
+			"anim": "singRIGHT-alt",
+			"indices": [],
+			"name": "altr"
 		},
 		{
-			"loop": false,
 			"offsets": [253, -639],
-			"anim": "singDOWN-alt",
+			"loop": false,
 			"fps": 24,
-			"name": "altd",
-			"indices": []
+			"anim": "singDOWN-alt",
+			"indices": [],
+			"name": "altd"
 		}
 	],
-	"vocals_file": "",
+	"vocals_file": "detg",
 	"no_antialiasing": false,
 	"image": "characters/detg",
 	"position": [0, 0],

@@ -1,167 +1,167 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [398, 26],
-			"loop": false,
-			"fps": 24,
 			"anim": "singUP",
-			"indices": [],
-			"name": "u"
+			"fps": 24,
+			"name": "u",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [-13, -9],
-			"loop": false,
-			"fps": 24,
 			"anim": "singLEFT",
-			"indices": [],
-			"name": "l"
+			"fps": 24,
+			"name": "l",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [1, -265],
-			"loop": false,
-			"fps": 24,
 			"anim": "singDOWN",
-			"indices": [],
-			"name": "d"
+			"fps": 24,
+			"name": "d",
+			"indices": []
 		},
 		{
-			"offsets": [0, 0],
 			"loop": false,
-			"fps": 24,
+			"offsets": [0, 0],
 			"anim": "singRIGHT",
-			"indices": [],
-			"name": "r"
+			"fps": 24,
+			"name": "r",
+			"indices": []
 		},
 		{
-			"offsets": [0, 0],
 			"loop": true,
-			"fps": 24,
+			"offsets": [0, 0],
 			"anim": "idle",
-			"indices": [],
-			"name": "i"
+			"fps": 24,
+			"name": "i",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [390, 30],
-			"loop": false,
-			"fps": 24,
 			"anim": "singUPmiss",
-			"indices": [],
-			"name": "mu"
+			"fps": 24,
+			"name": "mu",
+			"indices": []
 		},
 		{
-			"offsets": [0, 0],
 			"loop": false,
-			"fps": 24,
+			"offsets": [0, 0],
 			"anim": "singLEFTmiss",
-			"indices": [],
-			"name": "ml"
+			"fps": 24,
+			"name": "ml",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [0, -271],
-			"loop": false,
-			"fps": 24,
 			"anim": "singDOWNmiss",
-			"indices": [],
-			"name": "md"
+			"fps": 24,
+			"name": "md",
+			"indices": []
 		},
 		{
-			"offsets": [0, 0],
 			"loop": false,
-			"fps": 24,
+			"offsets": [0, 0],
 			"anim": "singRIGHTmiss",
-			"indices": [],
-			"name": "mr"
+			"fps": 24,
+			"name": "mr",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [0, -136],
-			"loop": false,
-			"fps": 24,
 			"anim": "intro",
-			"indices": [],
-			"name": "hellohottie"
+			"fps": 24,
+			"name": "hellohottie",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [64, -26],
-			"loop": false,
-			"fps": 24,
 			"anim": "voiceline",
-			"indices": [],
-			"name": "voiceline"
+			"fps": 24,
+			"name": "voiceline",
+			"indices": []
 		},
 		{
-			"offsets": [0, 0],
 			"loop": true,
-			"fps": 24,
+			"offsets": [0, 0],
 			"anim": "idle-alt",
-			"indices": [],
-			"name": "alti"
+			"fps": 24,
+			"name": "alti",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [396, 26],
-			"loop": false,
-			"fps": 24,
 			"anim": "singUP-alt",
-			"indices": [],
-			"name": "altu"
+			"fps": 24,
+			"name": "altu",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [-16, -10],
-			"loop": false,
-			"fps": 24,
 			"anim": "singLEFT-alt",
-			"indices": [],
-			"name": "altl"
+			"fps": 24,
+			"name": "altl",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [3, -263],
-			"loop": false,
-			"fps": 24,
 			"anim": "singDOWN-alt",
-			"indices": [],
-			"name": "altd"
+			"fps": 24,
+			"name": "altd",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [3, 2],
-			"loop": false,
-			"fps": 24,
 			"anim": "singRIGHT-alt",
-			"indices": [],
-			"name": "altr"
+			"fps": 24,
+			"name": "altr",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [394, 27],
-			"loop": false,
-			"fps": 24,
 			"anim": "singUPmiss-alt",
-			"indices": [],
-			"name": "altmu"
+			"fps": 24,
+			"name": "altmu",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [-12, -7],
-			"loop": false,
-			"fps": 24,
 			"anim": "singLEFTmiss-alt",
-			"indices": [],
-			"name": "altml"
+			"fps": 24,
+			"name": "altml",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [4, -264],
-			"loop": false,
-			"fps": 24,
 			"anim": "singDOWNmiss-alt",
-			"indices": [],
-			"name": "altmd"
+			"fps": 24,
+			"name": "altmd",
+			"indices": []
 		},
 		{
-			"offsets": [-2, 1],
 			"loop": false,
-			"fps": 24,
+			"offsets": [-2, 1],
 			"anim": "singRIGHTmiss-alt",
-			"indices": [],
-			"name": "altmr"
+			"fps": 24,
+			"name": "altmr",
+			"indices": []
 		}
 	],
-	"vocals_file": "",
+	"vocals_file": "marvin",
 	"no_antialiasing": false,
 	"image": "characters/marvin-shucks",
 	"position": [0, 0],

@@ -1,0 +1,67 @@
+{
+	"animations": [
+		{
+			"offsets": [28, 32],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "l"
+		},
+		{
+			"offsets": [0, 0],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "d"
+		},
+		{
+			"offsets": [0, 14],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "r"
+		},
+		{
+			"offsets": [-2, 86],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "u"
+		},
+		{
+			"offsets": [0, 0],
+			"loop": true,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "i"
+		},
+		{
+			"loop": false,
+			"offsets": [0, 1],
+			"anim": "intro",
+			"fps": 24,
+			"name": "n",
+			"indices": []
+		}
+	],
+	"vocals_file": "marvin",
+	"no_antialiasing": false,
+	"image": "characters/marvin-shucks-shadow",
+	"position": [80, 160],
+	"healthicon": "marvin",
+	"flip_x": true,
+	"healthbar_colors": [255, 0, 0],
+	"camera_position": [140, -230],
+	"chartPosition": [
+		0,
+		0
+	],
+	"sing_duration": 7,
+	"scale": 1.4,
+	"_editor_isPlayer": true
+}

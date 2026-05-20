@@ -5,17 +5,17 @@
 	],
 	"_editorMeta": {
 		"boyfriend": "marvin",
-		"dad": "detg",
-		"gf": "rose"
+		"gf": "rose",
+		"dad": "detg"
 	},
+	"girlfriend": [
+		764,
+		184
+	],
 	"stageUI": "normal",
 	"boyfriend": [
 		1420,
 		559
-	],
-	"girlfriend": [
-		764,
-		184
 	],
 	"defaultZoom": 0.55,
 	"objects": [
@@ -75,12 +75,12 @@
 			"type": "boyfriend"
 		},
 		{
-			"x": -1491,
+			"x": -884,
 			"blend": "normal",
-			"y": -941,
+			"y": -570,
 			"scale": [
-				2.4,
-				2.4
+				1.8,
+				1.95
 			],
 			"image": "stages/shucks/glow2",
 			"flipX": false,
@@ -148,15 +148,15 @@
 		0,
 		300
 	],
-	"camera_speed": 1.3,
-	"directory": "",
 	"opponent": [
 		-207,
 		118
 	],
+	"directory": "",
+	"camera_speed": 1.3,
+	"hide_girlfriend": false,
 	"camera_opponent": [
 		650,
 		400
-	],
-	"hide_girlfriend": false
+	]
 }

@@ -1,0 +1,59 @@
+{
+	"animations": [
+		{
+			"offsets": [90, -460],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "down"
+		},
+		{
+			"offsets": [242, 520],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "up"
+		},
+		{
+			"offsets": [231, -151],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "left"
+		},
+		{
+			"offsets": [-130, -189],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "right"
+		},
+		{
+			"loop": true,
+			"offsets": [-88, -151],
+			"anim": "idle",
+			"fps": 32,
+			"name": "idle",
+			"indices": []
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/detg-bloody",
+	"position": [0, 0],
+	"healthicon": "detg",
+	"flip_x": false,
+	"healthbar_colors": [185, 93, 42],
+	"camera_position": [-490, -400],
+	"chartPosition": [
+		0,
+		0
+	],
+	"sing_duration": 4,
+	"scale": 1.35,
+	"_editor_isPlayer": false
+}

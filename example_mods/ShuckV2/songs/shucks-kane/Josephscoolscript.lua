@@ -37,6 +37,8 @@ function onTweenCompleted(tag)
 end
 
 function onCreate()
+    setProperty('gf.alpha', 1)
+         setScrollFactor('gfGroup', 1, 1)
     makeLuaSprite('blackScreenn', 'nil', 0, 0)
     setObjectCamera('blackScreenn', 'camOther')
   setObjectOrder('blackScreenn', 1);
@@ -110,7 +112,7 @@ function onTimerCompleted(tag)
     end
 end
 function onStepHit()
-        if curStep == 2 then
+        if curStep == 32 then
             setObjectCamera('blackScreenn', 'camGame');
             setObjectOrder('blackScreenn', 18);
             scaleObject('blackScreenn', screenWidth, screenHeight);
@@ -121,12 +123,12 @@ function onStepHit()
             
 
         end
-        if curStep == 431 then
-            setObjectOrder('boyfriendGroup', 13)
-            setObjectOrder('dadGroup',13)
+        if curStep == 471 then
+            setObjectOrder('boyfriendGroup', 11)
+            setObjectOrder('dadGroup',11)
             fadingFlicker("blackScreenn")
         end
-        if curStep == 768 then -- 
+        if curStep == 814 then -- 
                 doTweenAlpha('saw', 'bg', 1, 0.50);
 		doTweenAlpha('Portada', 'Imagen', 1, 0.50);
 		doTweenAlpha('Titulo', 'Texto', 1, 0.50);
@@ -135,37 +137,40 @@ function onStepHit()
         doTweenY('sprite3ScaleY', 'sprite3.scale', 2.4, 0.3, 'quadOut')
 	end
 
-    if curStep == 811 then
+    if curStep == 846 then
                 doTweenAlpha('saw', 'bg', 0, 0.50);
 		doTweenAlpha('Portada', 'Imagen', 0, 0.50);
 		doTweenAlpha('Titulo', 'Texto', 0, 0.50);
 	end
-    if curStep == 1280 then
+    if curStep == 1326 then
          flashGlow()
     end
-    if curStep == 1552 then
+    if curStep == 1582 then
         flashGlow()
    end
-   if curStep == 2048 then
+   if curStep == 2094 then
     flashGlow()
 end
-if curStep == 2176 then
+if curStep == 2223 then
     flashGlow()
 end
-   if curStep == 2352 then
+if curStep == 2478 then
+    flashGlow()
+end
+   if curStep == 2815 then
     setProperty('dad.idleSuffix', '-NOIDLE');
 end
-if curStep == 2552 then
+if curStep == 3010 then
     playAnimReverse('dad', 'over', 0.04)
 end
-   if curStep == 2560 then
+   if curStep == 3022 then
     flashGlow()
 end
-    if curStep == 2815 then -- 
+    if curStep == 3269 then -- 
                 doTweenAlpha('red', 'red', 1, 0.10);
                 flashGlow()
     end 
-    if curStep == 3075 then
+    if curStep == 3537 then
         setProperty('cameraSpeed', 999999999)
         setProperty('isCameraOnForcedPos', true)
     setProperty('camFollow.x', 100)
@@ -174,27 +179,27 @@ end
     removeLuaScript('scripts/cameraMovement')
     removeLuaScript('scripts/smoothCam')
 end
-if curStep == 3108 then
+if curStep == 3569 then
     setProperty('cameraSpeed', 999999999)
     setProperty('isCameraOnForcedPos', true)
 setProperty('camFollow.x', 1620)
 setProperty('camFollow.y', 800)
 setProperty('defaultCamZoom', .7)
 end
-if curStep == 3140 then
+if curStep == 3598 then
     setProperty('cameraSpeed', 1.3)
     setProperty('isCameraOnForcedPos', false)
     triggerEvent('Camera Follow Pos', '', '') 
 setProperty('defaultCamZoom', 0.55)
 end
-if curStep == 3165 then
+if curStep == 3631 then
     setProperty('cameraSpeed', 1.3)
     setProperty('isCameraOnForcedPos', true)
 setProperty('camFollow.x', 400)
 setProperty('camFollow.y', 500)
 doTweenZoom('zoomTween', 'camGame', 0.8, 0.6, 'quadInOut')
 end
-    if curStep == 3196 then -- 
+    if curStep == 3737 then -- 
                 doTweenAlpha('red', 'red', 0, 0.10);
                 
         end

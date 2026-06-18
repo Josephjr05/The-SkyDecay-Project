@@ -1221,8 +1221,8 @@ class FunkinLua {
 
 		// others
 		Lua_helper.add_callback(lua, "triggerEvent", function(name:String, ?value1:String = '', ?value2:String = '') {
-			game.triggerEvent(name, value1, value2, Conductor.songPosition);
-			//trace('Triggered event: ' + name + ', ' + value1 + ', ' + value2);
+			if (game != null && Reflect.hasField(game, 'triggerEvent'))
+				Reflect.callMethod(game, Reflect.field(game, 'triggerEvent'), [name, value1, value2, '', Conductor.songPosition]);
 			return true;
 		});
 

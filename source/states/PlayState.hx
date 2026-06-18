@@ -1824,7 +1824,8 @@ class PlayState extends MusicBeatState
 			strumTime: event[0] + ClientPrefs.data.noteOffset,
 			event: event[1][i][0],
 			value1: event[1][i][1],
-			value2: event[1][i][2]
+			value2: event[1][i][2],
+			value3: event[1][i][3]
 		};
 		eventNotes.push(subEvent);
 		eventPushed(subEvent);
@@ -2465,7 +2466,11 @@ class PlayState extends MusicBeatState
 			if(eventNotes[0].value2 != null)
 				value2 = eventNotes[0].value2;
 
-			triggerEvent(eventNotes[0].event, value1, value2, leStrumTime);
+			var value3:String = '';
+			if(eventNotes[0].value3 != null)
+				value3 = eventNotes[0].value3;
+
+			triggerEvent(eventNotes[0].event, value1, value2, value3, leStrumTime);
 			eventNotes.shift();
 		}
 	}
@@ -2477,16 +2482,18 @@ class PlayState extends MusicBeatState
 		return pressed;
 	}
 
-	public function triggerEventNote(eventName:String, value1:String, value2:String, strumTime:Float) {
-		triggerEvent(eventName, value1, value2, Conductor.songPosition);
+	public function triggerEventNote(eventName:String, value1:String, value2:String, value3:String, strumTime:Float) {
+		triggerEvent(eventName, value1, value2, value3, Conductor.songPosition);
 		//This is for Troll engine compatibility, not really gonna use it though but kept here just incase.
 	}
 
-	public function triggerEvent(eventName:String, value1:String, value2:String, strumTime:Float) {
+	public function triggerEvent(eventName:String, value1:String, value2:String, value3:String, strumTime:Float) {
 		var flValue1:Null<Float> = Std.parseFloat(value1);
 		var flValue2:Null<Float> = Std.parseFloat(value2);
+		var flValue3:Null<Float> = Std.parseFloat(value3);
 		if(Math.isNaN(flValue1)) flValue1 = null;
 		if(Math.isNaN(flValue2)) flValue2 = null;
+		if(Math.isNaN(flValue3)) flValue3 = null;
 
 		// EventManager.run(eventName, [value1, value2, Std.string(strumTime)]);
 
@@ -2936,7 +2943,7 @@ class PlayState extends MusicBeatState
 			default:
             	trace("Unknown event: " + eventName);
 			}
-		stagesFunc(function(stage:BaseStage) stage.eventCalled(eventName, value1, value2, flValue1, flValue2, strumTime));
+		stagesFunc(function(stage:BaseStage) stage.eventCalled(eventName, value1, value2, value3, flValue1, flValue2, strumTime));
 		callOnScripts('onEvent', [eventName, value1, value2, strumTime]);
 	}
 
@@ -4745,7 +4752,6 @@ class PlayState extends MusicBeatState
 			case 'stage': new Stage(); //Week 1
 			case 'philly': new Philly(); //Week 3
 			case 'limo': new Limo(); //Week 4
-			case 'camellia': new Camellia(); //camellia studio
 			case 'camellia': new Studio(); //camellia studio
 			case 'concert': new CamelliaConcert(); //camellia concert
 			case 'cyphisonia': new Cyphisonia(); // cyphisonia ghost camellia stage!

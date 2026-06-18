@@ -10,6 +10,9 @@ import objects.StrumNote;
 import objects.SustainSplash;
 // import objects.NoteSplashData; // this is for future note looping. Currently not available yet.
 
+import flixel.FlxG;
+import flixel.FlxSprite;
+import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxRect;
 import flixel.util.FlxColor; // Make sure FlxColor is imported if used directly
 
@@ -19,7 +22,8 @@ typedef EventNote = {
 	strumTime:Float,
 	event:String,
 	value1:String,
-	value2:String
+	value2:String,
+	value3:String
 }
 
 typedef NoteSplashData = {
@@ -45,6 +49,8 @@ class Note extends FlxSprite
 	// sdy engine var
   	public var z:Float = 0;
 	public var isSustainReleaseNote:Bool = false;
+	public static var finalVertices:Array<Float> = [0, 0, 0, 0, 0, 0, 0, 0];
+	// public var sustainNote:objects.Sustain = null;
 
 	//This is needed for the hardcoded note types to appear on the Chart Editor,
 	//It's also used for backwards compatibility with 0.1 - 0.3.2 charts.
@@ -54,7 +60,11 @@ class Note extends FlxSprite
 		'Hey!',
 		'Hurt Note',
 		'GF Sing',
-		'No Animation'
+		'No Animation',
+		'Blue Note',
+		'Noobador Note',
+		'Red Note',
+		'Roll' // 1.75× sustain-release coyote window when this note type is used
 	];
 
 	public var strumTime:Float = 0;
@@ -79,7 +89,21 @@ class Note extends FlxSprite
 	public var tail:Array<Note> = []; // for sustains
 	public var parent:Note;
 	public var noteHoldSplash:SustainSplash;
-	
+
+	/** Combined miss already applied for this hold head (player sustain chain). */
+	public var sustainCombinedMissDone:Bool = false;
+	/** Early release / chain miss: dim hold visuals. */
+	public var sustainBrokenVisual:Bool = false;
+
+	/**
+	 * Hold head only: first tail's Psych downscroll anchor height (`frameHeight * |scale.y|`)
+	 * before stretched skin replaces anim/scale — keeps strip aligned to the arrow.
+	 */
+	public var isContinuousSustain:Bool = false;
+
+	/** Chart hold length in steps (rounded); used where old code used `tail.length` for duration/damage. */
+	public var sustainChartSteps:Int = 0;
+
 	public var blockHit:Bool = false; // only works for player
 
 	public var sustainLength:Float = 0;
@@ -100,6 +124,14 @@ class Note extends FlxSprite
 	public var earlyHitMult:Float = 1;
 	public var lateHitMult:Float = 1;
 	public var lowPriority:Bool = false;
+
+	/** Sustain release coyote window multiplier (e.g. note type `Roll` = 1.75). */
+	public var coyoteHitMult:Float = 1;
+
+	/**
+	 * Sibling sustain tails stay for gameplay; `tail[0]` is the only one drawn (stretched `hold` via `scale.y`).
+	 * Hidden tails use `visible = false` from PlayState after spawn.
+	 */
 
 	public static var SUSTAIN_SIZE:Int = 44;
 	public static var swagWidth:Float = 160 * 0.7;
@@ -204,6 +236,7 @@ class Note extends FlxSprite
 	private function set_noteType(value:String):String {
 		noteSplashData.texture = PlayState.SONG != null ? PlayState.SONG.splashSkin : 'noteSplashes';
 		defaultRGB();
+		coyoteHitMult = 1;
 
 		if(noteData > -1 && noteType != value) {
 			switch(value) {
@@ -236,6 +269,36 @@ class Note extends FlxSprite
 					noMissAnimation = true;
 				case 'GF Sing':
 					gfNote = true;
+				case 'Blue Note': // already exisiting note types (lua to haxe migration)
+					rgbShader.r = 0xFF0000FF; // blue
+					rgbShader.g = 0xFF0000FF;
+					rgbShader.b = 0xFF0000FF;
+					noteSplashData.r = 0xFF0000FF;
+					noteSplashData.g = 0xFF0000FF;
+					noteSplashData.b = 0xFF0000FF;
+					noAnimation = true;
+					ignoreNote = mustPress;
+				case 'Noobador Note': // the boss type character oh yes (i hate psych 0.7.3 pls 1.0.4) - Joseph
+				// color needs to be yellow mixed with red
+					rgbShader.r = 0xFFFFA500; // yellow
+					rgbShader.g = 0xFFFFA500;
+					rgbShader.b = 0xFFFF0000; // red
+					noteSplashData.r = 0xFFFFA500; // yellow
+					noteSplashData.g = 0xFFFFA500;
+					noteSplashData.b = 0xFFFF0000; // red
+					noAnimation = true;
+					ignoreNote = mustPress;
+				case 'Red Note':
+					rgbShader.r = 0xFFFF0000; // red
+					rgbShader.g = 0xFFFF0000;
+					rgbShader.b = 0xFFFF0000;
+					noteSplashData.r = 0xFFFF0000; // red
+					noteSplashData.g = 0xFFFF0000;
+					noteSplashData.b = 0xFFFF0000; // red
+					noAnimation = false; // red is the main opponent so it should have animation
+					ignoreNote = mustPress;
+				case 'Roll':
+					coyoteHitMult = 1.75;
 			}
 			if (value != null && value.length > 1) NoteTypesConfig.applyNoteTypeData(this, value);
 			if (hitsound != 'hitsound' && hitsoundVolume > 0) Paths.sound(hitsound); //precache new sound for being idiot-proof
@@ -246,7 +309,9 @@ class Note extends FlxSprite
 
 	public function _initializeNote(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?inEditor:Bool = false, ?createdFrom:Dynamic = null)
 	{
-		animation = new PsychAnimationController(this);
+		isContinuousSustain = false;
+		sustainChartSteps = 0;
+		if (animation == null) animation = new PsychAnimationController(this);
 		antialiasing = ClientPrefs.data.antialiasing;
 		if(createdFrom == null) createdFrom = PlayState.instance;
 
@@ -268,7 +333,7 @@ class Note extends FlxSprite
 
 		if(noteData > -1)
 		{
-			rgbShader = new RGBShaderReference(this, initializeGlobalRGBShader(noteData));
+			if (rgbShader == null) rgbShader = new RGBShaderReference(this, initializeGlobalRGBShader(noteData));
 			if(PlayState.SONG != null && PlayState.SONG.disableNoteRGB) rgbShader.enabled = false;
 			texture = '';
 
@@ -291,6 +356,7 @@ class Note extends FlxSprite
 			multAlpha = ClientPrefs.data.holdAlpha;
 			hitsoundDisabled = true;
 			if(ClientPrefs.data.downScroll) flipY = true;
+			scale.y = 0.62;
 
 			offsetX += width / 2;
 			copyAngle = false;
@@ -298,6 +364,7 @@ class Note extends FlxSprite
 			animation.play(colArray[noteData % colArray.length] + 'holdend'); // somehow gotta make it so it uses goodNoteHit here
 
 			updateHitbox();
+			centerOffsets();
 
 			offsetX -= width / 2;
 
@@ -308,11 +375,11 @@ class Note extends FlxSprite
 			{
 				prevNote.animation.play(colArray[prevNote.noteData % colArray.length] + 'hold');
 
-				prevNote.scale.y *= Conductor.stepCrochet / 100 * 1.05;
+				prevNote.scale.y = Conductor.stepCrochet / 100 * 1.054;
 				if(createdFrom != null && createdFrom.songSpeed != null) prevNote.scale.y *= createdFrom.songSpeed;
 
 				if(PlayState.isPixelStage) {
-					prevNote.scale.y *= 1.19;
+					prevNote.scale.y *= 4.58;
 					prevNote.scale.y *= (6 / height); //Auto adjust note size
 				}
 				prevNote.updateHitbox();
@@ -345,6 +412,8 @@ class Note extends FlxSprite
 
 	public function die(strumTime:Float, noteData:Int, ?prevNote:Note, ?isSustain:Bool = false, ?inEditor:Bool = false, ?createdFrom:Dynamic = null):Void
 	{
+		// this.scale.set(1, 1); // Fixes stretching
+		this.clipRect = null; // Fixes gaps
 	    _initializeNote(strumTime, noteData, prevNote, isSustain, inEditor, createdFrom);
 	}
 
@@ -519,6 +588,79 @@ class Note extends FlxSprite
 		}
 	}
 
+	// override function updateHitbox():Void
+	// {
+	// 	super.updateHitbox();
+	// }
+
+	// override function resetHelpers():Void
+	// {
+	// 	super.resetHelpers();
+	// }
+
+	// public inline function isStretchedSustainVisual():Bool
+	// {
+	// 	return isSustainNote && parent != null && parent.tail != null && parent.tail.length > 0 && parent.tail[0] == this;
+	// }
+
+	// /** Pixel height of full hold: first tail Psych height + every other tail (avoids circular use of `tail[0].scale.y`). */
+	// public function sumStretchedSustainTargetPx():Float
+	// {
+	// 	if (parent == null || parent.tail == null || parent.tail.length == 0)
+	// 		return 0.0;
+	// 	var sum:Float = parent.sustainFirstTailPsychH >= 0 ? parent.sustainFirstTailPsychH : 0.0;
+	// 	for (i in 1...parent.tail.length)
+	// 	{
+	// 		var t:Note = parent.tail[i];
+	// 		if (t == null || !t.exists)
+	// 			continue;
+	// 		sum += t.frameHeight * Math.abs(t.scale.y);
+	// 	}
+	// 	return sum;
+	// }
+
+	// /** After Psych builds `parent.tail`. Stretched strip uses normal FlxSprite draw + `scale.y` only. */
+	// public function setupStretchedSustainVisual():Void
+	// {
+	// 	if (!isStretchedSustainVisual())
+	// 		return;
+	// 	final col:String = colArray[noteData % colArray.length];
+	// 	final holdName:String = col + 'hold';
+	// 	multAlpha = ClientPrefs.data.holdAlpha;
+	// 	alpha = ClientPrefs.data.holdAlpha;
+	// 	scale.set(1, 1);
+	// 	// Size from `hold` frame — was wrong when setGraphicSize ran on `holdend` from `_initializeNote`.
+	// 	if (animation.getByName(holdName) != null)
+	// 		animation.play(holdName, true);
+	// 	if (PlayState.isPixelStage)
+	// 		setGraphicSize(Std.int(width * PlayState.daPixelZoom));
+	// 	else
+	// 		setGraphicSize(Std.int(width * 0.7));
+	// 	updateHitbox();
+	// 	// Match exact vanilla segmented width (pixel + regular) captured on the hold head.
+	// 	if (parent != null && parent.sustainFirstTailPsychW > 0.001 && width > 0.001)
+	// 		scale.x *= parent.sustainFirstTailPsychW / width;
+	// 	updateHitbox();
+	// 	copyAngle = false;
+	// 	syncStretchedSustainScaleY();
+	// 	// `offset` was centered for `holdend` in `_initializeNote`; 1.0.4 sustain uses default offsets — re-center for `hold` so downscroll clip math matches.
+	// 	centerOffsets();
+	// 	updateHitbox();
+	// }
+
+	// /** Match total segmented height using `scale.y` on the `hold` graphic (no custom camera draw). */
+	// public function syncStretchedSustainScaleY():Void
+	// {
+	// 	if (!isStretchedSustainVisual())
+	// 		return;
+	// 	final tgt:Float = sumStretchedSustainTargetPx();
+	// 	final fh:Float = frameHeight;
+	// 	if (fh <= 0.001 || tgt <= 0)
+	// 		return;
+	// 	scale.y = tgt / fh;
+	// 	updateHitbox();
+	// }
+
 	override public function destroy()
 	{
 		super.destroy();
@@ -527,6 +669,10 @@ class Note extends FlxSprite
 
 	public function followStrumNote(myStrum:StrumNote, fakeCrochet:Float, songSpeed:Float = 1)
 	{
+		// Psych 1.0.4: downscroll uses `(frameHeight * scale.y) - swagWidth/2` — must run after `scale.y` is current (same frame as positioning).
+		// if (isStretchedSustainVisual())
+		// 	syncStretchedSustainScaleY();
+
 		var strumX:Float = myStrum.x;
 		var strumY:Float = myStrum.y;
 		var strumAngle:Float = myStrum.angle;
@@ -574,7 +720,7 @@ class Note extends FlxSprite
 				{
 					swagRect.width = frameWidth;
 					swagRect.height = (center - y) / scale.y;
-					swagRect.y = frameHeight - swagRect.height;
+					swagRect.y = (height / scale.y) - swagRect.height;
 				}
 			}
 			else if (y + offset.y * scale.y <= center)
@@ -591,10 +737,8 @@ class Note extends FlxSprite
 	override function set_clipRect(rect:FlxRect):FlxRect
 	{
 		clipRect = rect;
-
-		if (frames != null)
+		if (frames != null && animation.curAnim != null)
 			frame = frames.frames[animation.frameIndex];
-
 		return rect;
 	}
 }

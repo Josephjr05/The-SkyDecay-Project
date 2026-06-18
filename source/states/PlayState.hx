@@ -372,6 +372,7 @@ class PlayState extends MusicBeatState
 
 	// Multi keys
 	private var keyCount:Int = 4;
+	public static var Crashed:Bool = false;
 
 	private static var _lastLoadedModDirectory:String = '';
 	public static var nextReloadAll:Bool = false;
@@ -4745,6 +4746,7 @@ class PlayState extends MusicBeatState
 			case 'philly': new Philly(); //Week 3
 			case 'limo': new Limo(); //Week 4
 			case 'camellia': new Camellia(); //camellia studio
+			case 'camellia': new Studio(); //camellia studio
 			case 'concert': new CamelliaConcert(); //camellia concert
 			case 'cyphisonia': new Cyphisonia(); // cyphisonia ghost camellia stage!
 			case 'planet': new Planet(); //camellia alt Planet

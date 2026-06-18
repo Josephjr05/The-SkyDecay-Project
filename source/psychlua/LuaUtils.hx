@@ -25,6 +25,7 @@ class LuaUtils
 	public static final Function_Continue:String = "##PSYCHLUA_FUNCTIONCONTINUE";
 	public static final Function_StopLua:String = "##PSYCHLUA_FUNCTIONSTOPLUA";
 	public static final Function_StopHScript:String = "##PSYCHLUA_FUNCTIONSTOPHSCRIPT";
+	public static final Function_StopYScript:String = "##PSYCHLUA_FUNCTIONSTOPYSCRIPT";
 	public static final Function_StopAll:String = "##PSYCHLUA_FUNCTIONSTOPALL";
 
 	public static function getLuaTween(options:Dynamic)

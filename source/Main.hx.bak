@@ -48,7 +48,6 @@ import backend.Highscore;
 import backend.ColorBlindness;
 
 import backend.SSPlugin as ScreenShotPlugin;
-import flixel.system.scaleModes.FillScaleMode;
 import backend.modules.*;
 import backend.modules.TraceManager;
 
@@ -115,44 +114,43 @@ class Main extends Sprite
 		trace("Finished testing forceCast.");
 
 		Lib.current.addChild(new Main());
-		FlxG.scaleMode = new FillScaleMode(); // so you can fullscreen without black bars on the sides!!
 
 		var arr:Array<Int> = [1, 2, 3, 4, 5];
 
 		trace("TypeTools ptrMap: " + TypeTools.ptrMap);
 
-		// // YSComp Test - Testing YScript to Haxe compilation
-		// #if macro
-		// trace("YSComp test skipped - macro context");
-		// #else
-		// try {
-		// 	// Test compiled YScript MathHelper class
-		// 	var helper = new yutautil.TestMath.MathHelper(2.0);
-		// 	trace("YSComp Test - Created MathHelper with multiplier 2.0");
+		// YSComp Test - Testing YScript to Haxe compilation
+		#if macro
+		trace("YSComp test skipped - macro context");
+		#else
+		try {
+			// Test compiled YScript MathHelper class
+			var helper = new yutautil.TestMath.MathHelper(2.0);
+			trace("YSComp Test - Created MathHelper with multiplier 2.0");
 
-		// 	var result1 = helper.multiply(5.0);
-		// 	trace("YSComp Test - 5.0 * 2.0 = " + result1);
+			var result1 = helper.multiply(5.0);
+			trace("YSComp Test - 5.0 * 2.0 = " + result1);
 
-		// 	var result2 = helper.add(10.0, 15.0);
-		// 	trace("YSComp Test - add(10.0, 15.0) = " + result2);
+			var result2 = helper.add(10.0, 15.0);
+			trace("YSComp Test - add(10.0, 15.0) = " + result2);
 
-		// 	var multiplier = helper.getMultiplier();
-		// 	trace("YSComp Test - getMultiplier() = " + multiplier);
+			var multiplier = helper.getMultiplier();
+			trace("YSComp Test - getMultiplier() = " + multiplier);
 
-		// 	// Test module-level function
-		// 	var quickResult = yutautil.TestMath.quickAdd(7.5, 2.5);
-		// 	trace("YSComp Test - quickAdd(7.5, 2.5) = " + quickResult);
+			// Test module-level function
+			var quickResult = yutautil.TestMath.quickAdd(7.5, 2.5);
+			trace("YSComp Test - quickAdd(7.5, 2.5) = " + quickResult);
 
-		// 	// Test module-level variable
-		// 	var defaultMult = yutautil.TestMath.defaultMultiplier;
-		// 	trace("YSComp Test - defaultMultiplier = " + defaultMult);
+			// Test module-level variable
+			var defaultMult = yutautil.TestMath.defaultMultiplier;
+			trace("YSComp Test - defaultMultiplier = " + defaultMult);
 
-		// 	trace("YSComp Test - All tests completed successfully!");
-		// } catch (e:Dynamic) {
-		// 	trace("YSComp Test - Error: " + e);
-		// 	trace("YSComp Test - This is expected if YSComp macro is not enabled or YScript files are not processed");
-		// }
-		// #end
+			trace("YSComp Test - All tests completed successfully!");
+		} catch (e:Dynamic) {
+			trace("YSComp Test - Error: " + e);
+			trace("YSComp Test - This is expected if YSComp macro is not enabled or YScript files are not processed");
+		}
+		#end
 
 		yutautil.typeregistry.BuildDataLoader.initialize();
 	}
@@ -203,6 +201,15 @@ class Main extends Sprite
 		var stageWidth:Int = Lib.current.stage.stageWidth;
 		var stageHeight:Int = Lib.current.stage.stageHeight;
 
+		if (game.zoom == -1.0)
+		{
+			var ratioX:Float = stageWidth / game.width;
+			var ratioY:Float = stageHeight / game.height;
+			game.zoom = Math.min(ratioX, ratioY);
+			game.width = Math.ceil(stageWidth / game.zoom);
+			game.height = Math.ceil(stageHeight / game.zoom);
+		}
+		
 		#if LUA_ALLOWED
 		Mods.pushGlobalMods();
 		#end
@@ -215,7 +222,8 @@ class Main extends Sprite
 		WindowUtils.init();
 
 		trace("PC System Memory: " + backend.util.NativeAPI.getPhysicallyInstalledSystemMemory() + " GB");
-		
+
+
 		#if HSCRIPT_ALLOWED
 		Iris.warn = function(x, ?pos:haxe.PosInfos) {
 			Iris.logLevel(WARN, x, pos);
@@ -324,7 +332,7 @@ class Main extends Sprite
 		#end
 
 		// shader coords fix
-		FlxG.signals.gameResized.add(function (w, h) {
+		FlxG.signals.gameResized.add((w:Int, h:Int) -> {
 		     if (FlxG.cameras != null) {
 			   for (cam in FlxG.cameras.list) {
 				if (cam != null && cam.filters != null)
@@ -532,7 +540,7 @@ class Main extends Sprite
 								if (PlayState.isStoryMode) {
 									FlxG.switchState(new states.StoryMenuState());
 								} else {
-									FlxG.switchState(new states.FreeplayState());
+									FreeplayManager.openFreeplay();
 								}
 								PlayState.Crashed = false;
 							}

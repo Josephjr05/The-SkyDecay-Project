@@ -155,6 +155,15 @@ import states.TitleState;
 		public var allowVis:Bool = true;
 		public var healthVis:Bool = true;
 		public var visOpacity:Float = 0.7;
+
+		// Mixtape engine additions
+		public var yscriptDebugMode:Bool = false; // Enable YScript execution tracing for debugging
+		public var enableFrameTraceLimiting:Bool = false; // Enable frame-based trace limiting
+		public var maxTracesPerFrame:Int = 5; // Maximum traces per frame before queuing
+		public var useTraceThreading:Bool = false; // Use separate thread for trace processing
+		public var traceMode:String = "CONSOLE"; // CONSOLE, GAME, or BOTH
+		public var sourceAccessDebug:Bool = false; // Allow debug access to source files to edit the game at runtime - EXTREMELY DANGEROUS, USE WITH CAUTION
+		public var maxInGameTraces:Int = 100; // Maximum traces to keep in memory for in-game viewer
 }
 
 class ClientPrefs {

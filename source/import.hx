@@ -71,7 +71,15 @@ import flixel.util.FlxTimer;
 import openfl.utils.Assets;
 import flixel.util.FlxDestroyUtil;
 
+import yutautil.ChanceSelector;
+import yutautil.ImprovedFileHandling;
+import yutautil.YScript;
+
+// import animate.FlxAnimate;
+// import animate.FlxAnimateFrames;
+
 using StringTools;
+using objects.ExtendUtil;
 
 import moonchart.Moonchart;
 import moonchart.formats.*;
@@ -82,9 +90,11 @@ import moonchart.parsers.*;
 import backend.window.Window;
 import backend.window.WindowUtil;
 import backend.window.WindowUtils;
+import backend.window.SnailWindowUtils;
 
 import objects.AudioDisplay;
 
+import Types;
 //Thank you Yutamon for letting me use your utils!
 import cache.Cache;
 
@@ -106,4 +116,8 @@ using yutautil.RuntimeTypedef;
 using yutautil.Tracked;
 using yutautil.TypeUtils;
 using yutautil.Valid;
+
+using yutautil.modules.ASync.AResult;
+using yutautil.modules.ASync.ASyncF;
+using yutautil.modules.ASync;
 #end

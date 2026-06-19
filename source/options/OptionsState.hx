@@ -20,6 +20,21 @@ class OptionsState extends MusicBeatState
 	public static var menuBG:FlxSprite;
 	public static var onPlayState:Bool = false;
 
+	/** Main menu track used by title / main menu / freeplay menus. */
+	public static inline var MAIN_MENU_MUSIC:String = 'freakyMenu';
+	/** Change this to any file in assets/music (without extension). */
+	public static inline var OPTIONS_MENU_MUSIC:String = 'Workshop';
+
+	public static function playOptionsMenuMusic(?volume:Float = 1):Void
+	{
+		FlxG.sound.playMusic(Paths.music(OPTIONS_MENU_MUSIC), volume, true);
+	}
+
+	public static function playMainMenuMusic(?volume:Float = 1):Void
+	{
+		FlxG.sound.playMusic(Paths.music(MAIN_MENU_MUSIC), volume, true);
+	}
+
 	function openSelectedSubstate(label:String) {
 		switch(label)
 		{
@@ -50,6 +65,9 @@ class OptionsState extends MusicBeatState
 		#if DISCORD_ALLOWED
 		DiscordClient.changePresence("Options Menu", null);
 		#end
+
+		if (!onPlayState)
+			playOptionsMenuMusic();
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.antialiasing = ClientPrefs.data.antialiasing;
@@ -107,7 +125,11 @@ class OptionsState extends MusicBeatState
 				LoadingState.loadAndSwitchState(new PlayState());
 				FlxG.sound.music.volume = 0;
 			}
-			else MusicBeatState.switchState(new MainMenuState());
+			else
+			{
+				playMainMenuMusic();
+				MusicBeatState.switchState(new MainMenuState());
+			}
 		}
 		else if (controls.ACCEPT) openSelectedSubstate(options[curSelected]);
 	}

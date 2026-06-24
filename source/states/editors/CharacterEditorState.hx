@@ -15,6 +15,9 @@ import objects.Bar;
 import states.editors.content.Prompt;
 import states.editors.content.PsychJsonPrinter;
 
+// import animate.FlxAnimate;
+// import animate.FlxAnimateFrames;
+
 @:bitmap("assets/images/debugger/cursorCross.png")
 class GraphicCursorCross extends openfl.display.BitmapData {}
 
@@ -417,6 +420,7 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 				scale: 1,
 				healthbar_colors: [161, 161, 161],
 				chartPosition: [0, 0], // chart positioning for editor
+				reflectionPos: [0, 0],
 				camera_position: [0, 0],
 				position: [0, 0],
 				vocals_file: null
@@ -610,6 +614,8 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 	var positionYStepper:PsychUINumericStepper;
 	var chartPositionX:PsychUINumericStepper;
 	var chartPositionY:PsychUINumericStepper;
+	var reflectionXStepper:PsychUINumericStepper;
+	var reflectionYStepper:PsychUINumericStepper;
 	var positionCameraXStepper:PsychUINumericStepper;
 	var positionCameraYStepper:PsychUINumericStepper;
 
@@ -675,6 +681,10 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 		positionXStepper = new PsychUINumericStepper(flipXCheckBox.x + 110, flipXCheckBox.y, 10, character.positionArray[0], -9000, 9000, 0);
 		positionYStepper = new PsychUINumericStepper(positionXStepper.x + 70, positionXStepper.y, 10, character.positionArray[1], -9000, 9000, 0);
 
+		reflectionXStepper = new PsychUINumericStepper(healthIconInputText.x + 85, healthIconInputText.y, 10, character.reflectionPosArray[0], -9000, 9000, 0);
+		reflectionYStepper = new PsychUINumericStepper(reflectionXStepper.x + 60, reflectionXStepper.y, 10, character.reflectionPosArray[1], -9000, 9000, 0);
+
+		// will make an extension for this probably
 		// chartPositionX = new PsychUINumericStepper(chartPosition.x, chartPosition.x + 40, 10, character.chartArray[0], -9000, 9000, 0);
 		// chartPositionX = new PsychUINumericStepper(chartPosition.x, chartPosition.y + 40, 10, character.chartArray[1], -9000, 9000, 0);
 
@@ -697,6 +707,7 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 		tab_group.add(new FlxText(15, singDurationStepper.y - 18, 120, 'Sing Animation length:'));
 		tab_group.add(new FlxText(15, scaleStepper.y - 18, 100, 'Scale:'));
 		tab_group.add(new FlxText(positionXStepper.x, positionXStepper.y - 18, 100, 'Character X/Y:'));
+		tab_group.add(new FlxText(reflectionXStepper.x, reflectionXStepper.y - 18, 0, 'Reflection X/Y:'));
 		tab_group.add(new FlxText(positionCameraXStepper.x, positionCameraXStepper.y - 18, 100, 'Camera X/Y:'));
 		tab_group.add(new FlxText(healthColorStepperR.x, healthColorStepperR.y - 18, 100, 'Health Bar R/G/B:'));
 		tab_group.add(imageInputText);
@@ -712,6 +723,8 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 		tab_group.add(noAntialiasingCheckBox);
 		tab_group.add(positionXStepper);
 		tab_group.add(positionYStepper);
+		tab_group.add(reflectionXStepper);
+		tab_group.add(reflectionYStepper);
 		tab_group.add(positionCameraXStepper);
 		tab_group.add(positionCameraYStepper);
 		tab_group.add(healthColorStepperR);
@@ -782,6 +795,12 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 				character.positionArray[1] = positionYStepper.value;
 				updateCharacterPositions();
 				unsavedProgress = true;
+			}
+			else if(sender == reflectionXStepper){
+				character.reflectionPosArray[0] = reflectionXStepper.value;
+			}
+			else if(sender == reflectionYStepper){
+				character.reflectionPosArray[1] = reflectionYStepper.value;
 			}
 			else if(sender == singDurationStepper)
 			{
@@ -882,6 +901,8 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 		positionYStepper.value = character.positionArray[1];
 		positionCameraXStepper.value = character.cameraPosition[0];
 		positionCameraYStepper.value = character.cameraPosition[1];
+		reflectionXStepper.value = character.reflectionPosArray[0];
+		reflectionYStepper.value = character.reflectionPosArray[1];
 		// chartPositionX.value = character.chartArray[0];
 		// chartPositionY.value = character.chartArray[1];
 		reloadAnimationDropDown();
@@ -1324,7 +1345,7 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 		FlxG.log.error("Problem saving file");
 	}
 
-	function saveCharacter() {
+	function saveCharacter() { 
 		if(_file != null) return;
 
 		var json:Dynamic = {
@@ -1335,6 +1356,7 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 			"healthicon": character.healthIcon,
 
 			"position":	character.positionArray,
+			"reflectionPos": character.reflectionPosArray,
 			"camera_position": character.cameraPosition,
 			"chartPosition": character.chartArray,
 

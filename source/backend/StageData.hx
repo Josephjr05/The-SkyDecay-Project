@@ -17,6 +17,11 @@ typedef StageFile = {
 	var opponent:Array<Dynamic>;
 	var hide_girlfriend:Bool;
 
+	//from Snail engine
+	var has_reflections:Bool;
+	var fixedCam_x:Null<Float>; 
+	var fixedCam_y:Null<Float>;
+
 	var camera_boyfriend:Array<Float>;
 	var camera_opponent:Array<Float>;
 	var camera_girlfriend:Array<Float>;
@@ -48,6 +53,10 @@ class StageData {
 			girlfriend: [400, 130],
 			opponent: [100, 100],
 			hide_girlfriend: false,
+			has_reflections: false,
+
+			fixedCam_x: null,
+			fixedCam_y: null,
 
 			camera_boyfriend: [0, 0],
 			camera_opponent: [0, 0],

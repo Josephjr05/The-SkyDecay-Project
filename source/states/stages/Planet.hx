@@ -2,39 +2,44 @@ package states.stages;
 
 import cutscenes.DialogueBoxPsych; // to use dialogue json
 
-import states.stages.objects.*;
+import objects.Note;
+import backend.Song;
+import shaders.Bloom;
+import shaders.Chromaticab;
+import shaders.Glitch;
+import openfl.filters.ShaderFilter;
 
-class Planet extends BaseStage
-{
-	var background:FlxSprite;
-	var planetshaper:FlxSprite;
-	var foreground:FlxSprite;
-	var stage:FlxSprite;
-	override function create()
-	{
-		background = new FlxSprite(-1000, -730).loadGraphic(Paths.image('stages/camellia/planet/background'));
-		background.scale.set(1.5, 1.5);
-		background.updateHitbox();
-		background.antialiasing = ClientPrefs.data.antialiasing;
-		add(background);
+var bg:BGSprite;
+var stage:BGSprite;
+var fg:BGSprite;
+var planetshaper:BGSprite;
 
-		planetshaper = new FlxSprite(-270, -750).loadGraphic(Paths.image('stages/camellia/planet/planetshaper'));
-		planetshaper.scale.set(1.9, 1.7);
-		planetshaper.updateHitbox();
-		planetshaper.antialiasing = ClientPrefs.data.antialiasing;
+var bloom = new Bloom();
+var chromatic = new Chromaticab();
+var glitch = new Glitch();
+var shadertween = {chromaticass:0.002};
+
+class Planet extends BaseStage{
+	override function create(){
+		bg = new BGSprite('stages/camellia/planet/background', -1400, -450);
+		bg.setGraphicSize(Std.int(bg.width * 2));
+		add(bg);
+
+		planetshaper = new BGSprite('stages/camellia/planet/planetshaper', 100, -500);
+		planetshaper.setGraphicSize(Std.int(bg.width * .8));
 		add(planetshaper);
 
-		stage = new FlxSprite(-1650, -1384).loadGraphic(Paths.image('stages/camellia/planet/stage'));
-		stage.scale.set(1.85, 1.9);
-		stage.updateHitbox();
-		stage.antialiasing = ClientPrefs.data.antialiasing;
+		stage = new BGSprite('stages/camellia/planet/stage', -600, -650);
+		stage.setGraphicSize(Std.int(stage.width * 1.9));
 		add(stage);
 
-		foreground = new FlxSprite(-3400, -2930).loadGraphic(Paths.image('stages/camellia/planet/foreground'));
-		foreground.scale.set(2.5, 2.5);
-		foreground.updateHitbox();
-		foreground.antialiasing = ClientPrefs.data.antialiasing;
-		add(foreground);
+		if (ClientPrefs.data.shaders){
+			bloom.size.value = [8.0];
+			chromatic.iOffset.value = [0.002];
+			camHUD.setFilters ([new ShaderFilter(bloom), new ShaderFilter(chromatic)]); //was camArrows
+			camGame.setFilters ([new ShaderFilter(bloom), new ShaderFilter(chromatic)]);
+			camGame.setFilters ([new ShaderFilter(bloom), new ShaderFilter(chromatic), new ShaderFilter(glitch)]);
+		}
 
 		if (!isStoryMode)
 		{
@@ -49,10 +54,10 @@ class Planet extends BaseStage
 			}
 		}
 	}
-
-	override function update(elapsed:Float)
-	{
-		game.camFollow.x = 600;
-		game.camFollow.y = 410;
+	
+	override function createPost(){
+		fg = new BGSprite('stages/camellia/planet/foreground', -1200, -1500);
+		fg.setGraphicSize(Std.int(fg.width * 2.5));
+		add(fg);
 	}
 }

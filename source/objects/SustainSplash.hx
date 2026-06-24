@@ -24,7 +24,8 @@ class SustainSplash extends FlxSprite
 
   public function setupSusSplash(strum:StrumNote, end:Note, ?playbackRate:Float = 1):Void {
 
-    final timeThingy:Float = (startCrochet * end.parent.tail.length + (end.parent.strumTime - Conductor.songPosition + ClientPrefs.data.ratingOffset)) / playbackRate * .001;
+    final susSteps:Float = end.parent.sustainLength / Math.max(1, startCrochet);
+    final timeThingy:Float = (startCrochet * susSteps + (end.parent.strumTime - Conductor.songPosition + ClientPrefs.data.ratingOffset)) / playbackRate * .001;
 
     end.extraData['holdSplash'] = this;
 

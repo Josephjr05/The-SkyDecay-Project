@@ -26,6 +26,12 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			BOOL);
 		addOption(option);
 
+		var option:Option = new Option('Note Object Pooling',
+			'If checked, notes use a Vs Camellia-style spawn queue and recycle active note sprites.\nCan reduce memory on very dense charts. Off = vanilla Psych behavior.',
+			'noteObjectPooling',
+			BOOL);
+		addOption(option);
+
 		var option:Option = new Option('Opponent Notes',
 			'If unchecked, opponent notes get hidden.',
 			'opponentStrums',

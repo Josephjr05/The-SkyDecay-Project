@@ -55,9 +55,9 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 			BOOL);
 		addOption(option);
 
-		var option:Option = new Option('Batched Draws',
+		var option:Option = new Option('GPU Functions',
 			"If checked, allows the game to batch draw sprites, decreasing CPU usage.\nDon't turn this on if you have a shitty Graphics Card.",
-			'batchedDraws',
+			'gpuFunctions',
 			BOOL);
 		addOption(option);
 

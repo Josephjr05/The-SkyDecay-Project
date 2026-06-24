@@ -142,6 +142,7 @@ import states.TitleState;
 		public var sustainRelease:Bool = true; // keep it true because yes fnf players need this
 
 		// optimizations
+		public var noteObjectPooling:Bool = false; // Vs Camellia-style: data-only unspawn queue + recycle active notes
 		public var batchedDraws:Bool = false; // if you have a potato pc, turn this off
 		public var trashMode:Bool = false;
 		public var ultratrashMode:Bool = false;

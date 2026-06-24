@@ -12,6 +12,9 @@ import haxe.Json;
 import backend.Song;
 import states.stages.objects.TankmenBG;
 
+// import animate.FlxAnimate;
+// import animate.FlxAnimateFrames;
+
 typedef CharacterFile = {
 	var animations:Array<AnimArray>;
 	var image:String;
@@ -20,6 +23,7 @@ typedef CharacterFile = {
 	var healthicon:String;
 
 	var position:Array<Float>;
+	var reflectionPos:Array<Float>;
 	var camera_position:Array<Float>;
 
 	var flip_x:Bool;
@@ -67,8 +71,14 @@ class Character extends FlxSprite
 
 	public var positionArray:Array<Float> = [0, 0];
 	public var cameraPosition:Array<Float> = [0, 0];
+	public var reflectionPosArray:Array<Float> = [0, 0];
 	public var chartArray:Array<Float> = [0, 0];
 	public var healthColorArray:Array<Int> = [255, 0, 0];
+
+	public var isVisible(get, never):Bool;
+	inline function get_isVisible() {
+		return visible && alpha >= 1/255;
+	}
 
 	public var missingCharacter:Bool = false;
 	public var missingText:FlxText;
@@ -81,6 +91,9 @@ class Character extends FlxSprite
 	public var noAntialiasing:Bool = false;
 	public var originalFlipX:Bool = false;
 	public var editorIsPlayer:Null<Bool> = null;
+	public var hasReflections:Bool = false;
+	public var reflectionOffsetX:Float;
+	public var reflectionOffsetY:Float;
 
 	public var loadFailed:Bool = false;
 
@@ -113,14 +126,20 @@ class Character extends FlxSprite
 		return cast Json.parse(rawJson);
 	}
 
-	public function new(x:Float, y:Float, ?character:String = 'bf', ?isPlayer:Bool = false)
+	public function new(x:Float, y:Float, ?character:String = 'bf', ?hasReflections:Bool = false, ?isPlayer:Bool = false)
 	{
 		super(x, y);
 
 		animation = new PsychAnimationController(this);
 
+		#if (haxe >= "4.0.0")
+		animOffsets = new Map();
+		#else
 		animOffsets = new Map<String, Array<Dynamic>>();
+		#end
 		this.isPlayer = isPlayer;
+		this.hasReflections = hasReflections;
+		reflectionAlpha = hasReflections && ClientPrefs.data.shaders && !ClientPrefs.data.lowQuality ? 0.5 : 0;
 		changeCharacter(character);
 		
 		switch(curCharacter)
@@ -220,6 +239,7 @@ class Character extends FlxSprite
 
 			// positioning
 			positionArray = json.position;
+			reflectionPosArray = json.reflectionPos == null ? [0, 0] : json.reflectionPos;
 			cameraPosition = json.camera_position;
 			chartArray = json.chartPosition;
 
@@ -625,6 +645,20 @@ class Character extends FlxSprite
 		animation.addByPrefix(name, anim, 24, false);
 	}
 
+	public var reflectionAlpha:Float = 0;
+	public var reflectionOffsets:Map<String, FlxPoint> = [];
+	public var reflectionOffset = new FlxPoint();
+
+	override function isOnScreen(?camera:FlxCamera) {
+		if(visibleOnScreen)
+			return true;
+		return super.isOnScreen(camera);
+	}
+
+	var visibleOnScreen:Bool = false;
+	var olda:Float;
+	var oldsy:Float;
+	var oldoy:Float;
 	// Atlas support
 	// special thanks ne_eo for the references, you're the goat!!
 	@:allow(states.editors.CharacterEditorState)
@@ -658,6 +692,38 @@ class Character extends FlxSprite
 			}
 			return;
 		}
+
+		visibleOnScreen = false;
+		for (camera in cameras) {
+			if (!camera.visible || !camera.exists || !isOnScreen(camera))
+				continue;
+
+			visibleOnScreen = true;
+			break;
+		}
+
+		if (reflectionAlpha > 0 && isVisible) {
+			olda = alpha;
+			oldsy = scale.y;
+			oldoy = offset.y;
+
+			alpha *= reflectionAlpha;
+			scale.y = -scale.y;
+			offset.y = 0;
+
+			x += reflectionPosArray[0] + reflectionOffset.x;
+			y += reflectionPosArray[1] + reflectionOffset.y + oldoy;
+
+			super.draw();
+
+			x -= reflectionPosArray[0] + reflectionOffset.x;
+			y -= reflectionPosArray[1] + reflectionOffset.y + oldoy;
+
+			alpha = olda;
+			scale.y = oldsy;
+			offset.y = oldoy;
+		}
+
 		super.draw();
 		if(missingCharacter && visible)
 		{

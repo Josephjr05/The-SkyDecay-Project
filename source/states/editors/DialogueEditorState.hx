@@ -96,7 +96,7 @@ class DialogueEditorState extends MusicBeatState implements PsychUIEventHandler.
 		add(UI_box);
 	}
 
-	var characterInputText:PsychUIInputText;
+	var characterDropDown:PsychUIDropDownMenu;
 	var lineInputText:PsychUIInputText;
 	var angryCheckbox:PsychUICheckBox;
 	var speedStepper:PsychUINumericStepper;
@@ -104,8 +104,30 @@ class DialogueEditorState extends MusicBeatState implements PsychUIEventHandler.
 	function addDialogueLineUI() {
 		var tab_group = UI_box.getTab('Dialogue Line').menu;
 
-		characterInputText = new PsychUIInputText(10, 20, 80, DialogueCharacter.DEFAULT_CHARACTER, 8);
-		speedStepper = new PsychUINumericStepper(10, characterInputText.y + 40, 0.005, 0.05, 0, 0.5, 3);
+		characterDropDown = new PsychUIDropDownMenu(10, 20, [''], function(index:Int, intended:String) {
+			if(intended == null || intended.length < 1 || !DialogueCharacter.characterJsonExists(intended))
+			{
+				reloadCharacterDropDown();
+				FlxG.sound.play(Paths.sound('cancelMenu'));
+				return;
+			}
+
+			character.changeCharacter(intended);
+			reloadCharacter();
+			if(character.jsonFile.animations.length > 0) {
+				curAnim = 0;
+				character.playAnim(character.jsonFile.animations[curAnim].anim, daText.finishedText);
+				animText.text = 'Animation: ' + character.jsonFile.animations[curAnim].anim + ' (' + (curAnim + 1) +' / ' + character.jsonFile.animations.length + ') - Press W or S to scroll';
+				characterAnimSpeed();
+			}
+			dialogueFile.dialogue[curSelected].portrait = intended;
+			reloadText(false);
+			updateTextBox();
+		});
+		reloadCharacterDropDown();
+		characterDropDown.selectedLabel = DialogueCharacter.DEFAULT_CHARACTER;
+
+		speedStepper = new PsychUINumericStepper(10, characterDropDown.y + 50, 0.005, 0.05, 0, 0.5, 3);
 
 		angryCheckbox = new PsychUICheckBox(speedStepper.x + 120, speedStepper.y, "Angry Textbox", 200);
 		angryCheckbox.onClick = function()
@@ -134,10 +156,10 @@ class DialogueEditorState extends MusicBeatState implements PsychUIEventHandler.
 		});
 
 		tab_group.add(new FlxText(10, speedStepper.y - 18, 0, 'Interval/Speed (ms):'));
-		tab_group.add(new FlxText(10, characterInputText.y - 18, 0, 'Character:'));
+		tab_group.add(new FlxText(10, characterDropDown.y - 18, 0, 'Character:'));
 		tab_group.add(new FlxText(10, soundInputText.y - 18, 0, 'Sound file name:'));
 		tab_group.add(new FlxText(10, lineInputText.y - 18, 0, 'Text:'));
-		tab_group.add(characterInputText);
+		tab_group.add(characterDropDown);
 		tab_group.add(angryCheckbox);
 		tab_group.add(speedStepper);
 		tab_group.add(soundInputText);
@@ -177,9 +199,16 @@ class DialogueEditorState extends MusicBeatState implements PsychUIEventHandler.
 		DialogueBoxPsych.updateBoxOffsets(box);
 	}
 
+	function reloadCharacterDropDown()
+	{
+		var characterList:Array<String> = DialogueCharacter.getDialogueCharacterList();
+		if(characterList.length < 1) characterList.push('');
+		characterDropDown.list = characterList;
+		characterDropDown.selectedLabel = character.curCharacter;
+	}
+
 	function reloadCharacter() {
-		character.frames = Paths.getSparrowAtlas('dialogue/' + character.jsonFile.image);
-		character.jsonFile = character.jsonFile;
+		character.loadDialogueFrames();
 		character.reloadAnimations();
 		character.setGraphicSize(Std.int(character.width * DialogueCharacter.DEFAULT_SCALE * character.jsonFile.scale));
 		character.updateHitbox();
@@ -242,25 +271,7 @@ class DialogueEditorState extends MusicBeatState implements PsychUIEventHandler.
 			unsavedProgress = true;
 
 		if(id == PsychUIInputText.CHANGE_EVENT && (sender is PsychUIInputText)) {
-			if (sender == characterInputText)
-			{
-				character.reloadCharacterJson(characterInputText.text);
-				reloadCharacter();
-				if(character.jsonFile.animations.length > 0) {
-					curAnim = 0;
-					if(character.jsonFile.animations.length > curAnim && character.jsonFile.animations[curAnim] != null) {
-						character.playAnim(character.jsonFile.animations[curAnim].anim, daText.finishedText);
-						animText.text = 'Animation: ' + character.jsonFile.animations[curAnim].anim + ' (' + (curAnim + 1) +' / ' + character.jsonFile.animations.length + ') - Press W or S to scroll';
-					} else {
-						animText.text = 'ERROR! NO ANIMATIONS FOUND';
-					}
-					characterAnimSpeed();
-				}
-				dialogueFile.dialogue[curSelected].portrait = characterInputText.text;
-				reloadText(false);
-				updateTextBox();
-			}
-			else if(sender == lineInputText)
+			if(sender == lineInputText)
 			{
 				dialogueFile.dialogue[curSelected].text = lineInputText.text;
 
@@ -365,7 +376,6 @@ class DialogueEditorState extends MusicBeatState implements PsychUIEventHandler.
 		curSelected = FlxMath.wrap(curSelected + add, 0, dialogueFile.dialogue.length - 1);
 
 		var curDialogue:DialogueLine = dialogueFile.dialogue[curSelected];
-		characterInputText.text = curDialogue.portrait;
 		lineInputText.text = curDialogue.text;
 		angryCheckbox.checked = (curDialogue.boxState == 'angry');
 		speedStepper.value = curDialogue.speed;
@@ -378,7 +388,11 @@ class DialogueEditorState extends MusicBeatState implements PsychUIEventHandler.
 		if(daText.sound != null && daText.sound.trim() == '') daText.sound = 'dialogue';
 
 		curAnim = 0;
-		character.reloadCharacterJson(characterInputText.text);
+		character.changeCharacter(curDialogue.portrait);
+		if(characterDropDown != null) {
+			reloadCharacterDropDown();
+			characterDropDown.selectedLabel = character.curCharacter;
+		}
 		reloadCharacter();
 		reloadText(false);
 		updateTextBox();

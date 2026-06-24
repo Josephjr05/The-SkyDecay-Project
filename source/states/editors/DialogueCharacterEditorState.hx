@@ -50,6 +50,9 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 	var ghostLoop:DialogueCharacter;
 	var ghostIdle:DialogueCharacter;
 
+	var _char:String = DialogueCharacter.DEFAULT_CHARACTER;
+	var charDropDown:PsychUIDropDownMenu;
+
 	var curAnim:Int = 0;
 	var unsavedProgress:Bool = false;
 
@@ -69,6 +72,7 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 		add(hudGroup);
 
 		character = new DialogueCharacter();
+		_char = character.curCharacter;
 		character.scrollFactor.set();
 		mainGroup.add(character);
 		
@@ -149,7 +153,7 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 		addTypeUI();
 		add(UI_typebox);
 
-		UI_mainbox = new PsychUIBox(UI_typebox.x + UI_typebox.width + 10, FlxG.height - 300, 200, 250, ['Animations', 'Character']);
+		UI_mainbox = new PsychUIBox(UI_typebox.x + UI_typebox.width + 10, FlxG.height - 320, 220, 290, ['Animations', 'Character']);
 		UI_mainbox.scrollFactor.set();
 		UI_mainbox.cameras = [camHUD];
 		addAnimationsUI();
@@ -304,7 +308,30 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 	function addCharacterUI() {
 		var tab_group = UI_mainbox.getTab('Character').menu;
 
-		imageInputText = new PsychUIInputText(10, 30, 80, character.jsonFile.image, 8);
+		charDropDown = new PsychUIDropDownMenu(10, 30, [''], function(index:Int, intended:String) {
+			if(intended == null || intended.length < 1 || !DialogueCharacter.characterJsonExists(intended)) {
+				reloadCharacterDropDown();
+				FlxG.sound.play(Paths.sound('cancelMenu'));
+				return;
+			}
+
+			_char = intended;
+			character.changeCharacter(intended);
+			ghostLoop.jsonFile = character.jsonFile;
+			ghostIdle.jsonFile = character.jsonFile;
+			ghostLoop.loadDialogueFrames();
+			ghostIdle.loadDialogueFrames();
+			ghostLoop.reloadAnimations();
+			ghostIdle.reloadAnimations();
+			reloadCharacter();
+			reloadAnimationsDropDown();
+			updateCharTypeBox();
+			updateCharacterUIFields();
+		});
+		reloadCharacterDropDown();
+		charDropDown.selectedLabel = _char;
+
+		imageInputText = new PsychUIInputText(10, 85, 200, getImageInputValue(), 8);
 		xStepper = new PsychUINumericStepper(imageInputText.x, imageInputText.y + 50, 10, character.jsonFile.position[0], -2000, 2000, 0);
 		yStepper = new PsychUINumericStepper(imageInputText.x + 80, xStepper.y, 10, character.jsonFile.position[1], -2000, 2000, 0);
 		scaleStepper = new PsychUINumericStepper(imageInputText.x, xStepper.y + 50, 0.05, character.jsonFile.scale, 0.1, 10, 2);
@@ -317,9 +344,11 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 			character.antialiasing = !character.jsonFile.no_antialiasing;
 		};
 		
+		tab_group.add(new FlxText(charDropDown.x, charDropDown.y - 18, 0, 'Character:'));
 		tab_group.add(new FlxText(10, imageInputText.y - 18, 0, 'Image file name:'));
 		tab_group.add(new FlxText(10, xStepper.y - 18, 0, 'Position Offset:'));
 		tab_group.add(new FlxText(10, scaleStepper.y - 18, 0, 'Scale:'));
+		tab_group.add(charDropDown);
 		tab_group.add(imageInputText);
 		tab_group.add(xStepper);
 		tab_group.add(yStepper);
@@ -358,11 +387,33 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 
 	private static var DEFAULT_TEXT:String = 'Lorem ipsum dolor sit amet';
 
+	function getImageInputValue():String
+	{
+		if(character == null || character.jsonFile == null) return '';
+		return character.jsonFile.image;
+	}
+
+	function updateCharacterUIFields()
+	{
+		if(imageInputText != null) imageInputText.text = getImageInputValue();
+		if(scaleStepper != null) scaleStepper.value = character.jsonFile.scale;
+		if(xStepper != null) xStepper.value = character.jsonFile.position[0];
+		if(yStepper != null) yStepper.value = character.jsonFile.position[1];
+	}
+
+	function reloadCharacterDropDown()
+	{
+		var characterList:Array<String> = DialogueCharacter.getDialogueCharacterList();
+		if(characterList.length < 1) characterList.push('');
+		charDropDown.list = characterList;
+		charDropDown.selectedLabel = _char;
+	}
+
 	function reloadCharacter() {
 		var charsArray:Array<DialogueCharacter> = [character, ghostLoop, ghostIdle];
 		for (char in charsArray) {
-			char.frames = Paths.getSparrowAtlas('dialogue/' + character.jsonFile.image);
 			char.jsonFile = character.jsonFile;
+			char.loadDialogueFrames();
 			char.reloadAnimations();
 			char.setGraphicSize(Std.int(char.width * DialogueCharacter.DEFAULT_SCALE * character.jsonFile.scale));
 			char.updateHitbox();
@@ -395,7 +446,7 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("Dialogue Character Editor", "Editting: " + character.jsonFile.image);
+		DiscordClient.changePresence("Dialogue Character Editor", "Editting: " + _char);
 		#end
 	}
 
@@ -418,7 +469,7 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 			unsavedProgress = true;
 
 		if(id == PsychUIInputText.CHANGE_EVENT && sender == imageInputText) {
-			character.jsonFile.image = imageInputText.text;
+			character.jsonFile.image = imageInputText.text.trim();
 			unsavedProgress = true;
 		} else if(id == PsychUINumericStepper.CHANGE_EVENT && (sender is PsychUINumericStepper)) {
 			if(sender == scaleStepper) {
@@ -647,15 +698,15 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 					var cutName:String = _file.name.substr(0, _file.name.length - 5);
 					trace("Successfully loaded file: " + cutName);
 					character.jsonFile = loadedChar;
+					_char = cutName;
+					character.curCharacter = _char;
 					reloadCharacter();
+					reloadCharacterDropDown();
 					reloadAnimationsDropDown();
 					updateCharTypeBox();
 					updateTextBox();
 					daText.resetDialogue();
-					imageInputText.text = character.jsonFile.image;
-					scaleStepper.value = character.jsonFile.scale;
-					xStepper.value = character.jsonFile.position[0];
-					yStepper.value = character.jsonFile.position[1];
+					updateCharacterUIFields();
 					_file = null;
 					return;
 				}
@@ -695,14 +746,11 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 		var data:String = haxe.Json.stringify(character.jsonFile, "\t");
 		if (data.length > 0)
 		{
-			var splittedImage:Array<String> = imageInputText.text.trim().split('_');
-			var characterName:String = splittedImage[0].toLowerCase().replace(' ', '');
-
 			_file = new FileReference();
 			_file.addEventListener(#if desktop Event.SELECT #else Event.COMPLETE #end, onSaveComplete);
 			_file.addEventListener(Event.CANCEL, onSaveCancel);
 			_file.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
-			_file.save(data, characterName + ".json");
+			_file.save(data, '$_char.json');
 		}
 	}
 

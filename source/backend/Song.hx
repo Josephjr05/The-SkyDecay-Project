@@ -267,6 +267,33 @@ class Song
 		return songJson;
 	}
 
+	/**
+	 * Merges embedded chart events and external events.json rows; drops rows that
+	 * share the same time and event payload (duplicate in both sources).
+	 */
+	public static function mergeUniqueChartEvents(embedded:Null<Array<Dynamic>>, external:Null<Array<Dynamic>>):Array<Dynamic>
+	{
+		var out:Array<Dynamic> = [];
+		var seen:Map<String, Bool> = new Map();
+
+		function pushUnique(ev:Dynamic):Void
+		{
+			if (ev == null || ev[1] == null) return;
+			var key:String = '${Math.round(ev[0] * 1000)}:' + Json.stringify(ev[1]);
+			if (seen.exists(key)) return;
+			seen.set(key, true);
+			out.push(ev);
+		}
+
+		if (embedded != null)
+			for (e in embedded)
+				pushUnique(e);
+		if (external != null)
+			for (e in external)
+				pushUnique(e);
+		return out;
+	}
+
 	static function findMoonchartChart(formattedFolder:String, formattedSong:String):String
 	{
 		var names:Array<String> = [formattedSong];

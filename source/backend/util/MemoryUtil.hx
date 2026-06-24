@@ -155,8 +155,8 @@ class MemoryUtil {
 
 		while ((_zombie = Gc.getNextZombie()) != null) {
 			_nb++;
-			if (_zombie is flixel.util.FlxDestroyUtil.IFlxDestroyable) {
-				flixel.util.FlxDestroyUtil.destroy(cast(_zombie, flixel.util.FlxDestroyUtil.IFlxDestroyable));
+			if (_zombie is flixel.util.IFlxDestroyable) {
+				flixel.util.FlxDestroyUtil.destroy(cast(_zombie, flixel.util.IFlxDestroyable));
 				_nbD++;
 			}
 		}

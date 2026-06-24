@@ -78,7 +78,7 @@ class IntegratedLuaScript {
     private static function isPlayState():Bool {
         var currentClass = Type.getClass(FlxG.state);
         while (currentClass != null) {
-            if (currentClass == PlayState) {
+            if (currentClass == PlayState || currentClass == states.editors.ChartingState) {
                 return true;
             }
             currentClass = cast(Type.getSuperClass(currentClass));
@@ -143,7 +143,7 @@ class IntegratedHScript {
     private static function isPlayState():Bool {
         var currentClass = Type.getClass(FlxG.state);
         while (currentClass != null) {
-            if (currentClass == PlayState) {
+            if (currentClass == PlayState || currentClass == states.editors.ChartingState) {
                 return true;
             }
             currentClass = cast(Type.getSuperClass(currentClass));

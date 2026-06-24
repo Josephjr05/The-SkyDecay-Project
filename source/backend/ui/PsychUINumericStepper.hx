@@ -51,13 +51,16 @@ class PsychUINumericStepper extends PsychUIInputText
 
 		if(FlxG.mouse.justPressed)
 		{
-			if(buttonPlus != null && buttonPlus.exists && FlxG.mouse.overlaps(buttonPlus, camera))
+			var cam:FlxCamera = getUiCamera();
+			if (cam == null) return;
+
+			if(buttonPlus != null && buttonPlus.exists && FlxG.mouse.overlaps(buttonPlus, cam))
 			{
 				buttonPlus.animation.play('pressed');
 				value += step;
 				_internalOnChange();
 			}
-			else if(buttonMinus != null && buttonMinus.exists && FlxG.mouse.overlaps(buttonMinus, camera))
+			else if(buttonMinus != null && buttonMinus.exists && FlxG.mouse.overlaps(buttonMinus, cam))
 			{
 				buttonMinus.animation.play('pressed');
 				value -= step;
@@ -71,6 +74,15 @@ class PsychUINumericStepper extends PsychUIInputText
 			if(buttonMinus != null && buttonMinus.exists && buttonMinus.animation.curAnim != null && buttonMinus.animation.curAnim.name != 'normal')
 				buttonMinus.animation.play('normal');
 		}
+	}
+
+	inline function getUiCamera():FlxCamera
+	{
+		if (cameras != null && cameras.length > 0)
+			return cameras[0];
+		if (buttonPlus != null && buttonPlus.cameras != null && buttonPlus.cameras.length > 0)
+			return buttonPlus.cameras[0];
+		return FlxG.camera;
 	}
 
 	function set_value(v:Float)

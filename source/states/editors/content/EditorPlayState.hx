@@ -378,14 +378,14 @@ class EditorPlayState extends MusicBeatSubstate
 			unspawnNotes.push(swagNote);
 
 			var curStepCrochet:Float = 60 / daBpm * 1000 / 4.0;
-			final roundSus:Int = Math.round(swagNote.sustainLength / Conductor.stepCrochet);
-			if(roundSus > 0)
+			final roundSus:Int = Math.round(swagNote.sustainLength / curStepCrochet);
+			if (roundSus > 0)
 			{
 				for (susNote in 0...roundSus)
 				{
 					oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
 
-					var sustainNote:Note = new Note(swagNote.strumTime + (curStepCrochet * susNote), note.noteData, oldNote, true, this);
+					var sustainNote:Note = new Note(note.strumTime + (curStepCrochet * susNote), note.noteData, oldNote, true, this);
 					sustainNote.mustPress = swagNote.mustPress;
 					sustainNote.gfNote = swagNote.gfNote;
 					sustainNote.noteType = swagNote.noteType;
@@ -394,14 +394,42 @@ class EditorPlayState extends MusicBeatSubstate
 					unspawnNotes.push(sustainNote);
 					swagNote.tail.push(sustainNote);
 
-					if (sustainNote.mustPress) sustainNote.x += FlxG.width / 2; // general offset
-					else if(ClientPrefs.data.middleScroll)
+					sustainNote.correctionOffset = swagNote.height / 2;
+					if (!PlayState.isPixelStage)
+					{
+						if (oldNote.isSustainNote)
+						{
+							oldNote.scale.y *= Note.SUSTAIN_SIZE / oldNote.frameHeight;
+							oldNote.scale.y /= playbackRate;
+							oldNote.resizeByRatio(curStepCrochet / Conductor.stepCrochet);
+						}
+
+						if (ClientPrefs.data.downScroll)
+							sustainNote.correctionOffset = 0;
+					}
+					else if (oldNote.isSustainNote)
+					{
+						oldNote.scale.y /= playbackRate;
+						oldNote.resizeByRatio(curStepCrochet / Conductor.stepCrochet);
+					}
+
+					if (sustainNote.mustPress)
+						sustainNote.x += FlxG.width / 2;
+					else if (ClientPrefs.data.middleScroll)
 					{
 						sustainNote.x += 310;
-						if(sustainNote.noteData > 1) //Up and Right
+						if (sustainNote.noteData > 1)
 							sustainNote.x += FlxG.width / 2 + 25;
 					}
 				}
+				// if (swagNote.tail.length > 0)
+				// {
+				// 	swagNote.sustainFirstTailPsychH = swagNote.tail[0].frameHeight * Math.abs(swagNote.tail[0].scale.y);
+				// 	swagNote.sustainFirstTailPsychW = swagNote.tail[0].width;
+				// 	swagNote.tail[0].setupStretchedSustainVisual();
+				// 	for (ti in 1...swagNote.tail.length)
+				// 		swagNote.tail[ti].visible = false;
+				// }
 			}
 
 			if (swagNote.mustPress)

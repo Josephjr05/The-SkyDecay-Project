@@ -62,8 +62,22 @@ class LuaUtils
 		#end
 	}
 
+	public static inline function inChartEditor():Bool
+		return PlayState.instance == null && states.editors.ChartingState.instance != null && Std.isOfType(FlxG.state, states.editors.ChartingState);
+
+	public static function isChartNullGroup(name:String):Bool
+	{
+		switch(name) {
+			case 'notes' | 'unspawnNotes' | 'eventNotes' | 'grpNoteSplashes': return true;
+		}
+		return false;
+	}
+
 	public static function setVarInArray(instance:Dynamic, variable:String, value:Dynamic, allowMaps:Bool = false):Any
 	{
+		if (instance == null)
+			return value;
+
 		var splitProps:Array<String> = variable.split('[');
 		if(splitProps.length > 1)
 		{
@@ -106,11 +120,24 @@ class LuaUtils
 		 	instance.colorTransform = new openfl.geom.ColorTransform();
 		 	return value;
 		}
+
+		if (Std.isOfType(instance, states.editors.ChartingState) && variable == 'defaultCamZoom')
+		{
+			Reflect.setProperty(instance, variable, value);
+			var chart:states.editors.ChartingState = cast instance;
+			if (chart.camGame != null)
+				chart.camGame.zoom = value;
+			return value;
+		}
+
 		Reflect.setProperty(instance, variable, value);
 		return value;
 	}
 	public static function getVarInArray(instance:Dynamic, variable:String, allowMaps:Bool = false):Any
 	{
+		if (instance == null)
+			return null;
+
 		var splitProps:Array<String> = variable.split('[');
 		if(splitProps.length > 1)
 		{
@@ -126,6 +153,8 @@ class LuaUtils
 
 			for (i in 1...splitProps.length)
 			{
+				if (target == null)
+					return null;
 				var j:Dynamic = splitProps[i].substr(0, splitProps[i].length - 1);
 				target = target[j];
 			}
@@ -150,6 +179,16 @@ class LuaUtils
     	{
     	    return new openfl.geom.ColorTransform();
     	}
+
+		if (Std.isOfType(instance, states.editors.ChartingState))
+		{
+			var chart:states.editors.ChartingState = cast instance;
+			switch(variable) {
+				case 'camHUD': return chart.camOther;
+				case 'notes' | 'unspawnNotes' | 'eventNotes' | 'grpNoteSplashes': return null;
+			}
+		}
+
 		return Reflect.getProperty(instance, variable);
 	}
 
@@ -239,11 +278,16 @@ class LuaUtils
 	}
 
 	public static function setGroupStuff(leArray:Dynamic, variable:String, value:Dynamic, ?allowMaps:Bool = false) {
+		if (leArray == null) return value;
+
 		var split:Array<String> = variable.split('.');
 		if(split.length > 1) {
 			var obj:Dynamic = Reflect.getProperty(leArray, split[0]);
-			for (i in 1...split.length-1)
+			if (obj == null) return value;
+			for (i in 1...split.length-1) {
 				obj = Reflect.getProperty(obj, split[i]);
+				if (obj == null) return value;
+			}
 
 			leArray = obj;
 			variable = split[split.length-1];
@@ -253,11 +297,16 @@ class LuaUtils
 		return value;
 	}
 	public static function getGroupStuff(leArray:Dynamic, variable:String, ?allowMaps:Bool = false) {
+		if (leArray == null) return null;
+
 		var split:Array<String> = variable.split('.');
 		if(split.length > 1) {
 			var obj:Dynamic = Reflect.getProperty(leArray, split[0]);
-			for (i in 1...split.length-1)
+			if (obj == null) return null;
+			for (i in 1...split.length-1) {
 				obj = Reflect.getProperty(obj, split[i]);
+				if (obj == null) return null;
+			}
 
 			leArray = obj;
 			variable = split[split.length-1];
@@ -273,8 +322,31 @@ class LuaUtils
 		var end = split.length;
 		if(getProperty) end = split.length-1;
 
-		for (i in 1...end) obj = getVarInArray(obj, split[i], allowMaps);
+		for (i in 1...end) {
+			if (obj == null) return null;
+			obj = getVarInArray(obj, split[i], allowMaps);
+		}
 		return obj;
+	}
+
+	public static function getScriptLuaObject(tag:String, ?text:Bool = true):FlxSprite
+	{
+		#if LUA_ALLOWED
+		if (PlayState.instance != null)
+		{
+			var spr:FlxSprite = PlayState.instance.getLuaObject(tag, text);
+			if (spr != null) return spr;
+		}
+		var chart:states.editors.ChartingState = states.editors.ChartingState.instance;
+		if (chart != null && Std.isOfType(FlxG.state, states.editors.ChartingState))
+		{
+			var chartSpr:FlxSprite = chart.getLuaObject(tag, text);
+			if (chartSpr != null) return chartSpr;
+		}
+		if (MusicBeatState.getVariables().exists(tag))
+			return MusicBeatState.getVariables().get(tag);
+		#end
+		return null;
 	}
 
 	public static function getObjectDirectly(objectName:String, ?allowMaps:Bool = false):Dynamic
@@ -282,7 +354,7 @@ class LuaUtils
 		switch(objectName)
 		{
 			case 'this' | 'instance' | 'game':
-				return PlayState.instance;
+				return getTargetInstance();
 			
 			default:
 				var obj:Dynamic = MusicBeatState.getVariables().get(objectName);
@@ -316,6 +388,28 @@ class LuaUtils
 
 	public static inline function getLowestCharacterGroup():FlxSpriteGroup
 	{
+		var chart:states.editors.ChartingState = states.editors.ChartingState.instance;
+		if (PlayState.instance == null && chart != null && Std.isOfType(FlxG.state, states.editors.ChartingState))
+		{
+			var stageData:StageFile = StageData.getStageFile(chart.curStage);
+			var group:FlxSpriteGroup = (stageData != null && stageData.hide_girlfriend ? chart.boyfriendGroup : chart.gfGroup);
+			if (group == null)
+				group = chart.boyfriendGroup;
+
+			var pos:Int = chart.previewGroup.members.indexOf(group);
+			var newPos:Int = chart.previewGroup.members.indexOf(chart.boyfriendGroup);
+			if (newPos >= 0 && (pos < 0 || newPos < pos))
+			{
+				group = chart.boyfriendGroup;
+				pos = newPos;
+			}
+
+			newPos = chart.previewGroup.members.indexOf(chart.dadGroup);
+			if (newPos >= 0 && (pos < 0 || newPos < pos))
+				group = chart.dadGroup;
+			return group;
+		}
+
 		var stageData:StageFile = StageData.getStageFile(PlayState.curStage);
 		var group:FlxSpriteGroup = (stageData.hide_girlfriend ? PlayState.instance.boyfriendGroup : PlayState.instance.gfGroup);
 
@@ -549,7 +643,33 @@ class LuaUtils
 		return "unknown";
 	}
 
+	public static function resolveInstanceGroup(group:String, ?allowMaps:Bool = false):Dynamic
+	{
+		var instance:Dynamic = getTargetInstance();
+		var rootName:String = group.split('.')[0];
+		if (inChartEditor() && isChartNullGroup(rootName))
+			return null;
+
+		var split:Array<String> = group.split('.');
+		if(split.length > 1)
+			return getPropertyLoop(split, false, allowMaps);
+		return getVarInArray(instance, group, allowMaps);
+	}
+
 	public static function cameraFromString(cam:String):FlxCamera {
+		var chart:states.editors.ChartingState = states.editors.ChartingState.instance;
+		if (PlayState.instance == null && chart != null && Std.isOfType(FlxG.state, states.editors.ChartingState))
+		{
+			switch(cam.toLowerCase()) {
+				case 'camgame' | 'game': return chart.camGame;
+				case 'camhud' | 'hud': return chart.camOther;
+				case 'camother' | 'other': return chart.camOther;
+			}
+			var chartCamera:FlxCamera = MusicBeatState.getVariables().get(cam);
+			if (chartCamera != null && Std.isOfType(chartCamera, FlxCamera)) return chartCamera;
+			return chart.camGame;
+		}
+
 		switch(cam.toLowerCase()) {
 			case 'camgame' | 'game': return PlayState.instance.camGame;
 			case 'camhud' | 'hud': return PlayState.instance.camHUD;

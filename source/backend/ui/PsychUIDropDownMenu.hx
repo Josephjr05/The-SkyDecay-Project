@@ -257,7 +257,10 @@ class PsychUIDropDownItem extends FlxSpriteGroup
 		super.update(elapsed);
 		if(FlxG.mouse.justMoved || FlxG.mouse.justPressed || forceNextUpdate)
 		{
-			var overlapped:Bool = (FlxG.mouse.overlaps(bg, camera));
+			var cam:FlxCamera = getUiCamera();
+			if (cam == null) return;
+
+			var overlapped:Bool = FlxG.mouse.overlaps(bg, cam);
 
 			var style = overlapped ? hoverStyle : normalStyle;
 			bg.color = style.bgColor;
@@ -269,14 +272,29 @@ class PsychUIDropDownItem extends FlxSpriteGroup
 				onClick();
 		}
 		
-		text.x = bg.x;
-		text.y = bg.y + bg.height/2 - text.height/2;
+		if (text != null && text.exists && bg != null && bg.exists)
+		{
+			text.x = bg.x;
+			text.y = bg.y + bg.height/2 - text.height/2;
+		}
+	}
+
+	inline function getUiCamera():FlxCamera
+	{
+		if (cameras != null && cameras.length > 0)
+			return cameras[0];
+		if (bg != null && bg.cameras != null && bg.cameras.length > 0)
+			return bg.cameras[0];
+		return FlxG.camera;
 	}
 
 	public var label(default, set):String;
 	function set_label(v:String)
 	{
 		label = v;
+		if (text == null || !text.exists || bg == null || !bg.exists)
+			return v;
+
 		text.text = v;
 		bg.scale.y = text.height + 6;
 		bg.updateHitbox();

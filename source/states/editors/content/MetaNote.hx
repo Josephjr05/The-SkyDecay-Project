@@ -438,8 +438,9 @@ class EventNoteGui extends FlxSpriteGroup {
 	public override function update(elapsed:Float):Void {
 		super.update(elapsed);
 		
-		if (FlxG.mouse.overlaps(rect)) {
-			if (closestGui == null || Math.abs(y + height * .5 - FlxG.mouse.y) < Math.abs(closestGui.y + closestGui.height * .5 - FlxG.mouse.y))
+		if (FlxG.mouse.overlaps(rect, ChartingState.instance.camChart)) {
+			var mouseY:Float = ChartingState.instance.getChartMouseY();
+			if (closestGui == null || Math.abs(y + height * .5 - mouseY) < Math.abs(closestGui.y + closestGui.height * .5 - mouseY))
 				closestGui = this;
 		}
 	}
@@ -449,9 +450,7 @@ class EventNoteGui extends FlxSpriteGroup {
 		var selected:Bool = false;
 		
 		for (event in eventContainer) {
-			var eventBounds = event.getScreenBounds(null, charter.camUI);
-			eventBounds.top -= charter.scrollY;
-			eventBounds.bottom -= charter.scrollY;
+			var eventBounds = event.getScreenBounds(null, charter.camChart);
 
 			if (bounds.overlaps(eventBounds) && !Lambda.exists(charter.selectedEvents, (e) -> e.event == events[event.ID])) {
 				charter.selectedEvents.push({event: events[event.ID], note: eventNote});
@@ -485,8 +484,10 @@ class EventNoteGui extends FlxSpriteGroup {
 				event.setColorTransform(1, 1, 1, alpha);
 			}
 			
-			if (hovering && FlxG.mouse.overlaps(event)) {
-				var dist:Float = Math.sqrt(Math.pow(FlxG.mouse.x - event.x - event.width * .5, 2) + Math.pow(FlxG.mouse.y - event.y - event.height * .5, 2));
+			if (hovering && FlxG.mouse.overlaps(event, charter.camChart)) {
+				var mouseX:Float = charter.getChartMouseX();
+				var mouseY:Float = charter.getChartMouseY();
+				var dist:Float = Math.sqrt(Math.pow(mouseX - event.x - event.width * .5, 2) + Math.pow(mouseY - event.y - event.height * .5, 2));
 				if (closest == null) {
 					closest = event;
 					near = dist;

@@ -271,8 +271,8 @@ class PsychUIInputText extends FlxSpriteGroup
 				else
 				{
 					var lastText = text;
-					text = text.substring(0, caretIndex-1) + text.substring(caretIndex);
-					caretIndex--;
+					caretIndex --;
+					text = text.substring(0, caretIndex) + text.substring(caretIndex + 1);
 					if(onChange != null) onChange(lastText, text);
 					if(broadcastInputTextEvent) PsychUIEventHandler.event(CHANGE_EVENT, this);
 				}
@@ -474,21 +474,20 @@ class PsychUIInputText extends FlxSpriteGroup
 		if(textObj == null || !textObj.exists) return;
 
 		var textField = textObj.textField;
+		if (textField == null) return;
 		try {
-			// Ensure caretIndex is within valid bounds for the text field
 			var textLength:Int = Std.int(textField.length);
 			var safeCaretIndex:Int = (caretIndex < 0) ? 0 : ((caretIndex > textLength) ? textLength : caretIndex);
 			textField.setSelection(safeCaretIndex, safeCaretIndex);
 		} catch(e:Dynamic) {
 			trace('Error updating caret selection: $e');
-			// If setSelection fails, try to reset to a safe state
 			caretIndex = 0;
 			try {
 				if(textField.length > 0) {
 					textField.setSelection(0, 0);
 				}
 			} catch(e2:Dynamic) {
-				// If even that fails, just continue without updating selection
+				// Just continue lil bro heh
 			}
 		}
 		_caretTime = 0;
@@ -625,7 +624,14 @@ class PsychUIInputText extends FlxSpriteGroup
 	function set_text(v:String)
 	{
 		for (i in 0..._boundaries.length) _boundaries.pop();
+		v = (v ?? '');
 		v = filter(v);
+
+		if (textObj == null || !textObj.exists || textObj.textField == null)
+		{
+			text = v;
+			return text;
+		}
 
 		textObj.text = '';
 		if(v != null && v.length > 0)
@@ -646,8 +652,9 @@ class PsychUIInputText extends FlxSpriteGroup
 				_boundaries.push(textObj.textField.textWidth);
 			}
 		}
-		text = (v ?? '');
+		text = v;
 		updateCaret();
+		
 		return text;
 	}
 

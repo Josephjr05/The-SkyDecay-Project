@@ -1,5 +1,7 @@
 package backend;
 
+import backend.GameplayVisualPreview;
+
 import flixel.FlxBasic;
 import flixel.FlxObject;
 import flixel.FlxSubState;
@@ -99,9 +101,26 @@ class BaseStage extends FlxBasic
 	public function noteMissPress(direction:Int) {}
 
 	// Things to replace FlxGroup stuff and inject sprites directly into the state
-	function add(object:FlxBasic) return FlxG.state.add(object);
-	function remove(object:FlxBasic, splice:Bool = false) return FlxG.state.remove(object, splice);
-	function insert(position:Int, object:FlxBasic) return FlxG.state.insert(position, object);
+	function add(object:FlxBasic)
+	{
+		if (Std.isOfType(FlxG.state, states.editors.ChartingState))
+			return cast(FlxG.state, states.editors.ChartingState).previewGroup.add(object);
+		return FlxG.state.add(object);
+	}
+
+	function remove(object:FlxBasic, splice:Bool = false)
+	{
+		if (Std.isOfType(FlxG.state, states.editors.ChartingState))
+			return cast(FlxG.state, states.editors.ChartingState).previewGroup.remove(object, splice);
+		return FlxG.state.remove(object, splice);
+	}
+
+	function insert(position:Int, object:FlxBasic)
+	{
+		if (Std.isOfType(FlxG.state, states.editors.ChartingState))
+			return cast(FlxG.state, states.editors.ChartingState).previewGroup.insert(position, object);
+		return FlxG.state.insert(position, object);
+	}
 	
 	public function addBehindGF(obj:FlxBasic) return insert(members.indexOf(game.gfGroup), obj);
 	public function addBehindBF(obj:FlxBasic) return insert(members.indexOf(game.boyfriendGroup), obj);
@@ -134,8 +153,21 @@ class BaseStage extends FlxBasic
 	// overrides
 	function startCountdown() if(onPlayState) return PlayState.instance.startCountdown(); else return false;
 	function endSong() if(onPlayState)return PlayState.instance.endSong(); else return false;
-	function moveCameraSection() if(onPlayState) PlayState.instance.moveCameraSection();
-	function moveCamera(isDad:Bool) if(onPlayState) PlayState.instance.moveCamera(isDad);
+	function moveCameraSection()
+	{
+		if (onPlayState)
+			PlayState.instance.moveCameraSection();
+		else if (Std.isOfType(FlxG.state, states.editors.ChartingState))
+			GameplayVisualPreview.moveCameraSection(cast(FlxG.state, states.editors.ChartingState));
+	}
+
+	function moveCamera(isDad:Bool)
+	{
+		if (onPlayState)
+			PlayState.instance.moveCamera(isDad);
+		else if (Std.isOfType(FlxG.state, states.editors.ChartingState))
+			GameplayVisualPreview.moveCamera(cast(FlxG.state, states.editors.ChartingState), isDad);
+	}
 	inline private function get_paused() return game.paused;
 	inline private function get_songName() return game.songName;
 	inline private function get_isStoryMode() return PlayState.isStoryMode;

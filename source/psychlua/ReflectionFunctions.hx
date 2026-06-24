@@ -18,6 +18,8 @@ class ReflectionFunctions
 		var lua:State = funk.lua;
 		Lua_helper.add_callback(lua, "getProperty", function(variable:String, ?allowMaps:Bool = false) {
 			var split:Array<String> = variable.split('.');
+			if (LuaUtils.inChartEditor() && split.length > 1 && LuaUtils.isChartNullGroup(split[0]) && split[split.length - 1] == 'length')
+				return 0;
 			if(split.length > 1)
 				return LuaUtils.getVarInArray(LuaUtils.getPropertyLoop(split, true, allowMaps), split[split.length-1], allowMaps);
 			return LuaUtils.getVarInArray(LuaUtils.getTargetInstance(), variable, allowMaps);
@@ -42,12 +44,17 @@ class ReflectionFunctions
 			var split:Array<String> = variable.split('.');
 			if(split.length > 1) {
 				var obj:Dynamic = LuaUtils.getVarInArray(myClass, split[0], allowMaps);
-				for (i in 1...split.length-1)
+				for (i in 1...split.length-1) {
+					if (obj == null) return null;
 					obj = LuaUtils.getVarInArray(obj, split[i], allowMaps);
-
+				}
+				if (obj == null) return null;
 				return LuaUtils.getVarInArray(obj, split[split.length-1], allowMaps);
 			}
-			return LuaUtils.getVarInArray(myClass, variable, allowMaps);
+			var result:Dynamic = LuaUtils.getVarInArray(myClass, variable, allowMaps);
+			if (result == null && LuaUtils.inChartEditor())
+				return 0;
+			return result;
 		});
 		Lua_helper.add_callback(lua, "setPropertyFromClass", function(classVar:String, variable:String, value:Dynamic, ?allowMaps:Bool = false, ?allowInstances:Bool = false) {
 			var myClass:Dynamic = Type.resolveClass(classVar);
@@ -60,9 +67,11 @@ class ReflectionFunctions
 			var split:Array<String> = variable.split('.');
 			if(split.length > 1) {
 				var obj:Dynamic = LuaUtils.getVarInArray(myClass, split[0], allowMaps);
-				for (i in 1...split.length-1)
+				for (i in 1...split.length-1) {
+					if (obj == null) return value;
 					obj = LuaUtils.getVarInArray(obj, split[i], allowMaps);
-
+				}
+				if (obj == null) return value;
 				LuaUtils.setVarInArray(obj, split[split.length-1], allowInstances ? parseInstances(value) : value, allowMaps);
 				return value;
 			}
@@ -70,20 +79,23 @@ class ReflectionFunctions
 			return value;
 		});
 		Lua_helper.add_callback(lua, "getPropertyFromGroup", function(group:String, index:Int, variable:Dynamic, ?allowMaps:Bool = false) {
-			var split:Array<String> = group.split('.');
-			var realObject:Dynamic = null;
-			if(split.length > 1)
-				realObject = LuaUtils.getPropertyLoop(split, false, allowMaps);
-			else
-				realObject = Reflect.getProperty(LuaUtils.getTargetInstance(), group);
+			var rootName:String = group.split('.')[0];
+			if (LuaUtils.inChartEditor() && rootName == 'notes') {
+				var chart:states.editors.ChartingState = states.editors.ChartingState.instance;
+				if (chart != null && Type.typeof(variable) != ValueType.TInt)
+					return chart.getPreviewNoteProperty(index, Std.string(variable), allowMaps);
+				return null;
+			}
+			if (LuaUtils.inChartEditor() && LuaUtils.isChartNullGroup(rootName))
+				return null;
 
-			var groupOrArray:Dynamic = Reflect.getProperty(LuaUtils.getTargetInstance(), group);
+			var groupOrArray:Dynamic = LuaUtils.resolveInstanceGroup(group, allowMaps);
 			if(groupOrArray != null)
 			{
 				switch(Type.typeof(groupOrArray))
 				{
 					case TClass(Array): //Is Array
-						var leArray:Dynamic = realObject[index];
+						var leArray:Dynamic = groupOrArray[index];
 						if(leArray != null) {
 							var result:Dynamic = null;
 							if(Type.typeof(variable) == ValueType.TInt)
@@ -95,20 +107,24 @@ class ReflectionFunctions
 						FunkinLua.luaTrace('getPropertyFromGroup: Object #$index from group: $group doesn\'t exist!', false, false, FlxColor.RED);
 
 					default: //Is Group
-						var result:Dynamic = LuaUtils.getGroupStuff(realObject.members[index], variable, allowMaps);
-						return result;
+						var member:Dynamic = groupOrArray.members != null ? groupOrArray.members[index] : null;
+						if (member == null)
+						{
+							FunkinLua.luaTrace('getPropertyFromGroup: Object #$index from group: $group doesn\'t exist!', false, false, FlxColor.RED);
+							return null;
+						}
+						return LuaUtils.getGroupStuff(member, variable, allowMaps);
 				}
 			}
 			FunkinLua.luaTrace('getPropertyFromGroup: Group/Array $group doesn\'t exist!', false, false, FlxColor.RED);
 			return null;
 		});
 		Lua_helper.add_callback(lua, "setPropertyFromGroup", function(group:String, index:Int, variable:Dynamic, value:Dynamic, ?allowMaps:Bool = false, ?allowInstances:Bool = false) {
-			var split:Array<String> = group.split('.');
-			var realObject:Dynamic = null;
-			if(split.length > 1)
-				realObject = LuaUtils.getPropertyLoop(split, false, allowMaps);
-			else
-				realObject = Reflect.getProperty(LuaUtils.getTargetInstance(), group);
+			var rootName:String = group.split('.')[0];
+			if (LuaUtils.inChartEditor() && (rootName == 'notes' || LuaUtils.isChartNullGroup(rootName)))
+				return value;
+
+			var realObject:Dynamic = LuaUtils.resolveInstanceGroup(group, allowMaps);
 
 			if(realObject != null)
 			{
@@ -127,7 +143,9 @@ class ReflectionFunctions
 						}
 
 					default: //Is Group
-						LuaUtils.setGroupStuff(realObject.members[index], variable, allowInstances ? parseInstances(value) : value, allowMaps);
+						var member:Dynamic = realObject.members != null ? realObject.members[index] : null;
+						if (member != null)
+							LuaUtils.setGroupStuff(member, variable, allowInstances ? parseInstances(value) : value, allowMaps);
 				}
 			}
 			else FunkinLua.luaTrace('setPropertyFromGroup: Group/Array $group doesn\'t exist!', false, false, FlxColor.RED);

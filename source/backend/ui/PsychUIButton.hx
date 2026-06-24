@@ -72,7 +72,10 @@ class PsychUIButton extends FlxSpriteGroup
 
 		if(forceCheckNext || FlxG.mouse.justMoved || FlxG.mouse.justPressed)
 		{
-			var overlapped:Bool = (FlxG.mouse.overlaps(bg, camera));
+			var cam:FlxCamera = getUiCamera();
+			if (cam == null) return;
+
+			var overlapped:Bool = FlxG.mouse.overlaps(bg, cam);
 
 			forceCheckNext = false;
 
@@ -94,6 +97,15 @@ class PsychUIButton extends FlxSpriteGroup
 				if(broadcastButtonEvent) PsychUIEventHandler.event(CLICK_EVENT, this);
 			}
 		}
+	}
+
+	inline function getUiCamera():FlxCamera
+	{
+		if (bg.cameras != null && bg.cameras.length > 0)
+			return bg.cameras[0];
+		if (cameras != null && cameras.length > 0)
+			return cameras[0];
+		return FlxG.camera;
 	}
 
 	public function resize(width:Int, height:Int)
